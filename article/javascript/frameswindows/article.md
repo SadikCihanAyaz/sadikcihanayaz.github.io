@@ -6,6 +6,10 @@ Redis keeps data in memory. What does it mean? Where did other traditional datab
 A typical 7200 RPM HDD will deliver a read/write speed of 80–160MB/s. On the other hand, a typical SSD will deliver read/write speed of between 200 MB/s to 550 MB/s. DDR3 SDRAM gives a maximum transfer rate of 6400 MB/s.
 
 
+[<img src="https://miro.medium.com/max/1252/1*yFbr23EFQWSluZNefm8gfA.png">](http://google.com.au/)
+
+[![Foo](https://miro.medium.com/max/1252/1*yFbr23EFQWSluZNefm8gfA.png)](http://google.com.au/)
+
 Note: This includes average information.
 Redis help us to deliver the data to user quickly using its RAM’s incredible speed. But there is a problem here … How to use the incredible speed of Ram while Ram doesn’t hold permanent data? The answer is of course Redis. Redis does not eliminate the need for traditional databases(SQL Server, PostgreSQL, MySql, MongoDB,etc.) and works with them. The pictures below explain this very well.
 
