@@ -1,17 +1,18 @@
 <html lang="en-us">
 
 <head>
-     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script> 
+    <link rel="stylesheet" href="collapse.css">
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
     <meta charset="utf-8">
 </head>
 
 <body>
-    <div style="width:70%; margin:0 auto;" id="mdcontainer">
+    <p>Topics: </p>
+    <div id="basicDOM"></div>
+    <div id="detailDOM"></div>
 
-    </div>
 </body>
 
-//
 
 <script>
     function getQuery(key) {
@@ -33,7 +34,11 @@
         md.setAttribute("src", getQuery("src"))
         md.setAttribute("no-shadow", "")
         document.getElementById("mdcontainer").append(md)
+        //https://sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/javascript/frameswindows/article.md
     }
 </script>
+<script src="dynamic.js"></script>
+<script src="collapse.js"></script>
+
 
 </html>
