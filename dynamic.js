@@ -62,9 +62,9 @@ function getArticleJSON() {
                     "description": "frames Windows"
                 },
                 {
-                    "path": "frameswindows2",
-                    "header": "frameswindows2",
-                    "description": "frames Windows2"
+                    "path": "arrayslooping",
+                    "header": "ITERATIVE OF ARRAYS",
+                    "description": "ITERATIVE OF ARRAYS"
                 },
                 {
                     "path": "frameswindows3",
