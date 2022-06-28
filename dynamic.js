@@ -14,8 +14,6 @@ fetch("./article.json")
 
 for (i = 0; i < articleJSON.length; i++) {
 
-    window.console.log('working!!');
-
     dynamic = dynamic + `<button type="button" onclick="selectionTopic(${i})" >${articleJSON[i].header}</button>`;
 
 }
@@ -26,18 +24,19 @@ function selectionTopic(index) {
 
     detail = '';
 
+    detail = detail + `<div style="height: 30%; width: 100%; overflow: auto;">`;
+
     for (i = 0; i < articleJSON[index].under.length; i++) {
-        detail = detail + `<p onclick="selectArticle(${index}, ${i})">${articleJSON[index].under[i].header}</p>`;
+        detail = detail + `<p style="color: blue; text-shadow: 1px 0px;" onclick="selectArticle(${index}, ${i})">${(i+1) + `. ` + articleJSON[index].under[i].header.toUpperCase()}</p>`;
     }
 
-    window.console.log(detail);
+    detail = detail + `</div>`;
+
     document.getElementById("detailDOM").innerHTML = detail;
 }
 
 function selectArticle(selectedTopicIndex, selectedArticleIndex)
 {
-    window.console.log(selectedTopicIndex);
-    window.console.log(selectedArticleIndex);
     const url = `https://sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`
     location.href = url;
 }
