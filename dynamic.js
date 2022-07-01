@@ -56,9 +56,9 @@ function getArticleJSON() {
             "description": "javascript topic",
             "under": [
                 {
-                    "path": "frameswindows",
-                    "header": "frameswindows",
-                    "description": "frames Windows"
+                    "path": "advancedWorkingWithFunctions",
+                    "header": "ADVANCED WORKING WITH FUNCTIONS",
+                    "description": "ADVANCED WORKING WITH FUNCTIONS"
                 },
                 {
                     "path": "arrayslooping",
