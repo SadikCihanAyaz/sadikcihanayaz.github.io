@@ -12,11 +12,14 @@ fetch("./article.json")
 .then((data) => console.log(data));
 */
 
+dynamic = dynamic + `<div class="container"><div class="hero">`;
 for (i = 0; i < articleJSON.length; i++) {
 
-    dynamic = dynamic + `<button type="button" onclick="selectionTopic(${i})" >${articleJSON[i].header}</button>`;
-
+    //dynamic = dynamic + `<button type="button" onclick="selectionTopic(${i})" >${articleJSON[i].header}</button>`;
+    
+    dynamic = dynamic + `<span class="class="job-title" style="cursor: pointer; padding: 5px;" onclick="selectionTopic(${i})"><a> ${articleJSON[i].header.toUpperCase()}</a></span>`;
 }
+dynamic = dynamic + `</div></div>`;
 
 
 
@@ -24,6 +27,7 @@ function selectionTopic(index) {
 
     detail = '';
 
+    detail = detail + `<div class="container"><div class="hero">`;
     detail = detail + `<div style="height: 30%; width: 100%; overflow: auto;">`;
 
     for (i = 0; i < articleJSON[index].under.length; i++) {
@@ -31,6 +35,7 @@ function selectionTopic(index) {
     }
 
     detail = detail + `</div>`;
+    detail = detail + `</div></div>`;
 
     document.getElementById("detailDOM").innerHTML = detail;
 }
