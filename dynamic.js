@@ -25,16 +25,16 @@ dynamic = dynamic + `</div></div>`;
 
 function selectionTopic(index) {
 
+    document.getElementById("mdcontainer").innerHTML = '';
+
     detail = '';
 
     detail = detail + `<div class="container"><div class="hero">`;
-    detail = detail + `<div style="height: 30%; width: 100%; overflow: auto;">`;
 
     for (i = 0; i < articleJSON[index].under.length; i++) {
-        detail = detail + `<p style="color: blue; text-shadow: 1px 0px;" onclick="selectArticle(${index}, ${i})">${(i+1) + `. ` + articleJSON[index].under[i].header.toUpperCase()}</p>`;
+        detail = detail + `<p style="cursor: pointer;"  onclick="selectArticle(${index}, ${i})">${articleJSON[index].under[i].header.toUpperCase()}</p>`;
     }
 
-    detail = detail + `</div>`;
     detail = detail + `</div></div>`;
 
     document.getElementById("detailDOM").innerHTML = detail;
@@ -43,6 +43,7 @@ function selectionTopic(index) {
 function selectArticle(selectedTopicIndex, selectedArticleIndex)
 {
     const url = `https://sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`
+    //const url = `file:///Users/sadikcihanayaz/projects/sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`;
     location.href = url;
 }
 
