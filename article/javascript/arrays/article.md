@@ -6,7 +6,7 @@ Our purpose of this section inform to you following topics. You will learn how y
 
 
 
-<div style="background-color: rgb(230, 230, 230); color: black">
+<div style="background-color: rgb(230, 230, 230); color: black; padding: 2.5%; border-radius: 5px;">
 
 <summary style="font-weight: bold;">QUESTION 1</summary>
 
@@ -25,6 +25,7 @@ Which methods could be use for add/ remove items into an array?
 6. arr.slice([start], [end])
 7. arr.concat(arg1, arg2...)
 
+if you use <b>delete</b> keyword for removing an item to array you can only delete the value of array. 
 
 
 </details>
