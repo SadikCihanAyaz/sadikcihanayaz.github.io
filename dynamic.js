@@ -42,8 +42,8 @@ function selectionTopic(index) {
 
 function selectArticle(selectedTopicIndex, selectedArticleIndex)
 {
-    //const url = `https://sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`
-    const url = `file:///Users/sadikcihanayaz/projects/sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`;
+    const url = `https://sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`
+    //const url = `file:///Users/sadikcihanayaz/projects/sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`;
     location.href = url;
 }
 
