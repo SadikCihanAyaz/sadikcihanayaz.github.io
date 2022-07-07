@@ -32,7 +32,7 @@ function selectionTopic(index) {
     detail = detail + `<div class="container"><div class="hero">`;
 
     for (i = 0; i < articleJSON[index].under.length; i++) {
-        detail = detail + `<p style="cursor: pointer;"  onclick="selectArticle(${index}, ${i})">${articleJSON[index].under[i].header.toUpperCase()}</p>`;
+        detail = detail + `<p class="link" onclick="selectArticle(${index}, ${i})">${articleJSON[index].under[i].header.toUpperCase()}</p>`;
     }
 
     detail = detail + `</div></div>`;
@@ -42,8 +42,8 @@ function selectionTopic(index) {
 
 function selectArticle(selectedTopicIndex, selectedArticleIndex)
 {
-    const url = `https://sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`
-    //const url = `file:///Users/sadikcihanayaz/projects/sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`;
+    //const url = `https://sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`
+    const url = `file:///Users/sadikcihanayaz/projects/sadikcihanayaz.github.io/md.htm?src=https://sadikcihanayaz.github.io/article/${articleJSON[selectedTopicIndex].path}/${articleJSON[selectedTopicIndex].under[selectedArticleIndex].path}/article.md`;
     location.href = url;
 }
 
