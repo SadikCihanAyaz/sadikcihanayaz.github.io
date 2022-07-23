@@ -62,6 +62,11 @@ function getArticleJSON() {
             "description": "javascript topic",
             "under": [
                 {
+                    "path": "objectBasics",
+                    "header": "OBJECT BASICS",
+                    "description": "OBJECT BASICS"
+                },
+                {
                     "path": "arrays",
                     "header": "ARRAYS",
                     "description": "ARRAYS"
