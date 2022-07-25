@@ -213,3 +213,211 @@ console.log(sum);
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 6
+  -->
+
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 6</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+What will be console output following code snippet?
+
+```js
+
+let test = (val) =>
+{
+    val.name = 'cihan'
+    console.log(val);
+}
+
+let item2 = {name: 'kerim'};
+
+test(item2);
+console.log(item2);
+
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+{ name: 'cihan' }
+{ name: 'cihan' }
+```
+
+</details>
+
+</div>
+
+
+<!---
+  QUESTION 7
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 7</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+What will be console output following code snippet?
+
+```js
+
+
+let a = {name: 'cihan'};
+let b = a;
+let c = {name: 'cihan'};
+
+console.log(a == b);
+console.log(a === b);
+console.log(a == c);
+console.log(a === c);
+
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+true
+true
+false
+false
+```
+
+</details>
+
+</div>
+
+
+
+<!---
+  QUESTION 8
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 8</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Change the value of <b>brand</b> property following object.
+
+1. copy car object to car2 obj. (use for..in)
+2. copy car object to car3 obj. (use JSON methods)
+3. copy car object to car4 obj. (use spread syntax)
+4. copy car object to car5 obj. (use assign method)
+
+```js
+
+let car = {
+    brand: "mercedes",
+    model: 30
+  };
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```js
+let car = {
+    brand: "mercedes",
+    model: 30
+  };
+
+let car2 = {};
+
+
+for(let key in car)
+{
+    car2[key] = car[key];
+}
+car2.brand = 'bmw'
+
+let car3 = JSON.parse(JSON.stringify(car));
+car3.brand = 'renault';
+
+let car4 = {...car};
+car4.brand = 'volvo'
+
+let car5 = Object.assign({}, car);
+car5.brand = 'range';
+
+console.log(car)
+console.log(car2);
+console.log(car3);
+console.log(car4);
+console.log(car5);
+
+
+```
+
+</details>
+
+</div>
+
+
+<!---
+  QUESTION 9
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 9</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following question. What will be the console output when the code snippet work?
+
+```js
+
+let car = {
+    brand: "bmw"
+  };
+  
+let car2 = car;
+car2 = null;
+
+console.log(car.brand);
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+bmw
+
+```
+When we assign the value of car2 to <b>null</b> only car2 reference will be removed. That means garbage collector don't will remove the object because of object is still reacable.
+
+</details>
+
+</div>
