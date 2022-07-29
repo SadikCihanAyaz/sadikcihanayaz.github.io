@@ -421,3 +421,55 @@ When we assign the value of car2 to <b>null</b> only car2 reference will be remo
 </details>
 
 </div>
+
+
+<!---
+  QUESTION 10
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 10</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code snippet. What will be the output of this?
+
+```js
+
+let brand = 'mercedes'
+let model = '2016'
+
+let cars= {
+    brand: 'bmw',
+    model: 2014,
+    getBrand() {
+        return brand;
+    },
+    getModel(){
+        return this.model;
+    }
+}
+  
+
+console.log(cars.getBrand());
+console.log(cars.getModel());
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+mercedes
+2014
+```
+if you use this keyword, it will show current object.
+
+</details>
+
+</div>
