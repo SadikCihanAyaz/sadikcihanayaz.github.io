@@ -468,7 +468,57 @@ console.log(cars.getModel());
 mercedes
 2014
 ```
-if you use this keyword, it will show current object.
+if you use <b>this</b> keyword, it will show current object.
+
+</details>
+
+</div>
+
+
+
+<!---
+  QUESTION 11
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 11</summary>
+<p style="font-size: 8px; text-align: right;">This question is taken from javascript.info</p>
+
+Look at the following code snippet. What will be the output of this?
+
+```js
+
+let user = { name: "John" };
+let admin = { name: "Admin" };
+
+function sayHi() {
+  console.log(this.name)
+}
+
+user.f = sayHi;
+admin.f = sayHi;
+
+user.f(); 
+admin.f();
+
+admin['f']();
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+John
+Admin
+Admin
+```
 
 </details>
 
