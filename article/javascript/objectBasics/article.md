@@ -523,3 +523,157 @@ Admin
 </details>
 
 </div>
+
+
+
+
+<!---
+  QUESTION 12
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 12</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code snippet. Insert a method to car object. (method name will be <b>sayBrand</b>) This methods must be return brand of following object.
+
+```js
+
+let car = {
+  brand: "bmw",
+  model: 2017
+};
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```js
+let car = {
+  brand: "bmw",
+  model: 2017
+};
+
+car.sayBrand = function () {
+  return this.brand;
+}
+
+console.log(car.sayBrand());
+```
+
+Above we insert a method that's the called the name sayBrand. After we call car.sayBrand() method.
+
+</details>
+
+</div>
+
+
+
+<!---
+  QUESTION 13
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 13</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code snippet. What will be the output when the code run?
+
+```js
+
+let car = {
+  brand: "Mercedes",
+  arrowFunction : () => {
+    console.log('arrow function');
+    console.log(this);
+  },
+  normalFunction: function (){
+    console.log('normal function');
+    console.log(this);
+    arrowFunction2 = () => {
+      console.log('arrow function 2');
+      console.log(this);
+    }
+
+    arrowFunction2();
+
+    return this;
+  }
+  
+};
+
+car.arrowFunction();
+car.normalFunction();
+car.normalFunction().arrowFunction();
+
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+arrow function
+{}
+normal function
+{
+  brand: 'Mercedes',
+  arrowFunction: [Function: arrowFunction],
+  normalFunction: [Function: normalFunction]
+}
+arrow function 2
+{
+  brand: 'Mercedes',
+  arrowFunction: [Function: arrowFunction],
+  normalFunction: [Function: normalFunction]
+}
+normal function
+{
+  brand: 'Mercedes',
+  arrowFunction: [Function: arrowFunction],
+  normalFunction: [Function: normalFunction]
+}
+arrow function 2
+{
+  brand: 'Mercedes',
+  arrowFunction: [Function: arrowFunction],
+  normalFunction: [Function: normalFunction]
+}
+arrow function
+{}
+
+```
+
+At the first look above code can be a little complicated. But we need yo forward step by step.
+
+1. car.arrowFunction();
+
+arrow functions cannot access <b>this</b> keyword. So you can see only empty object when you are attempt to access this.
+
+2. car.normalFunction();
+
+normal function can access own object properties by using <b>this</b>. But there is some important point it there. We declare a arrow function inside a normal function. And inside the arrow function we attempt to <b> this </b> keyword as a result we see normal function this already passing to arrow function.
+
+3. car.normalFunction().arrowFunction();
+
+normalFunction will be return to us <b>this</b> keyword. That mean gives to us object itself. And you can access this object arrowFunction using 
+
+this.arrowFunction();
+
+
+</details>
+
+</div>
