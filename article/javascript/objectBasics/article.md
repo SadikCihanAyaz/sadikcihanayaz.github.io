@@ -677,3 +677,73 @@ this.arrowFunction();
 </details>
 
 </div>
+
+
+
+
+
+
+
+
+<!---
+  QUESTION 14
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 14</summary>
+<p style="font-size: 8px; text-align: right;">This question is taken from javascript.info</p>
+
+Create an object calculator with three methods:
+
+<b>read()</b> writes for two values and saves them as object properties with names a (value will be 5) and b (value will be 4) respectively.
+<b>sum()</b> returns the sum of saved values.
+<b>mul()</b> multiplies saved values and returns the result.
+
+```js
+
+let calculator = {
+  // ... your code ...
+};
+
+calculator.read();
+alert( calculator.sum() );
+alert( calculator.mul() );
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```js
+
+let calculator = {
+  a: 0,
+  b: 0,
+  read: function(){
+    this.a = 5;
+    this.b = 4;
+  },
+  sum: function(){
+    return this.a + this.b;
+  },
+  mul: function(){
+    return this.a * this.b;
+  }
+}
+
+calculator.read();
+console.log(calculator.sum());
+console.log(calculator.mul());
+
+```
+
+
+</details>
+
+</div>
