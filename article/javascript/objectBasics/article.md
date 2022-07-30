@@ -747,3 +747,60 @@ console.log(calculator.mul());
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 15
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 15</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+What will be the output of the following code?
+
+```js
+
+let car = function () {
+    this.name = 'bmw',
+    this.model = 2013
+}
+
+console.log(car());
+console.log(new car());
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+
+undefined
+car { name: 'bmw', model: 2013 }
+
+```
+
+if you use a function as a constructor style the code will executed following 
+
+```js
+let car = function () {
+    this = {};
+    this.name = 'bmw',
+    this.model = 2013
+    return this;
+}
+
+```
+
+
+</details>
+
+</div>
