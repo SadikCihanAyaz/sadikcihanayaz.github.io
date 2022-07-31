@@ -931,3 +931,62 @@ console.log( "Mul=" + calculator.mul() );
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 18
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 18</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Create a constructor function <b>SumValues(initVal)</b> 
+
+* Store values in propert of <b>value</b>
+* Write <b>add</b> method for summarize values
+
+Usage of the SumValues contructor function:
+
+```js
+
+let sumValues = new SumValues(1); // initial value 1
+
+sumValues.add(5); 
+sumValues.read(4); 
+
+console.log(sumValues.value); // 10
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```js
+function SumValues(initVal){
+    this.value = initVal;
+
+    this.add = function(val){
+        this.value = this.value + val; 
+    }
+}
+
+let sumValues = new SumValues(1);
+sumValues.add(2);
+sumValues.add(4);
+sumValues.add(6);
+console.log(sumValues.value);
+
+```
+
+
+</details>
+
+</div>
