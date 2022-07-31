@@ -990,3 +990,49 @@ console.log(sumValues.value);
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 19
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 19</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+What will be the output of the following code?
+
+```js
+
+let value = null;
+let value2 = undefined;
+let value3 = {test : 'cihan'}
+
+console.log(value?.test);
+console.log(value2?.test);
+console.log(value3?.test);
+
+
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+undefined
+undefined
+cihan
+```
+if we use optional chain <b>null</b> and <b>undefined</b> values will be return <b>undefined</b>. Above <b>null</b> is return as a <b>undefined</b>.
+
+</details>
+
+</div>
