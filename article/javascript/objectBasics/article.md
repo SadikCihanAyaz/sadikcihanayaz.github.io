@@ -804,3 +804,65 @@ let car = function () {
 </details>
 
 </div>
+
+
+
+
+<!---
+  QUESTION 16
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 16</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+What will be the output of the following code?
+
+```js
+
+let car = function () {
+    return;
+}
+
+let car2 = function () {
+    return 'test';
+}
+
+let car3 = function () {
+    return 5;
+}
+
+let car4 = function () {
+    return { car: 'bmw'};
+}
+
+console.log(new car())
+console.log(new car2())
+console.log(new car3())
+console.log(new car4())
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+
+car {}
+car2 {}
+car3 {}
+{ car: 'bmw' }
+
+```
+
+you can use return statement in a constructor primitive values will be ignored.
+
+</details>
+
+</div>
