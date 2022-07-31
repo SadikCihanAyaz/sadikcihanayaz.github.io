@@ -866,3 +866,68 @@ you can use return statement in a constructor primitive values will be ignored.
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 17
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 17</summary>
+<p style="font-size: 8px; text-align: right;">javascript.info</p>
+
+Create a constructor function <b>Calculator</b> that creates objects with 3 methods:
+
+<b>read()</b> asks for two values using prompt and remembers them in object properties.
+<b>sum()</b> returns the sum of these properties.
+<b>mul()</b> returns the multiplication product of these properties.
+For instance:
+
+
+```js
+
+let calculator = new Calculator();
+calculator.read();
+
+alert( "Sum=" + calculator.sum() );
+alert( "Mul=" + calculator.mul() );
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```js
+
+function Calculator(){
+    this.read = function (){
+        this.a = 3;
+        this.b = 5;
+    };
+    this.sum = function () {
+        return this.a + this.b;
+    };
+    this.mul = function () {
+        return this.a * this.b;
+    }
+}
+
+let calculator = new Calculator();
+calculator.read();
+
+console.log( "Sum=" + calculator.sum() );
+console.log( "Mul=" + calculator.mul() );
+
+```
+
+
+</details>
+
+</div>
