@@ -94,9 +94,9 @@ function getArticleJSON() {
             "description": "react-native topic",
             "under": [
                 {
-                    "path": "frameswindowsBB1",
-                    "header": "frameswindowsBB1",
-                    "description": "frames WindowsBB 1"
+                    "path": "reactnative1",
+                    "header": "react-native-1",
+                    "description": "react-native-1"
                 }
             ]
         }
