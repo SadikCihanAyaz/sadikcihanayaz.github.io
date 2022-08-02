@@ -1088,3 +1088,140 @@ Number 2 and Number 3 will be caused an error.
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 21
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 21</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code what will be output?
+
+```js
+  runEngine = {
+    bmw(){
+        console.log('bmw engine is run ')
+    }
+  }
+
+  console.log(runEngine.bmw?.());
+  console.log(runEngine.mercedes?.())
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+bmw's engine is run 
+undefined
+undefined
+```
+
+* ?.() cheks the left side.
+
+</details>
+
+</div>
+
+
+
+<!---
+  QUESTION 22
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 22</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code what will be output?
+
+```js
+let test1 = Symbol('car');
+let test2 = Symbol('car');
+
+console.log(test1 == test2);
+console.log(test1.toString());
+console.log(test1.description);
+console.log(test1.description == test2.description);
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+false
+Symbol(car)
+car
+true
+```
+
+* every symbol is generate uniqe values
+* primitive types is converted suitable type in javascript but symbols cannot be converted. So you must use toString()
+
+</details>
+
+</div>
+
+
+
+<!---
+  QUESTION 23
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 23</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code what will be output?
+
+```js
+let carId = Symbol("carId");
+let car = {
+  brand: "BMW",
+  model: 2020,
+  [carId]: 123456
+};
+
+for (let item in car) console.log(car[item]); 
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+BMW
+2020
+```
+
+* symbol will be ignored at for..in. You can only access symbol value in directly.
+
+car[carId]
+
+</details>
+
+</div>
