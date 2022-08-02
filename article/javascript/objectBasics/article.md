@@ -1036,3 +1036,55 @@ if we use optional chain <b>null</b> and <b>undefined</b> values will be return 
 </details>
 
 </div>
+
+
+
+
+<!---
+  QUESTION 20
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 20</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code which number can cause an error?
+
+```js
+
+let user = null;
+let user2 = {};
+let x = 0;
+user?.increment(x++); // 1
+user.increment?.(x++); // 2
+user2?.increment(x++); // 3
+user2.increment?.(x++) // 4
+
+user?.increment?.(x++);
+
+console.log(x);
+console.log(y);
+
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+2
+3
+```
+
+Number 2 and Number 3 will be caused an error. 
+* Number 2 Cannot read properties of null (reading 'increment')
+* Number 3 user2?.increment is not a function
+
+</details>
+
+</div>
