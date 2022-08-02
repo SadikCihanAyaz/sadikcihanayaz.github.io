@@ -1225,3 +1225,47 @@ car[carId]
 </details>
 
 </div>
+
+
+
+
+<!---
+  QUESTION 24
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 24</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code what will be output?
+
+```js
+let carid= Symbol('carID');
+
+let car = {
+    [carid] : 'bmw',
+}
+
+let car2 = Object.assign({}, car);
+
+console.log(car2[carid]);
+```
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+bmw
+```
+
+* if you copy an object symbol properties will be protected.
+
+</details>
+
+</div>
