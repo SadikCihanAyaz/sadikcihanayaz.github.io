@@ -67,6 +67,11 @@ function getArticleJSON() {
                     "description": "OBJECT BASICS"
                 },
                 {
+                    "path": "datatypes",
+                    "header": "DATA TYPES",
+                    "description": "DATA TYPES"
+                },
+                {
                     "path": "arrays",
                     "header": "ARRAYS",
                     "description": "ARRAYS"
