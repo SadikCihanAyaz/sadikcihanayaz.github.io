@@ -101,6 +101,8 @@ npx react-native init
 1. Create new react native project
 2. if exist Prettier and eslint your boilerplate delete all dependencies
 3. setup prettier and eslint in your react native project
+4. Setup stylelint in your react native project
+5. Setup Husky in your react native project
 
 ```html
 TİP: use this command for create a project -> react-native init 
@@ -116,6 +118,9 @@ TİP: use this command for create a project -> react-native init
 
 * <a href="https://enlear.academy/eslint-vs-prettier-57882d0fec1d">Read Difference Eslint And Prettier</a> 
 
+* <a href="https://stylelint.io/user-guide/get-started">Read About Stylelint</a>,
+
+* <a href="https://dev.to/botreetechnologies/setting-up-husky-pre-commit-hook-with-eslint-prettier-and-lint-staged-for-react-and-react-native-d05">Read About Husky, Eslint and Prettier</a>,
 
 
 </details>
