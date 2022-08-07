@@ -45,3 +45,79 @@ Look at the following questions.
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 2
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 2</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+How many way is exist for create react native project?
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+
+```html
+npx create-react-native-app try1
+```
+This will create react native boilerplate
+
+```html
+expo
+```
+Generally, this method cannot be suggested
+```html
+npx react-native init
+```
+
+</details>
+
+</div>
+
+
+
+
+<!---
+  QUESTION 3
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 3</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+1. Create new react native project
+2. if exist Prettier and eslint your boilerplate delete all dependencies
+3. setup prettier and eslint in your react native project
+
+```html
+TİP: use this command for create a project -> react-native init 
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+
+* <a href="https://three29.com/set-up-eslint-and-prettier-for-react-native-projects/">Read Set up Eslint and Prettier</a> 
+
+* <a href="https://enlear.academy/eslint-vs-prettier-57882d0fec1d">Read Difference Eslint And Prettier</a> 
+
+
+
+</details>
+
+</div>
