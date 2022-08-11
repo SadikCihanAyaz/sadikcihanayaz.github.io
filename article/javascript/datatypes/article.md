@@ -303,3 +303,104 @@ console.log( 999999999999999999 );
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 7
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 7</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code. What will be output log?
+
+```js
+console.log(isNaN(NaN));
+console.log(isNaN("str"));
+console.log(NaN === NaN);
+console.log(6.35.toFixed(1));
+console.log(1.35.toFixed(1));
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+true
+true
+false
+6.3
+1.4
+```
+
+if you write toFixed(20)
+
+console.log(6.35.toFixed(20));
+console.log(1.35.toFixed(20));
+
+```html
+6.34999999999999964473
+1.35000000000000008882
+```
+
+</details>
+
+</div>
+
+
+
+<!---
+  QUESTION 8
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 8</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Create a string variable and output will be following.
+
+```html
+Guests:
+ * John
+ * Pete
+ * Mary
+```
+
+Tips: 
+```js
+let variable = ...;
+console.log(variable);
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+You can write your js file two different way
+First way:
+
+```js
+let guestList = "Guests:\n * John\n * Pete\n * Mary";
+
+```
+
+Second way: 
+```js
+let guestList = "Guests:\n * John\n * Pete\n * Mary";
+
+```
+
+</details>
+
+</div>
