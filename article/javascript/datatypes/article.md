@@ -397,7 +397,11 @@ let guestList = "Guests:\n * John\n * Pete\n * Mary";
 
 Second way: 
 ```js
-let guestList = "Guests:\n * John\n * Pete\n * Mary";
+let guestList = `Guests:
+ * John
+ * Pete
+ * Mary
+`
 
 ```
 
