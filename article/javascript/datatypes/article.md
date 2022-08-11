@@ -408,3 +408,102 @@ let guestList = `Guests:
 </details>
 
 </div>
+
+
+
+
+<!---
+  QUESTION 9
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 9</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+write a code for following text 'cihan' to convert to 'c-i-h-a-n'
+
+```js
+let test = 'cihan';
+
+.....
+
+console.log(copy);
+
+```
+
+Output will be: 
+```html
+c-i-h-a-n
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+
+```js
+let test = 'cihan';
+let copy = '';
+for(let c of test)
+{   
+    if(copy)
+    {
+        copy += '-';
+    }
+    copy += c ;
+}
+
+console.log(copy);
+
+```
+
+</details>
+
+</div>
+
+
+<!---
+  QUESTION 10
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 10</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+1. How you can access an array character? Give an example
+2. Why we are use string.length instead of string.length()
+3. Is it possible to change a string character?  (Look at the following ; is it possible?)
+
+```js
+let test = 'cihan';
+test[1] = 'a';
+
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+1. If you want to access a string character you have two option. Square brackets and charAt can be used.
+
+```js
+let test = `Cihan`;
+
+console.log( test[0] );
+console.log( test.charAt(0) ); 
+```
+
+2. This is a numeric property so not a function
+3. This occurs an error. Because strings are immutable.
+
+</details>
+
+</div>
