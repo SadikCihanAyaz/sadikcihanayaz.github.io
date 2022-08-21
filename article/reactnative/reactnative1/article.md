@@ -126,3 +126,54 @@ TİP: use this command for create a project -> react-native init
 </details>
 
 </div>
+
+
+
+
+<!---
+  QUESTION 4
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 4</summary>
+<p style="font-size: 8px; text-align: right;">this question is taken from https://blog.logrocket.com/using-typescript-with-react-native/</p>
+
+Write following application with typescript 
+
+<img src="https://paper-attachments.dropbox.com/s_5B729611AE3E42F3A9C97D1DA20832973F0ACB94FE96AF127DADD3967B2EB606_1617810063568_ezgif.com-gif-maker.gif" alt="J" width="200"/>
+
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+
+Initialize the project and write following command
+
+```html
+
+npm install typescript @types/react @types/react-native @types/react-test-renderer @types/jest
+
+```
+
+
+* typescript: To install typescript
+* @types/react: To install react types for typescript
+* @types/react-native: To install React Native types for typescript
+* @types/react-test-renderer: To install types for test-renderer for typescript
+* @types/jest: To install types for jest testing for typescript
+
+
+```html
+tsc --init
+```
+
+* this command will be generate <b>tsconfig.json</b> 
+
+</details>
+
+</div>
