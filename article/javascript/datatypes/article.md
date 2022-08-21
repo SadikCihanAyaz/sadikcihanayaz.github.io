@@ -303,3 +303,207 @@ console.log( 999999999999999999 );
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 7
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 7</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Look at the following code. What will be output log?
+
+```js
+console.log(isNaN(NaN));
+console.log(isNaN("str"));
+console.log(NaN === NaN);
+console.log(6.35.toFixed(1));
+console.log(1.35.toFixed(1));
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+```html
+true
+true
+false
+6.3
+1.4
+```
+
+if you write toFixed(20)
+
+console.log(6.35.toFixed(20));
+console.log(1.35.toFixed(20));
+
+```html
+6.34999999999999964473
+1.35000000000000008882
+```
+
+</details>
+
+</div>
+
+
+
+<!---
+  QUESTION 8
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 8</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+Create a string variable and output will be following.
+
+```html
+Guests:
+ * John
+ * Pete
+ * Mary
+```
+
+Tips: 
+```js
+let variable = ...;
+console.log(variable);
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+You can write your js file two different way
+First way:
+
+```js
+let guestList = "Guests:\n * John\n * Pete\n * Mary";
+
+```
+
+Second way: 
+```js
+let guestList = `Guests:
+ * John
+ * Pete
+ * Mary
+`
+
+```
+
+</details>
+
+</div>
+
+
+
+
+<!---
+  QUESTION 9
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 9</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+write a code for following text 'cihan' to convert to 'c-i-h-a-n'
+
+```js
+let test = 'cihan';
+
+.....
+
+console.log(copy);
+
+```
+
+Output will be: 
+```html
+c-i-h-a-n
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+
+```js
+let test = 'cihan';
+let copy = '';
+for(let c of test)
+{   
+    if(copy)
+    {
+        copy += '-';
+    }
+    copy += c ;
+}
+
+console.log(copy);
+
+```
+
+</details>
+
+</div>
+
+
+<!---
+  QUESTION 10
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 10</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+1. How you can access an array character? Give an example
+2. Why we are use string.length instead of string.length()
+3. Is it possible to change a string character?  (Look at the following ; is it possible?)
+
+```js
+let test = 'cihan';
+test[1] = 'a';
+
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+1. If you want to access a string character you have two option. Square brackets and charAt can be used.
+
+```js
+let test = `Cihan`;
+
+console.log( test[0] );
+console.log( test.charAt(0) ); 
+```
+
+2. This is a numeric property so not a function
+3. This occurs an error. Because strings are immutable.
+
+</details>
+
+</div>
