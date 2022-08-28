@@ -507,3 +507,43 @@ console.log( test.charAt(0) );
 </details>
 
 </div>
+
+
+
+<!---
+  QUESTION 11
+  -->
+
+<br/>
+
+<div style="background-color: rgb(6, 41, 48 ); color: white; padding: 2.5%; border-radius: 5px;">
+
+<summary style="font-weight: bold;">QUESTION 11</summary>
+<p style="font-size: 8px; text-align: right;">ORIGINAL</p>
+
+You have a following text and What is the <b>second</b> position of <b>trying</b> 
+
+
+
+```js
+let test = 'Trying is good thing, dont trying is nothing';
+```
+
+<details>
+  
+  <summary style="font-weight: bold; cursor: pointer;">See Answer</summary>
+  <br/>
+
+We have two option for perform this
+
+```js
+let test = 'Trying is good thing, dont trying is nothing';
+
+console.log(test.indexOf('trying', 1));
+console.log(test.lastIndexOf('trying'));
+```
+
+Second parameter of indexOf indicates the start of a search from the specified position.
+</details>
+
+</div>
