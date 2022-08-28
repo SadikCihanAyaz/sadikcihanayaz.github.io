@@ -172,7 +172,13 @@ npm install typescript @types/react @types/react-native @types/react-test-render
 tsc --init
 ```
 
-* this command will be generate <b>tsconfig.json</b> 
+* this command will be generate <b>tsconfig.json</b>
+
+* Full Of the Code
+
+```html
+https://github.com/SadikCihanAyaz/ShoppingListApp/tree/master/ShoppingListApp
+```
 
 </details>
 
