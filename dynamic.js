@@ -6,11 +6,6 @@ let selectedArticle = '';
 let selectedTopic = '';
 var articleJSON = getArticleJSON();
 
-/*
-fetch("./article.json") 
-.then((response) => { return response.json(); }) 
-.then((data) => console.log(data));
-*/
 
 dynamic = dynamic + `<div class="container"><div class="hero">`;
 for (i = 0; i < articleJSON.length; i++) {
