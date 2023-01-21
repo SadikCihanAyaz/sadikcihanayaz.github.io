@@ -60,13 +60,11 @@
                             <a class="nav-link" href="../reactJS/index.htm">ReactJS</a>
                         </li>
                         <div class="ms-4">
-                            <a href="/index.html" class="btn custom-btn custom-border-btn smoothscroll">Who is Sadık
-                                Cihan Ayaz?</a>
+                            <a href="/index.html" class="btn custom-btn custom-border-btn smoothscroll">Who am I?</a>
                         </div>
                 </div>
             </div>
         </nav>
-
 
         <section class="hero-section">
             <div class="container">
@@ -75,7 +73,6 @@
                 </div>
             </div>
         </section>
-
 
         <section class="latest-podcast-section section-padding pb-0" id="section_2">
             <div class="container">
@@ -89,103 +86,9 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-12 mb-4 mb-lg-0" style="margin-top: 10px;">
-                        <div class="custom-block d-flex">
-                            <div class="">
-                                <div class="custom-block-icon-wrap">
-                                    <div class="section-overlay"></div>
-                                    <a href="detail-page.html" class="custom-block-image-wrap">
-                                        <img src="../images/reactJs.png" class="custom-block-image img-fluid" alt="">
-
-                                        <a href="#" class="custom-block-icon">
-                                            <i class="bi-eyeglasses"></i>
-                                        </a>
-                                    </a>
-                                </div>
-
-                                <div class="mt-2">
-                                    <a href="#" class="btn custom-btn">
-                                        Read
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="custom-block-info">
-                                <div class="custom-block-top d-flex mb-1">
-                                    <small class="me-4">
-                                        <i class="bi-clock-fill custom-icon"></i>
-                                        10 Minutes
-                                    </small>
-
-                                </div>
-
-                                <h5 class="mb-4">
-                                    <a href="detail-page.html">
-                                        Closures
-                                    </a>
-                                </h5>
-
-
-
-                                <p class="mb-4">Advanced topic</p>
-
-
-                            </div>
-
-
-                        </div>
+                    <div id="dom2">
+                        <div id="loader" class="loader" style="margin: 0 auto;"></div>
                     </div>
-
-                    <div class="col-lg-6 col-12 mb-4 mb-lg-0" style="margin-top: 10px;">
-                        <div class="custom-block d-flex">
-                            <div class="">
-                                <div class="custom-block-icon-wrap">
-                                    <div class="section-overlay"></div>
-                                    <a href="detail-page.html" class="custom-block-image-wrap">
-                                        <img src="../images/reactJs.png" class="custom-block-image img-fluid" alt="">
-
-                                        <a href="#" class="custom-block-icon">
-                                            <i class="bi-eyeglasses"></i>
-                                        </a>
-                                    </a>
-                                </div>
-
-                                <div class="mt-2">
-                                    <a href="#" class="btn custom-btn">
-                                        Read
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="custom-block-info">
-                                <div class="custom-block-top d-flex mb-1">
-                                    <small class="me-4">
-                                        <i class="bi-clock-fill custom-icon"></i>
-                                        7 Minutes
-                                    </small>
-
-                                </div>
-
-                                <h5 class="mb-4">
-                                    <a href="detail-page.html">
-                                        Scope / Compiler
-                                    </a>
-                                </h5>
-
-
-
-                                <p class="mb-4">Not Read Yet</p>
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div id="dom2"></div>
-
-
 
                 </div>
             </div>
@@ -255,20 +158,22 @@
             console.log(item)
             const url = item.url;
             const duration = item.duration;
-            const header= item.header;
+            const header = item.header;
             const description = item.description;
-            let domObj = `<div class="custom-block d-flex"> <div class=""> <div class="custom-block-icon-wrap"> <div class="section-overlay"></div> <a href="${url}" class="custom-block-image-wrap"> <img src="../images/reactJs.png" class="custom-block-image img-fluid" alt=""> <a href="${url}" class="custom-block-icon"> <i class="bi-eyeglasses"></i> </a> </a> </div> <div class="mt-2"> <a href="${url}" class="btn custom-btn"> Read </a> </div> </div> <div class="custom-block-info"> <div class="custom-block-top d-flex mb-1"> <small class="me-4"> <i class="bi-clock-fill custom-icon"></i> ${duration} </small> </div> <h5 class="mb-4"> <a href="detail-page.html"> ${header} </a> </h5> <p class="mb-4">${description}</p> </div> </div> `;
-            //let domObj = `<div style="margin-top: 10px;"> <div class="custom-block d-flex"> <div class=""> <div class="custom-block-icon-wrap"> <div class="section-overlay"></div> <a href="${url}" class="custom-block-image-wrap"> <img src="../images/reactJs.png" class="custom-block-image img-fluid" alt=""> <a href="${url}" class="custom-block-icon"> <i class="bi-eyeglasses"></i> </a> </a> </div> <div class="mt-2"> <a href="${url}" class="btn custom-btn"> Read </a> </div> </div> <div class="custom-block-info"> <div class="custom-block-top d-flex mb-1"> <small class="me-4"> <i class="bi-clock-fill custom-icon"></i> ${duration} </small> </div> <h5 class="mb-4"> <a href="detail-page.html"> ${header} </a> </h5> <p class="mb-4">${description}</p> </div> </div> </div>`;
+            let domObj = `<div class="custom-block d-flex"> <div class=""> <div class="custom-block-icon-wrap"> <div class="section-overlay"></div> <a href="${url}" class="custom-block-image-wrap"> <img src="../images/reactJs.png" class="custom-block-image" alt=""> <a href="${url}" class="custom-block-icon"> <i class="bi-eyeglasses"></i> </a> </a> </div> <div class="mt-2"> <a href="${url}" class="btn custom-btn"> Read </a> </div> </div> <div class="custom-block-info"> <div class="custom-block-top d-flex mb-1"> <small class="me-4"> <i class="bi-clock-fill custom-icon"></i> ${duration} </small> </div> <h5 class="mb-4"> <a href="${url}"> ${header} </a> </h5> <p class="mb-4">${description}</p> </div> </div> `;
 
-            // Create an "li" node:
             const node = document.createElement("div");
             node.className = "col-lg-6 col-12 mb-4 mb-lg-0";
-            node.id = 'block'+ Math.floor(Math.random() * 100);
+            node.id = 'block' + Math.floor(Math.random() * 100);
             node.style.cssText = 'margin-top: 10px';
 
-            // Append the "li" node to the list:
             document.getElementById("dom").appendChild(node);
-            document.getElementById(node.id).innerHTML = domObj;
+
+            setTimeout(function () {
+                document.getElementById("loader").hidden = true;
+                document.getElementById(node.id).innerHTML = domObj;
+            }, 3000);
+
         }
 
 
@@ -281,6 +186,40 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/owl.carousel.min.js"></script>
     <script src="../js/custom.js"></script>
+
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            /* Safari */
+            animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 
 </body>
 
