@@ -46,7 +46,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="md2.htm">Home</a>
+                            <a class="nav-link" href="md2.htm">Home</a>
                         </li>
 
 
@@ -81,7 +81,7 @@
                     <div class="col-lg-12 col-12">
                         <div class="section-title-wrap mb-5">
                             <a href="#">
-                                <h4 class="section-title">REACTJS >></h4>
+                                <h4 class="section-title" id="headerId"></h4>
                             </a>
                         </div>
                     </div>
@@ -137,8 +137,8 @@
 
         const genereteDynamicCourse = (data) => {
             const topic = getQueryStringParams('topic');
-            reactJSTopic = data[topic];
-            reactJSTopic.forEach(createItem);
+            allTopics = data[topic];
+            allTopics.forEach(createItem);
         }
 
         function createItem(item, index) {
@@ -161,6 +161,24 @@
             }, 0);
         }
 
+        const changeHeaderText = () => {
+            const topic = getQueryStringParams('topic');
+            var headerText = '';
+
+            if (topic === 'reactJs')
+                headerText = 'React';
+            if (topic === 'javascript')
+                headerText = 'Javascript';
+            if (topic === 'reactNative')
+                headerText = 'React Native';
+            if (topic === 'nextJs')
+                headerText = 'nextJS';
+
+
+            document.getElementById('headerId').innerHTML = headerText;
+
+        }
+
         /**
          * this function find the query strings values.
         */
@@ -175,6 +193,8 @@
                 }
             }
         }
+
+        changeHeaderText();
 
     </script>
 
