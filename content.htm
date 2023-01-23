@@ -46,18 +46,21 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="../md2.htm">Home</a>
+                            <a class="nav-link" href="md2.htm">Home</a>
                         </li>
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="../javascript/index.htm">Javascript</a>
+                            <a class="nav-link" href="tutorial.htm?topic=javascript">Javascript</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../reactNative/index.htm">ReactNative</a>
+                            <a class="nav-link" href="tutorial.htm?topic=reactNative">ReactNative</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../reactJS/index.htm">ReactJS</a>
+                            <a class="nav-link" href="tutorial.htm?topic=reactJs">ReactJS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="tutorial.htm?topic=nextJs">NextJS</a>
                         </li>
                         <div class="ms-4">
                             <a href="/index.html" class="btn custom-btn custom-border-btn smoothscroll">Who am I?</a>
@@ -81,13 +84,14 @@
                     <div class="col-lg-12 col-12">
                         <div class="section-title-wrap mb-5">
                             <a href="#">
-                                <h4 class="section-title">REACTJS >></h4>
+                                <h4 class="section-title" id="headerId"></h4>
                             </a>
                         </div>
                     </div>
 
                     <div id="dom2">
                         <div id="loader" class="loader" style="margin: 0 auto;"></div>
+                        <object data="sample.pdf" id="article" type="application/pdf" width="100%" height="400"></object>
                     </div>
 
                 </div>
@@ -137,8 +141,14 @@
 
         const genereteDynamicCourse = (data) => {
             const topic = getQueryStringParams('topic');
-            reactJSTopic = data[topic];
-            reactJSTopic.forEach(createItem);
+            allTopics = data[topic];
+            if (allTopics.length === 0) {
+                document.getElementById("loader").hidden = true;
+            }
+            else {
+                allTopics.forEach(createItem);
+            }
+
         }
 
         function createItem(item, index) {
@@ -161,6 +171,29 @@
             }, 0);
         }
 
+        const changeHeaderText = () => {
+            const topic = getQueryStringParams('topic');
+            var headerText = '';
+
+            if (topic === 'reactJs')
+                headerText = 'React';
+            if (topic === 'javascript')
+                headerText = 'Javascript';
+            if (topic === 'reactNative')
+                headerText = 'React Native';
+            if (topic === 'nextJs')
+                headerText = 'nextJS';
+
+
+            document.getElementById('headerId').innerHTML = headerText;
+
+        }
+
+        const calculateBrowserHeight = () => {
+            const height = document.documentElement.clientHeight;
+            document.getElementById('article').height = height*0.7;
+        }
+
         /**
          * this function find the query strings values.
         */
@@ -175,6 +208,10 @@
                 }
             }
         }
+
+
+        changeHeaderText();
+        calculateBrowserHeight();
 
     </script>
 
