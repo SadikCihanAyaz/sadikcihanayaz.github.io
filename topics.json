@@ -34,7 +34,7 @@
       "duration": "4 min",
       "order": 4,
       "url": "/topic"
-    } ,
+    },
     {
       "header": "Test Header Was Added..",
       "description": "Test Header Was Added For Seeing extra description who seess",
@@ -42,5 +42,8 @@
       "order": 5,
       "url": "/topic"
     }
-  ]
+  ],
+  "nextJs": [],
+  "reactNative": [],
+  "javascript": []
 }
