@@ -66,72 +66,86 @@
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="custom-block custom-block-overlay">
-                            <a href="tutorial.htm?topic=reactNative" class="custom-block-image-wrap">
-                                <img src="images/arrowRight.jpg" class="custom-block-image img-fluid" alt="">
-                            </a>
+                            <div id="loReactNative" class="loader" style="margin: 0 auto;"></div>
+                            <div id="loDivReactNative" hidden="true">
+                                <a href="tutorial.htm?topic=reactNative" class="custom-block-image-wrap">
+                                    <img src="images/arrowRight.jpg" class="custom-block-image img-fluid" alt="">
+                                </a>
 
-                            <div class="custom-block-info custom-block-overlay-info">
-                                <h5 class="mb-1">
-                                    <a href="tutorial.htm?topic=reactNative">
-                                        React Native
-                                    </a>
-                                </h5>
+                                <div class="custom-block-info custom-block-overlay-info">
+                                    <h5 class="mb-1">
+                                        <a href="tutorial.htm?topic=reactNative">
+                                            React Native
+                                        </a>
+                                    </h5>
 
-                                <p class="badge mb-0">0 Articles</p>
+                                    <p class="badge mb-0" id="reactNativeArticleNumber"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="custom-block custom-block-overlay">
-                            <a href="tutorial.htm?topic=reactJs" class="custom-block-image-wrap">
-                                <img src="images/arrowUp.jpg" class="custom-block-image img-fluid" alt="">
-                            </a>
+                            <div id="loReactJs" class="loader" style="margin: 0 auto;"></div>
+                            <div id="loDivReactJs" hidden="true">
+                                <a href="tutorial.htm?topic=reactJs" class="custom-block-image-wrap">
+                                    <img src="images/arrowUp.jpg" class="custom-block-image img-fluid" alt="">
+                                </a>
 
-                            <div class="custom-block-info custom-block-overlay-info">
-                                <h5 class="mb-1">
-                                    <a href="tutorial.htm?topic=reactJs">
-                                        React JS
-                                    </a>
-                                </h5>
 
-                                <p class="badge mb-0">3 Articles</p>
+                                <div class="custom-block-info custom-block-overlay-info">
+                                    <h5 class="mb-1">
+                                        <a href="tutorial.htm?topic=reactJs">
+                                            React JS
+                                        </a>
+                                    </h5>
+
+                                    <p class="badge mb-0" id="reactJsArticleNumber"></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block custom-block-overlay">
+                            <div id="loJavascript" class="loader" style="margin: 0 auto;"></div>
+                            <div id="loDivJavascript" hidden="true">
+                                <a href="tutorial.htm?topic=javascript" class="custom-block-image-wrap">
+                                    <img src="images/arrowLeft.jpg" class="custom-block-image img-fluid" alt="">
+                                </a>
+
+                                <div class="custom-block-info custom-block-overlay-info">
+                                    <h5 class="mb-1">
+                                        <a href="tutorial.htm?topic=javascript">
+                                            Javascript
+                                        </a>
+                                    </h5>
+
+                                    <p class="badge mb-0" id="javascriptArticleNumber"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="custom-block custom-block-overlay">
-                            <a href="tutorial.htm?topic=javascript" class="custom-block-image-wrap">
-                                <img src="images/arrowLeft.jpg" class="custom-block-image img-fluid" alt="">
-                            </a>
+                            <div id="loNextJs" class="loader" style="margin: 0 auto;"></div>
+                            <div id="loDivNextJs" hidden="true">
+                                <a href="tutorial.htm?topic=nextJs" class="custom-block-image-wrap">
+                                    <img src="images/arrowBottom.jpg" class="custom-block-image img-fluid" alt="">
+                                </a>
 
-                            <div class="custom-block-info custom-block-overlay-info">
-                                <h5 class="mb-1">
-                                    <a href="tutorial.htm?topic=javascript">
-                                        Javascript
-                                    </a>
-                                </h5>
+                                <div class="custom-block-info custom-block-overlay-info">
+                                    <h5 class="mb-1">
+                                        <a href="tutorial.htm?topic=nextJs">
+                                            Next JS
+                                        </a>
+                                    </h5>
 
-                                <p class="badge mb-0">0 Articles</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                        <div class="custom-block custom-block-overlay">
-                            <a href="tutorial.htm?topic=nextJs" class="custom-block-image-wrap">
-                                <img src="images/arrowBottom.jpg" class="custom-block-image img-fluid" alt="">
-                            </a>
-
-                            <div class="custom-block-info custom-block-overlay-info">
-                                <h5 class="mb-1">
-                                    <a href="tutorial.htm?topic=nextJs">
-                                        Next JS
-                                    </a>
-                                </h5>
-
-                                <p class="badge mb-0">0 Articles</p>
+                                    <p class="badge mb-0" id="nextJsArticleNumber"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -179,12 +193,102 @@
 
     </footer>
 
+    <script>
+        function someCallback(data) {
+        }
+
+        function jsonOnLoad(callback) {
+            const raw = this.contentWindow.document.body.textContent.trim();
+            try {
+                const data = JSON.parse(raw);
+                console.log('data Wass');
+                getArticlesLength(data);
+            } catch (e) {
+                console.warn(e.message);
+            }
+            this.remove();
+        }
+
+        /**
+         * getArticlesLength
+        */
+        const getArticlesLength = (data) => {
+            document.getElementById('javascriptArticleNumber').innerHTML = data['javascript'].length + " " + "Articles";
+            document.getElementById('reactJsArticleNumber').innerHTML = data['reactJs'].length + " " + "Articles";
+            document.getElementById('nextJsArticleNumber').innerHTML = data['nextJs'].length + " " + "Articles";
+            document.getElementById('reactNativeArticleNumber').innerHTML = data['reactNative'].length + " " + "Articles";
+
+            document.getElementById('loReactJs').hidden = true;
+            document.getElementById('loDivReactJs').hidden = false;
+
+            document.getElementById('loNextJs').hidden = true;
+            document.getElementById('loDivNextJs').hidden = false;
+
+            document.getElementById('loJavascript').hidden = true;
+            document.getElementById('loDivJavascript').hidden = false;
+
+            document.getElementById('loReactNative').hidden = true;
+            document.getElementById('loDivReactNative').hidden = false;
+        }
+
+        /**
+         * this function find the query strings values.
+        */
+        function getQueryStringParams(sParam) {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) {
+                    return sParameterName[1];
+                }
+            }
+        }
+    </script>
+
+    <iframe src="/topics.json" onload="jsonOnLoad.apply(this, someCallback)" style="display: none;"></iframe>
 
     <!-- JAVASCRIPT FILES -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/custom.js"></script>
+
+
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            /* Safari */
+            animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 
 </body>
 
