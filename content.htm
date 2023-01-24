@@ -78,9 +78,9 @@
         <section class="latest-podcast-section section-padding pb-1" id="section_2">
             <div class="container">
                 <div class="row justify-content-center" id="dom">
-                    <div id="dom2">
+                    <div id="domArticle">
                         <div id="loader" class="loader" style="margin: 0 auto;"></div>
-                        <zero-md src="https://sadikcihanayaz.github.io/reactJS/basic/testReactJs.md" ></zero-md>
+                        <zero-md id="domArticle2" src=""></zero-md>
                     </div>
                 </div>
             </div>
@@ -161,7 +161,10 @@
             }
         }
 
-
+        //<zero-md id="domArticle2" src="https://sadikcihanayaz.github.io/reactJS/basic/testReactJs.md"></zero-md>
+        const showArticle = () => {
+            document.getElementById('domArticle2').src = "https://sadikcihanayaz.github.io/reactJS/basic/testReactJs.md";
+        }
 
         //const app = document.querySelector('zero-md')
         //const app = document.getElementById('article');
@@ -186,6 +189,7 @@
 
         hideLoader();
         changeHeaderText();
+        showArticle();
 
     </script>
 
