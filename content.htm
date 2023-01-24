@@ -174,10 +174,28 @@
                 hostName = `sadikcihanayaz.github.io`;
             }
 
+            console.log('name ::::');
+            console.log(name);
             console.log(hostName + `/${topic}/${category}/${name}.md`);
 
-            document.getElementById('article').src = hostName + `/${topic}/${category}/${name}.md`;
+            //document.getElementById('article').src = hostName + `/${topic}/${category}/${name}.md`;
         }
+
+
+        const app = document.querySelector('zero-md')
+        const run = async () => {
+            app.src = '/reactJs/basic/testReactJs.md'
+            await app.render({
+                // The class `line-numbers` will be added to the markdown-body container
+                classes: 'line-numbers',
+                // These are Marked options
+                gfm: false,
+                mangle: false
+            })
+            alert('Render complete!')
+        }
+        run()
+
 
         const hideLoader = () => {
             document.getElementById("loader").hidden = true;
