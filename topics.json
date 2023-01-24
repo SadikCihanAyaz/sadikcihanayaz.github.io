@@ -1,20 +1,20 @@
 {
   "reactJs": [
     {
-      "header": "testHeader",
+      "header": "Article Header 1",
       "description": "testDescription Konusunda Bir Takım Düzenlemeler yapıldı",
-      "duration": "1 min",
+      "duration": "2 min",
       "order": 0,
       "category": "basic",
       "name": "testReactJs"
     },
     {
-      "header": "testHeader2",
+      "header": "Article Header 2",
       "description": "testDescription2",
-      "duration": "3 min",
+      "duration": "4 min",
       "order": 1,
       "category": "basic",
-      "name": "testReactJs"
+      "name": "testReactJs2"
     },
     {
       "header": "testHeader3",
