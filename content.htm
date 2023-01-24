@@ -30,7 +30,7 @@
     <link href="../css/templatemo-pod-talk.css" rel="stylesheet">
 
     <!-- Import element definition -->
-    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
+    <script type="module" src="js/zero-md.min.js"></script>
 
 </head>
 
@@ -184,8 +184,9 @@
 
         const app = document.querySelector('zero-md')
         const run = async () => {
-            console.log('work!!!!!');
-            app.src = 'https://sadikcihanayaz.github.io/reactJs/basic/testReactJs.md'
+            console.log('work3!!!!!');
+
+            app.src = '/reactJs/basic/testReactJs.md'
             await app.render({
                 // The class `line-numbers` will be added to the markdown-body container
                 classes: 'line-numbers',
