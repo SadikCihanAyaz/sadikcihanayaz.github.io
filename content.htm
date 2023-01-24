@@ -128,24 +128,6 @@
     </footer>
 
     <script>
-        const changeHeaderText = () => {
-            const topic = getQueryStringParams('topic');
-            var headerText = '';
-
-            if (topic === 'reactJs')
-                headerText = 'Return React';
-            if (topic === 'javascript')
-                headerText = 'Javascript';
-            if (topic === 'reactNative')
-                headerText = 'React Native';
-            if (topic === 'nextJs')
-                headerText = 'nextJS';
-
-
-            document.getElementById('headerId').innerHTML = headerText;
-
-        }
-
         /**
          * this function find the query strings values.
         */
@@ -188,7 +170,6 @@
         }
 
         hideLoader();
-        changeHeaderText();
         showArticle();
 
     </script>
