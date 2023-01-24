@@ -164,6 +164,7 @@
             const topic = getQueryStringParams("topic");
             const category = getQueryStringParams("category");
             const name = getQueryStringParams("name");
+            console.log(window.location.hostname);
             console.log(`/${topic}/${category}/${article}.md`);
             document.getElementById('article').src = `/${topic}/${category}/${name}.md`;
         }
