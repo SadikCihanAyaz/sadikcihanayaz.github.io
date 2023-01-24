@@ -80,7 +80,7 @@
                 <div class="row justify-content-center" id="dom">
                     <div id="dom2">
                         <div id="loader" class="loader" style="margin: 0 auto;"></div>
-                        <zero-md id="article" src=""></zero-md>
+                        <zero-md></zero-md>
                     </div>
                 </div>
             </div>
@@ -161,25 +161,6 @@
             }
         }
 
-        const setArticle = () => {
-            const topic = getQueryStringParams("topic");
-            const category = getQueryStringParams("category");
-            const name = getQueryStringParams("name");
-            console.log(window.location.hostname);
-            console.log(`/${topic}/${category}/${article}.md`);
-
-            let hostName = ``;
-
-            if (window.location.hostname === 'sadikcihanayaz.github.io') {
-                hostName = `sadikcihanayaz.github.io`;
-            }
-
-            console.log('name ::::');
-            console.log(name);
-            console.log(hostName + `/${topic}/${category}/${name}.md`);
-
-            //document.getElementById('article').src = hostName + `/${topic}/${category}/${name}.md`;
-        }
 
 
         const app = document.querySelector('zero-md')
@@ -203,7 +184,6 @@
             document.getElementById("loader").hidden = true;
         }
 
-        setArticle();
         hideLoader();
         changeHeaderText();
 
