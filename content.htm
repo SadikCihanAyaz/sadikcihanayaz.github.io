@@ -80,7 +80,7 @@
                 <div class="row justify-content-center" id="dom">
                     <div id="domArticle">
                         <div id="loader" class="loader" style="margin: 0 auto;"></div>
-                        <zero-md id="domArticle2" src=""></zero-md>
+                        <zero-md id="domArticle2"></zero-md>
                     </div>
                 </div>
             </div>
@@ -143,27 +143,21 @@
             }
         }
 
+        // https://sadikcihanayaz.github.io/reactJs/basic/testReactJs.md
         //<zero-md id="domArticle2" src="https://sadikcihanayaz.github.io/reactJS/basic/testReactJs.md"></zero-md>
         const showArticle = () => {
-            document.getElementById('domArticle2').src = "https://sadikcihanayaz.github.io/reactJS/basic/testReactJs.md";
+            const topic = getQueryStringParams('topic');
+            const category = getQueryStringParams('category');
+            const name = getQueryStringParams('name');
+            console.log('toic');
+            console.log(topic);
+            console.log(category);
+            console.log(name);
+            //console.log(`https://sadikcihanayaz.github.io/${topic}/${category}/${name}.md`);
+            //const val = `https://sadikcihanayaz.github.io/${topic}/${category}/${name}.md`;
+            
+            document.getElementById('domArticle2').src = `https://sadikcihanayaz.github.io/${topic}/${category}/${name}.md`;
         }
-
-        //const app = document.querySelector('zero-md')
-        //const app = document.getElementById('article');
-        const run = async () => {
-            console.log('work4!!!!!');
-
-            app.src = '/reactJs/basic/testReactJs.md';
-            await app.render({
-                // The class `line-numbers` will be added to the markdown-body container
-                classes: 'line-numbers',
-                // These are Marked options
-                gfm: false,
-                mangle: false
-            })
-        }
-        //run()
-
 
         const hideLoader = () => {
             document.getElementById("loader").hidden = true;
@@ -171,7 +165,6 @@
 
         hideLoader();
         showArticle();
-
     </script>
 
     <iframe src="../topics.json" onload="jsonOnLoad.apply(this, someCallback)" style="display: none;"></iframe>
