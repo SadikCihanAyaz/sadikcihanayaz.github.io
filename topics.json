@@ -51,5 +51,14 @@
   ],
   "nextJs": [],
   "reactNative": [],
-  "javascript": []
+  "javascript": [
+    {
+      "header": "JavaScript Fundamentals - 1",
+      "description": "You will find interview questions with answers.",
+      "duration": "10 min",
+      "order": 0,
+      "category": "jsFundamentals",
+      "name": "jsf1"
+    }
+  ]
 }
