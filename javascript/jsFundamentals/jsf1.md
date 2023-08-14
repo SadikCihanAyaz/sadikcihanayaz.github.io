@@ -33,13 +33,17 @@
 <br><br> <br><br>
 
 <h2>Question 3</h2>
-<p>Why might developers use comments inside the <code>&lt;script&gt;</code> tag in older JavaScript code, and is this practice relevant in modern web development?</p>
+<p>Historically, why did some developers wrap their JavaScript code with HTML-style comments (e.g., <code>&lt;!-- --&gt;</code>) inside the <code>&lt;script&gt;</code> tag? Is this approach still prevalent in today's web development?</p>
+
 
 <h2>Answer 3</h2>
-<p>In ancient times, developers used comments inside the <code>&lt;script&gt;</code> tag to hide JavaScript code from old browsers that couldn't process the <code>&lt;script&gt;</code> tag correctly. An example of this technique would look like:</p>
+<p>In the early stages of web development, some browsers did not recognize or properly handle the <code>&lt;script&gt;</code> tag. To prevent these browsers from displaying raw JavaScript code to users, developers would wrap their code within HTML comments inside the <code>&lt;script&gt;</code> tag. Here's an example of this practice:</p>
+
 <pre>
 &lt;script type="text/javascript"&gt;&lt;!--
-    // JavaScript code here...
+    // Actual JavaScript code...
 //--&gt;&lt;/script&gt;
 </pre>
-<p>This trick was used to prevent older browsers from displaying the JavaScript code as plain text on the page. However, with the advancement in browser technology, especially in the past 15 years, this practice has become outdated. Modern browsers can process the <code>&lt;script&gt;</code> tag correctly without any need for such comments. Thus, if you come across this type of comment in a script, it can be an indication of really old code, and it's not a practice used in modern JavaScript development.</p>
+
+<p>These comments ensured that older browsers, which didn't understand the <code>&lt;script&gt;</code> tag, would treat the JavaScript code as an HTML comment, thereby hiding it from view. With advancements in browser technology and the wide adoption of modern web standards, this technique has become obsolete. Nowadays, all popular browsers handle the <code>&lt;script&gt;</code> tag correctly, making such commenting unnecessary. Therefore, if you encounter such comments in JavaScript today, it's likely a sign of outdated code practices, and it's no longer a standard approach in contemporary web development.</p>
+
