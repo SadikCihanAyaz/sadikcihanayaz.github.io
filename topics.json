@@ -59,6 +59,14 @@
       "order": 0,
       "category": "jsFundamentals",
       "name": "jsf1"
+    },
+    {
+      "header": "JavaScript Fundamentals - 2",
+      "description": "Code structure",
+      "duration": "12 min",
+      "order": 1,
+      "category": "jsFundamentals",
+      "name": "codeStructure"
     }
   ]
 }
