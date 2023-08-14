@@ -23,12 +23,7 @@
 
 <p>With this change, the code will correctly show four alerts: "Hello", 1, 2, and 3.</p>
 
-
-
-<br><br> <br><br>
-
-
-
+<br><br> <br>
 
 <h2>Question 2</h2>
 
@@ -45,7 +40,6 @@ comment */
 
 <h2>Answer 2</h2>
 
-
 <p>For commenting out large blocks of code, the multi-line comment style, denoted by <code>/* ... */</code>, would be more appropriate. This is because it allows multiple lines to be commented out with a single opening and closing tag, whereas the single-line comment style <code>//</code> only comments out the remainder of the line on which it appears.</p>
 
 <p>Regarding nesting, one style of comment cannot be nested within the other in the way that <code>/* ... /* ... */ ... */</code> is used, as it will result in errors. However, you can place single-line comments within multi-line comments:</p>
@@ -59,11 +53,9 @@ Another line of the multi-line comment
 
 <p>But note that the single-line comment indicators <code>//</code> inside the multi-line comment are redundant, as the multi-line comment already comments out everything within its bounds.</p>
 
-
-<br><br> <br><br>
+<br><br> <br>
 
 <h2>Question 3</h2>
-
 
 <p>Review the JavaScript code below:</p>
 
@@ -74,9 +66,7 @@ Another line of the multi-line comment
 
 <p>Despite the appearance of the code and the line breaks, what would be the output of this script? Explain the behavior of JavaScript regarding newlines and its impact on this particular code snippet.</p>
 
-
 <h2>Answer 3</h2>
-
 
 <p>The output of the provided script will be <code>6</code>.</p>
 
@@ -86,8 +76,7 @@ Another line of the multi-line comment
 
 <p>This results in the addition of the numbers and produces the output <code>6</code>.</p>
 
-
-<br><br> <br><br>
+<br><br> <br>
 
 <h2>Question 4</h2>
 
@@ -101,9 +90,7 @@ alert('World');
 
 <p>Which messages will be displayed when executing this code? Explain the significance of the placement and structure of comments in JavaScript.</p>
 
-
 <h2>Answer 4</h2>
-
 
 <p>When executing the code, only the message <code>'World'</code> will be displayed.</p>
 
@@ -112,3 +99,36 @@ alert('World');
 <p>In the given code snippet, the <code>alert('Hello');</code> statement is enclosed within a multi-line comment, rendering it non-executable. Therefore, it won't produce any alert. On the other hand, the <code>alert('World');</code> statement is outside of the comment delimiters and will execute, displaying the message <code>'World'</code>.</p>
 
 <p>It's crucial to be mindful of the placement and structure of comments, as incorrect usage can inadvertently comment out essential parts of the code, leading to unexpected behaviors.</p>
+
+<br><br><br>
+
+<h2>Question 5</h2>
+
+<p>Refer to the given code snippet:</p>
+
+<pre><code>// This comment occupies a line of its own
+alert('Hello');
+
+alert('World'); // This comment follows the statement
+</code></pre>
+
+<p>Comments in code serve various purposes. Based on the example above, explain the two ways comments are presented in the snippet and discuss the importance of using comments in code development. Additionally, do comments have any impact on the performance or size of a script when it's executed or published?</p>
+
+<h2>Answer 5</h2>
+
+<p>In the provided code snippet, two different commenting styles are showcased:</p>
+
+<ol>
+  <li>The single-line comment, introduced with <code>//</code>. Any text following these characters, up to the end of the line, is treated as a comment. In the snippet, the comment <code>// This comment occupies a line of its own</code> is an example of this.</li>
+  <li>Inline comments that follow a statement on the same line, as seen with <code>alert('World');</code> followed by <code>// This comment follows the statement</code>.</li>
+</ol>
+
+<p>Comments are essential in code development for various reasons:</p>
+
+<ul>
+  <li>Clarification: They provide explanations or clarify complex parts of the code.</li>
+  <li>Maintenance: They assist other developers in understanding the purpose and functionality of specific code sections, making maintenance and collaboration more effective.</li>
+  <li>Debugging: They can be used to temporarily disable specific code lines or sections during debugging without deleting them.</li>
+</ul>
+
+<p>When it comes to performance or the size of a script during execution, comments have no impact on performance because the JavaScript engine simply ignores them. However, comments do increase the overall size of a script. For production purposes, many tools minify code, which involves removing comments, leading to reduced script sizes. Consequently, while comments increase the file size during development, they do not have negative effects when scripts are optimized for production.</p>
