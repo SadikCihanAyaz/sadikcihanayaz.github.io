@@ -22,10 +22,24 @@
 
 <p>In this revised version, the browser will execute both the external script (<code>externalFile.js</code>) and the inline <code>alert</code> function.</p>
 
-<br><br> <br><br><br><br>
+<br><br> <br><br>
 
 <h2>Question 2</h2>
 <p>What were the old usages of the <code>type</code> and <code>language</code> attributes in the <code>&lt;script&gt;</code> tag, and are they still necessary in modern HTML?</p>
 
 <h2>Answer 2</h2>
 <p>In the old HTML standard, HTML4, the <code>type</code> attribute was required for the <code>&lt;script&gt;</code> tag. It was commonly set to <code>text/javascript</code>. However, in modern HTML, this attribute is no longer required for specifying the script type as JavaScript is now the default. The modern HTML standard has repurposed the meaning of the <code>type</code> attribute, especially for JavaScript modules, which is a more advanced topic. As for the <code>language</code> attribute, it was previously used to indicate the language of the script. Since JavaScript has become the default scripting language for browsers, the <code>language</code> attribute is now obsolete and no longer makes sense to use.</p>
+
+<br><br> <br><br>
+
+<h2>Question 3</h2>
+<p>Why might developers use comments inside the <code>&lt;script&gt;</code> tag in older JavaScript code, and is this practice relevant in modern web development?</p>
+
+<h2>Answer 3</h2>
+<p>In ancient times, developers used comments inside the <code>&lt;script&gt;</code> tag to hide JavaScript code from old browsers that couldn't process the <code>&lt;script&gt;</code> tag correctly. An example of this technique would look like:</p>
+<pre>
+&lt;script type="text/javascript"&gt;&lt;!--
+    // JavaScript code here...
+//--&gt;&lt;/script&gt;
+</pre>
+<p>This trick was used to prevent older browsers from displaying the JavaScript code as plain text on the page. However, with the advancement in browser technology, especially in the past 15 years, this practice has become outdated. Modern browsers can process the <code>&lt;script&gt;</code> tag correctly without any need for such comments. Thus, if you come across this type of comment in a script, it can be an indication of really old code, and it's not a practice used in modern JavaScript development.</p>
