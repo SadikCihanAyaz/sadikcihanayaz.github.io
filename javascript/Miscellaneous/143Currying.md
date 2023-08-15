@@ -76,6 +76,8 @@ _What is currying in JavaScript and how does it transform the way functions are 
 Answer 1
 --------
 
+Currying is a functional programming concept where a function that takes multiple arguments is transformed into a sequence of functions that each take a single argument. In other words, instead of invoking a function with multiple arguments at once, you can break down the invocation process by passing one argument at a time. In other words, 
+
 Currying in JavaScript is an advanced technique that transforms a function to allow it to be called in a step-by-step manner. Instead of taking multiple arguments at once, like `f(a, b, c)`, a curried function would take one argument at a time, allowing it to be invoked as `f(a)(b)(c)`.
 
 For instance, consider a simple sum function that takes two arguments:
