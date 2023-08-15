@@ -67,6 +67,14 @@
       "order": 1,
       "category": "jsFundamentals",
       "name": "codeStructure"
+    },
+    {
+      "header": "Miscellaneous - 1",
+      "description": "Currying",
+      "duration": "40 min",
+      "order": 143,
+      "category": "Miscellaneous",
+      "name": "143Currying"
     }
   ]
 }
