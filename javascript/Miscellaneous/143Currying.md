@@ -1,73 +1,3 @@
-
-
-Currying in JavaScript
-----------------------
-
-Currying is an advanced technique that transforms a function to allow it to be called in a step-by-step manner. Instead of `f(a, b, c)`, after currying, the function can be called as `f(a)(b)(c)`.
-
-### Basic Implementation
-
-A simple curried function can be designed using nested wrapper functions, effectively allowing arguments to be passed one at a time. Here, we curry a sum function that takes two arguments. Once curried, we can invoke it step-by-step.
-
-    
-    function curry(f) {
-      return function(a) {
-        return function(b) {
-          return f(a, b);
-        };
-      };
-    }
-    function sum(a, b) {
-      return a + b;
-    }
-    let curriedSum = curry(sum);
-    alert( curriedSum(1)(2) ); // Outputs 3
-        
-
-### Advanced Curry Implementation
-
-More advanced implementations allow the function to be called in both traditional and curried styles. This flexibility is achieved by checking the number of provided arguments against the function's expected arguments. If they match, the function executes; otherwise, it continues currying.
-
-    
-    function curry(func) {
-      return function curried(...args) {
-        if (args.length >= func.length) {
-          return func.apply(this, args);
-        } else {
-          return function(...args2) {
-            return curried.apply(this, args.concat(args2));
-          }
-        }
-      };
-    }
-        
-
-### Practical Applications
-
-Currying provides the benefit of creating "partials" or functions with some arguments pre-applied. Consider a logging function. By currying, we can pre-apply certain arguments like date, creating a logger that always logs messages with the current date. Here's a simplified example, but in real-world scenarios, we could have a more complex logger curried to provide specific functionalities.
-
-    
-    function log(date) {
-      return function(level, message) {
-        console.log(`[${date.toISOString()}] ${level}: ${message}`);
-      };
-    }
-    let logNow = log(new Date());
-    logNow("INFO", "message"); // Outputs [2023-08-15T09:00:00.000Z] INFO: message
-        
-
-### Limitations
-
-Currying is best suited for functions with a fixed number of arguments. Functions that use rest parameters or have an indefinite number of arguments are not suitable for currying using the provided method.
-
-### Summary
-
-Currying is a useful technique in JavaScript that allows functions to be transformed for step-by-step invocation. While primarily defined for this purpose, most JavaScript implementations also support the traditional style of invocation, making it a versatile tool for creating specialized functions.
-
-
-
-<br><br><br>
-
 Question 1
 ----------
 
@@ -289,3 +219,42 @@ When using the curried function, ensure you're chaining the correct number of ar
 This will produce the expected `{ theme: "dark", layout: "grid", language: "en-US" }` configuration.
 
 
+<br><br><br>
+
+
+Question 7
+----------
+
+**What is currying in JavaScript and how does it transform the way functions are invoked? Can you also provide a basic example to illustrate this?**
+
+### Answer 7
+
+Currying is a functional programming concept where a function that takes multiple arguments is transformed into a sequence of functions that each take a single argument. In other words, instead of invoking a function with multiple arguments at once, you can break down the invocation process by passing one argument at a time.
+
+Currying in JavaScript is an advanced technique that transforms a function to allow it to be called in a step-by-step manner. Instead of taking multiple arguments at once, like `f(a, b, c)`, a curried function would take one argument at a time, allowing it to be invoked as `f(a)(b)(c)`.
+
+For instance, consider a simple sum function that takes two arguments:
+
+    
+    function sum(a, b) {
+      return a + b;
+    }
+    
+
+When we curry this function, it can be designed using nested wrapper functions to allow arguments to be passed one at a time:
+
+    
+    function curry(f) {
+      return function(a) {
+        return function(b) {
+          return f(a, b);
+        };
+      };
+    }
+    let curriedSum = curry(sum);
+    
+
+With the curried version, we can invoke it step-by-step:
+
+    
+    alert( curriedSum(1)(2) ); // Outputs 3
