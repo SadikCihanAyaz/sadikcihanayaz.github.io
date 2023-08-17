@@ -258,3 +258,40 @@ With the curried version, we can invoke it step-by-step:
 
     
     alert( curriedSum(1)(2) ); // Outputs 3
+
+
+<br><br><br>
+
+
+Question 8
+----------
+
+**How does currying work under the hood in JavaScript? Could you elucidate the mechanism and provide an illustrative example?**
+
+### Answer 8
+
+At its core, currying in JavaScript leverages the ability of functions to retain access to their outer function's variables, even after the outer function has completed its execution. This phenomenon is known as a _closure_. When you curry a function and invoke it with a subset of its arguments, what you're actually getting in return is another function that remembers those initial arguments due to closures.
+
+Let's break it down with an example:
+
+    
+    function curry(f) {
+      return function(a) {
+        return function(b) {
+          return f(a, b);
+        };
+      };
+    }
+    
+    let curriedMultiply = curry(function(x, y) {
+      return x * y;
+    });
+    
+
+Here's what happens step by step:
+
+1.  When `curriedMultiply` is invoked with a single argument, it returns another function that takes the second argument. The returned function still has access to the first argument through a closure.
+2.  The innermost function has access to variables from all the outer functions, thanks to closures, so when it's finally invoked, it has all the arguments it needs to execute the original function `f`.
+3.  Therefore, `curriedMultiply(2)(3)` will give `6` as the innermost function gets both `x = 2` and `y = 3`, and returns `2 * 3`.
+
+This ability of JavaScript functions to "remember" the environment in which they were created, including any variables available at the time, is the cornerstone that makes currying possible.
