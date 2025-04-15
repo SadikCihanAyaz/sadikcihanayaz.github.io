@@ -171,6 +171,27 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block custom-block-overlay">
+                            <div id="loKubernetes" class="loader" style="margin: 0 auto;"></div>
+                            <div id="loDivKubernetes" hidden="true">
+                                <a href="tutorial.htm?topic=Kubernetes" class="custom-block-image-wrap">
+                                    <img src="images/arrowBottom.jpg" class="custom-block-image img-fluid" alt="">
+                                </a>
+
+                                <div class="custom-block-info custom-block-overlay-info">
+                                    <h5 class="mb-1">
+                                        <a href="tutorial.htm?topic=Kubernetes">
+                                            Kubernetes
+                                        </a>
+                                    </h5>
+
+                                    <p class="badge mb-0" id="KubernetesArticleNumber"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -239,6 +260,7 @@
             document.getElementById('nextJsArticleNumber').innerHTML = data['nextJs'].length + " " + "Articles";
             document.getElementById('reactNativeArticleNumber').innerHTML = data['reactNative'].length + " " + "Articles";
             document.getElementById('RomanianArticleNumber').innerHTML = data['Romanian'].length + " " + "Articles";
+            document.getElementById('KubernetesArticleNumber').innerHTML = data['Kubernetes'].length + " " + "Articles";
 
             document.getElementById('loReactJs').hidden = true;
             document.getElementById('loDivReactJs').hidden = false;
@@ -248,6 +270,8 @@
 
             document.getElementById('loRomanian').hidden = true;
             document.getElementById('loDivRomanian').hidden = false;
+            document.getElementById('loKubernetes').hidden = true;
+            document.getElementById('loDivKubernetes').hidden = false;
 
             document.getElementById('loJavascript').hidden = true;
             document.getElementById('loDivJavascript').hidden = false;
