@@ -65,11 +65,20 @@
     {
       "header": "Course 1: Introduction",
       "description": "This lesson you will learn which topics you need to know if you called yourself as react native developer.",
-      "duration": "13 min",
+      "duration": "10 min",
       "order": 0,
       "category": "rn",
       "name": "001"
+    },
+    {
+      "header": "Course: Prerequisites & Setup",
+      "description": "This lesson you will learn setup the project",
+      "duration": "15 min",
+      "order": 1,
+      "category": "rn",
+      "name": "002"
     }
+
   ],
   "javascript": [
     {
