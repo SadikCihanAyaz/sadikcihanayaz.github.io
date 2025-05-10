@@ -61,7 +61,16 @@
       "name": "0001"
     }
   ],
-  "reactNative": [],
+  "reactNative": [
+    {
+      "header": "Course 1: Introduction",
+      "description": "This lesson you will learn which topics you need to know if you called yourself as react native developer.",
+      "duration": "13 min",
+      "order": 0,
+      "category": "rn",
+      "name": "001"
+    }
+  ],
   "javascript": [
     {
       "header": "JavaScript Fundamentals - 1",
