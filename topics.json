@@ -111,6 +111,14 @@
       "order": 1,
       "category": "rn",
       "name": "006"
+    },
+    {
+      "header": "Course 1.5: Modules & tooling ESM imports exports bundlers Metro Webpack",
+      "description": "This lesson you will learn Modules & tooling ESM imports exports bundlers Metro Webpack",
+      "duration": "15 min",
+      "order": 1,
+      "category": "rn",
+      "name": "007"
     }
 
   ],
