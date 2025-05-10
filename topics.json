@@ -87,6 +87,15 @@
       "category": "rn",
       "name": "003"
     }
+    ,
+    {
+      "header": "Course 1.2: Hoisting",
+      "description": "This lesson you will hoisting",
+      "duration": "15 min",
+      "order": 1,
+      "category": "rn",
+      "name": "004"
+    }
 
   ],
   "javascript": [
