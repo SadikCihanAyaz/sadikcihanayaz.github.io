@@ -255,6 +255,14 @@
       "order": 5,
       "category": "rn",
       "name": "024"
+    },
+    {
+      "header": "2. Core React Concepts",
+      "description": "Performance: React.memo, useTransition (Concurrent React intro)",
+      "duration": "15 min",
+      "order": 6,
+      "category": "rn",
+      "name": "025"
     }
 
   ],
