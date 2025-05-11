@@ -181,6 +181,14 @@
       "order": 3,
       "category": "rn",
       "name": "015"
+    },
+    {
+      "header": "2. Core React Concepts",
+      "description": "Components functional vs class Fragments",
+      "duration": "15 min",
+      "order": 3,
+      "category": "rn",
+      "name": "016"
     }
 
   ],
