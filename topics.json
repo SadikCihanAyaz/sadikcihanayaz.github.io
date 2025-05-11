@@ -264,6 +264,15 @@
       "category": "rn",
       "name": "025"
     }
+    ,
+    {
+      "header": "2. Core React Concepts",
+      "description": "DevTools & Profiler: hook inspection, flamegraphs",
+      "duration": "15 min",
+      "order": 6,
+      "category": "rn",
+      "name": "026"
+    }
 
   ],
   "javascript": [
