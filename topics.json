@@ -206,6 +206,15 @@
       "category": "rn",
       "name": "018"
     }
+    ,
+    {
+      "header": "2. Core React Concepts",
+      "description": "Context API createContext Providers useContext",
+      "duration": "15 min",
+      "order": 3,
+      "category": "rn",
+      "name": "019"
+    }
 
   ],
   "javascript": [
