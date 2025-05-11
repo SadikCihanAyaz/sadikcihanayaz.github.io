@@ -247,6 +247,14 @@
       "order": 5,
       "category": "rn",
       "name": "023"
+    },
+    {
+      "header": "2. Core React Concepts",
+      "description": "Event handling Reacts synthetic events cross-platform quirks",
+      "duration": "15 min",
+      "order": 5,
+      "category": "rn",
+      "name": "024"
     }
 
   ],
