@@ -119,8 +119,15 @@
       "order": 1,
       "category": "rn",
       "name": "007"
+    },
+    {
+      "header": "1.6: Event loop & concurrency micro vs macro-tasks blocking the JS UI thread",
+      "description": "This lesson you will learn Event loop & concurrency micro vs macro-tasks blocking the JS UI thread",
+      "duration": "15 min",
+      "order": 1,
+      "category": "rn",
+      "name": "008"
     }
-
   ],
   "javascript": [
     {
