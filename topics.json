@@ -223,6 +223,14 @@
       "order": 4,
       "category": "rn",
       "name": "020"
+    }   ,
+    {
+      "header": "2. Core React Concepts",
+      "description": "Error boundaries componentDidCatch getDerivedStateFromError",
+      "duration": "15 min",
+      "order": 4,
+      "category": "rn",
+      "name": "021"
     }
 
   ],
