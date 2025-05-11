@@ -239,6 +239,14 @@
       "order": 4,
       "category": "rn",
       "name": "022"
+    },
+    {
+      "header": "2. Core React Concepts",
+      "description": "Suspense & lazy loading Reactlazy Suspense",
+      "duration": "15 min",
+      "order": 5,
+      "category": "rn",
+      "name": "023"
     }
 
   ],
