@@ -173,6 +173,15 @@
       "category": "rn",
       "name": "014"
     }
+    ,
+    {
+      "header": "2. Core React Concepts",
+      "description": "JSX & reconciliation: Virtual DOM diffing, keys",
+      "duration": "15 min",
+      "order": 3,
+      "category": "rn",
+      "name": "015"
+    }
 
   ],
   "javascript": [
