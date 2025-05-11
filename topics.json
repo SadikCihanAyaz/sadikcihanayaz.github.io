@@ -137,6 +137,15 @@
       "category": "rn",
       "name": "010"
     }
+    ,
+    {
+      "header": "1.9 Dynamic imports & code splitting import() lazy-loading modules",
+      "description": "This lesson you will learn Dynamic imports & code splitting import() lazy-loading modules",
+      "duration": "15 min",
+      "order": 2,
+      "category": "rn",
+      "name": "011"
+    }
 
   ],
   "javascript": [
