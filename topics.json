@@ -146,6 +146,15 @@
       "category": "rn",
       "name": "011"
     }
+    ,
+    {
+      "header": "1.9.1 Timers & scheduling setTimeout setInterval requestAnimationFrame cleanup to avoid leaks",
+      "description": "This lesson you will learn Timers & scheduling setTimeout setInterval requestAnimationFrame cleanup to avoid leaks",
+      "duration": "15 min",
+      "order": 2,
+      "category": "rn",
+      "name": "012"
+    }
 
   ],
   "javascript": [
