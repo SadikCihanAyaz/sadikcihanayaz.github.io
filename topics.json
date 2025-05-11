@@ -127,15 +127,17 @@
       "order": 1,
       "category": "rn",
       "name": "008"
-    },
-    {
-      "header": "1.7: Prototypal inheritance & classes prototype chain ES6 class vs manual prototypes",
-      "description": "This lesson you will learn Prototypal inheritance & classes prototype chain ES6 class vs manual prototypes",
-      "duration": "15 min",
-      "order": 1,
-      "category": "rn",
-      "name": "009"
     }
+    ,
+    {
+      "header": "1.8 Optional chaining & nullish coalescing ?. and ??",
+      "description": "This lesson you will learn Optional chaining & nullish coalescing ?. and ??",
+      "duration": "15 min",
+      "order": 2,
+      "category": "rn",
+      "name": "010"
+    }
+
   ],
   "javascript": [
     {
