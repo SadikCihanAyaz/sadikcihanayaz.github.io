@@ -290,6 +290,14 @@
       "order": 7,
       "category": "rn",
       "name": "028"
+    },
+    {
+      "header": "3. React Native Essentials",
+      "description": "Styling Flexbox and Layout",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "029"
     }
 
   ],
