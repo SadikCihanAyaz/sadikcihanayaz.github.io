@@ -273,6 +273,15 @@
       "category": "rn",
       "name": "026"
     }
+    ,
+    {
+      "header": "2. Core React Concepts",
+      "description": "Type checking: PropTypes or TypeScript interfaces/types",
+      "duration": "15 min",
+      "order": 6,
+      "category": "rn",
+      "name": "027"
+    }
 
   ],
   "javascript": [
