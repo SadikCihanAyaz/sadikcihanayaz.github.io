@@ -215,6 +215,15 @@
       "category": "rn",
       "name": "019"
     }
+    ,
+    {
+      "header": "2. Core React Concepts",
+      "description": "Refs useRef ref forwarding",
+      "duration": "15 min",
+      "order": 4,
+      "category": "rn",
+      "name": "020"
+    }
 
   ],
   "javascript": [
