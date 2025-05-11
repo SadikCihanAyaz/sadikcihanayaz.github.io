@@ -189,6 +189,14 @@
       "order": 3,
       "category": "rn",
       "name": "016"
+    },
+    {
+      "header": "2. Core React Concepts",
+      "description": "Data flow props state unidirectional updates",
+      "duration": "15 min",
+      "order": 3,
+      "category": "rn",
+      "name": "017"
     }
 
   ],
