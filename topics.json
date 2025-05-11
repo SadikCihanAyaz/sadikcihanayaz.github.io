@@ -231,6 +231,14 @@
       "order": 4,
       "category": "rn",
       "name": "021"
+    },
+    {
+      "header": "2. Core React Concepts",
+      "description": "Render patterns render props higher-order components composition",
+      "duration": "15 min",
+      "order": 4,
+      "category": "rn",
+      "name": "022"
     }
 
   ],
