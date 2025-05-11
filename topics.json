@@ -164,6 +164,15 @@
       "category": "rn",
       "name": "013"
     }
+    ,
+    {
+      "header": "1.9.3 TypeScript basics: interfaces vs types, generics, type narrowing, module augmentation",
+      "description": "This lesson you will learn TypeScript basics: interfaces vs types, generics, type narrowing, module augmentation",
+      "duration": "15 min",
+      "order": 2,
+      "category": "rn",
+      "name": "014"
+    }
 
   ],
   "javascript": [
