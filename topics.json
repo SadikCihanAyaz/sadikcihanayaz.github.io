@@ -282,6 +282,15 @@
       "category": "rn",
       "name": "027"
     }
+    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "Built-in UI components",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "028"
+    }
 
   ],
   "javascript": [
