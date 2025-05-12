@@ -151,6 +151,14 @@
       "order": 1,
       "category": "rn",
       "name": "008"
+    },
+    {
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "React Native Interview Questions: Event Loop, Concurrency, Microtasks vs Macrotasks, and JS Thread Blocking",
+      "duration": "15 min",
+      "order": 1,
+      "category": "rn",
+      "name": "008_01"
     }
     ,
     {
