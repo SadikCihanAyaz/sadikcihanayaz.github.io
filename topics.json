@@ -129,16 +129,16 @@
       "name": "006"
     },
     {
-      "header": "Course 1.5: Modules & tooling ESM imports exports bundlers Metro Webpack",
-      "description": "This lesson you will learn Modules & tooling ESM imports exports bundlers Metro Webpack",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Modules & tooling ESM imports exports bundlers Metro Webpack",
       "duration": "15 min",
       "order": 1,
       "category": "rn",
       "name": "007"
     },
     {
-      "header": "1.6: Event loop & concurrency micro vs macro-tasks blocking the JS UI thread",
-      "description": "This lesson you will learn Event loop & concurrency micro vs macro-tasks blocking the JS UI thread",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Event loop & concurrency micro vs macro-tasks blocking the JS UI thread",
       "duration": "15 min",
       "order": 1,
       "category": "rn",
@@ -146,8 +146,17 @@
     }
     ,
     {
-      "header": "1.8 Optional chaining & nullish coalescing ?. and ??",
-      "description": "This lesson you will learn Optional chaining & nullish coalescing ?. and ??",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Prototypal inheritance & classes prototype chain ES6 class vs manual prototypes",
+      "duration": "15 min",
+      "order": 1,
+      "category": "rn",
+      "name": "009"
+    }
+    ,
+    {
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": " Optional chaining & nullish coalescing ?. and ??",
       "duration": "15 min",
       "order": 2,
       "category": "rn",
@@ -155,8 +164,8 @@
     }
     ,
     {
-      "header": "1.9 Dynamic imports & code splitting import() lazy-loading modules",
-      "description": "This lesson you will learn Dynamic imports & code splitting import() lazy-loading modules",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Dynamic imports & code splitting import() lazy-loading modules",
       "duration": "15 min",
       "order": 2,
       "category": "rn",
@@ -164,8 +173,8 @@
     }
     ,
     {
-      "header": "1.9.1 Timers & scheduling setTimeout setInterval requestAnimationFrame cleanup to avoid leaks",
-      "description": "This lesson you will learn Timers & scheduling setTimeout setInterval requestAnimationFrame cleanup to avoid leaks",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Timers & scheduling setTimeout setInterval requestAnimationFrame cleanup to avoid leaks",
       "duration": "15 min",
       "order": 2,
       "category": "rn",
@@ -173,8 +182,8 @@
     }
     ,
     {
-      "header": "1.9.2 Error handling patterns: centralized error boundaries, global handlers (ErrorUtils)",
-      "description": "This lesson you will learn Error handling patterns: centralized error boundaries, global handlers (ErrorUtils)",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Error handling patterns: centralized error boundaries, global handlers (ErrorUtils)",
       "duration": "15 min",
       "order": 2,
       "category": "rn",
@@ -182,8 +191,8 @@
     }
     ,
     {
-      "header": "1.9.3 TypeScript basics: interfaces vs types, generics, type narrowing, module augmentation",
-      "description": "This lesson you will learn TypeScript basics: interfaces vs types, generics, type narrowing, module augmentation",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "TypeScript basics: interfaces vs types, generics, type narrowing, module augmentation",
       "duration": "15 min",
       "order": 2,
       "category": "rn",
