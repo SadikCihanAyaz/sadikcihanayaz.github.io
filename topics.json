@@ -350,6 +350,32 @@
       "order": 7,
       "category": "rn",
       "name": "035"
+    },
+    {
+      "header": "3. React Native Essentials",
+      "description": "App Lifecycle & State in React Native: Managing AppState and Connectivity (NetInfo)",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "036"
+    }
+    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "Storage & Persistence in React Native: AsyncStorage, MMKV, and SecureStore",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "037"
+    }
+    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "Linking & Deep Linking in React Native: Using Linking API and Universal/App Links",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "038"
     }
 
   ],
