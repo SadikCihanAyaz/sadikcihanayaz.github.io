@@ -333,6 +333,24 @@
       "category": "rn",
       "name": "033"
     }
+    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "Navigation Hooks in React Native: useNavigation and useRoute",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "034"
+    }
+    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "StatusBar and Appearance in React Native: Managing StatusBar and Dark Mode",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "035"
+    }
 
   ],
   "javascript": [
