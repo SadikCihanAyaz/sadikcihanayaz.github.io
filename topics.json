@@ -316,6 +316,22 @@
       "order": 7,
       "category": "rn",
       "name": "031"
+    }    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "Touch & Gestures in React Native: Pressable, TouchableOpacity, PanResponder, and Gesture Handler",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "032"
+    } ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "Animations in React Native: Animated API, LayoutAnimation, and Reanimated Basics",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "033"
     }
 
   ],
