@@ -255,6 +255,14 @@
       "order": 3,
       "category": "rn",
       "name": "018"
+    },
+    {
+      "header": "2. Core React Concepts",
+      "description": "React Native TypeScript Hooks Interview Questions: Hooks useState useEffect useCallback useMemo custom hooks",
+      "duration": "15 min",
+      "order": 3,
+      "category": "rn",
+      "name": "018_01"
     }
     ,
     {
