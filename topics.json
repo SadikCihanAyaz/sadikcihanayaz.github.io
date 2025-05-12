@@ -216,6 +216,15 @@
     }
     ,
     {
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "React Native TypeScript Interview Questions: Interfaces vs Types, Generics, Type Narrowing, Module Augmentation",
+      "duration": "15 min",
+      "order": 2,
+      "category": "rn",
+      "name": "014_01"
+    }
+    ,
+    {
       "header": "2. Core React Concepts",
       "description": "JSX & reconciliation: Virtual DOM diffing, keys",
       "duration": "15 min",
