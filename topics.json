@@ -451,6 +451,14 @@
       "order": 7,
       "category": "rn",
       "name": "047"
+    },
+    {
+      "header": "6. When & why to write native modules (Java/Kotlin or Objective-C/Swift)",
+      "description": "When & Why to Write Native Modules in React Native (Java/Kotlin or Objective-C/Swift)",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "048"
     }
 
   ],
