@@ -395,6 +395,31 @@
       "category": "rn",
       "name": "040"
     }
+    ,
+    {
+      "header": "4. Navigation",
+      "description": "React Navigation (v5+): Stack, Tabs, Drawers, and Deep Linking",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "041"
+    },
+    {
+      "header": "4. Navigation",
+      "description": "Wix React Native Navigation: A Native Stack Navigation Solution",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "042"
+    },
+    {
+      "header": "4. Navigation",
+      "description": "React Navigation Patterns: Nested Navigators, Param Passing, and Auth Flows",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "043"
+    }
 
   ],
   "javascript": [
