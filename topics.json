@@ -80,8 +80,8 @@
     }
     ,
     {
-      "header": "Course 1.1: Closures",
-      "description": "This lesson you will closures",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Closures",
       "duration": "15 min",
       "order": 1,
       "category": "rn",
@@ -89,15 +89,15 @@
     }
     ,
     {
-      "header": "Course 1.2: Hoisting",
-      "description": "This lesson you will hoisting",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Hoisting",
       "duration": "15 min",
       "order": 1,
       "category": "rn",
       "name": "004"
     },
     {
-      "header": "Course 1.2: Closures, Hoisting Questions",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "Closures, Hoisting Questions",
       "duration": "15 min",
       "order": 1,
@@ -105,8 +105,8 @@
       "name": "004_01"
     },
     {
-      "header": "Course 1.3: Async Patterns",
-      "description": "This lesson you will learn async patterns",
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Async Patterns",
       "duration": "15 min",
       "order": 1,
       "category": "rn",
