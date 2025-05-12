@@ -339,6 +339,14 @@
       "order": 6,
       "category": "rn",
       "name": "027"
+    },
+    {
+      "header": "2. Core React Concepts",
+      "description": "React Native Styling Essentials with Flexbox (TypeScript)",
+      "duration": "15 min",
+      "order": 6,
+      "category": "rn",
+      "name": "027_01"
     }
     ,
     {
