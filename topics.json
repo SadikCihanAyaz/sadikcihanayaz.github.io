@@ -299,6 +299,24 @@
       "category": "rn",
       "name": "029"
     }
+    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "Understanding Device Metrics in React Native: Dimensions, PixelRatio, and useWindowDimensions",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "030"
+    }
+    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "React Native Platform Quirks: iOS vs Android Styling, KeyboardAvoidingView, and Permissions",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "031"
+    }
 
   ],
   "javascript": [
