@@ -419,6 +419,38 @@
       "order": 7,
       "category": "rn",
       "name": "043"
+    },
+    {
+      "header": "5. State Management",
+      "description": "Local State Management in React Native: Context API, useReducer, and Selectors",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "044"
+    },
+    {
+      "header": "5. State Management",
+      "description": "Global State Management in React Native: Redux, MobX, Recoil, and Lightweight Alternatives",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "045"
+    },
+    {
+      "header": "5. State Management",
+      "description": "Persistence in React Native: Redux Persist, MMKV, and AsyncStorage Integrations",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "046"
+    },
+    {
+      "header": "5. State Management",
+      "description": "Async Data Handling in React Native: Redux-Thunk, Redux-Saga, React Query, SWR, and GraphQL Clients",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "047"
     }
 
   ],
