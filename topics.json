@@ -386,6 +386,15 @@
       "category": "rn",
       "name": "039"
     }
+    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "Native Modules Basics in React Native: Platform, PermissionsAndroid, and Bridging APIs",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "040"
+    }
 
   ],
   "javascript": [
