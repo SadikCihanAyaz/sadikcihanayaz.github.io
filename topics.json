@@ -377,6 +377,15 @@
       "category": "rn",
       "name": "038"
     }
+    ,
+    {
+      "header": "3. React Native Essentials",
+      "description": "Accessibility in React Native: accessible Props, accessibilityLabel, Roles, and Focus Management",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "039"
+    }
 
   ],
   "javascript": [
