@@ -130,6 +130,14 @@
     },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "JavaScript Syntax Sugar in React Native: Destructuring, Rest, Spread, and Template Literals Questions",
+      "duration": "15 min",
+      "order": 1,
+      "category": "rn",
+      "name": "006_01"
+    },
+    {
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "Modules & tooling ESM imports exports bundlers Metro Webpack",
       "duration": "15 min",
       "order": 1,
