@@ -113,6 +113,14 @@
       "name": "005"
     },
     {
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "React Native Interview Questions: Async Patterns (JavaScript, ESNext, TypeScript)",
+      "duration": "15 min",
+      "order": 1,
+      "category": "rn",
+      "name": "0001"
+    },
+    {
       "header": "Course 1.4: Syntax Sugar Destructuring Rest Spread Template Literals",
       "description": "This lesson you will learn syntax sugar destructuring rest spread template literals",
       "duration": "15 min",
