@@ -880,6 +880,14 @@
     },
     {
       "header": "18. CI/CD, Analytics & Architecture Extras",
+      "description": "Questions: CI/CD & DevOps: GitHub Actions / Bitrise for automated builds/tests, Fastlane for signing & release",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "090_01"
+    },
+    {
+      "header": "18. CI/CD, Analytics & Architecture Extras",
       "description": "Analytics & Monitoring: Segment / Amplitude / Firebase Analytics, performance monitoring (New Relic, Datadog)",
       "duration": "15 min",
       "order": 7,
