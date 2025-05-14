@@ -576,6 +576,66 @@
       "category": "rn",
       "name": "050"
     }
+    ,
+    {
+      "header": "7. Networking & Offline",
+      "description": "HTTP & WS: fetch, Axios, WebSockets",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "051"
+    }
+    ,
+    {
+      "header": "7. Networking & Offline",
+      "description": "Caching & storage: AsyncStorage, MMKV, SQLite",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "052"
+    },
+    {
+      "header": "7. Networking & Offline",
+      "description": "Offline sync patterns",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "053"
+    },
+    {
+      "header": "7. Networking & Offline",
+      "description": "Connectivity & status: @react-native-community/netinfo, reachability checks, offline/online event handling",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "054"
+    }
+    ,
+    {
+      "header": "7. Networking & Offline",
+      "description": "Background tasks: BackgroundFetch, react-native-background-task, WorkManager (Android)",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "055"
+    },
+    {
+      "header": "7. Networking & Offline",
+      "description": "Retry & queueing: exponential backoff, offline mutation queue (e.g. Redux Offline, Apollo Offline)",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "056"
+    },
+    {
+      "header": "7. Networking & Offline",
+      "description": "Security: HTTPS pinning, certificate handling, secure storage for tokens (Keychain, Keystore)",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "057"
+    }
+
 
   ],
   "javascript": [
