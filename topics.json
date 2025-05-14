@@ -659,6 +659,33 @@
       "category": "rn",
       "name": "060"
     }
+    ,
+    {
+      "header": "9. Assets & Media",
+      "description": "Images: bundling @2x/@3x, optimization",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "061"
+    }
+    ,
+    {
+      "header": "9. Assets & Media",
+      "description": "Fonts & SVGs: custom fonts, react-native-svg",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "062"
+    }
+    ,
+    {
+      "header": "9. Assets & Media",
+      "description": "Video & audio: expo-av or community packages",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "063"
+    }
 
 
   ],
