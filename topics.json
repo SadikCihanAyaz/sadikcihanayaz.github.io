@@ -704,7 +704,7 @@
     },
     {
       "header": "11. Notifications & Linking",
-      "description": "Geolocation: foreground & background updates",
+      "description": "Push: FCM / APNs integrations, Notifee / react-native-push-notifications",
       "duration": "15 min",
       "order": 7,
       "category": "rn",
@@ -712,7 +712,15 @@
     },
     {
       "header": "11. Notifications & Linking",
-      "description": "Geolocation: foreground & background updates",
+      "description": "Questions -> Push: FCM / APNs integrations, Notifee / react-native-push-notifications",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "066_01"
+    },
+    {
+      "header": "11. Notifications & Linking",
+      "description": "Deep & Universal Links: Linking API, custom URL schemes",
       "duration": "15 min",
       "order": 7,
       "category": "rn",
