@@ -77,8 +77,7 @@
       "order": 1,
       "category": "rn",
       "name": "002"
-    }
-    ,
+    },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "Closures",
@@ -86,8 +85,7 @@
       "order": 1,
       "category": "rn",
       "name": "003"
-    }
-    ,
+    },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "Hoisting",
@@ -167,8 +165,7 @@
       "order": 1,
       "category": "rn",
       "name": "008_01"
-    }
-    ,
+    },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "Prototypal inheritance & classes prototype chain ES6 class vs manual prototypes",
@@ -176,8 +173,7 @@
       "order": 1,
       "category": "rn",
       "name": "009"
-    }
-    ,
+    },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": " Optional chaining & nullish coalescing ?. and ??",
@@ -185,8 +181,7 @@
       "order": 2,
       "category": "rn",
       "name": "010"
-    }
-    ,
+    },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "Dynamic imports & code splitting import() lazy-loading modules",
@@ -194,8 +189,7 @@
       "order": 2,
       "category": "rn",
       "name": "011"
-    }
-    ,
+    },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "Timers & scheduling setTimeout setInterval requestAnimationFrame cleanup to avoid leaks",
@@ -203,8 +197,7 @@
       "order": 2,
       "category": "rn",
       "name": "012"
-    }
-    ,
+    },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "Error handling patterns: centralized error boundaries, global handlers (ErrorUtils)",
@@ -212,8 +205,7 @@
       "order": 2,
       "category": "rn",
       "name": "013"
-    }
-    ,
+    },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "TypeScript basics: interfaces vs types, generics, type narrowing, module augmentation",
@@ -221,8 +213,7 @@
       "order": 2,
       "category": "rn",
       "name": "014"
-    }
-    ,
+    },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "React Native TypeScript Interview Questions: Interfaces vs Types, Generics, Type Narrowing, Module Augmentation",
@@ -230,8 +221,7 @@
       "order": 2,
       "category": "rn",
       "name": "014_01"
-    }
-    ,
+    },
     {
       "header": "2. Core React Concepts",
       "description": "JSX & reconciliation: Virtual DOM diffing, keys",
@@ -271,8 +261,7 @@
       "order": 3,
       "category": "rn",
       "name": "018_01"
-    }
-    ,
+    },
     {
       "header": "2. Core React Concepts",
       "description": "Context API createContext Providers useContext",
@@ -280,8 +269,7 @@
       "order": 3,
       "category": "rn",
       "name": "019"
-    }
-    ,
+    },
     {
       "header": "2. Core React Concepts",
       "description": "Interview Questions: Context API createContext Providers useContext",
@@ -289,8 +277,7 @@
       "order": 3,
       "category": "rn",
       "name": "019_01"
-    }
-    ,
+    },
     {
       "header": "2. Core React Concepts",
       "description": "Refs useRef ref forwarding",
@@ -298,7 +285,7 @@
       "order": 4,
       "category": "rn",
       "name": "020"
-    }   ,
+    },
     {
       "header": "2. Core React Concepts",
       "description": "Error boundaries componentDidCatch getDerivedStateFromError",
@@ -346,8 +333,7 @@
       "order": 6,
       "category": "rn",
       "name": "025"
-    }
-    ,
+    },
     {
       "header": "2. Core React Concepts",
       "description": "DevTools & Profiler: hook inspection, flamegraphs",
@@ -355,8 +341,7 @@
       "order": 6,
       "category": "rn",
       "name": "026"
-    }
-    ,
+    },
     {
       "header": "2. Core React Concepts",
       "description": "Type checking: PropTypes or TypeScript interfaces/types",
@@ -372,8 +357,7 @@
       "order": 6,
       "category": "rn",
       "name": "027_01"
-    }
-    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "Built-in UI components",
@@ -389,8 +373,7 @@
       "order": 7,
       "category": "rn",
       "name": "029"
-    }
-    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "Understanding Device Metrics in React Native: Dimensions, PixelRatio, and useWindowDimensions",
@@ -398,8 +381,7 @@
       "order": 7,
       "category": "rn",
       "name": "030"
-    }
-    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "React Native Platform Quirks: iOS vs Android Styling, KeyboardAvoidingView, and Permissions",
@@ -407,7 +389,7 @@
       "order": 7,
       "category": "rn",
       "name": "031"
-    }    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "Touch & Gestures in React Native: Pressable, TouchableOpacity, PanResponder, and Gesture Handler",
@@ -415,7 +397,7 @@
       "order": 7,
       "category": "rn",
       "name": "032"
-    } ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "Animations in React Native: Animated API, LayoutAnimation, and Reanimated Basics",
@@ -423,8 +405,7 @@
       "order": 7,
       "category": "rn",
       "name": "033"
-    }
-    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "Navigation Hooks in React Native: useNavigation and useRoute",
@@ -432,8 +413,7 @@
       "order": 7,
       "category": "rn",
       "name": "034"
-    }
-    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "StatusBar and Appearance in React Native: Managing StatusBar and Dark Mode",
@@ -449,8 +429,7 @@
       "order": 7,
       "category": "rn",
       "name": "036"
-    }
-    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "Storage & Persistence in React Native: AsyncStorage, MMKV, and SecureStore",
@@ -458,8 +437,7 @@
       "order": 7,
       "category": "rn",
       "name": "037"
-    }
-    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "Linking & Deep Linking in React Native: Using Linking API and Universal/App Links",
@@ -467,8 +445,7 @@
       "order": 7,
       "category": "rn",
       "name": "038"
-    }
-    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "Accessibility in React Native: accessible Props, accessibilityLabel, Roles, and Focus Management",
@@ -476,8 +453,7 @@
       "order": 7,
       "category": "rn",
       "name": "039"
-    }
-    ,
+    },
     {
       "header": "3. React Native Essentials",
       "description": "Native Modules Basics in React Native: Platform, PermissionsAndroid, and Bridging APIs",
@@ -485,8 +461,7 @@
       "order": 7,
       "category": "rn",
       "name": "040"
-    }
-    ,
+    },
     {
       "header": "4. Navigation",
       "description": "React Navigation (v5+): Stack, Tabs, Drawers, and Deep Linking",
@@ -566,8 +541,7 @@
       "order": 7,
       "category": "rn",
       "name": "049"
-    }
-    ,
+    },
     {
       "header": "6. Native Modules & Bridging",
       "description": "Permissions in React Native: Camera, Location, and Notifications",
@@ -575,8 +549,7 @@
       "order": 7,
       "category": "rn",
       "name": "050"
-    }
-    ,
+    },
     {
       "header": "7. Networking & Offline",
       "description": "HTTP & WS: fetch, Axios, WebSockets",
@@ -584,8 +557,7 @@
       "order": 7,
       "category": "rn",
       "name": "051"
-    }
-    ,
+    },
     {
       "header": "7. Networking & Offline",
       "description": "Caching & storage: AsyncStorage, MMKV, SQLite",
@@ -609,8 +581,7 @@
       "order": 7,
       "category": "rn",
       "name": "054"
-    }
-    ,
+    },
     {
       "header": "7. Networking & Offline",
       "description": "Background tasks: BackgroundFetch, react-native-background-task, WorkManager (Android)",
@@ -658,8 +629,7 @@
       "order": 7,
       "category": "rn",
       "name": "060"
-    }
-    ,
+    },
     {
       "header": "9. Assets & Media",
       "description": "Images: bundling @2x/@3x, optimization",
@@ -667,8 +637,7 @@
       "order": 7,
       "category": "rn",
       "name": "061"
-    }
-    ,
+    },
     {
       "header": "9. Assets & Media",
       "description": "Fonts & SVGs: custom fonts, react-native-svg",
@@ -676,8 +645,7 @@
       "order": 7,
       "category": "rn",
       "name": "062"
-    }
-    ,
+    },
     {
       "header": "9. Assets & Media",
       "description": "Video & audio: expo-av or community packages",
@@ -749,8 +717,8 @@
       "order": 7,
       "category": "rn",
       "name": "070"
-    }
-    ,    {
+    },
+    {
       "header": "12. Performance & Profiling",
       "description": "Flipper, React DevTools, Perf Monitor",
       "duration": "15 min",
@@ -773,8 +741,8 @@
       "order": 7,
       "category": "rn",
       "name": "073"
-    }
-    ,    {
+    },
+    {
       "header": "13. Debugging & Tooling",
       "description": "Error/crash reporting: Sentry, Bugsnag",
       "duration": "15 min",
@@ -861,9 +829,135 @@
       "order": 7,
       "category": "rn",
       "name": "084"
+    },
+    {
+      "header": "17. Best Practices & Patterns",
+      "description": "Project structure: folder conventions, module boundaries",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "085"
+    },
+    {
+      "header": "17. Best Practices & Patterns",
+      "description": "Reusable components: DRY, atomic design",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "086"
+    },
+    {
+      "header": "17. Best Practices & Patterns",
+      "description": "Error boundaries & fallback UIs",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "087"
+    },
+    {
+      "header": "17. Best Practices & Patterns",
+      "description": "Accessibility (a11y): labels, roles, focus management",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "088"
+    },
+    {
+      "header": "17. Best Practices & Patterns",
+      "description": "Security: secure storage, encrypted data, avoiding eval",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "089"
+    },
+    {
+      "header": "18. CI/CD, Analytics & Architecture Extras",
+      "description": "CI/CD & DevOps: GitHub Actions / Bitrise for automated builds/tests, Fastlane for signing & release",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "090"
+    },
+    {
+      "header": "18. CI/CD, Analytics & Architecture Extras",
+      "description": "Analytics & Monitoring: Segment / Amplitude / Firebase Analytics, performance monitoring (New Relic, Datadog)",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "091"
+    },
+    {
+      "header": "18. CI/CD, Analytics & Architecture Extras",
+      "description": "Internationalization (i18n): react-native-i18n, FormatJS / Intl usage",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "092"
+    },
+    {
+      "header": "18. CI/CD, Analytics & Architecture Extras",
+      "description": "Feature Flags & Remote Config: LaunchDarkly, Firebase Remote Config",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "093"
+    },
+    {
+      "header": "18. CI/CD, Analytics & Architecture Extras",
+      "description": "Monorepos & Code Sharing: Yarn Workspaces, Lerna, NX (for sharing web & native code)",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "094"
+    },
+    {
+      "header": "19. React Native Architecture Evolution",
+      "description": "Classic Bridge (Pre-0.60): JavaScriptCore + Bridge, synchronous serialization, manual native modules",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "095"
+    },
+    {
+      "header": "19. React Native Architecture Evolution",
+      "description": "Fabric Renderer: concurrent UI, async layout, fine-grained updates",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "096"
+    },
+    {
+      "header": "19. React Native Architecture Evolution",
+      "description": "TurboModules: codegen'd native modules, direct JS ↔ Native calls",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "097"
+    },
+    {
+      "header": "19. React Native Architecture Evolution",
+      "description": "JSI & Hermes: JavaScript Interface for direct native access, optimized bytecode execution",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "098"
+    },
+    {
+      "header": "19. React Native Architecture Evolution",
+      "description": "Codegen: automated type-safe bindings for props, events, modules",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "099"
+    },
+    {
+      "header": "19. React Native Architecture Evolution",
+      "description": "Community Engines & Runtimes: Hermes (default), JSC (legacy), V8 Mobile (optional)",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "100"
     }
-
-
   ],
   "javascript": [
     {
