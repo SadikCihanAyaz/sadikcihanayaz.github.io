@@ -634,6 +634,30 @@
       "order": 7,
       "category": "rn",
       "name": "057"
+    },
+    {
+      "header": "8. Animations & Gestures",
+      "description": "APIs: Animated, LayoutAnimation, Reanimated",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "058"
+    },
+    {
+      "header": "8. Animations & Gestures",
+      "description": "Gesture handling: PanResponder vs React Native Gesture Handler",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "059"
+    },
+    {
+      "header": "8. Animations & Gestures",
+      "description": "Types: springs, timing, transitions",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "060"
     }
 
 
