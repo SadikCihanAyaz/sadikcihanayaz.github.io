@@ -789,6 +789,54 @@
       "order": 7,
       "category": "rn",
       "name": "075"
+    },
+    {
+      "header": "14. Testing",
+      "description": "Unit: Jest + react-test-renderer",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "076"
+    },
+    {
+      "header": "14. Testing",
+      "description": "Component: React Native Testing Library",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "077"
+    },
+    {
+      "header": "14. Testing",
+      "description": "E2E: Detox, Appium",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "078"
+    },
+    {
+      "header": "15. Build & Deployment",
+      "description": "iOS: Xcode, provisioning profiles, TestFlight",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "079"
+    },
+    {
+      "header": "15. Build & Deployment",
+      "description": "Android: Gradle, signing configs, Play Store bundles",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "080"
+    },
+    {
+      "header": "15. Build & Deployment",
+      "description": "OTA updates: CodePush, Expo Updates",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "081"
     }
 
 
