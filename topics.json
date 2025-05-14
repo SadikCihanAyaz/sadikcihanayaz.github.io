@@ -725,6 +725,38 @@
       "order": 7,
       "category": "rn",
       "name": "067"
+    },
+    {
+      "header": "12. Performance & Profiling",
+      "description": "Avoiding re-renders: React.memo, hook deps",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "068"
+    },
+    {
+      "header": "12. Performance & Profiling",
+      "description": "List tweaks: FlatList optimizations, getItemLayout",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "069"
+    },
+    {
+      "header": "12. Performance & Profiling",
+      "description": "JS thread: InteractionManager, offload work to native",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "070"
+    }
+    ,    {
+      "header": "12. Performance & Profiling",
+      "description": "Flipper, React DevTools, Perf Monitor",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "071"
     }
 
 
