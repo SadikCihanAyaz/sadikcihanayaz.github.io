@@ -757,6 +757,38 @@
       "order": 7,
       "category": "rn",
       "name": "071"
+    },
+    {
+      "header": "13. Debugging & Tooling",
+      "description": "Debuggers: Chrome DevTools, Flipper, Reactotron",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "072"
+    },
+    {
+      "header": "13. Debugging & Tooling",
+      "description": "Logging: console.log, DEV guards",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "073"
+    }
+    ,    {
+      "header": "13. Debugging & Tooling",
+      "description": "Error/crash reporting: Sentry, Bugsnag",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "074"
+    },
+    {
+      "header": "13. Debugging & Tooling",
+      "description": "Fast Refresh vs Hot Reload",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "075"
     }
 
 
