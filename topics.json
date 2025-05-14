@@ -317,6 +317,14 @@
     },
     {
       "header": "2. Core React Concepts",
+      "description": "Question: Render patterns render props higher-order components composition",
+      "duration": "15 min",
+      "order": 4,
+      "category": "rn",
+      "name": "022_01"
+    },
+    {
+      "header": "2. Core React Concepts",
       "description": "Suspense & lazy loading Reactlazy Suspense",
       "duration": "15 min",
       "order": 5,
