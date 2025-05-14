@@ -837,6 +837,30 @@
       "order": 7,
       "category": "rn",
       "name": "081"
+    },
+    {
+      "header": "16. Expo vs Bare Workflow",
+      "description": "Expo pros/cons: managed vs bare",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "082"
+    },
+    {
+      "header": "16. Expo vs Bare Workflow",
+      "description": "Ejecting: when & how",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "083"
+    },
+    {
+      "header": "16. Expo vs Bare Workflow",
+      "description": "Unimodules",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "084"
     }
 
 
