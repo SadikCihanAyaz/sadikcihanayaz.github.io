@@ -888,6 +888,14 @@
     },
     {
       "header": "18. CI/CD, Analytics & Architecture Extras",
+      "description": "CI, Continuous Delivery, and Continuous Deployment stages",
+      "duration": "15 min",
+      "order": 7,
+      "category": "rn",
+      "name": "090_02"
+    },
+    {
+      "header": "18. CI/CD, Analytics & Architecture Extras",
       "description": "Analytics & Monitoring: Segment / Amplitude / Firebase Analytics, performance monitoring (New Relic, Datadog)",
       "duration": "15 min",
       "order": 7,
