@@ -80,6 +80,14 @@
     },
     {
       "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
+      "description": "Common Array Methods in JavaScript/TypeScript",
+      "duration": "15 min",
+      "order": 1,
+      "category": "rn",
+      "name": "002_01"
+    },
+    {
+      "header": "1. JavaScript, ESNext & TypeScript Fundamentals",
       "description": "Closures",
       "duration": "15 min",
       "order": 1,
