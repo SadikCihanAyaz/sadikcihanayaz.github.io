@@ -985,10 +985,18 @@
   ],
   "javascript": [
     {
+      "header": "📚 JavaScript Global Functions",
+      "description": "eval(),isFinite(),isNaN(),parseFloat(),parseInt(),decodeURI(),decodeURIComponent(),encodeURI(),encodeURIComponent()",
+      "duration": "5 min",
+      "order": 1,
+      "category": "globalJavascriptFunctions",
+      "name": "topic"
+    },
+    {
       "header": "JavaScript Fundamentals - 1",
       "description": "Introduction to Javascript Fundamentals",
       "duration": "6 min",
-      "order": 0,
+      "order": 400,
       "category": "jsFundamentals",
       "name": "jsf1"
     },
@@ -996,7 +1004,7 @@
       "header": "JavaScript Fundamentals - 2",
       "description": "Code structure",
       "duration": "12 min",
-      "order": 1,
+      "order": 400,
       "category": "jsFundamentals",
       "name": "codeStructure"
     },
@@ -1004,9 +1012,19 @@
       "header": "Miscellaneous - 1",
       "description": "Currying",
       "duration": "40 min",
-      "order": 143,
+      "order": 1430,
       "category": "Miscellaneous",
       "name": "143Currying"
+    }
+  ],
+  "typescript": [
+    {
+      "header": "Dijkstra’s Algorithm: ",
+      "description": "Shortest Route in a City",
+      "duration": "30 min",
+      "order": 1,
+      "category": "interview",
+      "name": "0001"
     }
   ]
 }
