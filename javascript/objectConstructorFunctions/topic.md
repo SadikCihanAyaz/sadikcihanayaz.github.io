@@ -24,6 +24,90 @@ const wrapped = Object("hello") // creates a String object
 
 ✅ Use `{}` instead of `new Object()` for brevity.
 
+- If value is primitive, Object() wraps it in its corresponding object wrapper.
+
+| Primitive         | `Object(...)` Result       | Equivalent To            | Notes                        |
+|------------------|----------------------------|---------------------------|------------------------------|
+| `"hello"`        | `new String("hello")`      | ✅ String object wrapper   |                              |
+| `42`             | `new Number(42)`           | ✅ Number object wrapper   |                              |
+| `true`           | `new Boolean(true)`        | ✅ Boolean object wrapper  |                              |
+| `null` / `undefined` | ❌ Throws error         | 🚫 Cannot be converted     |                              |
+
+✅ Following example show that Object wraps it its corresponding object wrapper.
+
+```ts
+const hello = () => {
+  const test = Object("hello"); // no need for `new`
+  console.log(test); // [String: 'hello']
+};
+```
+
+### 🔄 Extracting Primitive Values from Wrapper Objects in JavaScript
+
+JavaScript sometimes wraps primitive values (`string`, `number`, `boolean`) into their respective object types. Here's how to get the original primitive back.
+
+---
+
+#### ✅ 1. Use `.valueOf()` (most direct way)
+
+```ts
+const wrapped = Object("hello");  // [String: "hello"]
+const primitive = wrapped.valueOf();  // "hello"
+```
+
+Works for:
+- String objects
+- Number objects
+- Boolean objects
+
+```ts
+Object(42).valueOf();       // → 42
+Object(true).valueOf();     // → true
+Object("text").valueOf();   // → "text"
+```
+
+---
+
+#### ✅ 2. Use `String()` / `Number()` / `Boolean()` functions
+
+These will extract the primitive as well:
+
+```ts
+String(Object("hello"));   // → "hello"
+Number(Object(42));        // → 42
+Boolean(Object(true));     // → true
+```
+
+🔍 Internally, this also calls `.valueOf()`.
+
+---
+
+#### ✅ 3. Use implicit coercion
+
+Sometimes, using the object in the right context automatically converts it:
+
+```ts
+const wrapped = Object(42);
+
+console.log(wrapped + 1);   // → 43 (calls valueOf)
+console.log(`${wrapped}`); // → "42" (calls toString)
+```
+
+⚠️ This can be unpredictable and is not recommended unless you know exactly what you're doing.
+
+---
+
+#### ⚠️ Be careful: `typeof` doesn’t change
+
+```ts
+const x = Object("hello");
+
+typeof x;           // → "object"
+typeof x.valueOf(); // → "string" ✅
+```
+
+✅ So to safely get back the primitive, always use `.valueOf()`.
+
 ---
 
 ## 📌 2. `Function()`
