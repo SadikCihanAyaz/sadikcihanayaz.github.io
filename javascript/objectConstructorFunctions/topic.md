@@ -15,12 +15,12 @@ Constructor functions are used with the `new` keyword to create instances of obj
 - Creates a generic object wrapper.
 - Can also convert primitive types to their object equivalents.
 
-&&&ts
+```ts
 const obj = new Object()
 // same as:
 const obj2 = {}
 const wrapped = Object("hello") // creates a String object
-&&&
+```
 
 ✅ Use `{}` instead of `new Object()` for brevity.
 
@@ -30,10 +30,10 @@ const wrapped = Object("hello") // creates a String object
 
 - Dynamically creates a new function using a string of code.
 
-&&&ts
+```ts
 const sum = new Function("a", "b", "return a + b")
 sum(2, 3) // returns 5
-&&&
+```
 
 ⚠️ Not recommended. Similar to `eval()` and can introduce security risks.
 
@@ -43,19 +43,19 @@ sum(2, 3) // returns 5
 
 - Converts any value to a boolean.
 
-&&&ts
+```ts
 Boolean(1)       // true
 Boolean(0)       // false
 Boolean("")      // false
 Boolean("text")  // true
-&&&
+```
 
 - With `new`, creates a Boolean object (rarely useful):
 
-&&&ts
+```ts
 const flag = new Boolean(false)
 typeof flag // "object"
-&&&
+```
 
 ---
 
@@ -63,11 +63,11 @@ typeof flag // "object"
 
 - Creates a unique and immutable symbol value.
 
-&&&ts
+```ts
 const sym = Symbol("id")
 const sym2 = Symbol("id")
 sym === sym2 // false
-&&&
+```
 
 - Often used for object property keys to avoid name clashes.
 
@@ -77,10 +77,10 @@ sym === sym2 // false
 
 - Represents integers with arbitrary precision.
 
-&&&ts
+```ts
 const big = BigInt(9007199254740991)
 const big2 = 9007199254740991n
-&&&
+```
 
 ✅ Useful for large numbers beyond the safe integer limit.
 
@@ -90,10 +90,10 @@ const big2 = 9007199254740991n
 
 - Used to create error objects manually.
 
-&&&ts
+```ts
 const err = new Error("Something went wrong")
 throw err
-&&&
+```
 
 - There are subclasses like `TypeError`, `ReferenceError`, `SyntaxError`, etc.
 

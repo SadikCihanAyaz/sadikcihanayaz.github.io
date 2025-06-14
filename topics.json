@@ -996,7 +996,7 @@
       "header": "📦 Object Constructor Functions in JavaScript",
       "description": "Object(), Function(), Boolean(), Symbol(), BigInt(), Error()",
       "duration": "5 min",
-      "order": 1,
+      "order": 3,
       "category": "objectConstructorFunctions",
       "name": "topic"
     },
