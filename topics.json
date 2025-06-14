@@ -986,10 +986,18 @@
   "javascript": [
     {
       "header": "📚 JavaScript Global Functions",
-      "description": "eval(),isFinite(),isNaN(),parseFloat(),parseInt(),decodeURI(),decodeURIComponent(),encodeURI(),encodeURIComponent()",
+      "description": "eval(), isFinite(), isNaN(), parseFloat(), parseInt(), decodeURI(), decodeURIComponent(), encodeURI(), encodeURIComponent()",
       "duration": "5 min",
       "order": 1,
       "category": "globalJavascriptFunctions",
+      "name": "topic"
+    },
+    {
+      "header": "📦 Object Constructor Functions in JavaScript",
+      "description": "Object(), Function(), Boolean(), Symbol(), BigInt(), Error()",
+      "duration": "5 min",
+      "order": 1,
+      "category": "objectConstructorFunctions",
       "name": "topic"
     },
     {
