@@ -1001,28 +1001,12 @@
       "name": "topic"
     },
     {
-      "header": "JavaScript Fundamentals - 1",
-      "description": "Introduction to Javascript Fundamentals",
-      "duration": "6 min",
-      "order": 400,
-      "category": "jsFundamentals",
-      "name": "jsf1"
-    },
-    {
-      "header": "JavaScript Fundamentals - 2",
-      "description": "Code structure",
-      "duration": "12 min",
-      "order": 400,
-      "category": "jsFundamentals",
-      "name": "codeStructure"
-    },
-    {
-      "header": "Miscellaneous - 1",
-      "description": "Currying",
-      "duration": "40 min",
-      "order": 1430,
-      "category": "Miscellaneous",
-      "name": "143Currying"
+      "header": "🧵 String Methods in JavaScript in JavaScript",
+      "description": "String(), charAt(), charCodeAt(), codePointAt(), concat(), includes(), endsWith(), indexOf(), lastIndexOf(), localeCompare(), match(), matchAll(), normalize(), padEnd(), padStart(), repeat(), replace(), replaceAll(), search(), slice(), split(), startsWith(), substring(), toLocaleLowerCase(), toLocaleUpperCase(), toLowerCase(), toUpperCase(), trim(), trimStart(), trimEnd(), valueOf()",
+      "duration": "20 min",
+      "order": 5,
+      "category": "stringMethods",
+      "name": "topic"
     }
   ],
   "typescript": [
