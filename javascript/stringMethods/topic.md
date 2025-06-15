@@ -8,6 +8,8 @@ JavaScript provides a wide variety of methods to manipulate and work with string
 
 ✅ Converts a given value to a string.
 
+- Note String() return primitive string. if you use new String() it will return String object.
+
 ```ts
 String(123);         // "123"
 String(true);        // "true"
@@ -74,8 +76,14 @@ const second = "world!";
 first.concat(second); // "Hello, world!"
 ```
 
+- Above we didnt change first variable value(it cannot be changeable). We returned a new string value.
+
 Note: You can also just use `+` or template literals.
 
+```ts
+const greeting = `Hello, ${name}!`;
+```
+- Simply you can prefer to use template literals to join two strings. ${...} that is template literals.
 ---
 
 ### 🔍 6. `includes(searchString, position?)`
