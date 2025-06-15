@@ -43,6 +43,27 @@ const sentence = "Apple pie, apple juice, and APPLE sauce are tasty.";
 ```ts
 const countApples = sentence.match(/apple/gi)?.length || 0;
 ```
+
+- without using regex
+
+```ts
+const sentence = “Apple pie, apple juice, and APPLE sauce are tasty.”;
+
+const lower = sentence.toLowerCase();
+const words = lower.split(” “);
+let count = 0;
+
+for (let word of words) {
+// Remove common punctuation from the word
+word = word.replace(”,”, “”).replace(”.”, “”);
+
+if (word === “apple”) {
+count++;
+}
+}
+
+console.log(“Apple count:”, count); // Output: 3
+```
 </details>
 
 ---
@@ -65,6 +86,21 @@ const capitalizeWords = (sentence: string): string => {
 const capitalizeWords = (sentence: string): string => {
   return sentence.replace(/\b\w/g, char => char.toUpperCase());
 };
+```
+- without using regex
+
+```ts
+const capitalizeWords = (sentence: string): string => {
+return sentence
+.split(” “)
+.map(word =>
+word.charAt(0).toUpperCase() + word.slice(1)
+)
+.join(” “);
+};
+
+// Example usage
+console.log(capitalizeWords(“hello world”)); // “Hello World”
 ```
 </details>
 
