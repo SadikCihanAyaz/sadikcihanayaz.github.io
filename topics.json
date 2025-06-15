@@ -1008,6 +1008,15 @@
       "category": "stringMethods",
       "name": "topic"
     }
+    ,
+    {
+      "header": "🧵 Interview Quewstions -1 : String Methods in JavaScript in JavaScript",
+      "description": "String(), charAt(), charCodeAt(), codePointAt(), concat(), includes(), endsWith(), indexOf(), lastIndexOf(), localeCompare(), match(), matchAll(), normalize(), padEnd(), padStart(), repeat(), replace(), replaceAll(), search(), slice(), split(), startsWith(), substring(), toLocaleLowerCase(), toLocaleUpperCase(), toLowerCase(), toUpperCase(), trim(), trimStart(), trimEnd(), valueOf()",
+      "duration": "20 min",
+      "order": 5,
+      "category": "stringMethods",
+      "name": "interview1"
+    }
   ],
   "typescript": [
     {

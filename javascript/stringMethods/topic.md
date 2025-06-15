@@ -84,6 +84,19 @@ Note: You can also just use `+` or template literals.
 const greeting = `Hello, ${name}!`;
 ```
 - Simply you can prefer to use template literals to join two strings. ${...} that is template literals.
+
+- Besides that concat method can be used for multiple join options
+
+```ts
+const first = "Hello, ";
+const second = "world";
+const third = " and ";
+const fourth = "everyone!";
+
+const result = first.concat(second, third, fourth);
+console.log(result); // "Hello, world and everyone!"
+```
+
 ---
 
 ### 🔍 6. `includes(searchString, position?)`
@@ -147,6 +160,14 @@ str.indexOf("a", 2);    // 3 (starts searching from index 2)
 str.indexOf("z");       // -1 (not found)
 ```
 
+- You can use indexOf also for string. Look at the following example it will return 0.
+
+```ts
+const str = "banana";
+
+str.indexOf("ban"); // 0
+
+```
 ---
 
 ### 9️⃣ `lastIndexOf(searchValue, fromIndex?)`
@@ -158,6 +179,12 @@ const str = "banana";
 
 str.lastIndexOf("a");       // 5
 str.lastIndexOf("a", 4);    // 3
+
+const str = "banana";
+// Indexes:  012345
+// Letters:  b a n a n a
+
+// it will dont care after index 4. so it will be bana and it will start to search backward. 
 ```
 
 ---
