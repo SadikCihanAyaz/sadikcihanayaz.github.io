@@ -176,3 +176,72 @@ const getLastWord = (sentence: string): string => {
 </details>
 
 ---
+
+### ✅ Question 7: Check if a sentence ends with a period
+
+```ts
+// ❓ Write a function that checks whether a given sentence ends with a period.
+// "This is a sentence." → true
+// "No punctuation" → false
+
+const endsWithPeriod = (sentence: string): boolean => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const endsWithPeriod = (sentence: string): boolean => {
+  return sentence.trim().endsWith(".");
+};
+```
+</details>
+
+---
+
+### ✅ Question 8: Compare two strings alphabetically (locale-aware)
+
+```ts
+// ❓ Write a function that compares two strings alphabetically using locale rules.
+// Return -1 if a < b, 1 if a > b, 0 if equal
+
+const compareStrings = (a: string, b: string): number => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const compareStrings = (a: string, b: string): number => {
+  return a.localeCompare(b);
+};
+```
+</details>
+
+---
+
+### ✅ Question 9: Extract the domain from an email address
+
+```ts
+// ❓ Given an email like "user@example.com", extract and return "example.com"
+
+const getDomain = (email: string): string => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const getDomain = (email: string): string => {
+  return email.slice(email.indexOf("@") + 1);
+};
+```
+</details>
+
+---
