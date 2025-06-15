@@ -105,3 +105,74 @@ console.log(capitalizeWords(“hello world”)); // “Hello World”
 </details>
 
 ---
+
+### ✅ Question 4: Trim and normalize spacing in a sentence
+
+```ts
+// ❓ Write a function that trims a sentence and replaces multiple spaces with a single space.
+// "   Hello    world   " → "Hello world"
+
+const normalizeSpace = (input: string): string => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const normalizeSpace = (input: string): string => {
+  return input.trim().split(" ").filter(Boolean).join(" ");
+};
+```
+</details>
+
+---
+
+### ✅ Question 5: Repeat a pattern and pad the result
+
+```ts
+// ❓ Repeat the string "Hi" 3 times and pad the result to be exactly 10 characters long with "." at the end
+// Expected: "HiHiHi...."
+
+const repeatAndPad = (): string => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const repeatAndPad = (): string => {
+  return "Hi".repeat(3).padEnd(10, ".");
+};
+```
+</details>
+
+---
+
+### ✅ Question 6: Get the last word of a sentence
+
+```ts
+// ❓ Extract the last word from the sentence: "Learning JavaScript is fun."
+// Should return: "fun"
+
+const getLastWord = (sentence: string): string => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const getLastWord = (sentence: string): string => {
+  const clean = sentence.trim().replace(/[.,!?]$/, "");
+  const words = clean.split(" ");
+  return words[words.length - 1];
+};
+```
+</details>
+
+---
