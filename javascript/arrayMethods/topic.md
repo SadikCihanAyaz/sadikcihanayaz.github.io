@@ -556,6 +556,16 @@ const sliced = arr.slice(1, 3); // [20, 30]
 > Does **not** modify the original array.  
 > Negative indexes count from the end.
 
+> We can do also samething with filter. Below you can find how can we reach same result using filter.
+
+```ts
+const arr = [10, 20, 30, 40];
+
+const sliced = arr.filter((_, index) => index >= 1 && index < 3);
+
+console.log(sliced); // [20, 30]
+```
+
 ---
 
 ### 🧪 31. `some(callback)`
