@@ -282,6 +282,17 @@ nums.forEach(num => console.log(num * 2)); // 2, 4, 6
 
 > Does not return anything. Use `.map()` if you need a new array.
 
+> If you need if else condition and access its index and array itself you can use it like below.
+```ts
+array.forEach((value, index, array) => {
+  if (condition) {
+    // do something
+  } else {
+    // do something else
+  }
+});
+```
+
 ---
 
 ### 🔍 18. `includes(value, fromIndex?)`
@@ -383,6 +394,22 @@ const doubled = numbers.map(x => x * 2); // [2, 4, 6]
 ```
 
 > Does not mutate the original array.
+
+> below you can find large usage of map().
+
+```ts
+const numbers = [1, 2, 3, 4, 5];
+
+const modified = numbers.map((num, index,array) => {
+  if (num % 2 === 0) {
+    return num * index; // multiply even numbers by their index
+  } else {
+    return num + index; // add index to odd numbers
+  }
+});
+
+console.log(modified); // [1, 2, 9, 6, 9]
+```
 
 ---
 
