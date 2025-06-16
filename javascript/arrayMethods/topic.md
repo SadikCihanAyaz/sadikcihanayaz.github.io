@@ -115,6 +115,8 @@ for (const [index, value] of iterator) {
   console.log(index, value);
 }
 // Output: 0 'a', 1 'b', 2 'c'
+
+// BTW [index, value] -> this referring to call as array destructuring
 ```
 
 > Useful for `for...of` loops when you need both index and value.
@@ -145,6 +147,20 @@ arr.fill(0, 1, 3); // [1, 0, 0, 4]
 
 > Mutates the original array.
 
+❌ fill() cannot add more items to an array.
+
+It only modifies existing elements in-place.
+
+
+```ts
+const arr = [1, 2, 3];
+arr.fill(9, 3, 5); // does NOT add anything — array stays the same length
+```
+
+> To add items, you’d need:
+	•	push(), unshift() – for adding
+	•	concat() – to combine arrays
+	•	Or spread operator: [...arr, ...newItems]
 ---
 
 ### 🔍 10. `filter(callback)`
@@ -169,6 +185,10 @@ const evens = nums.filter(n => n % 2 === 0); // [2, 4]
 ```
 
 > Returns `undefined` if no match is found.
+
+⚠️ Difference from filter():
+	•	find() → returns first matching element
+	•	filter() → returns an array of all matching elements
 
 ---
 
