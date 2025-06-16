@@ -174,6 +174,26 @@ const evens = nums.filter(n => n % 2 === 0); // [2, 4]
 
 > Does not modify the original array.
 
+> if you want to use index, array etc below you can see large usage.
+
+🧠 Reminder:
+	•	Returning true → keep the item
+	•	Returning false → exclude the item
+
+```ts
+const nums = [1, 2, 3, 4, 5];
+
+const customFilter = nums.filter((num, index, arr) => {
+  if (num % 2 === 0 && index < arr.length - 1) {
+    return true; // keep this element
+  } else {
+    return false; // exclude this one
+  }
+});
+
+console.log(customFilter); // [2, 4]
+```
+
 ---
 
 ### 🔎 11. `find(callback)`
@@ -437,6 +457,16 @@ queue.push(3); // returns 3
 console.log(queue); // [1, 2, 3]
 ```
 
+> Mutates the original array.
+
+> In real life we mostly prefer to use spread syntax. It doesnt mutate original array.
+
+```ts
+const queue = [1, 2];
+const newQueue = [...queue, 3]; 
+// newQueue: [1, 2, 3]
+```
+
 ---
 
 ### 🧮 26. `reduce(callback, initialValue)`
@@ -471,6 +501,16 @@ const reversed = letters.reduceRight((acc, curr) => acc + curr, "");
 ```ts
 const list = [1, 2, 3];
 list.reverse(); // [3, 2, 1]
+```
+
+> Mutation doesnt like in real life. We can Do it with map. Follow you can see how can we reverse the items without using reverse()
+
+```ts
+const list = [1, 2, 3];
+
+const reversed = list.map((_, i, arr) => arr[arr.length - 1 - i]);
+
+console.log(reversed); // [3, 2, 1]
 ```
 
 ---
