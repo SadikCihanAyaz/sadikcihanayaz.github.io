@@ -23,6 +23,16 @@ const maskCard = (cardNumber: string): string => {
   return cardNumber.slice(-4).padStart(cardNumber.length, '*');
 };
 ```
+
+* Alternative Solution
+```ts
+const maskCard = (cardNumber) => {
+  return cardNumber.split('').map((value,index,array) => {
+      if(cardNumber.length-4 > index) return '*';
+      return value;
+  }).join('')
+};
+```
 </details>
 
 ---

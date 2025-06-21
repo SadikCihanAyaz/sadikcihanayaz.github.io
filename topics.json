@@ -1026,6 +1026,15 @@
       "category": "arrayMethods",
       "name": "topic"
     }
+    ,
+    {
+      "header": "🧮 Regex in JavaScript",
+      "description": "",
+      "duration": "50 min",
+      "order": 6,
+      "category": "regex",
+      "name": "topic"
+    }
   ],
   "typescript": [
     {

@@ -592,6 +592,30 @@ nums.sort((a, b) => b - a); // [3, 2, 1] — descending
 > Mutates the array.  
 > Sorts as strings by default (so "10" < "2").
 
+> Below you can find large usage
+
+```ts
+array.sort((a, b) => {
+  if (someCondition) {
+    return -1; // a comes before b
+  } else if (otherCondition) {
+    return 1; // b comes before a
+  } else {
+    return 0; // no change
+  }
+});
+```
+
+> Below if you need sort strings shows how you can use it.
+
+```ts
+names.sort((a, b) => {
+  if (a.localeCompare(b) < 0) return -1;
+  if (a.localeCompare(b) > 0) return 1;
+  return 0;
+});
+```
+
 ---
 
 ### 🪓 33. `splice(start, deleteCount, ...items)`
