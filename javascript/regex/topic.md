@@ -50,136 +50,64 @@ console.log(result); // ["hello", "wword"]
 
 
 
-## 🧪 Regex Interview Questions (Write the Regex)
+## 🧵 JavaScript Regex Interview Questions & Answers
+
+These practical coding interview questions focus on using regular expressions (regex) to process and extract information from strings. Try to solve them first—answers and explanations are provided below!
 
 ---
 
-### ❓ Question 1
+### ✅ Question 1: Extract All Numbers From a String
 
-**🧵 String:**
-```
-"The price is $45 and the discount is $5"
-```
-
-**🎯 Expected Match:**
-```
-["$45", "$5"]
-```
-
-**❓ Task:** Write a regex that extracts all dollar amounts from the string.
+// ❓ Write a function that returns all numbers from a given string as an array of strings.
+// Example:  
+// "The car costs 20000 dollars, and the tax is 4500." → ["20000", "4500"]
 
 ```ts
-const str = "The price is $45 and the discount is $5";
-const result = str.match(/\$\d+/g);
-console.log(result); // ["$45", "$5"]
+const extractNumbers = (input) => {
+  // Your code here
+};
 ```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const extractNumbers = (input) => {
+  return input.match(/\d+/g) || [];
+};
+```
+
+**Explanation:**  
+- `/\d+/g` matches one or more digits, globally, in the string.
+- `match()` returns all found numbers or `null` (so use `|| []` for safety).
+
+</details>
 
 ---
 
-### ❓ Question 2
+### ✅ Question 2: Find All Words Starting With a Capital Letter
 
-**🧵 String:**
-```
-"Usernames: user_01, admin99, guest123"
-```
-
-**🎯 Expected Match:**
-```
-["user_01", "admin99", "guest123"]
-```
-
-**❓ Task:** Write a regex that matches all usernames (letters, numbers, underscore).
+// ❓ Write a function that returns all words starting with a capital letter from a sentence.
+// Example:  
+// "Alice and Bob are attending the ReactJS Conference in London."  
+// → ["Alice", "Bob", "ReactJS", "Conference", "London"]
 
 ```ts
-const str = "Usernames: user_01, admin99, guest123";
-const result = str.match(/\b\w+\b/g);
-console.log(result); // ["Usernames", "user_01", "admin99", "guest123"]
-// optionally filter out "Usernames" if needed
+const getCapitalizedWords = (sentence) => {
+  // Your code here
+};
 ```
 
----
-
-### ❓ Question 3
-
-**🧵 String:**
-```
-"Emails: test.mail@example.com, hello.world@site.co"
-```
-
-**🎯 Expected Match:**
-```
-["test.mail@example.com", "hello.world@site.co"]
-```
-
-**❓ Task:** Write a regex to extract all valid email addresses.
+<details>
+<summary>✅ Answer</summary>
 
 ```ts
-const str = "Emails: test.mail@example.com, hello.world@site.co";
-const result = str.match(/[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/g);
-console.log(result); // ["test.mail@example.com", "hello.world@site.co"]
+const getCapitalizedWords = (sentence) => {
+  return sentence.match(/\b[A-Z][a-zA-Z]*\b/g) || [];
+};
 ```
 
+**Explanation:**  
+- `/\b[A-Z][a-zA-Z]*\b/g` matches each word boundary followed by a capital letter, then zero or more letters.
 
-### ❓ Question 4
-
-**🧵 String:**
-```
-"The meeting is at 09:30, and the next one is at 14:45."
-```
-
-**🎯 Expected Match:**
-```
-["09:30", "14:45"]
-```
-
-**❓ Task:** Write a regex to match times in **HH:MM** 24-hour format.
-
-```ts
-const str = "The meeting is at 09:30, and the next one is at 14:45.";
-const result = str.match(/\b\d{2}:\d{2}\b/g);
-console.log(result); // ["09:30", "14:45"]
-```
-
----
-
-### ❓ Question 5
-
-**🧵 String:**
-```
-"Here are the hex colors: #ff5733, #BADA55, #123abc"
-```
-
-**🎯 Expected Match:**
-```
-["#ff5733", "#BADA55", "#123abc"]
-```
-
-**❓ Task:** Write a regex to match **hex color codes** (with `#` and 6 hex digits).
-
-```ts
-const str = "Here are the hex colors: #ff5733, #BADA55, #123abc";
-const result = str.match(/#[a-fA-F0-9]{6}\b/g);
-console.log(result); // ["#ff5733", "#BADA55", "#123abc"]
-```
-
----
-
-### ❓ Question 6
-
-**🧵 String:**
-```
-"Chapter 1: Getting Started, Chapter 2: Advanced Techniques"
-```
-
-**🎯 Expected Match:**
-```
-["Chapter 1", "Chapter 2"]
-```
-
-**❓ Task:** Write a regex to match the word **"Chapter"** followed by a **number**.
-
-```ts
-const str = "Chapter 1: Getting Started, Chapter 2: Advanced Techniques";
-const result = str.match(/Chapter \d+/g);
-console.log(result); // ["Chapter 1", "Chapter 2"]
-```
+</details>
