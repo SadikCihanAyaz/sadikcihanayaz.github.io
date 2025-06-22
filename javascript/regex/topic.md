@@ -58,9 +58,9 @@ These practical coding interview questions focus on using regular expressions (r
 
 ### ✅ Question 1: Extract All Numbers From a String
 
-// ❓ Write a function that returns all numbers from a given string as an array of strings.
-// Example:  
-// "The car costs 20000 dollars, and the tax is 4500." → ["20000", "4500"]
+ ❓ Write a function that returns all numbers from a given string as an array of strings.
+- Example:  
+* "The car costs 20000 dollars, and the tax is 4500." → ["20000", "4500"]
 
 ```ts
 const extractNumbers = (input) => {
@@ -87,10 +87,10 @@ const extractNumbers = (input) => {
 
 ### ✅ Question 2: Find All Words Starting With a Capital Letter
 
-// ❓ Write a function that returns all words starting with a capital letter from a sentence.
-// Example:  
-// "Alice and Bob are attending the ReactJS Conference in London."  
-// → ["Alice", "Bob", "ReactJS", "Conference", "London"]
+ ❓ Write a function that returns all words starting with a capital letter from a sentence.
+- Example:  
+* "Alice and Bob are attending the ReactJS Conference in London."  
+* → ["Alice", "Bob", "ReactJS", "Conference", "London"]
 
 ```ts
 const getCapitalizedWords = (sentence) => {
@@ -109,5 +109,124 @@ const getCapitalizedWords = (sentence) => {
 
 **Explanation:**  
 - `/\b[A-Z][a-zA-Z]*\b/g` matches each word boundary followed by a capital letter, then zero or more letters.
+
+</details>
+
+
+---
+
+### ✅ Question 3: Validate an Email Address
+
+ ❓ Write a function that checks if a string is a valid email address (basic validation).
+- Example:  
+* "test.user@example.com" → true  
+* "not-an-email" → false
+
+```ts
+const isValidEmail = (email) => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const isValidEmail = (email) => {
+  return /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email);
+};
+```
+
+**Explanation:**  
+- `/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/` checks:
+  - At least one valid character before "@"
+  - An "@" symbol
+  - At least one valid character for the domain
+  - A dot and at least two letters for the extension
+
+</details>
+
+---
+
+### ✅ Question 4: Replace All Numbers With "#"
+
+ ❓ Write a function that replaces every number in a string with "#".
+- Example:  
+* "My PIN is 1234 and my code is 5678." → "My PIN is #### and my code is ####."
+
+```ts
+const maskNumbers = (input) => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const maskNumbers = (input) => {
+  return input.replace(/\d/g, "#");
+};
+```
+
+**Explanation:**  
+- `/\d/g` matches every digit.  
+- `replace()` swaps each with "#".
+
+</details>
+
+---
+
+### ✅ Question 5: Extract All Words With Exactly 5 Letters
+
+❓ Write a function that returns all words with exactly 5 letters from a sentence.
+- Example:  
+* "These apple trees grow sweet pears." → ["These", "apple", "sweet", "pears"]
+
+```ts
+const getFiveLetterWords = (sentence) => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const getFiveLetterWords = (sentence) => {
+  return sentence.match(/\b\w{5}\b/g) || [];
+};
+```
+
+**Explanation:**  
+- `/\b\w{5}\b/g` matches whole words with exactly 5 word characters.
+
+</details>
+
+---
+
+### ✅ Question 6: Remove All Non-Alphanumeric Characters
+
+ ❓ Write a function that removes all characters from a string except letters and digits.
+- Example:  
+* "Hello, World! 123." → "HelloWorld123"
+
+```ts
+const removeNonAlphanumeric = (input) => {
+  // Your code here
+};
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const removeNonAlphanumeric = (input) => {
+  return input.replace(/[^a-zA-Z0-9]/g, "");
+};
+```
+
+**Explanation:**  
+- `/[^a-zA-Z0-9]/g` matches any character that is NOT a letter or a digit, and removes it.
 
 </details>
