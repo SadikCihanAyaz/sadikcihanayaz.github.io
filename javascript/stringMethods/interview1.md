@@ -135,6 +135,12 @@ const normalizeSpace = (input: string): string => {
   return input.trim().split(" ").filter(Boolean).join(" ");
 };
 ```
+
+```ts
+const normalizeSpace = (input) => {
+  return input.match(/[a-zA-Z]+/gi).join(" ");
+};
+```
 </details>
 
 ---
@@ -181,6 +187,18 @@ const getLastWord = (sentence: string): string => {
   const clean = sentence.trim().replace(/[.,!?]$/, "");
   const words = clean.split(" ");
   return words[words.length - 1];
+};
+```
+
+```ts
+const getLastWord = (sentence) => {
+  return sentence.split(" ").map((value, index, array) => {
+      if(index === array.length -1)
+      {
+          return value.match(/\b[a-zA-Z]+\b/gi).join("")
+      }
+      return '';
+  }).join("")
 };
 ```
 </details>
