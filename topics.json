@@ -1043,7 +1043,7 @@
     },
     {
       "header": "🧮 Set and Map in JavaScript",
-      "description": "",
+      "description": "Set: add(value), delete(value), has(value), clear(), size. Map: set(key, value), get(key), has(key), delete(key), clear(), size. Both Set and Map support forEach for iteration. Set is used for unique values, Map is used for key-value pairs where keys can be any type.",
       "duration": "35 min",
       "order": 7,
       "category": "setMap",
