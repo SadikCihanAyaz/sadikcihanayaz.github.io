@@ -138,6 +138,31 @@ const isValidEmail = (email) => {
 ```
 
 **Explanation:**  
+
+| Pattern      | Matches Letters | Matches Digits | Matches Underscore | Matches Hyphen | Matches Dot |
+|--------------|:--------------:|:--------------:|:------------------:|:--------------:|:-----------:|
+| `[a-zA-Z]`   |      ✔️        |      ❌       |        ❌         |      ❌       |     ❌     |
+| `[a-zA-Z]*`  |      ✔️        |      ❌       |        ❌         |      ❌       |     ❌     |
+| `\w`         |      ✔️        |      ✔️       |        ✔️         |      ❌       |     ❌     |
+| `[\w.-]`     |      ✔️        |      ✔️       |        ✔️         |      ✔️       |     ✔️     |
+
+| Part             | Meaning                                        | Example Match   |
+|------------------|------------------------------------------------|-----------------|
+| `[a-zA-Z]`       | Any uppercase or lowercase letter               | "A", "z"        |
+| `\d`             | Any digit (0–9)                                | "3", "7"        |
+| `.`              | A literal dot (period)                         | "."             |
+| `-`              | A literal hyphen                               | "-"             |
+| `[a-zA-Z\d.-]`   | Any letter, digit, dot, or hyphen              | "A", "5", ".", "-" |
+| `[a-zA-Z\d.-]+`  | One or more of the above (letters, digits, dot, hyphen) | "domain-name.23" |
+
+| Part             | Meaning                                                        | Example Match  |
+|------------------|----------------------------------------------------------------|---------------|
+| `+`              | One or more of the previous character set (applies to what comes before) | (from previous part, e.g., "domain" or "site.co") |
+| `\.`             | A literal dot (period)                                         | "."           |
+| `[a-zA-Z]`       | Any uppercase or lowercase letter                              | "c", "O"      |
+| `{2,}`           | At least 2 (two or more) of the preceding element (`[a-zA-Z]`) | "com", "org"  |
+| `\.[a-zA-Z]{2,}` | A dot followed by at least two letters (typical domain ending) | ".com", ".ro" |
+
 - `/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/` checks:
   - At least one valid character before "@"
   - An "@" symbol
