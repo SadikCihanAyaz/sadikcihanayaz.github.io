@@ -1040,6 +1040,14 @@
       "order": 6,
       "category": "regex",
       "name": "topic"
+    },
+    {
+      "header": "🧮 Set and Map in JavaScript",
+      "description": "",
+      "duration": "35 min",
+      "order": 7,
+      "category": "setMap",
+      "name": "topic"
     }
   ],
   "typescript": [
