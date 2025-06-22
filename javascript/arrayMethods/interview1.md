@@ -71,3 +71,76 @@ const findFirstCheapProduct = (products) => {
 ```
 
 </details>
+
+
+---
+
+### ✅ Question 3: Group Students by Grade
+
+You have an array of student objects. Each student has a `name` and a `grade` property (e.g., "A", "B", "C").  
+Write a function that returns an object where each key is a grade and its value is an array of student names with that grade.
+
+Example:  
+const students = [
+  { name: "Alice", grade: "A" },
+  { name: "Bob", grade: "B" },
+  { name: "Charlie", grade: "A" },
+  { name: "Dana", grade: "C" }
+];  
+Result: { A: ["Alice", "Charlie"], B: ["Bob"], C: ["Dana"] }
+
+```ts
+const groupStudentsByGrade = (students) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const groupStudentsByGrade = (students) => {
+  return students.reduce((acc, curr) => {
+    acc[curr.grade] = acc[curr.grade] || [];
+    acc[curr.grade].push(curr.name);
+    return acc;
+  }, {});
+}
+```
+
+</details>
+
+---
+
+### ✅ Question 4: Find Users With All Required Permissions
+
+You have an array of user objects, each with a `name` and a `permissions` array.  
+Given a list of required permissions, return an array of user names who have **all** the required permissions.
+
+Example:  
+const users = [
+  { name: "Alice", permissions: ["read", "write", "delete"] },
+  { name: "Bob", permissions: ["read"] },
+  { name: "Charlie", permissions: ["read", "write"] }
+];
+const required = ["read", "write"];
+Result: ["Alice", "Charlie"]
+
+```ts
+const getUsersWithAllPermissions = (users, required) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const getUsersWithAllPermissions = (users, required) => {
+  return users
+    .filter(user => required.every(p => user.permissions.includes(p)))
+    .map(user => user.name);
+}
+```
+
+</details>
