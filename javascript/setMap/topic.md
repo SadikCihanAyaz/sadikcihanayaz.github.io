@@ -90,4 +90,40 @@ for (const [key, value] of scores) {
 
 **Tip:** Both `Set` and `Map` support `for...of` loops and `.forEach()` for easy iteration!
 
-Let me know if you want deep dives, gotchas, or performance comparisons!
+
+# 🔄 Converting Between Array and Set in JavaScript
+
+## 1. Array ➡️ Set
+
+You can create a Set from an array using the `Set` constructor.  
+This is useful for removing duplicates!
+
+```ts
+const arr = [1, 2, 3, 2, 4, 1];
+const set = new Set(arr); // Set { 1, 2, 3, 4 }
+```
+
+---
+
+## 2. Set ➡️ Array
+
+You can convert a Set back to an array using the spread operator `...` or `Array.from()`.
+
+```ts
+const set = new Set([1, 2, 3]);
+const arr1 = [...set];        // [1, 2, 3]
+const arr2 = Array.from(set); // [1, 2, 3]
+```
+
+---
+
+## 🔥 Bonus: Remove Duplicates From Array
+
+Using Set and spread, you can quickly deduplicate an array:
+
+```ts
+const arr = [1, 2, 2, 3, 4, 4];
+const unique = [...new Set(arr)]; // [1, 2, 3, 4]
+```
+
+---
