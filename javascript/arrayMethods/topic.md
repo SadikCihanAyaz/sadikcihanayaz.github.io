@@ -72,6 +72,11 @@ const result = a.concat(b, [5]); // [1, 2, 3, 4, 5]
 
 > Does **not mutate** original arrays — returns a new one.
 
+✅ As alternative you can use spread operator.
+```ts
+const result = [...a, ...b, 5];
+```
+
 ---
 
 ### 📤 6. `copyWithin(target, start, end?)`

@@ -1016,8 +1016,7 @@
       "order": 5,
       "category": "stringMethods",
       "name": "interview1"
-    }
-    ,
+    },
     {
       "header": "🧮 Array Methods in JavaScript",
       "description": "Array(), Array.from(), Array.isArray(), Array.of(), concat(), copyWithin(), entries(), every(), fill(), filter(), find(), findIndex(), findLast(), findLastIndex(), flat(), flatMap(), forEach(), includes(), indexOf(), join(), keys(), lastIndexOf(), map(), pop(), push(), reduce(), reduceRight(), reverse(), shift(), slice(), some(), sort(), splice(), toLocaleString(), toString(), unshift(), values()",
@@ -1025,12 +1024,19 @@
       "order": 6,
       "category": "arrayMethods",
       "name": "topic"
-    }
-    ,
+    },
+    {
+      "header": "🧮 Interview Questions -1 Array Methods in JavaScript",
+      "description": "Array(), Array.from(), Array.isArray(), Array.of(), concat(), copyWithin(), entries(), every(), fill(), filter(), find(), findIndex(), findLast(), findLastIndex(), flat(), flatMap(), forEach(), includes(), indexOf(), join(), keys(), lastIndexOf(), map(), pop(), push(), reduce(), reduceRight(), reverse(), shift(), slice(), some(), sort(), splice(), toLocaleString(), toString(), unshift(), values()",
+      "duration": "50 min",
+      "order": 6,
+      "category": "arrayMethods",
+      "name": "interview1"
+    },
     {
       "header": "🧮 Regex in JavaScript",
       "description": "",
-      "duration": "50 min",
+      "duration": "35 min",
       "order": 6,
       "category": "regex",
       "name": "topic"
