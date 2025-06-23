@@ -248,6 +248,32 @@ const findMostFrequentWord = (words) => {
 }
 ```
 
+```ts
+const words = ["apple", "banana", "apple", "orange", "banana", "apple"];
+
+const findMostFreqElement = () => {
+    // 1. Count occurrences using a Map
+    const map = new Map();
+
+    words.forEach((value) => {
+        map.set(value, (map.get(value) ?? 0) + 1);
+    });
+
+    // 2. Convert the Map's entries (iterator) into an array of [word, count] pairs
+    const arrEntry = [...map.entries()];
+
+    // 3. Sort the array in descending order by count
+    const sortedValue = arrEntry.sort((a, b) => b[1] - a[1]);
+
+    // 4. Return the word with the highest count (the first element after sorting)
+    return sortedValue[0][0];
+}
+
+const result = findMostFreqElement();
+
+console.log(result); // Output: "apple"
+```
+
 </details>
 
 ---
@@ -281,6 +307,25 @@ const createProductMap = (products) => {
     return map;
   }, {});
 }
+```
+
+```ts
+const products = [ { id: 101, name: "Laptop" }, { id: 102, name: "Phone" }, { id: 103, name: "Tablet" } ]; 
+
+
+const createPojo = () => {
+    
+    const map = new Map();
+    
+    products.forEach((value) => {
+        map.set(value.id, value.name);
+    })
+    
+    return Object.fromEntries(map);
+}
+
+const result = createPojo();
+console.log(result);
 ```
 
 </details>
