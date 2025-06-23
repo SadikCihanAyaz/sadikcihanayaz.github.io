@@ -218,7 +218,7 @@ const obj = Object.fromEntries(pairs);
 
 ---
 
-## 🗂️ What Is a Plain Object?
+## 🗂️ What Is a Plain Object? (POJO)
 
 A **plain object** is the most basic JavaScript object:
 - Created with `{}` or `new Object()`
