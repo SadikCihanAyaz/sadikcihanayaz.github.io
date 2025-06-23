@@ -127,3 +127,53 @@ const unique = [...new Set(arr)]; // [1, 2, 3, 4]
 ```
 
 ---
+
+# 🔄 Converting Between Map and Array in JavaScript
+
+## 1. Array ➡️ Map
+
+You can create a Map from an array of key-value pairs using the `Map` constructor.
+
+```ts
+const entries = [
+  ["name", "Alice"],
+  ["age", 30]
+];
+const map = new Map(entries);
+// Map { "name" => "Alice", "age" => 30 }
+```
+
+---
+
+## 2. Map ➡️ Array
+
+You can convert a Map to an array using the spread operator (`...`) or `Array.from()`.  
+This gives you an array of `[key, value]` pairs.
+
+```ts
+const map = new Map([
+  ["color", "blue"],
+  ["size", "large"]
+]);
+
+const arr1 = [...map];         // [ ["color", "blue"], ["size", "large"] ]
+const arr2 = Array.from(map);  // [ ["color", "blue"], ["size", "large"] ]
+```
+
+---
+
+## 🔥 Bonus: Get Only Keys or Only Values from a Map
+
+To get just the keys or just the values as arrays:
+
+```ts
+const map = new Map([
+  ["x", 10],
+  ["y", 20]
+]);
+
+const keys = [...map.keys()];     // ["x", "y"]
+const values = [...map.values()]; // [10, 20]
+```
+
+---
