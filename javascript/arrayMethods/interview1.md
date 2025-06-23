@@ -109,31 +109,24 @@ const groupStudentsByGrade = (students) => {
 ```
 
 ```ts
-const groupStudentsByGrade = (students) => {
-  // 1. Group by grade using Map
-  const map = new Map();
+const students = [ { name: "Alice", grade: "A" }, { name: "Bob", grade: "B" }, { name: "Charlie", grade: "A" }, { name: "Dana", grade: "C" } ];
 
-  students.forEach(({ name, grade }) => {
-    if (!map.has(grade)) {
-      map.set(grade, []);
-    }
-    map.get(grade).push(name);
-  });
+const grade = () => {
+    const map = new Map();
+    students.forEach((value, index, array) => {
+        if(!map.has(value.grade))
+        {
+            map.set(value.grade, []);
+        }
+        
+        map.set(value.grade, [...map.get(value.grade), value.name])
+    })
+    
+    return Object.fromEntries(map);
+}
 
-  // 2. Convert Map to plain object
-  return Object.fromEntries(map.entries());
-};
-
-// Example usage:
-const students = [
-  { name: "Alice", grade: "A" },
-  { name: "Bob", grade: "B" },
-  { name: "Charlie", grade: "A" },
-  { name: "Dana", grade: "C" }
-];
-
-console.log(groupStudentsByGrade(students));
-// Output: { A: [ 'Alice', 'Charlie' ], B: [ 'Bob' ], C: [ 'Dana' ] }
+const result = grade();
+console.log(result);
 ```
 
 </details>
