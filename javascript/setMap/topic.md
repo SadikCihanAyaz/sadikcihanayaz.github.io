@@ -177,3 +177,108 @@ const values = [...map.values()]; // [10, 20]
 ```
 
 ---
+
+# 🔄 Understanding `Object.fromEntries()` in JavaScript
+
+JavaScript’s `Object.fromEntries()` is a powerful method for converting arrays (or any iterable) of key-value pairs into a **plain object**. It is especially useful for transforming Maps or processing data for key-based lookups.
+
+---
+
+## 🚩 What Does `Object.fromEntries()` Do?
+
+- Takes an **iterable** (like an array or a Map) of `[key, value]` pairs.
+- Returns a **plain JavaScript object** where each key-value pair becomes a property on the object.
+
+---
+
+## 🏗️ How Does It Work?
+
+### From Map to Object
+
+```ts
+const map = new Map();
+map.set("A", ["Alice", "Charlie"]);
+map.set("B", ["Bob"]);
+
+const obj = Object.fromEntries(map.entries());
+// Result: { A: [ 'Alice', 'Charlie' ], B: [ 'Bob' ] }
+```
+
+### From Array of Pairs to Object
+
+```ts
+const pairs = [
+  ["name", "Alice"],
+  ["age", 30]
+];
+
+const obj = Object.fromEntries(pairs);
+// Result: { name: "Alice", age: 30 }
+```
+
+---
+
+## 🗂️ What Is a Plain Object?
+
+A **plain object** is the most basic JavaScript object:
+- Created with `{}` or `new Object()`
+- Keys are strings or symbols
+- Used for flexible, key-based data storage
+
+Example:
+```ts
+const person = { name: "Bob", age: 25 };
+// Access:
+console.log(person.name); // "Bob"
+```
+
+---
+
+## ⚡ Does `Object.fromEntries()` Create an Array?
+
+**No.**  
+It creates a plain object (not an array).  
+- **Array:** `[1, 2, 3]`
+- **Object:** `{ a: 1, b: 2 }`
+
+---
+
+## 📊 Extended Summary Table
+
+| Function / Constructor             | Example Input                                     | Output Example                            | Output Type         |
+|------------------------------------|---------------------------------------------------|-------------------------------------------|---------------------|
+| `Object.fromEntries()`             | `[["a", 1], ["b", 2]]`                            | `{ a: 1, b: 2 }`                          | Object              |
+| `Object.entries()`                 | `{ a: 1, b: 2 }`                                  | `[["a", 1], ["b", 2]]`                    | Array of pairs      |
+| `Array.from()`                     | `[1, 2, 3]`                                       | `[1, 2, 3]`                               | Array               |
+| `new Map([["x", 10], ["y", 20]])`  | `[["x", 10], ["y", 20]]`                          | `Map { "x" => 10, "y" => 20 }`            | Map                 |
+| `map.entries()`                    | `Map { "x" => 10, "y" => 20 }`                    | `[["x", 10], ["y", 20]]` (iterator/array) | Iterator / Array    |
+| `Object.keys()`                    | `{ a: 1, b: 2 }`                                  | `["a", "b"]`                              | Array               |
+| `Object.values()`                  | `{ a: 1, b: 2 }`                                  | `[1, 2]`                                  | Array               |
+
+---
+
+## 🔥 When Is This Useful?
+
+- Convert a Map to a regular object for serialization (e.g., `JSON.stringify` only works on plain objects, not Maps).
+- Transform data after using `Object.entries()` (do data manipulation, then turn it back into an object).
+- Cleanly aggregate or group data.
+
+---
+
+## 💡 Pro Tip
+
+If you ever use `.reduce()` to build an array of pairs, you can immediately transform it into an object:
+
+```ts
+const arr = [ ["cat", 4], ["dog", 4] ];
+const obj = Object.fromEntries(arr);
+// { cat: 4, dog: 4 }
+```
+
+---
+
+**Summary:**  
+- `Object.fromEntries()` is a bridge between arrays, Maps, and regular JavaScript objects.
+- Perfect for building key-based lookups and working with iterable data.
+
+Let me know if you want practical scenarios, or a visual chart for these conversions!
