@@ -164,6 +164,21 @@ const getUsersWithAllPermissions = (users, required) => {
 }
 ```
 
+```ts
+const users = [ { name: "Alice", permissions: ["read", "write", "delete"] }, { name: "Bob", permissions: ["read"] }, { name: "Charlie", permissions: ["read", "write"] } ]; 
+const required = ["read", "write"]; 
+
+
+const getUserAllPermission = () => {
+    return users.filter((value) => 
+         required.every(req => value.permissions.includes(req))
+    )
+}
+
+const result = getUserAllPermission();
+console.log(result)
+```
+
 </details>
 
 
