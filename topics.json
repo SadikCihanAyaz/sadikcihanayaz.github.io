@@ -1048,6 +1048,14 @@
       "order": 7,
       "category": "setMap",
       "name": "topic"
+    },
+        {
+      "header": "🧮 Set, Map, Array, and POJO Conversion Guide in JavaScript",
+      "description": "🗂️ Set → Array 🗂️ Map → Array 🗂️ POJO → Array 🗂️ Array → POJO 🗂️ Map → POJO 🗂️ Array → Map 🗂️ POJO → Map",
+      "duration": "35 min",
+      "order": 6,
+      "category": "setMap",
+      "name": "topic2"
     }
   ],
   "typescript": [

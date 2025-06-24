@@ -436,6 +436,33 @@ const partitionByThreshold = (arr, threshold) => {
 }
 ```
 
+```ts
+const arr = [3, 8, 1, 6, 9, 2]; const threshold = 5; 
+const seperate = () => {
+    const map = new Map();
+    
+    arr.forEach((value) => {
+        if(value > threshold)
+        {
+            if(!map.has('Above')){
+                map.set('Above', []);
+            }
+            map.set('Above', [...map.get('Above'), value])
+        }
+        else{
+            if(!map.has('Below')){
+                map.set('Below', []);
+            }
+            map.set('Below', [...map.get('Below'), value])
+        }
+    })
+    
+    return Object.fromEntries(map);
+}
+
+console.log(seperate())
+```
+
 </details>
 
 
@@ -463,6 +490,16 @@ const intersection = (arr1, arr2) => {
 ```ts
 const intersection = (arr1, arr2) => {
   return [...new Set(arr1)].filter(x => arr2.includes(x));
+}
+```
+
+```ts
+const multiple = () => {
+    //delete dublicate values
+    const set1 = [...new Set([...arr1])];
+    //delete dublicate values and create array again.
+    const set2 = [...new Set([...arr2])]
+    return set1.filter(x => set2.some(y => y === x))
 }
 ```
 
@@ -589,6 +626,21 @@ const rotateRight = (arr, k) => {
 }
 ```
 
+```ts
+const getLongestOne = () => {
+    
+    let bigOne = '';
+    arr.forEach((value) => {
+        if(bigOne.length < value.length)
+        {
+            bigOne = value;
+        }
+    })
+    
+    return bigOne;
+}
+```
+
 </details>
 
 ---
@@ -654,6 +706,18 @@ const findEarliestAndLatest = (dates) => {
     if (date > latest) latest = date;
   }
   return { earliest, latest };
+}
+```
+
+
+```ts
+const getLongestOne = () => {
+    
+    const sorted = dates.sort((a,b) => new Date(a)- new Date(b));
+    return {
+        "earliest": sorted[0],
+        "late": sorted[sorted.length -1]
+    }
 }
 ```
 
