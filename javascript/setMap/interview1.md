@@ -56,6 +56,25 @@ const totalItemsByUser = (orders) => {
 };
 ```
 
+```ts
+const orders = [
+  { userId: "u1", items: 3 },
+  { userId: "u2", items: 2 },
+  { userId: "u1", items: 1 },
+  { userId: "u3", items: 5 }
+];
+
+const getOrdered = () => {
+   const map = new Map();
+
+   orders.forEach((value, index) => {
+       map.set(value.userId, (map.get(value.userId) ?? 0 )+ value.items)
+   })
+   
+   return Object.fromEntries(map);
+}
+```
+
 ---
 
 ### ✅ Question 3: Top Favorite Items
@@ -82,6 +101,21 @@ const getTopFavorites = (map) => {
     .slice(0, 2)
     .map(([key]) => key);
 };
+```
+
+```ts
+const favoriteOrder = () => {
+   const sortedArr = [...favoriteItems].sort((a,b) => b[1] -a[1]);
+   const slicedArr = sortedArr.slice(0,2);
+   const setV = new Set();
+   
+    for(const[value, value2] of slicedArr)
+    {
+        setV.add(value);
+    }
+   
+   return [...setV];
+}
 ```
 
 ---
