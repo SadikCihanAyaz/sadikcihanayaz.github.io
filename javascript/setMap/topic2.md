@@ -13,6 +13,7 @@ const arrayFromSet = Array.from(mySet);
 // or
 const arrayFromSet2 = [...mySet];
 ```
+- NOTE: The spread operator is a shortcut to iterate over iterable objects like Arrays, Sets, and Maps. It uses the Symbol.iterator protocol behind the scenes.
 
 ### 🔁 Iterate over a `Set`
 ```ts

@@ -1007,8 +1007,7 @@
       "order": 5,
       "category": "stringMethods",
       "name": "topic"
-    }
-    ,
+    },
     {
       "header": "🧵 Interview Quewstions -1 : String Methods in JavaScript in JavaScript",
       "description": "String(), charAt(), charCodeAt(), codePointAt(), concat(), includes(), endsWith(), indexOf(), lastIndexOf(), localeCompare(), match(), matchAll(), normalize(), padEnd(), padStart(), repeat(), replace(), replaceAll(), search(), slice(), split(), startsWith(), substring(), toLocaleLowerCase(), toLocaleUpperCase(), toLowerCase(), toUpperCase(), trim(), trimStart(), trimEnd(), valueOf()",
@@ -1049,13 +1048,21 @@
       "category": "setMap",
       "name": "topic"
     },
-        {
+    {
       "header": "🧮 Set, Map, Array, and POJO Conversion Guide in JavaScript",
       "description": "🗂️ Set → Array 🗂️ Map → Array 🗂️ POJO → Array 🗂️ Array → POJO 🗂️ Map → POJO 🗂️ Array → Map 🗂️ POJO → Map",
       "duration": "35 min",
       "order": 6,
       "category": "setMap",
       "name": "topic2"
+    },
+    {
+      "header": "🧮 JavaScript Data Structure Challenges – Set, Map, Array, POJO",
+      "description": "Set, Map, Array, POJO",
+      "duration": "35 min",
+      "order": 6,
+      "category": "setMap",
+      "name": "interview1"
     }
   ],
   "typescript": [
