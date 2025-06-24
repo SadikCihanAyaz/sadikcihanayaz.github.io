@@ -167,4 +167,15 @@ const buildUserNameMap = (users) => {
 };
 ```
 
+```ts
+const lookUpForNames = () => {
+   const map = new Map();
+   
+   users.forEach((value, index) => {
+       map.set(value.id, value.firstName + ' ' + value.lastName)
+   })
+   return map;
+}
+```
+
 ---
