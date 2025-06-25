@@ -169,6 +169,13 @@ const isValidEmail = (email) => {
   - At least one valid character for the domain
   - A dot and at least two letters for the extension
 
+  ### 📊 Regex Anchors vs Word Boundaries
+
+| **Pattern**     | **Matches**                    | **Use Case**                  |
+|------------------|-------------------------------|-------------------------------|
+| `^pattern$`      | Full string only              | ✅ Validation (strict match)  |
+| `\bpattern\b`    | Standalone word in a sentence | 🔍 Search (not strict)        |
+
 </details>
 
 ---

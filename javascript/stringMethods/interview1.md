@@ -10,6 +10,8 @@ These are practical coding-style interview questions based on common JavaScript 
 // ❓ Write a function that takes a credit card number string
 // and returns it masked like "************1234"
 
+const cardNumber = '376070620590827';
+
 const maskCard = (cardNumber: string): string => {
   // Your code here
 };
@@ -268,6 +270,296 @@ const getDomain = (email: string): string => {
 ```ts
 const getDomain = (email: string): string => {
   return email.slice(email.indexOf("@") + 1);
+};
+```
+</details>
+
+---
+
+### ✅ Question 10: Mask Middle of Email Address
+
+You are given a valid email address.  
+Mask everything between the first character and the `@` symbol with `"***"` and return the masked email.
+
+**Example Input:**  
+`"john.doe@example.com"`
+
+**Expected Output:**  
+`"j***@example.com"`
+
+```ts
+const maskEmail = (email) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const maskEmail = (email) => {
+  return email.replace(/^(.).*?(@.+)$/, '$1***$2');
+};
+```
+
+**Explanation:**  
+- `^(.).*?(@.+)$`  
+  - `(. )` → captures the first character  
+  - `.*?` → lazily matches everything until the `@`  
+  - `(@.+)` → captures the `@` and domain part  
+- `$1***$2` → rebuilds the string as: first character + `***` + domain
+
+</details>
+
+---
+
+### ✅ Question 11: Check for Strong Password
+
+A password is considered strong if:
+- It has at least **8 characters**
+- Contains at least one **lowercase** letter
+- Contains at least one **uppercase** letter
+- Contains at least one **digit**
+- Contains at least one **special character** (`!@#$%^&*`)
+
+Return `true` if the password meets all criteria, otherwise `false`.
+
+**Examples:**
+- `"Aa1!aaaa"` → ✅ true  
+- `"weakpass"` → ❌ false  
+
+```ts
+const isStrongPassword = (password) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const isStrongPassword = (password) => {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+  return regex.test(password);
+};
+```
+
+**Explanation:**
+- `(?=.*[a-z])` → must contain at least one lowercase
+- `(?=.*[A-Z])` → must contain at least one uppercase
+- `(?=.*\d)` → must contain at least one digit
+- `(?=.*[!@#$%^&*])` → must contain one special character
+- `.{8,}` → total length must be 8 or more
+
+</details>
+
+---
+
+### ✅ Question 12: Capitalize Each Word in a Title
+
+You are given a string representing a title. Return a new string where the **first letter of each word is capitalized**, and the rest of the letters are lowercase.
+
+**Example Input:**  
+`"the great gatsby"`
+
+**Expected Output:**  
+`"The Great Gatsby"`
+
+```ts
+const capitalizeTitle = (title) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const capitalizeTitle = (title) => {
+  return title
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+};
+```
+</details>
+
+---
+
+### ✅ Question 13: Compare Two Strings Alphabetically
+
+Write a function that takes two strings and returns:
+- `"equal"` if both are equal
+- `"before"` if the first string comes before the second alphabetically
+- `"after"` if the first string comes after the second
+
+Use the `.localeCompare()` method.
+
+**Example Inputs:**
+- `"apple"`, `"banana"` → `"before"`  
+- `"grape"`, `"grape"` → `"equal"`  
+- `"zebra"`, `"ant"` → `"after"`  
+
+```ts
+const compareStrings = (a, b) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const compareStrings = (a, b) => {
+  const result = a.localeCompare(b);
+  if (result === 0) return "equal";
+  return result < 0 ? "before" : "after";
+};
+```
+</details>
+
+---
+
+
+### ✅ Question 14: Compress Consecutive Characters
+
+Write a function that compresses a string by replacing consecutive repeating characters with the character followed by the count.
+
+**Example Input:**  
+`"aaabbccccd"`
+
+**Expected Output:**  
+`"a3b2c4d1"`
+
+```ts
+const compressString = (input) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const compressString = (input) => {
+  if (!input) return "";
+
+  let result = "";
+  let count = 1;
+
+  for (let i = 1; i <= input.length; i++) {
+    if (input[i] === input[i - 1]) {
+      count++;
+    } else {
+      result += input[i - 1] + count;
+      count = 1;
+    }
+  }
+
+  return result;
+};
+```
+</details>
+
+---
+
+### ✅ Question 15: Smart Trimming – Keep Start and End
+
+Given a long string, trim it so that:
+- The **first 10 characters** are kept,
+- The **last 10 characters** are kept,
+- The middle is replaced with `"..."`
+
+Only trim if the string is **longer than 25 characters**.
+
+**Example Input:**  
+`"This is a very long sentence that needs trimming."`
+
+**Expected Output:**  
+`"This is a ...ds trimming."`
+
+```ts
+const smartTrim = (str) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const smartTrim = (str) => {
+  if (str.length <= 25) return str;
+  const start = str.slice(0, 10);
+  const end = str.slice(-10);
+  return `${start}...${end}`;
+};
+```
+</details>
+
+---
+
+### ✅ Question 16: Rotate a String to the Right
+
+Write a function that **rotates** a string to the right by `k` positions.
+
+**Rules:**
+- If `k` is greater than the string length, use modulo
+- You must not use array methods (like `.reverse()` or `.splice()`)
+
+**Example Input:**  
+`("rotation", 2)`
+
+**Expected Output:**  
+`"onrotati"`
+
+```ts
+const rotateRight = (str, k) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const rotateRight = (str, k) => {
+  const len = str.length;
+  if (len === 0) return str;
+  k = k % len;
+  return str.slice(-k) + str.slice(0, len - k);
+};
+```
+</details>
+
+---
+
+### ✅ Question 17: Generate URL Slug
+
+Create a function that converts a sentence to a URL slug:
+- Trim spaces at both ends
+- Lowercase all characters
+- Replace **all spaces** with hyphens (`-`)
+- Remove extra spaces between words (normalize)
+
+**Example Input:**  
+`"   JavaScript   String   Methods  "`
+
+**Expected Output:**  
+`"javascript-string-methods"`
+
+```ts
+const slugify = (str) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const slugify = (str) => {
+  return str.trim().toLowerCase().split(/\s+/).join("-");
 };
 ```
 </details>
