@@ -565,3 +565,156 @@ const slugify = (str) => {
 </details>
 
 ---
+
+### ✅ Question 18: Find the Longest Word in a Sentence
+
+Write a function that returns the **longest word** in a sentence. If multiple words have the same length, return the first one.
+
+**Example Input:**  
+`"Mastering string manipulation is essential"`
+
+**Expected Output:**  
+`"manipulation"`
+
+```ts
+const findLongestWord = (sentence) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const findLongestWord = (sentence) => {
+  const words = sentence.trim().split(" ");
+  let longest = "";
+
+  for (const word of words) {
+    if (word.length > longest.length) {
+      longest = word;
+    }
+  }
+
+  return longest;
+};
+```
+</details>
+
+---
+
+### ✅ Question 19: Reverse Words in a Sentence (Preserve Order)
+
+Write a function that **reverses each word** in a sentence individually, but keeps their original order and spacing intact.
+
+**Example Input:**  
+`"JavaScript is fun"`
+
+**Expected Output:**  
+`"tpircSavaJ si nuf"`
+
+```ts
+const reverseWords = (sentence) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const reverseWords = (sentence) => {
+  return sentence
+    .split(" ")
+    .map(word => word.split("").reverse().join(""))
+    .join(" ");
+};
+```
+</details>
+
+---
+
+### ✅ Question 20: Extract Initials from a Full Name
+
+Write a function that takes a full name and returns the **initials in uppercase**, separated by dots.
+
+**Rules:**
+- Ignore extra spaces
+- Always return uppercase initials
+- Works for 2 or more words
+
+**Example Input:**  
+`"   ada    lovelace   "`  
+**Expected Output:**  
+`"A.L"`
+
+**Example Input:**  
+`"grace brewster murray hopper"`  
+**Expected Output:**  
+`"G.B.M.H"`
+
+```ts
+const getInitials = (fullName) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const getInitials = (fullName) => {
+  return fullName
+    .trim()
+    .split(" ")
+    .filter(Boolean)
+    .map(word => word.charAt(0).toUpperCase())
+    .join(".");
+};
+```
+</details>
+
+---
+
+### ✅ Question 21: Find Common Prefix of Two Strings
+
+Write a function that returns the **longest common prefix** between two strings.
+
+**Example Input:**  
+`"international"` and `"internet"`  
+**Expected Output:**  
+`"inter"`
+
+**Example Input:**  
+`"flight"` and `"flow"`  
+**Expected Output:**  
+`"fl"`
+
+```ts
+const longestCommonPrefix = (a, b) => {
+  // Your code here
+}
+```
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const longestCommonPrefix = (a, b) => {
+  const minLength = Math.min(a.length, b.length);
+  let prefix = "";
+
+  for (let i = 0; i < minLength; i++) {
+    if (a[i] === b[i]) {
+      prefix += a[i];
+    } else {
+      break;
+    }
+  }
+
+  return prefix;
+};
+```
+</details>
+
+---
