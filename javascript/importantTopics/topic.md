@@ -516,6 +516,17 @@ MACROTASK QUEUE (Timers, Events)
 
 ---
 
+- Lets say microtask queue look like
+
+[task1, task2, task3, task4, task5]
+The Event Loop will:
+	1.	Move task1 → Call stack → Execute
+	2.	Move task2 → Call stack → Execute
+	3.	…
+	4.	Continue until task5 is executed
+
+👉 Only after all 5 microtasks are executed, the Event Loop moves on to the next macrotask.
+
 ## 🧠 Summary Table
 
 | Concept        | Description                                    | Examples                                 |
