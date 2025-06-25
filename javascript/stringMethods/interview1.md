@@ -630,6 +630,12 @@ const reverseWords = (sentence) => {
     .join(" ");
 };
 ```
+
+```ts
+    return a.split("").map((value, index, array) => {
+        return array[array.length-1- index]
+    }).join("")
+```
 </details>
 
 ---
