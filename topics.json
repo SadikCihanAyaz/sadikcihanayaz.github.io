@@ -985,6 +985,14 @@
   ],
   "javascript": [
     {
+      "header": "📚 JavaScript Must-Know Topics Before Interviews",
+      "description": "- Hoisting\n- Temporal Dead Zone (TDZ)\n- Closures\n- Destructuring\n- Spread and Rest Operators\n- Callbacks vs Promises vs Async/Await\n- Microtasks vs Macrotasks\n- Event Loop, Call Stack, and Queue\n- Memory Management Basics (Garbage Collection)\n- Writing Unit Tests with `jest` or Similar\n- Understanding XSS / CSRF (Basic Security Concepts)",
+      "duration": "5 min",
+      "order": 1,
+      "category": "importantTopics",
+      "name": "topic"
+    },
+    {
       "header": "📚 JavaScript Global Functions",
       "description": "eval(), isFinite(), isNaN(), parseFloat(), parseInt(), decodeURI(), decodeURIComponent(), encodeURI(), encodeURIComponent()",
       "duration": "5 min",
