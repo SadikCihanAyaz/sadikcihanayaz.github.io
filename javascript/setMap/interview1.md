@@ -20,6 +20,9 @@ const previousBuyers = ["u2", "u3", "u6"];
 **Expected Result:**  
 ["u2", "u3"]
 
+<details>
+<summary>✅ Answer</summary>
+
 ```ts
 const getReturningCustomers = (allOrders, previousBuyers) => {
   const currentSet = new Set(allOrders);
@@ -27,6 +30,9 @@ const getReturningCustomers = (allOrders, previousBuyers) => {
   return [...currentSet].filter(user => previousSet.has(user));
 };
 ```
+
+</details>
+
 
 ---
 
@@ -46,6 +52,10 @@ const orders = [
 
 **Expected Result:**  
 { u1: 4, u2: 2, u3: 5 }
+
+<details>
+<summary>✅ Answer</summary>
+
 
 ```ts
 const totalItemsByUser = (orders) => {
@@ -74,7 +84,7 @@ const getOrdered = () => {
    return Object.fromEntries(map);
 }
 ```
-
+</details>
 ---
 
 ### ✅ Question 3: Top Favorite Items
@@ -93,6 +103,9 @@ const favoriteItems = new Map([
 
 **Expected Result:**  
 ["Pizza", "Burger"]
+
+<details>
+<summary>✅ Answer</summary>
 
 ```ts
 const getTopFavorites = (map) => {
@@ -118,6 +131,7 @@ const favoriteOrder = () => {
 }
 ```
 
+</details>
 ---
 
 ### ✅ Question 4: Flatten Friend Orders by Item
@@ -136,6 +150,10 @@ const friendOrders = {
 **Expected Result:**  
 ["Burger", "Fries", "Cola", "Pizza", "Water"]
 
+<details>
+<summary>✅ Answer</summary>
+
+
 ```ts
 const getAllUniqueItems = (orders) => {
   const all = Object.values(orders).flat();
@@ -143,6 +161,7 @@ const getAllUniqueItems = (orders) => {
 };
 ```
 
+</details>
 ---
 
 ### ✅ Question 5: Build Name Lookup from Array
@@ -161,6 +180,8 @@ const users = [
 **Expected Result:**  
 Map { "u1" => "Alice Brown", "u2" => "Bob Smith", "u3" => "Charlie Davis" }
 
+<details>
+<summary>✅ Answer</summary>
 ```ts
 const buildUserNameMap = (users) => {
   return new Map(users.map(user => [user.id, `${user.firstName} ${user.lastName}`]));
@@ -178,4 +199,5 @@ const lookUpForNames = () => {
 }
 ```
 
+</details>
 ---
