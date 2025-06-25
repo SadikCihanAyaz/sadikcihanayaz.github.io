@@ -201,3 +201,98 @@ const lookUpForNames = () => {
 
 </details>
 ---
+
+---
+
+### ✅ Question 6: Group Products by Category
+
+You have an array of products. Each product has a `name` and a `category`.  
+Return a POJO where each key is a category, and its value is an array of product names in that category.
+
+```ts
+const products = [
+  { name: "Apple", category: "Fruit" },
+  { name: "Carrot", category: "Vegetable" },
+  { name: "Banana", category: "Fruit" },
+  { name: "Cucumber", category: "Vegetable" },
+  { name: "Steak", category: "Meat" }
+];
+```
+
+**Expected Result:**  
+{ Fruit: ["Apple", "Banana"], Vegetable: ["Carrot", "Cucumber"], Meat: ["Steak"] }
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const groupByCategory = (products) => {
+  return products.reduce((acc, product) => {
+    const { category, name } = product;
+    acc[category] = acc[category] || [];
+    acc[category].push(name);
+    return acc;
+  }, {});
+};
+```
+
+```ts
+const groupUsingMap = () => {
+  const map = new Map();
+
+  products.forEach(({ name, category }) => {
+    if (!map.has(category)) {
+      map.set(category, []);
+    }
+    map.get(category).push(name);
+  });
+
+  return Object.fromEntries(map);
+};
+```
+</details>
+
+---
+
+### ✅ Question 7: Extract Unique Technologies Used by All Developers
+
+You are given a POJO where each key is a developer’s name and the value is an array of technologies they use.  
+Return a flat array of **unique technologies** used across all developers.
+
+```ts
+const developers = {
+  Alice: ["React", "Node", "GraphQL"],
+  Bob: ["Vue", "Node", "TypeScript"],
+  Carol: ["React", "TypeScript", "Node"]
+};
+```
+
+**Expected Result:**  
+["React", "Node", "GraphQL", "Vue", "TypeScript"]
+
+<details>
+<summary>✅ Answer</summary>
+
+```ts
+const extractTechnologies = (devs) => {
+  const all = Object.values(devs).flat();
+  return [...new Set(all)];
+};
+```
+
+```ts
+const techFromEach = () => {
+  const resultSet = new Set();
+
+  for (const techs of Object.values(developers)) {
+    for (const tech of techs) {
+      resultSet.add(tech);
+    }
+  }
+
+  return Array.from(resultSet);
+};
+```
+</details>
+
+---
