@@ -33,25 +33,26 @@
       "correctChoiceIds": [
         "D"
       ],
-      "answerBody": "Coffman kosullari: mutual exclusion, hold&wait, no preemption, circular wait. Auto rollback deadlock kosulu degildir.",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nDogru secenek(ler): D: Auto rollback\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis secenek degil; deadlock kosuludur."
+          "text": "Yanlis/eksik secenek: 'Mutual exclusion'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Yanlis secenek degil; deadlock kosuludur."
+          "text": "Yanlis/eksik secenek: 'Hold and wait'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis secenek degil; deadlock kosuludur."
+          "text": "Yanlis/eksik secenek: 'No preemption'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Dogru secim. Deadlock taniminin parcasi degildir."
+          "text": "Dogru secenek: 'Auto rollback'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Deadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}"
     },
     {
       "id": "i7-q2",
@@ -80,25 +81,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "Global lock order circular wait kosulunu kirar. Bu, pratikte en etkili ve en cok uygulanan deadlock onleme stratejisidir.",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Kilit alma sirasini global olarak sabitlemek\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Circular wait riski kayda deger azalir."
+          "text": "Dogru secenek: 'Kilit alma sirasini global olarak sabitlemek'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Deadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Thread sayisi arttirmak problemi buyutebilir."
+          "text": "Yanlis/eksik secenek: 'Thread sayisini rastgele arttirmak'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. volatile deadlocka cozum degildir."
+          "text": "Yanlis/eksik secenek: 'volatile eklemek'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Static yapmak deadlocku cozmez."
+          "text": "Yanlis/eksik secenek: 'Tum metodlari static yapmak'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}"
     },
     {
       "id": "i7-q3",
@@ -127,25 +129,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Starvation, adaletsiz scheduling/lock politikasi nedeniyle bir threadin surekli geri planda kalmasidir.",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Bir threadin uzun sure kaynak alamamasi\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Bu deadlock tanimina daha yakindir."
+          "text": "Yanlis/eksik secenek: 'Tum threadlerin karsilikli kilitlenmesi'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Starvationin cekirdek tanimi budur."
+          "text": "Dogru secenek: 'Bir threadin uzun sure kaynak alamamasi'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Deadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Donanimsal bir durum degildir."
+          "text": "Yanlis/eksik secenek: 'CPU overheating'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Runtime davranisidir."
+          "text": "Yanlis/eksik secenek: 'Compile-time warning'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}"
     },
     {
       "id": "i7-q4",
@@ -174,25 +177,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Livelockta threadler surekli durum degistirir fakat hedef is tamamlanmaz. Deadlockta ise bekleme kilitlenmesi vardir.",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Deadlockta ilerleme yoktur; livelockta threadler aktif ama is ilerlemez\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Davranis modelleri farklidir."
+          "text": "Yanlis/eksik secenek: 'Ikisi aynidir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. En kritik ayrim bu sekildedir."
+          "text": "Dogru secenek: 'Deadlockta ilerleme yoktur; livelockta threadler aktif ama is ilerlemez'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Deadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Multi-thread etkile\u015fim sorunudur."
+          "text": "Yanlis/eksik secenek: 'Livelock sadece single-threadde olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Deadlock genelde sessizce takilma yapar."
+          "text": "Yanlis/eksik secenek: 'Deadlock her zaman exception firlatir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}"
     },
     {
       "id": "i7-q5",
@@ -221,25 +225,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Interrupt sinyalini yutmak upstream kodun durdurma niyetini bozar. Catch icinde restore etmek kritik best practicetir.",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Thread.currentThread().interrupt() ile interrupt flagini restore edip uygun sekilde cikmak\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Sinyal kaybolur, shutdown mekanizmasi bozulur."
+          "text": "Yanlis/eksik secenek: 'Yoksayip devam etmek'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. En yaygin ve guvenli yaklasimdir."
+          "text": "Dogru secenek: 'Thread.currentThread().interrupt() ile interrupt flagini restore edip uygun sekilde cikmak'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Deadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Her senaryoda zorunlu degildir."
+          "text": "Yanlis/eksik secenek: 'Her zaman RuntimeException firlatmak'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Sorunu buyutur."
+          "text": "Yanlis/eksik secenek: 'Sonsuz donguye girmek'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "try {\n    while (!Thread.currentThread().isInterrupted()) {\n        Thread.sleep(100);\n    }\n} catch (InterruptedException e) {\n    Thread.currentThread().interrupt();\n} finally {\n    // cleanup\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}"
     },
     {
       "id": "i7-q6",
@@ -268,26 +273,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Iki threadin lock alma sirasini ters kurmasi circular wait uretir. Bu kod deadlock adayi klasik ornektir.",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Kilit alma sirasi ters oldugu icin deadlock olusabilir ve program takilabilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Normal bitis garanti degildir."
+          "text": "Yanlis/eksik secenek: 'Her zaman normal biter'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Deadlock potansiyeli vardir."
+          "text": "Dogru secenek: 'Kilit alma sirasi ters oldugu icin deadlock olusabilir ve program takilabilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Deadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Derleme hatasi degil tasarim hatasidir."
+          "text": "Yanlis/eksik secenek: 'Compile error verir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. volatile lock-order problemini cozmez."
+          "text": "Yanlis/eksik secenek: 'volatile eklenirse kesin cozulur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "Object a = new Object();\nObject b = new Object();\n\nThread t1 = new Thread(() -> {\n    synchronized (a) {\n        try { Thread.sleep(50); } catch (InterruptedException e) {}\n        synchronized (b) { System.out.println(\"t1 done\"); }\n    }\n});\nThread t2 = new Thread(() -> {\n    synchronized (b) {\n        try { Thread.sleep(50); } catch (InterruptedException e) {}\n        synchronized (a) { System.out.println(\"t2 done\"); }\n    }\n});"
+      "questionCode": "Object a = new Object();\nObject b = new Object();\n\nThread t1 = new Thread(() -> {\n    synchronized (a) {\n        try { Thread.sleep(50); } catch (InterruptedException e) {}\n        synchronized (b) { System.out.println(\"t1 done\"); }\n    }\n});\nThread t2 = new Thread(() -> {\n    synchronized (b) {\n        try { Thread.sleep(50); } catch (InterruptedException e) {}\n        synchronized (a) { System.out.println(\"t2 done\"); }\n    }\n});",
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}"
     },
     {
       "id": "i7-q7",
@@ -316,26 +322,27 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "tryLock(timeout), lock alinmazsa geri donup alternatif yol izleme sansi verir. Bu yaklasim bekleme kilitlenmelerini pratikte azaltir.",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Deadlocku teorik olarak azaltip sonsuz beklemeyi kirar\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Kritik fayda budur."
+          "text": "Dogru secenek: 'Deadlocku teorik olarak azaltip sonsuz beklemeyi kirar'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Deadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Her durumda daha hizli olmak zorunda degil."
+          "text": "Yanlis/eksik secenek: 'Her zaman daha hizli yapar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Lock hala vardir, sadece edinim stratejisi farklidir."
+          "text": "Yanlis/eksik secenek: 'Hic lock gerektirmez'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Daemon ile ilgisi yok."
+          "text": "Yanlis/eksik secenek: 'Threadi daemon yapar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.locks.ReentrantLock lock = new java.util.concurrent.locks.ReentrantLock();\nif (lock.tryLock(100, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n    try {\n        System.out.println(\"work\");\n    } finally {\n        lock.unlock();\n    }\n} else {\n    System.out.println(\"fallback\");\n}"
+      "questionCode": "java.util.concurrent.locks.ReentrantLock lock = new java.util.concurrent.locks.ReentrantLock();\nif (lock.tryLock(100, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n    try {\n        System.out.println(\"work\");\n    } finally {\n        lock.unlock();\n    }\n} else {\n    System.out.println(\"fallback\");\n}",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}"
     },
     {
       "id": "i7-q8",
@@ -364,26 +371,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Bircok blocking API InterruptedException firlatirken interrupted flagi temizler. Bu yuzden catch icinde tekrar interrupt etmek gerekir.",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Cogu durumda false, cunku exception atilirken interrupt statusu temizlenir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Otomatik true kalmaz."
+          "text": "Yanlis/eksik secenek: 'Her zaman true'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Flag temizlenebildigi icin restore gerekir."
+          "text": "Dogru secenek: 'Cogu durumda false, cunku exception atilirken interrupt statusu temizlenir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Deadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. boolean ifade null olmaz."
+          "text": "Yanlis/eksik secenek: 'Her zaman null'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod derlenir."
+          "text": "Yanlis/eksik secenek: 'Derleme hatasi'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "Thread t = new Thread(() -> {\n    try {\n        Thread.sleep(1000);\n    } catch (InterruptedException e) {\n        System.out.println(Thread.currentThread().isInterrupted());\n    }\n});\nt.start();\nt.interrupt();\nt.join();"
+      "questionCode": "Thread t = new Thread(() -> {\n    try {\n        Thread.sleep(1000);\n    } catch (InterruptedException e) {\n        System.out.println(Thread.currentThread().isInterrupted());\n    }\n});\nt.start();\nt.interrupt();\nt.join();",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}"
     },
     {
       "id": "i7-q9",
@@ -412,34 +420,35 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Daemon threadler JVM icin yardimci threadlerdir. User thread kalmadiginda daemonlarin bitmesi beklenmeden JVM sonlanabilir.",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Tum user threadler bittiginde JVM kapanabilir ve daemonlar yarida kesilebilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Tam tersi: user thread yoksa JVM kapanir."
+          "text": "Yanlis/eksik secenek: 'Main biterse sadece daemon threadler ayakta kalip JVM yasamaya devam eder'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Daemonlar grace garantisi olmadan kesilebilir."
+          "text": "Dogru secenek: 'Tum user threadler bittiginde JVM kapanabilir ve daemonlar yarida kesilebilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Deadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. JVM kapanisiyla sonlanabilirler."
+          "text": "Yanlis/eksik secenek: 'Daemon threadler asla sonlanmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Farkli amaclarla da kullanilabilir."
+          "text": "Yanlis/eksik secenek: 'Daemon sadece GC threadi icindir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: InterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "Thread d = new Thread(() -> {\n    while (true) {}\n});\nd.setDaemon(true);\nd.start();\nSystem.out.println(\"main done\");"
+      "questionCode": "Thread d = new Thread(() -> {\n    while (true) {}\n});\nd.setDaemon(true);\nd.start();\nSystem.out.println(\"main done\");",
+      "answerCode": "try {\n    while (!Thread.currentThread().isInterrupted()) {\n        Thread.sleep(100);\n    }\n} catch (InterruptedException e) {\n    Thread.currentThread().interrupt();\n} finally {\n    // cleanup\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}"
     },
     {
       "id": "i7-q10",
       "type": "code",
       "question": "Interrupt ile durdurulabilen bir worker yaz. Kaynak aciksa finallyde kapatsin.",
       "starterCode": "class InterruptibleWorker implements Runnable {\n    @Override\n    public void run() {\n        // TODO\n    }\n}",
-      "answerBody": "Kaliteli cozumde dongu kosulu interrupt statusunu kontrol eder, blocking call catchinde status restore edilir ve finallyde cleanup yapilir.",
-      "answerCode": "class InterruptibleWorker implements Runnable {\n    @Override\n    public void run() {\n        try {\n            while (!Thread.currentThread().isInterrupted()) {\n                // unit of work\n                Thread.sleep(100);\n            }\n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n        } finally {\n            // cleanup: close files/sockets/db resources\n            System.out.println(\"cleanup done\");\n        }\n    }\n}",
+      "answerBody": "Sorunun odagi: Liveness problemleri ve interrupt\n\nNeden bu cevap dogru?\nBu bir kod yazma sorusu. Beklenen sadece calisan kod degil; thread-safety, temiz kapanis, hata/iptal davranisi ve test edilebilirliktir.\n\nKonu anlatimi (sifirdan):\nDeadlockta ilerleme kilitlenir, starvationda bir thread surekli kaynak disinda kalir, livelockta threadler aktif ama is ilerlemez. Interrupt zorla oldurme degil isbirlikci iptal sinyalidir.\n\nPratikte nasil uygularsin?\nGlobal lock ordering, tryLock+timeout, interrupt flag restore ve temiz kapanis deseni liveness problemlerinde temel yaklasimdir.\n\nSik yapilan hata:\nInterruptedException yutmak veya lock sirasini kontrolsuz birakmak productionda tespiti zor bekleme buglari olusturur.\n\nKod yazma kalitesi kontrol listesi:\n1) interrupt dostu durdurma var mi?\n2) lock/kaynak finallyde birakiliyor mu?\n3) timeout/retry politikasi net mi?\n4) tekrarli concurrent test ile dogrulama dusunuldu mu?\n\nEk mini kod ornegi:\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
+      "answerCode": "class InterruptibleWorker implements Runnable {\n    @Override\n    public void run() {\n        try {\n            while (!Thread.currentThread().isInterrupted()) {\n                // unit of work\n                Thread.sleep(100);\n            }\n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n        } finally {\n            // cleanup: close files/sockets/db resources\n            System.out.println(\"cleanup done\");\n        }\n    }\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nwhile (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]

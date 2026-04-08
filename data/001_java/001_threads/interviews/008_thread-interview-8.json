@@ -33,25 +33,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "ConcurrentHashMap null key/value kabul etmez. Bu tasarim ambiguityyi azaltir ve concurrency semantigini netlestirir.",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: null key/value desteklemez\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Null key/value desteklemez."
+          "text": "Yanlis/eksik secenek: 'null key ve null value destekler'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Java dokumantasyonuna uygun davranis budur."
+          "text": "Dogru secenek: 'null key/value desteklemez'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Thread-safe yapilarin temel ornegidir."
+          "text": "Yanlis/eksik secenek: 'Thread-safe degildir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Cok threadli kullanim icin vardir."
+          "text": "Yanlis/eksik secenek: 'Sadece tek threadde calisir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ConcurrentHashMap<String, Integer> counts =\n    new java.util.concurrent.ConcurrentHashMap<>();\ncounts.merge(\"java\", 1, Integer::sum);\ncounts.computeIfAbsent(\"threads\", k -> 0);\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
     },
     {
       "id": "i8-q2",
@@ -80,25 +81,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "CopyOnWrite her write adiminda kopya maliyeti yaratir. Okuma cok, yazma az ise snapshot iterasyon avantaj saglar.",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Read agirlikli ve iterasyon yogun senaryolarda\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Write maliyeti yuksek oldugu icin uygun degil."
+          "text": "Yanlis/eksik secenek: 'Write agirlikli senaryolarda'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Read-heavy workload icin idealdir."
+          "text": "Dogru secenek: 'Read agirlikli ve iterasyon yogun senaryolarda'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Immutable liste ile ayni kavram degil."
+          "text": "Yanlis/eksik secenek: 'Sadece immutable liste lazimsa'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Dogru senaryoda oldukca kullanislidir."
+          "text": "Yanlis/eksik secenek: 'Hicbir durumda'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ConcurrentHashMap<String, Integer> counts =\n    new java.util.concurrent.ConcurrentHashMap<>();\ncounts.merge(\"java\", 1, Integer::sum);\ncounts.computeIfAbsent(\"threads\", k -> 0);\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
     },
     {
       "id": "i8-q3",
@@ -113,7 +115,7 @@
         },
         {
           "id": "B",
-          "text": "Iterasyon s\u0131ras\u0131nda disardan synchronized(list) ile lock alinmali"
+          "text": "Iterasyon sırasında disardan synchronized(list) ile lock alinmali"
         },
         {
           "id": "C",
@@ -127,25 +129,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Wrapper yalnizca tek tek metotlari senkronize eder. Iterasyon gibi bile\u015fik i\u015flemlerde client-side lock gerekir.",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Iterasyon sırasında disardan synchronized(list) ile lock alinmali\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Bilesik islemde ek lock gerekir."
+          "text": "Yanlis/eksik secenek: 'Ek locka gerek yok'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Dokumantasyonda da bu sekilde onerilir."
+          "text": "Dogru secenek: 'Iterasyon sırasında disardan synchronized(list) ile lock alinmali'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. volatile koleksiyon iterasyonunu korumaz."
+          "text": "Yanlis/eksik secenek: 'Sadece volatile yeterli'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Desteklenir ama dogru kilitleme gerekir."
+          "text": "Yanlis/eksik secenek: 'Iterasyon asla desteklenmez'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
     },
     {
       "id": "i8-q4",
@@ -174,25 +177,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "Immutable nesnelerde state degisimi olmadigindan race condition alani daralir. Bu da lock karmasini azaltir.",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Cunku nesne state degismedigi icin lock ihtiyaci azalir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Shared mutable state azalinca risk azalir."
+          "text": "Dogru secenek: 'Cunku nesne state degismedigi icin lock ihtiyaci azalir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Derleme hizi ile alakali degildir."
+          "text": "Yanlis/eksik secenek: 'Cunku nesneyi daha hizli derler'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Deadlock lock tasarimiyla ilgilidir."
+          "text": "Yanlis/eksik secenek: 'Cunku deadlocku tek basina tamamen yok eder'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. GC davranisiyla ilgisiz."
+          "text": "Yanlis/eksik secenek: 'Cunku GCyi kapatir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
     },
     {
       "id": "i8-q5",
@@ -221,25 +225,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "BlockingQueue put/take ile backpressure ve bekleme semantigini hazir sunar. Elle wait/notify yazma ihtiyacini buyuk olcude azaltir.",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Producer-consumer koordinasyonunu lock/free ve bekleme semantiklerini kapsayacak sekilde kolaylastirir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Producer-consumer icin cok uygun abstractiondir."
+          "text": "Dogru secenek: 'Producer-consumer koordinasyonunu lock/free ve bekleme semantiklerini kapsayacak sekilde kolaylastirir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Thread-safe olarak tasarlanmistir."
+          "text": "Yanlis/eksik secenek: 'Thread-safe degildir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Hem write hem read operasyonlari vardir."
+          "text": "Yanlis/eksik secenek: 'Sadece read icin vardir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kendi thread-safe semantigi vardir."
+          "text": "Yanlis/eksik secenek: 'Mutlaka synchronized dis lock ister'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
     },
     {
       "id": "i8-q6",
@@ -268,26 +273,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "CopyOnWrite iterasyon snapshot uzerinden gider. Iterasyon sirasinda eklenen eleman ayni turda gorulmez ama listede kalir.",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Iterasyonda snapshot nedeniyle 1 2 gorulur; final listede 3 vardir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Snapshot iterasyon nedeniyle 3 gorulmez."
+          "text": "Yanlis/eksik secenek: 'Iterasyonda 1 2 3 gorulur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Snapshot + final liste guncellemesi birlikte budur."
+          "text": "Dogru secenek: 'Iterasyonda snapshot nedeniyle 1 2 gorulur; final listede 3 vardir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Bu tipin avantajlarindan biri CME riskini azaltmasidir."
+          "text": "Yanlis/eksik secenek: 'ConcurrentModificationException kesin olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod gecerli."
+          "text": "Yanlis/eksik secenek: 'Kod compile olmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.CopyOnWriteArrayList<Integer> list = new java.util.concurrent.CopyOnWriteArrayList<>(java.util.List.of(1, 2));\nfor (Integer v : list) {\n    if (v == 1) {\n        list.add(3);\n    }\n    System.out.print(v + \" \");\n}\nSystem.out.println(\"| size=\" + list.size());"
+      "questionCode": "java.util.concurrent.CopyOnWriteArrayList<Integer> list = new java.util.concurrent.CopyOnWriteArrayList<>(java.util.List.of(1, 2));\nfor (Integer v : list) {\n    if (v == 1) {\n        list.add(3);\n    }\n    System.out.print(v + \" \");\n}\nSystem.out.println(\"| size=\" + list.size());",
+      "answerCode": "java.util.concurrent.ConcurrentHashMap<String, Integer> counts =\n    new java.util.concurrent.ConcurrentHashMap<>();\ncounts.merge(\"java\", 1, Integer::sum);\ncounts.computeIfAbsent(\"threads\", k -> 0);\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
     },
     {
       "id": "i8-q7",
@@ -316,26 +322,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "ConcurrentHashMap.computeIfAbsent, key yoksa deger hesaplamayi atomik akista yapmaya yardim eder. Yarisa dayanikli bir APIdir.",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Thread-safe mapte anahtar yoksa atomik sekilde deger hesaplayip yazar\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. API amaci atomik/guvenli hesaplamadir."
+          "text": "Yanlis/eksik secenek: 'Ayni key icin mapping function birden cok kez deger yazabilir, tutarlilik garanti degildir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Bu methodun temel kullanim nedenidir."
+          "text": "Dogru secenek: 'Thread-safe mapte anahtar yoksa atomik sekilde deger hesaplayip yazar'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Hesaplanan degeri dondurur."
+          "text": "Yanlis/eksik secenek: 'Her zaman null dondurur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. ConcurrentHashMap APIsidir."
+          "text": "Yanlis/eksik secenek: 'Sadece synchronizedMapte vardir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.ConcurrentHashMap<String, Integer> map = new java.util.concurrent.ConcurrentHashMap<>();\nInteger v = map.computeIfAbsent(\"java\", k -> 1);\nSystem.out.println(v + \" / \" + map.get(\"java\"));"
+      "questionCode": "java.util.concurrent.ConcurrentHashMap<String, Integer> map = new java.util.concurrent.ConcurrentHashMap<>();\nInteger v = map.computeIfAbsent(\"java\", k -> 1);\nSystem.out.println(v + \" / \" + map.get(\"java\"));",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
     },
     {
       "id": "i8-q8",
@@ -364,26 +371,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "HashMap thread-safe degildir. Eszamanli write islemleri veri tutarsizligi ve beklenmeyen davranislara yol acabilir.",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Davranis tanimsiz hale gelebilir; veri kaybi/tutarsizlik riski vardir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. HashMap thread-safe degildir."
+          "text": "Yanlis/eksik secenek: 'Tam thread-safe oldugu icin her zaman tutarli sonuc verir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Eszamanli write risklidir."
+          "text": "Dogru secenek: 'Davranis tanimsiz hale gelebilir; veri kaybi/tutarsizlik riski vardir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. JVM otomatik lock eklemez."
+          "text": "Yanlis/eksik secenek: 'Runtime otomatik lock ekler'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Asil risk write tarafindadir."
+          "text": "Yanlis/eksik secenek: 'Sadece read operasyonunda bozulur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.HashMap<Integer, Integer> map = new java.util.HashMap<>();\n// iki thread ayni anda put yapiyor varsay\n// Sonuc deterministic garanti edilmez."
+      "questionCode": "java.util.HashMap<Integer, Integer> map = new java.util.HashMap<>();\n// iki thread ayni anda put yapiyor varsay\n// Sonuc deterministic garanti edilmez.",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
     },
     {
       "id": "i8-q9",
@@ -412,34 +420,35 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "unmodifiableList sadece wrapperdir; alttaki liste degisirse wrapper da yeni durumu gorur. Gercek immutability saglamaz.",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: 2\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Alttaki listeye eklenen eleman gorulur."
+          "text": "Yanlis/eksik secenek: '1'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. size 2 olur."
+          "text": "Dogru secenek: '2'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Exception wrapper uzerinden mutasyonda olur."
+          "text": "Yanlis/eksik secenek: 'UnsupportedOperationException'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Null donmez."
+          "text": "Yanlis/eksik secenek: 'null'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Plain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.List<Integer> base = new java.util.ArrayList<>(java.util.List.of(1));\njava.util.List<Integer> ro = java.util.Collections.unmodifiableList(base);\nbase.add(2);\nSystem.out.println(ro.size());"
+      "questionCode": "java.util.List<Integer> base = new java.util.ArrayList<>(java.util.List.of(1));\njava.util.List<Integer> ro = java.util.Collections.unmodifiableList(base);\nbase.add(2);\nSystem.out.println(ro.size());",
+      "answerCode": "class ConcurrencyChecklist {\n    // 1) Shared mutable state var mi?\n    // 2) Atomicity gerekli mi?\n    // 3) Visibility nasil saglanacak?\n    // 4) Lock scope minimum mu?\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
     },
     {
       "id": "i8-q10",
       "type": "code",
       "question": "Immutable bir AppConfig sinifi yaz. Tum alanlar final olsun, disariya mutable referans kacmasin.",
       "starterCode": "class AppConfig {\n    // TODO\n}",
-      "answerBody": "Immutable tasarimda final alanlar, defensive copy ve setter olmamasi temel prensiplerdir. Ozellikle config objeleri icin cok degerlidir.",
-      "answerCode": "final class AppConfig {\n    private final String env;\n    private final java.util.List<String> servers;\n\n    AppConfig(String env, java.util.List<String> servers) {\n        this.env = env;\n        this.servers = java.util.List.copyOf(servers);\n    }\n\n    String getEnv() {\n        return env;\n    }\n\n    java.util.List<String> getServers() {\n        return servers; // already unmodifiable snapshot\n    }\n}",
+      "answerBody": "Sorunun odagi: Concurrent collections ve immutable tasarim\n\nNeden bu cevap dogru?\nBu bir kod yazma sorusu. Beklenen sadece calisan kod degil; thread-safety, temiz kapanis, hata/iptal davranisi ve test edilebilirliktir.\n\nKonu anlatimi (sifirdan):\nConcurrentHashMap paylasilan key-value veride guclu secenektir. CopyOnWriteArrayList read-agir yukte avantajli olabilir. Immutable nesneler paylasimi guvenli hale getirir.\n\nPratikte nasil uygularsin?\nCollection secimini read/write dagilimina gore yap. Mutable referanslarin disariya sizmasini engelle.\n\nSik yapilan hata:\nPlain HashMapi concurrent write altinda kullanmak veya synchronizedList iterasyonunda dis lock almamak veri tutarsizligi yaratir.\n\nKod yazma kalitesi kontrol listesi:\n1) interrupt dostu durdurma var mi?\n2) lock/kaynak finallyde birakiliyor mu?\n3) timeout/retry politikasi net mi?\n4) tekrarli concurrent test ile dogrulama dusunuldu mu?\n\nEk mini kod ornegi:\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
+      "answerCode": "final class AppConfig {\n    private final String env;\n    private final java.util.List<String> servers;\n\n    AppConfig(String env, java.util.List<String> servers) {\n        this.env = env;\n        this.servers = java.util.List.copyOf(servers);\n    }\n\n    String getEnv() {\n        return env;\n    }\n\n    java.util.List<String> getServers() {\n        return servers; // already unmodifiable snapshot\n    }\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]

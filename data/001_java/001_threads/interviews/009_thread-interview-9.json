@@ -33,25 +33,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "Java Memory Modelde monitor release/acquire gorunurluk semantigi uretir. Bu nedenle synchronized sadece mutual exclusion degil visibility de saglar.",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Happens-before iliskisi olusur ve onceki yazilar gorunur hale gelir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Happens-before etkisi vardir."
+          "text": "Dogru secenek: 'Happens-before iliskisi olusur ve onceki yazilar gorunur hale gelir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Happens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. JMM bu iliskiyi tanimlar."
+          "text": "Yanlis/eksik secenek: 'Hicbir iliski yok'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Referans tiplerinde de gecerlidir."
+          "text": "Yanlis/eksik secenek: 'Sadece primitive tiplerde gecerli'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Instance monitorlerde de gecerlidir."
+          "text": "Yanlis/eksik secenek: 'Sadece static metodda gecerli'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}"
     },
     {
       "id": "i9-q2",
@@ -80,25 +81,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "volatile, gorunurluk ve kismi ordering bariyerleri saglar. Ancak compound atomiklik icin yeterli degildir.",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Write, sonraki volatile readlere gorunur ve belirli reorder engelleri getirir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. volatilein asil semantigi budur."
+          "text": "Dogru secenek: 'Write, sonraki volatile readlere gorunur ve belirli reorder engelleri getirir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Happens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Semantik davranis degisimi vardir."
+          "text": "Yanlis/eksik secenek: 'Sadece cache hit oranini degistirir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. ++ atomik olmaz."
+          "text": "Yanlis/eksik secenek: 'Atomic ++ garantiler'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Scheduler politikasi degismez."
+          "text": "Yanlis/eksik secenek: 'Thread scheduleri degistirir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}"
     },
     {
       "id": "i9-q3",
@@ -127,25 +129,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "JMM final alanlara ozel gorunurluk guvenceleri tanir. Ancak this referansinin constructor icinde kacirilmamasi gerekir.",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Constructor tamamlandiktan sonra dogru publish edilen final alanlar diger threadlerde tutarli gorulur\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Safe publicationla birlikte tutarlilik artar."
+          "text": "Dogru secenek: 'Constructor tamamlandiktan sonra dogru publish edilen final alanlar diger threadlerde tutarli gorulur'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Happens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. final mutasyona kapatir."
+          "text": "Yanlis/eksik secenek: 'final alanlar her zaman mutabledir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Runtime memory model etkisi de vardir."
+          "text": "Yanlis/eksik secenek: 'final sadece compile-time keywordudur, runtime etkisi yoktur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Deadlockla dogrudan ilgisi yoktur."
+          "text": "Yanlis/eksik secenek: 'final deadlocku engeller'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}"
     },
     {
       "id": "i9-q4",
@@ -174,25 +177,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "DCLde volatile olmadan yari-olusturulmus nesne gorunebilir. volatile reorder ve visibility riskini azaltir.",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: volatile olmali\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. DCLde klasik hata budur."
+          "text": "Yanlis/eksik secenek: 'normal field yeterli'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. DCL icin kritik gereksinimdir."
+          "text": "Dogru secenek: 'volatile olmali'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Happens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. transient serialization ile ilgilidir."
+          "text": "Yanlis/eksik secenek: 'transient olmali'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Bu baska bir singleton stratejisidir."
+          "text": "Yanlis/eksik secenek: 'static final olmali zorunlu'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}"
     },
     {
       "id": "i9-q5",
@@ -221,25 +225,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Reorder optimizasyon amacli dogal bir davranistir. Concurrency kontrolu olmadiginda beklenmeyen gozlemler olusabilir.",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Tek thread semantigini bozmadan JVM/CPU belirli reorder yapabilir; concurrencyde gorunurluk sorunu dogurabilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Reorder gercek bir olgudur."
+          "text": "Yanlis/eksik secenek: 'Asla olmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. JMM bu dengeyi tanimlar."
+          "text": "Dogru secenek: 'Tek thread semantigini bozmadan JVM/CPU belirli reorder yapabilir; concurrencyde gorunurluk sorunu dogurabilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Happens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. JVM ve CPU seviyesinde de vardir."
+          "text": "Yanlis/eksik secenek: 'Sadece C dilinde olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Debug ile sinirli degildir."
+          "text": "Yanlis/eksik secenek: 'Sadece debug modda olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}"
     },
     {
       "id": "i9-q6",
@@ -268,26 +273,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Visibility garanti edilmediginde worker thread stale deger okuyabilir. Bu da dongunun beklenenden uzun/sonsuz surmesine neden olabilir.",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: stop volatile degilse loop bazi calismalarda sonlanmayabilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Sonlanma garanti degildir."
+          "text": "Yanlis/eksik secenek: 'loop her zaman sonlanir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Volatile/sync olmadan gorunurluk riski vardir."
+          "text": "Dogru secenek: 'stop volatile degilse loop bazi calismalarda sonlanmayabilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Happens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Kod derlenir."
+          "text": "Yanlis/eksik secenek: 'Derleme hatasi vardir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Paylasilan alan heapte tutulur."
+          "text": "Yanlis/eksik secenek: 'Stop degeri stackte oldugu icin garanti sonlanir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "class Flag {\n    boolean stop = false;\n}\nFlag f = new Flag();\nThread t = new Thread(() -> {\n    while (!f.stop) {\n        // busy loop\n    }\n    System.out.println(\"stopped\");\n});\nt.start();\nThread.sleep(100);\nf.stop = true;"
+      "questionCode": "class Flag {\n    boolean stop = false;\n}\nFlag f = new Flag();\nThread t = new Thread(() -> {\n    while (!f.stop) {\n        // busy loop\n    }\n    System.out.println(\"stopped\");\n});\nt.start();\nThread.sleep(100);\nf.stop = true;",
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}"
     },
     {
       "id": "i9-q7",
@@ -316,26 +322,27 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "volatile write/read gorunurlugu saglayarak stop sinyalinin worker tarafinda gorulmesini kolaylastirir.",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: stop degisimi gorulebilir ve looptan cikis beklenir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Bu senaryoda volatile amacina uygundur."
+          "text": "Dogru secenek: 'stop degisimi gorulebilir ve looptan cikis beklenir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Happens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Tam olarak gorunurluk farki yaratir."
+          "text": "Yanlis/eksik secenek: 'volatile hic fark yaratmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Kod gecerlidir."
+          "text": "Yanlis/eksik secenek: 'Kod compile olmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Termination yine kod akisina baglidir."
+          "text": "Yanlis/eksik secenek: 'Thread otomatik terminate edilir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "class Flag {\n    volatile boolean stop = false;\n}\nFlag f = new Flag();\nThread t = new Thread(() -> {\n    while (!f.stop) {}\n    System.out.println(\"stopped\");\n});\nt.start();\nThread.sleep(100);\nf.stop = true;"
+      "questionCode": "class Flag {\n    volatile boolean stop = false;\n}\nFlag f = new Flag();\nThread t = new Thread(() -> {\n    while (!f.stop) {}\n    System.out.println(\"stopped\");\n});\nt.start();\nThread.sleep(100);\nf.stop = true;",
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}"
     },
     {
       "id": "i9-q8",
@@ -364,26 +371,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "DCLde constructor tamamlanmadan referans assign gorulebilirse diger thread yari olusmus nesne gorebilir. Bu dogruluk hatasidir.",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Partially constructed object gozlenebilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Bilinen klasik risktir."
+          "text": "Yanlis/eksik secenek: 'Hic risk yoktur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Asil risk budur."
+          "text": "Dogru secenek: 'Partially constructed object gozlenebilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Happens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Sadece performans degil correctness bozulur."
+          "text": "Yanlis/eksik secenek: 'Sadece performans riski vardir, dogruluk riski yoktur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Runtime davranis problemidir."
+          "text": "Yanlis/eksik secenek: 'Sadece compile-time warning olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "class Singleton {\n    private static Singleton instance; // volatile degil\n    private Singleton() {}\n    static Singleton get() {\n        if (instance == null) {\n            synchronized (Singleton.class) {\n                if (instance == null) {\n                    instance = new Singleton();\n                }\n            }\n        }\n        return instance;\n    }\n}"
+      "questionCode": "class Singleton {\n    private static Singleton instance; // volatile degil\n    private Singleton() {}\n    static Singleton get() {\n        if (instance == null) {\n            synchronized (Singleton.class) {\n                if (instance == null) {\n                    instance = new Singleton();\n                }\n            }\n        }\n        return instance;\n    }\n}",
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}"
     },
     {
       "id": "i9-q9",
@@ -412,34 +420,35 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Synchronized, monitor bazli mutual exclusion ve happens-before semantigi saglar. Bu iki etki birlikte correctness icin onemlidir.",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Hem race riskini azaltir hem write-read gorunurluk iliskisi kurar\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Asil amac dogruluk ve tutarliliktir."
+          "text": "Yanlis/eksik secenek: 'Sadece hiz artirir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Hem exclusion hem visibility etkisi vardir."
+          "text": "Dogru secenek: 'Hem race riskini azaltir hem write-read gorunurluk iliskisi kurar'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Happens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Volatile ayri bir ara\u00e7tir."
+          "text": "Yanlis/eksik secenek: 'Volatileyi kaldirir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Tum optimizasyonlari kapatmaz."
+          "text": "Yanlis/eksik secenek: 'JVM optimizasyonlarini kapatir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Volatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "class Counter {\n    private int value = 0;\n    synchronized void inc() { value++; }\n    synchronized int get() { return value; }\n}"
+      "questionCode": "class Counter {\n    private int value = 0;\n    synchronized void inc() { value++; }\n    synchronized int get() { return value; }\n}",
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}"
     },
     {
       "id": "i9-q10",
       "type": "code",
       "question": "Thread-safe lazy singletoni Initialization-on-demand holder idiomi ile yaz.",
       "starterCode": "class HolderSingleton {\n    // TODO\n}",
-      "answerBody": "Holder idiomi, class loading semantigini kullanarak hem lazy hem thread-safe singleton saglar. Ek lock maliyeti gerektirmez.",
-      "answerCode": "class HolderSingleton {\n    private HolderSingleton() {}\n\n    private static class Holder {\n        private static final HolderSingleton INSTANCE = new HolderSingleton();\n    }\n\n    static HolderSingleton getInstance() {\n        return Holder.INSTANCE;\n    }\n}",
+      "answerBody": "Sorunun odagi: Java memory model ve publication\n\nNeden bu cevap dogru?\nBu bir kod yazma sorusu. Beklenen sadece calisan kod degil; thread-safety, temiz kapanis, hata/iptal davranisi ve test edilebilirliktir.\n\nKonu anlatimi (sifirdan):\nHappens-before kurallari gorunurluk ve siralama garantisini tanimlar. synchronized unlock->lock ve volatile write->read publication garantilerinde kritik role sahiptir.\n\nPratikte nasil uygularsin?\nSafe publication icin final alanlar, dogru init kaliplari ve gerekiyorsa volatile birlikte dusunulmelidir.\n\nSik yapilan hata:\nVolatile olmadan DCL yazmak veya reordering riskini yok saymak yarim-initialize obje gorulmesine yol acabilir.\n\nKod yazma kalitesi kontrol listesi:\n1) interrupt dostu durdurma var mi?\n2) lock/kaynak finallyde birakiliyor mu?\n3) timeout/retry politikasi net mi?\n4) tekrarli concurrent test ile dogrulama dusunuldu mu?\n\nEk mini kod ornegi:\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
+      "answerCode": "class HolderSingleton {\n    private HolderSingleton() {}\n\n    private static class Holder {\n        private static final HolderSingleton INSTANCE = new HolderSingleton();\n    }\n\n    static HolderSingleton getInstance() {\n        return Holder.INSTANCE;\n    }\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Singleton {\n    private Singleton() {}\n    private static class Holder { static final Singleton INSTANCE = new Singleton(); }\n    static Singleton getInstance() { return Holder.INSTANCE; }\n}",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]

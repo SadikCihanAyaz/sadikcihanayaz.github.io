@@ -33,25 +33,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "synchronized monitor lock ile kritik bolgeye tek thread girisini saglar ve lock acquire/release ile visibility/happens-before etkisi verir.",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Mutual exclusion ve memory visibility birlikte saglar.\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. synchronized visibility de saglar."
+          "text": "Yanlis/eksik secenek: 'Sadece atomiklik saglar, gorunurluk saglamaz.'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Hem mutual exclusion hem gorunurluk etkisi vardir."
+          "text": "Dogru secenek: 'Mutual exclusion ve memory visibility birlikte saglar.'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: synchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Read ve write islemleri kritik bolgede korunur."
+          "text": "Yanlis/eksik secenek: 'Sadece read islemlerini kilitler.'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Instance metod ve blocklarda da calisir."
+          "text": "Yanlis/eksik secenek: 'Sadece static metodlarda calisir.'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}"
     },
     {
       "id": "i2-q2",
@@ -80,25 +81,26 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "volatile degiskenin en guncel degerinin gorulmesini hedefler. Ancak read-modify-write desenlerinde tek basina yeterli degildir.",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nDogru secenek(ler): C: Threadler arasi gorunurluk saglar ama compound islemleri atomik yapmaz.\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. value++ hala birden fazla adimdir."
+          "text": "Yanlis/eksik secenek: 'value++ islemini atomik yapar.'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Amaci hiz degil, tutarlilik semantigidir."
+          "text": "Yanlis/eksik secenek: 'Sadece write islemlerini hizlandirir.'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Dogru. visibility vardir, atomiklik yoktur."
+          "text": "Dogru secenek: 'Threadler arasi gorunurluk saglar ama compound islemleri atomik yapmaz.'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: synchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Deadlock lock tasarimiyla ilgilidir."
+          "text": "Yanlis/eksik secenek: 'Deadlocku engeller.'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}"
     },
     {
       "id": "i2-q3",
@@ -127,25 +129,26 @@
       "correctChoiceIds": [
         "D"
       ],
-      "answerBody": "static synchronized metodlar instance degil class seviyesinde kilitlenir. Bu nedenle tum instance lar icin ortak lock noktasi olusur.",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nDogru secenek(ler): D: Class object locku (ClassName.class)\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Stack lock kavrami yoktur."
+          "text": "Yanlis/eksik secenek: 'Her thread kendi stack lockunu'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Method local lock otomatik bir lock modeli degildir."
+          "text": "Yanlis/eksik secenek: 'Method local locku'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. this locku instance synchronized icindir."
+          "text": "Yanlis/eksik secenek: 'Nesne locku (this)'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Dogru. Class monitor lock kullanilir."
+          "text": "Dogru secenek: 'Class object locku (ClassName.class)'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: synchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}"
     },
     {
       "id": "i2-q4",
@@ -174,25 +177,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "ReentrantLock ile tryLock, lockInterruptibly, fairness gibi kontrol noktalarina sahip olursun. synchronized daha sade ama daha az esnektir.",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: tryLock/timeout/fairness gibi ileri kontrol gerektiginde\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Bu ozellikler ReentrantLocku one cikarir."
+          "text": "Dogru secenek: 'tryLock/timeout/fairness gibi ileri kontrol gerektiginde'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: synchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Veri tipiyle degil kilit politikasi ihtiyaci ile ilgilidir."
+          "text": "Yanlis/eksik secenek: 'Sadece primitive alanlari korurken'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Bir cok production senaryosunda faydalidir."
+          "text": "Yanlis/eksik secenek: 'Hicbir durumda uygun degildir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Tek threadde lock ihtiyaci zaten dusuktur."
+          "text": "Yanlis/eksik secenek: 'Sadece tek thread varken'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}"
     },
     {
       "id": "i2-q5",
@@ -221,25 +225,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Fair policy bekleyen threadlere daha adil sira verir fakat strict fairness scheduler maliyeti olusturabilir. Bu nedenle throughput bazen duser.",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Starvation riskini azaltir ama throughput dusurebilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Fair lock cogu zaman biraz daha maliyetlidir."
+          "text": "Yanlis/eksik secenek: 'Her zaman daha hizlidir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Adalet artar, ham hiz bazen azalir."
+          "text": "Dogru secenek: 'Starvation riskini azaltir ama throughput dusurebilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: synchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Deadlock lock order problemidir."
+          "text": "Yanlis/eksik secenek: 'Deadlocku tamamen bitirir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Visibility semantigi lock mekanizmasinda devam eder."
+          "text": "Yanlis/eksik secenek: 'Visibility garantisini kaldirir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}"
     },
     {
       "id": "i2-q6",
@@ -268,26 +273,27 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "volatile gorunurluk saglar ama ++ atomik degildir. Iki thread ayni anda okuma/yazma yaparsa update kaybi olur.",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nDogru secenek(ler): C: 2000 garanti degil; race condition nedeniyle daha dusuk cikabilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Atomicity olmadigi icin 2000 garanti edilemez."
+          "text": "Yanlis/eksik secenek: 'Kesinlikle 2000'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Artislar olur, 0 beklenmez."
+          "text": "Yanlis/eksik secenek: 'Kesinlikle 0'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Dogru. Kayip update olasiligi vardir."
+          "text": "Dogru secenek: '2000 garanti degil; race condition nedeniyle daha dusuk cikabilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: synchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod derlenir ama mantik riski vardir."
+          "text": "Yanlis/eksik secenek: 'Program derlenmez'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "class C {\n    volatile int value = 0;\n    void inc() { value++; }\n}\n\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.value);"
+      "questionCode": "class C {\n    volatile int value = 0;\n    void inc() { value++; }\n}\n\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.value);",
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}"
     },
     {
       "id": "i2-q7",
@@ -316,26 +322,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Iki synchronized metod ayni nesne lockunu paylastigi icin biri calisirken digeri bekler. Bu nedenle m1 tamamlanmadan m2ye girilemez.",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: A-B bitmeden C baslayamaz\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Ayni monitor locku nedeniyle paralellik engellenir."
+          "text": "Yanlis/eksik secenek: 'A ve C kesin paralel gider'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Lock serbest kalmadan ikinci synchronized metoda giris olmaz."
+          "text": "Dogru secenek: 'A-B bitmeden C baslayamaz'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: synchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Zorunlu eszamanlilik yok."
+          "text": "Yanlis/eksik secenek: 'C her zaman A ile ayni anda baslar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. synchronized bu kodun davranisini dogrudan belirler."
+          "text": "Yanlis/eksik secenek: 'synchronized etkisizdir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "class S {\n    synchronized void m1() {\n        System.out.print(\"A\");\n        try { Thread.sleep(100); } catch (InterruptedException e) {}\n        System.out.print(\"B\");\n    }\n    synchronized void m2() { System.out.print(\"C\"); }\n}\nS s = new S();\nThread t1 = new Thread(s::m1);\nThread t2 = new Thread(s::m2);\nt1.start();\nThread.sleep(10);\nt2.start();\nt1.join(); t2.join();"
+      "questionCode": "class S {\n    synchronized void m1() {\n        System.out.print(\"A\");\n        try { Thread.sleep(100); } catch (InterruptedException e) {}\n        System.out.print(\"B\");\n    }\n    synchronized void m2() { System.out.print(\"C\"); }\n}\nS s = new S();\nThread t1 = new Thread(s::m1);\nThread t2 = new Thread(s::m2);\nt1.start();\nThread.sleep(10);\nt2.start();\nt1.join(); t2.join();",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}"
     },
     {
       "id": "i2-q8",
@@ -364,26 +371,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "synchronized(lockA) ve synchronized(lockB) farkli monitorlerdir. Bu nedenle lock contention olmaz ve metodlar paralel calisabilir.",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Metodlar birbirini bloklamaz; paralel calisabilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Lock objeleri farkliysa monitorler de farklidir."
+          "text": "Yanlis/eksik secenek: 'Metodlar yine de ayni locku paylasir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Ayrik lock tasarimi paralelligi artirir."
+          "text": "Dogru secenek: 'Metodlar birbirini bloklamaz; paralel calisabilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: synchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Kod gecerlidir."
+          "text": "Yanlis/eksik secenek: 'Kod compile olmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Otomatik serialization yalnizca ayni lockta olur."
+          "text": "Yanlis/eksik secenek: 'Threadler otomatik serialized olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "Object lockA = new Object();\nObject lockB = new Object();\n\nRunnable r1 = () -> { synchronized (lockA) { System.out.print(\"A\"); } };\nRunnable r2 = () -> { synchronized (lockB) { System.out.print(\"B\"); } };\n\nThread t1 = new Thread(r1);\nThread t2 = new Thread(r2);\nt1.start(); t2.start();\nt1.join(); t2.join();"
+      "questionCode": "Object lockA = new Object();\nObject lockB = new Object();\n\nRunnable r1 = () -> { synchronized (lockA) { System.out.print(\"A\"); } };\nRunnable r2 = () -> { synchronized (lockB) { System.out.print(\"B\"); } };\n\nThread t1 = new Thread(r1);\nThread t2 = new Thread(r2);\nt1.start(); t2.start();\nt1.join(); t2.join();",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}"
     },
     {
       "id": "i2-q9",
@@ -412,34 +420,35 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Ayni thread, sahip oldugu monitoru tekrar alabilir. Bu ozellige reentrancy denir ve Java synchronized icin dogaldir.",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: ok yazar, cunku synchronized reentranttir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Ayni thread ayni locku tekrar alinca deadlock olmaz."
+          "text": "Yanlis/eksik secenek: 'Deadlock olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Reentrant davranis sayesinde inner cagrisi sorunsuzdur."
+          "text": "Dogru secenek: 'ok yazar, cunku synchronized reentranttir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: synchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Kod derlenir."
+          "text": "Yanlis/eksik secenek: 'Compile hatasi verir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Bu akista null kaynakli hata yoktur."
+          "text": "Yanlis/eksik secenek: 'NullPointerException firlatir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: volatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "class R {\n    synchronized void outer() { inner(); }\n    synchronized void inner() { System.out.println(\"ok\"); }\n}\nnew R().outer();"
+      "questionCode": "class R {\n    synchronized void outer() { inner(); }\n    synchronized void inner() { System.out.println(\"ok\"); }\n}\nnew R().outer();",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}"
     },
     {
       "id": "i2-q10",
       "type": "code",
       "question": "Money transferde lock beklemesini sonsuza birakma. ReentrantLock ile timeoutlu transfer metodu yaz.",
       "starterCode": "class Account {\n    final java.util.concurrent.locks.ReentrantLock lock = new java.util.concurrent.locks.ReentrantLock();\n    int balance;\n}\n\nboolean transfer(Account from, Account to, int amount) throws InterruptedException {\n    // TODO\n    return false;\n}",
-      "answerBody": "Burada hedef, deadlock riskini azaltmak ve sonsuz beklemeyi kirabilmek. tryLock(timeout) ile kilit alinmazsa operasyonu fail etmek productionda daha guvenli bir stratejidir.",
-      "answerCode": "boolean transfer(Account from, Account to, int amount) throws InterruptedException {\n    if (!from.lock.tryLock(200, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n        return false;\n    }\n    try {\n        if (!to.lock.tryLock(200, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n            return false;\n        }\n        try {\n            if (from.balance < amount) {\n                return false;\n            }\n            from.balance -= amount;\n            to.balance += amount;\n            return true;\n        } finally {\n            to.lock.unlock();\n        }\n    } finally {\n        from.lock.unlock();\n    }\n}",
+      "answerBody": "Sorunun odagi: Senkronizasyon primitive secimi\n\nNeden bu cevap dogru?\nBu bir kod yazma sorusu. Beklenen sadece calisan kod degil; thread-safety, temiz kapanis, hata/iptal davranisi ve test edilebilirliktir.\n\nKonu anlatimi (sifirdan):\nsynchronized mutual exclusion ve gorunurluk saglar. volatile yalnizca gorunurluk verir. ReentrantLock tryLock, timeout ve fairness gibi daha ince kontrol imkanlari sunar.\n\nPratikte nasil uygularsin?\nBasit kritik bolgede synchronized, lock edinimi ustunde kontrol gerektiğinde ReentrantLock, yalnizca bayrak gorunurlugu gerektiğinde volatile secilir.\n\nSik yapilan hata:\nvolatile ile atomiklik beklemek, locku finallyde birakmamak, gereksiz genis lock kapsamiyla throughputu dusurmek ciddi risktir.\n\nKod yazma kalitesi kontrol listesi:\n1) interrupt dostu durdurma var mi?\n2) lock/kaynak finallyde birakiliyor mu?\n3) timeout/retry politikasi net mi?\n4) tekrarli concurrent test ile dogrulama dusunuldu mu?\n\nEk mini kod ornegi:\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
+      "answerCode": "boolean transfer(Account from, Account to, int amount) throws InterruptedException {\n    if (!from.lock.tryLock(200, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n        return false;\n    }\n    try {\n        if (!to.lock.tryLock(200, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n            return false;\n        }\n        try {\n            if (from.balance < amount) {\n                return false;\n            }\n            from.balance -= amount;\n            to.balance += amount;\n            return true;\n        } finally {\n            to.lock.unlock();\n        }\n    } finally {\n        from.lock.unlock();\n    }\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]

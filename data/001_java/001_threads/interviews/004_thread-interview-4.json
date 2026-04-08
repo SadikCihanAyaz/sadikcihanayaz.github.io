@@ -33,25 +33,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "submit ile task sonucunu ve hata bilgisini Future uzerinden yonetebilirsin. execute fire-and-forget yaklasimidir.",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: execute void doner; submit Future doner\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. execute Future donmez."
+          "text": "Yanlis/eksik secenek: 'Ikisi de Future doner'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Temel API farki budur."
+          "text": "Dogru secenek: 'execute void doner; submit Future doner'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. execute Runnable kabul eder."
+          "text": "Yanlis/eksik secenek: 'execute sadece Callable alir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. submit Runnable ve Callable kabul eder."
+          "text": "Yanlis/eksik secenek: 'submit sadece Runnable alir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}"
     },
     {
       "id": "i4-q2",
@@ -80,25 +81,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "shutdown zarif kapanis, shutdownNow ise daha agresif kapanis yaklasimidir. shutdownNow best-effort interrupt uygular.",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: shutdown yeni task kabul etmez, eldeki tasklerin bitmesini bekler; shutdownNow devam edenleri interrupt etmeye calisir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Semantik farklari vardir."
+          "text": "Yanlis/eksik secenek: 'Ikisi de aynidir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Production kapanis stratejisinde kritik ayrimdir."
+          "text": "Dogru secenek: 'shutdown yeni task kabul etmez, eldeki tasklerin bitmesini bekler; shutdownNow devam edenleri interrupt etmeye calisir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Interrupt denemesi de yapar."
+          "text": "Yanlis/eksik secenek: 'shutdownNow sadece queueyu temizler ama interrupt etmez'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Yeni task kabulunu kapatir."
+          "text": "Yanlis/eksik secenek: 'shutdown queueya yeni task ekler'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}"
     },
     {
       "id": "i4-q3",
@@ -127,25 +129,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "Fixed pool, concurrency seviyesini sinirlayarak kaynak kullanimini kontrol eder. Fazla tasklar kuyrukta bekler.",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Ayni anda en fazla 4 worker thread calisir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Pool size kadar paralellik sunar."
+          "text": "Dogru secenek: 'Ayni anda en fazla 4 worker thread calisir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Fixed pool sinirsiz thread acmaz."
+          "text": "Yanlis/eksik secenek: 'Ayni anda sinirsiz thread acar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Tasklar threadler tarafindan calistirilir."
+          "text": "Yanlis/eksik secenek: 'Tasklar thread acmadan calisir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Process acma modeli degildir."
+          "text": "Yanlis/eksik secenek: 'Her task icin yeni process acar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}"
     },
     {
       "id": "i4-q4",
@@ -174,25 +177,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "Single thread executor tek worker ile sirali isleme davranisi saglar. Bu, thread-safe olmayan ardil akislarda faydalidir.",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Tasklar submit sirasina gore ardil calisir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Tek worker oldugu icin sirali calisma beklenir."
+          "text": "Dogru secenek: 'Tasklar submit sirasina gore ardil calisir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Rastgele siralama beklenmez."
+          "text": "Yanlis/eksik secenek: 'Tasklar random sirada calisir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Paralellik yoktur."
+          "text": "Yanlis/eksik secenek: 'Tasklar daima paralel calisir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Arkada bir worker thread vardir."
+          "text": "Yanlis/eksik secenek: 'Tasklar thread olusturmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}"
     },
     {
       "id": "i4-q5",
@@ -221,25 +225,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "Executor kapanmisken yeni task kabul edilmez ve rejection olusur. Bu nedenle lifecycle yonetimi cok onemlidir.",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Executor shutdown olduktan sonra submit/execute cagrilirsa\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Kapanis sonrasi task gondermek rejection \u00fcretir."
+          "text": "Dogru secenek: 'Executor shutdown olduktan sonra submit/execute cagrilirsa'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Normal durumda rejection olmaz."
+          "text": "Yanlis/eksik secenek: 'Her normal submitte'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. get rejection noktasi degildir."
+          "text": "Yanlis/eksik secenek: 'Sadece Future.get cagrilirken'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. volatile ile ilgisi yoktur."
+          "text": "Yanlis/eksik secenek: 'Sadece volatile kullanirken'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}"
     },
     {
       "id": "i4-q6",
@@ -268,26 +273,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "SingleThreadExecutor tasklari submit sirasina gore tek worker ile calistirir. Bu nedenle A sonra B gorulur.",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: AB\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Sira submit sirasidir."
+          "text": "Yanlis/eksik secenek: 'BA'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Tek worker + kuyruk = AB."
+          "text": "Dogru secenek: 'AB'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Bu senaryoda belirli sira vardir."
+          "text": "Yanlis/eksik secenek: 'A veya B rastgele'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Tasklar calisir."
+          "text": "Yanlis/eksik secenek: 'Hicbir sey'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\nex.execute(() -> System.out.print(\"A\"));\nex.execute(() -> System.out.print(\"B\"));\nex.shutdown();\nex.awaitTermination(1, java.util.concurrent.TimeUnit.SECONDS);"
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\nex.execute(() -> System.out.print(\"A\"));\nex.execute(() -> System.out.print(\"B\"));\nex.shutdown();\nex.awaitTermination(1, java.util.concurrent.TimeUnit.SECONDS);",
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}"
     },
     {
       "id": "i4-q7",
@@ -316,26 +322,27 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "submit(Runnable) sonucu Future ile takip etsen de task bir deger donmez. Bu nedenle get() sonucu null olur.",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: null\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Runnable sonuc degeri uretmez."
+          "text": "Dogru secenek: 'null'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. done stringi yok."
+          "text": "Yanlis/eksik secenek: 'done'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Numeric sonuc yok."
+          "text": "Yanlis/eksik secenek: '1'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod gecerli."
+          "text": "Yanlis/eksik secenek: 'Runtime error'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\njava.util.concurrent.Future<?> f = ex.submit(() -> System.out.print(\"run \"));\nSystem.out.println(f.get());\nex.shutdown();"
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\njava.util.concurrent.Future<?> f = ex.submit(() -> System.out.print(\"run \"));\nSystem.out.println(f.get());\nex.shutdown();",
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}"
     },
     {
       "id": "i4-q8",
@@ -364,33 +371,34 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "shutdown cagrisi ile executor yeni task kabul etmez. Sonraki submit rejection exception ile sonuclanir.",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: RejectedExecutionException olusur\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. shutdown sonrasi kabul yok."
+          "text": "Yanlis/eksik secenek: 'Task normal kabul edilir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Rejection beklenir."
+          "text": "Dogru secenek: 'RejectedExecutionException olusur'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Sessizce yutulmaz."
+          "text": "Yanlis/eksik secenek: 'Task sessizce yok sayilir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Derleme degil runtime sorunudur."
+          "text": "Yanlis/eksik secenek: 'Compile error'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(1);\nex.shutdown();\nex.submit(() -> System.out.println(\"x\"));"
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(1);\nex.shutdown();\nex.submit(() -> System.out.println(\"x\"));",
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}"
     },
     {
       "id": "i4-q9",
       "type": "mcq",
       "questionKind": "code-output",
       "singleChoice": true,
-      "question": "invokeAll icin dogru cikt\u0131/yorum hangisidir?",
+      "question": "invokeAll icin dogru ciktı/yorum hangisidir?",
       "choices": [
         {
           "id": "A",
@@ -412,34 +420,35 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "invokeAll verilen callable listesini submit eder ve tumu tamamlanana kadar bekler. Sonuc listesi input boyu ile aynidir.",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Liste boyu 2 olur ve get() ile degerler okunur\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Future listesi callable sayisi kadar olur."
+          "text": "Dogru secenek: 'Liste boyu 2 olur ve get() ile degerler okunur'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: ExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. 0 olmasi beklenmez."
+          "text": "Yanlis/eksik secenek: 'Liste boyu her zaman 0 olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. invokeAll blocking davranir."
+          "text": "Yanlis/eksik secenek: 'invokeAll asenkron doner ve hic beklemez'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Callable listesi bekler."
+          "text": "Yanlis/eksik secenek: 'Sadece Runnable kabul eder'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Poolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(2);\njava.util.List<java.util.concurrent.Callable<Integer>> tasks = java.util.List.of(\n    () -> 1,\n    () -> 2\n);\njava.util.List<java.util.concurrent.Future<Integer>> results = ex.invokeAll(tasks);\nSystem.out.println(results.size());\nex.shutdown();"
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(2);\njava.util.List<java.util.concurrent.Callable<Integer>> tasks = java.util.List.of(\n    () -> 1,\n    () -> 2\n);\njava.util.List<java.util.concurrent.Future<Integer>> results = ex.invokeAll(tasks);\nSystem.out.println(results.size());\nex.shutdown();",
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}"
     },
     {
       "id": "i4-q10",
       "type": "code",
       "question": "Bir Callable taskini timeout ile calistiran yardimci metod yaz. Sureyi asarsa iptal et ve fallback don.",
       "starterCode": "String runWithTimeout(java.util.concurrent.Callable<String> task) {\n    // TODO\n    return null;\n}",
-      "answerBody": "Pattern: executor + submit + get(timeout) + cancel(true). Bu patterni dogru kurmak timeout ve kaynak yonetimi acisindan kritik.",
-      "answerCode": "String runWithTimeout(java.util.concurrent.Callable<String> task) {\n    java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\n    java.util.concurrent.Future<String> f = ex.submit(task);\n    try {\n        return f.get(500, java.util.concurrent.TimeUnit.MILLISECONDS);\n    } catch (java.util.concurrent.TimeoutException e) {\n        f.cancel(true);\n        return \"TIMEOUT\";\n    } catch (Exception e) {\n        return \"ERROR\";\n    } finally {\n        ex.shutdownNow();\n    }\n}",
+      "answerBody": "Sorunun odagi: ExecutorService ve pool lifecycle\n\nNeden bu cevap dogru?\nBu bir kod yazma sorusu. Beklenen sadece calisan kod degil; thread-safety, temiz kapanis, hata/iptal davranisi ve test edilebilirliktir.\n\nKonu anlatimi (sifirdan):\nExecutorService thread yonetimini merkezilestirir. execute fire-and-forgettir, submit Future dondurur. shutdown yeni is alimni durdurur, shutdownNow best-effort interrupt dener.\n\nPratikte nasil uygularsin?\nPool tipi ve boyutu is tipine gore secilmeli, kapanis protokolu (shutdown/awaitTermination) net uygulanmalidir.\n\nSik yapilan hata:\nPoolu kapatmamak thread sizintisi, kapanmis poole is yollamak RejectedExecutionException yaratir.\n\nKod yazma kalitesi kontrol listesi:\n1) interrupt dostu durdurma var mi?\n2) lock/kaynak finallyde birakiliyor mu?\n3) timeout/retry politikasi net mi?\n4) tekrarli concurrent test ile dogrulama dusunuldu mu?\n\nEk mini kod ornegi:\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
+      "answerCode": "String runWithTimeout(java.util.concurrent.Callable<String> task) {\n    java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\n    java.util.concurrent.Future<String> f = ex.submit(task);\n    try {\n        return f.get(500, java.util.concurrent.TimeUnit.MILLISECONDS);\n    } catch (java.util.concurrent.TimeoutException e) {\n        f.cancel(true);\n        return \"TIMEOUT\";\n    } catch (Exception e) {\n        return \"ERROR\";\n    } finally {\n        ex.shutdownNow();\n    }\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]

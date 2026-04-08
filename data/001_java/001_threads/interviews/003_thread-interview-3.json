@@ -33,25 +33,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Race condition veri yarisi demektir: sonuc zamanlamaya bagimli hale gelir ve deterministik olmaz. En cok paylasilan mutable state uzerinde gorulur.",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Birden fazla threadin ayni mutable statei uygun senkronizasyon olmadan guncellemesi\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Local degisken threadin kendisine ozeldir."
+          "text": "Yanlis/eksik secenek: 'Tek threadin kendi local degiskenini degistirmesi'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Problem tanimi tam olarak budur."
+          "text": "Dogru secenek: 'Birden fazla threadin ayni mutable statei uygun senkronizasyon olmadan guncellemesi'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Race condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Deadlock farkli bir eszamanlilik problemidir."
+          "text": "Yanlis/eksik secenek: 'Sadece deadlock olusmasi'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Koken performans degil, tutarlilik problemidir."
+          "text": "Yanlis/eksik secenek: 'Sadece CPU yavasligi'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}"
     },
     {
       "id": "i3-q2",
@@ -80,25 +81,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "AtomicInteger CAS tabanli atomik operasyonlar sunar. Yuksek contention olmayan sayac senaryolarinda sade ve hizli bir secenektir.",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Lock kullanmadan atomik read-modify-write operasyonlari sunar\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. incrementAndGet gibi metodlar atomiktir."
+          "text": "Dogru secenek: 'Lock kullanmadan atomik read-modify-write operasyonlari sunar'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Race condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Tum kodu degil yalniz ilgili atomik alan operasyonlarini kapsar."
+          "text": "Yanlis/eksik secenek: 'Tum kodu otomatik synchronized yapar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Deadlock lock tasarimiyla ilgilidir."
+          "text": "Yanlis/eksik secenek: 'Deadlocku otomatik engeller'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Cok threadli kullanim icin vardir."
+          "text": "Yanlis/eksik secenek: 'Sadece tek threadde calisir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}"
     },
     {
       "id": "i3-q3",
@@ -127,25 +129,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "CAS optimistic concurrency temelidir. Beklenen deger tutarsa atomik gunceller, tutmazsa fail eder ve retry stratejisi uygulanir.",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Deger expected ise update yazar ve true doner, degilse false doner\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Kosula baglidir, her zaman yazmaz."
+          "text": "Yanlis/eksik secenek: 'Her zaman update yazar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. CAS davranisi budur."
+          "text": "Dogru secenek: 'Deger expected ise update yazar ve true doner, degilse false doner'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Race condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Kosullu write operasyonudur."
+          "text": "Yanlis/eksik secenek: 'Yalnizca read yapar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Intrinsic lock almak zorunda degildir."
+          "text": "Yanlis/eksik secenek: 'Synchronized lock alir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}"
     },
     {
       "id": "i3-q4",
@@ -174,25 +177,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "LongAdder, ic parcali hucrelerle contentioni azaltir. Ozellikle metrik toplama gibi yuksek yazma yogunlugu olan senaryolarda tercih edilir.",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Yuksek contention altinda sik increment edilen metrik sayaclari\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Tek threadde ekstra karma\u015f\u0131kl\u0131k gereksizdir."
+          "text": "Yanlis/eksik secenek: 'Tek threadli basit sayac'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Yuksek concurrency saya\u00e7lari icin idealdir."
+          "text": "Dogru secenek: 'Yuksek contention altinda sik increment edilen metrik sayaclari'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Race condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Bu sayac tipidir, map yapisi degil."
+          "text": "Yanlis/eksik secenek: 'Map key saklama'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Immutability ile ilgisizdir."
+          "text": "Yanlis/eksik secenek: 'Immutable nesne olusturma'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class AtomicCounter {\n    private final java.util.concurrent.atomic.AtomicInteger value =\n        new java.util.concurrent.atomic.AtomicInteger(0);\n\n    void inc() {\n        value.incrementAndGet();\n    }\n\n    int get() {\n        return value.get();\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}"
     },
     {
       "id": "i3-q5",
@@ -221,25 +225,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "incrementAndGet tek atomik operasyon semantigi sunar. Diger ++ desenleri read-modify-write parcali oldugu icin yar\u0131\u015f riski ta\u015f\u0131r.",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: AtomicInteger ai; ai.incrementAndGet();\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. ++ atomik degildir."
+          "text": "Yanlis/eksik secenek: 'int x; x++;'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. AtomicInteger metodu atomik garanti verir."
+          "text": "Dogru secenek: 'AtomicInteger ai; ai.incrementAndGet();'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Race condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. volatile atomiklik vermez."
+          "text": "Yanlis/eksik secenek: 'volatile int v; v++;'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Bu da atomik degildir."
+          "text": "Yanlis/eksik secenek: 'x = x + 1 ve iki thread'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class FlagControl {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void loop() {\n        while (running) {\n            // lightweight work\n        }\n    }\n}\n\n// Not: value++ icin volatile degil AtomicInteger veya lock gerekir.\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}"
     },
     {
       "id": "i3-q6",
@@ -268,26 +273,27 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "AtomicInteger ile her increment atomik oldugu icin join sonrasinda toplam kesin 2000 olur.",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Kesin 2000\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Atomic increment kayip updatee izin vermez."
+          "text": "Dogru secenek: 'Kesin 2000'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Race condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Artis islemleri gerceklesir."
+          "text": "Yanlis/eksik secenek: 'Kesin 0'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Atomic oldugu icin deterministiktir."
+          "text": "Yanlis/eksik secenek: '2000 veya daha dusuk rastgele'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod derlenir ve calisir."
+          "text": "Yanlis/eksik secenek: 'Compile error'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(0);\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(ai.get());"
+      "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(0);\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(ai.get());",
+      "answerCode": "class AtomicCounter {\n    private final java.util.concurrent.atomic.AtomicInteger value =\n        new java.util.concurrent.atomic.AtomicInteger(0);\n\n    void inc() {\n        value.incrementAndGet();\n    }\n\n    int get() {\n        return value.get();\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}"
     },
     {
       "id": "i3-q7",
@@ -316,26 +322,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Plain int ++ yarisa aciktir. join sadece threadlerin bitmesini garanti eder, veri yarisi problemini cozmez.",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Race condition nedeniyle 2000 garanti degildir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Senkronizasyon yoksa 2000 garanti olmaz."
+          "text": "Yanlis/eksik secenek: 'Her zaman 2000 yazar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Join bitisi bekletir ama atomiklik saglamaz."
+          "text": "Dogru secenek: 'Race condition nedeniyle 2000 garanti degildir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Race condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Negatif zorunlu degil."
+          "text": "Yanlis/eksik secenek: 'Her zaman negatif yazar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Otomatik synchronized davranisi yoktur."
+          "text": "Yanlis/eksik secenek: 'Threadler otomatik synchronize olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "class C { int v = 0; void inc(){ v++; } }\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.v);"
+      "questionCode": "class C { int v = 0; void inc(){ v++; } }\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.v);",
+      "answerCode": "class AtomicCounter {\n    private final java.util.concurrent.atomic.AtomicInteger value =\n        new java.util.concurrent.atomic.AtomicInteger(0);\n\n    void inc() {\n        value.incrementAndGet();\n    }\n\n    int get() {\n        return value.get();\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}"
     },
     {
       "id": "i3-q8",
@@ -364,26 +371,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Ilk CAS basarili olur ve deger 5 olur. Ikinci CAS expected=1 bekledigi icin basarisiz olur.",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: true false 5\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Ikinci CAS 1 bekledigi icin true olamaz."
+          "text": "Yanlis/eksik secenek: 'true true 7'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. r1 true, r2 false, son deger 5."
+          "text": "Dogru secenek: 'true false 5'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Race condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Ilk CAS basarisiz degil, basarili."
+          "text": "Yanlis/eksik secenek: 'false true 7'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Ilk CAS kesinlikle degeri degistirir."
+          "text": "Yanlis/eksik secenek: 'false false 1'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(1);\nboolean r1 = ai.compareAndSet(1, 5);\nboolean r2 = ai.compareAndSet(1, 7);\nSystem.out.println(r1 + \" \" + r2 + \" \" + ai.get());"
+      "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(1);\nboolean r1 = ai.compareAndSet(1, 5);\nboolean r2 = ai.compareAndSet(1, 7);\nSystem.out.println(r1 + \" \" + r2 + \" \" + ai.get());",
+      "answerCode": "class AtomicCounter {\n    private final java.util.concurrent.atomic.AtomicInteger value =\n        new java.util.concurrent.atomic.AtomicInteger(0);\n\n    void inc() {\n        value.incrementAndGet();\n    }\n\n    int get() {\n        return value.get();\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}"
     },
     {
       "id": "i3-q9",
@@ -412,34 +420,35 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "LongAdder increment + add islemlerini biriktirir. sum() tum hucreleri toplayarak sonucu verir.",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nDogru secenek(ler): C: 3\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Iki arti islem var."
+          "text": "Yanlis/eksik secenek: '0'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Toplam 1 degil 3 olur."
+          "text": "Yanlis/eksik secenek: '1'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Dogru. 1 + 2 = 3."
+          "text": "Dogru secenek: '3'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Race condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Bu kod sorunsuzdur."
+          "text": "Yanlis/eksik secenek: 'Runtime error'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Atomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.atomic.LongAdder adder = new java.util.concurrent.atomic.LongAdder();\nadder.increment();\nadder.add(2);\nSystem.out.println(adder.sum());"
+      "questionCode": "java.util.concurrent.atomic.LongAdder adder = new java.util.concurrent.atomic.LongAdder();\nadder.increment();\nadder.add(2);\nSystem.out.println(adder.sum());",
+      "answerCode": "class AtomicCounter {\n    private final java.util.concurrent.atomic.AtomicInteger value =\n        new java.util.concurrent.atomic.AtomicInteger(0);\n\n    void inc() {\n        value.incrementAndGet();\n    }\n\n    int get() {\n        return value.get();\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}"
     },
     {
       "id": "i3-q10",
       "type": "code",
       "question": "Order id ureten thread-safe bir generator yaz. Her cagrida sirali ve benzersiz id donsun.",
       "starterCode": "class OrderIdGenerator {\n    // TODO\n    String nextId() {\n        return null;\n    }\n}",
-      "answerBody": "Burada hedef lock contention olusturmadan benzersiz, artan id uretmek. AtomicLong bu is icin dogru secimdir.",
-      "answerCode": "class OrderIdGenerator {\n    private final java.util.concurrent.atomic.AtomicLong seq = new java.util.concurrent.atomic.AtomicLong(0);\n\n    String nextId() {\n        long n = seq.incrementAndGet();\n        return String.format(\"ORD-%06d\", n);\n    }\n}",
+      "answerBody": "Sorunun odagi: Race condition ve atomik yapilar\n\nNeden bu cevap dogru?\nBu bir kod yazma sorusu. Beklenen sadece calisan kod degil; thread-safety, temiz kapanis, hata/iptal davranisi ve test edilebilirliktir.\n\nKonu anlatimi (sifirdan):\nRace condition paylasilan mutable state uzerinde adimlarin birbirine girmesidir. AtomicInteger CAS ile atomik update dener. LongAdder write contention yuksekken daha iyi olabilen bir alternatiftir.\n\nPratikte nasil uygularsin?\nSayaç ve metrik gibi bagimsiz artirimlarda atomik yapilar verimlidir; birden fazla alani birlikte tutman gerekiyorsa ek senkronizasyon gerekir.\n\nSik yapilan hata:\nAtomic kullandim diye tum islemin thread-safe oldugunu varsaymak, check-then-act desenlerinde bug uretir.\n\nKod yazma kalitesi kontrol listesi:\n1) interrupt dostu durdurma var mi?\n2) lock/kaynak finallyde birakiliyor mu?\n3) timeout/retry politikasi net mi?\n4) tekrarli concurrent test ile dogrulama dusunuldu mu?\n\nEk mini kod ornegi:\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
+      "answerCode": "class OrderIdGenerator {\n    private final java.util.concurrent.atomic.AtomicLong seq = new java.util.concurrent.atomic.AtomicLong(0);\n\n    String nextId() {\n        long n = seq.incrementAndGet();\n        return String.format(\"ORD-%06d\", n);\n    }\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]

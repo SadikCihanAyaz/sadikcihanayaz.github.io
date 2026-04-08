@@ -33,25 +33,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "Callable sonuc donen isler icin, Runnable fire-and-forget isler icin uygundur. Callable hata yonetiminde de daha gucludur.",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Callable deger dondurur ve checked exception firlatabilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. API farkinin merkezinde bu vardir."
+          "text": "Dogru secenek: 'Callable deger dondurur ve checked exception firlatabilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Callable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Runnable kendi basina Future donmez."
+          "text": "Yanlis/eksik secenek: 'Runnable daima Future doner'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Thread baslatma ayrik bir sorumluluktur."
+          "text": "Yanlis/eksik secenek: 'Callable thread baslatir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Runnable hala cok yaygin kullanilir."
+          "text": "Yanlis/eksik secenek: 'Runnable kullanmak yasaktir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.CompletableFuture<Integer> value =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenApply(v -> v * 2)\n        .exceptionally(ex -> 0);\n\nSystem.out.println(value.join());\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());"
     },
     {
       "id": "i5-q2",
@@ -80,25 +81,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Future.get() sonuc hazir olana kadar bekler. Bu nedenle ana threadde dikkatli kullanilmazsa latency artirabilir.",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Task sonucu hazir degilse bloklar\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. get bloklayici olabilir."
+          "text": "Yanlis/eksik secenek: 'Asla bloklamaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Blocking davranis temeldir."
+          "text": "Dogru secenek: 'Task sonucu hazir degilse bloklar'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Callable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Iptal ayri APIdir."
+          "text": "Yanlis/eksik secenek: 'Taski otomatik iptal eder'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Daemon ile iliskisi yoktur."
+          "text": "Yanlis/eksik secenek: 'Sadece daemon threadlerde calisir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.CompletableFuture<Integer> value =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenApply(v -> v * 2)\n        .exceptionally(ex -> 0);\n\nSystem.out.println(value.join());\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());"
     },
     {
       "id": "i5-q3",
@@ -127,25 +129,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "cancel(true) garanti shutdown degil, interrupt sinyali denemesidir. Task kodu interrupti dogru ele almiyorsa hemen durmayabilir.",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Calisan threade interrupt gondermeyi dener; best-effort davranistir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Kesin rollback garantisi yoktur."
+          "text": "Yanlis/eksik secenek: 'Taski kesin bitirir ve rollback yapar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Best-effort interrupt semantigidir."
+          "text": "Dogru secenek: 'Calisan threade interrupt gondermeyi dener; best-effort davranistir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Callable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Tamamlanmis taskte iptal anlamsizdir."
+          "text": "Yanlis/eksik secenek: 'Sadece tamamlanmis taski iptal eder'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Runtime davranisidir."
+          "text": "Yanlis/eksik secenek: 'Sadece compile-time etkisi vardir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());"
     },
     {
       "id": "i5-q4",
@@ -174,25 +177,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "thenCompose async pipeline birlestirmede nested future sorununu cozer. thenApply ise basit deger donusumu icindir.",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: thenApply T->U map yapar, thenCompose T->CompletableFuture<U> flatten eder\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Davranis farki vardir."
+          "text": "Yanlis/eksik secenek: 'Ikisi ayni seydir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Map vs flatMap analojisidir."
+          "text": "Dogru secenek: 'thenApply T->U map yapar, thenCompose T->CompletableFuture<U> flatten eder'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Callable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Hata icin exceptionally/handle vardir."
+          "text": "Yanlis/eksik secenek: 'thenCompose sadece hata durumunda calisir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. thenApply deger donusturur."
+          "text": "Yanlis/eksik secenek: 'thenApply sadece void dondurur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.CompletableFuture<Integer> value =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenApply(v -> v * 2)\n        .exceptionally(ex -> 0);\n\nSystem.out.println(value.join());\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());"
     },
     {
       "id": "i5-q5",
@@ -221,25 +225,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "exceptionally hata kanalini normal degere donusturmek icin kullanilir. Bu sayede zincirin kontrollu devam etmesi saglanir.",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Asenkron zincirde exception oldugunda fallback degeri uretmek icin\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Basarili akista calismaz."
+          "text": "Yanlis/eksik secenek: 'Her basarili tamamlanmada'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Hata fallback noktasi olarak kullanilir."
+          "text": "Dogru secenek: 'Asenkron zincirde exception oldugunda fallback degeri uretmek icin'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Callable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Timeout da bir hata olabilir ama tek kosul o degildir."
+          "text": "Yanlis/eksik secenek: 'Sadece timeoutta'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Runtime exceptionlar dahil calisir."
+          "text": "Yanlis/eksik secenek: 'Sadece checked exceptionlarda'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.CompletableFuture<Integer> value =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenApply(v -> v * 2)\n        .exceptionally(ex -> 0);\n\nSystem.out.println(value.join());\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());"
     },
     {
       "id": "i5-q6",
@@ -268,26 +273,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "supplyAsync 10 uretir, thenApply x2 yapar. join ile son deger 20 okunur.",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: 20\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. thenApply ile ikiyle carpiliyor."
+          "text": "Yanlis/eksik secenek: '10'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. 10 * 2 = 20."
+          "text": "Dogru secenek: '20'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Callable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Sifirlanmiyor."
+          "text": "Yanlis/eksik secenek: '0'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Bu akista exception yok."
+          "text": "Yanlis/eksik secenek: 'Exception'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "int v = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> 10)\n    .thenApply(x -> x * 2)\n    .join();\nSystem.out.println(v);"
+      "questionCode": "int v = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> 10)\n    .thenApply(x -> x * 2)\n    .join();\nSystem.out.println(v);",
+      "answerCode": "java.util.concurrent.CompletableFuture<Integer> value =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenApply(v -> v * 2)\n        .exceptionally(ex -> 0);\n\nSystem.out.println(value.join());\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());"
     },
     {
       "id": "i5-q7",
@@ -316,26 +322,27 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "thenCompose ilk sonucu alip yeni bir future doner; join sonunda flatten edilmis final deger 21 olur.",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: 21\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. (7*3) = 21."
+          "text": "Dogru secenek: '21'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Callable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Bu hesap zinciriyle uyusmuyor."
+          "text": "Yanlis/eksik secenek: '12'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Ilk deger donmuyor, compose ile devam ediyor."
+          "text": "Yanlis/eksik secenek: '7'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Hata olusturan bir kisim yok."
+          "text": "Yanlis/eksik secenek: 'Exception'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "int v = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> 7)\n    .thenCompose(x -> java.util.concurrent.CompletableFuture.supplyAsync(() -> x * 3))\n    .join();\nSystem.out.println(v);"
+      "questionCode": "int v = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> 7)\n    .thenCompose(x -> java.util.concurrent.CompletableFuture.supplyAsync(() -> x * 3))\n    .join();\nSystem.out.println(v);",
+      "answerCode": "java.util.concurrent.CompletableFuture<Integer> value =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenApply(v -> v * 2)\n        .exceptionally(ex -> 0);\n\nSystem.out.println(value.join());\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());"
     },
     {
       "id": "i5-q8",
@@ -364,26 +371,27 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "exceptionally ile hata kanali yakalanip fallback degeri donuluyor. Bu sayede join exception firlatmadan deger dondurur.",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: fallback\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Exception fallbacke cevriliyor."
+          "text": "Dogru secenek: 'fallback'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Callable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. boom mesaji yutulup fallback donuyor."
+          "text": "Yanlis/eksik secenek: 'boom'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Null degil fallback stringi var."
+          "text": "Yanlis/eksik secenek: 'null'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod derlenir."
+          "text": "Yanlis/eksik secenek: 'compile error'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "String s = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> { throw new RuntimeException(\"boom\"); })\n    .exceptionally(ex -> \"fallback\")\n    .join();\nSystem.out.println(s);"
+      "questionCode": "String s = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> { throw new RuntimeException(\"boom\"); })\n    .exceptionally(ex -> \"fallback\")\n    .join();\nSystem.out.println(s);",
+      "answerCode": "java.util.concurrent.CompletableFuture<Integer> value =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenApply(v -> v * 2)\n        .exceptionally(ex -> 0);\n\nSystem.out.println(value.join());\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());"
     },
     {
       "id": "i5-q9",
@@ -412,34 +420,35 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "anyOf, yarisi ilk bitiren sonucu alir. allOf ise tumunun bitmesini bekler; bu ayrim cok onemlidir.",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Ilk tamamlanan future degeri ile doner\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Bu davranis allOfa daha yakindir."
+          "text": "Yanlis/eksik secenek: 'Tum futurelar bitmeden donmez'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Ilk tamamlanan sonucu verir."
+          "text": "Dogru secenek: 'Ilk tamamlanan future degeri ile doner'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: Callable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. En son degil, en hizli biten sonuc."
+          "text": "Yanlis/eksik secenek: 'Her zaman en son tamamlanan degeri doner'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Generic olarak farkli tiplerle calisabilir."
+          "text": "Yanlis/eksik secenek: 'Sadece integer tipinde calisir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: thenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.CompletableFuture<String> slow = java.util.concurrent.CompletableFuture.supplyAsync(() -> {\n    try { Thread.sleep(200); } catch (InterruptedException e) {}\n    return \"slow\";\n});\njava.util.concurrent.CompletableFuture<String> fast = java.util.concurrent.CompletableFuture.completedFuture(\"fast\");\nObject result = java.util.concurrent.CompletableFuture.anyOf(slow, fast).join();\nSystem.out.println(result);"
+      "questionCode": "java.util.concurrent.CompletableFuture<String> slow = java.util.concurrent.CompletableFuture.supplyAsync(() -> {\n    try { Thread.sleep(200); } catch (InterruptedException e) {}\n    return \"slow\";\n});\njava.util.concurrent.CompletableFuture<String> fast = java.util.concurrent.CompletableFuture.completedFuture(\"fast\");\nObject result = java.util.concurrent.CompletableFuture.anyOf(slow, fast).join();\nSystem.out.println(result);",
+      "answerCode": "java.util.concurrent.CompletableFuture<Integer> value =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenApply(v -> v * 2)\n        .exceptionally(ex -> 0);\n\nSystem.out.println(value.join());\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());"
     },
     {
       "id": "i5-q10",
       "type": "code",
       "question": "Iki uzak servisten (price ve discount) veriyi asenkron cekip birlestiren CompletableFuture akisi yaz. Hata olursa default deger kullan.",
       "starterCode": "java.util.concurrent.ExecutorService pool = java.util.concurrent.Executors.newFixedThreadPool(4);\n\nString buildPriceLine() {\n    // TODO\n    return null;\n}",
-      "answerBody": "Burada onemli nokta, iki async kaynagi paralel calistirip combine etmek ve exception durumunda kontrollu fallback vermek.",
-      "answerCode": "String buildPriceLine() {\n    java.util.concurrent.CompletableFuture<Integer> priceF =\n        java.util.concurrent.CompletableFuture.supplyAsync(() -> 100, pool)\n            .exceptionally(ex -> 0);\n\n    java.util.concurrent.CompletableFuture<Integer> discountF =\n        java.util.concurrent.CompletableFuture.supplyAsync(() -> 15, pool)\n            .exceptionally(ex -> 0);\n\n    return priceF.thenCombine(discountF, (price, discount) -> {\n        int finalPrice = price - discount;\n        return \"finalPrice=\" + finalPrice;\n    }).join();\n}",
+      "answerBody": "Sorunun odagi: Future, Callable ve CompletableFuture\n\nNeden bu cevap dogru?\nBu bir kod yazma sorusu. Beklenen sadece calisan kod degil; thread-safety, temiz kapanis, hata/iptal davranisi ve test edilebilirliktir.\n\nKonu anlatimi (sifirdan):\nCallable sonuc dondurur ve exception firlatabilir. Future sonucun temsilcisidir. CompletableFuture map/compose/fallback adimlariyla asenkron pipeline kurar.\n\nPratikte nasil uygularsin?\nTek sonuclu basit islerde Future, birden fazla async kaynagi birlestirme ve hata fallback ihtiyacinda CompletableFuture tercih edilir.\n\nSik yapilan hata:\nthenCompose yerine thenApply kullanip nested future olusturmak veya hata kanalini bos birakmak en yaygin sorundur.\n\nKod yazma kalitesi kontrol listesi:\n1) interrupt dostu durdurma var mi?\n2) lock/kaynak finallyde birakiliyor mu?\n3) timeout/retry politikasi net mi?\n4) tekrarli concurrent test ile dogrulama dusunuldu mu?\n\nEk mini kod ornegi:\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
+      "answerCode": "String buildPriceLine() {\n    java.util.concurrent.CompletableFuture<Integer> priceF =\n        java.util.concurrent.CompletableFuture.supplyAsync(() -> 100, pool)\n            .exceptionally(ex -> 0);\n\n    java.util.concurrent.CompletableFuture<Integer> discountF =\n        java.util.concurrent.CompletableFuture.supplyAsync(() -> 15, pool)\n            .exceptionally(ex -> 0);\n\n    return priceF.thenCombine(discountF, (price, discount) -> {\n        int finalPrice = price - discount;\n        return \"finalPrice=\" + finalPrice;\n    }).join();\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.CompletableFuture<Integer> result =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\nSystem.out.println(result.join());",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]

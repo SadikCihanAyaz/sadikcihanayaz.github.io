@@ -33,25 +33,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "CPU-bound islerde asiri thread sayisi context switch maliyetini arttirir. Core sayisina yakin sizing genelde daha dengeli olur.",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: CPU core sayisina yakin tutmak\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Pratikte iyi baslangic noktasi budur."
+          "text": "Dogru secenek: 'CPU core sayisina yakin tutmak'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: CPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Asiri thread \u00e7o\u011fu zaman zarar verir."
+          "text": "Yanlis/eksik secenek: 'Her zaman 10x core sayisi yapmak'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Paralel potansiyeli gereksiz kisitlar."
+          "text": "Yanlis/eksik secenek: 'Her zaman 1 yapmak'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Sistematik sizing gerekir."
+          "text": "Yanlis/eksik secenek: 'Rastgele secmek'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}"
     },
     {
       "id": "i10-q2",
@@ -80,25 +81,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "IO-bound tasklarda bekleme suresi yuksek oldugu icin daha fazla thread ile throughput artabilir. Ancak bu da \u00f6l\u00e7umle dengelenmelidir.",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Cunku threadler sik sik beklemede kalir; biraz daha yuksek pool fayda saglayabilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Bekleme agirlikli workloadda bu mantik kullanilir."
+          "text": "Dogru secenek: 'Cunku threadler sik sik beklemede kalir; biraz daha yuksek pool fayda saglayabilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: CPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. IO-bound da thread kullanir."
+          "text": "Yanlis/eksik secenek: 'Cunku IO-boundda thread kullanilmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Lock semantigiyle dogrudan bagli degil."
+          "text": "Yanlis/eksik secenek: 'Cunku JVM IO icin lock kullanmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Workload tipine gore sizing farkli olur."
+          "text": "Yanlis/eksik secenek: 'Fark yoktur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}"
     },
     {
       "id": "i10-q3",
@@ -127,25 +129,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "parallelStream her zaman kazanmaz. Kucuk islerde partitioning ve thread scheduling overheadi kazanci silebilir.",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Kisa ve ucuz hesaplarda overhead faydayi gecerse\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Overhead/fayda dengesi kritik."
+          "text": "Dogru secenek: 'Kisa ve ucuz hesaplarda overhead faydayi gecerse'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: CPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Tek kosul eleman sayisi degil, is maliyeti de onemli."
+          "text": "Yanlis/eksik secenek: 'Sadece listede 2 eleman varsa'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Yanlis senaryoda zarar verebilir."
+          "text": "Yanlis/eksik secenek: 'Asla riskli degil'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Platformdan bagimsiz bir trade-offtur."
+          "text": "Yanlis/eksik secenek: 'Sadece Linuxte riskli'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ConcurrentHashMap<String, Integer> counts =\n    new java.util.concurrent.ConcurrentHashMap<>();\ncounts.merge(\"java\", 1, Integer::sum);\ncounts.computeIfAbsent(\"threads\", k -> 0);\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}"
     },
     {
       "id": "i10-q4",
@@ -174,25 +177,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "Pool reuse nedeniyle ThreadLocal remove edilmezse requestler arasi veri sizmasi olur. Bu guvenlik ve dogruluk riskidir.",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Pool threadleri yeniden kullanildigi icin temizlenmeyen ThreadLocal degeri sonraki islere sizabilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. En kritik production risklerinden biridir."
+          "text": "Dogru secenek: 'Pool threadleri yeniden kullanildigi icin temizlenmeyen ThreadLocal degeri sonraki islere sizabilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: CPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. ThreadLocal amaci thread bazli izolasyondur."
+          "text": "Yanlis/eksik secenek: 'ThreadLocal her zaman global paylasimlidir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Compile-time sorunu degil runtime tasarim riskidir."
+          "text": "Yanlis/eksik secenek: 'ThreadLocal compile-time hatasi verir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Ciddi risk vardir."
+          "text": "Yanlis/eksik secenek: 'Risk yoktur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}"
     },
     {
       "id": "i10-q5",
@@ -221,25 +225,26 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "Thread dump, waiting/blocking zincirini gorup deadlock ve contention kok nedenini bulmada en etkili araclar arasindadir.",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Thread dump (jstack) ve lock bilgilerini incelemek\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. Diagnostik icin cok degerlidir."
+          "text": "Dogru secenek: 'Thread dump (jstack) ve lock bilgilerini incelemek'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: CPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Test onemli ama runtime gorunurluk de gerekir."
+          "text": "Yanlis/eksik secenek: 'Sadece unit test sayisini arttirmak'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Donanim bilgisi tek basina yetmez."
+          "text": "Yanlis/eksik secenek: 'Yalnizca CPU markasina bakmak'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod + runtime kaniti birlikte gerekir."
+          "text": "Yanlis/eksik secenek: 'Kod okumayi tamamen birakmak'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}"
     },
     {
       "id": "i10-q6",
@@ -268,26 +273,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "parallel + forEach ile encounter order garanti edilmez. Deterministik sira gerekiyorsa forEachOrdered tercih edilmelidir.",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: forEach paralelde sira garantisi vermez, cikti sirasi degisebilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Bu garanti yoktur."
+          "text": "Yanlis/eksik secenek: 'Cikti her zaman 1234'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Order nondeterministic olabilir."
+          "text": "Dogru secenek: 'forEach paralelde sira garantisi vermez, cikti sirasi degisebilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: CPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Kod derlenir."
+          "text": "Yanlis/eksik secenek: 'Kod compile olmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Sabit ters sira da garanti edilmez."
+          "text": "Yanlis/eksik secenek: 'Her zaman 4321'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.stream.IntStream.rangeClosed(1, 4)\n    .parallel()\n    .forEach(System.out::print);"
+      "questionCode": "java.util.stream.IntStream.rangeClosed(1, 4)\n    .parallel()\n    .forEach(System.out::print);",
+      "answerCode": "class ConcurrencyChecklist {\n    // 1) Shared mutable state var mi?\n    // 2) Atomicity gerekli mi?\n    // 3) Visibility nasil saglanacak?\n    // 4) Lock scope minimum mu?\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}"
     },
     {
       "id": "i10-q7",
@@ -316,26 +322,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "forEachOrdered encounter orderu korumaya calisir. Paralel calisiyor olsa da cikti duzeni stabilize edilir.",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: forEachOrdered nedeniyle 1234 sirasi korunur\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Ordered varyantta sira korunur."
+          "text": "Yanlis/eksik secenek: 'Sira yine rastgele'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Bu metodun temel farki budur."
+          "text": "Dogru secenek: 'forEachOrdered nedeniyle 1234 sirasi korunur'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: CPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Tum elemanlar yazilir."
+          "text": "Yanlis/eksik secenek: 'Sadece 12 basar'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod gecerli."
+          "text": "Yanlis/eksik secenek: 'Runtime error'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.stream.IntStream.rangeClosed(1, 4)\n    .parallel()\n    .forEachOrdered(System.out::print);"
+      "questionCode": "java.util.stream.IntStream.rangeClosed(1, 4)\n    .parallel()\n    .forEachOrdered(System.out::print);",
+      "answerCode": "class ConcurrencyChecklist {\n    // 1) Shared mutable state var mi?\n    // 2) Atomicity gerekli mi?\n    // 3) Visibility nasil saglanacak?\n    // 4) Lock scope minimum mu?\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}"
     },
     {
       "id": "i10-q8",
@@ -364,26 +371,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Ayni thread reuse edilirse ThreadLocal state tasklar arasinda tasinabilir. request sonunda remove edilmesi iyi pratiktir.",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Ayni worker tekrar kullanildigindan ikinci task onceki degeri gorebilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Reuse nedeniyle null garanti degil."
+          "text": "Yanlis/eksik secenek: 'Ikinci taskta deger null olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Pool + ThreadLocal sizmasi klasik problemdir."
+          "text": "Dogru secenek: 'Ayni worker tekrar kullanildigindan ikinci task onceki degeri gorebilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: CPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Calisir ama dikkat ister."
+          "text": "Yanlis/eksik secenek: 'ThreadLocal poolde calismaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod derlenir."
+          "text": "Yanlis/eksik secenek: 'Compile error'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "ThreadLocal<String> ctx = new ThreadLocal<>();\njava.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\nex.submit(() -> ctx.set(\"REQ-1\")).get();\nSystem.out.println(ex.submit(() -> ctx.get()).get());\nex.shutdown();"
+      "questionCode": "ThreadLocal<String> ctx = new ThreadLocal<>();\njava.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\nex.submit(() -> ctx.set(\"REQ-1\")).get();\nSystem.out.println(ex.submit(() -> ctx.get()).get());\nex.shutdown();",
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}"
     },
     {
       "id": "i10-q9",
@@ -412,34 +420,35 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "CompletionService, tamamlanan tasklari completion queueya yazar. Bu sayede hizli doneyi once isleyebilirsin.",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: take() ilk submit edileni degil, ilk tamamlanani verir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Dogru. En faydali ozellik budur."
+          "text": "Dogru secenek: 'take() ilk submit edileni degil, ilk tamamlanani verir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: CPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "B",
-          "text": "Yanlis. Son degil ilk biten gelir."
+          "text": "Yanlis/eksik secenek: 'take() her zaman son tamamlanani verir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Cok task icin tasarlanmistir."
+          "text": "Yanlis/eksik secenek: 'CompletionService sadece tek task destekler'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Arka planda Future kullanir."
+          "text": "Yanlis/eksik secenek: 'Future kullanmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: Rastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(2);\njava.util.concurrent.CompletionService<String> cs = new java.util.concurrent.ExecutorCompletionService<>(ex);\ncs.submit(() -> { Thread.sleep(200); return \"slow\"; });\ncs.submit(() -> \"fast\");\nSystem.out.println(cs.take().get());\nex.shutdown();"
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(2);\njava.util.concurrent.CompletionService<String> cs = new java.util.concurrent.ExecutorCompletionService<>(ex);\ncs.submit(() -> { Thread.sleep(200); return \"slow\"; });\ncs.submit(() -> \"fast\");\nSystem.out.println(cs.take().get());\nex.shutdown();",
+      "answerCode": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    System.out.println(f.get());\n} finally {\n    pool.shutdown();\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}"
     },
     {
       "id": "i10-q10",
       "type": "code",
       "question": "Interrupt dostu bounded retry mekanizmasi yaz. Basarisiz islemde exponential backoff uygulasin ve max denemede dursun.",
       "starterCode": "String callWithRetry(java.util.concurrent.Callable<String> action) {\n    // TODO\n    return null;\n}",
-      "answerBody": "Gercek dunyada retry kodlari en cok interrupt yutma ve sinirsiz dongu hatasi yapar. Dogru cozumde max attempt, backoff ve interrupt restore bir arada olmalidir.",
-      "answerCode": "String callWithRetry(java.util.concurrent.Callable<String> action) {\n    long backoffMs = 100;\n    int maxAttempts = 4;\n\n    for (int attempt = 1; attempt <= maxAttempts; attempt++) {\n        try {\n            return action.call();\n        } catch (Exception e) {\n            if (attempt == maxAttempts) {\n                return \"FAILED\";\n            }\n            try {\n                Thread.sleep(backoffMs);\n            } catch (InterruptedException ie) {\n                Thread.currentThread().interrupt();\n                return \"INTERRUPTED\";\n            }\n            backoffMs *= 2;\n        }\n    }\n    return \"FAILED\";\n}",
+      "answerBody": "Sorunun odagi: Performans ve production operasyonu\n\nNeden bu cevap dogru?\nBu bir kod yazma sorusu. Beklenen sadece calisan kod degil; thread-safety, temiz kapanis, hata/iptal davranisi ve test edilebilirliktir.\n\nKonu anlatimi (sifirdan):\nCPU-bound islerde pool cekirdege yakin secilir, IO-boundda bekleme nedeniyle daha yuksek olabilir. parallelStream her zaman hizlandirmaz. ThreadLocal degerleri pool reuse altinda remove edilmelidir.\n\nPratikte nasil uygularsin?\nOlcum odakli tuning yap: latency, queue depth, reject oranlari, thread dump analizi birlikte yorumlanmalidir.\n\nSik yapilan hata:\nRastgele pool boyutu secmek, interrupta duyarsiz retry yazmak, ThreadLocal temizligini unutmak performans ve veri sizmasi riski yaratir.\n\nKod yazma kalitesi kontrol listesi:\n1) interrupt dostu durdurma var mi?\n2) lock/kaynak finallyde birakiliyor mu?\n3) timeout/retry politikasi net mi?\n4) tekrarli concurrent test ile dogrulama dusunuldu mu?\n\nEk mini kod ornegi:\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
+      "answerCode": "String callWithRetry(java.util.concurrent.Callable<String> action) {\n    long backoffMs = 100;\n    int maxAttempts = 4;\n\n    for (int attempt = 1; attempt <= maxAttempts; attempt++) {\n        try {\n            return action.call();\n        } catch (Exception e) {\n            if (attempt == maxAttempts) {\n                return \"FAILED\";\n            }\n            try {\n                Thread.sleep(backoffMs);\n            } catch (InterruptedException ie) {\n                Thread.currentThread().interrupt();\n                return \"INTERRUPTED\";\n            }\n            backoffMs *= 2;\n        }\n    }\n    return \"FAILED\";\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nThreadLocal<String> ctx = new ThreadLocal<>();\ntry {\n    ctx.set(\"req-123\");\n} finally {\n    ctx.remove();\n}",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]

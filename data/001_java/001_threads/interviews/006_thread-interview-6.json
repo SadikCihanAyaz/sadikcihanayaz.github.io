@@ -33,25 +33,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "wait monitor semantigiyle calisir; lock sahibi olmadan cagrilirsa IllegalMonitorStateException olur.",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Cagri synchronized blok/metod icinde ve ilgili monitor locku eldeyken yapilmali\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. static olma zorunlulugu yoktur."
+          "text": "Yanlis/eksik secenek: 'Her zaman static metodda olmak'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. wait monitor lockuna baglidir."
+          "text": "Dogru secenek: 'Cagri synchronized blok/metod icinde ve ilgili monitor locku eldeyken yapilmali'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: wait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Daemon ilgisizdir."
+          "text": "Yanlis/eksik secenek: 'Thread daemon olmali'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. wait dusuk seviye monitor APIdir."
+          "text": "Yanlis/eksik secenek: 'ExecutorService zorunlu'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);"
     },
     {
       "id": "i6-q2",
@@ -80,25 +81,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "waitin en kritik farki locku birakmasidir. Bu sayede diger threadler locka girip kosulu degistirebilir.",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Monitor lock birakilir ve sinyal beklenir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. wait locku birakir."
+          "text": "Yanlis/eksik secenek: 'Lock tutulmaya devam eder'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. notify/notifyAll beklerken lock serbesttir."
+          "text": "Dogru secenek: 'Monitor lock birakilir ve sinyal beklenir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: wait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Sadece ilgili monitor locku birakilir."
+          "text": "Yanlis/eksik secenek: 'Tum locklar global serbest kalir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Thread sonlanmaz, beklemeye gecer."
+          "text": "Yanlis/eksik secenek: 'Thread terminate olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);"
     },
     {
       "id": "i6-q3",
@@ -127,25 +129,26 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "Birden fazla kosul varsa notifyAll daha guvenli olur. notify yanlis threadi uyandirirsa ilerleme olmayabilir.",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): C: notify bir bekleyeni, notifyAll tum bekleyenleri uyandirir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. notify tek bekleyen secmeye calisir."
+          "text": "Yanlis/eksik secenek: 'notify tum bekleyenleri kaldirir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Yanlis. notifyAll tum waiting threadleri uyandirir."
+          "text": "Yanlis/eksik secenek: 'notifyAll sadece bir threadi kaldirir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "C",
-          "text": "Dogru. Temel fark budur."
+          "text": "Dogru secenek: 'notify bir bekleyeni, notifyAll tum bekleyenleri uyandirir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: wait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Monitor lock semantigi devam eder."
+          "text": "Yanlis/eksik secenek: 'Ikisi de lock kullanmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);"
     },
     {
       "id": "i6-q4",
@@ -174,25 +177,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "CountDownLatch bir kerelik koordinasyon primitiveidir. Tekrar kullanmak icin yeni instance gerekir.",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Tek seferlik countdown kapisidir; sifira inince await gecilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Reset destegi yoktur."
+          "text": "Yanlis/eksik secenek: 'Resetlenebilir ve tekrar tekrar kullanilir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. one-shot koordinasyon aracidir."
+          "text": "Dogru secenek: 'Tek seferlik countdown kapisidir; sifira inince await gecilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: wait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Cok threadli koordinasyon icin tasarlanmistir."
+          "text": "Yanlis/eksik secenek: 'Sadece tek thread destekler'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Queue degil senkronizasyon primitiveidir."
+          "text": "Yanlis/eksik secenek: 'Lock-free queue yapisidir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);"
     },
     {
       "id": "i6-q5",
@@ -221,25 +225,26 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "CyclicBarrier fazlar halinde calisan paralel algoritmalarda etkilidir. Bariyer kirildiktan sonra tekrar kullanilabilir.",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Bir grup threadin belirli noktada birbirini bekleyip tekrar kullanilabilir bariyer olusturmasi\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Bu daha cok latche benzer."
+          "text": "Yanlis/eksik secenek: 'Tek seferlik event bekleme'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Reusable faz bariyeri amacina hizmet eder."
+          "text": "Dogru secenek: 'Bir grup threadin belirli noktada birbirini bekleyip tekrar kullanilabilir bariyer olusturmasi'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: wait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Queue primitivei degildir."
+          "text": "Yanlis/eksik secenek: 'Task queue depolama'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Saya\u00e7 degildir."
+          "text": "Yanlis/eksik secenek: 'Atomic counter'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
-      ]
+      ],
+      "answerCode": "class AtomicCounter {\n    private final java.util.concurrent.atomic.AtomicInteger value =\n        new java.util.concurrent.atomic.AtomicInteger(0);\n\n    void inc() {\n        value.incrementAndGet();\n    }\n\n    int get() {\n        return value.get();\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);"
     },
     {
       "id": "i6-q6",
@@ -268,26 +273,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "main wait ile bekler, notifier thread notify verdikten sonra main devam eder. Bu nedenle after satiri notify sonrasi gelir.",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: before -> waiting -> after sirasi beklenir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. wait oldugu icin after once gelemez."
+          "text": "Yanlis/eksik secenek: 'after hemen beforedan once gelir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Koordinasyon akisi budur."
+          "text": "Dogru secenek: 'before -> waiting -> after sirasi beklenir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: wait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. before/waiting de yazilir."
+          "text": "Yanlis/eksik secenek: 'Sadece after yazilir'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod derlenir."
+          "text": "Yanlis/eksik secenek: 'Kod compile olmaz'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "Object lock = new Object();\nThread notifier = new Thread(() -> {\n    synchronized (lock) {\n        System.out.print(\"waiting \");\n        lock.notify();\n    }\n});\n\nsynchronized (lock) {\n    System.out.print(\"before \");\n    notifier.start();\n    lock.wait();\n    System.out.print(\"after\");\n}\nnotifier.join();"
+      "questionCode": "Object lock = new Object();\nThread notifier = new Thread(() -> {\n    synchronized (lock) {\n        System.out.print(\"waiting \");\n        lock.notify();\n    }\n});\n\nsynchronized (lock) {\n    System.out.print(\"before \");\n    notifier.start();\n    lock.wait();\n    System.out.print(\"after\");\n}\nnotifier.join();",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);"
     },
     {
       "id": "i6-q7",
@@ -316,26 +322,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "wait monitor locku olmadan cagrildigi icin runtime exception firlar. Bu klasik interview tuzagidir.",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: IllegalMonitorStateException olusur\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. synchronized yoksa normal bekleme olamaz."
+          "text": "Yanlis/eksik secenek: 'Normal bekleme olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Monitor lock sartini ihlal eder."
+          "text": "Dogru secenek: 'IllegalMonitorStateException olusur'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: wait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Hata deadlocktan once exception olarak gelir."
+          "text": "Yanlis/eksik secenek: 'Deadlock olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Derleme basarili olur."
+          "text": "Yanlis/eksik secenek: 'Compile error'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "Object lock = new Object();\nlock.wait();"
+      "questionCode": "Object lock = new Object();\nlock.wait();",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);"
     },
     {
       "id": "i6-q8",
@@ -364,26 +371,27 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "CountDownLatch(2) iki sinyal bekler. Sifira indiginde await bloktan cikar.",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Iki countDown sonrasi await gecer ve done yazilir\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Sayi sifira inince await doner."
+          "text": "Yanlis/eksik secenek: 'await asla donmez'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Tam davranis budur."
+          "text": "Dogru secenek: 'Iki countDown sonrasi await gecer ve done yazilir'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: wait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. countDown lock alma zorunlulugu yoktur."
+          "text": "Yanlis/eksik secenek: 'countDown lock ister'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Latch resetlenmez."
+          "text": "Yanlis/eksik secenek: 'Latch otomatik reset olur'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(2);\nnew Thread(() -> { latch.countDown(); latch.countDown(); }).start();\nlatch.await();\nSystem.out.println(\"done\");"
+      "questionCode": "java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(2);\nnew Thread(() -> { latch.countDown(); latch.countDown(); }).start();\nlatch.await();\nSystem.out.println(\"done\");",
+      "answerCode": "class SafeCounter {\n    private int value = 0;\n    private final Object lock = new Object();\n\n    void increment() {\n        synchronized (lock) {\n            value++;\n        }\n    }\n\n    int getValue() {\n        synchronized (lock) {\n            return value;\n        }\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);"
     },
     {
       "id": "i6-q9",
@@ -412,34 +420,35 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "Iki permit alindiktan sonra ucuncu acquire denemesi permit iade edilmedikce basarisiz olur.",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: tryAcquire kesin false\nDogru secenek, soruda aranan garanti tipini (atomiklik, gorunurluk, liveness veya performans trade-offu) dogrudan karsilar.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nKod cikti sorulari icin adim adim yontem:\n1) Deterministik siralama var mi bak (join, single-thread executor, latch gibi).\n2) Shared state ve lock etkisini ayristir.\n3) Garanti yoksa olasi cikti kumesini ve sebebini yaz.\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
       "optionExplanations": [
         {
           "id": "A",
-          "text": "Yanlis. Permit kalmadigi icin true beklenmez."
+          "text": "Yanlis/eksik secenek: 'tryAcquire kesin true'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "B",
-          "text": "Dogru. Kalan permit 0 oldugu icin false."
+          "text": "Dogru secenek: 'tryAcquire kesin false'.\nBu secenek soruda aranan garanti tipini dogrudan saglar.\nTeknik temel: wait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\nMulakatta bu secenegi savunurken garanti tipini adlandirip diger seceneklerin neden eksik oldugunu karsilastir.\nProduction bakisi: bu karari tekrarli test, timeout ve hata senaryolariyla dogrulamak gerekir."
         },
         {
           "id": "C",
-          "text": "Yanlis. Hata yok."
+          "text": "Yanlis/eksik secenek: 'Runtime error'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         },
         {
           "id": "D",
-          "text": "Yanlis. Kod gecerli."
+          "text": "Yanlis/eksik secenek: 'Derleme hatasi'.\nBu secenek sorunun bekledigi garantiyle tam uyusmaz.\nRisk hatirlatmasi: waiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\nKarsilastirma taktigi: bu secenekte hangi garanti eksik (atomiklik, gorunurluk, liveness, performans) oldugunu net soyle.\nProduction etkisi: veri tutarsizligi, bekleme sorunlari veya gereksiz maliyet olusturabilir."
         }
       ],
-      "questionCode": "java.util.concurrent.Semaphore sem = new java.util.concurrent.Semaphore(2);\nsem.acquire();\nsem.acquire();\nSystem.out.println(sem.tryAcquire());"
+      "questionCode": "java.util.concurrent.Semaphore sem = new java.util.concurrent.Semaphore(2);\nsem.acquire();\nsem.acquire();\nSystem.out.println(sem.tryAcquire());",
+      "answerCode": "java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(2);\nnew Thread(latch::countDown).start();\nnew Thread(latch::countDown).start();\nlatch.await();\nSystem.out.println(\"all workers completed\");\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);"
     },
     {
       "id": "i6-q10",
       "type": "code",
       "question": "Producer-consumer modelini ArrayBlockingQueue ile uygula. Producer 1..5 uretsin, consumer hepsini tuketsin.",
       "starterCode": "void runPipeline() throws Exception {\n    // TODO\n}",
-      "answerBody": "Low-level wait/notify yerine BlockingQueue kullanmak daha guvenli ve okunur yaklasimdir. Kuyruk hem koordinasyonu hem backpressurei yonetir.",
-      "answerCode": "void runPipeline() throws Exception {\n    java.util.concurrent.BlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(2);\n\n    Thread producer = new Thread(() -> {\n        try {\n            for (int i = 1; i <= 5; i++) {\n                q.put(i);\n            }\n            q.put(-1); // poison pill\n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n        }\n    });\n\n    Thread consumer = new Thread(() -> {\n        try {\n            while (true) {\n                int v = q.take();\n                if (v == -1) break;\n                System.out.println(\"consume=\" + v);\n            }\n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n        }\n    });\n\n    producer.start();\n    consumer.start();\n    producer.join();\n    consumer.join();\n}",
+      "answerBody": "Sorunun odagi: Koordinasyon primitiveleri\n\nNeden bu cevap dogru?\nBu bir kod yazma sorusu. Beklenen sadece calisan kod degil; thread-safety, temiz kapanis, hata/iptal davranisi ve test edilebilirliktir.\n\nKonu anlatimi (sifirdan):\nwait/notify monitor bazlidir. CountDownLatch tek seferlik senkronizasyon saglar. CyclicBarrier tekrar kullanilabilir faz bariyeridir. Semaphore eszamanli izin sayisini sinirlar. BlockingQueue producer-consumeri sadeleştirir.\n\nPratikte nasil uygularsin?\nLow-level wait/notify yerine java.util.concurrent araclarini secmek daha okunur ve hataya daha dayanikli cozum verir.\n\nSik yapilan hata:\nwaiti if ile yazmak (spurious wakeup), notify/notifyAll secimini yanlis yapmak, interrupti yutmak bekleme hatasi dogurur.\n\nKod yazma kalitesi kontrol listesi:\n1) interrupt dostu durdurma var mi?\n2) lock/kaynak finallyde birakiliyor mu?\n3) timeout/retry politikasi net mi?\n4) tekrarli concurrent test ile dogrulama dusunuldu mu?\n\nEk mini kod ornegi:\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);\n\nMulakat kapanis cumlesi: once shared state, sonra atomiklik/gorunurluk, en son liveness ve performans etkisi degerlendirilir.",
+      "answerCode": "void runPipeline() throws Exception {\n    java.util.concurrent.BlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(2);\n\n    Thread producer = new Thread(() -> {\n        try {\n            for (int i = 1; i <= 5; i++) {\n                q.put(i);\n            }\n            q.put(-1); // poison pill\n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n        }\n    });\n\n    Thread consumer = new Thread(() -> {\n        try {\n            while (true) {\n                int v = q.take();\n                if (v == -1) break;\n                System.out.println(\"consume=\" + v);\n            }\n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n        }\n    });\n\n    producer.start();\n    consumer.start();\n    producer.join();\n    consumer.join();\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\njava.util.concurrent.ArrayBlockingQueue<Integer> q = new java.util.concurrent.ArrayBlockingQueue<>(10);\nq.put(1);\nint value = q.take();\nSystem.out.println(value);",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]

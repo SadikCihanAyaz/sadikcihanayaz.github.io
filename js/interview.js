@@ -78,6 +78,10 @@
     }
   }
 
+  function formatMultiline(text) {
+    return esc(text || '').replace(/\n/g, '<br>');
+  }
+
   function setSeo({ title, description, path, robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }) {
     const canonicalUrl = new URL(path, window.location.origin).href;
 
@@ -292,14 +296,14 @@
         const items = question.optionExplanations.map((item) => {
           const isCorrect = correctIds.includes(item.id);
           const status = isCorrect ? 'Dogru secenek' : 'Yanlis secenek';
-          return `<li><strong>${esc(item.id)} - ${status}:</strong> ${esc(item.text || '')}</li>`;
+          return `<li><strong>${esc(item.id)} - ${status}:</strong> ${formatMultiline(item.text || '')}</li>`;
         }).join('');
         html += `<div class="article-block"><h4>Sik Aciklamalari</h4><ul>${items}</ul></div>`;
       }
     }
 
     if (question.answerBody) {
-      html += `<p>${esc(question.answerBody)}</p>`;
+      html += `<p>${formatMultiline(question.answerBody)}</p>`;
     }
 
     if (question.answerCode) {
