@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategories": [
+    {
+      "id": "threads",
+      "title": "Threads",
+      "description": "Thread modeli, lifecycle, synchronization ve thread-safe tasarim",
+      "order": 1,
+      "folder": "001_threads",
+      "topicFile": "/data/001_java/001_threads/topic/001_topic.json",
+      "interviewsFile": "/data/001_java/001_threads/interviews/index.json",
+      "interviewCount": 2
+    },
+    {
+      "id": "collections",
+      "title": "Collections",
+      "description": "List, Set, Map secimi ve performans trade-offlari",
+      "order": 2,
+      "folder": "002_collections",
+      "topicFile": "/data/001_java/002_collections/topic/001_topic.json",
+      "interviewsFile": "/data/001_java/002_collections/interviews/index.json",
+      "interviewCount": 1
+    }
+  ]
+}

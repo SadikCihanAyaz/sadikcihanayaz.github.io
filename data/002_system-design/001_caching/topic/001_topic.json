@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "categoryId": "system-design",
+  "subcategoryId": "caching",
+  "id": "caching-topic",
+  "title": "Caching - Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Cache, sik okunan veriyi hizli katmanda tutarak latency'yi dusurur. Ama invalidation yanlissa stale data problemleri olur."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Read-through ve cache-aside en yaygin iki model",
+        "TTL secimi is kuralina gore yapilmali",
+        "Dogru metricler: hit ratio, stale ratio, p95 latency"
+      ]
+    }
+  ]
+}

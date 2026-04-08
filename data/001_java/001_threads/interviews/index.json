@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "interviews": [
+    {
+      "id": "thread-interview-1",
+      "title": "Thread Interview - 1",
+      "description": "Temel lifecycle ve synchronization sorulari",
+      "order": 1,
+      "questionCount": 3,
+      "file": "/data/001_java/001_threads/interviews/001_thread-interview-1.json"
+    },
+    {
+      "id": "thread-interview-2",
+      "title": "Thread Interview - 2",
+      "description": "ExecutorService, Future, timeout ve cancellation",
+      "order": 2,
+      "questionCount": 2,
+      "file": "/data/001_java/001_threads/interviews/002_thread-interview-2.json"
+    }
+  ]
+}

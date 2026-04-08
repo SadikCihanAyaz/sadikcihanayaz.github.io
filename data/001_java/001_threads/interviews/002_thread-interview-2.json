@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "id": "thread-interview-2",
+  "title": "Thread Interview - 2",
+  "description": "ExecutorService, Future, timeout ve cancellation",
+  "questions": [
+    {
+      "id": "t2-q1",
+      "type": "mcq",
+      "singleChoice": true,
+      "question": "`ExecutorService` kullanmanin temel avantaji nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Thread olusturmayi tamamen kaldirir"
+        },
+        {
+          "id": "B",
+          "text": "Thread yasam dongusunu ve havuzu merkezi yonetmeni saglar"
+        },
+        {
+          "id": "C",
+          "text": "Tum tasklari senkron calistirir"
+        },
+        {
+          "id": "D",
+          "text": "GC'yi kapatir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "ExecutorService, thread reuse ve task scheduling konusunda daha guvenli ve olceklenebilir bir model sunar."
+    },
+    {
+      "id": "t2-q2",
+      "type": "code",
+      "question": "Bir task 2 saniyede donmezse iptal et. `Future` ile ornek kod yaz.",
+      "starterCode": "ExecutorService pool = Executors.newSingleThreadExecutor();\nFuture<String> f = pool.submit(() -> {\n    Thread.sleep(5000);\n    return \"done\";\n});\n\n// TODO: timeout + cancel",
+      "answerBody": "`get(timeout)` ile bekleyip `TimeoutException` durumunda `cancel(true)` cagirabilirsin.",
+      "answerCode": "try {\n    String value = f.get(2, TimeUnit.SECONDS);\n    System.out.println(value);\n} catch (TimeoutException ex) {\n    f.cancel(true);\n    System.out.println(\"task cancelled\");\n} finally {\n    pool.shutdownNow();\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

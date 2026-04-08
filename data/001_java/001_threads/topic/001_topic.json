@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "id": "threads-topic",
+  "title": "Java Threads - Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Thread, JVM icinde bagimsiz calisma akisidir. Ama temel hedef sadece parallel calismak degil; dogru paylasim, dogru senkronizasyon ve tahmin edilebilir davranistir."
+    },
+    {
+      "type": "list",
+      "title": "Temel basliklar",
+      "items": [
+        "Thread lifecycle: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED",
+        "Shared mutable state oldugunda race condition riski",
+        "synchronized / Lock / atomics secimi",
+        "ExecutorService ile thread yonetimi"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "ExecutorService pool = Executors.newFixedThreadPool(4);\nFuture<Integer> result = pool.submit(() -> 42);\nSystem.out.println(result.get());\npool.shutdown();"
+    },
+    {
+      "type": "paragraph",
+      "text": "Kural: Once mutable state'i azalt. Sonra gerekli yerde minimum kapsamli senkronizasyon uygula."
+    }
+  ]
+}

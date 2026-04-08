@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "categoryId": "system-design",
+  "subcategoryId": "caching",
+  "id": "cache-interview-1",
+  "title": "Caching Interview - 1",
+  "description": "Cache invalidation ve dogru metrik secimi",
+  "questions": [
+    {
+      "id": "sd1-q1",
+      "type": "mcq",
+      "singleChoice": true,
+      "question": "Cache performansini ilk bakista en iyi gosteren metrik hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "CPU temperature"
+        },
+        {
+          "id": "B",
+          "text": "Cache hit ratio"
+        },
+        {
+          "id": "C",
+          "text": "Disk model number"
+        },
+        {
+          "id": "D",
+          "text": "HTTP status text"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Hit ratio tek basina yeterli olmasa da cache etkinligini gosteren ilk ana metriktir."
+    }
+  ]
+}

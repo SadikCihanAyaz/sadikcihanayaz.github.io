@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "categoryId": "system-design",
+  "subcategories": [
+    {
+      "id": "caching",
+      "title": "Caching",
+      "description": "Cache stratejileri, invalidation ve stale data",
+      "order": 1,
+      "folder": "001_caching",
+      "topicFile": "/data/002_system-design/001_caching/topic/001_topic.json",
+      "interviewsFile": "/data/002_system-design/001_caching/interviews/index.json",
+      "interviewCount": 1
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "collections",
+  "id": "collections-interview-1",
+  "title": "Collections Interview - 1",
+  "description": "Temel secim ve complexity sorulari",
+  "questions": [
+    {
+      "id": "c1-q1",
+      "type": "mcq",
+      "singleChoice": true,
+      "question": "Asagidakilerden hangisi key-value veri yapisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "HashSet"
+        },
+        {
+          "id": "B",
+          "text": "ArrayList"
+        },
+        {
+          "id": "C",
+          "text": "HashMap"
+        },
+        {
+          "id": "D",
+          "text": "Queue"
+        }
+      ],
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "HashMap key-value yapisidir; Set ise key tabanli degil benzersiz eleman koleksiyonudur."
+    }
+  ]
+}

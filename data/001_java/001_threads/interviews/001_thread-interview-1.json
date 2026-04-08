@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "id": "thread-interview-1",
+  "title": "Thread Interview - 1",
+  "description": "Temel lifecycle ve synchronization sorulari",
+  "questions": [
+    {
+      "id": "t1-q1",
+      "type": "mcq",
+      "singleChoice": true,
+      "question": "`volatile` asagidakilerden hangisini garanti eder?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tum operasyonlarda atomicity"
+        },
+        {
+          "id": "B",
+          "text": "Threadler arasi gorunurluk"
+        },
+        {
+          "id": "C",
+          "text": "Deadlock olusmamasini"
+        },
+        {
+          "id": "D",
+          "text": "Automatic retry mekanizmasini"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "`volatile` gorunurluk saglar; `x++` gibi compound operasyonlarda atomicity saglamaz."
+    },
+    {
+      "id": "t1-q2",
+      "type": "mcq",
+      "singleChoice": false,
+      "question": "Asagidakilerden hangileri thread-safe koleksiyon ornegidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "ArrayList"
+        },
+        {
+          "id": "B",
+          "text": "ConcurrentHashMap"
+        },
+        {
+          "id": "C",
+          "text": "CopyOnWriteArrayList"
+        },
+        {
+          "id": "D",
+          "text": "HashMap"
+        }
+      ],
+      "correctChoiceIds": [
+        "B",
+        "C"
+      ],
+      "answerBody": "`ConcurrentHashMap` ve `CopyOnWriteArrayList` eszamanli erisim icin tasarlanmistir."
+    },
+    {
+      "id": "t1-q3",
+      "type": "code",
+      "question": "100 thread ayni sayac degerini 1000 kez artiriyor. Sonucun hep dogru olmasi icin nasil yazarsin?",
+      "starterCode": "class CounterService {\n    private int count = 0;\n\n    public void increment() {\n        // TODO\n    }\n\n    public int getCount() {\n        return count;\n    }\n}",
+      "answerBody": "Senkronizasyon veya atomik tip kullanmalisin. En sade cozum `AtomicInteger` kullanmaktir.",
+      "answerCode": "class CounterService {\n    private final AtomicInteger count = new AtomicInteger(0);\n\n    public void increment() {\n        count.incrementAndGet();\n    }\n\n    public int getCount() {\n        return count.get();\n    }\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+:root {
+  --bg: #f7f8fb;
+  --panel: #ffffff;
+  --text: #19202a;
+  --muted: #5d6b7a;
+  --line: #dbe2ea;
+  --primary: #0d6efd;
+  --primary-strong: #0b5ed7;
+  --ok: #198754;
+  --bad: #dc3545;
+  --code: #0f1720;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.site-header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+}
+
+.breadcrumb {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
+.section {
+  margin-top: 26px;
+}
+
+.section h2 {
+  margin: 0 0 14px;
+  font-size: 22px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.card .meta {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 9px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: #bbc7d3;
+}
+
+.btn-primary {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-strong);
+  border-color: var(--primary-strong);
+}
+
+.btn-link {
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  padding: 0;
+}
+
+.callout {
+  border-left: 4px solid var(--primary);
+  background: #eef5ff;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 16px 0;
+  color: #223;
+}
+
+.article-block {
+  margin-top: 14px;
+}
+
+.article-block h4 {
+  margin: 0 0 8px;
+}
+
+.article-block p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.article-block ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text);
+}
+
+.article-block li {
+  margin: 7px 0;
+}
+
+pre.code {
+  margin: 0;
+  background: var(--code);
+  color: #d7e0ea;
+  border-radius: 10px;
+  padding: 12px;
+  overflow: auto;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.question-shell {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 16px;
+}
+
+.progress {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.question-title {
+  margin: 8px 0 0;
+  font-size: 23px;
+}
+
+.question-text {
+  margin-top: 12px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.choice-list {
+  margin-top: 16px;
+  display: grid;
+  gap: 9px;
+}
+
+.choice {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.choice input {
+  margin-top: 3px;
+}
+
+.choice label {
+  cursor: pointer;
+}
+
+.answer-box {
+  margin-top: 14px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  background: #fafcff;
+}
+
+.status-ok {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.status-bad {
+  color: var(--bad);
+  font-weight: 700;
+}
+
+textarea.code-input {
+  width: 100%;
+  min-height: 200px;
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 14px;
+}
+
+.footer-note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .question-title {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview Player</title>
+  <link rel="stylesheet" href="/app/app.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/learn.html">Learning Hub</a>
+      <a id="backToSub" href="/learn.html" class="btn">Geri</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div id="breadcrumb" class="breadcrumb"></div>
+    <h1 id="title" class="title">Interview</h1>
+    <p id="subtitle" class="subtitle"></p>
+
+    <section id="questionShell" class="question-shell hidden">
+      <div id="progress" class="progress"></div>
+      <h2 id="questionTitle" class="question-title"></h2>
+      <p id="questionText" class="question-text"></p>
+
+      <div id="questionBody"></div>
+
+      <div class="actions">
+        <button id="checkBtn" class="btn">Yanitimi Kontrol Et</button>
+        <button id="toggleAnswerBtn" class="btn">Cevabi Goster</button>
+      </div>
+
+      <div id="checkResult" class="article-block"></div>
+      <div id="answerBox" class="answer-box hidden"></div>
+
+      <div class="actions">
+        <button id="prevBtn" class="btn">Onceki Soru</button>
+        <button id="nextBtn" class="btn btn-primary">Sonraki Soru</button>
+      </div>
+    </section>
+
+    <section id="errorBox" class="callout hidden"></section>
+  </main>
+
+  <script src="/js/interview.js"></script>
+</body>
+</html>
