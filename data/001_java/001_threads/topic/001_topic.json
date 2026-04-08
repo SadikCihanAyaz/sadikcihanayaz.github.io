@@ -3,30 +3,113 @@
   "categoryId": "java",
   "subcategoryId": "threads",
   "id": "threads-topic",
-  "title": "Java Threads - Konu Anlatimi",
+  "title": "Java Concurrency ve Multithreading - Threads Temel ve Kritik Ozet",
   "blocks": [
     {
       "type": "paragraph",
-      "text": "Thread, JVM icinde bagimsiz calisma akisidir. Ama temel hedef sadece parallel calismak degil; dogru paylasim, dogru senkronizasyon ve tahmin edilebilir davranistir."
+      "text": "Concurrency tarafinda asil problem thread olusturmak degil, paylasilan mutable state'i dogru yonetememektir. Bu konu, interview ve production kodda en kritik ayrim noktalarini toplar."
     },
     {
       "type": "list",
-      "title": "Temel basliklar",
+      "title": "Bu konuda odak noktasi",
       "items": [
-        "Thread lifecycle: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED",
-        "Shared mutable state oldugunda race condition riski",
-        "synchronized / Lock / atomics secimi",
-        "ExecutorService ile thread yonetimi"
+        "Thread heap'i paylasir: ayni nesneye birden fazla thread erisebilir",
+        "Race condition neden olur ve nasil engellenir",
+        "synchronized, volatile, ReentrantLock secim mantigi",
+        "ExecutorService, Callable, Future ile dogru asenkron model",
+        "Deadlock/starvation riskleri ve onleme",
+        "Immutability ve concurrent collections ile daha guvenli tasarim"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Thread, process icindeki is parcacigidir. Process'ler ayrik bellek alanina sahipken thread'ler ayni heap'i paylastigi icin veri tutarsizligi riski dogar."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "class Counter {\n    int value = 0;\n\n    void increment() {\n        value++; // thread-safe degil\n    }\n}"
+    },
+    {
+      "type": "list",
+      "title": "Race condition neden olur?",
+      "items": [
+        "value++ tek adim degildir: oku -> arttir -> yaz",
+        "Iki thread ayni anda girerse update kaybi olabilir",
+        "Beklenen sonuc deterministik olmaz"
       ]
     },
     {
       "type": "code",
       "language": "java",
-      "code": "ExecutorService pool = Executors.newFixedThreadPool(4);\nFuture<Integer> result = pool.submit(() -> 42);\nSystem.out.println(result.get());\npool.shutdown();"
+      "code": "class CounterSync {\n    private int value = 0;\n\n    public synchronized void increment() {\n        value++;\n    }\n}\n\nclass CounterAtomic {\n    private final java.util.concurrent.atomic.AtomicInteger value =\n        new java.util.concurrent.atomic.AtomicInteger(0);\n\n    public void increment() {\n        value.incrementAndGet();\n    }\n}"
+    },
+    {
+      "type": "list",
+      "title": "synchronized, volatile, ReentrantLock secim mantigi",
+      "items": [
+        "synchronized: kritik bolgeye ayni anda tek thread girer (mutual exclusion)",
+        "volatile: sadece gorunurluk saglar, atomiklik saglamaz",
+        "ReentrantLock: tryLock, timeout, fairness gibi ileri kontrol ihtiyacinda"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "class StopSignal {\n    volatile boolean running = true;\n}\n\n// Not: volatile gorunurluk saglar ama value++ gibi compound islemleri\n// thread-safe hale getirmez."
     },
     {
       "type": "paragraph",
-      "text": "Kural: Once mutable state'i azalt. Sonra gerekli yerde minimum kapsamli senkronizasyon uygula."
+      "text": "Modern Java'da tek tek new Thread() acmak yerine task odakli calismak gerekir. Bu nedenle ExecutorService kullanimi production'da daha dogru yaklasimdir."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\njava.util.concurrent.Callable<Integer> task = () -> 42;\njava.util.concurrent.Future<Integer> future = pool.submit(task);\n\ntry {\n    Integer result = future.get(2, java.util.concurrent.TimeUnit.SECONDS);\n    System.out.println(result);\n} catch (java.util.concurrent.TimeoutException e) {\n    future.cancel(true);\n} finally {\n    pool.shutdown();\n}"
+    },
+    {
+      "type": "list",
+      "title": "Lifecycle ve bekleme farklari",
+      "items": [
+        "Durumlar: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED",
+        "BLOCKED: lock bekleme",
+        "WAITING: sinyal/olay bekleme",
+        "sleep(): timed waiting, join(): baska thread bitsin bekle, wait(): notify/sinyal bekle"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "Object lockA = new Object();\nObject lockB = new Object();\n\n// T1: A -> B\n// T2: B -> A\n// Kilit sirasi ters olursa deadlock olusabilir"
+    },
+    {
+      "type": "list",
+      "title": "Deadlock ve starvation onleme",
+      "items": [
+        "Kilit alma sirasini sabitle (global lock order)",
+        "Gereksiz lock sayisini azalt",
+        "tryLock + timeout ile sonsuz beklemeyi kir",
+        "Starvation riskinde fair lock dusun: new ReentrantLock(true)"
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Thread-safe tasarim best practices",
+      "items": [
+        "Mumkun oldugunca immutable nesneler kullan",
+        "Paylasilan mutable state'i azalt",
+        "Kilit kapsamlarini kucuk tut",
+        "ConcurrentHashMap, CopyOnWriteArrayList, ConcurrentLinkedQueue gibi yapilari dogru yerde kullan"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "java.util.Map<String, Integer> counts =\n    new java.util.concurrent.ConcurrentHashMap<>();\n\ncounts.merge(\"java\", 1, Integer::sum);"
+    },
+    {
+      "type": "paragraph",
+      "text": "Interview kapanis cizgisi: Once paylasilan mutable state var mi bakarim. Varsa race condition riskini degerlendiririm. Basit durumda synchronized, ileri kontrol gerekiyorsa ReentrantLock, sadece gorunurluk icinse volatile dusunurum. Thread acmaktan cok ExecutorService ile merkezi yonetim yapar, tasarimda immutable ve concurrent collections tercih ederim."
     }
   ]
 }

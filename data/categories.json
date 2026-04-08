@@ -7,17 +7,8 @@
       "description": "Core Java, concurrency ve backend temelleri",
       "order": 1,
       "folder": "001_java",
-      "subcategoryCount": 2,
-      "subcategoriesFile": "/data/001_java/subcategories.json"
-    },
-    {
-      "id": "system-design",
-      "title": "System Design",
-      "description": "Olceklenebilirlik, cache, latency ve resiliency",
-      "order": 2,
-      "folder": "002_system-design",
       "subcategoryCount": 1,
-      "subcategoriesFile": "/data/002_system-design/subcategories.json"
+      "subcategoriesFile": "/data/001_java/subcategories.json"
     }
   ]
 }
