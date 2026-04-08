@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "hibernate-jpa-interview-1",
+  "title": "Hibernate/JPA Interview - 1",
+  "description": "Temel kavramlar: Spring Data JPA, JPA, Hibernate, JpaRepository",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring Data JPA, JPA ve Hibernate iliskisi icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Spring Data JPA ORM motorudur, Hibernate sadece connection acip kapatir."
+        },
+        {
+          "id": "B",
+          "text": "JPA spesifikasyondur, Hibernate implementasyondur, Spring Data JPA repository abstraction saglar."
+        },
+        {
+          "id": "C",
+          "text": "Hibernate JPAdan ust seviyede bir framework oldugu icin JPAya ihtiyac yoktur."
+        },
+        {
+          "id": "D",
+          "text": "Spring Data JPA sadece SQL migration araci olarak kullanilir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: JPA spesifikasyondur, Hibernate implementasyondur, Spring Data JPA repository abstraction saglar.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratikte nasil uygularsin?\nService katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Spring Data JPA ORM motorudur, Hibernate sadece connection acip kapatir.'.\nBu secenek, dogru yanit olan 'JPA spesifikasyondur, Hibernate implementasyondur, Spring Data JPA repository abstraction saglar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'JPA spesifikasyondur, Hibernate implementasyondur, Spring Data JPA repository abstraction saglar.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\nPratik uygulama: Service katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Hibernate JPAdan ust seviyede bir framework oldugu icin JPAya ihtiyac yoktur.'.\nBu secenek, dogru yanit olan 'JPA spesifikasyondur, Hibernate implementasyondur, Spring Data JPA repository abstraction saglar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Spring Data JPA sadece SQL migration araci olarak kullanilir.'.\nBu secenek, dogru yanit olan 'JPA spesifikasyondur, Hibernate implementasyondur, Spring Data JPA repository abstraction saglar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "public interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {}\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}"
+    },
+    {
+      "id": "i1-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JpaRepository icin en dogru avantaj seti hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece INSERT yapar, SELECT/DELETE icin manuel JDBC gerekir."
+        },
+        {
+          "id": "B",
+          "text": "CRUD, paging/sorting, derived query, @Query ve repository proxy olusumu saglar."
+        },
+        {
+          "id": "C",
+          "text": "Sadece native SQL calistirir, JPQL desteklemez."
+        },
+        {
+          "id": "D",
+          "text": "Sadece test ortaminda calisir, productionda kullanilmaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: CRUD, paging/sorting, derived query, @Query ve repository proxy olusumu saglar.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratikte nasil uygularsin?\nService katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Sadece INSERT yapar, SELECT/DELETE icin manuel JDBC gerekir.'.\nBu secenek, dogru yanit olan 'CRUD, paging/sorting, derived query, @Query ve repository proxy olusumu saglar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'CRUD, paging/sorting, derived query, @Query ve repository proxy olusumu saglar.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\nPratik uygulama: Service katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece native SQL calistirir, JPQL desteklemez.'.\nBu secenek, dogru yanit olan 'CRUD, paging/sorting, derived query, @Query ve repository proxy olusumu saglar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece test ortaminda calisir, productionda kullanilmaz.'.\nBu secenek, dogru yanit olan 'CRUD, paging/sorting, derived query, @Query ve repository proxy olusumu saglar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "java.util.Optional<User> u = userRepository.findById(1L);\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}"
+    },
+    {
+      "id": "i1-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Managed bir entity transaction icinde degistirildiginde hangi ifade dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her setter cagrisi aninda otomatik commit olur."
+        },
+        {
+          "id": "B",
+          "text": "Dirty checking sayesinde flush/commit aninda gerekli UPDATE SQLi olusur; her seferinde save zorunlu degildir."
+        },
+        {
+          "id": "C",
+          "text": "Entity once detach edilir sonra update edilir."
+        },
+        {
+          "id": "D",
+          "text": "Bu davranis sadece native query ile olur."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Dirty checking sayesinde flush/commit aninda gerekli UPDATE SQLi olusur; her seferinde save zorunlu degildir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratikte nasil uygularsin?\nService katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Her setter cagrisi aninda otomatik commit olur.'.\nBu secenek, dogru yanit olan 'Dirty checking sayesinde flush/commit aninda gerekli UPDATE SQLi olusur; her seferinde save zorunlu degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Dirty checking sayesinde flush/commit aninda gerekli UPDATE SQLi olusur; her seferinde save zorunlu degildir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\nPratik uygulama: Service katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Entity once detach edilir sonra update edilir.'.\nBu secenek, dogru yanit olan 'Dirty checking sayesinde flush/commit aninda gerekli UPDATE SQLi olusur; her seferinde save zorunlu degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Bu davranis sadece native query ile olur.'.\nBu secenek, dogru yanit olan 'Dirty checking sayesinde flush/commit aninda gerekli UPDATE SQLi olusur; her seferinde save zorunlu degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional\npublic void changeName(Long id){ User u = repo.findById(id).orElseThrow(); u.setName(\"Yeni\"); }\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}"
+    },
+    {
+      "id": "i1-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "findById ile getReferenceById arasindaki temel fark nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi de ayni anda tum iliskileri eager yukler."
+        },
+        {
+          "id": "B",
+          "text": "findById genelde DBye gidip entityyi getirir; getReferenceById proxy donup alan erisimi aninda initialize olabilir."
+        },
+        {
+          "id": "C",
+          "text": "getReferenceById sadece delete icin vardir."
+        },
+        {
+          "id": "D",
+          "text": "findById sadece id dondurur, entity dondurmez."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: findById genelde DBye gidip entityyi getirir; getReferenceById proxy donup alan erisimi aninda initialize olabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratikte nasil uygularsin?\nService katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Ikisi de ayni anda tum iliskileri eager yukler.'.\nBu secenek, dogru yanit olan 'findById genelde DBye gidip entityyi getirir; getReferenceById proxy donup alan erisimi aninda initialize olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'findById genelde DBye gidip entityyi getirir; getReferenceById proxy donup alan erisimi aninda initialize olabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\nPratik uygulama: Service katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'getReferenceById sadece delete icin vardir.'.\nBu secenek, dogru yanit olan 'findById genelde DBye gidip entityyi getirir; getReferenceById proxy donup alan erisimi aninda initialize olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'findById sadece id dondurur, entity dondurmez.'.\nBu secenek, dogru yanit olan 'findById genelde DBye gidip entityyi getirir; getReferenceById proxy donup alan erisimi aninda initialize olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "User ref = repo.getReferenceById(10L);\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}"
+    },
+    {
+      "id": "i1-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "CrudRepository ile JpaRepository iliskisi icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "CrudRepository, JpaRepositoryden daha genis bir arayuzdur."
+        },
+        {
+          "id": "B",
+          "text": "JpaRepository, CrudRepository/PagingAndSorting yeteneklerini kapsayip ek JPA odakli metotlar sunar."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi tamamen bagimsizdir, birlikte kullanilamaz."
+        },
+        {
+          "id": "D",
+          "text": "JpaRepository sadece @EntityGraph icin vardir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: JpaRepository, CrudRepository/PagingAndSorting yeteneklerini kapsayip ek JPA odakli metotlar sunar.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratikte nasil uygularsin?\nService katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'CrudRepository, JpaRepositoryden daha genis bir arayuzdur.'.\nBu secenek, dogru yanit olan 'JpaRepository, CrudRepository/PagingAndSorting yeteneklerini kapsayip ek JPA odakli metotlar sunar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'JpaRepository, CrudRepository/PagingAndSorting yeteneklerini kapsayip ek JPA odakli metotlar sunar.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\nPratik uygulama: Service katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Ikisi tamamen bagimsizdir, birlikte kullanilamaz.'.\nBu secenek, dogru yanit olan 'JpaRepository, CrudRepository/PagingAndSorting yeteneklerini kapsayip ek JPA odakli metotlar sunar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'JpaRepository sadece @EntityGraph icin vardir.'.\nBu secenek, dogru yanit olan 'JpaRepository, CrudRepository/PagingAndSorting yeteneklerini kapsayip ek JPA odakli metotlar sunar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "long total = userRepository.count();\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}"
+    },
+    {
+      "id": "i1-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Derived query yaklasiminda hangi sinir dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Karmasik join + aggregation + subquery senaryolarinda method ismi fazla buyuyup okunabilirlik azalir."
+        },
+        {
+          "id": "B",
+          "text": "Derived query sadece delete icin calisir."
+        },
+        {
+          "id": "C",
+          "text": "Derived queryde parameter kullanilamaz."
+        },
+        {
+          "id": "D",
+          "text": "Derived queryde pagination imkansizdir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Karmasik join + aggregation + subquery senaryolarinda method ismi fazla buyuyup okunabilirlik azalir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratikte nasil uygularsin?\nService katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Karmasik join + aggregation + subquery senaryolarinda method ismi fazla buyuyup okunabilirlik azalir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\nPratik uygulama: Service katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Derived query sadece delete icin calisir.'.\nBu secenek, dogru yanit olan 'Karmasik join + aggregation + subquery senaryolarinda method ismi fazla buyuyup okunabilirlik azalir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Derived queryde parameter kullanilamaz.'.\nBu secenek, dogru yanit olan 'Karmasik join + aggregation + subquery senaryolarinda method ismi fazla buyuyup okunabilirlik azalir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Derived queryde pagination imkansizdir.'.\nBu secenek, dogru yanit olan 'Karmasik join + aggregation + subquery senaryolarinda method ismi fazla buyuyup okunabilirlik azalir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "java.util.List<User> list = repo.findByStatusAndRole(\"ACTIVE\", \"ADMIN\");\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}"
+    },
+    {
+      "id": "i1-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Query ne zaman daha anlamli tercih olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece id ile findById cagrilarinda."
+        },
+        {
+          "id": "B",
+          "text": "Karmasik JPQL/native SQL, ozel join, aggregation veya performans kontrolu gereken sorgularda."
+        },
+        {
+          "id": "C",
+          "text": "Sadece test siniflarinda."
+        },
+        {
+          "id": "D",
+          "text": "Derived query hic calismadiginda degil, sadece migrationda."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Karmasik JPQL/native SQL, ozel join, aggregation veya performans kontrolu gereken sorgularda.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratikte nasil uygularsin?\nService katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Sadece id ile findById cagrilarinda.'.\nBu secenek, dogru yanit olan 'Karmasik JPQL/native SQL, ozel join, aggregation veya performans kontrolu gereken sorgularda.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Karmasik JPQL/native SQL, ozel join, aggregation veya performans kontrolu gereken sorgularda.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\nPratik uygulama: Service katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece test siniflarinda.'.\nBu secenek, dogru yanit olan 'Karmasik JPQL/native SQL, ozel join, aggregation veya performans kontrolu gereken sorgularda.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Derived query hic calismadiginda degil, sadece migrationda.'.\nBu secenek, dogru yanit olan 'Karmasik JPQL/native SQL, ozel join, aggregation veya performans kontrolu gereken sorgularda.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}"
+    },
+    {
+      "id": "i1-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki kodun behaviori icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Kod compile olur ama transaction olmadigi icin hic SQL calismaz."
+        },
+        {
+          "id": "B",
+          "text": "User managed oldugu icin commit/flush asamasinda UPDATE SQLi olusur; ayrica save cagrisi zorunlu degildir."
+        },
+        {
+          "id": "C",
+          "text": "findById sadece proxy dondurdugu icin degisiklik yansimaz."
+        },
+        {
+          "id": "D",
+          "text": "Kod her durumda iki kez UPDATE calistirir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: User managed oldugu icin commit/flush asamasinda UPDATE SQLi olusur; ayrica save cagrisi zorunlu degildir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratikte nasil uygularsin?\nService katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Kod compile olur ama transaction olmadigi icin hic SQL calismaz.'.\nBu secenek, dogru yanit olan 'User managed oldugu icin commit/flush asamasinda UPDATE SQLi olusur; ayrica save cagrisi zorunlu degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'User managed oldugu icin commit/flush asamasinda UPDATE SQLi olusur; ayrica save cagrisi zorunlu degildir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\nPratik uygulama: Service katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'findById sadece proxy dondurdugu icin degisiklik yansimaz.'.\nBu secenek, dogru yanit olan 'User managed oldugu icin commit/flush asamasinda UPDATE SQLi olusur; ayrica save cagrisi zorunlu degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Kod her durumda iki kez UPDATE calistirir.'.\nBu secenek, dogru yanit olan 'User managed oldugu icin commit/flush asamasinda UPDATE SQLi olusur; ayrica save cagrisi zorunlu degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id){ User u=repo.findById(id).orElseThrow(); u.setName(\"Bahar\"); }\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}",
+      "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void rename(Long id) {\n     User u = repo.findById(id).orElseThrow();\n     u.setName(\"Bahar\");\n }"
+    },
+    {
+      "id": "i1-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod parcasi icin dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "getId cagrisi proxyyi tam initialize etmek zorundadir ve her zaman SELECT atar."
+        },
+        {
+          "id": "B",
+          "text": "Proxy nesnesinde id erisimi cogu durumda initialize etmeden donebilir; diger alanlar (or. email) erisilince SELECT tetiklenebilir."
+        },
+        {
+          "id": "C",
+          "text": "Proxy nesnesi transaction disinda da tum alanlari otomatik yukler."
+        },
+        {
+          "id": "D",
+          "text": "getReferenceById hicbir durumda kullanilmamalidir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Proxy nesnesinde id erisimi cogu durumda initialize etmeden donebilir; diger alanlar (or. email) erisilince SELECT tetiklenebilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratikte nasil uygularsin?\nService katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'getId cagrisi proxyyi tam initialize etmek zorundadir ve her zaman SELECT atar.'.\nBu secenek, dogru yanit olan 'Proxy nesnesinde id erisimi cogu durumda initialize etmeden donebilir; diger alanlar (or. email) erisilince SELECT tetiklenebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Proxy nesnesinde id erisimi cogu durumda initialize etmeden donebilir; diger alanlar (or. email) erisilince SELECT tetiklenebilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\nPratik uygulama: Service katmaninda is kurali + transaction, repository katmaninda veri erisimi ayrimi yapildiginda kod daha bakimli olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Proxy nesnesi transaction disinda da tum alanlari otomatik yukler.'.\nBu secenek, dogru yanit olan 'Proxy nesnesinde id erisimi cogu durumda initialize etmeden donebilir; diger alanlar (or. email) erisilince SELECT tetiklenebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'getReferenceById hicbir durumda kullanilmamalidir.'.\nBu secenek, dogru yanit olan 'Proxy nesnesinde id erisimi cogu durumda initialize etmeden donebilir; diger alanlar (or. email) erisilince SELECT tetiklenebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Spring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "User ref = repo.getReferenceById(10L);\nLong id = ref.getId();\nString email = ref.getEmail();\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}",
+      "questionCode": " User ref = repo.getReferenceById(10L);\n Long onlyId = ref.getId();\n String email = ref.getEmail();"
+    },
+    {
+      "id": "i1-q10",
+      "type": "code",
+      "question": "Email bazli kullanici kaydi yapan bir service metodu yaz. Eger email zaten varsa IllegalStateException firlatsin; yoksa kaydetsin ve donsun.",
+      "starterCode": "class UserService {\n    private final UserRepository userRepository;\n\n    UserService(UserRepository userRepository) {\n        this.userRepository = userRepository;\n    }\n\n    // TODO\n}\n\ninterface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    boolean existsByEmail(String email);\n}\n\nclass User {\n    private Long id;\n    private String email;\n}\n",
+      "answerBody": "Sorunun odagi: Temel kavramlar ve repository mimarisi\n\nBu bir kod yazma sorusu. Beklenen sadece compile olan bir cozum degil; transaction semantigi, persistence context davranisi, hata yonetimi ve testlenebilirlik birlikte dogru kurulmalidir.\n\nKonu anlatimi (sifirdan):\nJPA bir spesifikasyon, Hibernate implementasyon, Spring Data JPA ise repository abstraction katmanidir. Bu ucunu ayirmak tum sorularin temelidir.\n\nPratik uygulama adimlari:\n1) Girdi dogrulama ve business rule kontrolu\n2) Transaction boundary belirleme\n3) Repository cagrisi ve lifecycle etkisi\n4) Hata durumlarinda rollback/compensation karari\n5) Testte hem basarili hem hatali akisi dogrulama\n\nSik yapilan hata:\nSpring Data JPAyi ORM motoru sanmak veya her update icin save zorunlu zannetmek ileride ciddi tasarim hatasi yaratir.\n\nDegerlendirme kriteri:\n- Dogru API secimi\n- Gereksiz query ve N+1 riskini azaltma\n- Rollback davranisini netlestirme\n- Kodun okunabilir ve test edilebilir olmasi\n\nEk mini kod ornegi:\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}",
+      "answerCode": "@org.springframework.transaction.annotation.Transactional\npublic User createUser(String email) {\n    if (email == null || email.isBlank()) {\n        throw new IllegalArgumentException(\"email bos olamaz\");\n    }\n\n    if (userRepository.existsByEmail(email)) {\n        throw new IllegalStateException(\"email zaten kayitli\");\n    }\n\n    User user = new User();\n    user.setEmail(email.trim().toLowerCase());\n    return userRepository.save(user);\n}\n\n// Test fikri:\n// 1) existsByEmail=true ise IllegalStateException\n// 2) yeni email ile save cagrisi ve donen entity kontrolu\n\n// Ek ogretici ornek\npublic interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

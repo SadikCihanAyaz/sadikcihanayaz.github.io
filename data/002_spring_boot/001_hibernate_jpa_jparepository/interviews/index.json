@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "interviews": [
+    {
+      "id": "hibernate-jpa-interview-1",
+      "title": "Hibernate/JPA Interview - 1",
+      "description": "Temel kavramlar: Spring Data JPA, JPA, Hibernate, JpaRepository",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/001_hibernate-jpa-interview-1.json"
+    },
+    {
+      "id": "hibernate-jpa-interview-2",
+      "title": "Hibernate/JPA Interview - 2",
+      "description": "CRUD, paging/sorting, derived query ve @Query pratikleri",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/002_hibernate-jpa-interview-2.json"
+    },
+    {
+      "id": "hibernate-jpa-interview-3",
+      "title": "Hibernate/JPA Interview - 3",
+      "description": "Entity state, persistence context, dirty checking, flush, merge",
+      "order": 3,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/003_hibernate-jpa-interview-3.json"
+    },
+    {
+      "id": "hibernate-jpa-interview-4",
+      "title": "Hibernate/JPA Interview - 4",
+      "description": "Lazy/Eager, N+1, fetch join, EntityGraph, batch fetch",
+      "order": 4,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/004_hibernate-jpa-interview-4.json"
+    },
+    {
+      "id": "hibernate-jpa-interview-5",
+      "title": "Hibernate/JPA Interview - 5",
+      "description": "@Transactional temel davranis, rollback kurallari, proxy etkisi",
+      "order": 5,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/005_hibernate-jpa-interview-5.json"
+    },
+    {
+      "id": "hibernate-jpa-interview-6",
+      "title": "Hibernate/JPA Interview - 6",
+      "description": "Propagation: REQUIRED, REQUIRES_NEW, MANDATORY, NESTED, UnexpectedRollback",
+      "order": 6,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/006_hibernate-jpa-interview-6.json"
+    },
+    {
+      "id": "hibernate-jpa-interview-7",
+      "title": "Hibernate/JPA Interview - 7",
+      "description": "Isolation seviyeleri, locking, lost update, @Version",
+      "order": 7,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/007_hibernate-jpa-interview-7.json"
+    },
+    {
+      "id": "hibernate-jpa-interview-8",
+      "title": "Hibernate/JPA Interview - 8",
+      "description": "Hibernate performans: batching, bulk update, pool, query plan",
+      "order": 8,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/008_hibernate-jpa-interview-8.json"
+    },
+    {
+      "id": "hibernate-jpa-interview-9",
+      "title": "Hibernate/JPA Interview - 9",
+      "description": "Specification, auditing, soft delete, cascade/orphanRemoval",
+      "order": 9,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/009_hibernate-jpa-interview-9.json"
+    },
+    {
+      "id": "hibernate-jpa-interview-10",
+      "title": "Hibernate/JPA Interview - 10",
+      "description": "Test, debug, SQL gozlemi, migration ve sorun giderme",
+      "order": 10,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/010_hibernate-jpa-interview-10.json"
+    }
+  ]
+}

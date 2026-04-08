@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "hibernate-jpa-interview-4",
+  "title": "Hibernate/JPA Interview - 4",
+  "description": "Lazy/Eager, N+1, fetch join, EntityGraph, batch fetch",
+  "questions": [
+    {
+      "id": "i4-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JPA default fetch tipi icin hangi eslesme dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@ManyToOne LAZY, @OneToMany EAGER"
+        },
+        {
+          "id": "B",
+          "text": "@ManyToOne EAGER, @OneToMany LAZY"
+        },
+        {
+          "id": "C",
+          "text": "Tum iliskiler default LAZY"
+        },
+        {
+          "id": "D",
+          "text": "Tum iliskiler default EAGER"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: @ManyToOne EAGER, @OneToMany LAZY\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratikte nasil uygularsin?\nDefault mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: '@ManyToOne LAZY, @OneToMany EAGER'.\nBu secenek, dogru yanit olan '@ManyToOne EAGER, @OneToMany LAZY' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: '@ManyToOne EAGER, @OneToMany LAZY'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: N+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\nPratik uygulama: Default mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Tum iliskiler default LAZY'.\nBu secenek, dogru yanit olan '@ManyToOne EAGER, @OneToMany LAZY' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Tum iliskiler default EAGER'.\nBu secenek, dogru yanit olan '@ManyToOne EAGER, @OneToMany LAZY' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@javax.persistence.ManyToOne(fetch = javax.persistence.FetchType.LAZY)\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+    },
+    {
+      "id": "i4-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "LazyInitializationException en tipik hangi durumda gorulur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Lazy iliskiye, persistence context kapanmisken erisildiginde."
+        },
+        {
+          "id": "B",
+          "text": "Entity save edilmeden once."
+        },
+        {
+          "id": "C",
+          "text": "Sadece native queryde."
+        },
+        {
+          "id": "D",
+          "text": "Sadece @Version oldugunda."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Lazy iliskiye, persistence context kapanmisken erisildiginde.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratikte nasil uygularsin?\nDefault mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Lazy iliskiye, persistence context kapanmisken erisildiginde.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: N+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\nPratik uygulama: Default mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Entity save edilmeden once.'.\nBu secenek, dogru yanit olan 'Lazy iliskiye, persistence context kapanmisken erisildiginde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece native queryde.'.\nBu secenek, dogru yanit olan 'Lazy iliskiye, persistence context kapanmisken erisildiginde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece @Version oldugunda.'.\nBu secenek, dogru yanit olan 'Lazy iliskiye, persistence context kapanmisken erisildiginde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "order.getItems().size(); // tx disinda ise risk\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+    },
+    {
+      "id": "i4-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "N+1 problemi icin en dogru tanim hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tek sorguda tum verinin ideal gelmesidir."
+        },
+        {
+          "id": "B",
+          "text": "1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece write islemlerinde gorulur."
+        },
+        {
+          "id": "D",
+          "text": "Connection pool hatasidir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: 1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratikte nasil uygularsin?\nDefault mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Tek sorguda tum verinin ideal gelmesidir.'.\nBu secenek, dogru yanit olan '1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: '1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: N+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\nPratik uygulama: Default mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece write islemlerinde gorulur.'.\nBu secenek, dogru yanit olan '1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Connection pool hatasidir.'.\nBu secenek, dogru yanit olan '1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "for (User u : users) { u.getOrders().size(); }\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+    },
+    {
+      "id": "i4-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JOIN FETCH kullaniminin ana amaci nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Transaction propagation belirlemek."
+        },
+        {
+          "id": "B",
+          "text": "Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak."
+        },
+        {
+          "id": "C",
+          "text": "Sadece insert hizini arttirmak."
+        },
+        {
+          "id": "D",
+          "text": "Entityyi detached yapmak."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratikte nasil uygularsin?\nDefault mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Transaction propagation belirlemek.'.\nBu secenek, dogru yanit olan 'Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: N+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\nPratik uygulama: Default mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece insert hizini arttirmak.'.\nBu secenek, dogru yanit olan 'Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Entityyi detached yapmak.'.\nBu secenek, dogru yanit olan 'Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.data.jpa.repository.Query(\"select distinct u from User u join fetch u.orders\")\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+    },
+    {
+      "id": "i4-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@EntityGraph neyi saglar?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Repository seviyesinde fetch planini declarative sekilde tanimlamayi."
+        },
+        {
+          "id": "B",
+          "text": "SQL migration scripti yazmayi."
+        },
+        {
+          "id": "C",
+          "text": "Rollback kurallarini degistirmeyi."
+        },
+        {
+          "id": "D",
+          "text": "Connection pool boyutunu ayarlamayi."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Repository seviyesinde fetch planini declarative sekilde tanimlamayi.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratikte nasil uygularsin?\nDefault mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Repository seviyesinde fetch planini declarative sekilde tanimlamayi.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: N+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\nPratik uygulama: Default mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'SQL migration scripti yazmayi.'.\nBu secenek, dogru yanit olan 'Repository seviyesinde fetch planini declarative sekilde tanimlamayi.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Rollback kurallarini degistirmeyi.'.\nBu secenek, dogru yanit olan 'Repository seviyesinde fetch planini declarative sekilde tanimlamayi.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Connection pool boyutunu ayarlamayi.'.\nBu secenek, dogru yanit olan 'Repository seviyesinde fetch planini declarative sekilde tanimlamayi.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+    },
+    {
+      "id": "i4-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "hibernate.default_batch_fetch_size ayarinin temel faydasi nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek."
+        },
+        {
+          "id": "B",
+          "text": "Tum sorgulari native SQLe cevirmek."
+        },
+        {
+          "id": "C",
+          "text": "Her transactioni REQUIRES_NEW yapmak."
+        },
+        {
+          "id": "D",
+          "text": "Dirty checkingi kapatmak."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratikte nasil uygularsin?\nDefault mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: N+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\nPratik uygulama: Default mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Tum sorgulari native SQLe cevirmek.'.\nBu secenek, dogru yanit olan 'Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Her transactioni REQUIRES_NEW yapmak.'.\nBu secenek, dogru yanit olan 'Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Dirty checkingi kapatmak.'.\nBu secenek, dogru yanit olan 'Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "spring.jpa.properties.hibernate.default_batch_fetch_size=50\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+    },
+    {
+      "id": "i4-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "OSIV (Open Session In View) acik oldugunda en kritik risk hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti."
+        },
+        {
+          "id": "B",
+          "text": "Uygulamanin derlenmemesi."
+        },
+        {
+          "id": "C",
+          "text": "Sadece insertlerin calismasi."
+        },
+        {
+          "id": "D",
+          "text": "Repositorylerin kapanmasi."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratikte nasil uygularsin?\nDefault mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: N+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\nPratik uygulama: Default mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Uygulamanin derlenmemesi.'.\nBu secenek, dogru yanit olan 'Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece insertlerin calismasi.'.\nBu secenek, dogru yanit olan 'Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Repositorylerin kapanmasi.'.\nBu secenek, dogru yanit olan 'Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "spring.jpa.open-in-view=false\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+    },
+    {
+      "id": "i4-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki kod icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dongu hicbir zaman query tetiklemez."
+        },
+        {
+          "id": "C",
+          "text": "Bu kod sadece delete SQL uretir."
+        },
+        {
+          "id": "D",
+          "text": "N+1 sadece write tarafinda olur."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratikte nasil uygularsin?\nDefault mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: N+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\nPratik uygulama: Default mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Dongu hicbir zaman query tetiklemez.'.\nBu secenek, dogru yanit olan 'users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Bu kod sadece delete SQL uretir.'.\nBu secenek, dogru yanit olan 'users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'N+1 sadece write tarafinda olur.'.\nBu secenek, dogru yanit olan 'users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "java.util.List<User> users = userRepository.findAll();\nfor (User u : users) {\n    u.getOrders().size();\n}\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();",
+      "questionCode": " java.util.List<User> users = userRepository.findAll();\n for (User u : users) {\n     System.out.println(u.getOrders().size());\n }"
+    },
+    {
+      "id": "i4-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu join fetch sorgusunda neden distinct kullanimi gerekebilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Cunku distinct olmadan SQL syntax hatasi olur."
+        },
+        {
+          "id": "B",
+          "text": "One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir."
+        },
+        {
+          "id": "C",
+          "text": "Distinct her zaman performansi kotulestirir."
+        },
+        {
+          "id": "D",
+          "text": "Distinct sadece count sorgusunda vardir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratikte nasil uygularsin?\nDefault mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Cunku distinct olmadan SQL syntax hatasi olur.'.\nBu secenek, dogru yanit olan 'One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: N+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\nPratik uygulama: Default mappingleri oldugu gibi birakmak yerine use-case bazli fetch plani yapmak performansin anahtari olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Distinct her zaman performansi kotulestirir.'.\nBu secenek, dogru yanit olan 'One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Distinct sadece count sorgusunda vardir.'.\nBu secenek, dogru yanit olan 'One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Entityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.data.jpa.repository.Query(\"select distinct u from User u join fetch u.orders\")\njava.util.List<User> findAllWithOrders();\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();",
+      "questionCode": " @org.springframework.data.jpa.repository.Query(\"select u from User u join fetch u.orders\")\n java.util.List<User> findAllWithOrders();"
+    },
+    {
+      "id": "i4-q10",
+      "type": "code",
+      "question": "User ile Orders iliskisini N+1siz getiren bir repository + service kodu yaz. EntityGraph veya fetch join kullanabilir, sonucu DTOya map et.",
+      "starterCode": "interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    // TODO\n}\n\nclass UserService {\n    private final UserRepository userRepository;\n\n    UserService(UserRepository userRepository) {\n        this.userRepository = userRepository;\n    }\n\n    // TODO\n}\n",
+      "answerBody": "Sorunun odagi: Iliski yukleme plani ve N+1 cozumleri\n\nBu bir kod yazma sorusu. Beklenen sadece compile olan bir cozum degil; transaction semantigi, persistence context davranisi, hata yonetimi ve testlenebilirlik birlikte dogru kurulmalidir.\n\nKonu anlatimi (sifirdan):\nN+1 genelde lazy iliskiye dongu icinde erisimden kaynaklanir; fetch join, EntityGraph ve projection ana cozum araclaridir.\n\nPratik uygulama adimlari:\n1) Girdi dogrulama ve business rule kontrolu\n2) Transaction boundary belirleme\n3) Repository cagrisi ve lifecycle etkisi\n4) Hata durumlarinda rollback/compensation karari\n5) Testte hem basarili hem hatali akisi dogrulama\n\nSik yapilan hata:\nEntityyi dogrudan API cevabi donup lazy alanlari serilestirme sirasinda tetiklemek gizli N+1 ve LazyInitializationException uretir.\n\nDegerlendirme kriteri:\n- Dogru API secimi\n- Gereksiz query ve N+1 riskini azaltma\n- Rollback davranisini netlestirme\n- Kodun okunabilir ve test edilebilir olmasi\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();",
+      "answerCode": "interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    @org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\n    java.util.List<User> findByStatus(String status);\n}\n\n@org.springframework.transaction.annotation.Transactional(readOnly = true)\npublic java.util.List<UserOrderDto> listActiveUsers() {\n    java.util.List<User> users = userRepository.findByStatus(\"ACTIVE\");\n    return users.stream()\n        .map(u -> new UserOrderDto(u.getId(), u.getEmail(), u.getOrders().size()))\n        .toList();\n}\n\nrecord UserOrderDto(Long id, String email, int orderCount) {}\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

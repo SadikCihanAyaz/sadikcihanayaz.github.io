@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategories": [
+    {
+      "id": "hibernate-jpa-jparepository",
+      "title": "Hibernate/JPA/JpaRepository",
+      "description": "Spring Data JPA repository katmani, entity lifecycle, transaction ve performans sorulari",
+      "order": 1,
+      "folder": "001_hibernate_jpa_jparepository",
+      "topicFile": "/data/002_spring_boot/001_hibernate_jpa_jparepository/topic/001_topic.json",
+      "interviewsFile": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/index.json",
+      "interviewCount": 10
+    }
+  ]
+}

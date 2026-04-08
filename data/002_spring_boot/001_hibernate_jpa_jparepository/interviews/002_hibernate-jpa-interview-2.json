@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "hibernate-jpa-interview-2",
+  "title": "Hibernate/JPA Interview - 2",
+  "description": "CRUD, paging/sorting, derived query ve @Query pratikleri",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "existsById metodu icin en dogru kullanim senaryosu hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Entitynin tum alanlarini almak istediginde."
+        },
+        {
+          "id": "B",
+          "text": "Sadece kaydin var-yok kontrolu gerektiginde, tum entityyi cekmeden."
+        },
+        {
+          "id": "C",
+          "text": "Bulk update yapmak istediginde."
+        },
+        {
+          "id": "D",
+          "text": "Transaction propagation ayarlamak istediginde."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Sadece kaydin var-yok kontrolu gerektiginde, tum entityyi cekmeden.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratikte nasil uygularsin?\nBasit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Entitynin tum alanlarini almak istediginde.'.\nBu secenek, dogru yanit olan 'Sadece kaydin var-yok kontrolu gerektiginde, tum entityyi cekmeden.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Sadece kaydin var-yok kontrolu gerektiginde, tum entityyi cekmeden.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\nPratik uygulama: Basit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Bulk update yapmak istediginde.'.\nBu secenek, dogru yanit olan 'Sadece kaydin var-yok kontrolu gerektiginde, tum entityyi cekmeden.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Transaction propagation ayarlamak istediginde.'.\nBu secenek, dogru yanit olan 'Sadece kaydin var-yok kontrolu gerektiginde, tum entityyi cekmeden.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "boolean exists = userRepository.existsById(id);\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);"
+    },
+    {
+      "id": "i2-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "deleteById cagrildiginda kayit yoksa tipik davranis hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her durumda checked exception firlatir."
+        },
+        {
+          "id": "B",
+          "text": "Cogu senaryoda islem sessiz tamamlanir; davranis implementasyon detayina bagli olsa da garanti bir NotFound yoktur."
+        },
+        {
+          "id": "C",
+          "text": "Uygulama otomatik kapanir."
+        },
+        {
+          "id": "D",
+          "text": "Ilk once insert sonra delete yapar."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Cogu senaryoda islem sessiz tamamlanir; davranis implementasyon detayina bagli olsa da garanti bir NotFound yoktur.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratikte nasil uygularsin?\nBasit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Her durumda checked exception firlatir.'.\nBu secenek, dogru yanit olan 'Cogu senaryoda islem sessiz tamamlanir; davranis implementasyon detayina bagli olsa da garanti bir NotFound yoktur.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Cogu senaryoda islem sessiz tamamlanir; davranis implementasyon detayina bagli olsa da garanti bir NotFound yoktur.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\nPratik uygulama: Basit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Uygulama otomatik kapanir.'.\nBu secenek, dogru yanit olan 'Cogu senaryoda islem sessiz tamamlanir; davranis implementasyon detayina bagli olsa da garanti bir NotFound yoktur.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Ilk once insert sonra delete yapar.'.\nBu secenek, dogru yanit olan 'Cogu senaryoda islem sessiz tamamlanir; davranis implementasyon detayina bagli olsa da garanti bir NotFound yoktur.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "userRepository.deleteById(999L);\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);"
+    },
+    {
+      "id": "i2-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "saveAll kullanimi ile ilgili hangi ifade daha dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "saveAll her zaman tek SQL ile tum kayitlari yazar."
+        },
+        {
+          "id": "B",
+          "text": "saveAll genel olarak her entity icin persist/merge surecini isletir; batching ayarlariyla daha verimli hale getirilebilir."
+        },
+        {
+          "id": "C",
+          "text": "saveAll sadece read-only transactionda calisir."
+        },
+        {
+          "id": "D",
+          "text": "saveAll cagrisinda dirty checking devre disi kalir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: saveAll genel olarak her entity icin persist/merge surecini isletir; batching ayarlariyla daha verimli hale getirilebilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratikte nasil uygularsin?\nBasit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'saveAll her zaman tek SQL ile tum kayitlari yazar.'.\nBu secenek, dogru yanit olan 'saveAll genel olarak her entity icin persist/merge surecini isletir; batching ayarlariyla daha verimli hale getirilebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'saveAll genel olarak her entity icin persist/merge surecini isletir; batching ayarlariyla daha verimli hale getirilebilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\nPratik uygulama: Basit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'saveAll sadece read-only transactionda calisir.'.\nBu secenek, dogru yanit olan 'saveAll genel olarak her entity icin persist/merge surecini isletir; batching ayarlariyla daha verimli hale getirilebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'saveAll cagrisinda dirty checking devre disi kalir.'.\nBu secenek, dogru yanit olan 'saveAll genel olarak her entity icin persist/merge surecini isletir; batching ayarlariyla daha verimli hale getirilebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "userRepository.saveAll(users);\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);"
+    },
+    {
+      "id": "i2-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "PageRequest.of(1, 20) ifadesi ne anlama gelir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ilk sayfadan 1 kayit getir."
+        },
+        {
+          "id": "B",
+          "text": "Sayfa indexi 1 oldugu icin ikinci sayfadan 20 kayit getir."
+        },
+        {
+          "id": "C",
+          "text": "Her sayfada 1 kayit, toplam 20 sayfa getir."
+        },
+        {
+          "id": "D",
+          "text": "Pagination yerine sorting calisir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Sayfa indexi 1 oldugu icin ikinci sayfadan 20 kayit getir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratikte nasil uygularsin?\nBasit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Ilk sayfadan 1 kayit getir.'.\nBu secenek, dogru yanit olan 'Sayfa indexi 1 oldugu icin ikinci sayfadan 20 kayit getir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Sayfa indexi 1 oldugu icin ikinci sayfadan 20 kayit getir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\nPratik uygulama: Basit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Her sayfada 1 kayit, toplam 20 sayfa getir.'.\nBu secenek, dogru yanit olan 'Sayfa indexi 1 oldugu icin ikinci sayfadan 20 kayit getir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Pagination yerine sorting calisir.'.\nBu secenek, dogru yanit olan 'Sayfa indexi 1 oldugu icin ikinci sayfadan 20 kayit getir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "org.springframework.data.domain.Pageable p = org.springframework.data.domain.PageRequest.of(1, 20);\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);"
+    },
+    {
+      "id": "i2-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Modifying anotasyonu hangi durumda zorunludur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece SELECT querylerde."
+        },
+        {
+          "id": "B",
+          "text": "INSERT/UPDATE/DELETE gibi veri degistiren @Query cagrilarinda."
+        },
+        {
+          "id": "C",
+          "text": "Sadece Pageable kullanirken."
+        },
+        {
+          "id": "D",
+          "text": "Sadece existsBy methodlarinda."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: INSERT/UPDATE/DELETE gibi veri degistiren @Query cagrilarinda.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratikte nasil uygularsin?\nBasit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Sadece SELECT querylerde.'.\nBu secenek, dogru yanit olan 'INSERT/UPDATE/DELETE gibi veri degistiren @Query cagrilarinda.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'INSERT/UPDATE/DELETE gibi veri degistiren @Query cagrilarinda.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\nPratik uygulama: Basit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece Pageable kullanirken.'.\nBu secenek, dogru yanit olan 'INSERT/UPDATE/DELETE gibi veri degistiren @Query cagrilarinda.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece existsBy methodlarinda.'.\nBu secenek, dogru yanit olan 'INSERT/UPDATE/DELETE gibi veri degistiren @Query cagrilarinda.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.data.jpa.repository.Modifying\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);"
+    },
+    {
+      "id": "i2-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JPQL ile native SQL arasinda en kritik trade-off hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "JPQL daha DB-ozel oldugu icin tasinabilirlik dusuktur."
+        },
+        {
+          "id": "B",
+          "text": "Native SQL daima daha guvenlidir ve bug ihtimali sifirdir."
+        },
+        {
+          "id": "C",
+          "text": "JPQL entity odakli ve daha portabledir; native SQL daha esnek ama DB bagimliligini arttirir."
+        },
+        {
+          "id": "D",
+          "text": "Ikisi de sadece update icin kullanilir."
+        }
+      ],
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nNeden bu cevap dogru?\nDogru secenek(ler): C: JPQL entity odakli ve daha portabledir; native SQL daha esnek ama DB bagimliligini arttirir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratikte nasil uygularsin?\nBasit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'JPQL daha DB-ozel oldugu icin tasinabilirlik dusuktur.'.\nBu secenek, dogru yanit olan 'JPQL entity odakli ve daha portabledir; native SQL daha esnek ama DB bagimliligini arttirir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Native SQL daima daha guvenlidir ve bug ihtimali sifirdir.'.\nBu secenek, dogru yanit olan 'JPQL entity odakli ve daha portabledir; native SQL daha esnek ama DB bagimliligini arttirir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Dogru secenek: 'JPQL entity odakli ve daha portabledir; native SQL daha esnek ama DB bagimliligini arttirir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\nPratik uygulama: Basit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Ikisi de sadece update icin kullanilir.'.\nBu secenek, dogru yanit olan 'JPQL entity odakli ve daha portabledir; native SQL daha esnek ama DB bagimliligini arttirir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.data.jpa.repository.Query(value=\"select * from users\", nativeQuery=true)\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);"
+    },
+    {
+      "id": "i2-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Derived query isimlendirmesinde hangi ifade dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "findByNameContainingIgnoreCase ifadesi case-insensitive benzerlik aramasi icin kullanilabilir."
+        },
+        {
+          "id": "B",
+          "text": "Method adinda field ismi kullanilamaz."
+        },
+        {
+          "id": "C",
+          "text": "And/Or ile birden fazla kosul yazilamaz."
+        },
+        {
+          "id": "D",
+          "text": "Derived queryde Top/First kullanilamaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: findByNameContainingIgnoreCase ifadesi case-insensitive benzerlik aramasi icin kullanilabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratikte nasil uygularsin?\nBasit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'findByNameContainingIgnoreCase ifadesi case-insensitive benzerlik aramasi icin kullanilabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\nPratik uygulama: Basit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Method adinda field ismi kullanilamaz.'.\nBu secenek, dogru yanit olan 'findByNameContainingIgnoreCase ifadesi case-insensitive benzerlik aramasi icin kullanilabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'And/Or ile birden fazla kosul yazilamaz.'.\nBu secenek, dogru yanit olan 'findByNameContainingIgnoreCase ifadesi case-insensitive benzerlik aramasi icin kullanilabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Derived queryde Top/First kullanilamaz.'.\nBu secenek, dogru yanit olan 'findByNameContainingIgnoreCase ifadesi case-insensitive benzerlik aramasi icin kullanilabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "java.util.List<User> findByNameContainingIgnoreCase(String keyword);\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);"
+    },
+    {
+      "id": "i2-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod parcasi icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "page=1 oldugu icin ilk sayfa gelir."
+        },
+        {
+          "id": "B",
+          "text": "page=1 ikinci sayfayi ifade eder; size=20 ve DESC sorting ile calisir."
+        },
+        {
+          "id": "C",
+          "text": "Sort sadece memoryde uygulanir, DBye yansimaz."
+        },
+        {
+          "id": "D",
+          "text": "PageRequest.of compile olmaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: page=1 ikinci sayfayi ifade eder; size=20 ve DESC sorting ile calisir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratikte nasil uygularsin?\nBasit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'page=1 oldugu icin ilk sayfa gelir.'.\nBu secenek, dogru yanit olan 'page=1 ikinci sayfayi ifade eder; size=20 ve DESC sorting ile calisir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'page=1 ikinci sayfayi ifade eder; size=20 ve DESC sorting ile calisir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\nPratik uygulama: Basit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sort sadece memoryde uygulanir, DBye yansimaz.'.\nBu secenek, dogru yanit olan 'page=1 ikinci sayfayi ifade eder; size=20 ve DESC sorting ile calisir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'PageRequest.of compile olmaz.'.\nBu secenek, dogru yanit olan 'page=1 ikinci sayfayi ifade eder; size=20 ve DESC sorting ile calisir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "org.springframework.data.domain.Pageable p = org.springframework.data.domain.PageRequest.of(1, 20, org.springframework.data.domain.Sort.by(\"createdAt\").descending());\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);",
+      "questionCode": "org.springframework.data.domain.Pageable p =\n    org.springframework.data.domain.PageRequest.of(1, 20,\n        org.springframework.data.domain.Sort.by(\"createdAt\").descending());"
+    },
+    {
+      "id": "i2-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki derived query metodu icin dogru aciklama hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "En eski 3 kaydi ascending getirir."
+        },
+        {
+          "id": "B",
+          "text": "Statusa gore filtreleyip createdAt DESC sirasiyla en yeni ilk 3 kaydi getirir."
+        },
+        {
+          "id": "C",
+          "text": "Top3 ifadesi ignore edilir ve tum kayitlar doner."
+        },
+        {
+          "id": "D",
+          "text": "Bu method sadece native SQL ile calisir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Statusa gore filtreleyip createdAt DESC sirasiyla en yeni ilk 3 kaydi getirir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratikte nasil uygularsin?\nBasit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'En eski 3 kaydi ascending getirir.'.\nBu secenek, dogru yanit olan 'Statusa gore filtreleyip createdAt DESC sirasiyla en yeni ilk 3 kaydi getirir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Statusa gore filtreleyip createdAt DESC sirasiyla en yeni ilk 3 kaydi getirir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: JpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\nPratik uygulama: Basit filtrelerde derived query, karmasik join/aggregationda @Query tercih edilerek okunabilirlik ve kontrol dengesi kurulabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Top3 ifadesi ignore edilir ve tum kayitlar doner.'.\nBu secenek, dogru yanit olan 'Statusa gore filtreleyip createdAt DESC sirasiyla en yeni ilk 3 kaydi getirir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Bu method sadece native SQL ile calisir.'.\nBu secenek, dogru yanit olan 'Statusa gore filtreleyip createdAt DESC sirasiyla en yeni ilk 3 kaydi getirir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Method ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "java.util.List<User> findTop3ByStatusOrderByCreatedAtDesc(String status);\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);",
+      "questionCode": "java.util.List<User> findTop3ByStatusOrderByCreatedAtDesc(String status);"
+    },
+    {
+      "id": "i2-q10",
+      "type": "code",
+      "question": "Status ve role bilgisine gore DTO projection donduren bir repository metodu yaz. JPQL constructor expression kullan.",
+      "starterCode": "record UserSummary(Long id, String email) {}\n\ninterface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    // TODO\n}\n\nclass User {\n    Long id;\n    String email;\n    String status;\n    String role;\n}\n",
+      "answerBody": "Sorunun odagi: Repository API davranislari ve sorgu stratejileri\n\nBu bir kod yazma sorusu. Beklenen sadece compile olan bir cozum degil; transaction semantigi, persistence context davranisi, hata yonetimi ve testlenebilirlik birlikte dogru kurulmalidir.\n\nKonu anlatimi (sifirdan):\nJpaRepository sadece CRUD degil, paging, sorting, flush, batch ve query abstraction saglar.\n\nPratik uygulama adimlari:\n1) Girdi dogrulama ve business rule kontrolu\n2) Transaction boundary belirleme\n3) Repository cagrisi ve lifecycle etkisi\n4) Hata durumlarinda rollback/compensation karari\n5) Testte hem basarili hem hatali akisi dogrulama\n\nSik yapilan hata:\nMethod ismiyle asiri karmasik sorgu yazmaya calismak veya @Modifying gerektiren sorguda bunu unutmak runtime hatasi dogurur.\n\nDegerlendirme kriteri:\n- Dogru API secimi\n- Gereksiz query ve N+1 riskini azaltma\n- Rollback davranisini netlestirme\n- Kodun okunabilir ve test edilebilir olmasi\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);",
+      "answerCode": "@org.springframework.data.jpa.repository.Query(\"\"\"\n    select new com.example.UserSummary(u.id, u.email)\n    from User u\n    where u.status = :status and u.role = :role\n\"\"\")\njava.util.List<UserSummary> findSummaries(\n    @org.springframework.data.repository.query.Param(\"status\") String status,\n    @org.springframework.data.repository.query.Param(\"role\") String role\n);\n\n// Neden DTO?\n// - Gereksiz kolon tasimaz\n// - API katmaninda entity bagimliligini azaltir\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\njava.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

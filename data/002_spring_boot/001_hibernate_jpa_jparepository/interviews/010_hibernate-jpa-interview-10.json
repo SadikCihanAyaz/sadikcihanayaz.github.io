@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "hibernate-jpa-interview-10",
+  "title": "Hibernate/JPA Interview - 10",
+  "description": "Test, debug, SQL gozlemi, migration ve sorun giderme",
+  "questions": [
+    {
+      "id": "i10-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@DataJpaTest icin en dogru aciklama hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tum uygulamayi full ayaga kaldirir ve web server acmadan calismaz."
+        },
+        {
+          "id": "B",
+          "text": "Repository ve JPA katmanina odakli test slice saglar; her testte rollback davranisi tipik olarak vardir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece controller testidir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece native queryleri test eder."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Repository ve JPA katmanina odakli test slice saglar; her testte rollback davranisi tipik olarak vardir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratikte nasil uygularsin?\nQuery sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Tum uygulamayi full ayaga kaldirir ve web server acmadan calismaz.'.\nBu secenek, dogru yanit olan 'Repository ve JPA katmanina odakli test slice saglar; her testte rollback davranisi tipik olarak vardir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Repository ve JPA katmanina odakli test slice saglar; her testte rollback davranisi tipik olarak vardir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\nPratik uygulama: Query sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece controller testidir.'.\nBu secenek, dogru yanit olan 'Repository ve JPA katmanina odakli test slice saglar; her testte rollback davranisi tipik olarak vardir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece native queryleri test eder.'.\nBu secenek, dogru yanit olan 'Repository ve JPA katmanina odakli test slice saglar; her testte rollback davranisi tipik olarak vardir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}"
+    },
+    {
+      "id": "i10-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "TestEntityManager ne zaman faydalidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Persistence context davranisini testte daha kontrollu yonetmek (persist/flush/clear) istediginde."
+        },
+        {
+          "id": "B",
+          "text": "Sadece productionda pool yonetmek icin."
+        },
+        {
+          "id": "C",
+          "text": "Sadece migration script yazmak icin."
+        },
+        {
+          "id": "D",
+          "text": "Sadece HTTP request atmak icin."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Persistence context davranisini testte daha kontrollu yonetmek (persist/flush/clear) istediginde.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratikte nasil uygularsin?\nQuery sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Persistence context davranisini testte daha kontrollu yonetmek (persist/flush/clear) istediginde.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\nPratik uygulama: Query sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Sadece productionda pool yonetmek icin.'.\nBu secenek, dogru yanit olan 'Persistence context davranisini testte daha kontrollu yonetmek (persist/flush/clear) istediginde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece migration script yazmak icin.'.\nBu secenek, dogru yanit olan 'Persistence context davranisini testte daha kontrollu yonetmek (persist/flush/clear) istediginde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece HTTP request atmak icin.'.\nBu secenek, dogru yanit olan 'Persistence context davranisini testte daha kontrollu yonetmek (persist/flush/clear) istediginde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "testEntityManager.flush();\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}"
+    },
+    {
+      "id": "i10-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "SQL gorunurlugu icin hangi ayar kombinasyonu pratiktir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "logging.level.org.hibernate.SQL=DEBUG ve parameter binding loglari."
+        },
+        {
+          "id": "B",
+          "text": "Sadece server.port ayari."
+        },
+        {
+          "id": "C",
+          "text": "Sadece spring.main.banner-mode=off."
+        },
+        {
+          "id": "D",
+          "text": "Hic log acmamak daha iyidir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: logging.level.org.hibernate.SQL=DEBUG ve parameter binding loglari.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratikte nasil uygularsin?\nQuery sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'logging.level.org.hibernate.SQL=DEBUG ve parameter binding loglari.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\nPratik uygulama: Query sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Sadece server.port ayari.'.\nBu secenek, dogru yanit olan 'logging.level.org.hibernate.SQL=DEBUG ve parameter binding loglari.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece spring.main.banner-mode=off.'.\nBu secenek, dogru yanit olan 'logging.level.org.hibernate.SQL=DEBUG ve parameter binding loglari.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Hic log acmamak daha iyidir.'.\nBu secenek, dogru yanit olan 'logging.level.org.hibernate.SQL=DEBUG ve parameter binding loglari.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "logging.level.org.hibernate.SQL=DEBUG\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}"
+    },
+    {
+      "id": "i10-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Flyway/Liquibase kullanimi neden onemlidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Schema degisikliklerini versiyonlayip ortamlarda tutarli migration akisi sagladigi icin."
+        },
+        {
+          "id": "B",
+          "text": "Entity relationlarini otomatik optimize ettigi icin."
+        },
+        {
+          "id": "C",
+          "text": "Transaction propagationi degistirdigi icin."
+        },
+        {
+          "id": "D",
+          "text": "Sadece testte SQL atmak icin."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Schema degisikliklerini versiyonlayip ortamlarda tutarli migration akisi sagladigi icin.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratikte nasil uygularsin?\nQuery sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Schema degisikliklerini versiyonlayip ortamlarda tutarli migration akisi sagladigi icin.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\nPratik uygulama: Query sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Entity relationlarini otomatik optimize ettigi icin.'.\nBu secenek, dogru yanit olan 'Schema degisikliklerini versiyonlayip ortamlarda tutarli migration akisi sagladigi icin.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Transaction propagationi degistirdigi icin.'.\nBu secenek, dogru yanit olan 'Schema degisikliklerini versiyonlayip ortamlarda tutarli migration akisi sagladigi icin.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece testte SQL atmak icin.'.\nBu secenek, dogru yanit olan 'Schema degisikliklerini versiyonlayip ortamlarda tutarli migration akisi sagladigi icin.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "spring.flyway.enabled=true\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}"
+    },
+    {
+      "id": "i10-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "H2 ile production DB farklari icin hangi uyari dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "H2 her zaman production DB ile birebir ayni davranir."
+        },
+        {
+          "id": "B",
+          "text": "Dialect, lock semantigi, index planlari farkli olabilecegi icin kritik sorgular production benzeri DBde de test edilmelidir."
+        },
+        {
+          "id": "C",
+          "text": "H2 oldugu icin transactionlar devre disi olur."
+        },
+        {
+          "id": "D",
+          "text": "H2 kullaniminda migration gereksizdir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Dialect, lock semantigi, index planlari farkli olabilecegi icin kritik sorgular production benzeri DBde de test edilmelidir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratikte nasil uygularsin?\nQuery sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'H2 her zaman production DB ile birebir ayni davranir.'.\nBu secenek, dogru yanit olan 'Dialect, lock semantigi, index planlari farkli olabilecegi icin kritik sorgular production benzeri DBde de test edilmelidir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Dialect, lock semantigi, index planlari farkli olabilecegi icin kritik sorgular production benzeri DBde de test edilmelidir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\nPratik uygulama: Query sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'H2 oldugu icin transactionlar devre disi olur.'.\nBu secenek, dogru yanit olan 'Dialect, lock semantigi, index planlari farkli olabilecegi icin kritik sorgular production benzeri DBde de test edilmelidir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'H2 kullaniminda migration gereksizdir.'.\nBu secenek, dogru yanit olan 'Dialect, lock semantigi, index planlari farkli olabilecegi icin kritik sorgular production benzeri DBde de test edilmelidir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}"
+    },
+    {
+      "id": "i10-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Repository testlerinde sadece happy-path yazmak neden risklidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Cunku rollback, lock, stale data, unique constraint gibi hata senaryolari kacirilir."
+        },
+        {
+          "id": "B",
+          "text": "Cunku testler cok hizli olur."
+        },
+        {
+          "id": "C",
+          "text": "Cunku SQL loglari kapanir."
+        },
+        {
+          "id": "D",
+          "text": "Risk yoktur, yeterlidir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Cunku rollback, lock, stale data, unique constraint gibi hata senaryolari kacirilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratikte nasil uygularsin?\nQuery sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Cunku rollback, lock, stale data, unique constraint gibi hata senaryolari kacirilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\nPratik uygulama: Query sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Cunku testler cok hizli olur.'.\nBu secenek, dogru yanit olan 'Cunku rollback, lock, stale data, unique constraint gibi hata senaryolari kacirilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Cunku SQL loglari kapanir.'.\nBu secenek, dogru yanit olan 'Cunku rollback, lock, stale data, unique constraint gibi hata senaryolari kacirilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Risk yoktur, yeterlidir.'.\nBu secenek, dogru yanit olan 'Cunku rollback, lock, stale data, unique constraint gibi hata senaryolari kacirilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "org.junit.jupiter.api.Assertions.assertThrows(...)\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}"
+    },
+    {
+      "id": "i10-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "LazyInitializationException testi yazarken hangi yaklasim dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Persistence context kapanmis/tx disi durumda lazy alana erisimi bilincli test etmek."
+        },
+        {
+          "id": "B",
+          "text": "Her zaman OSIV acmak."
+        },
+        {
+          "id": "C",
+          "text": "Lazy relationi kaldirmak."
+        },
+        {
+          "id": "D",
+          "text": "Sadece mock repository kullanmak."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Persistence context kapanmis/tx disi durumda lazy alana erisimi bilincli test etmek.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratikte nasil uygularsin?\nQuery sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Persistence context kapanmis/tx disi durumda lazy alana erisimi bilincli test etmek.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\nPratik uygulama: Query sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Her zaman OSIV acmak.'.\nBu secenek, dogru yanit olan 'Persistence context kapanmis/tx disi durumda lazy alana erisimi bilincli test etmek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Lazy relationi kaldirmak.'.\nBu secenek, dogru yanit olan 'Persistence context kapanmis/tx disi durumda lazy alana erisimi bilincli test etmek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece mock repository kullanmak.'.\nBu secenek, dogru yanit olan 'Persistence context kapanmis/tx disi durumda lazy alana erisimi bilincli test etmek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "org.hibernate.LazyInitializationException\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}"
+    },
+    {
+      "id": "i10-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki @DataJpaTest davranisi icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Test methodu sonunda tipik rollback nedeniyle veri bir sonraki teste kalici tasinmayabilir."
+        },
+        {
+          "id": "B",
+          "text": "Her test otomatik commit olur ve veri birikir."
+        },
+        {
+          "id": "C",
+          "text": "Rollback sadece native queryde olur."
+        },
+        {
+          "id": "D",
+          "text": "DataJpaTest transaction acmaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Test methodu sonunda tipik rollback nedeniyle veri bir sonraki teste kalici tasinmayabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratikte nasil uygularsin?\nQuery sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Test methodu sonunda tipik rollback nedeniyle veri bir sonraki teste kalici tasinmayabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\nPratik uygulama: Query sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Her test otomatik commit olur ve veri birikir.'.\nBu secenek, dogru yanit olan 'Test methodu sonunda tipik rollback nedeniyle veri bir sonraki teste kalici tasinmayabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Rollback sadece native queryde olur.'.\nBu secenek, dogru yanit olan 'Test methodu sonunda tipik rollback nedeniyle veri bir sonraki teste kalici tasinmayabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'DataJpaTest transaction acmaz.'.\nBu secenek, dogru yanit olan 'Test methodu sonunda tipik rollback nedeniyle veri bir sonraki teste kalici tasinmayabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "repo.save(new User(\"a@x.com\"));\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}",
+      "questionCode": " @org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\n class UserRepoTest {\n   @org.junit.jupiter.api.Test\n   void t1(){ repo.save(new User(\"a@x.com\")); }\n }"
+    },
+    {
+      "id": "i10-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu senaryo icin en dogru sonuc hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Lazy relation tx/persistence context disinda erisildiginde LazyInitializationException alinabilir."
+        },
+        {
+          "id": "B",
+          "text": "Lazy relation her durumda otomatik eager olur."
+        },
+        {
+          "id": "C",
+          "text": "Bu exception sadece controllerda olur, testte olmaz."
+        },
+        {
+          "id": "D",
+          "text": "JPAde lazy relation diye bir sey yoktur."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Lazy relation tx/persistence context disinda erisildiginde LazyInitializationException alinabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratikte nasil uygularsin?\nQuery sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Lazy relation tx/persistence context disinda erisildiginde LazyInitializationException alinabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\nPratik uygulama: Query sayisi, lock bekleme ve rollback davranisini testte erken yakalamak production incident sayisini azaltir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Lazy relation her durumda otomatik eager olur.'.\nBu secenek, dogru yanit olan 'Lazy relation tx/persistence context disinda erisildiginde LazyInitializationException alinabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Bu exception sadece controllerda olur, testte olmaz.'.\nBu secenek, dogru yanit olan 'Lazy relation tx/persistence context disinda erisildiginde LazyInitializationException alinabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'JPAde lazy relation diye bir sey yoktur.'.\nBu secenek, dogru yanit olan 'Lazy relation tx/persistence context disinda erisildiginde LazyInitializationException alinabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: H2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "User user = repo.findById(id).orElseThrow();\nuser.getOrders().size();\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}",
+      "questionCode": " User user = repo.findById(id).orElseThrow();\n // tx kapanmis olsun\n user.getOrders().size();"
+    },
+    {
+      "id": "i10-q10",
+      "type": "code",
+      "question": "Optimistic locking catismasini yakalayan bir integration test taslagi yaz. Iki ayri transactionla ayni kaydi guncelleyip ikinci guncellemede exception bekle.",
+      "starterCode": "@org.springframework.boot.test.context.SpringBootTest\nclass AccountLockingIT {\n    // TODO\n}\n",
+      "answerBody": "Sorunun odagi: Test stratejisi ve production troubleshooting\n\nBu bir kod yazma sorusu. Beklenen sadece compile olan bir cozum degil; transaction semantigi, persistence context davranisi, hata yonetimi ve testlenebilirlik birlikte dogru kurulmalidir.\n\nKonu anlatimi (sifirdan):\n@DataJpaTest, SQL loglari, migration araci ve transaction davranis testleri veri katmanini guvenilir hale getirir.\n\nPratik uygulama adimlari:\n1) Girdi dogrulama ve business rule kontrolu\n2) Transaction boundary belirleme\n3) Repository cagrisi ve lifecycle etkisi\n4) Hata durumlarinda rollback/compensation karari\n5) Testte hem basarili hem hatali akisi dogrulama\n\nSik yapilan hata:\nH2 ile gercek DB farklarini ignore etmek, SQL logunu kapali tutmak ve sadece happy-path test yazmak kritik hatalari kacirir.\n\nDegerlendirme kriteri:\n- Dogru API secimi\n- Gereksiz query ve N+1 riskini azaltma\n- Rollback davranisini netlestirme\n- Kodun okunabilir ve test edilebilir olmasi\n\nEk mini kod ornegi:\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}",
+      "answerCode": "@org.springframework.boot.test.context.SpringBootTest\nclass AccountLockingIT {\n    @org.springframework.beans.factory.annotation.Autowired\n    private AccountRepository accountRepository;\n\n    @org.springframework.beans.factory.annotation.Autowired\n    private org.springframework.transaction.support.TransactionTemplate txTemplate;\n\n    @org.junit.jupiter.api.Test\n    void optimisticLockingShouldFailSecondWriter() {\n        Long id = txTemplate.execute(status -> accountRepository.save(new Account(java.math.BigDecimal.valueOf(100))).getId());\n\n        Account snapshot1 = txTemplate.execute(status -> accountRepository.findById(id).orElseThrow());\n        Account snapshot2 = txTemplate.execute(status -> accountRepository.findById(id).orElseThrow());\n\n        txTemplate.executeWithoutResult(status -> {\n            Account a1 = accountRepository.findById(snapshot1.getId()).orElseThrow();\n            a1.setBalance(java.math.BigDecimal.valueOf(90));\n        });\n\n        org.junit.jupiter.api.Assertions.assertThrows(\n            org.springframework.orm.ObjectOptimisticLockingFailureException.class,\n            () -> txTemplate.executeWithoutResult(status -> {\n                Account a2 = accountRepository.findById(snapshot2.getId()).orElseThrow();\n                a2.setBalance(java.math.BigDecimal.valueOf(80));\n                accountRepository.flush();\n            })\n        );\n    }\n}\n\n// Ek ogretici ornek\n@org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\nclass UserRepositoryTest {\n    // repository tests\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

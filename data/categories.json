@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "categories": [
     {
       "id": "java",
@@ -9,6 +9,15 @@
       "folder": "001_java",
       "subcategoryCount": 1,
       "subcategoriesFile": "/data/001_java/subcategories.json"
+    },
+    {
+      "id": "spring-boot",
+      "title": "Spring Boot",
+      "description": "Spring Boot veri katmani: Hibernate, JPA, JpaRepository, transaction ve performans",
+      "order": 2,
+      "folder": "002_spring_boot",
+      "subcategoryCount": 1,
+      "subcategoriesFile": "/data/002_spring_boot/subcategories.json"
     }
   ]
 }

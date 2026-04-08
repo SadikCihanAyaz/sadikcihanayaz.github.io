@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "spring-jpa-topic",
+  "title": "Spring Boot + Hibernate/JPA/JpaRepository - Temel ve Kritik Ozet",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu konu, Spring Boot uzerinde Hibernate/JPA/JpaRepository kullanimini sifirdan baslayip production seviyesine tasimak icin hazirlandi. Hedef sadece anotasyon ezberi degil; neden boyle davrandigini mekanizma bazinda anlayip sorularda dogru karar verebilmek."
+    },
+    {
+      "type": "list",
+      "title": "Bu konuyu bitirince net bilmen gerekenler",
+      "items": [
+        "Spring Data JPA, JPA ve Hibernate rollerinin net ayrimi",
+        "JpaRepository CRUD, paging/sorting, derived query ve @Query stratejisi",
+        "Entity state, persistence context, dirty checking, flush, merge davranisi",
+        "Lazy/Eager farki, N+1 problemi ve fetch plani kontrolu",
+        "@Transactional boundary, rollback kurallari, proxy etkisi",
+        "Propagation ve isolation seviyelerinde karar mantigi",
+        "Optimistic/pessimistic locking ile veri tutarliligi",
+        "Batching, bulk update, projection, pool ve SQL gozlemiyle performans tuning",
+        "Specification, auditing, orphanRemoval/cascade gibi modelleme kararlarinin etkisi",
+        "Test ve troubleshooting yaklasimi ile production hatalarini erken yakalama"
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Mimari buyuk resim",
+      "items": [
+        "Spring Data JPA: repository abstraction katmani",
+        "JPA: standart / spesifikasyon",
+        "Hibernate: JPA implementasyonu (ORM motoru)",
+        "Akis: Spring Data JPA -> JPA API -> Hibernate -> Database"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Interviewda en kritik fark: Spring Data JPA ORM motoru degildir. ORM isini Hibernate yapar. Spring Data JPA veri erisim kodunu azaltan bir ust katmandir."
+    },
+    {
+      "type": "list",
+      "title": "JpaRepository nasil dusunulmeli?",
+      "items": [
+        "Hazir CRUD + paging/sorting + query methodlari",
+        "Runtime proxy ile implementasyon olusumu",
+        "Basit sorgularda derived query hizi",
+        "Karmasik sorgularda @Query ile kontrol"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "public interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    java.util.Optional<User> findByEmail(String email);\n\n    @org.springframework.data.jpa.repository.Query(\"select u from User u where u.status = :status\")\n    java.util.List<User> findByStatus(@org.springframework.data.repository.query.Param(\"status\") String status);\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "save() davranisini sadece id var/yok diye ezberlemek yetmez. Managed entity transaction icinde degisirse dirty checking commit/flush asamasinda update SQL uretebilir; her adimda save zorunlu degildir."
+    },
+    {
+      "type": "list",
+      "title": "Entity lifecycle ve persistence context",
+      "items": [
+        "Transient: new ile olusmus, context disi",
+        "Managed: context tarafindan izlenir",
+        "Detached: context disinda, otomatik takip yok",
+        "Removed: silinmek uzere isaretli"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@org.springframework.transaction.annotation.Transactional\npublic void updateEmail(Long id, String email) {\n    User user = userRepository.findById(id).orElseThrow();\n    user.setEmail(email);\n    // save() zorunlu degil, dirty checking calisabilir\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Flush, persistence contextteki degisiklikleri SQLe yansitma adimidir; commit ise transactioni kalici sonlandirir. Flush ve commit ayni sey degildir ama committen once flush tipik olarak olur."
+    },
+    {
+      "type": "list",
+      "title": "merge hakkinda kritik not",
+      "items": [
+        "Detached entityyi geri baglamak icin kullanilir",
+        "Donus degeri managed referanstir",
+        "Eski detached referans otomatik managed olmaz"
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Fetch plani: Lazy/Eager ve N+1",
+      "items": [
+        "Lazy: ihtiyac oldugunda yukleme",
+        "Eager: hemen yukleme",
+        "N+1: 1 ana query + her satir icin ek query",
+        "Cozum: fetch join, EntityGraph, batch fetch, projection"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@org.springframework.data.jpa.repository.Query(\"select distinct u from User u join fetch u.orders\")\njava.util.List<User> findAllWithOrders();\n\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findByStatus(String status);"
+    },
+    {
+      "type": "paragraph",
+      "text": "LazyInitializationException genelde lazy alana persistence context kapandiktan sonra erisildiginda gorulur. Bu nedenle fetch planini service boundary icinde netlestirmek gerekir."
+    },
+    {
+      "type": "list",
+      "title": "Transaction mantigi",
+      "items": [
+        "@Transactional boundary service katmaninda tanimlanmali",
+        "RuntimeException default rollbacke gider",
+        "Checked exception icin rollbackFor ihtiyaci olabilir",
+        "Self-invocation proxy bypass nedeniyle risklidir"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void processPayment() throws Exception {\n    paymentRepository.save(new Payment(...));\n    // checked exception durumunda da rollback icin rollbackFor gerekir\n}"
+    },
+    {
+      "type": "list",
+      "title": "Propagation karar rehberi",
+      "items": [
+        "REQUIRED: varsayilan, varsa katil yoksa ac",
+        "REQUIRES_NEW: mevcut txi askiya alip yeni tx ac",
+        "MANDATORY: tx yoksa hata",
+        "NESTED: savepoint tabanli alt tx senaryolari"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "UnexpectedRollbackException cogu zaman inner akista rollback-only set edilip outer akista commit beklenmesinden dogar. Bu durum propagation kararinin sadece anotasyon degil, is akisi tasarimi oldugunu gosterir."
+    },
+    {
+      "type": "list",
+      "title": "Isolation ve locking birlikte dusunulmeli",
+      "items": [
+        "READ_COMMITTED dirty readi engeller ama her cakisimi cozmeyebilir",
+        "REPEATABLE_READ tekrarli okumada daha guclu koruma saglar",
+        "SERIALIZABLE en guclu ama throughput maliyetli olabilir",
+        "Lost update gibi risklerde @Version (optimistic) veya pessimistic lock secimi gerekir"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@javax.persistence.Entity\nclass Account {\n    @javax.persistence.Id\n    private Long id;\n\n    @javax.persistence.Version\n    private Long version;\n\n    private java.math.BigDecimal balance;\n}"
+    },
+    {
+      "type": "list",
+      "title": "Performans checklist",
+      "items": [
+        "Query sayisi ve query suresi olc",
+        "N+1 var mi kontrol et",
+        "Projection ile tasinan veri miktarini dusur",
+        "Batch insert/update ayarlarini yap",
+        "Bulk update sonrasi stale context riskini yonet",
+        "Connection pool, index ve lock beklemelerini izle"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "for (int i = 1; i <= users.size(); i++) {\n    entityManager.persist(users.get(i - 1));\n    if (i % 50 == 0) {\n        entityManager.flush();\n        entityManager.clear();\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": "Bulk update JPQL cagrilari persistence contexti bypass edebilir. Bu nedenle clearAutomatically/flushAutomatically veya explicit clear/refresh stratejisi olmadan stale veri okumasi yapabilirsin."
+    },
+    {
+      "type": "list",
+      "title": "Gelismis repository/modelleme konulari",
+      "items": [
+        "Specification ile dinamik filtreleme",
+        "Page vs Slice secimi",
+        "Auditing (@CreatedDate, @LastModifiedDate)",
+        "Soft delete stratejisi",
+        "Cascade ve orphanRemoval farki"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "public class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}"
+    },
+    {
+      "type": "list",
+      "title": "Test ve troubleshooting",
+      "items": [
+        "@DataJpaTest ile repository slice testleri",
+        "SQL + bind param loglarini acarak davranis gozlemi",
+        "Migrationlari Flyway/Liquibase ile versiyonla",
+        "H2 ile production DB farklarini kritik sorgularda capraz test et",
+        "Locking ve rollback senaryolarini explicit test et"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "En guclu interview kapanisi: Spring Data JPA tarafinda asil deger repository method ezberinden degil; persistence context, dirty checking, fetch plan, transaction boundary ve performans etkisini birlikte tasarlayabilmekten gelir."
+    }
+  ]
+}

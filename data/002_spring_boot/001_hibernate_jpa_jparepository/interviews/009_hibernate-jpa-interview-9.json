@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "hibernate-jpa-interview-9",
+  "title": "Hibernate/JPA Interview - 9",
+  "description": "Specification, auditing, soft delete, cascade/orphanRemoval",
+  "questions": [
+    {
+      "id": "i9-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Specification yaklasiminin ana amaci nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece static SQL yazmak."
+        },
+        {
+          "id": "B",
+          "text": "Dinamik filtre kosullarini composable bicimde kurmak."
+        },
+        {
+          "id": "C",
+          "text": "Transaction propagationi belirlemek."
+        },
+        {
+          "id": "D",
+          "text": "Sadece native queryde calismak."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Dinamik filtre kosullarini composable bicimde kurmak.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratikte nasil uygularsin?\nGercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Sadece static SQL yazmak.'.\nBu secenek, dogru yanit olan 'Dinamik filtre kosullarini composable bicimde kurmak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Dinamik filtre kosullarini composable bicimde kurmak.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Specification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\nPratik uygulama: Gercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Transaction propagationi belirlemek.'.\nBu secenek, dogru yanit olan 'Dinamik filtre kosullarini composable bicimde kurmak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece native queryde calismak.'.\nBu secenek, dogru yanit olan 'Dinamik filtre kosullarini composable bicimde kurmak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "org.springframework.data.jpa.domain.Specification<User> spec\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}"
+    },
+    {
+      "id": "i9-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Page ile Slice farki icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Page toplam count bilgisi tasir; Slice genelde sadece sonraki sayfa var mi bilgisini odaklar."
+        },
+        {
+          "id": "B",
+          "text": "Slice her zaman daha agir count sorgusu atar."
+        },
+        {
+          "id": "C",
+          "text": "Page pagination yapamaz."
+        },
+        {
+          "id": "D",
+          "text": "Ikisi tamamen aynidir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Page toplam count bilgisi tasir; Slice genelde sadece sonraki sayfa var mi bilgisini odaklar.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratikte nasil uygularsin?\nGercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Page toplam count bilgisi tasir; Slice genelde sadece sonraki sayfa var mi bilgisini odaklar.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Specification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\nPratik uygulama: Gercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Slice her zaman daha agir count sorgusu atar.'.\nBu secenek, dogru yanit olan 'Page toplam count bilgisi tasir; Slice genelde sadece sonraki sayfa var mi bilgisini odaklar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Page pagination yapamaz.'.\nBu secenek, dogru yanit olan 'Page toplam count bilgisi tasir; Slice genelde sadece sonraki sayfa var mi bilgisini odaklar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Ikisi tamamen aynidir.'.\nBu secenek, dogru yanit olan 'Page toplam count bilgisi tasir; Slice genelde sadece sonraki sayfa var mi bilgisini odaklar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "org.springframework.data.domain.Page<User>\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}"
+    },
+    {
+      "id": "i9-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring Data auditing icin hangi yapi kritik onemdedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@CreatedDate/@LastModifiedDate alanlari + @EnableJpaAuditing konfigurasyonu."
+        },
+        {
+          "id": "B",
+          "text": "Sadece @Query native kullanimi."
+        },
+        {
+          "id": "C",
+          "text": "Sadece Hikari pool ayari."
+        },
+        {
+          "id": "D",
+          "text": "Sadece @Version."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: @CreatedDate/@LastModifiedDate alanlari + @EnableJpaAuditing konfigurasyonu.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratikte nasil uygularsin?\nGercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: '@CreatedDate/@LastModifiedDate alanlari + @EnableJpaAuditing konfigurasyonu.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Specification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\nPratik uygulama: Gercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Sadece @Query native kullanimi.'.\nBu secenek, dogru yanit olan '@CreatedDate/@LastModifiedDate alanlari + @EnableJpaAuditing konfigurasyonu.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece Hikari pool ayari.'.\nBu secenek, dogru yanit olan '@CreatedDate/@LastModifiedDate alanlari + @EnableJpaAuditing konfigurasyonu.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece @Version.'.\nBu secenek, dogru yanit olan '@CreatedDate/@LastModifiedDate alanlari + @EnableJpaAuditing konfigurasyonu.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.data.jpa.domain.support.AuditingEntityListener\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}"
+    },
+    {
+      "id": "i9-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Soft delete stratejisinde tipik yaklasim hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Kaydi fiziksel silmek zorunludur."
+        },
+        {
+          "id": "B",
+          "text": "deleted flag/timestamp tutup sorgularda aktif kayitlari filtrelemek."
+        },
+        {
+          "id": "C",
+          "text": "Tum tablolari archive etmek."
+        },
+        {
+          "id": "D",
+          "text": "Sadece cacheden silmek."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: deleted flag/timestamp tutup sorgularda aktif kayitlari filtrelemek.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratikte nasil uygularsin?\nGercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Kaydi fiziksel silmek zorunludur.'.\nBu secenek, dogru yanit olan 'deleted flag/timestamp tutup sorgularda aktif kayitlari filtrelemek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'deleted flag/timestamp tutup sorgularda aktif kayitlari filtrelemek.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Specification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\nPratik uygulama: Gercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Tum tablolari archive etmek.'.\nBu secenek, dogru yanit olan 'deleted flag/timestamp tutup sorgularda aktif kayitlari filtrelemek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece cacheden silmek.'.\nBu secenek, dogru yanit olan 'deleted flag/timestamp tutup sorgularda aktif kayitlari filtrelemek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "private boolean deleted;\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}"
+    },
+    {
+      "id": "i9-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "orphanRemoval ile CascadeType.REMOVE farki icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi tamamen ayni sey ve her zaman ayni SQLi uretir."
+        },
+        {
+          "id": "B",
+          "text": "orphanRemoval cocuk koleksiyondan cikarildiginda silmeyi tetikleyebilir; CascadeType.REMOVE parent remove oldugunda cocuklari siler."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi de sadece read operationda calisir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece many-to-many iliskide vardir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: orphanRemoval cocuk koleksiyondan cikarildiginda silmeyi tetikleyebilir; CascadeType.REMOVE parent remove oldugunda cocuklari siler.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratikte nasil uygularsin?\nGercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Ikisi tamamen ayni sey ve her zaman ayni SQLi uretir.'.\nBu secenek, dogru yanit olan 'orphanRemoval cocuk koleksiyondan cikarildiginda silmeyi tetikleyebilir; CascadeType.REMOVE parent remove oldugunda cocuklari siler.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'orphanRemoval cocuk koleksiyondan cikarildiginda silmeyi tetikleyebilir; CascadeType.REMOVE parent remove oldugunda cocuklari siler.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Specification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\nPratik uygulama: Gercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Ikisi de sadece read operationda calisir.'.\nBu secenek, dogru yanit olan 'orphanRemoval cocuk koleksiyondan cikarildiginda silmeyi tetikleyebilir; CascadeType.REMOVE parent remove oldugunda cocuklari siler.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece many-to-many iliskide vardir.'.\nBu secenek, dogru yanit olan 'orphanRemoval cocuk koleksiyondan cikarildiginda silmeyi tetikleyebilir; CascadeType.REMOVE parent remove oldugunda cocuklari siler.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@javax.persistence.OneToMany(orphanRemoval = true)\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}"
+    },
+    {
+      "id": "i9-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "getReferenceById hangi durumda daha uygun olabilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece id referansi yeterliyse ve tum alanlari hemen okumaya ihtiyac yoksa."
+        },
+        {
+          "id": "B",
+          "text": "Tum iliskili alanlari eager yuklemek icin."
+        },
+        {
+          "id": "C",
+          "text": "Sadece deleteById yerine gecmek icin zorunlu."
+        },
+        {
+          "id": "D",
+          "text": "Sadece transaction disinda calisir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Sadece id referansi yeterliyse ve tum alanlari hemen okumaya ihtiyac yoksa.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratikte nasil uygularsin?\nGercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Sadece id referansi yeterliyse ve tum alanlari hemen okumaya ihtiyac yoksa.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Specification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\nPratik uygulama: Gercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Tum iliskili alanlari eager yuklemek icin.'.\nBu secenek, dogru yanit olan 'Sadece id referansi yeterliyse ve tum alanlari hemen okumaya ihtiyac yoksa.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece deleteById yerine gecmek icin zorunlu.'.\nBu secenek, dogru yanit olan 'Sadece id referansi yeterliyse ve tum alanlari hemen okumaya ihtiyac yoksa.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece transaction disinda calisir.'.\nBu secenek, dogru yanit olan 'Sadece id referansi yeterliyse ve tum alanlari hemen okumaya ihtiyac yoksa.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "Order order = new Order(); order.setUser(userRepo.getReferenceById(userId));\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}"
+    },
+    {
+      "id": "i9-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Dynamic filteringde method explosion sorununu azaltan yaklasim hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her kombinasyon icin ayri findBy... methodu yazmak."
+        },
+        {
+          "id": "B",
+          "text": "Specification / Criteria tabanli composable kosullar."
+        },
+        {
+          "id": "C",
+          "text": "Tum filtreleri client tarafinda yapmak."
+        },
+        {
+          "id": "D",
+          "text": "Sadece native query concat string."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Specification / Criteria tabanli composable kosullar.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratikte nasil uygularsin?\nGercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Her kombinasyon icin ayri findBy... methodu yazmak.'.\nBu secenek, dogru yanit olan 'Specification / Criteria tabanli composable kosullar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Specification / Criteria tabanli composable kosullar.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Specification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\nPratik uygulama: Gercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Tum filtreleri client tarafinda yapmak.'.\nBu secenek, dogru yanit olan 'Specification / Criteria tabanli composable kosullar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece native query concat string.'.\nBu secenek, dogru yanit olan 'Specification / Criteria tabanli composable kosullar.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "spec = spec.and(UserSpecs.hasStatus(status));\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}"
+    },
+    {
+      "id": "i9-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu iliski icin dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "orphanRemoval true oldugunda cocuk listeden cikarilinca committe DELETE SQLi olusabilir."
+        },
+        {
+          "id": "B",
+          "text": "Listeden cikarmak sadece memoryde degisir, DBye asla yansimaz."
+        },
+        {
+          "id": "C",
+          "text": "Sadece parent silinirse cocuk silinir."
+        },
+        {
+          "id": "D",
+          "text": "Bu davranis JPAde yoktur."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: orphanRemoval true oldugunda cocuk listeden cikarilinca committe DELETE SQLi olusabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratikte nasil uygularsin?\nGercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'orphanRemoval true oldugunda cocuk listeden cikarilinca committe DELETE SQLi olusabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Specification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\nPratik uygulama: Gercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Listeden cikarmak sadece memoryde degisir, DBye asla yansimaz.'.\nBu secenek, dogru yanit olan 'orphanRemoval true oldugunda cocuk listeden cikarilinca committe DELETE SQLi olusabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece parent silinirse cocuk silinir.'.\nBu secenek, dogru yanit olan 'orphanRemoval true oldugunda cocuk listeden cikarilinca committe DELETE SQLi olusabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Bu davranis JPAde yoktur.'.\nBu secenek, dogru yanit olan 'orphanRemoval true oldugunda cocuk listeden cikarilinca committe DELETE SQLi olusabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "order.getItems().remove(0);\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}",
+      "questionCode": " @javax.persistence.OneToMany(mappedBy = \"order\", cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true)\n private java.util.List<OrderItem> items;"
+    },
+    {
+      "id": "i9-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu cascade ayariyla ilgili en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Parent persist edilince childlarin da persist edilmesi tetiklenebilir."
+        },
+        {
+          "id": "B",
+          "text": "CascadeType.PERSIST child inserti engeller."
+        },
+        {
+          "id": "C",
+          "text": "Cascade sadece delete icindir."
+        },
+        {
+          "id": "D",
+          "text": "Cascade var diye transaction gerekmez."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Parent persist edilince childlarin da persist edilmesi tetiklenebilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratikte nasil uygularsin?\nGercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Parent persist edilince childlarin da persist edilmesi tetiklenebilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Specification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\nPratik uygulama: Gercek projede filtreleme kosullari arttikca specification yaklasimi method explosion sorununu onler.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'CascadeType.PERSIST child inserti engeller.'.\nBu secenek, dogru yanit olan 'Parent persist edilince childlarin da persist edilmesi tetiklenebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Cascade sadece delete icindir.'.\nBu secenek, dogru yanit olan 'Parent persist edilince childlarin da persist edilmesi tetiklenebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Cascade var diye transaction gerekmez.'.\nBu secenek, dogru yanit olan 'Parent persist edilince childlarin da persist edilmesi tetiklenebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Cascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "entityManager.persist(order);\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}",
+      "questionCode": " @javax.persistence.OneToMany(mappedBy = \"order\", cascade = javax.persistence.CascadeType.PERSIST)\n private java.util.List<OrderItem> items;"
+    },
+    {
+      "id": "i9-q10",
+      "type": "code",
+      "question": "Opsiyonel status, role ve email filtreleriyle dynamic arama yapan bir Specification builder ve repository kullanimi yaz. Sonucu pageable dondur.",
+      "starterCode": "interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long>,\n    org.springframework.data.jpa.repository.JpaSpecificationExecutor<User> {}\n\nclass UserSearchService {\n    // TODO\n}\n",
+      "answerBody": "Sorunun odagi: Gelismis repository desenleri ve modelleme kararlari\n\nBu bir kod yazma sorusu. Beklenen sadece compile olan bir cozum degil; transaction semantigi, persistence context davranisi, hata yonetimi ve testlenebilirlik birlikte dogru kurulmalidir.\n\nKonu anlatimi (sifirdan):\nSpecification dinamik filtreleme, auditing zaman damgasi/kimlik takibi, orphanRemoval ve cascade ise iliski yasam dongusunu kontrol eder.\n\nPratik uygulama adimlari:\n1) Girdi dogrulama ve business rule kontrolu\n2) Transaction boundary belirleme\n3) Repository cagrisi ve lifecycle etkisi\n4) Hata durumlarinda rollback/compensation karari\n5) Testte hem basarili hem hatali akisi dogrulama\n\nSik yapilan hata:\nCascade ve orphanRemoval semantigini karistirmak istenmeyen delete veya veri artigi olusturabilir.\n\nDegerlendirme kriteri:\n- Dogru API secimi\n- Gereksiz query ve N+1 riskini azaltma\n- Rollback davranisini netlestirme\n- Kodun okunabilir ve test edilebilir olmasi\n\nEk mini kod ornegi:\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}",
+      "answerCode": "class UserSpecs {\n    static org.springframework.data.jpa.domain.Specification<User> statusEq(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n\n    static org.springframework.data.jpa.domain.Specification<User> roleEq(String role) {\n        return (root, query, cb) -> role == null ? cb.conjunction() : cb.equal(root.get(\"role\"), role);\n    }\n\n    static org.springframework.data.jpa.domain.Specification<User> emailContains(String email) {\n        return (root, query, cb) -> email == null ? cb.conjunction() : cb.like(cb.lower(root.get(\"email\")), \"%\" + email.toLowerCase() + \"%\");\n    }\n}\n\nclass UserSearchService {\n    private final UserRepository repo;\n\n    UserSearchService(UserRepository repo) { this.repo = repo; }\n\n    public org.springframework.data.domain.Page<User> search(String status, String role, String email, org.springframework.data.domain.Pageable pageable) {\n        var spec = UserSpecs.statusEq(status).and(UserSpecs.roleEq(role)).and(UserSpecs.emailContains(email));\n        return repo.findAll(spec, pageable);\n    }\n}\n\n// Ek ogretici ornek\npublic class UserSpecs {\n    public static org.springframework.data.jpa.domain.Specification<User> hasStatus(String status) {\n        return (root, query, cb) -> status == null ? cb.conjunction() : cb.equal(root.get(\"status\"), status);\n    }\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

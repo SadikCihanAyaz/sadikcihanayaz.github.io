@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "hibernate-jpa-interview-8",
+  "title": "Hibernate/JPA Interview - 8",
+  "description": "Hibernate performans: batching, bulk update, pool, query plan",
+  "questions": [
+    {
+      "id": "i8-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Connection pool neden JPA/Hibernate performansinda kritik bir basliktir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her sorguda yeni fiziksel baglanti acma maliyetini azaltip throughputu dengeler."
+        },
+        {
+          "id": "B",
+          "text": "Sadece entity annotationlarini tutar."
+        },
+        {
+          "id": "C",
+          "text": "Lazy loadingi kapatir."
+        },
+        {
+          "id": "D",
+          "text": "Rollback kurallarini degistirir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Her sorguda yeni fiziksel baglanti acma maliyetini azaltip throughputu dengeler.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratikte nasil uygularsin?\nBatch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Her sorguda yeni fiziksel baglanti acma maliyetini azaltip throughputu dengeler.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Performansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\nPratik uygulama: Batch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Sadece entity annotationlarini tutar.'.\nBu secenek, dogru yanit olan 'Her sorguda yeni fiziksel baglanti acma maliyetini azaltip throughputu dengeler.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Lazy loadingi kapatir.'.\nBu secenek, dogru yanit olan 'Her sorguda yeni fiziksel baglanti acma maliyetini azaltip throughputu dengeler.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Rollback kurallarini degistirir.'.\nBu secenek, dogru yanit olan 'Her sorguda yeni fiziksel baglanti acma maliyetini azaltip throughputu dengeler.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "spring.datasource.hikari.maximum-pool-size=20\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);"
+    },
+    {
+      "id": "i8-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "hibernate.jdbc.batch_size ayari neyi hedefler?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her sorguyu tek tek daha yavas calistirmayi."
+        },
+        {
+          "id": "B",
+          "text": "Benzer DML operasyonlarini batchleyerek network/round-trip maliyetini azaltmayi."
+        },
+        {
+          "id": "C",
+          "text": "Tum SELECTleri disable etmeyi."
+        },
+        {
+          "id": "D",
+          "text": "Version kontrolunu kapatmayi."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Benzer DML operasyonlarini batchleyerek network/round-trip maliyetini azaltmayi.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratikte nasil uygularsin?\nBatch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Her sorguyu tek tek daha yavas calistirmayi.'.\nBu secenek, dogru yanit olan 'Benzer DML operasyonlarini batchleyerek network/round-trip maliyetini azaltmayi.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Benzer DML operasyonlarini batchleyerek network/round-trip maliyetini azaltmayi.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Performansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\nPratik uygulama: Batch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Tum SELECTleri disable etmeyi.'.\nBu secenek, dogru yanit olan 'Benzer DML operasyonlarini batchleyerek network/round-trip maliyetini azaltmayi.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Version kontrolunu kapatmayi.'.\nBu secenek, dogru yanit olan 'Benzer DML operasyonlarini batchleyerek network/round-trip maliyetini azaltmayi.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "spring.jpa.properties.hibernate.jdbc.batch_size=50\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);"
+    },
+    {
+      "id": "i8-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Buyuk hacimli insertte flush/clear dongusunun amaci nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Persistence contextte biriken managed entity sayisini kontrol ederek memory ve dirty checking maliyetini azaltmak."
+        },
+        {
+          "id": "B",
+          "text": "Transactioni her satirda rollback yapmak."
+        },
+        {
+          "id": "C",
+          "text": "Entityyi detached yapmayi yasaklamak."
+        },
+        {
+          "id": "D",
+          "text": "Sadece native SQL yazmayi zorlamak."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Persistence contextte biriken managed entity sayisini kontrol ederek memory ve dirty checking maliyetini azaltmak.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratikte nasil uygularsin?\nBatch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Persistence contextte biriken managed entity sayisini kontrol ederek memory ve dirty checking maliyetini azaltmak.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Performansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\nPratik uygulama: Batch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Transactioni her satirda rollback yapmak.'.\nBu secenek, dogru yanit olan 'Persistence contextte biriken managed entity sayisini kontrol ederek memory ve dirty checking maliyetini azaltmak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Entityyi detached yapmayi yasaklamak.'.\nBu secenek, dogru yanit olan 'Persistence contextte biriken managed entity sayisini kontrol ederek memory ve dirty checking maliyetini azaltmak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece native SQL yazmayi zorlamak.'.\nBu secenek, dogru yanit olan 'Persistence contextte biriken managed entity sayisini kontrol ederek memory ve dirty checking maliyetini azaltmak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "if (i % 50 == 0) { entityManager.flush(); entityManager.clear(); }\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);"
+    },
+    {
+      "id": "i8-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "DTO projectionin performans katkisi icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tum entityyi cekip sonra filtreledigi icin daha maliyetlidir."
+        },
+        {
+          "id": "B",
+          "text": "Ihtiyac olan kolonlari alarak transfer ve memory maliyetini azaltabilir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece write islemlerinde vardir."
+        },
+        {
+          "id": "D",
+          "text": "Projectionda index kullanilmaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Ihtiyac olan kolonlari alarak transfer ve memory maliyetini azaltabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratikte nasil uygularsin?\nBatch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Tum entityyi cekip sonra filtreledigi icin daha maliyetlidir.'.\nBu secenek, dogru yanit olan 'Ihtiyac olan kolonlari alarak transfer ve memory maliyetini azaltabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Ihtiyac olan kolonlari alarak transfer ve memory maliyetini azaltabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Performansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\nPratik uygulama: Batch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece write islemlerinde vardir.'.\nBu secenek, dogru yanit olan 'Ihtiyac olan kolonlari alarak transfer ve memory maliyetini azaltabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Projectionda index kullanilmaz.'.\nBu secenek, dogru yanit olan 'Ihtiyac olan kolonlari alarak transfer ve memory maliyetini azaltabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "select new com.example.UserSummary(u.id, u.email) from User u\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);"
+    },
+    {
+      "id": "i8-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Bulk update ile ilgili kritik uyari hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Bulk update persistence contextteki mevcut managed nesneleri otomatik senkron tutar."
+        },
+        {
+          "id": "B",
+          "text": "Bulk update persistence contexti bypass edebilir; stale data riskine karsi clear/refresh stratejisi gerekir."
+        },
+        {
+          "id": "C",
+          "text": "Bulk update sadece testte calisir."
+        },
+        {
+          "id": "D",
+          "text": "Bulk update hic SQL uretmez."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Bulk update persistence contexti bypass edebilir; stale data riskine karsi clear/refresh stratejisi gerekir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratikte nasil uygularsin?\nBatch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Bulk update persistence contextteki mevcut managed nesneleri otomatik senkron tutar.'.\nBu secenek, dogru yanit olan 'Bulk update persistence contexti bypass edebilir; stale data riskine karsi clear/refresh stratejisi gerekir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Bulk update persistence contexti bypass edebilir; stale data riskine karsi clear/refresh stratejisi gerekir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Performansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\nPratik uygulama: Batch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Bulk update sadece testte calisir.'.\nBu secenek, dogru yanit olan 'Bulk update persistence contexti bypass edebilir; stale data riskine karsi clear/refresh stratejisi gerekir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Bulk update hic SQL uretmez.'.\nBu secenek, dogru yanit olan 'Bulk update persistence contexti bypass edebilir; stale data riskine karsi clear/refresh stratejisi gerekir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true)\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);"
+    },
+    {
+      "id": "i8-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Index kullanimi acisindan en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Index sadece insert hizini arttirmak icindir."
+        },
+        {
+          "id": "B",
+          "text": "Sik filtre/siralama kolonlarinda dogru index secimi query costu ciddi azaltabilir."
+        },
+        {
+          "id": "C",
+          "text": "JPA indexe hic etki etmez."
+        },
+        {
+          "id": "D",
+          "text": "Tum kolonlara index atmak her zaman en iyi cozumdur."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Sik filtre/siralama kolonlarinda dogru index secimi query costu ciddi azaltabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratikte nasil uygularsin?\nBatch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Index sadece insert hizini arttirmak icindir.'.\nBu secenek, dogru yanit olan 'Sik filtre/siralama kolonlarinda dogru index secimi query costu ciddi azaltabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Sik filtre/siralama kolonlarinda dogru index secimi query costu ciddi azaltabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Performansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\nPratik uygulama: Batch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'JPA indexe hic etki etmez.'.\nBu secenek, dogru yanit olan 'Sik filtre/siralama kolonlarinda dogru index secimi query costu ciddi azaltabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Tum kolonlara index atmak her zaman en iyi cozumdur.'.\nBu secenek, dogru yanit olan 'Sik filtre/siralama kolonlarinda dogru index secimi query costu ciddi azaltabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "create index idx_user_status_created_at on users(status, created_at);\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);"
+    },
+    {
+      "id": "i8-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ORM performans tuningde ilk adim ne olmali?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Rastgele cache acmak."
+        },
+        {
+          "id": "B",
+          "text": "Olcum yapmak: query sayisi, query suresi, lock beklemeleri ve hotspot sorgulari tespit etmek."
+        },
+        {
+          "id": "C",
+          "text": "Tum fetch tiplerini EAGER yapmak."
+        },
+        {
+          "id": "D",
+          "text": "Sadece batch_sizei buyutmek."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Olcum yapmak: query sayisi, query suresi, lock beklemeleri ve hotspot sorgulari tespit etmek.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratikte nasil uygularsin?\nBatch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Rastgele cache acmak.'.\nBu secenek, dogru yanit olan 'Olcum yapmak: query sayisi, query suresi, lock beklemeleri ve hotspot sorgulari tespit etmek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Olcum yapmak: query sayisi, query suresi, lock beklemeleri ve hotspot sorgulari tespit etmek.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Performansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\nPratik uygulama: Batch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Tum fetch tiplerini EAGER yapmak.'.\nBu secenek, dogru yanit olan 'Olcum yapmak: query sayisi, query suresi, lock beklemeleri ve hotspot sorgulari tespit etmek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece batch_sizei buyutmek.'.\nBu secenek, dogru yanit olan 'Olcum yapmak: query sayisi, query suresi, lock beklemeleri ve hotspot sorgulari tespit etmek.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "logging.level.org.hibernate.SQL=DEBUG\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);"
+    },
+    {
+      "id": "i8-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu bulk update kodundan hemen sonra managed entity okunursa ne riski vardir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hic risk yoktur, context daima otomatik senkron."
+        },
+        {
+          "id": "B",
+          "text": "Contextte eski deger kalabilir; stale data gorulebilir."
+        },
+        {
+          "id": "C",
+          "text": "JVM crash olur."
+        },
+        {
+          "id": "D",
+          "text": "Sadece count sorgusu calisir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Contextte eski deger kalabilir; stale data gorulebilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratikte nasil uygularsin?\nBatch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Hic risk yoktur, context daima otomatik senkron.'.\nBu secenek, dogru yanit olan 'Contextte eski deger kalabilir; stale data gorulebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Contextte eski deger kalabilir; stale data gorulebilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Performansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\nPratik uygulama: Batch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'JVM crash olur.'.\nBu secenek, dogru yanit olan 'Contextte eski deger kalabilir; stale data gorulebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece count sorgusu calisir.'.\nBu secenek, dogru yanit olan 'Contextte eski deger kalabilir; stale data gorulebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "repo.deactivate(threshold);\nUser u = repo.findById(id).orElseThrow(); // stale risk\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);",
+      "questionCode": " @org.springframework.data.jpa.repository.Modifying\n @org.springframework.data.jpa.repository.Query(\"update User u set u.status = PASSIVE where u.lastLogin < :t\")\n int deactivate(java.time.Instant t);"
+    },
+    {
+      "id": "i8-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu loopun amaci icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her 50 kayitta flush/clear ile memory bloat ve dirty checking yukunu kontrol altina almak."
+        },
+        {
+          "id": "B",
+          "text": "Her 50 kayitta rollback zorlamak."
+        },
+        {
+          "id": "C",
+          "text": "Entity statei tamamen bozmak."
+        },
+        {
+          "id": "D",
+          "text": "Sadece debug icin yazilmis anlamsiz kod."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Her 50 kayitta flush/clear ile memory bloat ve dirty checking yukunu kontrol altina almak.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratikte nasil uygularsin?\nBatch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Her 50 kayitta flush/clear ile memory bloat ve dirty checking yukunu kontrol altina almak.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Performansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\nPratik uygulama: Batch insert, projection, index, query analizi ve kontrollu flush/clear kullanimi ile buyuk hacimde stabilite artar.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Her 50 kayitta rollback zorlamak.'.\nBu secenek, dogru yanit olan 'Her 50 kayitta flush/clear ile memory bloat ve dirty checking yukunu kontrol altina almak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Entity statei tamamen bozmak.'.\nBu secenek, dogru yanit olan 'Her 50 kayitta flush/clear ile memory bloat ve dirty checking yukunu kontrol altina almak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece debug icin yazilmis anlamsiz kod.'.\nBu secenek, dogru yanit olan 'Her 50 kayitta flush/clear ile memory bloat ve dirty checking yukunu kontrol altina almak.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Bulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "if (i % 50 == 0) { entityManager.flush(); entityManager.clear(); }\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);",
+      "questionCode": " for (int i = 1; i <= items.size(); i++) {\n    entityManager.persist(items.get(i - 1));\n    if (i % 50 == 0) {\n       entityManager.flush();\n       entityManager.clear();\n    }\n }"
+    },
+    {
+      "id": "i8-q10",
+      "type": "code",
+      "question": "Bulk status update yapan bir repository metodu ve service yaz. Modifying + clearAutomatically/flushAutomatically kullan; update sayisini don.",
+      "starterCode": "interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    // TODO\n}\n\nclass UserService {\n    private final UserRepository repo;\n\n    UserService(UserRepository repo) { this.repo = repo; }\n\n    // TODO\n}\n",
+      "answerBody": "Sorunun odagi: ORM performans optimizasyonu ve maliyet kontrolu\n\nBu bir kod yazma sorusu. Beklenen sadece compile olan bir cozum degil; transaction semantigi, persistence context davranisi, hata yonetimi ve testlenebilirlik birlikte dogru kurulmalidir.\n\nKonu anlatimi (sifirdan):\nPerformansin ana maliyetleri query sayisi, gereksiz veri tasima, flush/dirty checking yukusu ve connection pool baskisidir.\n\nPratik uygulama adimlari:\n1) Girdi dogrulama ve business rule kontrolu\n2) Transaction boundary belirleme\n3) Repository cagrisi ve lifecycle etkisi\n4) Hata durumlarinda rollback/compensation karari\n5) Testte hem basarili hem hatali akisi dogrulama\n\nSik yapilan hata:\nBulk update sonra persistence contexti temizlememek stale data sorununa, OSIV ile kontrolsuz lazy erisimler gizli N+1e neden olabilir.\n\nDegerlendirme kriteri:\n- Dogru API secimi\n- Gereksiz query ve N+1 riskini azaltma\n- Rollback davranisini netlestirme\n- Kodun okunabilir ve test edilebilir olmasi\n\nEk mini kod ornegi:\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);",
+      "answerCode": "interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    @org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n    @org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\n    int bulkUpdateStatus(\n        @org.springframework.data.repository.query.Param(\"status\") String status,\n        @org.springframework.data.repository.query.Param(\"threshold\") java.time.Instant threshold\n    );\n}\n\nclass UserService {\n    private final UserRepository repo;\n\n    UserService(UserRepository repo) { this.repo = repo; }\n\n    @org.springframework.transaction.annotation.Transactional\n    public int deactivateOldUsers(java.time.Instant threshold) {\n        return repo.bulkUpdateStatus(\"PASSIVE\", threshold);\n    }\n}\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.Modifying(clearAutomatically = true, flushAutomatically = true)\n@org.springframework.data.jpa.repository.Query(\"update User u set u.status = :status where u.lastLogin < :threshold\")\nint bulkDeactivate(String status, java.time.Instant threshold);",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

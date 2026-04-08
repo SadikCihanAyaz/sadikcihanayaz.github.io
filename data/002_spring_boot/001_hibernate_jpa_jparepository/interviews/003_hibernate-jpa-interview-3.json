@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "hibernate-jpa-interview-3",
+  "title": "Hibernate/JPA Interview - 3",
+  "description": "Entity state, persistence context, dirty checking, flush, merge",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Transient entity icin en dogru tanim hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Persistence context tarafindan izlenen ve dirty checkinge acik entitydir."
+        },
+        {
+          "id": "B",
+          "text": "new ile olusturulmus, henuz persistence context tarafindan izlenmeyen entitydir."
+        },
+        {
+          "id": "C",
+          "text": "DBden silinmek uzere isaretlenmis entitydir."
+        },
+        {
+          "id": "D",
+          "text": "Her zaman detached ile ayni anlama gelir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: new ile olusturulmus, henuz persistence context tarafindan izlenmeyen entitydir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratikte nasil uygularsin?\nManaged-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Persistence context tarafindan izlenen ve dirty checkinge acik entitydir.'.\nBu secenek, dogru yanit olan 'new ile olusturulmus, henuz persistence context tarafindan izlenmeyen entitydir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'new ile olusturulmus, henuz persistence context tarafindan izlenmeyen entitydir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Managed entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\nPratik uygulama: Managed-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'DBden silinmek uzere isaretlenmis entitydir.'.\nBu secenek, dogru yanit olan 'new ile olusturulmus, henuz persistence context tarafindan izlenmeyen entitydir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Her zaman detached ile ayni anlama gelir.'.\nBu secenek, dogru yanit olan 'new ile olusturulmus, henuz persistence context tarafindan izlenmeyen entitydir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "User u = new User(); // transient\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}"
+    },
+    {
+      "id": "i3-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Managed entity icin hangi ifade dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Degisiklikleri commit/flush asamasinda otomatik tespit edilip SQLe donusturulebilir."
+        },
+        {
+          "id": "B",
+          "text": "Asla update edilemez."
+        },
+        {
+          "id": "C",
+          "text": "Yalnizca native query ile degistirilebilir."
+        },
+        {
+          "id": "D",
+          "text": "Transaction disinda da daima DBye otomatik yazar."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Degisiklikleri commit/flush asamasinda otomatik tespit edilip SQLe donusturulebilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratikte nasil uygularsin?\nManaged-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Degisiklikleri commit/flush asamasinda otomatik tespit edilip SQLe donusturulebilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Managed entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\nPratik uygulama: Managed-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Asla update edilemez.'.\nBu secenek, dogru yanit olan 'Degisiklikleri commit/flush asamasinda otomatik tespit edilip SQLe donusturulebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Yalnizca native query ile degistirilebilir.'.\nBu secenek, dogru yanit olan 'Degisiklikleri commit/flush asamasinda otomatik tespit edilip SQLe donusturulebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Transaction disinda da daima DBye otomatik yazar.'.\nBu secenek, dogru yanit olan 'Degisiklikleri commit/flush asamasinda otomatik tespit edilip SQLe donusturulebilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "u.setEmail(\"new@mail.com\"); // managed ise dirty checking\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}"
+    },
+    {
+      "id": "i3-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Detached entity ile ilgili en kritik bilgi hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Detached entitydeki degisiklikler otomatik commit olur."
+        },
+        {
+          "id": "B",
+          "text": "Detached entity persistence context disindadir; otomatik dirty checking uygulanmaz."
+        },
+        {
+          "id": "C",
+          "text": "Detached entity sadece delete icin vardir."
+        },
+        {
+          "id": "D",
+          "text": "Detached state sadece @Query kullanildiginda olusur."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Detached entity persistence context disindadir; otomatik dirty checking uygulanmaz.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratikte nasil uygularsin?\nManaged-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Detached entitydeki degisiklikler otomatik commit olur.'.\nBu secenek, dogru yanit olan 'Detached entity persistence context disindadir; otomatik dirty checking uygulanmaz.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Detached entity persistence context disindadir; otomatik dirty checking uygulanmaz.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Managed entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\nPratik uygulama: Managed-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Detached entity sadece delete icin vardir.'.\nBu secenek, dogru yanit olan 'Detached entity persistence context disindadir; otomatik dirty checking uygulanmaz.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Detached state sadece @Query kullanildiginda olusur.'.\nBu secenek, dogru yanit olan 'Detached entity persistence context disindadir; otomatik dirty checking uygulanmaz.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "entityManager.detach(user);\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}"
+    },
+    {
+      "id": "i3-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "merge metodu icin hangisi dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Var olan detached instancei aynen managed yapar, yeni instance dondurmez."
+        },
+        {
+          "id": "B",
+          "text": "Detached veriyi persistence contexte kopyalar ve managed bir donus degeri uretir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece delete isleminde kullanilir."
+        },
+        {
+          "id": "D",
+          "text": "Transaction olmadan merge her zaman rollback yapar."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Detached veriyi persistence contexte kopyalar ve managed bir donus degeri uretir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratikte nasil uygularsin?\nManaged-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Var olan detached instancei aynen managed yapar, yeni instance dondurmez.'.\nBu secenek, dogru yanit olan 'Detached veriyi persistence contexte kopyalar ve managed bir donus degeri uretir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Detached veriyi persistence contexte kopyalar ve managed bir donus degeri uretir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Managed entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\nPratik uygulama: Managed-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece delete isleminde kullanilir.'.\nBu secenek, dogru yanit olan 'Detached veriyi persistence contexte kopyalar ve managed bir donus degeri uretir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Transaction olmadan merge her zaman rollback yapar.'.\nBu secenek, dogru yanit olan 'Detached veriyi persistence contexte kopyalar ve managed bir donus degeri uretir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "User managed = entityManager.merge(detachedUser);\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}"
+    },
+    {
+      "id": "i3-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "flush ve commit farki icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Flush kalici commit etkisi yaratir; commit gereksizdir."
+        },
+        {
+          "id": "B",
+          "text": "Flush SQL senkronizasyonudur; commit transactioni kalici sonlandirir."
+        },
+        {
+          "id": "C",
+          "text": "Commit sadece read-only transactionda vardir."
+        },
+        {
+          "id": "D",
+          "text": "Flush sadece native queryde vardir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Flush SQL senkronizasyonudur; commit transactioni kalici sonlandirir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratikte nasil uygularsin?\nManaged-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Flush kalici commit etkisi yaratir; commit gereksizdir.'.\nBu secenek, dogru yanit olan 'Flush SQL senkronizasyonudur; commit transactioni kalici sonlandirir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Flush SQL senkronizasyonudur; commit transactioni kalici sonlandirir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Managed entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\nPratik uygulama: Managed-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Commit sadece read-only transactionda vardir.'.\nBu secenek, dogru yanit olan 'Flush SQL senkronizasyonudur; commit transactioni kalici sonlandirir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Flush sadece native queryde vardir.'.\nBu secenek, dogru yanit olan 'Flush SQL senkronizasyonudur; commit transactioni kalici sonlandirir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "entityManager.flush();\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}"
+    },
+    {
+      "id": "i3-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "entityManager.clear() cagrisi ne yapar?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tum managed entityleri detached hale getirir (persistence context temizlenir)."
+        },
+        {
+          "id": "B",
+          "text": "Tum tablolari truncate eder."
+        },
+        {
+          "id": "C",
+          "text": "Transactioni otomatik commit eder."
+        },
+        {
+          "id": "D",
+          "text": "Sadece tek bir entityyi remove eder."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Tum managed entityleri detached hale getirir (persistence context temizlenir).\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratikte nasil uygularsin?\nManaged-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Tum managed entityleri detached hale getirir (persistence context temizlenir).'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Managed entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\nPratik uygulama: Managed-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Tum tablolari truncate eder.'.\nBu secenek, dogru yanit olan 'Tum managed entityleri detached hale getirir (persistence context temizlenir).' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Transactioni otomatik commit eder.'.\nBu secenek, dogru yanit olan 'Tum managed entityleri detached hale getirir (persistence context temizlenir).' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece tek bir entityyi remove eder.'.\nBu secenek, dogru yanit olan 'Tum managed entityleri detached hale getirir (persistence context temizlenir).' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "entityManager.clear();\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}"
+    },
+    {
+      "id": "i3-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Dirty checkingin calismasi icin hangi kosul kritik onemdedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Entitynin managed durumda olmasi ve degisikligin transaction boundary icinde yapilmasi."
+        },
+        {
+          "id": "B",
+          "text": "Mutlaka save metodunun iki kez cagrilmasi."
+        },
+        {
+          "id": "C",
+          "text": "Entitynin native query ile alinmis olmasi."
+        },
+        {
+          "id": "D",
+          "text": "ThreadLocalde tutulmasi."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Entitynin managed durumda olmasi ve degisikligin transaction boundary icinde yapilmasi.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratikte nasil uygularsin?\nManaged-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Entitynin managed durumda olmasi ve degisikligin transaction boundary icinde yapilmasi.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Managed entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\nPratik uygulama: Managed-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Mutlaka save metodunun iki kez cagrilmasi.'.\nBu secenek, dogru yanit olan 'Entitynin managed durumda olmasi ve degisikligin transaction boundary icinde yapilmasi.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Entitynin native query ile alinmis olmasi.'.\nBu secenek, dogru yanit olan 'Entitynin managed durumda olmasi ve degisikligin transaction boundary icinde yapilmasi.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'ThreadLocalde tutulmasi.'.\nBu secenek, dogru yanit olan 'Entitynin managed durumda olmasi ve degisikligin transaction boundary icinde yapilmasi.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}"
+    },
+    {
+      "id": "i3-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun sonucu icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "clear sonrasi user detached oldugu icin setName degisikligi otomatik updatee donmez."
+        },
+        {
+          "id": "B",
+          "text": "clear hicbir etkisi yoktur, update kesin gider."
+        },
+        {
+          "id": "C",
+          "text": "clear DByi temizler."
+        },
+        {
+          "id": "D",
+          "text": "Kod compile olmaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: clear sonrasi user detached oldugu icin setName degisikligi otomatik updatee donmez.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratikte nasil uygularsin?\nManaged-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'clear sonrasi user detached oldugu icin setName degisikligi otomatik updatee donmez.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Managed entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\nPratik uygulama: Managed-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'clear hicbir etkisi yoktur, update kesin gider.'.\nBu secenek, dogru yanit olan 'clear sonrasi user detached oldugu icin setName degisikligi otomatik updatee donmez.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'clear DByi temizler.'.\nBu secenek, dogru yanit olan 'clear sonrasi user detached oldugu icin setName degisikligi otomatik updatee donmez.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Kod compile olmaz.'.\nBu secenek, dogru yanit olan 'clear sonrasi user detached oldugu icin setName degisikligi otomatik updatee donmez.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "User user = entityManager.find(User.class, id);\nentityManager.clear();\nuser.setName(\"X\");\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}",
+      "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void demo(Long id){\n     User user = entityManager.find(User.class, id);\n     entityManager.clear();\n     user.setName(\"X\");\n }"
+    },
+    {
+      "id": "i3-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki merge senaryosunda hangi yorum dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "oldRef ve merged her zaman ayni Java referansidir."
+        },
+        {
+          "id": "B",
+          "text": "merge donus degeri managed olabilir; eski detached referansta yapilan degisiklikler otomatik takip edilmez."
+        },
+        {
+          "id": "C",
+          "text": "merge olduktan sonra persistence context kapanir."
+        },
+        {
+          "id": "D",
+          "text": "Bu kod yalnizca rollback uretir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: merge donus degeri managed olabilir; eski detached referansta yapilan degisiklikler otomatik takip edilmez.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratikte nasil uygularsin?\nManaged-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'oldRef ve merged her zaman ayni Java referansidir.'.\nBu secenek, dogru yanit olan 'merge donus degeri managed olabilir; eski detached referansta yapilan degisiklikler otomatik takip edilmez.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'merge donus degeri managed olabilir; eski detached referansta yapilan degisiklikler otomatik takip edilmez.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Managed entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\nPratik uygulama: Managed-detached ayrimini net bilirsen gereksiz save/merge cagrilarini azaltir, beklenmedik update buglarini onlersin.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'merge olduktan sonra persistence context kapanir.'.\nBu secenek, dogru yanit olan 'merge donus degeri managed olabilir; eski detached referansta yapilan degisiklikler otomatik takip edilmez.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Bu kod yalnizca rollback uretir.'.\nBu secenek, dogru yanit olan 'merge donus degeri managed olabilir; eski detached referansta yapilan degisiklikler otomatik takip edilmez.' ile ayni garanti seviyesini saglamaz.\nRisk notu: mergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "User merged = entityManager.merge(detachedUser);\nmerged.setName(\"managed\");\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}",
+      "questionCode": " User oldRef = detachedUser;\n User merged = entityManager.merge(detachedUser);\n oldRef.setName(\"old\");\n merged.setName(\"managed\");"
+    },
+    {
+      "id": "i3-q10",
+      "type": "code",
+      "question": "Managed entity dirty checking davranisini gosteren bir update service metodu yaz. save cagrisi olmadan committe update olusmali.",
+      "starterCode": "class UserService {\n    private final UserRepository repo;\n\n    UserService(UserRepository repo) {\n        this.repo = repo;\n    }\n\n    // TODO\n}\n\ninterface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {}\nclass User { Long id; String email; }\n",
+      "answerBody": "Sorunun odagi: Entity lifecycle ve persistence context mekanigi\n\nBu bir kod yazma sorusu. Beklenen sadece compile olan bir cozum degil; transaction semantigi, persistence context davranisi, hata yonetimi ve testlenebilirlik birlikte dogru kurulmalidir.\n\nKonu anlatimi (sifirdan):\nManaged entityler persistence context tarafindan izlenir ve degisiklikler dirty checking ile flush/commit sirasinda SQLe doner.\n\nPratik uygulama adimlari:\n1) Girdi dogrulama ve business rule kontrolu\n2) Transaction boundary belirleme\n3) Repository cagrisi ve lifecycle etkisi\n4) Hata durumlarinda rollback/compensation karari\n5) Testte hem basarili hem hatali akisi dogrulama\n\nSik yapilan hata:\nmergein mevcut objeyi managed yaptigini sanmak veya clear/detach etkisini bilmeden degisiklik beklemek yanlis sonuclara yol acar.\n\nDegerlendirme kriteri:\n- Dogru API secimi\n- Gereksiz query ve N+1 riskini azaltma\n- Rollback davranisini netlestirme\n- Kodun okunabilir ve test edilebilir olmasi\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}",
+      "answerCode": "@org.springframework.transaction.annotation.Transactional\npublic void updateEmail(Long id, String newEmail) {\n    User user = repo.findById(id).orElseThrow();\n    user.setEmail(newEmail);\n    // save() zorunlu degil; managed entity dirty checking ile committe update edilir.\n}\n\n// Test fikri:\n// - method cagrisi sonrasi DBde email degismeli\n// - save mocku zorunlu degildir\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional\npublic void rename(Long id) {\n    User u = repo.findById(id).orElseThrow();\n    u.setName(\"Ayse\"); // dirty checking\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

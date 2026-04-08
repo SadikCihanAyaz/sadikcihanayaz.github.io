@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "hibernate-jpa-interview-5",
+  "title": "Hibernate/JPA Interview - 5",
+  "description": "@Transactional temel davranis, rollback kurallari, proxy etkisi",
+  "questions": [
+    {
+      "id": "i5-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Transactional icin en dogru aciklama hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece log basmak icindir."
+        },
+        {
+          "id": "B",
+          "text": "Methodu transaction boundary icinde calistirir; commit/rollback ve persistence context davranisini etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Sadece repository interfaceinde calisir."
+        },
+        {
+          "id": "D",
+          "text": "Thread olusturma aracidir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Methodu transaction boundary icinde calistirir; commit/rollback ve persistence context davranisini etkiler.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratikte nasil uygularsin?\nBoundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Sadece log basmak icindir.'.\nBu secenek, dogru yanit olan 'Methodu transaction boundary icinde calistirir; commit/rollback ve persistence context davranisini etkiler.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Methodu transaction boundary icinde calistirir; commit/rollback ve persistence context davranisini etkiler.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\nPratik uygulama: Boundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece repository interfaceinde calisir.'.\nBu secenek, dogru yanit olan 'Methodu transaction boundary icinde calistirir; commit/rollback ve persistence context davranisini etkiler.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Thread olusturma aracidir.'.\nBu secenek, dogru yanit olan 'Methodu transaction boundary icinde calistirir; commit/rollback ve persistence context davranisini etkiler.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}"
+    },
+    {
+      "id": "i5-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring default rollback kurali icin hangisi dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Checked exceptionlarda default rollback vardir, runtime exceptionda yoktur."
+        },
+        {
+          "id": "B",
+          "text": "RuntimeException ve altlarinda rollback tipik olarak vardir."
+        },
+        {
+          "id": "C",
+          "text": "Hicbir exception rollback yapmaz."
+        },
+        {
+          "id": "D",
+          "text": "Sadece IOException rollback yapar."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: RuntimeException ve altlarinda rollback tipik olarak vardir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratikte nasil uygularsin?\nBoundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Checked exceptionlarda default rollback vardir, runtime exceptionda yoktur.'.\nBu secenek, dogru yanit olan 'RuntimeException ve altlarinda rollback tipik olarak vardir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'RuntimeException ve altlarinda rollback tipik olarak vardir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\nPratik uygulama: Boundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Hicbir exception rollback yapmaz.'.\nBu secenek, dogru yanit olan 'RuntimeException ve altlarinda rollback tipik olarak vardir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece IOException rollback yapar.'.\nBu secenek, dogru yanit olan 'RuntimeException ve altlarinda rollback tipik olarak vardir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "throw new RuntimeException(\"boom\");\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}"
+    },
+    {
+      "id": "i5-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Checked exception icin rollback garanti etmek istiyorsan ne yapmalisin?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@Transactional(rollbackFor = Exception.class) gibi bir ayar kullanmalisin."
+        },
+        {
+          "id": "B",
+          "text": "Sadece log yazmak yeterlidir."
+        },
+        {
+          "id": "C",
+          "text": "findById yerine getReference kullanmalisin."
+        },
+        {
+          "id": "D",
+          "text": "Entityye @Version eklemelisin."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: @Transactional(rollbackFor = Exception.class) gibi bir ayar kullanmalisin.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratikte nasil uygularsin?\nBoundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: '@Transactional(rollbackFor = Exception.class) gibi bir ayar kullanmalisin.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\nPratik uygulama: Boundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Sadece log yazmak yeterlidir.'.\nBu secenek, dogru yanit olan '@Transactional(rollbackFor = Exception.class) gibi bir ayar kullanmalisin.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'findById yerine getReference kullanmalisin.'.\nBu secenek, dogru yanit olan '@Transactional(rollbackFor = Exception.class) gibi bir ayar kullanmalisin.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Entityye @Version eklemelisin.'.\nBu secenek, dogru yanit olan '@Transactional(rollbackFor = Exception.class) gibi bir ayar kullanmalisin.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}"
+    },
+    {
+      "id": "i5-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Transactional(readOnly = true) icin dogru yorum hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Yazma SQLini mutlak olarak engeller ve exception firlatir."
+        },
+        {
+          "id": "B",
+          "text": "Read intent belirtir; DB/JPA tarafinda optimizasyon ipucu olabilir ama yazma davranisi implementasyona baglidir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece native queryleri kapatir."
+        },
+        {
+          "id": "D",
+          "text": "Her zaman SERIALIZABLE isolation uygular."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Read intent belirtir; DB/JPA tarafinda optimizasyon ipucu olabilir ama yazma davranisi implementasyona baglidir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratikte nasil uygularsin?\nBoundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Yazma SQLini mutlak olarak engeller ve exception firlatir.'.\nBu secenek, dogru yanit olan 'Read intent belirtir; DB/JPA tarafinda optimizasyon ipucu olabilir ama yazma davranisi implementasyona baglidir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Read intent belirtir; DB/JPA tarafinda optimizasyon ipucu olabilir ama yazma davranisi implementasyona baglidir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\nPratik uygulama: Boundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece native queryleri kapatir.'.\nBu secenek, dogru yanit olan 'Read intent belirtir; DB/JPA tarafinda optimizasyon ipucu olabilir ama yazma davranisi implementasyona baglidir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Her zaman SERIALIZABLE isolation uygular.'.\nBu secenek, dogru yanit olan 'Read intent belirtir; DB/JPA tarafinda optimizasyon ipucu olabilir ama yazma davranisi implementasyona baglidir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional(readOnly = true)\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}"
+    },
+    {
+      "id": "i5-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Self-invocation neden transaction acisindan risklidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ayni class icinden method cagrisi proxyyi bypass edip anotasyonun beklenen etkisini gostermemesine neden olabilir."
+        },
+        {
+          "id": "B",
+          "text": "Java derleyicisi izin vermez."
+        },
+        {
+          "id": "C",
+          "text": "Sadece testte gorulur."
+        },
+        {
+          "id": "D",
+          "text": "Sadece native queryde etkilidir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Ayni class icinden method cagrisi proxyyi bypass edip anotasyonun beklenen etkisini gostermemesine neden olabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratikte nasil uygularsin?\nBoundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Ayni class icinden method cagrisi proxyyi bypass edip anotasyonun beklenen etkisini gostermemesine neden olabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\nPratik uygulama: Boundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Java derleyicisi izin vermez.'.\nBu secenek, dogru yanit olan 'Ayni class icinden method cagrisi proxyyi bypass edip anotasyonun beklenen etkisini gostermemesine neden olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece testte gorulur.'.\nBu secenek, dogru yanit olan 'Ayni class icinden method cagrisi proxyyi bypass edip anotasyonun beklenen etkisini gostermemesine neden olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece native queryde etkilidir.'.\nBu secenek, dogru yanit olan 'Ayni class icinden method cagrisi proxyyi bypass edip anotasyonun beklenen etkisini gostermemesine neden olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "this.innerTxMethod(); // proxy bypass riski\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}"
+    },
+    {
+      "id": "i5-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Transaction boundary hangi katmanda tutulmasi daha sagliklidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Controller katmaninda tum endpointlerde rastgele."
+        },
+        {
+          "id": "B",
+          "text": "Service katmaninda, is kurali birimini kapsayacak sekilde."
+        },
+        {
+          "id": "C",
+          "text": "Entity sinifinda annotation ile."
+        },
+        {
+          "id": "D",
+          "text": "DTO sinifinda."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Service katmaninda, is kurali birimini kapsayacak sekilde.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratikte nasil uygularsin?\nBoundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Controller katmaninda tum endpointlerde rastgele.'.\nBu secenek, dogru yanit olan 'Service katmaninda, is kurali birimini kapsayacak sekilde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Service katmaninda, is kurali birimini kapsayacak sekilde.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\nPratik uygulama: Boundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Entity sinifinda annotation ile.'.\nBu secenek, dogru yanit olan 'Service katmaninda, is kurali birimini kapsayacak sekilde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'DTO sinifinda.'.\nBu secenek, dogru yanit olan 'Service katmaninda, is kurali birimini kapsayacak sekilde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.stereotype.Service\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}"
+    },
+    {
+      "id": "i5-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Flush zamanlamasi ile ilgili hangisi daha dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Flush sadece uygulama kapanirken olur."
+        },
+        {
+          "id": "B",
+          "text": "Flush commit oncesi ve bazi querylerden once tetiklenebilir; commit ile ayni kavram degildir."
+        },
+        {
+          "id": "C",
+          "text": "Flush oldugunda transaction kapanir."
+        },
+        {
+          "id": "D",
+          "text": "Flush sadece rollbackte olur."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Flush commit oncesi ve bazi querylerden once tetiklenebilir; commit ile ayni kavram degildir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratikte nasil uygularsin?\nBoundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Flush sadece uygulama kapanirken olur.'.\nBu secenek, dogru yanit olan 'Flush commit oncesi ve bazi querylerden once tetiklenebilir; commit ile ayni kavram degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Flush commit oncesi ve bazi querylerden once tetiklenebilir; commit ile ayni kavram degildir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\nPratik uygulama: Boundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Flush oldugunda transaction kapanir.'.\nBu secenek, dogru yanit olan 'Flush commit oncesi ve bazi querylerden once tetiklenebilir; commit ile ayni kavram degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Flush sadece rollbackte olur.'.\nBu secenek, dogru yanit olan 'Flush commit oncesi ve bazi querylerden once tetiklenebilir; commit ile ayni kavram degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "entityManager.flush();\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}"
+    },
+    {
+      "id": "i5-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki kodda en olasi sonuc hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Runtime exception firlatildigi icin transaction rollback olur, insert kalici olmayabilir."
+        },
+        {
+          "id": "B",
+          "text": "Runtime exception rollbacke etki etmez, insert kesin kalir."
+        },
+        {
+          "id": "C",
+          "text": "Kod compile olmaz."
+        },
+        {
+          "id": "D",
+          "text": "Exception yakalanmasa da otomatik REQUIRES_NEW olur."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Runtime exception firlatildigi icin transaction rollback olur, insert kalici olmayabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratikte nasil uygularsin?\nBoundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Runtime exception firlatildigi icin transaction rollback olur, insert kalici olmayabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\nPratik uygulama: Boundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Runtime exception rollbacke etki etmez, insert kesin kalir.'.\nBu secenek, dogru yanit olan 'Runtime exception firlatildigi icin transaction rollback olur, insert kalici olmayabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Kod compile olmaz.'.\nBu secenek, dogru yanit olan 'Runtime exception firlatildigi icin transaction rollback olur, insert kalici olmayabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Exception yakalanmasa da otomatik REQUIRES_NEW olur.'.\nBu secenek, dogru yanit olan 'Runtime exception firlatildigi icin transaction rollback olur, insert kalici olmayabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "repo.save(new User(\"a@x.com\"));\nthrow new RuntimeException(\"fail\");\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}",
+      "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void create(){\n   repo.save(new User(\"a@x.com\"));\n   throw new RuntimeException(\"fail\");\n }"
+    },
+    {
+      "id": "i5-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod parcasi icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Checked exception oldugu icin varsayilan rollback davranisi otomatik garanti degildir."
+        },
+        {
+          "id": "B",
+          "text": "Checked exception daima rollback yapar."
+        },
+        {
+          "id": "C",
+          "text": "Checked exception sadece readOnlyde olur."
+        },
+        {
+          "id": "D",
+          "text": "Checked exception oldugunda transaction ignore edilir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Checked exception oldugu icin varsayilan rollback davranisi otomatik garanti degildir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratikte nasil uygularsin?\nBoundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Checked exception oldugu icin varsayilan rollback davranisi otomatik garanti degildir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: @Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\nPratik uygulama: Boundary service katmaninda dogru belirlenirse lazy loading, dirty checking ve rollback kontrolu daha tahmin edilebilir olur.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Checked exception daima rollback yapar.'.\nBu secenek, dogru yanit olan 'Checked exception oldugu icin varsayilan rollback davranisi otomatik garanti degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Checked exception sadece readOnlyde olur.'.\nBu secenek, dogru yanit olan 'Checked exception oldugu icin varsayilan rollback davranisi otomatik garanti degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Checked exception oldugunda transaction ignore edilir.'.\nBu secenek, dogru yanit olan 'Checked exception oldugu icin varsayilan rollback davranisi otomatik garanti degildir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Ayni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional\npublic void createChecked() throws Exception {\n    repo.save(new User(\"b@x.com\"));\n    throw new Exception(\"checked\");\n}\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}",
+      "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void createChecked() throws Exception {\n   repo.save(new User(\"b@x.com\"));\n   throw new Exception(\"checked\");\n }"
+    },
+    {
+      "id": "i5-q10",
+      "type": "code",
+      "question": "Checked exceptionda rollback garanti edecek bir service metodu yaz. Method icinde save yapip sonra checked exception firlat.",
+      "starterCode": "class PaymentService {\n    private final PaymentRepository repo;\n\n    PaymentService(PaymentRepository repo) {\n        this.repo = repo;\n    }\n\n    // TODO\n}\n",
+      "answerBody": "Sorunun odagi: Transaction boundary ve rollback semantigi\n\nBu bir kod yazma sorusu. Beklenen sadece compile olan bir cozum degil; transaction semantigi, persistence context davranisi, hata yonetimi ve testlenebilirlik birlikte dogru kurulmalidir.\n\nKonu anlatimi (sifirdan):\n@Transactional methodu transaction boundary icinde calistirir; runtime exceptionda default rollback olur, checked exceptionda genelde rollbackFor gerekir.\n\nPratik uygulama adimlari:\n1) Girdi dogrulama ve business rule kontrolu\n2) Transaction boundary belirleme\n3) Repository cagrisi ve lifecycle etkisi\n4) Hata durumlarinda rollback/compensation karari\n5) Testte hem basarili hem hatali akisi dogrulama\n\nSik yapilan hata:\nAyni class icinde self-invocation ile transactional method cagirip proxyyi bypass etmek beklenen transaction davranisini bozabilir.\n\nDegerlendirme kriteri:\n- Dogru API secimi\n- Gereksiz query ve N+1 riskini azaltma\n- Rollback davranisini netlestirme\n- Kodun okunabilir ve test edilebilir olmasi\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}",
+      "answerCode": "@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void createPaymentAndFail() throws Exception {\n    repo.save(new Payment(\"ORDER-1\", java.math.BigDecimal.TEN));\n    throw new Exception(\"simule checked hata\");\n}\n\n// Test fikri:\n// - method cagrisi sonrasi kayit DBde olmamali (rollback)\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)\npublic void process() throws Exception {\n    // business logic\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

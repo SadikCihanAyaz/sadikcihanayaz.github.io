@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "hibernate-jpa-jparepository",
+  "id": "hibernate-jpa-interview-6",
+  "title": "Hibernate/JPA Interview - 6",
+  "description": "Propagation: REQUIRED, REQUIRES_NEW, MANDATORY, NESTED, UnexpectedRollback",
+  "questions": [
+    {
+      "id": "i6-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Propagation.REQUIRED icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her zaman yeni transaction acar."
+        },
+        {
+          "id": "B",
+          "text": "Varsa mevcut transactiona katilir, yoksa yeni transaction acilir."
+        },
+        {
+          "id": "C",
+          "text": "Mevcut transaction varsa exception firlatir."
+        },
+        {
+          "id": "D",
+          "text": "Transactioni askiya alir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Varsa mevcut transactiona katilir, yoksa yeni transaction acilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratikte nasil uygularsin?\nAudit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Her zaman yeni transaction acar.'.\nBu secenek, dogru yanit olan 'Varsa mevcut transactiona katilir, yoksa yeni transaction acilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Varsa mevcut transactiona katilir, yoksa yeni transaction acilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Propagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\nPratik uygulama: Audit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Mevcut transaction varsa exception firlatir.'.\nBu secenek, dogru yanit olan 'Varsa mevcut transactiona katilir, yoksa yeni transaction acilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Transactioni askiya alir.'.\nBu secenek, dogru yanit olan 'Varsa mevcut transactiona katilir, yoksa yeni transaction acilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRED)\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }"
+    },
+    {
+      "id": "i6-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "REQUIRES_NEW davranisi nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her durumda mevcut transactioni kullanir."
+        },
+        {
+          "id": "B",
+          "text": "Mevcut transactioni askiya alip yeni bagimsiz transaction baslatir."
+        },
+        {
+          "id": "C",
+          "text": "Transaction acmaz."
+        },
+        {
+          "id": "D",
+          "text": "Sadece read-onlyde calisir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Mevcut transactioni askiya alip yeni bagimsiz transaction baslatir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratikte nasil uygularsin?\nAudit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Her durumda mevcut transactioni kullanir.'.\nBu secenek, dogru yanit olan 'Mevcut transactioni askiya alip yeni bagimsiz transaction baslatir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Mevcut transactioni askiya alip yeni bagimsiz transaction baslatir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Propagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\nPratik uygulama: Audit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Transaction acmaz.'.\nBu secenek, dogru yanit olan 'Mevcut transactioni askiya alip yeni bagimsiz transaction baslatir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece read-onlyde calisir.'.\nBu secenek, dogru yanit olan 'Mevcut transactioni askiya alip yeni bagimsiz transaction baslatir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }"
+    },
+    {
+      "id": "i6-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "MANDATORY propagation icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Mevcut transaction yoksa exception firlatir."
+        },
+        {
+          "id": "B",
+          "text": "Daima yeni transaction acilir."
+        },
+        {
+          "id": "C",
+          "text": "Transactioni askiya alir."
+        },
+        {
+          "id": "D",
+          "text": "Rollbacki kapatir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Mevcut transaction yoksa exception firlatir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratikte nasil uygularsin?\nAudit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Mevcut transaction yoksa exception firlatir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Propagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\nPratik uygulama: Audit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Daima yeni transaction acilir.'.\nBu secenek, dogru yanit olan 'Mevcut transaction yoksa exception firlatir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Transactioni askiya alir.'.\nBu secenek, dogru yanit olan 'Mevcut transaction yoksa exception firlatir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Rollbacki kapatir.'.\nBu secenek, dogru yanit olan 'Mevcut transaction yoksa exception firlatir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.MANDATORY)\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }"
+    },
+    {
+      "id": "i6-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "SUPPORTS propagation nasil calisir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Mevcut tx varsa ona katilir, yoksa txsiz calisir."
+        },
+        {
+          "id": "B",
+          "text": "Her zaman tx acilir."
+        },
+        {
+          "id": "C",
+          "text": "Asla tx kullanmaz."
+        },
+        {
+          "id": "D",
+          "text": "Sadece REQUIRES_NEW ile birlikte calisir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Mevcut tx varsa ona katilir, yoksa txsiz calisir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratikte nasil uygularsin?\nAudit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Mevcut tx varsa ona katilir, yoksa txsiz calisir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Propagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\nPratik uygulama: Audit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Her zaman tx acilir.'.\nBu secenek, dogru yanit olan 'Mevcut tx varsa ona katilir, yoksa txsiz calisir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Asla tx kullanmaz.'.\nBu secenek, dogru yanit olan 'Mevcut tx varsa ona katilir, yoksa txsiz calisir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece REQUIRES_NEW ile birlikte calisir.'.\nBu secenek, dogru yanit olan 'Mevcut tx varsa ona katilir, yoksa txsiz calisir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.SUPPORTS)\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }"
+    },
+    {
+      "id": "i6-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "NOT_SUPPORTED propagation icin hangisi dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her zaman tx acarak calisir."
+        },
+        {
+          "id": "B",
+          "text": "Mevcut tx varsa askiya alip txsiz calisabilir."
+        },
+        {
+          "id": "C",
+          "text": "MANDATORY ile aynidir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece rollback durumunda calisir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): B: Mevcut tx varsa askiya alip txsiz calisabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratikte nasil uygularsin?\nAudit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis/eksik secenek: 'Her zaman tx acarak calisir.'.\nBu secenek, dogru yanit olan 'Mevcut tx varsa askiya alip txsiz calisabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru secenek: 'Mevcut tx varsa askiya alip txsiz calisabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Propagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\nPratik uygulama: Audit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'MANDATORY ile aynidir.'.\nBu secenek, dogru yanit olan 'Mevcut tx varsa askiya alip txsiz calisabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Sadece rollback durumunda calisir.'.\nBu secenek, dogru yanit olan 'Mevcut tx varsa askiya alip txsiz calisabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.NOT_SUPPORTED)\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }"
+    },
+    {
+      "id": "i6-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "NESTED propagation hangi kosulda anlamlidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Savepoint destekli transaction manager/DB altyapisinda alt savepoint rollback senaryosu gerektiginde."
+        },
+        {
+          "id": "B",
+          "text": "Sadece MongoDBde."
+        },
+        {
+          "id": "C",
+          "text": "Hibernate ile kullanilamaz."
+        },
+        {
+          "id": "D",
+          "text": "Rollbacki tamamen devre disi birakmak icin."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Savepoint destekli transaction manager/DB altyapisinda alt savepoint rollback senaryosu gerektiginde.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratikte nasil uygularsin?\nAudit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Savepoint destekli transaction manager/DB altyapisinda alt savepoint rollback senaryosu gerektiginde.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Propagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\nPratik uygulama: Audit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Sadece MongoDBde.'.\nBu secenek, dogru yanit olan 'Savepoint destekli transaction manager/DB altyapisinda alt savepoint rollback senaryosu gerektiginde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Hibernate ile kullanilamaz.'.\nBu secenek, dogru yanit olan 'Savepoint destekli transaction manager/DB altyapisinda alt savepoint rollback senaryosu gerektiginde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Rollbacki tamamen devre disi birakmak icin.'.\nBu secenek, dogru yanit olan 'Savepoint destekli transaction manager/DB altyapisinda alt savepoint rollback senaryosu gerektiginde.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.NESTED)\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }"
+    },
+    {
+      "id": "i6-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "UnexpectedRollbackException tipik olarak neden olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Inner akista rollback-only set edilip outer akista commit beklenince."
+        },
+        {
+          "id": "B",
+          "text": "PageRequest.of cagrildiginda."
+        },
+        {
+          "id": "C",
+          "text": "Sadece lazy loadingde."
+        },
+        {
+          "id": "D",
+          "text": "EntityGraph kullanilinca."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Inner akista rollback-only set edilip outer akista commit beklenince.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratikte nasil uygularsin?\nAudit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Inner akista rollback-only set edilip outer akista commit beklenince.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Propagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\nPratik uygulama: Audit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'PageRequest.of cagrildiginda.'.\nBu secenek, dogru yanit olan 'Inner akista rollback-only set edilip outer akista commit beklenince.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Sadece lazy loadingde.'.\nBu secenek, dogru yanit olan 'Inner akista rollback-only set edilip outer akista commit beklenince.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'EntityGraph kullanilinca.'.\nBu secenek, dogru yanit olan 'Inner akista rollback-only set edilip outer akista commit beklenince.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "org.springframework.transaction.UnexpectedRollbackException\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }"
+    },
+    {
+      "id": "i6-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu senaryo icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Inner REQUIRED hata alip catch edilse de rollback-only bayragi tasinabilecegi icin outer committe UnexpectedRollbackException alinabilir."
+        },
+        {
+          "id": "B",
+          "text": "Inner hata daima yutulur ve her zaman commit olur."
+        },
+        {
+          "id": "C",
+          "text": "Propagation transaction davranisini etkilemez."
+        },
+        {
+          "id": "D",
+          "text": "Kod sadece compile warning verir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Inner REQUIRED hata alip catch edilse de rollback-only bayragi tasinabilecegi icin outer committe UnexpectedRollbackException alinabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratikte nasil uygularsin?\nAudit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Inner REQUIRED hata alip catch edilse de rollback-only bayragi tasinabilecegi icin outer committe UnexpectedRollbackException alinabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Propagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\nPratik uygulama: Audit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'Inner hata daima yutulur ve her zaman commit olur.'.\nBu secenek, dogru yanit olan 'Inner REQUIRED hata alip catch edilse de rollback-only bayragi tasinabilecegi icin outer committe UnexpectedRollbackException alinabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'Propagation transaction davranisini etkilemez.'.\nBu secenek, dogru yanit olan 'Inner REQUIRED hata alip catch edilse de rollback-only bayragi tasinabilecegi icin outer committe UnexpectedRollbackException alinabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Kod sadece compile warning verir.'.\nBu secenek, dogru yanit olan 'Inner REQUIRED hata alip catch edilse de rollback-only bayragi tasinabilecegi icin outer committe UnexpectedRollbackException alinabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "@org.springframework.transaction.annotation.Transactional\npublic void outer(){ try { innerRequired(); } catch (RuntimeException ignore) {} repo.save(new AuditLog(\"outer\")); }\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }",
+      "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void outer(){\n   try{ innerRequired(); } catch (RuntimeException ignore){}\n   repo.save(new AuditLog(\"outer\"));\n }\n\n @org.springframework.transaction.annotation.Transactional\n public void innerRequired(){ throw new RuntimeException(\"x\"); }"
+    },
+    {
+      "id": "i6-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki akista en dogru sonuc hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Inner REQUIRES_NEW rollback olsa bile outer transaction uygun kosulda commit olabilir."
+        },
+        {
+          "id": "B",
+          "text": "REQUIRES_NEW outer ile ayni rollback kaderini zorunlu paylasir."
+        },
+        {
+          "id": "C",
+          "text": "REQUIRES_NEW sadece readOnlyde calisir."
+        },
+        {
+          "id": "D",
+          "text": "Inner hata oldugunda JVM kapanir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nNeden bu cevap dogru?\nDogru secenek(ler): A: Inner REQUIRES_NEW rollback olsa bile outer transaction uygun kosulda commit olabilir.\nDogru secenek, soruda aranan davranis farkini ve production etkisini birlikte dogru yorumlar.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratikte nasil uygularsin?\nAudit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nKod-cikti sorulari icin adim adim cozum yontemi:\n1) Kodda transaction siniri, persistence context ve lazy/proxy etkisini tespit et.\n2) SQL ne zaman tetiklenir (query, flush, commit, proxy access) adimlarini sirala.\n3) Deterministik olmayan kisim varsa olasi cikti kumesini acikca yaz.\n4) Sonucu sadece ezberle degil, ORM mekanizmasi ile gerekcelendir.\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }\n\nMulakat kapanis cumlesi: repository API ezberi tek basina yeterli degil; persistence context, transaction, fetch plani ve performans etkisi beraber okunmalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru secenek: 'Inner REQUIRES_NEW rollback olsa bile outer transaction uygun kosulda commit olabilir.'.\nBu secenek sorunun aradigi kavramsal garantiyle birebir ortusur.\nTeknik temel: Propagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\nPratik uygulama: Audit/log gibi yan etkilerde REQUIRES_NEW, ana is akisinda REQUIRED tercih edilerek hata izolasyonu saglanabilir.\nMulakatta bu secenegi savunurken once kavrami dogru adlandir, sonra neden alternatiflerin eksik oldugunu netlestir.\nGercek projede bu karar, kodun dogrulugu kadar operasyonel izlenebilirlik ve performans maliyetini de etkiler."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis/eksik secenek: 'REQUIRES_NEW outer ile ayni rollback kaderini zorunlu paylasir.'.\nBu secenek, dogru yanit olan 'Inner REQUIRES_NEW rollback olsa bile outer transaction uygun kosulda commit olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis/eksik secenek: 'REQUIRES_NEW sadece readOnlyde calisir.'.\nBu secenek, dogru yanit olan 'Inner REQUIRES_NEW rollback olsa bile outer transaction uygun kosulda commit olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis/eksik secenek: 'Inner hata oldugunda JVM kapanir.'.\nBu secenek, dogru yanit olan 'Inner REQUIRES_NEW rollback olsa bile outer transaction uygun kosulda commit olabilir.' ile ayni garanti seviyesini saglamaz.\nRisk notu: Inner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\nKarsilastirma ipucu: Bu secenekte eksik olan nokta genelde transaction semantigi, fetch plani, lifecycle davranisi veya performans etkisidir.\nGercek projede bu secenek dogru kabul edilirse veri tutarsizligi, gereksiz query artisi, beklenmeyen rollback veya runtime exception gibi sonuclar dogabilir."
+        }
+      ],
+      "answerCode": "auditService.saveAuditRequiresNew();\norderRepo.save(new Order(\"OK\"));\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }",
+      "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void outer(){\n    try{ auditService.saveAuditRequiresNew(); }catch(Exception e){}\n    orderRepo.save(new Order(\"OK\"));\n }"
+    },
+    {
+      "id": "i6-q10",
+      "type": "code",
+      "question": "REQUIRES_NEW kullanan bir AuditService ve onu cagirarak ana is akisini yurutten bir OrderService yaz. Audit hatasi ana order commitini zorunlu bozmasin.",
+      "starterCode": "class OrderService {\n    private final OrderRepository orderRepo;\n    private final AuditService auditService;\n\n    OrderService(OrderRepository orderRepo, AuditService auditService) {\n        this.orderRepo = orderRepo;\n        this.auditService = auditService;\n    }\n\n    // TODO\n}\n\nclass AuditService {\n    // TODO\n}\n",
+      "answerBody": "Sorunun odagi: Icerik transaction iliskileri ve propagation kararlari\n\nBu bir kod yazma sorusu. Beklenen sadece compile olan bir cozum degil; transaction semantigi, persistence context davranisi, hata yonetimi ve testlenebilirlik birlikte dogru kurulmalidir.\n\nKonu anlatimi (sifirdan):\nPropagation cagrilan methodun mevcut transactiona nasil katilacagini belirler; yanlis secim unexpected rollback veya veri tutarsizligi yaratabilir.\n\nPratik uygulama adimlari:\n1) Girdi dogrulama ve business rule kontrolu\n2) Transaction boundary belirleme\n3) Repository cagrisi ve lifecycle etkisi\n4) Hata durumlarinda rollback/compensation karari\n5) Testte hem basarili hem hatali akisi dogrulama\n\nSik yapilan hata:\nInner REQUIRED hata alip yakalansa bile rollback-only flag tasinacagini unutmak UnexpectedRollbackException nedenidir.\n\nDegerlendirme kriteri:\n- Dogru API secimi\n- Gereksiz query ve N+1 riskini azaltma\n- Rollback davranisini netlestirme\n- Kodun okunabilir ve test edilebilir olmasi\n\nEk mini kod ornegi:\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }",
+      "answerCode": "class AuditService {\n    private final AuditRepository auditRepo;\n\n    AuditService(AuditRepository auditRepo) {\n        this.auditRepo = auditRepo;\n    }\n\n    @org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\n    public void saveAudit(String message) {\n        auditRepo.save(new AuditLog(message));\n    }\n}\n\nclass OrderService {\n    private final OrderRepository orderRepo;\n    private final AuditService auditService;\n\n    OrderService(OrderRepository orderRepo, AuditService auditService) {\n        this.orderRepo = orderRepo;\n        this.auditService = auditService;\n    }\n\n    @org.springframework.transaction.annotation.Transactional\n    public void createOrder() {\n        orderRepo.save(new Order(\"CREATED\"));\n        try {\n            auditService.saveAudit(\"order created\");\n        } catch (RuntimeException ignored) {\n            // audit izolasyonu\n        }\n    }\n}\n\n// Ek ogretici ornek\n@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW)\npublic void saveAudit(AuditLog log) { auditRepo.save(log); }",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}
