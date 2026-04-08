@@ -1,0 +1,446 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "id": "thread-interview-10",
+  "title": "Thread Interview - 10",
+  "description": "Performance, parallel stream, ThreadLocal ve production pratikleri",
+  "questions": [
+    {
+      "id": "i10-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "CPU-bound islerde thread pool size secimi icin genel dogru yaklasim nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "CPU core sayisina yakin tutmak"
+        },
+        {
+          "id": "B",
+          "text": "Her zaman 10x core sayisi yapmak"
+        },
+        {
+          "id": "C",
+          "text": "Her zaman 1 yapmak"
+        },
+        {
+          "id": "D",
+          "text": "Rastgele secmek"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "CPU-bound islerde asiri thread sayisi context switch maliyetini arttirir. Core sayisina yakin sizing genelde daha dengeli olur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Pratikte iyi baslangic noktasi budur."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Asiri thread \u00e7o\u011fu zaman zarar verir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Paralel potansiyeli gereksiz kisitlar."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Sistematik sizing gerekir."
+        }
+      ]
+    },
+    {
+      "id": "i10-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "IO-bound islerde pool sizing neden CPU-bounddan farkli olabilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Cunku threadler sik sik beklemede kalir; biraz daha yuksek pool fayda saglayabilir"
+        },
+        {
+          "id": "B",
+          "text": "Cunku IO-boundda thread kullanilmaz"
+        },
+        {
+          "id": "C",
+          "text": "Cunku JVM IO icin lock kullanmaz"
+        },
+        {
+          "id": "D",
+          "text": "Fark yoktur"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "IO-bound tasklarda bekleme suresi yuksek oldugu icin daha fazla thread ile throughput artabilir. Ancak bu da \u00f6l\u00e7umle dengelenmelidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Bekleme agirlikli workloadda bu mantik kullanilir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. IO-bound da thread kullanir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Lock semantigiyle dogrudan bagli degil."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Workload tipine gore sizing farkli olur."
+        }
+      ]
+    },
+    {
+      "id": "i10-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "parallelStream hangi durumda riskli olabilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Kisa ve ucuz hesaplarda overhead faydayi gecerse"
+        },
+        {
+          "id": "B",
+          "text": "Sadece listede 2 eleman varsa"
+        },
+        {
+          "id": "C",
+          "text": "Asla riskli degil"
+        },
+        {
+          "id": "D",
+          "text": "Sadece Linuxte riskli"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "parallelStream her zaman kazanmaz. Kucuk islerde partitioning ve thread scheduling overheadi kazanci silebilir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Overhead/fayda dengesi kritik."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Tek kosul eleman sayisi degil, is maliyeti de onemli."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Yanlis senaryoda zarar verebilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Platformdan bagimsiz bir trade-offtur."
+        }
+      ]
+    },
+    {
+      "id": "i10-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ThreadLocal kullaniminda pool ortami icin kritik risk nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Pool threadleri yeniden kullanildigi icin temizlenmeyen ThreadLocal degeri sonraki islere sizabilir"
+        },
+        {
+          "id": "B",
+          "text": "ThreadLocal her zaman global paylasimlidir"
+        },
+        {
+          "id": "C",
+          "text": "ThreadLocal compile-time hatasi verir"
+        },
+        {
+          "id": "D",
+          "text": "Risk yoktur"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Pool reuse nedeniyle ThreadLocal remove edilmezse requestler arasi veri sizmasi olur. Bu guvenlik ve dogruluk riskidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. En kritik production risklerinden biridir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. ThreadLocal amaci thread bazli izolasyondur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Compile-time sorunu degil runtime tasarim riskidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Ciddi risk vardir."
+        }
+      ]
+    },
+    {
+      "id": "i10-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Concurrency problemi analizinde hangi arac en dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Thread dump (jstack) ve lock bilgilerini incelemek"
+        },
+        {
+          "id": "B",
+          "text": "Sadece unit test sayisini arttirmak"
+        },
+        {
+          "id": "C",
+          "text": "Yalnizca CPU markasina bakmak"
+        },
+        {
+          "id": "D",
+          "text": "Kod okumayi tamamen birakmak"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Thread dump, waiting/blocking zincirini gorup deadlock ve contention kok nedenini bulmada en etkili araclar arasindadir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Diagnostik icin cok degerlidir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Test onemli ama runtime gorunurluk de gerekir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Donanim bilgisi tek basina yetmez."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kod + runtime kaniti birlikte gerekir."
+        }
+      ]
+    },
+    {
+      "id": "i10-q6",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod icin dogru yorum hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Cikti her zaman 1234"
+        },
+        {
+          "id": "B",
+          "text": "forEach paralelde sira garantisi vermez, cikti sirasi degisebilir"
+        },
+        {
+          "id": "C",
+          "text": "Kod compile olmaz"
+        },
+        {
+          "id": "D",
+          "text": "Her zaman 4321"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "parallel + forEach ile encounter order garanti edilmez. Deterministik sira gerekiyorsa forEachOrdered tercih edilmelidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Bu garanti yoktur."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Order nondeterministic olabilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Kod derlenir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Sabit ters sira da garanti edilmez."
+        }
+      ],
+      "questionCode": "java.util.stream.IntStream.rangeClosed(1, 4)\n    .parallel()\n    .forEach(System.out::print);"
+    },
+    {
+      "id": "i10-q7",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun ciktisi icin en dogru ifade hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sira yine rastgele"
+        },
+        {
+          "id": "B",
+          "text": "forEachOrdered nedeniyle 1234 sirasi korunur"
+        },
+        {
+          "id": "C",
+          "text": "Sadece 12 basar"
+        },
+        {
+          "id": "D",
+          "text": "Runtime error"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "forEachOrdered encounter orderu korumaya calisir. Paralel calisiyor olsa da cikti duzeni stabilize edilir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Ordered varyantta sira korunur."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Bu metodun temel farki budur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Tum elemanlar yazilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kod gecerli."
+        }
+      ],
+      "questionCode": "java.util.stream.IntStream.rangeClosed(1, 4)\n    .parallel()\n    .forEachOrdered(System.out::print);"
+    },
+    {
+      "id": "i10-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "SingleThreadExecutor + ThreadLocal icin dogru yorum hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikinci taskta deger null olur"
+        },
+        {
+          "id": "B",
+          "text": "Ayni worker tekrar kullanildigindan ikinci task onceki degeri gorebilir"
+        },
+        {
+          "id": "C",
+          "text": "ThreadLocal poolde calismaz"
+        },
+        {
+          "id": "D",
+          "text": "Compile error"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Ayni thread reuse edilirse ThreadLocal state tasklar arasinda tasinabilir. request sonunda remove edilmesi iyi pratiktir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Reuse nedeniyle null garanti degil."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Pool + ThreadLocal sizmasi klasik problemdir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Calisir ama dikkat ister."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kod derlenir."
+        }
+      ],
+      "questionCode": "ThreadLocal<String> ctx = new ThreadLocal<>();\njava.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\nex.submit(() -> ctx.set(\"REQ-1\")).get();\nSystem.out.println(ex.submit(() -> ctx.get()).get());\nex.shutdown();"
+    },
+    {
+      "id": "i10-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "CompletionService kullaniminda asagidaki yorumlardan hangisi dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "take() ilk submit edileni degil, ilk tamamlanani verir"
+        },
+        {
+          "id": "B",
+          "text": "take() her zaman son tamamlanani verir"
+        },
+        {
+          "id": "C",
+          "text": "CompletionService sadece tek task destekler"
+        },
+        {
+          "id": "D",
+          "text": "Future kullanmaz"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "CompletionService, tamamlanan tasklari completion queueya yazar. Bu sayede hizli doneyi once isleyebilirsin.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. En faydali ozellik budur."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Son degil ilk biten gelir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Cok task icin tasarlanmistir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Arka planda Future kullanir."
+        }
+      ],
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(2);\njava.util.concurrent.CompletionService<String> cs = new java.util.concurrent.ExecutorCompletionService<>(ex);\ncs.submit(() -> { Thread.sleep(200); return \"slow\"; });\ncs.submit(() -> \"fast\");\nSystem.out.println(cs.take().get());\nex.shutdown();"
+    },
+    {
+      "id": "i10-q10",
+      "type": "code",
+      "question": "Interrupt dostu bounded retry mekanizmasi yaz. Basarisiz islemde exponential backoff uygulasin ve max denemede dursun.",
+      "starterCode": "String callWithRetry(java.util.concurrent.Callable<String> action) {\n    // TODO\n    return null;\n}",
+      "answerBody": "Gercek dunyada retry kodlari en cok interrupt yutma ve sinirsiz dongu hatasi yapar. Dogru cozumde max attempt, backoff ve interrupt restore bir arada olmalidir.",
+      "answerCode": "String callWithRetry(java.util.concurrent.Callable<String> action) {\n    long backoffMs = 100;\n    int maxAttempts = 4;\n\n    for (int attempt = 1; attempt <= maxAttempts; attempt++) {\n        try {\n            return action.call();\n        } catch (Exception e) {\n            if (attempt == maxAttempts) {\n                return \"FAILED\";\n            }\n            try {\n                Thread.sleep(backoffMs);\n            } catch (InterruptedException ie) {\n                Thread.currentThread().interrupt();\n                return \"INTERRUPTED\";\n            }\n            backoffMs *= 2;\n        }\n    }\n    return \"FAILED\";\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

@@ -1,0 +1,446 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "id": "thread-interview-5",
+  "title": "Thread Interview - 5",
+  "description": "Callable, Future ve CompletableFuture derin pratik",
+  "questions": [
+    {
+      "id": "i5-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Callable ile Runnable arasindaki temel fark hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Callable deger dondurur ve checked exception firlatabilir"
+        },
+        {
+          "id": "B",
+          "text": "Runnable daima Future doner"
+        },
+        {
+          "id": "C",
+          "text": "Callable thread baslatir"
+        },
+        {
+          "id": "D",
+          "text": "Runnable kullanmak yasaktir"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Callable sonuc donen isler icin, Runnable fire-and-forget isler icin uygundur. Callable hata yonetiminde de daha gucludur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. API farkinin merkezinde bu vardir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Runnable kendi basina Future donmez."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Thread baslatma ayrik bir sorumluluktur."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Runnable hala cok yaygin kullanilir."
+        }
+      ]
+    },
+    {
+      "id": "i5-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Future.get() hangi davranisi gosterir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Asla bloklamaz"
+        },
+        {
+          "id": "B",
+          "text": "Task sonucu hazir degilse bloklar"
+        },
+        {
+          "id": "C",
+          "text": "Taski otomatik iptal eder"
+        },
+        {
+          "id": "D",
+          "text": "Sadece daemon threadlerde calisir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Future.get() sonuc hazir olana kadar bekler. Bu nedenle ana threadde dikkatli kullanilmazsa latency artirabilir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. get bloklayici olabilir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Blocking davranis temeldir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Iptal ayri APIdir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Daemon ile iliskisi yoktur."
+        }
+      ]
+    },
+    {
+      "id": "i5-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Future.cancel(true) icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Taski kesin bitirir ve rollback yapar"
+        },
+        {
+          "id": "B",
+          "text": "Calisan threade interrupt gondermeyi dener; best-effort davranistir"
+        },
+        {
+          "id": "C",
+          "text": "Sadece tamamlanmis taski iptal eder"
+        },
+        {
+          "id": "D",
+          "text": "Sadece compile-time etkisi vardir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "cancel(true) garanti shutdown degil, interrupt sinyali denemesidir. Task kodu interrupti dogru ele almiyorsa hemen durmayabilir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Kesin rollback garantisi yoktur."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Best-effort interrupt semantigidir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Tamamlanmis taskte iptal anlamsizdir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Runtime davranisidir."
+        }
+      ]
+    },
+    {
+      "id": "i5-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "thenApply ve thenCompose farki nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi ayni seydir"
+        },
+        {
+          "id": "B",
+          "text": "thenApply T->U map yapar, thenCompose T->CompletableFuture<U> flatten eder"
+        },
+        {
+          "id": "C",
+          "text": "thenCompose sadece hata durumunda calisir"
+        },
+        {
+          "id": "D",
+          "text": "thenApply sadece void dondurur"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "thenCompose async pipeline birlestirmede nested future sorununu cozer. thenApply ise basit deger donusumu icindir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Davranis farki vardir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Map vs flatMap analojisidir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Hata icin exceptionally/handle vardir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. thenApply deger donusturur."
+        }
+      ]
+    },
+    {
+      "id": "i5-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "CompletableFuture.exceptionally ne zaman devreye girer?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her basarili tamamlanmada"
+        },
+        {
+          "id": "B",
+          "text": "Asenkron zincirde exception oldugunda fallback degeri uretmek icin"
+        },
+        {
+          "id": "C",
+          "text": "Sadece timeoutta"
+        },
+        {
+          "id": "D",
+          "text": "Sadece checked exceptionlarda"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "exceptionally hata kanalini normal degere donusturmek icin kullanilir. Bu sayede zincirin kontrollu devam etmesi saglanir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Basarili akista calismaz."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Hata fallback noktasi olarak kullanilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Timeout da bir hata olabilir ama tek kosul o degildir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Runtime exceptionlar dahil calisir."
+        }
+      ]
+    },
+    {
+      "id": "i5-q6",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Kodun sonucu nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "20"
+        },
+        {
+          "id": "C",
+          "text": "0"
+        },
+        {
+          "id": "D",
+          "text": "Exception"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "supplyAsync 10 uretir, thenApply x2 yapar. join ile son deger 20 okunur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. thenApply ile ikiyle carpiliyor."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. 10 * 2 = 20."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Sifirlanmiyor."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Bu akista exception yok."
+        }
+      ],
+      "questionCode": "int v = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> 10)\n    .thenApply(x -> x * 2)\n    .join();\nSystem.out.println(v);"
+    },
+    {
+      "id": "i5-q7",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu zincirin sonucu ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "21"
+        },
+        {
+          "id": "B",
+          "text": "12"
+        },
+        {
+          "id": "C",
+          "text": "7"
+        },
+        {
+          "id": "D",
+          "text": "Exception"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "thenCompose ilk sonucu alip yeni bir future doner; join sonunda flatten edilmis final deger 21 olur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. (7*3) = 21."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Bu hesap zinciriyle uyusmuyor."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Ilk deger donmuyor, compose ile devam ediyor."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Hata olusturan bir kisim yok."
+        }
+      ],
+      "questionCode": "int v = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> 7)\n    .thenCompose(x -> java.util.concurrent.CompletableFuture.supplyAsync(() -> x * 3))\n    .join();\nSystem.out.println(v);"
+    },
+    {
+      "id": "i5-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod ne yazar?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "fallback"
+        },
+        {
+          "id": "B",
+          "text": "boom"
+        },
+        {
+          "id": "C",
+          "text": "null"
+        },
+        {
+          "id": "D",
+          "text": "compile error"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "exceptionally ile hata kanali yakalanip fallback degeri donuluyor. Bu sayede join exception firlatmadan deger dondurur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Exception fallbacke cevriliyor."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. boom mesaji yutulup fallback donuyor."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Null degil fallback stringi var."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kod derlenir."
+        }
+      ],
+      "questionCode": "String s = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> { throw new RuntimeException(\"boom\"); })\n    .exceptionally(ex -> \"fallback\")\n    .join();\nSystem.out.println(s);"
+    },
+    {
+      "id": "i5-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "anyOf icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tum futurelar bitmeden donmez"
+        },
+        {
+          "id": "B",
+          "text": "Ilk tamamlanan future degeri ile doner"
+        },
+        {
+          "id": "C",
+          "text": "Her zaman en son tamamlanan degeri doner"
+        },
+        {
+          "id": "D",
+          "text": "Sadece integer tipinde calisir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "anyOf, yarisi ilk bitiren sonucu alir. allOf ise tumunun bitmesini bekler; bu ayrim cok onemlidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Bu davranis allOfa daha yakindir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Ilk tamamlanan sonucu verir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. En son degil, en hizli biten sonuc."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Generic olarak farkli tiplerle calisabilir."
+        }
+      ],
+      "questionCode": "java.util.concurrent.CompletableFuture<String> slow = java.util.concurrent.CompletableFuture.supplyAsync(() -> {\n    try { Thread.sleep(200); } catch (InterruptedException e) {}\n    return \"slow\";\n});\njava.util.concurrent.CompletableFuture<String> fast = java.util.concurrent.CompletableFuture.completedFuture(\"fast\");\nObject result = java.util.concurrent.CompletableFuture.anyOf(slow, fast).join();\nSystem.out.println(result);"
+    },
+    {
+      "id": "i5-q10",
+      "type": "code",
+      "question": "Iki uzak servisten (price ve discount) veriyi asenkron cekip birlestiren CompletableFuture akisi yaz. Hata olursa default deger kullan.",
+      "starterCode": "java.util.concurrent.ExecutorService pool = java.util.concurrent.Executors.newFixedThreadPool(4);\n\nString buildPriceLine() {\n    // TODO\n    return null;\n}",
+      "answerBody": "Burada onemli nokta, iki async kaynagi paralel calistirip combine etmek ve exception durumunda kontrollu fallback vermek.",
+      "answerCode": "String buildPriceLine() {\n    java.util.concurrent.CompletableFuture<Integer> priceF =\n        java.util.concurrent.CompletableFuture.supplyAsync(() -> 100, pool)\n            .exceptionally(ex -> 0);\n\n    java.util.concurrent.CompletableFuture<Integer> discountF =\n        java.util.concurrent.CompletableFuture.supplyAsync(() -> 15, pool)\n            .exceptionally(ex -> 0);\n\n    return priceF.thenCombine(discountF, (price, discount) -> {\n        int finalPrice = price - discount;\n        return \"finalPrice=\" + finalPrice;\n    }).join();\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

@@ -218,6 +218,9 @@
     const qState = getQuestionState(question);
     const inputType = question.singleChoice === false ? 'checkbox' : 'radio';
     const inputName = `choice-${question.id}`;
+    const codeBlock = question.questionCode
+      ? `<pre class="code"><code>${esc(question.questionCode)}</code></pre>`
+      : '';
 
     const choices = (question.choices || []).map((choice) => {
       const checked = qState.selectedIds.includes(choice.id) ? 'checked' : '';
@@ -237,7 +240,10 @@
       `;
     }).join('');
 
-    els.questionBody.innerHTML = `<div class="choice-list">${choices}</div>`;
+    els.questionBody.innerHTML = `
+      ${codeBlock}
+      <div class="choice-list">${choices}</div>
+    `;
 
     Array.from(els.questionBody.querySelectorAll('input[data-choice-id]')).forEach((input) => {
       input.addEventListener('change', () => {
@@ -281,6 +287,15 @@
         .join(', ');
 
       html += `<p><strong>Dogru cevap:</strong> ${esc(correctText || '-')}</p>`;
+
+      if (Array.isArray(question.optionExplanations) && question.optionExplanations.length > 0) {
+        const items = question.optionExplanations.map((item) => {
+          const isCorrect = correctIds.includes(item.id);
+          const status = isCorrect ? 'Dogru secenek' : 'Yanlis secenek';
+          return `<li><strong>${esc(item.id)} - ${status}:</strong> ${esc(item.text || '')}</li>`;
+        }).join('');
+        html += `<div class="article-block"><h4>Sik Aciklamalari</h4><ul>${items}</ul></div>`;
+      }
     }
 
     if (question.answerBody) {
@@ -347,7 +362,13 @@
     els.errorBox.classList.add('hidden');
 
     els.progress.textContent = `Soru ${state.currentIndex + 1} / ${state.questions.length}`;
-    els.questionTitle.textContent = question.type === 'code' ? 'Kod Sorusu' : 'Test Sorusu';
+    if (question.type === 'code') {
+      els.questionTitle.textContent = 'Kod Yazma Sorusu';
+    } else if (question.questionKind === 'code-output') {
+      els.questionTitle.textContent = 'Kod Ciktisi Sorusu';
+    } else {
+      els.questionTitle.textContent = 'Kavramsal Test Sorusu';
+    }
     els.questionText.textContent = question.question || '';
     els.checkResult.innerHTML = '';
 

@@ -54,6 +54,9 @@ data/
 - `choices`: `[{ id, text }]`
 - `correctChoiceIds`: `["A"]` veya `["A","C"]`
 - `answerBody`
+- `questionKind`: `direct` veya `code-output`
+- `questionCode`: opsiyonel, soru icinde kod blogu gosterir
+- `optionExplanations`: her secenek icin detayli aciklama listesi
 
 2. `code`
 - `starterCode`

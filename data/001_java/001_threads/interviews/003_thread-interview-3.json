@@ -1,0 +1,446 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "id": "thread-interview-3",
+  "title": "Thread Interview - 3",
+  "description": "Race condition, CAS, AtomicInteger ve LongAdder",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Race condition tanimi icin en dogru secenek hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tek threadin kendi local degiskenini degistirmesi"
+        },
+        {
+          "id": "B",
+          "text": "Birden fazla threadin ayni mutable statei uygun senkronizasyon olmadan guncellemesi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece deadlock olusmasi"
+        },
+        {
+          "id": "D",
+          "text": "Sadece CPU yavasligi"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Race condition veri yarisi demektir: sonuc zamanlamaya bagimli hale gelir ve deterministik olmaz. En cok paylasilan mutable state uzerinde gorulur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Local degisken threadin kendisine ozeldir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Problem tanimi tam olarak budur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Deadlock farkli bir eszamanlilik problemidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Koken performans degil, tutarlilik problemidir."
+        }
+      ]
+    },
+    {
+      "id": "i3-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "AtomicInteger hangi avantajla gelir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Lock kullanmadan atomik read-modify-write operasyonlari sunar"
+        },
+        {
+          "id": "B",
+          "text": "Tum kodu otomatik synchronized yapar"
+        },
+        {
+          "id": "C",
+          "text": "Deadlocku otomatik engeller"
+        },
+        {
+          "id": "D",
+          "text": "Sadece tek threadde calisir"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "AtomicInteger CAS tabanli atomik operasyonlar sunar. Yuksek contention olmayan sayac senaryolarinda sade ve hizli bir secenektir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. incrementAndGet gibi metodlar atomiktir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Tum kodu degil yalniz ilgili atomik alan operasyonlarini kapsar."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Deadlock lock tasarimiyla ilgilidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Cok threadli kullanim icin vardir."
+        }
+      ]
+    },
+    {
+      "id": "i3-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "compareAndSet(expected, update) ne yapar?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her zaman update yazar"
+        },
+        {
+          "id": "B",
+          "text": "Deger expected ise update yazar ve true doner, degilse false doner"
+        },
+        {
+          "id": "C",
+          "text": "Yalnizca read yapar"
+        },
+        {
+          "id": "D",
+          "text": "Synchronized lock alir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "CAS optimistic concurrency temelidir. Beklenen deger tutarsa atomik gunceller, tutmazsa fail eder ve retry stratejisi uygulanir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Kosula baglidir, her zaman yazmaz."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. CAS davranisi budur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Kosullu write operasyonudur."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Intrinsic lock almak zorunda degildir."
+        }
+      ]
+    },
+    {
+      "id": "i3-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "LongAdder hangi senaryoda daha uygundur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tek threadli basit sayac"
+        },
+        {
+          "id": "B",
+          "text": "Yuksek contention altinda sik increment edilen metrik sayaclari"
+        },
+        {
+          "id": "C",
+          "text": "Map key saklama"
+        },
+        {
+          "id": "D",
+          "text": "Immutable nesne olusturma"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "LongAdder, ic parcali hucrelerle contentioni azaltir. Ozellikle metrik toplama gibi yuksek yazma yogunlugu olan senaryolarda tercih edilir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Tek threadde ekstra karma\u015f\u0131kl\u0131k gereksizdir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Yuksek concurrency saya\u00e7lari icin idealdir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Bu sayac tipidir, map yapisi degil."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Immutability ile ilgisizdir."
+        }
+      ]
+    },
+    {
+      "id": "i3-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidakilerden hangisi atomik operasyondur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "int x; x++;"
+        },
+        {
+          "id": "B",
+          "text": "AtomicInteger ai; ai.incrementAndGet();"
+        },
+        {
+          "id": "C",
+          "text": "volatile int v; v++;"
+        },
+        {
+          "id": "D",
+          "text": "x = x + 1 ve iki thread"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "incrementAndGet tek atomik operasyon semantigi sunar. Diger ++ desenleri read-modify-write parcali oldugu icin yar\u0131\u015f riski ta\u015f\u0131r.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. ++ atomik degildir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. AtomicInteger metodu atomik garanti verir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. volatile atomiklik vermez."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Bu da atomik degildir."
+        }
+      ]
+    },
+    {
+      "id": "i3-q6",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Kodun ciktisi ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Kesin 2000"
+        },
+        {
+          "id": "B",
+          "text": "Kesin 0"
+        },
+        {
+          "id": "C",
+          "text": "2000 veya daha dusuk rastgele"
+        },
+        {
+          "id": "D",
+          "text": "Compile error"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "AtomicInteger ile her increment atomik oldugu icin join sonrasinda toplam kesin 2000 olur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Atomic increment kayip updatee izin vermez."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Artis islemleri gerceklesir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Atomic oldugu icin deterministiktir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kod derlenir ve calisir."
+        }
+      ],
+      "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(0);\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(ai.get());"
+    },
+    {
+      "id": "i3-q7",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun en dogru yorumu hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her zaman 2000 yazar"
+        },
+        {
+          "id": "B",
+          "text": "Race condition nedeniyle 2000 garanti degildir"
+        },
+        {
+          "id": "C",
+          "text": "Her zaman negatif yazar"
+        },
+        {
+          "id": "D",
+          "text": "Threadler otomatik synchronize olur"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Plain int ++ yarisa aciktir. join sadece threadlerin bitmesini garanti eder, veri yarisi problemini cozmez.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Senkronizasyon yoksa 2000 garanti olmaz."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Join bitisi bekletir ama atomiklik saglamaz."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Negatif zorunlu degil."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Otomatik synchronized davranisi yoktur."
+        }
+      ],
+      "questionCode": "class C { int v = 0; void inc(){ v++; } }\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.v);"
+    },
+    {
+      "id": "i3-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Kodun sonucu nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "true true 7"
+        },
+        {
+          "id": "B",
+          "text": "true false 5"
+        },
+        {
+          "id": "C",
+          "text": "false true 7"
+        },
+        {
+          "id": "D",
+          "text": "false false 1"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Ilk CAS basarili olur ve deger 5 olur. Ikinci CAS expected=1 bekledigi icin basarisiz olur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Ikinci CAS 1 bekledigi icin true olamaz."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. r1 true, r2 false, son deger 5."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Ilk CAS basarisiz degil, basarili."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Ilk CAS kesinlikle degeri degistirir."
+        }
+      ],
+      "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(1);\nboolean r1 = ai.compareAndSet(1, 5);\nboolean r2 = ai.compareAndSet(1, 7);\nSystem.out.println(r1 + \" \" + r2 + \" \" + ai.get());"
+    },
+    {
+      "id": "i3-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod ne yazdirir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "0"
+        },
+        {
+          "id": "B",
+          "text": "1"
+        },
+        {
+          "id": "C",
+          "text": "3"
+        },
+        {
+          "id": "D",
+          "text": "Runtime error"
+        }
+      ],
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "LongAdder increment + add islemlerini biriktirir. sum() tum hucreleri toplayarak sonucu verir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Iki arti islem var."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Toplam 1 degil 3 olur."
+        },
+        {
+          "id": "C",
+          "text": "Dogru. 1 + 2 = 3."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Bu kod sorunsuzdur."
+        }
+      ],
+      "questionCode": "java.util.concurrent.atomic.LongAdder adder = new java.util.concurrent.atomic.LongAdder();\nadder.increment();\nadder.add(2);\nSystem.out.println(adder.sum());"
+    },
+    {
+      "id": "i3-q10",
+      "type": "code",
+      "question": "Order id ureten thread-safe bir generator yaz. Her cagrida sirali ve benzersiz id donsun.",
+      "starterCode": "class OrderIdGenerator {\n    // TODO\n    String nextId() {\n        return null;\n    }\n}",
+      "answerBody": "Burada hedef lock contention olusturmadan benzersiz, artan id uretmek. AtomicLong bu is icin dogru secimdir.",
+      "answerCode": "class OrderIdGenerator {\n    private final java.util.concurrent.atomic.AtomicLong seq = new java.util.concurrent.atomic.AtomicLong(0);\n\n    String nextId() {\n        long n = seq.incrementAndGet();\n        return String.format(\"ORD-%06d\", n);\n    }\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

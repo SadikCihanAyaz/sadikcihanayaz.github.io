@@ -1,0 +1,446 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "id": "thread-interview-7",
+  "title": "Thread Interview - 7",
+  "description": "Deadlock, starvation, livelock ve interrupt disiplini",
+  "questions": [
+    {
+      "id": "i7-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Deadlock olusumu icin klasik 4 kosuldan biri degildir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Mutual exclusion"
+        },
+        {
+          "id": "B",
+          "text": "Hold and wait"
+        },
+        {
+          "id": "C",
+          "text": "No preemption"
+        },
+        {
+          "id": "D",
+          "text": "Auto rollback"
+        }
+      ],
+      "correctChoiceIds": [
+        "D"
+      ],
+      "answerBody": "Coffman kosullari: mutual exclusion, hold&wait, no preemption, circular wait. Auto rollback deadlock kosulu degildir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis secenek degil; deadlock kosuludur."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis secenek degil; deadlock kosuludur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis secenek degil; deadlock kosuludur."
+        },
+        {
+          "id": "D",
+          "text": "Dogru secim. Deadlock taniminin parcasi degildir."
+        }
+      ]
+    },
+    {
+      "id": "i7-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Deadlock onleme icin en yaygin tasarim nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Kilit alma sirasini global olarak sabitlemek"
+        },
+        {
+          "id": "B",
+          "text": "Thread sayisini rastgele arttirmak"
+        },
+        {
+          "id": "C",
+          "text": "volatile eklemek"
+        },
+        {
+          "id": "D",
+          "text": "Tum metodlari static yapmak"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Global lock order circular wait kosulunu kirar. Bu, pratikte en etkili ve en cok uygulanan deadlock onleme stratejisidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Circular wait riski kayda deger azalir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Thread sayisi arttirmak problemi buyutebilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. volatile deadlocka cozum degildir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Static yapmak deadlocku cozmez."
+        }
+      ]
+    },
+    {
+      "id": "i7-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Starvation icin en dogru tanim hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tum threadlerin karsilikli kilitlenmesi"
+        },
+        {
+          "id": "B",
+          "text": "Bir threadin uzun sure kaynak alamamasi"
+        },
+        {
+          "id": "C",
+          "text": "CPU overheating"
+        },
+        {
+          "id": "D",
+          "text": "Compile-time warning"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Starvation, adaletsiz scheduling/lock politikasi nedeniyle bir threadin surekli geri planda kalmasidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Bu deadlock tanimina daha yakindir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Starvationin cekirdek tanimi budur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Donanimsal bir durum degildir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Runtime davranisidir."
+        }
+      ]
+    },
+    {
+      "id": "i7-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Livelock ile deadlock farki nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi aynidir"
+        },
+        {
+          "id": "B",
+          "text": "Deadlockta ilerleme yoktur; livelockta threadler aktif ama is ilerlemez"
+        },
+        {
+          "id": "C",
+          "text": "Livelock sadece single-threadde olur"
+        },
+        {
+          "id": "D",
+          "text": "Deadlock her zaman exception firlatir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Livelockta threadler surekli durum degistirir fakat hedef is tamamlanmaz. Deadlockta ise bekleme kilitlenmesi vardir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Davranis modelleri farklidir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. En kritik ayrim bu sekildedir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Multi-thread etkile\u015fim sorunudur."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Deadlock genelde sessizce takilma yapar."
+        }
+      ]
+    },
+    {
+      "id": "i7-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "InterruptedException yakalandiginda iyi pratik hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Yoksayip devam etmek"
+        },
+        {
+          "id": "B",
+          "text": "Thread.currentThread().interrupt() ile interrupt flagini restore edip uygun sekilde cikmak"
+        },
+        {
+          "id": "C",
+          "text": "Her zaman RuntimeException firlatmak"
+        },
+        {
+          "id": "D",
+          "text": "Sonsuz donguye girmek"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Interrupt sinyalini yutmak upstream kodun durdurma niyetini bozar. Catch icinde restore etmek kritik best practicetir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Sinyal kaybolur, shutdown mekanizmasi bozulur."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. En yaygin ve guvenli yaklasimdir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Her senaryoda zorunlu degildir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Sorunu buyutur."
+        }
+      ]
+    },
+    {
+      "id": "i7-q6",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki deadlock aday kodu icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her zaman normal biter"
+        },
+        {
+          "id": "B",
+          "text": "Kilit alma sirasi ters oldugu icin deadlock olusabilir ve program takilabilir"
+        },
+        {
+          "id": "C",
+          "text": "Compile error verir"
+        },
+        {
+          "id": "D",
+          "text": "volatile eklenirse kesin cozulur"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Iki threadin lock alma sirasini ters kurmasi circular wait uretir. Bu kod deadlock adayi klasik ornektir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Normal bitis garanti degildir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Deadlock potansiyeli vardir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Derleme hatasi degil tasarim hatasidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. volatile lock-order problemini cozmez."
+        }
+      ],
+      "questionCode": "Object a = new Object();\nObject b = new Object();\n\nThread t1 = new Thread(() -> {\n    synchronized (a) {\n        try { Thread.sleep(50); } catch (InterruptedException e) {}\n        synchronized (b) { System.out.println(\"t1 done\"); }\n    }\n});\nThread t2 = new Thread(() -> {\n    synchronized (b) {\n        try { Thread.sleep(50); } catch (InterruptedException e) {}\n        synchronized (a) { System.out.println(\"t2 done\"); }\n    }\n});"
+    },
+    {
+      "id": "i7-q7",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "tryLock timeoutlu bu kodun ana kazanci nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Deadlocku teorik olarak azaltip sonsuz beklemeyi kirar"
+        },
+        {
+          "id": "B",
+          "text": "Her zaman daha hizli yapar"
+        },
+        {
+          "id": "C",
+          "text": "Hic lock gerektirmez"
+        },
+        {
+          "id": "D",
+          "text": "Threadi daemon yapar"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "tryLock(timeout), lock alinmazsa geri donup alternatif yol izleme sansi verir. Bu yaklasim bekleme kilitlenmelerini pratikte azaltir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Kritik fayda budur."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Her durumda daha hizli olmak zorunda degil."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Lock hala vardir, sadece edinim stratejisi farklidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Daemon ile ilgisi yok."
+        }
+      ],
+      "questionCode": "java.util.concurrent.locks.ReentrantLock lock = new java.util.concurrent.locks.ReentrantLock();\nif (lock.tryLock(100, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n    try {\n        System.out.println(\"work\");\n    } finally {\n        lock.unlock();\n    }\n} else {\n    System.out.println(\"fallback\");\n}"
+    },
+    {
+      "id": "i7-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "InterruptedException yakalandiktan hemen sonra isInterrupted() ciktisi ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her zaman true"
+        },
+        {
+          "id": "B",
+          "text": "Cogu durumda false, cunku exception atilirken interrupt statusu temizlenir"
+        },
+        {
+          "id": "C",
+          "text": "Her zaman null"
+        },
+        {
+          "id": "D",
+          "text": "Derleme hatasi"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Bircok blocking API InterruptedException firlatirken interrupted flagi temizler. Bu yuzden catch icinde tekrar interrupt etmek gerekir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Otomatik true kalmaz."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Flag temizlenebildigi icin restore gerekir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. boolean ifade null olmaz."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kod derlenir."
+        }
+      ],
+      "questionCode": "Thread t = new Thread(() -> {\n    try {\n        Thread.sleep(1000);\n    } catch (InterruptedException e) {\n        System.out.println(Thread.currentThread().isInterrupted());\n    }\n});\nt.start();\nt.interrupt();\nt.join();"
+    },
+    {
+      "id": "i7-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Daemon thread ile ilgili bu senaryoda dogru ifade hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Main biterse sadece daemon threadler ayakta kalip JVM yasamaya devam eder"
+        },
+        {
+          "id": "B",
+          "text": "Tum user threadler bittiginde JVM kapanabilir ve daemonlar yarida kesilebilir"
+        },
+        {
+          "id": "C",
+          "text": "Daemon threadler asla sonlanmaz"
+        },
+        {
+          "id": "D",
+          "text": "Daemon sadece GC threadi icindir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Daemon threadler JVM icin yardimci threadlerdir. User thread kalmadiginda daemonlarin bitmesi beklenmeden JVM sonlanabilir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Tam tersi: user thread yoksa JVM kapanir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Daemonlar grace garantisi olmadan kesilebilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. JVM kapanisiyla sonlanabilirler."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Farkli amaclarla da kullanilabilir."
+        }
+      ],
+      "questionCode": "Thread d = new Thread(() -> {\n    while (true) {}\n});\nd.setDaemon(true);\nd.start();\nSystem.out.println(\"main done\");"
+    },
+    {
+      "id": "i7-q10",
+      "type": "code",
+      "question": "Interrupt ile durdurulabilen bir worker yaz. Kaynak aciksa finallyde kapatsin.",
+      "starterCode": "class InterruptibleWorker implements Runnable {\n    @Override\n    public void run() {\n        // TODO\n    }\n}",
+      "answerBody": "Kaliteli cozumde dongu kosulu interrupt statusunu kontrol eder, blocking call catchinde status restore edilir ve finallyde cleanup yapilir.",
+      "answerCode": "class InterruptibleWorker implements Runnable {\n    @Override\n    public void run() {\n        try {\n            while (!Thread.currentThread().isInterrupted()) {\n                // unit of work\n                Thread.sleep(100);\n            }\n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n        } finally {\n            // cleanup: close files/sockets/db resources\n            System.out.println(\"cleanup done\");\n        }\n    }\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

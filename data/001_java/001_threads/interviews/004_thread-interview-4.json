@@ -1,0 +1,446 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "id": "thread-interview-4",
+  "title": "Thread Interview - 4",
+  "description": "ExecutorService, pool yonetimi ve task lifecycle",
+  "questions": [
+    {
+      "id": "i4-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "execute() ve submit() farki icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi de Future doner"
+        },
+        {
+          "id": "B",
+          "text": "execute void doner; submit Future doner"
+        },
+        {
+          "id": "C",
+          "text": "execute sadece Callable alir"
+        },
+        {
+          "id": "D",
+          "text": "submit sadece Runnable alir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "submit ile task sonucunu ve hata bilgisini Future uzerinden yonetebilirsin. execute fire-and-forget yaklasimidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. execute Future donmez."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Temel API farki budur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. execute Runnable kabul eder."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. submit Runnable ve Callable kabul eder."
+        }
+      ]
+    },
+    {
+      "id": "i4-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "shutdown() ile shutdownNow() arasindaki fark nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi de aynidir"
+        },
+        {
+          "id": "B",
+          "text": "shutdown yeni task kabul etmez, eldeki tasklerin bitmesini bekler; shutdownNow devam edenleri interrupt etmeye calisir"
+        },
+        {
+          "id": "C",
+          "text": "shutdownNow sadece queueyu temizler ama interrupt etmez"
+        },
+        {
+          "id": "D",
+          "text": "shutdown queueya yeni task ekler"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "shutdown zarif kapanis, shutdownNow ise daha agresif kapanis yaklasimidir. shutdownNow best-effort interrupt uygular.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Semantik farklari vardir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Production kapanis stratejisinde kritik ayrimdir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Interrupt denemesi de yapar."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Yeni task kabulunu kapatir."
+        }
+      ]
+    },
+    {
+      "id": "i4-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "newFixedThreadPool(4) icin hangi ifade dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ayni anda en fazla 4 worker thread calisir"
+        },
+        {
+          "id": "B",
+          "text": "Ayni anda sinirsiz thread acar"
+        },
+        {
+          "id": "C",
+          "text": "Tasklar thread acmadan calisir"
+        },
+        {
+          "id": "D",
+          "text": "Her task icin yeni process acar"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Fixed pool, concurrency seviyesini sinirlayarak kaynak kullanimini kontrol eder. Fazla tasklar kuyrukta bekler.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Pool size kadar paralellik sunar."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Fixed pool sinirsiz thread acmaz."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Tasklar threadler tarafindan calistirilir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Process acma modeli degildir."
+        }
+      ]
+    },
+    {
+      "id": "i4-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "SingleThreadExecutor hangi garantiye en yakindir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tasklar submit sirasina gore ardil calisir"
+        },
+        {
+          "id": "B",
+          "text": "Tasklar random sirada calisir"
+        },
+        {
+          "id": "C",
+          "text": "Tasklar daima paralel calisir"
+        },
+        {
+          "id": "D",
+          "text": "Tasklar thread olusturmaz"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Single thread executor tek worker ile sirali isleme davranisi saglar. Bu, thread-safe olmayan ardil akislarda faydalidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Tek worker oldugu icin sirali calisma beklenir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Rastgele siralama beklenmez."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Paralellik yoktur."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Arkada bir worker thread vardir."
+        }
+      ]
+    },
+    {
+      "id": "i4-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "RejectedExecutionException ne zaman gorulmesi en olasidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Executor shutdown olduktan sonra submit/execute cagrilirsa"
+        },
+        {
+          "id": "B",
+          "text": "Her normal submitte"
+        },
+        {
+          "id": "C",
+          "text": "Sadece Future.get cagrilirken"
+        },
+        {
+          "id": "D",
+          "text": "Sadece volatile kullanirken"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Executor kapanmisken yeni task kabul edilmez ve rejection olusur. Bu nedenle lifecycle yonetimi cok onemlidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Kapanis sonrasi task gondermek rejection \u00fcretir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Normal durumda rejection olmaz."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. get rejection noktasi degildir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. volatile ile ilgisi yoktur."
+        }
+      ]
+    },
+    {
+      "id": "i4-q6",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Kodun ciktisi hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "BA"
+        },
+        {
+          "id": "B",
+          "text": "AB"
+        },
+        {
+          "id": "C",
+          "text": "A veya B rastgele"
+        },
+        {
+          "id": "D",
+          "text": "Hicbir sey"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "SingleThreadExecutor tasklari submit sirasina gore tek worker ile calistirir. Bu nedenle A sonra B gorulur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Sira submit sirasidir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Tek worker + kuyruk = AB."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Bu senaryoda belirli sira vardir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Tasklar calisir."
+        }
+      ],
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\nex.execute(() -> System.out.print(\"A\"));\nex.execute(() -> System.out.print(\"B\"));\nex.shutdown();\nex.awaitTermination(1, java.util.concurrent.TimeUnit.SECONDS);"
+    },
+    {
+      "id": "i4-q7",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod ne yazdirir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "null"
+        },
+        {
+          "id": "B",
+          "text": "done"
+        },
+        {
+          "id": "C",
+          "text": "1"
+        },
+        {
+          "id": "D",
+          "text": "Runtime error"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "submit(Runnable) sonucu Future ile takip etsen de task bir deger donmez. Bu nedenle get() sonucu null olur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Runnable sonuc degeri uretmez."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. done stringi yok."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Numeric sonuc yok."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kod gecerli."
+        }
+      ],
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\njava.util.concurrent.Future<?> f = ex.submit(() -> System.out.print(\"run \"));\nSystem.out.println(f.get());\nex.shutdown();"
+    },
+    {
+      "id": "i4-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Kodun davranisi nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Task normal kabul edilir"
+        },
+        {
+          "id": "B",
+          "text": "RejectedExecutionException olusur"
+        },
+        {
+          "id": "C",
+          "text": "Task sessizce yok sayilir"
+        },
+        {
+          "id": "D",
+          "text": "Compile error"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "shutdown cagrisi ile executor yeni task kabul etmez. Sonraki submit rejection exception ile sonuclanir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. shutdown sonrasi kabul yok."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Rejection beklenir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Sessizce yutulmaz."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Derleme degil runtime sorunudur."
+        }
+      ],
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(1);\nex.shutdown();\nex.submit(() -> System.out.println(\"x\"));"
+    },
+    {
+      "id": "i4-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "invokeAll icin dogru cikt\u0131/yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Liste boyu 2 olur ve get() ile degerler okunur"
+        },
+        {
+          "id": "B",
+          "text": "Liste boyu her zaman 0 olur"
+        },
+        {
+          "id": "C",
+          "text": "invokeAll asenkron doner ve hic beklemez"
+        },
+        {
+          "id": "D",
+          "text": "Sadece Runnable kabul eder"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "invokeAll verilen callable listesini submit eder ve tumu tamamlanana kadar bekler. Sonuc listesi input boyu ile aynidir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Future listesi callable sayisi kadar olur."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. 0 olmasi beklenmez."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. invokeAll blocking davranir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Callable listesi bekler."
+        }
+      ],
+      "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(2);\njava.util.List<java.util.concurrent.Callable<Integer>> tasks = java.util.List.of(\n    () -> 1,\n    () -> 2\n);\njava.util.List<java.util.concurrent.Future<Integer>> results = ex.invokeAll(tasks);\nSystem.out.println(results.size());\nex.shutdown();"
+    },
+    {
+      "id": "i4-q10",
+      "type": "code",
+      "question": "Bir Callable taskini timeout ile calistiran yardimci metod yaz. Sureyi asarsa iptal et ve fallback don.",
+      "starterCode": "String runWithTimeout(java.util.concurrent.Callable<String> task) {\n    // TODO\n    return null;\n}",
+      "answerBody": "Pattern: executor + submit + get(timeout) + cancel(true). Bu patterni dogru kurmak timeout ve kaynak yonetimi acisindan kritik.",
+      "answerCode": "String runWithTimeout(java.util.concurrent.Callable<String> task) {\n    java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\n    java.util.concurrent.Future<String> f = ex.submit(task);\n    try {\n        return f.get(500, java.util.concurrent.TimeUnit.MILLISECONDS);\n    } catch (java.util.concurrent.TimeoutException e) {\n        f.cancel(true);\n        return \"TIMEOUT\";\n    } catch (Exception e) {\n        return \"ERROR\";\n    } finally {\n        ex.shutdownNow();\n    }\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

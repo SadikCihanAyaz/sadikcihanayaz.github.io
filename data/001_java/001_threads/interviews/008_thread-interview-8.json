@@ -1,0 +1,446 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "threads",
+  "id": "thread-interview-8",
+  "title": "Thread Interview - 8",
+  "description": "Thread-safe collections, immutability ve veri modelleme",
+  "questions": [
+    {
+      "id": "i8-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ConcurrentHashMap icin hangisi dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "null key ve null value destekler"
+        },
+        {
+          "id": "B",
+          "text": "null key/value desteklemez"
+        },
+        {
+          "id": "C",
+          "text": "Thread-safe degildir"
+        },
+        {
+          "id": "D",
+          "text": "Sadece tek threadde calisir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "ConcurrentHashMap null key/value kabul etmez. Bu tasarim ambiguityyi azaltir ve concurrency semantigini netlestirir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Null key/value desteklemez."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Java dokumantasyonuna uygun davranis budur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Thread-safe yapilarin temel ornegidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Cok threadli kullanim icin vardir."
+        }
+      ]
+    },
+    {
+      "id": "i8-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "CopyOnWriteArrayList ne zaman daha uygundur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Write agirlikli senaryolarda"
+        },
+        {
+          "id": "B",
+          "text": "Read agirlikli ve iterasyon yogun senaryolarda"
+        },
+        {
+          "id": "C",
+          "text": "Sadece immutable liste lazimsa"
+        },
+        {
+          "id": "D",
+          "text": "Hicbir durumda"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "CopyOnWrite her write adiminda kopya maliyeti yaratir. Okuma cok, yazma az ise snapshot iterasyon avantaj saglar.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Write maliyeti yuksek oldugu icin uygun degil."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Read-heavy workload icin idealdir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Immutable liste ile ayni kavram degil."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Dogru senaryoda oldukca kullanislidir."
+        }
+      ]
+    },
+    {
+      "id": "i8-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Collections.synchronizedList ile iterasyon yaparken neye dikkat edilmeli?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ek locka gerek yok"
+        },
+        {
+          "id": "B",
+          "text": "Iterasyon s\u0131ras\u0131nda disardan synchronized(list) ile lock alinmali"
+        },
+        {
+          "id": "C",
+          "text": "Sadece volatile yeterli"
+        },
+        {
+          "id": "D",
+          "text": "Iterasyon asla desteklenmez"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Wrapper yalnizca tek tek metotlari senkronize eder. Iterasyon gibi bile\u015fik i\u015flemlerde client-side lock gerekir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Bilesik islemde ek lock gerekir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Dokumantasyonda da bu sekilde onerilir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. volatile koleksiyon iterasyonunu korumaz."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Desteklenir ama dogru kilitleme gerekir."
+        }
+      ]
+    },
+    {
+      "id": "i8-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Immutability neden concurrencyde guclu bir yaklasimdir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Cunku nesne state degismedigi icin lock ihtiyaci azalir"
+        },
+        {
+          "id": "B",
+          "text": "Cunku nesneyi daha hizli derler"
+        },
+        {
+          "id": "C",
+          "text": "Cunku deadlocku tek basina tamamen yok eder"
+        },
+        {
+          "id": "D",
+          "text": "Cunku GCyi kapatir"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Immutable nesnelerde state degisimi olmadigindan race condition alani daralir. Bu da lock karmasini azaltir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Shared mutable state azalinca risk azalir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Derleme hizi ile alakali degildir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Deadlock lock tasarimiyla ilgilidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. GC davranisiyla ilgisiz."
+        }
+      ]
+    },
+    {
+      "id": "i8-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "BlockingQueue icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Producer-consumer koordinasyonunu lock/free ve bekleme semantiklerini kapsayacak sekilde kolaylastirir"
+        },
+        {
+          "id": "B",
+          "text": "Thread-safe degildir"
+        },
+        {
+          "id": "C",
+          "text": "Sadece read icin vardir"
+        },
+        {
+          "id": "D",
+          "text": "Mutlaka synchronized dis lock ister"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "BlockingQueue put/take ile backpressure ve bekleme semantigini hazir sunar. Elle wait/notify yazma ihtiyacini buyuk olcude azaltir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Producer-consumer icin cok uygun abstractiondir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Thread-safe olarak tasarlanmistir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Hem write hem read operasyonlari vardir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kendi thread-safe semantigi vardir."
+        }
+      ]
+    },
+    {
+      "id": "i8-q6",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Kodun davranisi icin dogru yorum hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Iterasyonda 1 2 3 gorulur"
+        },
+        {
+          "id": "B",
+          "text": "Iterasyonda snapshot nedeniyle 1 2 gorulur; final listede 3 vardir"
+        },
+        {
+          "id": "C",
+          "text": "ConcurrentModificationException kesin olur"
+        },
+        {
+          "id": "D",
+          "text": "Kod compile olmaz"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "CopyOnWrite iterasyon snapshot uzerinden gider. Iterasyon sirasinda eklenen eleman ayni turda gorulmez ama listede kalir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Snapshot iterasyon nedeniyle 3 gorulmez."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Snapshot + final liste guncellemesi birlikte budur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Bu tipin avantajlarindan biri CME riskini azaltmasidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kod gecerli."
+        }
+      ],
+      "questionCode": "java.util.concurrent.CopyOnWriteArrayList<Integer> list = new java.util.concurrent.CopyOnWriteArrayList<>(java.util.List.of(1, 2));\nfor (Integer v : list) {\n    if (v == 1) {\n        list.add(3);\n    }\n    System.out.print(v + \" \");\n}\nSystem.out.println(\"| size=\" + list.size());"
+    },
+    {
+      "id": "i8-q7",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "computeIfAbsent ile ilgili dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ayni key icin mapping function birden cok kez deger yazabilir, tutarlilik garanti degildir"
+        },
+        {
+          "id": "B",
+          "text": "Thread-safe mapte anahtar yoksa atomik sekilde deger hesaplayip yazar"
+        },
+        {
+          "id": "C",
+          "text": "Her zaman null dondurur"
+        },
+        {
+          "id": "D",
+          "text": "Sadece synchronizedMapte vardir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "ConcurrentHashMap.computeIfAbsent, key yoksa deger hesaplamayi atomik akista yapmaya yardim eder. Yarisa dayanikli bir APIdir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. API amaci atomik/guvenli hesaplamadir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Bu methodun temel kullanim nedenidir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Hesaplanan degeri dondurur."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. ConcurrentHashMap APIsidir."
+        }
+      ],
+      "questionCode": "java.util.concurrent.ConcurrentHashMap<String, Integer> map = new java.util.concurrent.ConcurrentHashMap<>();\nInteger v = map.computeIfAbsent(\"java\", k -> 1);\nSystem.out.println(v + \" / \" + map.get(\"java\"));"
+    },
+    {
+      "id": "i8-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Concurrent write altinda plain HashMap icin dogru ifade hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tam thread-safe oldugu icin her zaman tutarli sonuc verir"
+        },
+        {
+          "id": "B",
+          "text": "Davranis tanimsiz hale gelebilir; veri kaybi/tutarsizlik riski vardir"
+        },
+        {
+          "id": "C",
+          "text": "Runtime otomatik lock ekler"
+        },
+        {
+          "id": "D",
+          "text": "Sadece read operasyonunda bozulur"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "HashMap thread-safe degildir. Eszamanli write islemleri veri tutarsizligi ve beklenmeyen davranislara yol acabilir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. HashMap thread-safe degildir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Eszamanli write risklidir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. JVM otomatik lock eklemez."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Asil risk write tarafindadir."
+        }
+      ],
+      "questionCode": "java.util.HashMap<Integer, Integer> map = new java.util.HashMap<>();\n// iki thread ayni anda put yapiyor varsay\n// Sonuc deterministic garanti edilmez."
+    },
+    {
+      "id": "i8-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod ne yazdirir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "1"
+        },
+        {
+          "id": "B",
+          "text": "2"
+        },
+        {
+          "id": "C",
+          "text": "UnsupportedOperationException"
+        },
+        {
+          "id": "D",
+          "text": "null"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "unmodifiableList sadece wrapperdir; alttaki liste degisirse wrapper da yeni durumu gorur. Gercek immutability saglamaz.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Alttaki listeye eklenen eleman gorulur."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. size 2 olur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Exception wrapper uzerinden mutasyonda olur."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Null donmez."
+        }
+      ],
+      "questionCode": "java.util.List<Integer> base = new java.util.ArrayList<>(java.util.List.of(1));\njava.util.List<Integer> ro = java.util.Collections.unmodifiableList(base);\nbase.add(2);\nSystem.out.println(ro.size());"
+    },
+    {
+      "id": "i8-q10",
+      "type": "code",
+      "question": "Immutable bir AppConfig sinifi yaz. Tum alanlar final olsun, disariya mutable referans kacmasin.",
+      "starterCode": "class AppConfig {\n    // TODO\n}",
+      "answerBody": "Immutable tasarimda final alanlar, defensive copy ve setter olmamasi temel prensiplerdir. Ozellikle config objeleri icin cok degerlidir.",
+      "answerCode": "final class AppConfig {\n    private final String env;\n    private final java.util.List<String> servers;\n\n    AppConfig(String env, java.util.List<String> servers) {\n        this.env = env;\n        this.servers = java.util.List.copyOf(servers);\n    }\n\n    String getEnv() {\n        return env;\n    }\n\n    java.util.List<String> getServers() {\n        return servers; // already unmodifiable snapshot\n    }\n}",
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+    }
+  ]
+}

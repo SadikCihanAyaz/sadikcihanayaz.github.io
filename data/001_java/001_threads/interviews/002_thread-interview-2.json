@@ -4,43 +4,442 @@
   "subcategoryId": "threads",
   "id": "thread-interview-2",
   "title": "Thread Interview - 2",
-  "description": "ExecutorService, Future, timeout ve cancellation",
+  "description": "synchronized, volatile ve ReentrantLock secim mantigi",
   "questions": [
     {
-      "id": "t2-q1",
+      "id": "i2-q1",
       "type": "mcq",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "`ExecutorService` kullanmanin temel avantaji nedir?",
+      "question": "synchronized bir bolge icin en dogru ifade hangisidir?",
       "choices": [
         {
           "id": "A",
-          "text": "Thread olusturmayi tamamen kaldirir"
+          "text": "Sadece atomiklik saglar, gorunurluk saglamaz."
         },
         {
           "id": "B",
-          "text": "Thread yasam dongusunu ve havuzu merkezi yonetmeni saglar"
+          "text": "Mutual exclusion ve memory visibility birlikte saglar."
         },
         {
           "id": "C",
-          "text": "Tum tasklari senkron calistirir"
+          "text": "Sadece read islemlerini kilitler."
         },
         {
           "id": "D",
-          "text": "GC'yi kapatir"
+          "text": "Sadece static metodlarda calisir."
         }
       ],
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "ExecutorService, thread reuse ve task scheduling konusunda daha guvenli ve olceklenebilir bir model sunar."
+      "answerBody": "synchronized monitor lock ile kritik bolgeye tek thread girisini saglar ve lock acquire/release ile visibility/happens-before etkisi verir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. synchronized visibility de saglar."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Hem mutual exclusion hem gorunurluk etkisi vardir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Read ve write islemleri kritik bolgede korunur."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Instance metod ve blocklarda da calisir."
+        }
+      ]
     },
     {
-      "id": "t2-q2",
+      "id": "i2-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "volatile ile ilgili hangisi dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "value++ islemini atomik yapar."
+        },
+        {
+          "id": "B",
+          "text": "Sadece write islemlerini hizlandirir."
+        },
+        {
+          "id": "C",
+          "text": "Threadler arasi gorunurluk saglar ama compound islemleri atomik yapmaz."
+        },
+        {
+          "id": "D",
+          "text": "Deadlocku engeller."
+        }
+      ],
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "volatile degiskenin en guncel degerinin gorulmesini hedefler. Ancak read-modify-write desenlerinde tek basina yeterli degildir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. value++ hala birden fazla adimdir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Amaci hiz degil, tutarlilik semantigidir."
+        },
+        {
+          "id": "C",
+          "text": "Dogru. visibility vardir, atomiklik yoktur."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Deadlock lock tasarimiyla ilgilidir."
+        }
+      ]
+    },
+    {
+      "id": "i2-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "static synchronized metodlar hangi locku kullanir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her thread kendi stack lockunu"
+        },
+        {
+          "id": "B",
+          "text": "Method local locku"
+        },
+        {
+          "id": "C",
+          "text": "Nesne locku (this)"
+        },
+        {
+          "id": "D",
+          "text": "Class object locku (ClassName.class)"
+        }
+      ],
+      "correctChoiceIds": [
+        "D"
+      ],
+      "answerBody": "static synchronized metodlar instance degil class seviyesinde kilitlenir. Bu nedenle tum instance lar icin ortak lock noktasi olusur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Stack lock kavrami yoktur."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Method local lock otomatik bir lock modeli degildir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. this locku instance synchronized icindir."
+        },
+        {
+          "id": "D",
+          "text": "Dogru. Class monitor lock kullanilir."
+        }
+      ]
+    },
+    {
+      "id": "i2-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ReentrantLock hangi durumda synchronizeda gore daha uygundur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "tryLock/timeout/fairness gibi ileri kontrol gerektiginde"
+        },
+        {
+          "id": "B",
+          "text": "Sadece primitive alanlari korurken"
+        },
+        {
+          "id": "C",
+          "text": "Hicbir durumda uygun degildir"
+        },
+        {
+          "id": "D",
+          "text": "Sadece tek thread varken"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "ReentrantLock ile tryLock, lockInterruptibly, fairness gibi kontrol noktalarina sahip olursun. synchronized daha sade ama daha az esnektir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Dogru. Bu ozellikler ReentrantLocku one cikarir."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Veri tipiyle degil kilit politikasi ihtiyaci ile ilgilidir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Bir cok production senaryosunda faydalidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Tek threadde lock ihtiyaci zaten dusuktur."
+        }
+      ]
+    },
+    {
+      "id": "i2-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Fair lock icin en dogru trade-off hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her zaman daha hizlidir"
+        },
+        {
+          "id": "B",
+          "text": "Starvation riskini azaltir ama throughput dusurebilir"
+        },
+        {
+          "id": "C",
+          "text": "Deadlocku tamamen bitirir"
+        },
+        {
+          "id": "D",
+          "text": "Visibility garantisini kaldirir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Fair policy bekleyen threadlere daha adil sira verir fakat strict fairness scheduler maliyeti olusturabilir. Bu nedenle throughput bazen duser.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Fair lock cogu zaman biraz daha maliyetlidir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Adalet artar, ham hiz bazen azalir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Deadlock lock order problemidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Visibility semantigi lock mekanizmasinda devam eder."
+        }
+      ]
+    },
+    {
+      "id": "i2-q6",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodda final value icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Kesinlikle 2000"
+        },
+        {
+          "id": "B",
+          "text": "Kesinlikle 0"
+        },
+        {
+          "id": "C",
+          "text": "2000 garanti degil; race condition nedeniyle daha dusuk cikabilir"
+        },
+        {
+          "id": "D",
+          "text": "Program derlenmez"
+        }
+      ],
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "volatile gorunurluk saglar ama ++ atomik degildir. Iki thread ayni anda okuma/yazma yaparsa update kaybi olur.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Atomicity olmadigi icin 2000 garanti edilemez."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis. Artislar olur, 0 beklenmez."
+        },
+        {
+          "id": "C",
+          "text": "Dogru. Kayip update olasiligi vardir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Kod derlenir ama mantik riski vardir."
+        }
+      ],
+      "questionCode": "class C {\n    volatile int value = 0;\n    void inc() { value++; }\n}\n\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.value);"
+    },
+    {
+      "id": "i2-q7",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki akista muhtemel ciktinin dogru yorumu nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "A ve C kesin paralel gider"
+        },
+        {
+          "id": "B",
+          "text": "A-B bitmeden C baslayamaz"
+        },
+        {
+          "id": "C",
+          "text": "C her zaman A ile ayni anda baslar"
+        },
+        {
+          "id": "D",
+          "text": "synchronized etkisizdir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Iki synchronized metod ayni nesne lockunu paylastigi icin biri calisirken digeri bekler. Bu nedenle m1 tamamlanmadan m2ye girilemez.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Ayni monitor locku nedeniyle paralellik engellenir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Lock serbest kalmadan ikinci synchronized metoda giris olmaz."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Zorunlu eszamanlilik yok."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. synchronized bu kodun davranisini dogrudan belirler."
+        }
+      ],
+      "questionCode": "class S {\n    synchronized void m1() {\n        System.out.print(\"A\");\n        try { Thread.sleep(100); } catch (InterruptedException e) {}\n        System.out.print(\"B\");\n    }\n    synchronized void m2() { System.out.print(\"C\"); }\n}\nS s = new S();\nThread t1 = new Thread(s::m1);\nThread t2 = new Thread(s::m2);\nt1.start();\nThread.sleep(10);\nt2.start();\nt1.join(); t2.join();"
+    },
+    {
+      "id": "i2-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Iki farkli lock objesi kullanilan bu kodla ilgili dogru ifade hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Metodlar yine de ayni locku paylasir"
+        },
+        {
+          "id": "B",
+          "text": "Metodlar birbirini bloklamaz; paralel calisabilir"
+        },
+        {
+          "id": "C",
+          "text": "Kod compile olmaz"
+        },
+        {
+          "id": "D",
+          "text": "Threadler otomatik serialized olur"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "synchronized(lockA) ve synchronized(lockB) farkli monitorlerdir. Bu nedenle lock contention olmaz ve metodlar paralel calisabilir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Lock objeleri farkliysa monitorler de farklidir."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Ayrik lock tasarimi paralelligi artirir."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Kod gecerlidir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Otomatik serialization yalnizca ayni lockta olur."
+        }
+      ],
+      "questionCode": "Object lockA = new Object();\nObject lockB = new Object();\n\nRunnable r1 = () -> { synchronized (lockA) { System.out.print(\"A\"); } };\nRunnable r2 = () -> { synchronized (lockB) { System.out.print(\"B\"); } };\n\nThread t1 = new Thread(r1);\nThread t2 = new Thread(r2);\nt1.start(); t2.start();\nt1.join(); t2.join();"
+    },
+    {
+      "id": "i2-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun sonucu ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Deadlock olur"
+        },
+        {
+          "id": "B",
+          "text": "ok yazar, cunku synchronized reentranttir"
+        },
+        {
+          "id": "C",
+          "text": "Compile hatasi verir"
+        },
+        {
+          "id": "D",
+          "text": "NullPointerException firlatir"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Ayni thread, sahip oldugu monitoru tekrar alabilir. Bu ozellige reentrancy denir ve Java synchronized icin dogaldir.",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "Yanlis. Ayni thread ayni locku tekrar alinca deadlock olmaz."
+        },
+        {
+          "id": "B",
+          "text": "Dogru. Reentrant davranis sayesinde inner cagrisi sorunsuzdur."
+        },
+        {
+          "id": "C",
+          "text": "Yanlis. Kod derlenir."
+        },
+        {
+          "id": "D",
+          "text": "Yanlis. Bu akista null kaynakli hata yoktur."
+        }
+      ],
+      "questionCode": "class R {\n    synchronized void outer() { inner(); }\n    synchronized void inner() { System.out.println(\"ok\"); }\n}\nnew R().outer();"
+    },
+    {
+      "id": "i2-q10",
       "type": "code",
-      "question": "Bir task 2 saniyede donmezse iptal et. `Future` ile ornek kod yaz.",
-      "starterCode": "ExecutorService pool = Executors.newSingleThreadExecutor();\nFuture<String> f = pool.submit(() -> {\n    Thread.sleep(5000);\n    return \"done\";\n});\n\n// TODO: timeout + cancel",
-      "answerBody": "`get(timeout)` ile bekleyip `TimeoutException` durumunda `cancel(true)` cagirabilirsin.",
-      "answerCode": "try {\n    String value = f.get(2, TimeUnit.SECONDS);\n    System.out.println(value);\n} catch (TimeoutException ex) {\n    f.cancel(true);\n    System.out.println(\"task cancelled\");\n} finally {\n    pool.shutdownNow();\n}",
+      "question": "Money transferde lock beklemesini sonsuza birakma. ReentrantLock ile timeoutlu transfer metodu yaz.",
+      "starterCode": "class Account {\n    final java.util.concurrent.locks.ReentrantLock lock = new java.util.concurrent.locks.ReentrantLock();\n    int balance;\n}\n\nboolean transfer(Account from, Account to, int amount) throws InterruptedException {\n    // TODO\n    return false;\n}",
+      "answerBody": "Burada hedef, deadlock riskini azaltmak ve sonsuz beklemeyi kirabilmek. tryLock(timeout) ile kilit alinmazsa operasyonu fail etmek productionda daha guvenli bir stratejidir.",
+      "answerCode": "boolean transfer(Account from, Account to, int amount) throws InterruptedException {\n    if (!from.lock.tryLock(200, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n        return false;\n    }\n    try {\n        if (!to.lock.tryLock(200, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n            return false;\n        }\n        try {\n            if (from.balance < amount) {\n                return false;\n            }\n            from.balance -= amount;\n            to.balance += amount;\n            return true;\n        } finally {\n            to.lock.unlock();\n        }\n    } finally {\n        from.lock.unlock();\n    }\n}",
       "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
     }
   ]
