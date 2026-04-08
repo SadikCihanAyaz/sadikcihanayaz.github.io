@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /data/
+Disallow: /scripts/
+Disallow: /.github/
+
+Sitemap: https://sadikcihanayaz.github.io/sitemap.xml

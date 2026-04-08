@@ -1,0 +1,49 @@
+name: SEO Sitemap
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'data/**'
+      - 'scripts/generate-seo.mjs'
+      - '.github/workflows/seo-sitemap.yml'
+      - '*.html'
+      - '*.htm'
+      - 'CNAME'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate sitemap and robots
+        run: node scripts/generate-seo.mjs
+
+      - name: Commit and push changes
+        run: |
+          if [[ -n "$(git status --porcelain -- sitemap.xml robots.txt)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sitemap.xml robots.txt
+            git commit -m "chore(seo): regenerate sitemap and robots [skip ci]"
+            git push
+          else
+            echo "No sitemap/robots changes."
+          fi

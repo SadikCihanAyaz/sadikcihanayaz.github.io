@@ -50,6 +50,55 @@
     return search.toString();
   }
 
+  function setMetaByName(name, content) {
+    const element = document.querySelector(`meta[name="${name}"]`);
+    if (element) {
+      element.setAttribute('content', content);
+    }
+  }
+
+  function setMetaByProperty(property, content) {
+    const element = document.querySelector(`meta[property="${property}"]`);
+    if (element) {
+      element.setAttribute('content', content);
+    }
+  }
+
+  function setCanonical(url) {
+    const canonical = document.getElementById('canonical-link');
+    if (canonical) {
+      canonical.setAttribute('href', url);
+    }
+  }
+
+  function setSchema(schema) {
+    const schemaEl = document.getElementById('seo-schema');
+    if (schemaEl) {
+      schemaEl.textContent = JSON.stringify(schema);
+    }
+  }
+
+  function setSeo({ title, description, path, robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }) {
+    const canonicalUrl = new URL(path, window.location.origin).href;
+
+    document.title = title;
+    setMetaByName('description', description);
+    setMetaByName('robots', robots);
+    setMetaByProperty('og:title', title);
+    setMetaByProperty('og:description', description);
+    setMetaByProperty('og:url', canonicalUrl);
+    setMetaByName('twitter:title', title);
+    setMetaByName('twitter:description', description);
+    setCanonical(canonicalUrl);
+    setSchema({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: canonicalUrl
+    });
+  }
+
   function sortByOrder(items) {
     return [...items].sort((a, b) => {
       const orderA = Number.isFinite(a?.order) ? a.order : Number.MAX_SAFE_INTEGER;
@@ -113,6 +162,12 @@
   }
 
   function setError(message) {
+    setSeo({
+      title: 'Interview Player | Hata',
+      description: message,
+      path: '/interview.html',
+      robots: 'noindex,nofollow'
+    });
     els.errorBox.textContent = message;
     els.errorBox.classList.remove('hidden');
     els.shell.classList.add('hidden');
@@ -137,6 +192,16 @@
     ].join(' / ');
 
     els.backToSub.href = subLink;
+
+    setSeo({
+      title: `${interview.title || 'Interview'} | ${sub.title} | Learning Hub`,
+      description: interview.description || `${sub.title} interview sorulari`,
+      path: `/interview.html?${makeQuery({
+        category: category.id,
+        subcategory: sub.id,
+        interview: interview.id
+      })}`
+    });
   }
 
   function getQuestionState(question) {

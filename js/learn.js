@@ -40,6 +40,56 @@
     els.subtitle.textContent = subtitle || '';
   }
 
+  function setMetaByName(name, content) {
+    const element = document.querySelector(`meta[name="${name}"]`);
+    if (element) {
+      element.setAttribute('content', content);
+    }
+  }
+
+  function setMetaByProperty(property, content) {
+    const element = document.querySelector(`meta[property="${property}"]`);
+    if (element) {
+      element.setAttribute('content', content);
+    }
+  }
+
+  function setCanonical(url) {
+    const canonical = document.getElementById('canonical-link');
+    if (canonical) {
+      canonical.setAttribute('href', url);
+    }
+  }
+
+  function setSchema(schema) {
+    const schemaEl = document.getElementById('seo-schema');
+    if (schemaEl) {
+      schemaEl.textContent = JSON.stringify(schema);
+    }
+  }
+
+  function setSeo({ title, description, path, robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }) {
+    const canonicalUrl = new URL(path, window.location.origin).href;
+
+    document.title = title;
+    setMetaByName('description', description);
+    setMetaByName('robots', robots);
+    setMetaByProperty('og:title', title);
+    setMetaByProperty('og:description', description);
+    setMetaByProperty('og:url', canonicalUrl);
+    setMetaByName('twitter:title', title);
+    setMetaByName('twitter:description', description);
+    setCanonical(canonicalUrl);
+
+    setSchema({
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: title,
+      description,
+      url: canonicalUrl
+    });
+  }
+
   function sortByOrder(items) {
     return [...items].sort((a, b) => {
       const orderA = Number.isFinite(a?.order) ? a.order : Number.MAX_SAFE_INTEGER;
@@ -102,6 +152,11 @@
   function renderCategoryList(categories) {
     setBreadcrumb([link('Ana Sayfa', '/learn.html')]);
     setTitle('Kategoriler', 'Bir kategori secerek devam et.');
+    setSeo({
+      title: 'Learning Hub | Kategoriler',
+      description: 'Teknik konulari kategori bazli kesfet ve ilgili alt kategorilere gec.',
+      path: '/learn.html'
+    });
 
     const cards = categories.map((category) => {
       const href = `/learn.html?${makeQuery({ category: category.id })}`;
@@ -129,6 +184,11 @@
     ]);
 
     setTitle(`${category.title} Alt Kategorileri`, 'Bir alt kategori sec.');
+    setSeo({
+      title: `${category.title} Alt Kategorileri | Learning Hub`,
+      description: `${category.title} kategorisindeki alt basliklari ve interview iceriklerini incele.`,
+      path: `/learn.html?${makeQuery({ category: category.id })}`
+    });
 
     const cards = subcategories.map((sub) => {
       const href = `/learn.html?${makeQuery({ category: category.id, subcategory: sub.id })}`;
@@ -157,6 +217,11 @@
     ]);
 
     setTitle(`${subcategory.title}`, 'Bu alt kategoride once konu anlatimi, sonra interview listesi gelir.');
+    setSeo({
+      title: `${subcategory.title} | Learning Hub`,
+      description: `${subcategory.title} icin konu anlatimi ve interview listesi.`,
+      path: `/learn.html?${makeQuery({ category: category.id, subcategory: subcategory.id })}`
+    });
 
     const topicHref = `/learn.html?${makeQuery({
       category: category.id,
@@ -216,6 +281,11 @@
     ]);
 
     setTitle(article.title || `${subcategory.title} - Konu Anlatimi`, subcategory.description || '');
+    setSeo({
+      title: `${article.title || `${subcategory.title} Konu Anlatimi`} | Learning Hub`,
+      description: subcategory.description || `${subcategory.title} konu anlatimi.`,
+      path: `/learn.html?${makeQuery({ category: category.id, subcategory: subcategory.id, view: 'topic' })}`
+    });
 
     const blocks = (article.blocks || []).map((block) => {
       if (block.type === 'paragraph') {
@@ -257,6 +327,12 @@
   function renderError(message) {
     setBreadcrumb([link('Ana Sayfa', '/learn.html')]);
     setTitle('Hata', 'Icerik yuklenemedi.');
+    setSeo({
+      title: 'Learning Hub | Hata',
+      description: message,
+      path: '/learn.html',
+      robots: 'noindex,nofollow'
+    });
     els.app.innerHTML = `<div class="callout">${esc(message)}</div>`;
   }
 
