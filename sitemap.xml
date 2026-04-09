@@ -151,6 +151,66 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-1</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-10</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-2</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-3</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-4</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-5</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-6</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-7</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-8</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-security&amp;interview=spring-security-interview-9</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://sadikcihanayaz.github.io/learn.html</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -188,6 +248,18 @@
   </url>
   <url>
     <loc>https://sadikcihanayaz.github.io/learn.html?category=spring-boot&amp;subcategory=hibernate-jpa-jparepository&amp;view=topic</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/learn.html?category=spring-boot&amp;subcategory=spring-security</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/learn.html?category=spring-boot&amp;subcategory=spring-security&amp;view=topic</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
