@@ -196,7 +196,15 @@
           quoteLines.push(lines[i].replace(/^\s*>\s?/, ''));
           i += 1;
         }
-        html += `<div class="callout callout-debug answer-note"><p>${quoteLines.map((x) => formatInline(x)).join('<br>')}</p></div>`;
+        let tone = 'debug';
+        if (quoteLines.length > 0) {
+          const marker = quoteLines[0].match(/^\s*\[(INFO|CONCEPT|CAUTION|SUCCESS|DEBUG)\]\s*/i);
+          if (marker) {
+            tone = marker[1].toLowerCase();
+            quoteLines[0] = quoteLines[0].replace(/^\s*\[(INFO|CONCEPT|CAUTION|SUCCESS|DEBUG)\]\s*/i, '');
+          }
+        }
+        html += `<div class="callout callout-${tone} answer-note"><p>${quoteLines.map((x) => formatInline(x)).join('<br>')}</p></div>`;
         continue;
       }
 
