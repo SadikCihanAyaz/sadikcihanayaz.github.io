@@ -304,6 +304,82 @@ pre.code {
   background: #fafcff;
 }
 
+.answer-highlight {
+  margin-bottom: 12px;
+}
+
+.answer-options {
+  display: grid;
+  gap: 10px;
+}
+
+.answer-option {
+  margin: 0;
+}
+
+.answer-rich {
+  color: var(--text);
+}
+
+.answer-rich p {
+  margin: 8px 0;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.answer-rich .answer-heading {
+  margin: 12px 0 6px;
+  color: #17212b;
+}
+
+.answer-rich .answer-list {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.answer-rich .answer-list li {
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.answer-note {
+  margin: 10px 0;
+}
+
+.inline-code {
+  font-family: Consolas, "Courier New", monospace;
+  background: #ecf2f8;
+  border: 1px solid #d5e0ea;
+  border-radius: 6px;
+  padding: 1px 6px;
+  color: #223447;
+}
+
+.answer-table-wrap {
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.answer-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.answer-table th,
+.answer-table td {
+  border: 1px solid var(--line);
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+.answer-table th {
+  background: #eef3f8;
+  font-weight: 700;
+}
+
 .status-ok {
   color: var(--ok);
   font-weight: 700;

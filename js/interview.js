@@ -82,6 +82,165 @@
     return esc(text || '').replace(/\n/g, '<br>');
   }
 
+  function formatInline(text) {
+    let value = esc(text || '');
+    value = value.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    value = value.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+    return value;
+  }
+
+  function startsCodeFence(line) {
+    return /^\s*```/.test(line);
+  }
+
+  function startsHeading(line) {
+    return /^\s*#{1,6}\s+/.test(line);
+  }
+
+  function startsList(line) {
+    return /^\s*-\s+/.test(line);
+  }
+
+  function startsOrderedList(line) {
+    return /^\s*\d+\.\s+/.test(line);
+  }
+
+  function startsQuote(line) {
+    return /^\s*>\s?/.test(line);
+  }
+
+  function startsTable(lines, index) {
+    const current = lines[index] || '';
+    const next = lines[index + 1] || '';
+    return current.includes('|') && /^\s*\|?[-:\s|]+\|?\s*$/.test(next);
+  }
+
+  function renderMarkdown(text) {
+    if (!text) {
+      return '';
+    }
+
+    const lines = String(text).replace(/\r/g, '').split('\n');
+    let i = 0;
+    let html = '';
+
+    while (i < lines.length) {
+      const line = lines[i];
+
+      if (!line.trim()) {
+        i += 1;
+        continue;
+      }
+
+      if (startsCodeFence(line)) {
+        i += 1;
+        const codeLines = [];
+        while (i < lines.length && !startsCodeFence(lines[i])) {
+          codeLines.push(lines[i]);
+          i += 1;
+        }
+        if (i < lines.length) {
+          i += 1;
+        }
+        html += `<pre class="code"><code>${esc(codeLines.join('\n'))}</code></pre>`;
+        continue;
+      }
+
+      if (startsTable(lines, i)) {
+        const headerCells = lines[i]
+          .split('|')
+          .map((cell) => cell.trim())
+          .filter(Boolean);
+        i += 2; // skip header + separator
+
+        const rows = [];
+        while (i < lines.length && lines[i].includes('|') && lines[i].trim()) {
+          const rowCells = lines[i]
+            .split('|')
+            .map((cell) => cell.trim())
+            .filter(Boolean);
+          if (rowCells.length > 0) {
+            rows.push(rowCells);
+          }
+          i += 1;
+        }
+
+        const headerHtml = headerCells.map((cell) => `<th>${formatInline(cell)}</th>`).join('');
+        const bodyHtml = rows.map((row) => {
+          const rowHtml = row.map((cell) => `<td>${formatInline(cell)}</td>`).join('');
+          return `<tr>${rowHtml}</tr>`;
+        }).join('');
+
+        html += `
+          <div class="answer-table-wrap">
+            <table class="answer-table">
+              <thead><tr>${headerHtml}</tr></thead>
+              <tbody>${bodyHtml}</tbody>
+            </table>
+          </div>
+        `;
+        continue;
+      }
+
+      if (startsHeading(line)) {
+        const match = line.match(/^\s*(#{1,6})\s+(.*)$/);
+        const level = Math.min(6, Math.max(2, match[1].length + 1));
+        html += `<h${level} class="answer-heading">${formatInline(match[2])}</h${level}>`;
+        i += 1;
+        continue;
+      }
+
+      if (startsQuote(line)) {
+        const quoteLines = [];
+        while (i < lines.length && startsQuote(lines[i])) {
+          quoteLines.push(lines[i].replace(/^\s*>\s?/, ''));
+          i += 1;
+        }
+        html += `<div class="callout callout-debug answer-note"><p>${quoteLines.map((x) => formatInline(x)).join('<br>')}</p></div>`;
+        continue;
+      }
+
+      if (startsList(line)) {
+        const items = [];
+        while (i < lines.length && startsList(lines[i])) {
+          items.push(lines[i].replace(/^\s*-\s+/, ''));
+          i += 1;
+        }
+        html += `<ul class="answer-list">${items.map((item) => `<li>${formatInline(item)}</li>`).join('')}</ul>`;
+        continue;
+      }
+
+      if (startsOrderedList(line)) {
+        const items = [];
+        while (i < lines.length && startsOrderedList(lines[i])) {
+          items.push(lines[i].replace(/^\s*\d+\.\s+/, ''));
+          i += 1;
+        }
+        html += `<ol class="answer-list">${items.map((item) => `<li>${formatInline(item)}</li>`).join('')}</ol>`;
+        continue;
+      }
+
+      const paragraph = [];
+      while (
+        i < lines.length &&
+        lines[i].trim() &&
+        !startsCodeFence(lines[i]) &&
+        !startsHeading(lines[i]) &&
+        !startsQuote(lines[i]) &&
+        !startsList(lines[i]) &&
+        !startsOrderedList(lines[i]) &&
+        !startsTable(lines, i)
+      ) {
+        paragraph.push(lines[i]);
+        i += 1;
+      }
+
+      html += `<p>${paragraph.map((x) => formatInline(x)).join('<br>')}</p>`;
+    }
+
+    return html;
+  }
+
   function setSeo({ title, description, path, robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }) {
     const canonicalUrl = new URL(path, window.location.origin).href;
 
@@ -290,24 +449,41 @@
         .map((c) => c.text)
         .join(', ');
 
-      html += `<p><strong>Dogru cevap:</strong> ${esc(correctText || '-')}</p>`;
+      html += `
+        <div class="callout callout-success answer-highlight">
+          <h4>Dogru Cevap</h4>
+          <p><strong>Secenek:</strong> ${esc(correctIds.join(', ') || '-')}</p>
+          <p><strong>Aciklama:</strong> ${esc(correctText || '-')}</p>
+        </div>
+      `;
 
       if (Array.isArray(question.optionExplanations) && question.optionExplanations.length > 0) {
         const items = question.optionExplanations.map((item) => {
           const isCorrect = correctIds.includes(item.id);
-          const status = isCorrect ? 'Dogru secenek' : 'Yanlis secenek';
-          return `<li><strong>${esc(item.id)} - ${status}:</strong> ${formatMultiline(item.text || '')}</li>`;
+          const tone = isCorrect ? 'success' : 'caution';
+          const status = isCorrect ? 'DOGRU' : 'YANLIS';
+          return `
+            <article class="callout callout-${tone} answer-option">
+              <h4>Secenek ${esc(item.id)} - ${status}</h4>
+              <div class="answer-rich">${renderMarkdown(item.text || '')}</div>
+            </article>
+          `;
         }).join('');
-        html += `<div class="article-block"><h4>Sik Aciklamalari</h4><ul>${items}</ul></div>`;
+        html += `<div class="article-block"><h4>Sik Aciklamalari</h4><div class="answer-options">${items}</div></div>`;
       }
     }
 
     if (question.answerBody) {
-      html += `<p>${formatMultiline(question.answerBody)}</p>`;
+      html += `<div class="article-block answer-rich">${renderMarkdown(question.answerBody)}</div>`;
     }
 
     if (question.answerCode) {
-      html += `<pre class="code"><code>${esc(question.answerCode)}</code></pre>`;
+      html += `
+        <div class="article-block">
+          <h4>Referans Kod</h4>
+          <pre class="code"><code>${esc(question.answerCode)}</code></pre>
+        </div>
+      `;
     }
 
     if (question.publicSolutionUrl) {
