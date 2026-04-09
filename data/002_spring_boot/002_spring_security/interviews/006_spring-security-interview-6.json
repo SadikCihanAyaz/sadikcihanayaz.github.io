@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-security",
+  "id": "spring-security-interview-6",
+  "title": "Spring Security Interview - 6",
+  "description": "JWT filter, SecurityContextHolder, filter order ve hata akislari",
+  "questions": [
+    {
+      "id": "i6-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JwtAuthFilter genelde hangi filterin oncesine eklenir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "UsernamePasswordAuthenticationFilter oncesi"
+        },
+        {
+          "id": "B",
+          "text": "ExceptionTranslationFilter sonrasi her zaman"
+        },
+        {
+          "id": "C",
+          "text": "LogoutFilter sonrasi zorunlu"
+        },
+        {
+          "id": "D",
+          "text": "Hicbir yere eklenmez"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nJwtAuthFilter genelde hangi filterin oncesine eklenir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - UsernamePasswordAuthenticationFilter oncesi\n\n### Sorunun Olctugu Kavram\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **UsernamePasswordAuthenticationFilter oncesi** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** UsernamePasswordAuthenticationFilter oncesi\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Pratik etkisi: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** ExceptionTranslationFilter sonrasi her zaman\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **UsernamePasswordAuthenticationFilter oncesi**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** LogoutFilter sonrasi zorunlu\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **UsernamePasswordAuthenticationFilter oncesi**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Hicbir yere eklenmez\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **UsernamePasswordAuthenticationFilter oncesi**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        }
+      ],
+      "answerCode": "http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);"
+    },
+    {
+      "id": "i6-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Bearer token yoksa filterin en dogru davranisi hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hemen 500 donmek"
+        },
+        {
+          "id": "B",
+          "text": "chain.doFilter ile devam edip protected endpointin standart auth akisina birakmak"
+        },
+        {
+          "id": "C",
+          "text": "Kullaniciya otomatik ROLE_USER atamak"
+        },
+        {
+          "id": "D",
+          "text": "SecurityContexte anonymous yerine ADMIN yazmak"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nBearer token yoksa filterin en dogru davranisi hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - chain.doFilter ile devam edip protected endpointin standart auth akisina birakmak\n\n### Sorunun Olctugu Kavram\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **chain.doFilter ile devam edip protected endpointin standart auth akisina birakmak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Spring hasRole ROLE_ prefix semantigine dikkat ister.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Hemen 500 donmek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **chain.doFilter ile devam edip protected endpointin standart auth akisina birakmak**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** chain.doFilter ile devam edip protected endpointin standart auth akisina birakmak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Pratik etkisi: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kullaniciya otomatik ROLE_USER atamak\n\n### Neden Yanlis?\nSpring hasRole ROLE_ prefix semantigine dikkat ister.\n\n### Dogru Model Ne?\nDogrusu: **chain.doFilter ile devam edip protected endpointin standart auth akisina birakmak**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** SecurityContexte anonymous yerine ADMIN yazmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **chain.doFilter ile devam edip protected endpointin standart auth akisina birakmak**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        }
+      ],
+      "answerCode": "http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);"
+    },
+    {
+      "id": "i6-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Invalid token parse edildi\u011finde tipik dogru yaklasim hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Exceptioni swallow edip authenticated gibi devam etmek"
+        },
+        {
+          "id": "B",
+          "text": "Contexti kirletmeden requesti uygun auth hata akisina yonlendirmek (genelde 401)"
+        },
+        {
+          "id": "C",
+          "text": "Tokeni otomatik duzeltmek"
+        },
+        {
+          "id": "D",
+          "text": "DBye role yazmak"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nInvalid token parse edildi\u011finde tipik dogru yaklasim hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Contexti kirletmeden requesti uygun auth hata akisina yonlendirmek (genelde 401)\n\n### Sorunun Olctugu Kavram\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Contexti kirletmeden requesti uygun auth hata akisina yonlendirmek (genelde 401)** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Exceptioni swallow edip authenticated gibi devam etmek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Contexti kirletmeden requesti uygun auth hata akisina yonlendirmek (genelde 401)**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Contexti kirletmeden requesti uygun auth hata akisina yonlendirmek (genelde 401)\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Pratik etkisi: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tokeni otomatik duzeltmek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Contexti kirletmeden requesti uygun auth hata akisina yonlendirmek (genelde 401)**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** DBye role yazmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Contexti kirletmeden requesti uygun auth hata akisina yonlendirmek (genelde 401)**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        }
+      ],
+      "answerCode": "http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);"
+    },
+    {
+      "id": "i6-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "SecurityContextHolder ile ilgili dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Uygulama acildiginda tek kez doldurulur ve hic degismez."
+        },
+        {
+          "id": "B",
+          "text": "Thread/request baglaminda authentication tutar; uygun yerde temizlenmesi gerekir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece PasswordEncoder verisi saklar."
+        },
+        {
+          "id": "D",
+          "text": "Sadece OAuth2 clientta calisir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nSecurityContextHolder ile ilgili dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Thread/request baglaminda authentication tutar; uygun yerde temizlenmesi gerekir.\n\n### Sorunun Olctugu Kavram\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Thread/request baglaminda authentication tutar; uygun yerde temizlenmesi gerekir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Uygulama acildiginda tek kez doldurulur ve hic degismez.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Thread/request baglaminda authentication tutar; uygun yerde temizlenmesi gerekir.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Thread/request baglaminda authentication tutar; uygun yerde temizlenmesi gerekir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Pratik etkisi: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece PasswordEncoder verisi saklar.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Thread/request baglaminda authentication tutar; uygun yerde temizlenmesi gerekir.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece OAuth2 clientta calisir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Thread/request baglaminda authentication tutar; uygun yerde temizlenmesi gerekir.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        }
+      ],
+      "answerCode": "http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);"
+    },
+    {
+      "id": "i6-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Async gibi farkli thread kullanan senaryoda SecurityContext neden dikkat ister?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Thread-local baglam oldugu icin context otomatik her zaman ayni sekilde tasinmayabilir."
+        },
+        {
+          "id": "B",
+          "text": "SecurityContext global static oldugu icin hic risk yoktur."
+        },
+        {
+          "id": "C",
+          "text": "Sadece frontendde etkiler."
+        },
+        {
+          "id": "D",
+          "text": "JWT kullaniliyorsa thread kavrami yoktur."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\n@Async gibi farkli thread kullanan senaryoda SecurityContext neden dikkat ister?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Thread-local baglam oldugu icin context otomatik her zaman ayni sekilde tasinmayabilir.\n\n### Sorunun Olctugu Kavram\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Thread-local baglam oldugu icin context otomatik her zaman ayni sekilde tasinmayabilir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Thread-local baglam oldugu icin context otomatik her zaman ayni sekilde tasinmayabilir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Pratik etkisi: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** SecurityContext global static oldugu icin hic risk yoktur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Thread-local baglam oldugu icin context otomatik her zaman ayni sekilde tasinmayabilir.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece frontendde etkiler.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Thread-local baglam oldugu icin context otomatik her zaman ayni sekilde tasinmayabilir.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT kullaniliyorsa thread kavrami yoktur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Thread-local baglam oldugu icin context otomatik her zaman ayni sekilde tasinmayabilir.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        }
+      ],
+      "answerCode": "http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);"
+    },
+    {
+      "id": "i6-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JwtAuthFilter icinde Authentication sadece hangi kosulda kurulmalidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Header varsa dogrulama yapmadan her durumda"
+        },
+        {
+          "id": "B",
+          "text": "Token validse ve contextte halihazirda authentication yoksa"
+        },
+        {
+          "id": "C",
+          "text": "Sadece GET requestlerde"
+        },
+        {
+          "id": "D",
+          "text": "Sadece ADMIN endpointlerinde"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nJwtAuthFilter icinde Authentication sadece hangi kosulda kurulmalidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Token validse ve contextte halihazirda authentication yoksa\n\n### Sorunun Olctugu Kavram\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Token validse ve contextte halihazirda authentication yoksa** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Header varsa dogrulama yapmadan her durumda\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token validse ve contextte halihazirda authentication yoksa**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Token validse ve contextte halihazirda authentication yoksa\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Pratik etkisi: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece GET requestlerde\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Token validse ve contextte halihazirda authentication yoksa**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece ADMIN endpointlerinde\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Token validse ve contextte halihazirda authentication yoksa**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        }
+      ],
+      "answerCode": "http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);"
+    },
+    {
+      "id": "i6-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Filterde en kritik cleanup disiplini hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Exceptionde contexti bozuk birakmamak ve zinciri tutarli sonlandirmak"
+        },
+        {
+          "id": "B",
+          "text": "Tum exceptionleri yutup 200 donmek"
+        },
+        {
+          "id": "C",
+          "text": "Her requestte contexte dummy user yazmak"
+        },
+        {
+          "id": "D",
+          "text": "Filter icinde DB schema degistirmek"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nFilterde en kritik cleanup disiplini hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Exceptionde contexti bozuk birakmamak ve zinciri tutarli sonlandirmak\n\n### Sorunun Olctugu Kavram\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Exceptionde contexti bozuk birakmamak ve zinciri tutarli sonlandirmak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Exceptionde contexti bozuk birakmamak ve zinciri tutarli sonlandirmak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Pratik etkisi: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tum exceptionleri yutup 200 donmek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Exceptionde contexti bozuk birakmamak ve zinciri tutarli sonlandirmak**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her requestte contexte dummy user yazmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Exceptionde contexti bozuk birakmamak ve zinciri tutarli sonlandirmak**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Filter icinde DB schema degistirmek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Exceptionde contexti bozuk birakmamak ve zinciri tutarli sonlandirmak**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```"
+        }
+      ],
+      "answerCode": "http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);"
+    },
+    {
+      "id": "i6-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod parcasi icin dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Token yoksa da chain devam ettigi icin endpoint kendi auth kuralina gore karar verir."
+        },
+        {
+          "id": "B",
+          "text": "Token yoksa otomatik 200 doner."
+        },
+        {
+          "id": "C",
+          "text": "Token yoksa her zaman 403 doner."
+        },
+        {
+          "id": "D",
+          "text": "Bu kod compile olmaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": "if (header == null || !header.startsWith(\"Bearer \")) {\n    chain.doFilter(request, response);\n    return;\n}",
+      "answerBody": "### Soru Metni\nBu kod parcasi icin dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Token yoksa da chain devam ettigi icin endpoint kendi auth kuralina gore karar verir.\n\n### Sorunun Olctugu Kavram\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Token yoksa da chain devam ettigi icin endpoint kendi auth kuralina gore karar verir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Bearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur.\n2. Kod satiri: `if (header == null || !header.startsWith(\"Bearer \")) {`\n3. Kod satiri: `chain.doFilter(request, response);`\n4. Kod satiri: `return;`\n5. Kod satiri: `}`\n6. Bu adimlarin sonucu olarak dogru cikti/yorum: **Token yoksa da chain devam ettigi icin endpoint kendi auth kuralina gore karar verir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Token yoksa da chain devam ettigi icin endpoint kendi auth kuralina gore karar verir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Pratik etkisi: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n### Kod Baglami\nBearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur."
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Token yoksa otomatik 200 doner.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token yoksa da chain devam ettigi icin endpoint kendi auth kuralina gore karar verir.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n### Kod Baglami\nBearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur."
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Token yoksa her zaman 403 doner.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Token yoksa da chain devam ettigi icin endpoint kendi auth kuralina gore karar verir.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n### Kod Baglami\nBearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur."
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu kod compile olmaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token yoksa da chain devam ettigi icin endpoint kendi auth kuralina gore karar verir.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n### Kod Baglami\nBearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur."
+        }
+      ],
+      "answerCode": "http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);"
+    },
+    {
+      "id": "i6-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu satir neyi garanti etmeye yardim eder?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Contextte zaten auth varsa gereksiz overwrite edilmesini onler."
+        },
+        {
+          "id": "B",
+          "text": "Tum tokenlari bypass eder."
+        },
+        {
+          "id": "C",
+          "text": "Sadece CORSu etkinlestirir."
+        },
+        {
+          "id": "D",
+          "text": "JWT imzasini kaldirir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": "if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {\n    // create auth and set context\n}",
+      "answerBody": "### Soru Metni\nBu satir neyi garanti etmeye yardim eder?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Contextte zaten auth varsa gereksiz overwrite edilmesini onler.\n\n### Sorunun Olctugu Kavram\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Contextte zaten auth varsa gereksiz overwrite edilmesini onler.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Contextte zaten auth varsa gereksiz overwrite edilmesini onler.\n2. Kod satiri: `if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {`\n3. Kod satiri: `// create auth and set context`\n4. Kod satiri: `}`\n5. Bu adimlarin sonucu olarak dogru cikti/yorum: **Contextte zaten auth varsa gereksiz overwrite edilmesini onler.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Contextte zaten auth varsa gereksiz overwrite edilmesini onler.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Pratik etkisi: Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Contextte zaten auth varsa gereksiz overwrite edilmesini onler."
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tum tokenlari bypass eder.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Contextte zaten auth varsa gereksiz overwrite edilmesini onler.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Contextte zaten auth varsa gereksiz overwrite edilmesini onler."
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece CORSu etkinlestirir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Contextte zaten auth varsa gereksiz overwrite edilmesini onler.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Contextte zaten auth varsa gereksiz overwrite edilmesini onler."
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT imzasini kaldirir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Contextte zaten auth varsa gereksiz overwrite edilmesini onler.**\n- Konu aciklamasi: JwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n- Bu secenek secilirse risk: Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Contextte zaten auth varsa gereksiz overwrite edilmesini onler."
+        }
+      ],
+      "answerCode": "http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);"
+    },
+    {
+      "id": "i6-q10",
+      "type": "code",
+      "question": "OncePerRequestFilter tabanli JwtAuthFilter yaz: Bearer token parse et, validate et, gecerliyse SecurityContexte Authentication koy, degilse zinciri kontrollu devam ettir.",
+      "starterCode": "class JwtAuthFilter extends OncePerRequestFilter {\n    // TODO\n}",
+      "answerCode": "@Component\nclass JwtAuthFilter extends OncePerRequestFilter {\n    private final JwtService jwtService;\n    private final UserDetailsService userDetailsService;\n\n    JwtAuthFilter(JwtService jwtService, UserDetailsService userDetailsService) {\n        this.jwtService = jwtService;\n        this.userDetailsService = userDetailsService;\n    }\n\n    @Override\n    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)\n        throws ServletException, IOException {\n\n        String header = request.getHeader(\"Authorization\");\n        if (header == null || !header.startsWith(\"Bearer \")) {\n            chain.doFilter(request, response);\n            return;\n        }\n\n        String token = header.substring(7);\n        try {\n            String username = jwtService.extractUsername(token);\n            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {\n                UserDetails userDetails = userDetailsService.loadUserByUsername(username);\n                if (jwtService.isTokenValid(token, userDetails)) {\n                    UsernamePasswordAuthenticationToken auth =\n                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());\n                    auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));\n                    SecurityContextHolder.getContext().setAuthentication(auth);\n                }\n            }\n            chain.doFilter(request, response);\n        } catch (JwtException ex) {\n            SecurityContextHolder.clearContext();\n            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);\n            response.setContentType(\"application/json\");\n            response.getWriter().write(\"{\"error\":\"invalid_token\"}\");\n        }\n    }\n}",
+      "answerBody": "### Soru Metni\nOncePerRequestFilter tabanli JwtAuthFilter yaz: Bearer token parse et, validate et, gecerliyse SecurityContexte Authentication koy, degilse zinciri kontrollu devam ettir.\n\n### Bu Soru Neyi Olcuyor?\nJwtAuthFilter token parse/validate edip SecurityContext olusturarak requestin authorization asamasina dogru kimlikle ulasmasini saglar.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari eksiksiz karsila (input, output, hata akis).\n2. Security semantigini dogru kur (authentication, authorization, token/role kontrolu).\n3. Kenar durumlarini ele al (null, invalid token, expired token, authority yok).\n4. Guvenlik loglarini ve failure case davranisini acikca tasarla.\n\n### Neden Bu Sekilde Tasarlanir?\n- Filter order, no-token davranisi ve exception yonetimi net olmazsa rastgele 401/403 hatalari olusur.\n- Token yokken requesti gereksiz fail etmek veya invalid tokenda context temizligini bozmak sik gorulen hatadir.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip 401/403 ayrimini atlamak\n- SecurityContext veya authority maplemeyi yarim birakmak\n- Token hata durumlarinda zinciri/scopeu yanlis yonetmek\n\n### Mini Referans Ornek\n```java\nhttp.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu semantik olarak bununla karsilastir."
+    }
+  ]
+}

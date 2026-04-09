@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-security",
+  "id": "spring-security-topic",
+  "title": "Spring Security, JWT, OAuth2, RBAC - Derin Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu dokuman sifirdan baslayip production seviyesine cikmak isteyen kisi icin yazildi. Amac sadece API ezberi degil: her request guvenlik zincirinde nasil ilerliyor, neden 401 veya 403 donuyor, JWT/OAuth2/RBAC nasil dogru tasarlaniyor sorularini net cevaplayabilmek."
+    },
+    {
+      "type": "list",
+      "title": "Bu konuyu bitirince net bilmen gerekenler",
+      "items": [
+        "Authentication vs Authorization ayrimi ve 401/403 farki",
+        "SecurityFilterChain request akisinin adimlari",
+        "Stateful vs Stateless farki ve SessionCreationPolicy etkisi",
+        "UserDetailsService, PasswordEncoder, AuthenticationManager akisinin tam resmi",
+        "JWT yapisi, imza, claim, access/refresh token lifecycle",
+        "JwtAuthFilter yazarken kritik hatalar ve dogru SecurityContext kullanimi",
+        "OAuth2 Authorization Code + PKCE akisi ve role paylasimi",
+        "RBAC, authority, @PreAuthorize, method security pratikleri",
+        "Production hardening: CORS, CSRF, rate-limit, key rotation, test ve debug"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Authentication",
+      "text": "Kullanici kimligini dogrulama adimidir. Sisteme gelen kimlik bilgisinin (username/password, token, certificate vb.) gecerli olup olmadigi kontrol edilir. Sonuc basarisizsa genelde 401 donulur."
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Authorization",
+      "text": "Kimligi dogrulanan kullanicinin hangi kaynaga erisebilecegini belirler. Kimlik var ama yetki yoksa tipik sonuc 403 olur."
+    },
+    {
+      "type": "callout",
+      "tone": "debug",
+      "title": "401 vs 403 hizli ayrim",
+      "items": [
+        "401 Unauthorized: kullanici henuz dogrulanmamis veya token gecersiz",
+        "403 Forbidden: kullanici dogrulandi ama istenen islem icin authority/role yetersiz"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "SecurityFilterChain neden merkezi?",
+      "text": "Controllerdan once tum requestler guvenlik filtrelerinden gecer. Bu sayede kimlik dogrulama/yetkilendirme kurallari merkezi, tekrar kullanilabilir ve denetlenebilir hale gelir."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@Bean\nSecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\n    return http\n        .csrf(csrf -> csrf.disable())\n        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))\n        .authorizeHttpRequests(auth -> auth\n            .requestMatchers(\"/auth/**\", \"/public/**\").permitAll()\n            .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n            .anyRequest().authenticated()\n        )\n        .build();\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Stateful vs Stateless",
+      "text": "Stateful modelde server session tutar; Stateless modelde her request token ile kimligini tasir. JWT yaklasimi statelessdir ama logout/revocation stratejisi dogru kurulmazsa kontrol zorlasir."
+    },
+    {
+      "type": "callout",
+      "tone": "caution",
+      "title": "Stateless projede sik hata",
+      "items": [
+        "SessionCreationPolicy.STATELESS ayarlanmadan JWT filter eklemek",
+        "Bearer token yokken requesti hatali sekilde durdurmak",
+        "Invalid token durumunda zinciri yanlis yonetmek",
+        "SecurityContext temizligini ihmal etmek"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "UserDetailsService ne yapar?",
+      "text": "Kimlik dogrulama sirasinda kullaniciyi repositoryden yukler ve Spring Security UserDetails modeline cevirir. Sifre dogrulama isini ise PasswordEncoder + AuthenticationProvider yapar."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@Service\nclass AppUserDetailsService implements UserDetailsService {\n    private final UserRepository userRepository;\n\n    AppUserDetailsService(UserRepository userRepository) {\n        this.userRepository = userRepository;\n    }\n\n    @Override\n    public UserDetails loadUserByUsername(String username) {\n        AppUser user = userRepository.findByEmail(username)\n            .orElseThrow(() -> new UsernameNotFoundException(\"user not found\"));\n\n        return User.withUsername(user.getEmail())\n            .password(user.getPasswordHash())\n            .authorities(user.getAuthorities())\n            .build();\n    }\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "PasswordEncoder (BCrypt) neden kritik?",
+      "text": "Plain text sifre asla saklanmaz. BCrypt gibi adaptif hash algoritmalari brute-force maliyetini arttirir. login aninda matches ile dogrulama yapilir."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@Bean\nPasswordEncoder passwordEncoder() {\n    return new BCryptPasswordEncoder();\n}\n\nString hash = passwordEncoder.encode(\"secret\");\nboolean ok = passwordEncoder.matches(\"secret\", hash);"
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "JWT nedir?",
+      "text": "JSON Web Token, imzali claim tasiyan bir token formatidir. Stateless authentication akislari icin sik kullanilir. Token 3 parcadan olusur: header.payload.signature."
+    },
+    {
+      "type": "callout",
+      "tone": "debug",
+      "title": "JWT guvenlik notlari",
+      "items": [
+        "Payload sifreli degil, sadece base64url encoded",
+        "Imza tokenin degistirilmedigini garanti eder",
+        "exp, iat, nbf, iss, aud gibi claimler dogru kontrol edilmelidir",
+        "Secret/private key guvenli yonetilmelidir"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Access token vs Refresh token",
+      "text": "Access token kisa omurlu olup API erisimi icindir. Refresh token daha uzun omurlu olup yeni access token uretir. Refresh token daha kritik bir credential oldugu icin saklama/rotation stratejisi dikkatli tasarlanir."
+    },
+    {
+      "type": "callout",
+      "tone": "success",
+      "title": "Refresh token rotation temel fikir",
+      "items": [
+        "Her refresh cagrisiyla yeni refresh token uret",
+        "Eski refresh tokeni invalid yap",
+        "Reuse yakalanirsa tum zinciri revoke et",
+        "Audit log ve anomaly alert ekle"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "JwtAuthFilter dogru davranis",
+      "text": "Filter, bearer tokeni parse eder, validate eder, user details ile dogrular ve SecurityContextHolder icine Authentication koyar. Token yoksa zinciri bozmaz; sadece devam eder."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@Override\nprotected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)\n    throws ServletException, IOException {\n\n    String header = request.getHeader(\"Authorization\");\n    if (header == null || !header.startsWith(\"Bearer \")) {\n        chain.doFilter(request, response);\n        return;\n    }\n\n    String token = header.substring(7);\n    String username = jwtService.extractUsername(token);\n\n    if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {\n        UserDetails userDetails = userDetailsService.loadUserByUsername(username);\n        if (jwtService.isTokenValid(token, userDetails)) {\n            UsernamePasswordAuthenticationToken auth =\n                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());\n            auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));\n            SecurityContextHolder.getContext().setAuthentication(auth);\n        }\n    }\n\n    chain.doFilter(request, response);\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "OAuth2 ve OIDC kisa ayrim",
+      "text": "OAuth2 yetki verme protokoludur. OIDC, OAuth2 uzerine kimlik katmani ekler. Authorization Code + PKCE modern web/mobile istemcilerde standart yaklasimdir."
+    },
+    {
+      "type": "list",
+      "title": "Authorization Code + PKCE adimlari",
+      "items": [
+        "Client, useri authorization servera yonlendirir",
+        "User login/consent verir",
+        "Authorization code clienta doner",
+        "Client code_verifier ile token endpointten access token alir",
+        "Client access token ile resource servera gider"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "RBAC ve Method Security",
+      "text": "RBAC role tabanli erisimdir. Springde URL bazli kurala ek olarak method seviyesinde @PreAuthorize ile domain odakli kurallar yazilabilir."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@EnableMethodSecurity\n@Configuration\nclass MethodSecurityConfig {}\n\n@Service\nclass AccountService {\n    @PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n    public void readPrivateData(String ownerId) {\n        // secure logic\n    }\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "caution",
+      "title": "Production hardening checklist",
+      "items": [
+        "HTTPS zorunlu",
+        "Rate limiting ve login brute-force korumasi",
+        "JWT key rotation ve kid kullanimi",
+        "CORS politikasini en dar kapsamla tanimla",
+        "Security eventlerini audit logla",
+        "401/403 ratio, failed login, refresh reuse gibi metrikleri izle"
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Troubleshooting hizli karar agaci",
+      "items": [
+        "401 aliyorsan: token var mi, format dogru mu, exp doldu mu, signature gecerli mi?",
+        "403 aliyorsan: authentication var ama authority/role mapping dogru mu?",
+        "Preflight CORS hata veriyorsa: OPTIONS izni ve allowed headers kontrol et",
+        "Method security beklenmedikse: @EnableMethodSecurity aktif mi, hasRole/hasAuthority mapping dogru mu?"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Ozet: Spring Securityde guc, parcalari tek tek bilmekten cok bunlari request akisi icinde birlestirmektir. Filter chain, kimlik dogrulama, yetkilendirme, token lifecycle ve operasyonel guvenlik birlikte tasarlanirsa hem mulakatta hem gercek sistemde saglam bir mimari kurarsin."
+    }
+  ]
+}

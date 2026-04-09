@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-security",
+  "id": "spring-security-interview-8",
+  "title": "Spring Security Interview - 8",
+  "description": "RBAC, role vs authority, @PreAuthorize ve method security desenleri",
+  "questions": [
+    {
+      "id": "i8-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Role ile authority farki icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Role ve authority birebir ayni kavramdir, fark yoktur."
+        },
+        {
+          "id": "B",
+          "text": "Role daha ust seviye etiket, authority daha granular izin ifadesi olarak kullanilabilir."
+        },
+        {
+          "id": "C",
+          "text": "Authority sadece frontendde kullanilir."
+        },
+        {
+          "id": "D",
+          "text": "Role sadece JWT headerda olur."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nRole ile authority farki icin dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Role daha ust seviye etiket, authority daha granular izin ifadesi olarak kullanilabilir.\n\n### Sorunun Olctugu Kavram\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Role daha ust seviye etiket, authority daha granular izin ifadesi olarak kullanilabilir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Mini Pekistirme Ornegi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Role ve authority birebir ayni kavramdir, fark yoktur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Role daha ust seviye etiket, authority daha granular izin ifadesi olarak kullanilabilir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Role daha ust seviye etiket, authority daha granular izin ifadesi olarak kullanilabilir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Pratik etkisi: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Authority sadece frontendde kullanilir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Role daha ust seviye etiket, authority daha granular izin ifadesi olarak kullanilabilir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Role sadece JWT headerda olur.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Role daha ust seviye etiket, authority daha granular izin ifadesi olarak kullanilabilir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        }
+      ],
+      "answerCode": "@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")"
+    },
+    {
+      "id": "i8-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "hasRole(\"ADMIN\") kontrolu yaparken framework tipik olarak ne bekler?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "ROLE_ADMIN authority semantigi"
+        },
+        {
+          "id": "B",
+          "text": "ADMIN_ONLY isimli DB tablo kaydi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece integer role id"
+        },
+        {
+          "id": "D",
+          "text": "CORS allowed origin listesi"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nhasRole(\"ADMIN\") kontrolu yaparken framework tipik olarak ne bekler?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - ROLE_ADMIN authority semantigi\n\n### Sorunun Olctugu Kavram\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **ROLE_ADMIN authority semantigi** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Mini Pekistirme Ornegi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** ROLE_ADMIN authority semantigi\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Pratik etkisi: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** ADMIN_ONLY isimli DB tablo kaydi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **ROLE_ADMIN authority semantigi**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece integer role id\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **ROLE_ADMIN authority semantigi**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** CORS allowed origin listesi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **ROLE_ADMIN authority semantigi**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        }
+      ],
+      "answerCode": "@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")"
+    },
+    {
+      "id": "i8-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Method securityyi acmak icin Spring Boot 3 tarafinda tipik annotation hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@EnableMethodSecurity"
+        },
+        {
+          "id": "B",
+          "text": "@EnableTransactionManagement"
+        },
+        {
+          "id": "C",
+          "text": "@EnableScheduling"
+        },
+        {
+          "id": "D",
+          "text": "@EnableJpaRepositories"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nMethod securityyi acmak icin Spring Boot 3 tarafinda tipik annotation hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - @EnableMethodSecurity\n\n### Sorunun Olctugu Kavram\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **@EnableMethodSecurity** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Mini Pekistirme Ornegi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** @EnableMethodSecurity\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Pratik etkisi: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** @EnableTransactionManagement\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **@EnableMethodSecurity**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** @EnableScheduling\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **@EnableMethodSecurity**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** @EnableJpaRepositories\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **@EnableMethodSecurity**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        }
+      ],
+      "answerCode": "@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")"
+    },
+    {
+      "id": "i8-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@PreAuthorize ne zaman calisir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Method body bittikten sonra"
+        },
+        {
+          "id": "B",
+          "text": "Methoda girmeden once authorization kosulunu degerlendirir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece testte"
+        },
+        {
+          "id": "D",
+          "text": "Sadece static methodlarda"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\n@PreAuthorize ne zaman calisir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Methoda girmeden once authorization kosulunu degerlendirir.\n\n### Sorunun Olctugu Kavram\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Methoda girmeden once authorization kosulunu degerlendirir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Mini Pekistirme Ornegi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Method body bittikten sonra\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Methoda girmeden once authorization kosulunu degerlendirir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Methoda girmeden once authorization kosulunu degerlendirir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Pratik etkisi: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece testte\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Methoda girmeden once authorization kosulunu degerlendirir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece static methodlarda\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Methoda girmeden once authorization kosulunu degerlendirir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        }
+      ],
+      "answerCode": "@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")"
+    },
+    {
+      "id": "i8-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidaki kosul neyi saglar? `@PreAuthorize(\"#id == authentication.name\")`",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece owner kendi kaydina erisir (principal name id semantigine uygunsa)."
+        },
+        {
+          "id": "B",
+          "text": "Tum kullanicilar tum kayitlara erisir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece ADMIN erisir."
+        },
+        {
+          "id": "D",
+          "text": "Kosul her zaman false olur."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nAsagidaki kosul neyi saglar? `@PreAuthorize(\"#id == authentication.name\")`\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Sadece owner kendi kaydina erisir (principal name id semantigine uygunsa).\n\n### Sorunun Olctugu Kavram\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Sadece owner kendi kaydina erisir (principal name id semantigine uygunsa).** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n> Not: Siklikla yapilan hata -> hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Mini Pekistirme Ornegi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Sadece owner kendi kaydina erisir (principal name id semantigine uygunsa).\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Pratik etkisi: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tum kullanicilar tum kayitlara erisir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Sadece owner kendi kaydina erisir (principal name id semantigine uygunsa).**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece ADMIN erisir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Sadece owner kendi kaydina erisir (principal name id semantigine uygunsa).**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kosul her zaman false olur.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Sadece owner kendi kaydina erisir (principal name id semantigine uygunsa).**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        }
+      ],
+      "answerCode": "@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")"
+    },
+    {
+      "id": "i8-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@PostAuthorize icin en dogru kullanim yorumu hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Method sonucuna gore ek kontrol gereken durumlarda kullanilabilir."
+        },
+        {
+          "id": "B",
+          "text": "Her zaman @PreAuthorize yerine kullanilmalidir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece CSRF ayaridir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece repository layerda calisir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\n@PostAuthorize icin en dogru kullanim yorumu hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Method sonucuna gore ek kontrol gereken durumlarda kullanilabilir.\n\n### Sorunun Olctugu Kavram\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Method sonucuna gore ek kontrol gereken durumlarda kullanilabilir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Mini Pekistirme Ornegi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Method sonucuna gore ek kontrol gereken durumlarda kullanilabilir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Pratik etkisi: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her zaman @PreAuthorize yerine kullanilmalidir.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Method sonucuna gore ek kontrol gereken durumlarda kullanilabilir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece CSRF ayaridir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Method sonucuna gore ek kontrol gereken durumlarda kullanilabilir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece repository layerda calisir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Method sonucuna gore ek kontrol gereken durumlarda kullanilabilir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        }
+      ],
+      "answerCode": "@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")"
+    },
+    {
+      "id": "i8-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "RBAC ile ABAC farki icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "RBAC role tabanli, ABAC context/attribute tabanli daha dinamik kurallar kurabilir."
+        },
+        {
+          "id": "B",
+          "text": "ABAC sadece password hashing algoritmasidir."
+        },
+        {
+          "id": "C",
+          "text": "RBAC role kullanmaz."
+        },
+        {
+          "id": "D",
+          "text": "Ikisi tamamen aynidir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nRBAC ile ABAC farki icin dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - RBAC role tabanli, ABAC context/attribute tabanli daha dinamik kurallar kurabilir.\n\n### Sorunun Olctugu Kavram\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **RBAC role tabanli, ABAC context/attribute tabanli daha dinamik kurallar kurabilir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Mini Pekistirme Ornegi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** RBAC role tabanli, ABAC context/attribute tabanli daha dinamik kurallar kurabilir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Pratik etkisi: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** ABAC sadece password hashing algoritmasidir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **RBAC role tabanli, ABAC context/attribute tabanli daha dinamik kurallar kurabilir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** RBAC role kullanmaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **RBAC role tabanli, ABAC context/attribute tabanli daha dinamik kurallar kurabilir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Ikisi tamamen aynidir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **RBAC role tabanli, ABAC context/attribute tabanli daha dinamik kurallar kurabilir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```"
+        }
+      ],
+      "answerCode": "@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")"
+    },
+    {
+      "id": "i8-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu annotation icin user role USER ve principal.name = 42 iken `id=42` requesti sonucu ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Always deny"
+        },
+        {
+          "id": "B",
+          "text": "Allow, cunku ikinci kosul saglanir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece ADMIN oldugunda allow"
+        },
+        {
+          "id": "D",
+          "text": "Compile error"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": "@PreAuthorize(\"hasRole('ADMIN') or #id == authentication.name\")\npublic AccountDto findById(String id) { ... }",
+      "answerBody": "### Soru Metni\nBu annotation icin user role USER ve principal.name = 42 iken `id=42` requesti sonucu ne olur?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Allow, cunku ikinci kosul saglanir.\n\n### Sorunun Olctugu Kavram\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Allow, cunku ikinci kosul saglanir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Method securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir.\n2. Kod satiri: `@PreAuthorize(\"hasRole('ADMIN') or #id == authentication.name\")`\n3. Kod satiri: `public AccountDto findById(String id) { ... }`\n4. Bu adimlarin sonucu olarak dogru cikti/yorum: **Allow, cunku ikinci kosul saglanir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Mini Pekistirme Ornegi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Always deny\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Allow, cunku ikinci kosul saglanir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```\n\n### Kod Baglami\nMethod securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir."
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Allow, cunku ikinci kosul saglanir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Pratik etkisi: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```\n\n### Kod Baglami\nMethod securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir."
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece ADMIN oldugunda allow\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Allow, cunku ikinci kosul saglanir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```\n\n### Kod Baglami\nMethod securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir."
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Compile error\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Allow, cunku ikinci kosul saglanir.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```\n\n### Kod Baglami\nMethod securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir."
+        }
+      ],
+      "answerCode": "@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")"
+    },
+    {
+      "id": "i8-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "URL-level ve method-level guvenlik bir arada kullanildiginda en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Method-level kontroller URL-levelin tamamlayicisidir; ikisi birlikte defense-in-depth saglar."
+        },
+        {
+          "id": "B",
+          "text": "Method-level oldugunda URL-level tamamen ignore edilir."
+        },
+        {
+          "id": "C",
+          "text": "URL-level oldugunda method-level yazmak yasaktir."
+        },
+        {
+          "id": "D",
+          "text": "Ikisi sadece frontend kodunu etkiler."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": "http.authorizeHttpRequests(a -> a.requestMatchers(\"/api/**\").authenticated());\n// service methodu\n@PreAuthorize(\"hasAuthority('invoice:read')\")\npublic Invoice read(...) { ... }",
+      "answerBody": "### Soru Metni\nURL-level ve method-level guvenlik bir arada kullanildiginda en dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Method-level kontroller URL-levelin tamamlayicisidir; ikisi birlikte defense-in-depth saglar.\n\n### Sorunun Olctugu Kavram\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Method-level kontroller URL-levelin tamamlayicisidir; ikisi birlikte defense-in-depth saglar.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Method securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir.\n2. Kod satiri: `http.authorizeHttpRequests(a -> a.requestMatchers(\"/api/**\").authenticated());`\n3. Kod satiri: `// service methodu`\n4. Kod satiri: `@PreAuthorize(\"hasAuthority('invoice:read')\")`\n5. Kod satiri: `public Invoice read(...) { ... }`\n6. Bu adimlarin sonucu olarak dogru cikti/yorum: **Method-level kontroller URL-levelin tamamlayicisidir; ikisi birlikte defense-in-depth saglar.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Mini Pekistirme Ornegi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Method-level kontroller URL-levelin tamamlayicisidir; ikisi birlikte defense-in-depth saglar.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Pratik etkisi: URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```\n\n### Kod Baglami\nMethod securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir."
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Method-level oldugunda URL-level tamamen ignore edilir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Method-level kontroller URL-levelin tamamlayicisidir; ikisi birlikte defense-in-depth saglar.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```\n\n### Kod Baglami\nMethod securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir."
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** URL-level oldugunda method-level yazmak yasaktir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Method-level kontroller URL-levelin tamamlayicisidir; ikisi birlikte defense-in-depth saglar.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```\n\n### Kod Baglami\nMethod securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir."
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Ikisi sadece frontend kodunu etkiler.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Method-level kontroller URL-levelin tamamlayicisidir; ikisi birlikte defense-in-depth saglar.**\n- Konu aciklamasi: RBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n- Bu secenek secilirse risk: hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```\n\n### Kod Baglami\nMethod securityde SpEL kosulu ve authority mapping sonucun ana belirleyicisidir."
+        }
+      ],
+      "answerCode": "@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")"
+    },
+    {
+      "id": "i8-q10",
+      "type": "code",
+      "question": "Method security kullanan bir service yaz: ADMIN her kaydi gorebilsin, USER sadece kendi kaydini gorebilsin. @PreAuthorize ile cozumle.",
+      "starterCode": "class AccountService {\n    // TODO\n}",
+      "answerCode": "@Service\nclass AccountService {\n\n    @PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n    public AccountDto readPrivateAccount(String ownerId) {\n        // repositoryden ownerIdye gore kayit cek\n        return new AccountDto(ownerId);\n    }\n\n    @PreAuthorize(\"hasRole('ADMIN')\")\n    public List<AccountDto> readAllAccounts() {\n        return List.of();\n    }\n}",
+      "answerBody": "### Soru Metni\nMethod security kullanan bir service yaz: ADMIN her kaydi gorebilsin, USER sadece kendi kaydini gorebilsin. @PreAuthorize ile cozumle.\n\n### Bu Soru Neyi Olcuyor?\nRBAC role/authority uzerinden erisim kontrolu kurar; @PreAuthorize ile method seviyesinde domain odakli guvenlik yazilir.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari eksiksiz karsila (input, output, hata akis).\n2. Security semantigini dogru kur (authentication, authorization, token/role kontrolu).\n3. Kenar durumlarini ele al (null, invalid token, expired token, authority yok).\n4. Guvenlik loglarini ve failure case davranisini acikca tasarla.\n\n### Neden Bu Sekilde Tasarlanir?\n- URL-level kurallari method-level kurallarla tamamlamak, ozellikle domain ownership kontrollerinde guvenlik acigini azaltir.\n- hasRole/hasAuthority farkini karistirmak ve ROLE_ prefix semantigini atlamak hatali 403/allow sonuclari uretir.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip 401/403 ayrimini atlamak\n- SecurityContext veya authority maplemeyi yarim birakmak\n- Token hata durumlarinda zinciri/scopeu yanlis yonetmek\n\n### Mini Referans Ornek\n```java\n@PreAuthorize(\"hasRole('ADMIN') or #ownerId == authentication.name\")\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu semantik olarak bununla karsilastir."
+    }
+  ]
+}

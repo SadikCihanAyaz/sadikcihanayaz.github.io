@@ -11,6 +11,16 @@
       "topicFile": "/data/002_spring_boot/001_hibernate_jpa_jparepository/topic/001_topic.json",
       "interviewsFile": "/data/002_spring_boot/001_hibernate_jpa_jparepository/interviews/index.json",
       "interviewCount": 10
+    },
+    {
+      "id": "spring-security",
+      "title": "Spring Security",
+      "description": "Authentication, authorization, JWT, OAuth2, RBAC, method security ve guvenlik best-practice sorulari",
+      "order": 2,
+      "folder": "002_spring_security",
+      "topicFile": "/data/002_spring_boot/002_spring_security/topic/001_topic.json",
+      "interviewsFile": "/data/002_spring_boot/002_spring_security/interviews/index.json",
+      "interviewCount": 10
     }
   ]
 }

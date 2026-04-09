@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-security",
+  "interviews": [
+    {
+      "id": "spring-security-interview-1",
+      "title": "Spring Security Interview - 1",
+      "description": "Authentication vs Authorization, 401/403, SecurityFilterChain temel davranislari",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/001_spring-security-interview-1.json"
+    },
+    {
+      "id": "spring-security-interview-2",
+      "title": "Spring Security Interview - 2",
+      "description": "Stateful/stateless, session policy, CSRF/CORS ve request-state etkileri",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/002_spring-security-interview-2.json"
+    },
+    {
+      "id": "spring-security-interview-3",
+      "title": "Spring Security Interview - 3",
+      "description": "UserDetailsService, AuthenticationManager, DaoAuthenticationProvider, PasswordEncoder",
+      "order": 3,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/003_spring-security-interview-3.json"
+    },
+    {
+      "id": "spring-security-interview-4",
+      "title": "Spring Security Interview - 4",
+      "description": "JWT yapisi, claimler, imza algoritmalari ve token validation kurallari",
+      "order": 4,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/004_spring-security-interview-4.json"
+    },
+    {
+      "id": "spring-security-interview-5",
+      "title": "Spring Security Interview - 5",
+      "description": "Access/refresh token tasarimi, rotation, revocation, logout stratejileri",
+      "order": 5,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/005_spring-security-interview-5.json"
+    },
+    {
+      "id": "spring-security-interview-6",
+      "title": "Spring Security Interview - 6",
+      "description": "JWT filter, SecurityContextHolder, filter order ve hata akislari",
+      "order": 6,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/006_spring-security-interview-6.json"
+    },
+    {
+      "id": "spring-security-interview-7",
+      "title": "Spring Security Interview - 7",
+      "description": "OAuth2, Authorization Code + PKCE, Resource vs Authorization Server",
+      "order": 7,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/007_spring-security-interview-7.json"
+    },
+    {
+      "id": "spring-security-interview-8",
+      "title": "Spring Security Interview - 8",
+      "description": "RBAC, role vs authority, @PreAuthorize ve method security desenleri",
+      "order": 8,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/008_spring-security-interview-8.json"
+    },
+    {
+      "id": "spring-security-interview-9",
+      "title": "Spring Security Interview - 9",
+      "description": "Security hardening, token storage, key rotation, brute-force ve operasyonel guvenlik",
+      "order": 9,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/009_spring-security-interview-9.json"
+    },
+    {
+      "id": "spring-security-interview-10",
+      "title": "Spring Security Interview - 10",
+      "description": "Test, troubleshooting, MockMvc, @WithMockUser ve production debug yaklasimlari",
+      "order": 10,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/002_spring_security/interviews/010_spring-security-interview-10.json"
+    }
+  ]
+}

@@ -13,10 +13,10 @@
     {
       "id": "spring-boot",
       "title": "Spring Boot",
-      "description": "Spring Boot veri katmani: Hibernate, JPA, JpaRepository, transaction ve performans",
+      "description": "Spring Boot guvenlik ve veri katmani: Spring Security, JWT, OAuth2, RBAC, Hibernate, JPA",
       "order": 2,
       "folder": "002_spring_boot",
-      "subcategoryCount": 1,
+      "subcategoryCount": 2,
       "subcategoriesFile": "/data/002_spring_boot/subcategories.json"
     }
   ]

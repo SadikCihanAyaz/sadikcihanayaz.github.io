@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-security",
+  "id": "spring-security-interview-10",
+  "title": "Spring Security Interview - 10",
+  "description": "Test, troubleshooting, MockMvc, @WithMockUser ve production debug yaklasimlari",
+  "questions": [
+    {
+      "id": "i10-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@WithMockUser ne icin kullanilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Testte gercek DB kullanicisi olusturmak zorunlulugunu azaltip guvenlik contexti taklit etmek icin"
+        },
+        {
+          "id": "B",
+          "text": "JWT imzalamak icin"
+        },
+        {
+          "id": "C",
+          "text": "CORS policy yazmak icin"
+        },
+        {
+          "id": "D",
+          "text": "Sifre hashlemek icin"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\n@WithMockUser ne icin kullanilir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Testte gercek DB kullanicisi olusturmak zorunlulugunu azaltip guvenlik contexti taklit etmek icin\n\n### Sorunun Olctugu Kavram\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Testte gercek DB kullanicisi olusturmak zorunlulugunu azaltip guvenlik contexti taklit etmek icin** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Mini Pekistirme Ornegi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Testte gercek DB kullanicisi olusturmak zorunlulugunu azaltip guvenlik contexti taklit etmek icin\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Pratik etkisi: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT imzalamak icin\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Testte gercek DB kullanicisi olusturmak zorunlulugunu azaltip guvenlik contexti taklit etmek icin**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** CORS policy yazmak icin\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Testte gercek DB kullanicisi olusturmak zorunlulugunu azaltip guvenlik contexti taklit etmek icin**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sifre hashlemek icin\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Testte gercek DB kullanicisi olusturmak zorunlulugunu azaltip guvenlik contexti taklit etmek icin**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        }
+      ],
+      "answerCode": "mockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());"
+    },
+    {
+      "id": "i10-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "MockMvc guvenlik testlerinde en kritik fayda nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "HTTP seviyesinde endpoint davranisini (status, auth, role) hizli dogrulamak"
+        },
+        {
+          "id": "B",
+          "text": "Sadece frontend CSS test etmek"
+        },
+        {
+          "id": "C",
+          "text": "JWTyi sifrelemek"
+        },
+        {
+          "id": "D",
+          "text": "Sadece performans benchmarki yapmak"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nMockMvc guvenlik testlerinde en kritik fayda nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - HTTP seviyesinde endpoint davranisini (status, auth, role) hizli dogrulamak\n\n### Sorunun Olctugu Kavram\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **HTTP seviyesinde endpoint davranisini (status, auth, role) hizli dogrulamak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Mini Pekistirme Ornegi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** HTTP seviyesinde endpoint davranisini (status, auth, role) hizli dogrulamak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Pratik etkisi: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece frontend CSS test etmek\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **HTTP seviyesinde endpoint davranisini (status, auth, role) hizli dogrulamak**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWTyi sifrelemek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **HTTP seviyesinde endpoint davranisini (status, auth, role) hizli dogrulamak**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece performans benchmarki yapmak\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **HTTP seviyesinde endpoint davranisini (status, auth, role) hizli dogrulamak**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        }
+      ],
+      "answerCode": "mockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());"
+    },
+    {
+      "id": "i10-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@WebMvcTest ve @SpringBootTest secimi icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@WebMvcTest daha dar slice test, @SpringBootTest tum context/integration senaryolari icin uygundur."
+        },
+        {
+          "id": "B",
+          "text": "Ikisi tamamen ayni seydir."
+        },
+        {
+          "id": "C",
+          "text": "@WebMvcTest asla guvenlik test etmez."
+        },
+        {
+          "id": "D",
+          "text": "@SpringBootTest sadece unit test icindir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\n@WebMvcTest ve @SpringBootTest secimi icin en dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - @WebMvcTest daha dar slice test, @SpringBootTest tum context/integration senaryolari icin uygundur.\n\n### Sorunun Olctugu Kavram\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **@WebMvcTest daha dar slice test, @SpringBootTest tum context/integration senaryolari icin uygundur.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Mini Pekistirme Ornegi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** @WebMvcTest daha dar slice test, @SpringBootTest tum context/integration senaryolari icin uygundur.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Pratik etkisi: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Ikisi tamamen ayni seydir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **@WebMvcTest daha dar slice test, @SpringBootTest tum context/integration senaryolari icin uygundur.**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** @WebMvcTest asla guvenlik test etmez.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **@WebMvcTest daha dar slice test, @SpringBootTest tum context/integration senaryolari icin uygundur.**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** @SpringBootTest sadece unit test icindir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **@WebMvcTest daha dar slice test, @SpringBootTest tum context/integration senaryolari icin uygundur.**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        }
+      ],
+      "answerCode": "mockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());"
+    },
+    {
+      "id": "i10-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "401/403 ayrimini test etmek neden kritik?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Kimlik ve yetki hatalarini ayri dogrulamak, client tarafi davranisi ve guvenlik kontratini netlestirir."
+        },
+        {
+          "id": "B",
+          "text": "Sadece log satiri sayisini arttirmak icin"
+        },
+        {
+          "id": "C",
+          "text": "Sadece performans icin"
+        },
+        {
+          "id": "D",
+          "text": "Guvenlikle ilgisi yok"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\n401/403 ayrimini test etmek neden kritik?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Kimlik ve yetki hatalarini ayri dogrulamak, client tarafi davranisi ve guvenlik kontratini netlestirir.\n\n### Sorunun Olctugu Kavram\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Kimlik ve yetki hatalarini ayri dogrulamak, client tarafi davranisi ve guvenlik kontratini netlestirir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Mini Pekistirme Ornegi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Kimlik ve yetki hatalarini ayri dogrulamak, client tarafi davranisi ve guvenlik kontratini netlestirir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Pratik etkisi: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece log satiri sayisini arttirmak icin\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Kimlik ve yetki hatalarini ayri dogrulamak, client tarafi davranisi ve guvenlik kontratini netlestirir.**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece performans icin\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Kimlik ve yetki hatalarini ayri dogrulamak, client tarafi davranisi ve guvenlik kontratini netlestirir.**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Guvenlikle ilgisi yok\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Kimlik ve yetki hatalarini ayri dogrulamak, client tarafi davranisi ve guvenlik kontratini netlestirir.**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        }
+      ],
+      "answerCode": "mockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());"
+    },
+    {
+      "id": "i10-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Filter order problemi testte nasil fark edilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Beklenen endpointte random 401/403 veya auth contextin kurulmamis gorunmesiyle"
+        },
+        {
+          "id": "B",
+          "text": "Her zaman compile error verir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece frontendde belli olur."
+        },
+        {
+          "id": "D",
+          "text": "Filter orderin hic etkisi yoktur."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nFilter order problemi testte nasil fark edilir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Beklenen endpointte random 401/403 veya auth contextin kurulmamis gorunmesiyle\n\n### Sorunun Olctugu Kavram\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Beklenen endpointte random 401/403 veya auth contextin kurulmamis gorunmesiyle** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Mini Pekistirme Ornegi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Beklenen endpointte random 401/403 veya auth contextin kurulmamis gorunmesiyle\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Pratik etkisi: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her zaman compile error verir.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Beklenen endpointte random 401/403 veya auth contextin kurulmamis gorunmesiyle**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece frontendde belli olur.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Beklenen endpointte random 401/403 veya auth contextin kurulmamis gorunmesiyle**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Filter orderin hic etkisi yoktur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Beklenen endpointte random 401/403 veya auth contextin kurulmamis gorunmesiyle**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        }
+      ],
+      "answerCode": "mockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());"
+    },
+    {
+      "id": "i10-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "CSRF kaynakli 403leri yakalamak icin ne test edilmelidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Stateful form akislarda CSRF tokenli ve tokensiz requestlerin ayrik sonucu"
+        },
+        {
+          "id": "B",
+          "text": "Sadece GET requestler"
+        },
+        {
+          "id": "C",
+          "text": "Sadece password encoder"
+        },
+        {
+          "id": "D",
+          "text": "Sadece JWT exp claimi"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nCSRF kaynakli 403leri yakalamak icin ne test edilmelidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Stateful form akislarda CSRF tokenli ve tokensiz requestlerin ayrik sonucu\n\n### Sorunun Olctugu Kavram\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Stateful form akislarda CSRF tokenli ve tokensiz requestlerin ayrik sonucu** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Mini Pekistirme Ornegi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Stateful form akislarda CSRF tokenli ve tokensiz requestlerin ayrik sonucu\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Pratik etkisi: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece GET requestler\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Stateful form akislarda CSRF tokenli ve tokensiz requestlerin ayrik sonucu**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece password encoder\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Stateful form akislarda CSRF tokenli ve tokensiz requestlerin ayrik sonucu**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece JWT exp claimi\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Stateful form akislarda CSRF tokenli ve tokensiz requestlerin ayrik sonucu**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        }
+      ],
+      "answerCode": "mockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());"
+    },
+    {
+      "id": "i10-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Production debuggingde hangi metrik/security signal daha degerlidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Failed login oranlari, 401/403 dagilimi, refresh reuse eventleri, filter exception loglari"
+        },
+        {
+          "id": "B",
+          "text": "Sadece toplam endpoint sayisi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece UI click sayisi"
+        },
+        {
+          "id": "D",
+          "text": "Sadece heap size"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nProduction debuggingde hangi metrik/security signal daha degerlidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Failed login oranlari, 401/403 dagilimi, refresh reuse eventleri, filter exception loglari\n\n### Sorunun Olctugu Kavram\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Failed login oranlari, 401/403 dagilimi, refresh reuse eventleri, filter exception loglari** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Mini Pekistirme Ornegi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Failed login oranlari, 401/403 dagilimi, refresh reuse eventleri, filter exception loglari\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Pratik etkisi: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece toplam endpoint sayisi\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Failed login oranlari, 401/403 dagilimi, refresh reuse eventleri, filter exception loglari**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece UI click sayisi\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Failed login oranlari, 401/403 dagilimi, refresh reuse eventleri, filter exception loglari**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece heap size\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Failed login oranlari, 401/403 dagilimi, refresh reuse eventleri, filter exception loglari**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```"
+        }
+      ],
+      "answerCode": "mockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());"
+    },
+    {
+      "id": "i10-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu testin beklenen sonucu nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Anonymous request /admin endpointinde unauthorized/forbidden beklenir."
+        },
+        {
+          "id": "B",
+          "text": "Her zaman 200 beklenir."
+        },
+        {
+          "id": "C",
+          "text": "Bu test compile olmaz."
+        },
+        {
+          "id": "D",
+          "text": "Role kontrolu test edilemez."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": "mockMvc.perform(get(\"/admin/panel\"))\n    .andExpect(status().isUnauthorized());",
+      "answerBody": "### Soru Metni\nBu testin beklenen sonucu nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Anonymous request /admin endpointinde unauthorized/forbidden beklenir.\n\n### Sorunun Olctugu Kavram\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Anonymous request /admin endpointinde unauthorized/forbidden beklenir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Anonymous request /admin endpointinde unauthorized/forbidden beklenir.\n2. Kod satiri: `mockMvc.perform(get(\"/admin/panel\"))`\n3. Kod satiri: `.andExpect(status().isUnauthorized());`\n4. Bu adimlarin sonucu olarak dogru cikti/yorum: **Anonymous request /admin endpointinde unauthorized/forbidden beklenir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Mini Pekistirme Ornegi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Anonymous request /admin endpointinde unauthorized/forbidden beklenir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Pratik etkisi: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Anonymous request /admin endpointinde unauthorized/forbidden beklenir."
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her zaman 200 beklenir.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Anonymous request /admin endpointinde unauthorized/forbidden beklenir.**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Anonymous request /admin endpointinde unauthorized/forbidden beklenir."
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu test compile olmaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Anonymous request /admin endpointinde unauthorized/forbidden beklenir.**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Anonymous request /admin endpointinde unauthorized/forbidden beklenir."
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Role kontrolu test edilemez.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Anonymous request /admin endpointinde unauthorized/forbidden beklenir.**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Anonymous request /admin endpointinde unauthorized/forbidden beklenir."
+        }
+      ],
+      "answerCode": "mockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());"
+    },
+    {
+      "id": "i10-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu testte neden @WithMockUser(roles={\"ADMIN\"}) kullanilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin"
+        },
+        {
+          "id": "B",
+          "text": "JWT encode etmek icin"
+        },
+        {
+          "id": "C",
+          "text": "CORS preflighti bypass etmek icin"
+        },
+        {
+          "id": "D",
+          "text": "Sadece repository test etmek icin"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": "@WithMockUser(username = \"alice\", roles = {\"ADMIN\"})\n@Test\nvoid adminEndpoint_shouldReturn200() throws Exception {\n    mockMvc.perform(get(\"/admin/panel\")).andExpect(status().isOk());\n}",
+      "answerBody": "### Soru Metni\nBu testte neden @WithMockUser(roles={\"ADMIN\"}) kullanilir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin\n\n### Sorunun Olctugu Kavram\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin\n2. Kod satiri: `@WithMockUser(username = \"alice\", roles = {\"ADMIN\"})`\n3. Kod satiri: `@Test`\n4. Kod satiri: `void adminEndpoint_shouldReturn200() throws Exception {`\n5. Kod satiri: `mockMvc.perform(get(\"/admin/panel\")).andExpect(status().isOk());`\n6. Kod satiri: `}`\n7. Bu adimlarin sonucu olarak dogru cikti/yorum: **Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Mini Pekistirme Ornegi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Pratik etkisi: MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT encode etmek icin\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** CORS preflighti bypass etmek icin\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece repository test etmek icin\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin**\n- Konu aciklamasi: Guvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n- Bu secenek secilirse risk: Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin"
+        }
+      ],
+      "answerCode": "mockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());"
+    },
+    {
+      "id": "i10-q10",
+      "type": "code",
+      "question": "MockMvc ile 3 test yaz: (1) anonymous /admin -> 401 veya 403, (2) USER role /admin -> 403, (3) ADMIN role /admin -> 200.",
+      "starterCode": "class SecurityTests {\n    // TODO\n}",
+      "answerCode": "@SpringBootTest\n@AutoConfigureMockMvc\nclass SecurityTests {\n\n    @Autowired MockMvc mockMvc;\n\n    @Test\n    void admin_anonymous_shouldBeDenied() throws Exception {\n        mockMvc.perform(get(\"/admin/panel\"))\n            .andExpect(status().isUnauthorized());\n    }\n\n    @Test\n    @WithMockUser(username = \"u\", roles = {\"USER\"})\n    void admin_userRole_shouldBeForbidden() throws Exception {\n        mockMvc.perform(get(\"/admin/panel\"))\n            .andExpect(status().isForbidden());\n    }\n\n    @Test\n    @WithMockUser(username = \"a\", roles = {\"ADMIN\"})\n    void admin_adminRole_shouldPass() throws Exception {\n        mockMvc.perform(get(\"/admin/panel\"))\n            .andExpect(status().isOk());\n    }\n}",
+      "answerBody": "### Soru Metni\nMockMvc ile 3 test yaz: (1) anonymous /admin -> 401 veya 403, (2) USER role /admin -> 403, (3) ADMIN role /admin -> 200.\n\n### Bu Soru Neyi Olcuyor?\nGuvenlik kodu test edilmeden guvenli kabul edilmez. Unit/integration testler 401/403 ayrimini, filter davranisini ve role mappingi dogrulamalidir.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari eksiksiz karsila (input, output, hata akis).\n2. Security semantigini dogru kur (authentication, authorization, token/role kontrolu).\n3. Kenar durumlarini ele al (null, invalid token, expired token, authority yok).\n4. Guvenlik loglarini ve failure case davranisini acikca tasarla.\n\n### Neden Bu Sekilde Tasarlanir?\n- MockMvc + @WithMockUser + token tabanli integration test kombinasyonu regressions yakalamada etkilidir.\n- Sadece happy-path test yazmak ve negatif guvenlik senaryolarini atlamak production incident riskini arttirir.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip 401/403 ayrimini atlamak\n- SecurityContext veya authority maplemeyi yarim birakmak\n- Token hata durumlarinda zinciri/scopeu yanlis yonetmek\n\n### Mini Referans Ornek\n```java\nmockMvc.perform(get(\"/admin\")).andExpect(status().isUnauthorized());\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu semantik olarak bununla karsilastir."
+    }
+  ]
+}

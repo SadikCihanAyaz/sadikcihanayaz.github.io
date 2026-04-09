@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-security",
+  "id": "spring-security-interview-4",
+  "title": "Spring Security Interview - 4",
+  "description": "JWT yapisi, claimler, imza algoritmalari ve token validation kurallari",
+  "questions": [
+    {
+      "id": "i4-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JWTnin uc parcasi dogru olarak hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "header.body.footer"
+        },
+        {
+          "id": "B",
+          "text": "request.payload.response"
+        },
+        {
+          "id": "C",
+          "text": "header.payload.signature"
+        },
+        {
+          "id": "D",
+          "text": "algorithm.claims.session"
+        }
+      ],
+      "correctChoiceIds": [
+        "C"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nJWTnin uc parcasi dogru olarak hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `C` - header.payload.signature\n\n### Sorunun Olctugu Kavram\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **header.payload.signature** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Mini Pekistirme Ornegi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** header.body.footer\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **header.payload.signature**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** request.payload.response\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **header.payload.signature**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** DOGRU\n**Secenek metni:** header.payload.signature\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Pratik etkisi: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** algorithm.claims.session\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **header.payload.signature**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        }
+      ],
+      "answerCode": "boolean valid = jwtService.isTokenValid(token, userDetails);"
+    },
+    {
+      "id": "i4-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JWT signature neyi garanti eder?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Payloadin gizli oldugunu garanti eder."
+        },
+        {
+          "id": "B",
+          "text": "Tokenin degistirilmedigini (integrity) ve imzayi ureten kaynaga guveni destekler."
+        },
+        {
+          "id": "C",
+          "text": "Tokenin hicbir zaman expire olmayacagini garanti eder."
+        },
+        {
+          "id": "D",
+          "text": "Kullanicinin her zaman ADMIN oldugunu garanti eder."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nJWT signature neyi garanti eder?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Tokenin degistirilmedigini (integrity) ve imzayi ureten kaynaga guveni destekler.\n\n### Sorunun Olctugu Kavram\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Tokenin degistirilmedigini (integrity) ve imzayi ureten kaynaga guveni destekler.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n> Not: Siklikla yapilan hata -> JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Mini Pekistirme Ornegi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Payloadin gizli oldugunu garanti eder.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Tokenin degistirilmedigini (integrity) ve imzayi ureten kaynaga guveni destekler.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Tokenin degistirilmedigini (integrity) ve imzayi ureten kaynaga guveni destekler.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Pratik etkisi: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tokenin hicbir zaman expire olmayacagini garanti eder.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Tokenin degistirilmedigini (integrity) ve imzayi ureten kaynaga guveni destekler.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kullanicinin her zaman ADMIN oldugunu garanti eder.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Tokenin degistirilmedigini (integrity) ve imzayi ureten kaynaga guveni destekler.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        }
+      ],
+      "answerCode": "boolean valid = jwtService.isTokenValid(token, userDetails);"
+    },
+    {
+      "id": "i4-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "exp claiminin anlami nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tokenin olusturuldugu an"
+        },
+        {
+          "id": "B",
+          "text": "Tokenin gecersiz olacagi son an"
+        },
+        {
+          "id": "C",
+          "text": "Kullanici rol listesi"
+        },
+        {
+          "id": "D",
+          "text": "JWT algoritma tipi"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nexp claiminin anlami nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Tokenin gecersiz olacagi son an\n\n### Sorunun Olctugu Kavram\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Tokenin gecersiz olacagi son an** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Mini Pekistirme Ornegi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tokenin olusturuldugu an\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Tokenin gecersiz olacagi son an**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Tokenin gecersiz olacagi son an\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Pratik etkisi: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kullanici rol listesi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Tokenin gecersiz olacagi son an**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT algoritma tipi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Tokenin gecersiz olacagi son an**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        }
+      ],
+      "answerCode": "boolean valid = jwtService.isTokenValid(token, userDetails);"
+    },
+    {
+      "id": "i4-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidakilerden hangisi JWT payload icin dogru bir guvenlik notudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Payload defaultta sifrelidir, kimse okuyamaz."
+        },
+        {
+          "id": "B",
+          "text": "Payload base64url encoded oldugu icin okunabilir; gizli bilgi koymamak gerekir."
+        },
+        {
+          "id": "C",
+          "text": "Payload sadece server tarafindan okunur, client gormez."
+        },
+        {
+          "id": "D",
+          "text": "Payload sadece ADMIN rolu icin vardir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nAsagidakilerden hangisi JWT payload icin dogru bir guvenlik notudur?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Payload base64url encoded oldugu icin okunabilir; gizli bilgi koymamak gerekir.\n\n### Sorunun Olctugu Kavram\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Payload base64url encoded oldugu icin okunabilir; gizli bilgi koymamak gerekir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Mini Pekistirme Ornegi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Payload defaultta sifrelidir, kimse okuyamaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Payload base64url encoded oldugu icin okunabilir; gizli bilgi koymamak gerekir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Payload base64url encoded oldugu icin okunabilir; gizli bilgi koymamak gerekir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Pratik etkisi: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Payload sadece server tarafindan okunur, client gormez.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Payload base64url encoded oldugu icin okunabilir; gizli bilgi koymamak gerekir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Payload sadece ADMIN rolu icin vardir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Payload base64url encoded oldugu icin okunabilir; gizli bilgi koymamak gerekir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        }
+      ],
+      "answerCode": "boolean valid = jwtService.isTokenValid(token, userDetails);"
+    },
+    {
+      "id": "i4-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "HS256 ve RS256 farki icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "HS256 tek secret ile simetrik imzalama, RS256 private/public key ile asimetrik imzalama kullanir."
+        },
+        {
+          "id": "B",
+          "text": "Ikisi tamamen ayni sekilde calisir."
+        },
+        {
+          "id": "C",
+          "text": "RS256 sadece cookie tabanli auth icindir."
+        },
+        {
+          "id": "D",
+          "text": "HS256da imza yoktur."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nHS256 ve RS256 farki icin dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - HS256 tek secret ile simetrik imzalama, RS256 private/public key ile asimetrik imzalama kullanir.\n\n### Sorunun Olctugu Kavram\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **HS256 tek secret ile simetrik imzalama, RS256 private/public key ile asimetrik imzalama kullanir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Mini Pekistirme Ornegi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** HS256 tek secret ile simetrik imzalama, RS256 private/public key ile asimetrik imzalama kullanir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Pratik etkisi: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Ikisi tamamen ayni sekilde calisir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **HS256 tek secret ile simetrik imzalama, RS256 private/public key ile asimetrik imzalama kullanir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** RS256 sadece cookie tabanli auth icindir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **HS256 tek secret ile simetrik imzalama, RS256 private/public key ile asimetrik imzalama kullanir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** HS256da imza yoktur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **HS256 tek secret ile simetrik imzalama, RS256 private/public key ile asimetrik imzalama kullanir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        }
+      ],
+      "answerCode": "boolean valid = jwtService.isTokenValid(token, userDetails);"
+    },
+    {
+      "id": "i4-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Claim tasariminda en saglikli yaklasim hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tokeni olabildigince buyutmek, tum profil datasini koymak"
+        },
+        {
+          "id": "B",
+          "text": "Kimlik/yetki icin gerekli minimal claimleri koymak, hassas veriyi tokena koymamak"
+        },
+        {
+          "id": "C",
+          "text": "Her claimi encrypted oldugu varsayimiyla saklamak"
+        },
+        {
+          "id": "D",
+          "text": "exp claimini hic koymamak"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nClaim tasariminda en saglikli yaklasim hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Kimlik/yetki icin gerekli minimal claimleri koymak, hassas veriyi tokena koymamak\n\n### Sorunun Olctugu Kavram\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Kimlik/yetki icin gerekli minimal claimleri koymak, hassas veriyi tokena koymamak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Mini Pekistirme Ornegi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tokeni olabildigince buyutmek, tum profil datasini koymak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Kimlik/yetki icin gerekli minimal claimleri koymak, hassas veriyi tokena koymamak**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Kimlik/yetki icin gerekli minimal claimleri koymak, hassas veriyi tokena koymamak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Pratik etkisi: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her claimi encrypted oldugu varsayimiyla saklamak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Kimlik/yetki icin gerekli minimal claimleri koymak, hassas veriyi tokena koymamak**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** exp claimini hic koymamak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Kimlik/yetki icin gerekli minimal claimleri koymak, hassas veriyi tokena koymamak**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        }
+      ],
+      "answerCode": "boolean valid = jwtService.isTokenValid(token, userDetails);"
+    },
+    {
+      "id": "i4-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JWT validationda asagidakilerden hangisi eksik bir yaklasimdir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece expiration kontrol edip signature kontrolu yapmamak"
+        },
+        {
+          "id": "B",
+          "text": "Signature + exp + issuer gibi kontrolleri birlikte yapmak"
+        },
+        {
+          "id": "C",
+          "text": "Token subjectini beklenen userla karsilastirmak"
+        },
+        {
+          "id": "D",
+          "text": "Clock skew toleransi dusunmek"
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nJWT validationda asagidakilerden hangisi eksik bir yaklasimdir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Sadece expiration kontrol edip signature kontrolu yapmamak\n\n### Sorunun Olctugu Kavram\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Sadece expiration kontrol edip signature kontrolu yapmamak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Mini Pekistirme Ornegi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Sadece expiration kontrol edip signature kontrolu yapmamak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Pratik etkisi: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Signature + exp + issuer gibi kontrolleri birlikte yapmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Sadece expiration kontrol edip signature kontrolu yapmamak**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Token subjectini beklenen userla karsilastirmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Sadece expiration kontrol edip signature kontrolu yapmamak**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Clock skew toleransi dusunmek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Sadece expiration kontrol edip signature kontrolu yapmamak**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```"
+        }
+      ],
+      "answerCode": "boolean valid = jwtService.isTokenValid(token, userDetails);"
+    },
+    {
+      "id": "i4-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodla ilgili en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "true ise token en azindan exp ve signature kontrollerini gecmis olmalidir."
+        },
+        {
+          "id": "B",
+          "text": "true olsa bile token kesinlikle hicbir sekilde revoke edilemez."
+        },
+        {
+          "id": "C",
+          "text": "Bu kod CSRFu otomatik cozer."
+        },
+        {
+          "id": "D",
+          "text": "Bu kod compile olmaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": "boolean valid = jwtService.isTokenValid(token, userDetails);\nif (!valid) {\n    response.setStatus(401);\n}",
+      "answerBody": "### Soru Metni\nBu kodla ilgili en dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - true ise token en azindan exp ve signature kontrollerini gecmis olmalidir.\n\n### Sorunun Olctugu Kavram\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **true ise token en azindan exp ve signature kontrollerini gecmis olmalidir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: true ise token en azindan exp ve signature kontrollerini gecmis olmalidir.\n2. Kod satiri: `boolean valid = jwtService.isTokenValid(token, userDetails);`\n3. Kod satiri: `if (!valid) {`\n4. Kod satiri: `response.setStatus(401);`\n5. Kod satiri: `}`\n6. Bu adimlarin sonucu olarak dogru cikti/yorum: **true ise token en azindan exp ve signature kontrollerini gecmis olmalidir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Mini Pekistirme Ornegi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** true ise token en azindan exp ve signature kontrollerini gecmis olmalidir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Pratik etkisi: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: true ise token en azindan exp ve signature kontrollerini gecmis olmalidir."
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** true olsa bile token kesinlikle hicbir sekilde revoke edilemez.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **true ise token en azindan exp ve signature kontrollerini gecmis olmalidir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: true ise token en azindan exp ve signature kontrollerini gecmis olmalidir."
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu kod CSRFu otomatik cozer.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **true ise token en azindan exp ve signature kontrollerini gecmis olmalidir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: true ise token en azindan exp ve signature kontrollerini gecmis olmalidir."
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu kod compile olmaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **true ise token en azindan exp ve signature kontrollerini gecmis olmalidir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: true ise token en azindan exp ve signature kontrollerini gecmis olmalidir."
+        }
+      ],
+      "answerCode": "boolean valid = jwtService.isTokenValid(token, userDetails);"
+    },
+    {
+      "id": "i4-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki akista 20 dakika sonra en olasi sonuc nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Token hala gecerlidir cunku iat var."
+        },
+        {
+          "id": "B",
+          "text": "exp now+15m ise 20 dakika sonra token gecersiz kabul edilir."
+        },
+        {
+          "id": "C",
+          "text": "Token sure kontrolu algoritmadan bagimsizdir, her zaman gecerli kalir."
+        },
+        {
+          "id": "D",
+          "text": "Kod sadece role kontrolu yapar."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": "Instant now = Instant.now();\nString token = jwtService.generateToken(subject, now.plus(15, ChronoUnit.MINUTES));\n// 20 dakika sonra validate(token)",
+      "answerBody": "### Soru Metni\nAsagidaki akista 20 dakika sonra en olasi sonuc nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - exp now+15m ise 20 dakika sonra token gecersiz kabul edilir.\n\n### Sorunun Olctugu Kavram\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **exp now+15m ise 20 dakika sonra token gecersiz kabul edilir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: exp now+15m ise 20 dakika sonra token gecersiz kabul edilir.\n2. Kod satiri: `Instant now = Instant.now();`\n3. Kod satiri: `String token = jwtService.generateToken(subject, now.plus(15, ChronoUnit.MINUTES));`\n4. Kod satiri: `// 20 dakika sonra validate(token)`\n5. Bu adimlarin sonucu olarak dogru cikti/yorum: **exp now+15m ise 20 dakika sonra token gecersiz kabul edilir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Mini Pekistirme Ornegi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Token hala gecerlidir cunku iat var.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **exp now+15m ise 20 dakika sonra token gecersiz kabul edilir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: exp now+15m ise 20 dakika sonra token gecersiz kabul edilir."
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** exp now+15m ise 20 dakika sonra token gecersiz kabul edilir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Pratik etkisi: Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: exp now+15m ise 20 dakika sonra token gecersiz kabul edilir."
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Token sure kontrolu algoritmadan bagimsizdir, her zaman gecerli kalir.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **exp now+15m ise 20 dakika sonra token gecersiz kabul edilir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: exp now+15m ise 20 dakika sonra token gecersiz kabul edilir."
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kod sadece role kontrolu yapar.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **exp now+15m ise 20 dakika sonra token gecersiz kabul edilir.**\n- Konu aciklamasi: JWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n- Bu secenek secilirse risk: JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: exp now+15m ise 20 dakika sonra token gecersiz kabul edilir."
+        }
+      ],
+      "answerCode": "boolean valid = jwtService.isTokenValid(token, userDetails);"
+    },
+    {
+      "id": "i4-q10",
+      "type": "code",
+      "question": "Basit bir JwtService yaz: generateToken(subject, authorities) ve isTokenValid(token, userDetails) metotlarini icersin. exp, subject ve signature kontrolu yap.",
+      "starterCode": "class JwtService {\n    // TODO\n}",
+      "answerCode": "class JwtService {\n    private final Key signingKey;\n\n    JwtService(Key signingKey) {\n        this.signingKey = signingKey;\n    }\n\n    String generateToken(String subject, List<String> authorities) {\n        Instant now = Instant.now();\n        return Jwts.builder()\n            .subject(subject)\n            .claim(\"authorities\", authorities)\n            .issuedAt(Date.from(now))\n            .expiration(Date.from(now.plus(15, ChronoUnit.MINUTES)))\n            .signWith(signingKey)\n            .compact();\n    }\n\n    boolean isTokenValid(String token, UserDetails userDetails) {\n        Claims claims = Jwts.parser().verifyWith((SecretKey) signingKey).build()\n            .parseSignedClaims(token).getPayload();\n\n        String subject = claims.getSubject();\n        Date exp = claims.getExpiration();\n        return userDetails.getUsername().equals(subject) && exp.after(new Date());\n    }\n}",
+      "answerBody": "### Soru Metni\nBasit bir JwtService yaz: generateToken(subject, authorities) ve isTokenValid(token, userDetails) metotlarini icersin. exp, subject ve signature kontrolu yap.\n\n### Bu Soru Neyi Olcuyor?\nJWT header-payload-signature yapisi, claim semanticsi ve imza dogrulamasi stateless guvenligin merkezindedir.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari eksiksiz karsila (input, output, hata akis).\n2. Security semantigini dogru kur (authentication, authorization, token/role kontrolu).\n3. Kenar durumlarini ele al (null, invalid token, expired token, authority yok).\n4. Guvenlik loglarini ve failure case davranisini acikca tasarla.\n\n### Neden Bu Sekilde Tasarlanir?\n- Token validationda exp, issuer, audience, signature kontrolleri birlikte yapilmalidir.\n- JWT payloadin sifreli oldugunu varsaymak ve sadece exp kontrol edip signature/issuer kontrolunu atlamak ciddi risktir.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip 401/403 ayrimini atlamak\n- SecurityContext veya authority maplemeyi yarim birakmak\n- Token hata durumlarinda zinciri/scopeu yanlis yonetmek\n\n### Mini Referans Ornek\n```java\nboolean valid = jwtService.isTokenValid(token, userDetails);\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu semantik olarak bununla karsilastir."
+    }
+  ]
+}

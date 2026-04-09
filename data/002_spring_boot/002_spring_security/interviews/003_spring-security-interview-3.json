@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-security",
+  "id": "spring-security-interview-3",
+  "title": "Spring Security Interview - 3",
+  "description": "UserDetailsService, AuthenticationManager, DaoAuthenticationProvider, PasswordEncoder",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "UserDetailsServicein temel sorumlulugu nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Kullanicinin sifresini encode etmek."
+        },
+        {
+          "id": "B",
+          "text": "Username/email ile kullaniciyi yukleyip UserDetails donmek."
+        },
+        {
+          "id": "C",
+          "text": "JWT token uretmek."
+        },
+        {
+          "id": "D",
+          "text": "CORS policy yazmak."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nUserDetailsServicein temel sorumlulugu nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Username/email ile kullaniciyi yukleyip UserDetails donmek.\n\n### Sorunun Olctugu Kavram\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Username/email ile kullaniciyi yukleyip UserDetails donmek.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kullanicinin sifresini encode etmek.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Username/email ile kullaniciyi yukleyip UserDetails donmek.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Username/email ile kullaniciyi yukleyip UserDetails donmek.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Pratik etkisi: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT token uretmek.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Username/email ile kullaniciyi yukleyip UserDetails donmek.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** CORS policy yazmak.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Username/email ile kullaniciyi yukleyip UserDetails donmek.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        }
+      ],
+      "answerCode": "Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));"
+    },
+    {
+      "id": "i3-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "PasswordEncoder.matches(raw, encoded) neyi dogrular?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Iki stringin birebir ayni olmasini"
+        },
+        {
+          "id": "B",
+          "text": "Raw sifrenin verilen hash ile semantik olarak eslesmesini"
+        },
+        {
+          "id": "C",
+          "text": "Sadece hash uzunlugunu"
+        },
+        {
+          "id": "D",
+          "text": "Sadece role bilgisini"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nPasswordEncoder.matches(raw, encoded) neyi dogrular?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Raw sifrenin verilen hash ile semantik olarak eslesmesini\n\n### Sorunun Olctugu Kavram\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Raw sifrenin verilen hash ile semantik olarak eslesmesini** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Iki stringin birebir ayni olmasini\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Raw sifrenin verilen hash ile semantik olarak eslesmesini**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Raw sifrenin verilen hash ile semantik olarak eslesmesini\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Pratik etkisi: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece hash uzunlugunu\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Raw sifrenin verilen hash ile semantik olarak eslesmesini**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece role bilgisini\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Raw sifrenin verilen hash ile semantik olarak eslesmesini**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        }
+      ],
+      "answerCode": "Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));"
+    },
+    {
+      "id": "i3-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "BCrypt ile ayni sifre iki kez encode edilirse ne beklenir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her zaman ayni hash cikar."
+        },
+        {
+          "id": "B",
+          "text": "Genelde farkli hashler cikar; dogrulama matches ile yapilir."
+        },
+        {
+          "id": "C",
+          "text": "Encode islemi runtime exception verir."
+        },
+        {
+          "id": "D",
+          "text": "Sifre plain text olarak DBde saklanir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nBCrypt ile ayni sifre iki kez encode edilirse ne beklenir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Genelde farkli hashler cikar; dogrulama matches ile yapilir.\n\n### Sorunun Olctugu Kavram\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Genelde farkli hashler cikar; dogrulama matches ile yapilir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Sifreler asla plain text tutulmaz; guclu hash ve salting zorunludur.\n\n> Not: Siklikla yapilan hata -> UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her zaman ayni hash cikar.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Genelde farkli hashler cikar; dogrulama matches ile yapilir.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Genelde farkli hashler cikar; dogrulama matches ile yapilir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Pratik etkisi: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Encode islemi runtime exception verir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Genelde farkli hashler cikar; dogrulama matches ile yapilir.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sifre plain text olarak DBde saklanir.\n\n### Neden Yanlis?\nSifreler asla plain text tutulmaz; guclu hash ve salting zorunludur.\n\n### Dogru Model Ne?\nDogrusu: **Genelde farkli hashler cikar; dogrulama matches ile yapilir.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        }
+      ],
+      "answerCode": "Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));"
+    },
+    {
+      "id": "i3-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "DaoAuthenticationProvider tipik olarak hangi iki seyi birlestirir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "CorsFilter ve CsrfFilter"
+        },
+        {
+          "id": "B",
+          "text": "UserDetailsService ve PasswordEncoder"
+        },
+        {
+          "id": "C",
+          "text": "JWT parser ve OAuth2 client"
+        },
+        {
+          "id": "D",
+          "text": "Only session ve redis cache"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nDaoAuthenticationProvider tipik olarak hangi iki seyi birlestirir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - UserDetailsService ve PasswordEncoder\n\n### Sorunun Olctugu Kavram\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **UserDetailsService ve PasswordEncoder** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** CorsFilter ve CsrfFilter\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **UserDetailsService ve PasswordEncoder**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** UserDetailsService ve PasswordEncoder\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Pratik etkisi: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT parser ve OAuth2 client\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **UserDetailsService ve PasswordEncoder**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Only session ve redis cache\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **UserDetailsService ve PasswordEncoder**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        }
+      ],
+      "answerCode": "Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));"
+    },
+    {
+      "id": "i3-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "AuthenticationManager.authenticate basarili oldugunda tipik sonuc nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "null doner."
+        },
+        {
+          "id": "B",
+          "text": "Authenticated bir Authentication objesi doner."
+        },
+        {
+          "id": "C",
+          "text": "Uygulamayi kapatir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece 500 hatasi firlatir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nAuthenticationManager.authenticate basarili oldugunda tipik sonuc nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Authenticated bir Authentication objesi doner.\n\n### Sorunun Olctugu Kavram\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Authenticated bir Authentication objesi doner.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** null doner.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Authenticated bir Authentication objesi doner.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Authenticated bir Authentication objesi doner.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Pratik etkisi: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Uygulamayi kapatir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Authenticated bir Authentication objesi doner.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece 500 hatasi firlatir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Authenticated bir Authentication objesi doner.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        }
+      ],
+      "answerCode": "Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));"
+    },
+    {
+      "id": "i3-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Kullanici bulunamazsa loadUserByUsername icin dogru davranis hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sessizce bos UserDetails donmek."
+        },
+        {
+          "id": "B",
+          "text": "UsernameNotFoundException firlatmak."
+        },
+        {
+          "id": "C",
+          "text": "Daima ADMIN role donmek."
+        },
+        {
+          "id": "D",
+          "text": "Controllerdan 200 donmek."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nKullanici bulunamazsa loadUserByUsername icin dogru davranis hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - UsernameNotFoundException firlatmak.\n\n### Sorunun Olctugu Kavram\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **UsernameNotFoundException firlatmak.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sessizce bos UserDetails donmek.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **UsernameNotFoundException firlatmak.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** UsernameNotFoundException firlatmak.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Pratik etkisi: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Daima ADMIN role donmek.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **UsernameNotFoundException firlatmak.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Controllerdan 200 donmek.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **UsernameNotFoundException firlatmak.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        }
+      ],
+      "answerCode": "Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));"
+    },
+    {
+      "id": "i3-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "hasRole(\"ADMIN\") kullanirken authority mappingte kritik nokta nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "ROLE_ prefix semantigine dikkat edilmelidir."
+        },
+        {
+          "id": "B",
+          "text": "Role bilgisinin sifre hashinde tutulmasi gerekir."
+        },
+        {
+          "id": "C",
+          "text": "Role sadece JWT headera yazilir."
+        },
+        {
+          "id": "D",
+          "text": "Role bilgisi guvenlikte etkisizdir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": null,
+      "answerBody": "### Soru Metni\nhasRole(\"ADMIN\") kullanirken authority mappingte kritik nokta nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - ROLE_ prefix semantigine dikkat edilmelidir.\n\n### Sorunun Olctugu Kavram\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **ROLE_ prefix semantigine dikkat edilmelidir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** ROLE_ prefix semantigine dikkat edilmelidir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Pratik etkisi: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Role bilgisinin sifre hashinde tutulmasi gerekir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **ROLE_ prefix semantigine dikkat edilmelidir.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Role sadece JWT headera yazilir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **ROLE_ prefix semantigine dikkat edilmelidir.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Role bilgisi guvenlikte etkisizdir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **ROLE_ prefix semantigine dikkat edilmelidir.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```"
+        }
+      ],
+      "answerCode": "Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));"
+    },
+    {
+      "id": "i3-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun ciktisi/yorumu icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "h1 ve h2 her zaman aynidir."
+        },
+        {
+          "id": "B",
+          "text": "h1 ve h2 tipik olarak farklidir; matches true doner."
+        },
+        {
+          "id": "C",
+          "text": "matches her zaman false doner."
+        },
+        {
+          "id": "D",
+          "text": "Kod compile olmaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "questionCode": "String h1 = encoder.encode(\"secret\");\nString h2 = encoder.encode(\"secret\");\nboolean ok = encoder.matches(\"secret\", h1);\nSystem.out.println(h1.equals(h2) + \" / \" + ok);",
+      "answerBody": "### Soru Metni\nBu kodun ciktisi/yorumu icin en dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - h1 ve h2 tipik olarak farklidir; matches true doner.\n\n### Sorunun Olctugu Kavram\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **h1 ve h2 tipik olarak farklidir; matches true doner.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: h1 ve h2 tipik olarak farklidir; matches true doner.\n2. Kod satiri: `String h1 = encoder.encode(\"secret\");`\n3. Kod satiri: `String h2 = encoder.encode(\"secret\");`\n4. Kod satiri: `boolean ok = encoder.matches(\"secret\", h1);`\n5. Kod satiri: `System.out.println(h1.equals(h2) + \" / \" + ok);`\n6. Bu adimlarin sonucu olarak dogru cikti/yorum: **h1 ve h2 tipik olarak farklidir; matches true doner.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** h1 ve h2 her zaman aynidir.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **h1 ve h2 tipik olarak farklidir; matches true doner.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: h1 ve h2 tipik olarak farklidir; matches true doner."
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** h1 ve h2 tipik olarak farklidir; matches true doner.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Pratik etkisi: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: h1 ve h2 tipik olarak farklidir; matches true doner."
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** matches her zaman false doner.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **h1 ve h2 tipik olarak farklidir; matches true doner.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: h1 ve h2 tipik olarak farklidir; matches true doner."
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kod compile olmaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **h1 ve h2 tipik olarak farklidir; matches true doner.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: h1 ve h2 tipik olarak farklidir; matches true doner."
+        }
+      ],
+      "answerCode": "Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));"
+    },
+    {
+      "id": "i3-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu akista en olasi sonuc hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur."
+        },
+        {
+          "id": "B",
+          "text": "Yanlis sifre olsa da authentication basarili olur."
+        },
+        {
+          "id": "C",
+          "text": "AuthenticationManager sifreyi asla kontrol etmez."
+        },
+        {
+          "id": "D",
+          "text": "Kod sadece CORS ayari yapar."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "questionCode": "Authentication auth = authenticationManager.authenticate(\n    new UsernamePasswordAuthenticationToken(email, rawPassword)\n);",
+      "answerBody": "### Soru Metni\nBu akista en olasi sonuc hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur.\n\n### Sorunun Olctugu Kavram\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur.\n2. Kod satiri: `Authentication auth = authenticationManager.authenticate(`\n3. Kod satiri: `new UsernamePasswordAuthenticationToken(email, rawPassword)`\n4. Kod satiri: `);`\n5. Bu adimlarin sonucu olarak dogru cikti/yorum: **Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Mini Pekistirme Ornegi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```",
+      "optionExplanations": [
+        {
+          "id": "A",
+          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Pratik etkisi: Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur."
+        },
+        {
+          "id": "B",
+          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Yanlis sifre olsa da authentication basarili olur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur."
+        },
+        {
+          "id": "C",
+          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** AuthenticationManager sifreyi asla kontrol etmez.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur."
+        },
+        {
+          "id": "D",
+          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kod sadece CORS ayari yapar.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur.**\n- Konu aciklamasi: Login akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n- Bu secenek secilirse risk: UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur."
+        }
+      ],
+      "answerCode": "Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));"
+    },
+    {
+      "id": "i3-q10",
+      "type": "code",
+      "question": "Kayit ve login akisi icin servis yaz: registerda sifreyi encode et, loginde AuthenticationManager ile dogrula ve basariliysa basit bir response don.",
+      "starterCode": "class AuthService {\n    // TODO: register + login metotlari\n}",
+      "answerCode": "@Service\nclass AuthService {\n    private final UserRepository userRepository;\n    private final PasswordEncoder passwordEncoder;\n    private final AuthenticationManager authenticationManager;\n\n    AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {\n        this.userRepository = userRepository;\n        this.passwordEncoder = passwordEncoder;\n        this.authenticationManager = authenticationManager;\n    }\n\n    public Long register(String email, String rawPassword) {\n        if (userRepository.existsByEmail(email)) {\n            throw new IllegalStateException(\"email already exists\");\n        }\n\n        AppUser user = new AppUser();\n        user.setEmail(email);\n        user.setPasswordHash(passwordEncoder.encode(rawPassword));\n        user.setAuthorities(List.of(\"ROLE_USER\"));\n        return userRepository.save(user).getId();\n    }\n\n    public String login(String email, String rawPassword) {\n        authenticationManager.authenticate(\n            new UsernamePasswordAuthenticationToken(email, rawPassword)\n        );\n        return \"LOGIN_OK\";\n    }\n}",
+      "answerBody": "### Soru Metni\nKayit ve login akisi icin servis yaz: registerda sifreyi encode et, loginde AuthenticationManager ile dogrula ve basariliysa basit bir response don.\n\n### Bu Soru Neyi Olcuyor?\nLogin akisinda UserDetailsService kullaniciyi yukler, PasswordEncoder sifreyi dogrular, AuthenticationManager/provider zinciri Authentication sonucunu uretir.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari eksiksiz karsila (input, output, hata akis).\n2. Security semantigini dogru kur (authentication, authorization, token/role kontrolu).\n3. Kenar durumlarini ele al (null, invalid token, expired token, authority yok).\n4. Guvenlik loglarini ve failure case davranisini acikca tasarla.\n\n### Neden Bu Sekilde Tasarlanir?\n- Login pathini bu rollerle ayri tutmak test ve hata analizi acisindan netlik saglar.\n- UserDetailsServicein sifre dogruladigini sanmak veya BCrypt hash esitligi mantigini yanlis yorumlamak kritik hatadir.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip 401/403 ayrimini atlamak\n- SecurityContext veya authority maplemeyi yarim birakmak\n- Token hata durumlarinda zinciri/scopeu yanlis yonetmek\n\n### Mini Referans Ornek\n```java\nAuthentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, rawPassword));\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu semantik olarak bununla karsilastir."
+    }
+  ]
+}
