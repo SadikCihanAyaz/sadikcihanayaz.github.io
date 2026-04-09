@@ -3,275 +3,376 @@
   "categoryId": "java",
   "subcategoryId": "threads",
   "id": "threads-topic",
-  "title": "Java Concurrency ve Multithreading - Threads Temel ve Kritik Ozet",
+  "title": "Java Concurrency ve Multithreading - Threads Derin Konu Anlatimi",
   "blocks": [
     {
       "type": "paragraph",
-      "text": "Bu konu sifirdan baslayan biri icin yazildi. Hedef sadece kavram ezberi degil: bir kod parcasi gorunce race condition var mi, dogru primitive ne, kapanis ve hata davranisi guvenli mi sorularini net cevaplayabilmek."
+      "text": "Bu icerik sifirdan baslayan ama konuya derin girmek isteyen biri icin yazildi. Amac sadece terim ezberi degil: bir kod gordugunde race condition var mi, hangi garanti eksik, hangi primitive secilmeli, nasil test edilmeli sorularini net cevaplayabilmek."
     },
     {
       "type": "list",
-      "title": "Bu konuyu bitirince net bilmen gerekenler",
+      "title": "Bu dokumani nasil oku",
       "items": [
-        "Thread ve process farki",
-        "Race condition nasil olusur",
-        "synchronized, volatile, ReentrantLock neyi garanti eder",
-        "ExecutorService ile dogru task yonetimi",
-        "Future ve CompletableFuture ile asenkron sonuc yonetimi",
-        "wait/notify, CountDownLatch, Semaphore gibi koordinasyon araclari",
-        "Deadlock/starvation/livelock farklari",
-        "Immutability, concurrent collections, ThreadLocal riskleri",
-        "Interrupt dostu kapanis ve production debug yaklasimi"
+        "Her terimde sirayla oku: Nedir -> Neden onemli -> Kotu ornek -> Dogru ornek -> Cozum mantigi",
+        "Kod orneklerini sadece calisiyor mu diye degil, hangi garantiye hizmet ediyor diye degerlendir",
+        "Bir terimi anlamadan digerine gecme; concurrency konulari zincir etkisiyle baglidir",
+        "Tum terimleri production etkisiyle birlikte dusun: dogruluk, performans, gozlemlenebilirlik"
       ]
     },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Process",
+      "text": "Process, isletim sisteminde calisan izole bir uygulama birimidir. Her processin kendi adres alani vardir. Farkli processler bellegi dogrudan paylasmaz.",
+      "items": [
+        "Ayni makinede birden fazla process calisabilir",
+        "Processler arasi iletisim icin IPC gerekir",
+        "Crash izolasyonu process sinirinda daha gucludur"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Thread",
+      "text": "Thread, process icindeki calisma akisidir. Ayni process icindeki threadler heapi paylasir, stackleri ayridir. Concurrency buglarinin cogu bu paylasimdan dogar.",
+      "items": [
+        "Local degiskenler stackte oldugu icin genelde daha guvenlidir",
+        "Nesne fieldlari heapte oldugu icin paylasim/race riski tasir",
+        "Sorun thread acmak degil, paylasilan mutable statei yonetmektir"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Concurrency ve Parallelism farki",
+      "text": "Concurrency: birden fazla isin ayni zaman araliginda ilerlemesi. Parallelism: fiziksel olarak ayni anda birden fazla isin gercekten calismasi. Tum parallel calisma concurrencydir ama tum concurrency parallel degildir."
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Context Switch",
+      "text": "CPU bir threadden digerine gecerken context switch olur. Cok fazla thread/context switch throughputu dusurebilir. Bu yuzden daha cok thread her zaman daha iyi degildir."
+    },
+
     {
       "type": "list",
-      "title": "Calisma stratejisi",
+      "title": "Garanti modeli: concurrencyde asil olculen 4 baslik",
       "items": [
-        "1) Once paylasilan mutable state var mi bak",
-        "2) Varsa atomiklik ve gorunurlugu ayri ayri degerlendir",
-        "3) Sonra liveness risklerini dusun: deadlock, starvation, livelock",
-        "4) Son olarak performans ve operasyon etkisini degerlendir"
+        "Atomiklik (islem bolunmezligi)",
+        "Gorunurluk (bir threadin yazdigini digerinin gormesi)",
+        "Siralama (instruction/order garantisi)",
+        "Liveness (sistem ilerliyor mu?)"
       ]
     },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Atomiklik (Atomicity) nedir?",
+      "text": "Atomiklik, bir islemin bolunmez tek adim gibi gorulmesidir. Islem yarida kesilmeden ya tamamen olur ya hic olmaz. `value++` atomik degildir; oku-arttir-yaz olmak uzere birden fazla adimdir."
+    },
+    {
+      "type": "callout",
+      "tone": "caution",
+      "title": "Atomik olmayan ornek",
+      "text": "Asagidaki kodda iki thread ayni anda `counter++` yaptiginda kayip update olur. Beklenen 200000 yerine daha dusuk bir deger gorebilirsin.",
+      "code": "class NonAtomicDemo {\n    private int counter = 0;\n\n    void inc() {\n        counter++; // atomik degil\n    }\n\n    int getCounter() {\n        return counter;\n    }\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "success",
+      "title": "Atomiklik cozumu 1: synchronized",
+      "text": "Kritik bolgeyi tek lock altina alarak ayni anda tek threadin erismesini saglarsin. Bu yontem basit ve guvenilir bir baslangictir.",
+      "code": "class SyncCounter {\n    private int counter = 0;\n\n    synchronized void inc() {\n        counter++;\n    }\n\n    synchronized int getCounter() {\n        return counter;\n    }\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "success",
+      "title": "Atomiklik cozumu 2: AtomicInteger",
+      "text": "Sayac gibi senaryolarda locksuz atomik guncelleme icin `AtomicInteger` daha uygun olabilir.",
+      "code": "class AtomicCounter {\n    private final java.util.concurrent.atomic.AtomicInteger counter =\n        new java.util.concurrent.atomic.AtomicInteger(0);\n\n    void inc() {\n        counter.incrementAndGet();\n    }\n\n    int getCounter() {\n        return counter.get();\n    }\n}"
+    },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Gorunurluk (Visibility) nedir?",
+      "text": "Bir threadin yaptigi yazmanin diger thread tarafindan zamaninda gorulebilmesidir. Cache ve reordering nedeniyle gorunurluk garantisi yoksa bir thread digerinin guncel degerini gormeyebilir."
+    },
+    {
+      "type": "callout",
+      "tone": "success",
+      "title": "Gorunurluk icin volatile bayrak",
+      "text": "Asagidaki pattern stop sinyali gibi basit durum bayraklari icin dogrudur.",
+      "code": "class StopFlag {\n    private volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n\n    void work() {\n        while (running) {\n            // is\n        }\n    }\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "caution",
+      "title": "Onemli: volatile atomiklik saglamaz",
+      "text": "`volatile int count; count++;` hala atomik degildir. volatile gorunurluk ve siralama yardimi saglar ama read-modify-write birlesik islemi atomik hale getirmez."
+    },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Happens-before nedir?",
+      "text": "Happens-before, bir islemin digerinden once gorunur olacagini tanimlayan bellek duzeni iliskisidir. Concurrencyde dogrulugun matematiksel temelidir.",
+      "items": [
+        "synchronized unlock -> sonra ayni lock lock arasinda happens-before vardir",
+        "volatile write -> sonra volatile read arasinda happens-before vardir",
+        "Thread.start ve Thread.join da gorunurluk iliskisi kurar"
+      ]
+    },
+
     {
       "type": "list",
-      "title": "1) Thread neden zor?",
+      "title": "Thread stateleri (mulakatta cok sorulur)",
       "items": [
-        "Ayni process icindeki threadler heapi paylasir",
-        "Her threadin kendi stacki vardir",
-        "Local degiskenler daha guvenli, ortak nesne alanlari daha risklidir",
-        "Asil problem thread olusturmak degil, paylasilan mutable statei dogru yonetmektir"
+        "NEW: start edilmedi",
+        "RUNNABLE: calismaya hazir/calisiyor",
+        "BLOCKED: monitor lock bekliyor",
+        "WAITING: suresiz bekliyor (wait, join)",
+        "TIMED_WAITING: sureli bekliyor (sleep, timed wait, timed join)",
+        "TERMINATED: bitti"
       ]
     },
     {
-      "type": "code",
-      "language": "java",
-      "code": "class Counter {\n    int value = 0;\n\n    void inc() {\n        value++; // thread-safe degil (read-modify-write)\n    }\n}"
+      "type": "callout",
+      "tone": "debug",
+      "title": "sleep, wait, join farki",
+      "text": "sleep lock birakmaz. wait lock birakir ve notify/notifyAll bekler. join baska threadin bitmesini bekler. Bu ucunu karistirmak sik bug sebebidir.",
+      "code": "Object monitor = new Object();\n\nsynchronized (monitor) {\n    // Thread.sleep(1000); // lock birakmaz\n    // monitor.wait();      // lock birakir\n}\n\nThread t = new Thread(() -> {});\nt.start();\nt.join(); // t bitene kadar bekler"
     },
+
     {
-      "type": "paragraph",
-      "text": "value++ tek adim degildir: oku, arttir, yaz. Iki thread ayni anda bu adimlari kesisirse kayip update olur. Bu race conditionin en klasik ornegidir."
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Race Condition",
+      "text": "Ayni paylasilan state birden fazla thread tarafindan zamanlamaya bagli sekilde degistirildiginde olusan bug tipidir. Sonuc deterministic degildir, bu nedenle bazen calisir bazen bozulur."
     },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Critical Section",
+      "text": "Ayni anda birden fazla threadin girmesi istenmeyen kod bolgesidir. Kilit stratejisi (synchronized/lock) bu bolge etrafinda tasarlanir."
+    },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: ReentrantLock ne zaman kullanilir?",
+      "text": "synchronized cogu durumda yeterlidir. Ama timeoutlu lock alma, interruptible lock alma veya fairness gibi ileri kontrol lazimsa ReentrantLock tercih edilir.",
+      "code": "class TransferService {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n\n    boolean transfer() throws InterruptedException {\n        if (!lock.tryLock(200, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n            return false;\n        }\n        try {\n            return true;\n        } finally {\n            lock.unlock();\n        }\n    }\n}"
+    },
+
     {
       "type": "list",
-      "title": "2) Race conditioni nasil onlersin?",
+      "title": "Liveness terimleri",
       "items": [
-        "Paylasilan mutable statei azalt",
-        "Kritik bolgeyi lock ile koru",
-        "Uygun durumda atomik siniflar kullan",
-        "Mumkun oldugunca immutable tasarim tercih et"
+        "Deadlock",
+        "Starvation",
+        "Livelock",
+        "Interrupted shutdown"
       ]
     },
+
     {
-      "type": "code",
-      "language": "java",
-      "code": "class SafeCounter {\n    private int value = 0;\n\n    synchronized void inc() {\n        value++;\n    }\n\n    synchronized int get() {\n        return value;\n    }\n}"
+      "type": "callout",
+      "tone": "caution",
+      "title": "Terim: Deadlock nedir?",
+      "text": "Iki veya daha fazla thread birbirinin tuttugu kaynagi bekledigi icin hicbirinin ilerleyemedigi durumdur.",
+      "code": "Object A = new Object();\nObject B = new Object();\n\nThread t1 = new Thread(() -> {\n    synchronized (A) {\n        synchronized (B) {\n            System.out.println(\"t1\");\n        }\n    }\n});\n\nThread t2 = new Thread(() -> {\n    synchronized (B) {\n        synchronized (A) {\n            System.out.println(\"t2\");\n        }\n    }\n});"
     },
     {
-      "type": "paragraph",
-      "text": "synchronized hem mutual exclusion hem gorunurluk saglar. Yani ayni lock altindaki kodu ayni anda iki thread calistiramaz, ayrica bir threadin yaptigi degisikligi digeri daha tutarli gorur."
+      "type": "callout",
+      "tone": "success",
+      "title": "Deadlock nasil cozulur?",
+      "items": [
+        "Global lock ordering: her yerde ayni lock alma sirasi",
+        "tryLock + timeout ile sonsuz beklemeyi kir",
+        "Kritik bolgeleri kucult, lock scopeu daralt"
+      ],
+      "code": "// Tum kod yollarinda once A sonra B lock al\nsynchronized (A) {\n    synchronized (B) {\n        // kritik is\n    }\n}"
     },
+
+    {
+      "type": "callout",
+      "tone": "caution",
+      "title": "Terim: Starvation nedir?",
+      "text": "Bir threadin surekli kaynak alamayip uzun sure calisamamasidir. Sistem genel olarak ilerlese bile o thread ilerleyemez.",
+      "items": [
+        "Asiri uzun kritik bolge",
+        "Oncelik dengesizligi",
+        "Fair olmayan lock/pool politikasi"
+      ]
+    },
+
+    {
+      "type": "callout",
+      "tone": "caution",
+      "title": "Terim: Livelock nedir?",
+      "text": "Threadler kilitli degildir, aktif gorunurler ama birbirine yol verip durduklari icin gercek is ilerlemez. Deadlocktan farki: hareket vardir ama sonuc yoktur.",
+      "code": "// Pseudo: iki thread surekli geri cekilip tekrar deniyor\nwhile (true) {\n    if (leftFree()) {\n        takeLeft();\n        if (rightFree()) {\n            takeRight();\n            break;\n        }\n        releaseLeft(); // ikisi de ayni anda hep geri cekiliyorsa livelock\n    }\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "success",
+      "title": "Livelock nasil cozulur?",
+      "items": [
+        "Rastgele backoff ekle (threadler ayni ritimde davranmasin)",
+        "Deneme sayisini sinirla",
+        "Deterministik lock ordering uygula"
+      ],
+      "code": "int backoffMs = java.util.concurrent.ThreadLocalRandom.current().nextInt(10, 40);\nThread.sleep(backoffMs);"
+    },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Interrupt nedir?",
+      "text": "Interrupt, threadi zorla oldurme degil, isbirlikci durdurma sinyalidir. Kod interrupti kontrol etmeli, yakalayinca flagi restore etmeli ve temiz kapanis yapmalidir."
+    },
+    {
+      "type": "callout",
+      "tone": "success",
+      "title": "Interrupt dostu worker",
+      "code": "class Worker implements Runnable {\n    @Override\n    public void run() {\n        while (!Thread.currentThread().isInterrupted()) {\n            try {\n                java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n                // is\n            } catch (InterruptedException e) {\n                Thread.currentThread().interrupt();\n                break;\n            }\n        }\n        // cleanup\n    }\n}"
+    },
+
     {
       "type": "list",
-      "title": "3) synchronized, volatile, ReentrantLock secim mantigi",
+      "title": "Task yonetimi: new Thread yerine ExecutorService",
       "items": [
-        "synchronized: basit ve guvenli kritik bolge korumasi",
-        "volatile: sadece gorunurluk, atomiklik degil",
-        "ReentrantLock: tryLock, timeout, fairness gibi ileri kontrol"
+        "Task tanimi ile calistirma stratejisini ayirir",
+        "Thread reuse eder",
+        "Kapanis ve reject politikasini merkezi yonetir",
+        "Production izlenebilirligi arttirir"
       ]
     },
     {
-      "type": "code",
-      "language": "java",
-      "code": "class StopSignal {\n    volatile boolean running = true;\n\n    void stop() {\n        running = false;\n    }\n}\n\n// Not: volatile value++ gibi compound islemi atomik yapmaz."
+      "type": "callout",
+      "tone": "success",
+      "title": "ExecutorService temel pattern",
+      "code": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    Integer result = f.get(2, java.util.concurrent.TimeUnit.SECONDS);\n    System.out.println(result);\n} finally {\n    pool.shutdown();\n}"
     },
     {
-      "type": "code",
-      "language": "java",
-      "code": "class LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try {\n            value++;\n        } finally {\n            lock.unlock();\n        }\n    }\n}"
-    },
-    {
-      "type": "list",
-      "title": "4) Java Memory Model kisa ama kritik notlar",
+      "type": "callout",
+      "tone": "caution",
+      "title": "Pool sizing yanlislari",
       "items": [
-        "Happens-before iliskisi gorunurluk/siralama garantisi verir",
-        "synchronized unlock -> lock arasi happens-before etkisi vardir",
-        "volatile write -> volatile read arasi happens-before vardir",
-        "DCL (double-checked locking) icin instance volatile olmalidir"
+        "CPU-bound islerde asiri buyuk pool context switch maliyeti arttirir",
+        "IO-bound islerde asiri kucuk pool bekleme kuyrugu buyutur",
+        "Dogru boyut benchmark + metrikle bulunur (p95/p99 latency, queue depth, throughput)"
+      ]
+    },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Runnable, Callable, Future",
+      "items": [
+        "Runnable: sonuc donmez",
+        "Callable: sonuc doner ve checked exception firlatabilir",
+        "Future.get(): sonuc hazir degilse bloklar"
       ]
     },
     {
-      "type": "code",
-      "language": "java",
-      "code": "class Singleton {\n    private Singleton() {}\n\n    private static class Holder {\n        static final Singleton INSTANCE = new Singleton();\n    }\n\n    static Singleton getInstance() {\n        return Holder.INSTANCE;\n    }\n}"
-    },
-    {
-      "type": "paragraph",
-      "text": "Initialization-on-demand holder idiomi lazy singleton ihtiyacinda hem sade hem guvenli bir yoldur. Cogu durumda volatile DCL yazmaktan daha az hata riski tasir."
-    },
-    {
-      "type": "list",
-      "title": "5) Thread lifecycle ve bekleme tipleri",
-      "items": [
-        "Durumlar: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED",
-        "BLOCKED: monitor lock bekleme",
-        "WAITING: olay/sinyal bekleme (wait, join)",
-        "TIMED_WAITING: sureli bekleme (sleep, timed wait)"
-      ]
-    },
-    {
-      "type": "code",
-      "language": "java",
-      "code": "Object monitor = new Object();\n\nThread t = new Thread(() -> {\n    synchronized (monitor) {\n        try {\n            monitor.wait(); // WAITING, locku birakir\n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n        }\n    }\n});"
-    },
-    {
-      "type": "paragraph",
-      "text": "sleep lock birakmaz. wait locku birakir ve notify/notifyAll bekler. join, baska bir threadin bitmesini bekler. Bu ucunu karistirmamak mulakatta kritik ayrimdir."
-    },
-    {
-      "type": "list",
-      "title": "6) new Thread yerine ExecutorService",
-      "items": [
-        "Task tanimi ile thread yonetimini ayirir",
-        "Thread reuse ile maliyeti dusurur",
-        "Kapanis davranisini merkezi hale getirir",
-        "Production kodda kontrol ve gozlemlenebilirlik artar"
-      ]
-    },
-    {
-      "type": "code",
-      "language": "java",
-      "code": "java.util.concurrent.ExecutorService pool =\n    java.util.concurrent.Executors.newFixedThreadPool(4);\n\ntry {\n    java.util.concurrent.Future<Integer> f = pool.submit(() -> 42);\n    Integer value = f.get(2, java.util.concurrent.TimeUnit.SECONDS);\n    System.out.println(value);\n} catch (java.util.concurrent.TimeoutException e) {\n    // sure asimi politikasi\n} finally {\n    pool.shutdown();\n}"
-    },
-    {
-      "type": "list",
-      "title": "Pool sizing temel kural",
-      "items": [
-        "CPU-bound: cekirdek sayisina yakin",
-        "IO-bound: bekleme agirligi nedeniyle daha buyuk olabilir",
-        "Rastgele buyuk pool secmek context-switch ve bellek maliyeti yaratir",
-        "Dogru deger olcumle bulunur: latency, queue depth, throughput"
-      ]
-    },
-    {
-      "type": "list",
-      "title": "7) Runnable, Callable, Future, CompletableFuture",
-      "items": [
-        "Runnable: sonuc dondurmez",
-        "Callable: sonuc dondurur, exception firlatabilir",
-        "Future.get(): sonuc hazir degilse bloklar",
-        "CompletableFuture: asenkron pipeline, compose, fallback, hata kanali"
-      ]
-    },
-    {
-      "type": "code",
-      "language": "java",
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: CompletableFuture",
+      "text": "Asenkron pipeline kurar. `thenApply` map, `thenCompose` flatMap gibidir. Hata kanali acikca ele alinmazsa sessiz fail riskin vardir.",
       "code": "java.util.concurrent.CompletableFuture<Integer> total =\n    java.util.concurrent.CompletableFuture.supplyAsync(() -> 10)\n        .thenCompose(v -> java.util.concurrent.CompletableFuture.supplyAsync(() -> v + 5))\n        .exceptionally(ex -> 0);\n\nSystem.out.println(total.join());"
     },
-    {
-      "type": "paragraph",
-      "text": "thenApply map gibidir (T -> U), thenCompose flatMap gibidir (T -> CompletableFuture<U>). Nested future olusuyorsa thenCompose gerekir."
-    },
+
     {
       "type": "list",
-      "title": "8) Koordinasyon araclari (dogru araci sec)",
+      "title": "Koordinasyon araclari: hangi problemde hangisi?",
       "items": [
-        "wait/notify: low-level monitor koordinasyonu",
-        "CountDownLatch: tek seferlik kapi, N olay bekle",
-        "CyclicBarrier: grup halinde faz faz bekleme",
+        "CountDownLatch: N olay bitsin, sonra devam et",
+        "CyclicBarrier: grup halinde faz-faz ilerleme",
         "Semaphore: ayni anda calisabilecek is sayisini sinirla",
-        "BlockingQueue: producer-consumer icin en sade yol"
+        "BlockingQueue: producer-consumer"
       ]
     },
     {
-      "type": "code",
-      "language": "java",
+      "type": "callout",
+      "tone": "success",
+      "title": "CountDownLatch ornegi",
+      "code": "java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(2);\nnew Thread(latch::countDown).start();\nnew Thread(latch::countDown).start();\nlatch.await();\nSystem.out.println(\"all done\");"
+    },
+    {
+      "type": "callout",
+      "tone": "success",
+      "title": "Semaphore ornegi",
+      "code": "java.util.concurrent.Semaphore sem = new java.util.concurrent.Semaphore(3);\nsem.acquire();\ntry {\n    // ayni anda en fazla 3 thread\n} finally {\n    sem.release();\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "success",
+      "title": "BlockingQueue producer-consumer",
       "code": "java.util.concurrent.ArrayBlockingQueue<Integer> q =\n    new java.util.concurrent.ArrayBlockingQueue<>(10);\n\nThread producer = new Thread(() -> {\n    for (int i = 1; i <= 5; i++) {\n        try { q.put(i); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }\n    }\n});\n\nThread consumer = new Thread(() -> {\n    for (int i = 1; i <= 5; i++) {\n        try { System.out.println(q.take()); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }\n    }\n});"
     },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: ConcurrentHashMap",
+      "text": "Paylasilan map erisimi icin thread-safe secenektir. Plain HashMap ile concurrent write yapmak tutarsiz sonuclar ve hatta sonsuz dongu riskleri dogurabilir.",
+      "code": "java.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\nmap.merge(\"java\", 1, Integer::sum);"
+    },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Immutability neden guclu?",
+      "text": "Immutable nesneler olustuktan sonra degismez. Bu sayede lock ihtiyaci ciddi azalir, paylasim daha guvenli olur. Concurrencyde en guvenli state, degismeyen statedir."
+    },
+
+    {
+      "type": "callout",
+      "tone": "caution",
+      "title": "Terim: ThreadLocal ve pool sizintisi",
+      "text": "ThreadLocal thread bazli veri saklar. Ama thread poolda ayni thread tekrar kullanildigi icin `remove` etmezsen onceki istegin verisi sonrakine sizabilir.",
+      "code": "ThreadLocal<String> requestId = new ThreadLocal<>();\n\ntry {\n    requestId.set(\"req-123\");\n    // is\n} finally {\n    requestId.remove(); // kritik\n}"
+    },
+
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Terim: Daemon thread",
+      "text": "Daemon threadler JVM kapanisini engellemez. Arka plan yardimci isler icin kullanilir. Kritik veri yazimi gibi isleri daemon threade baglamak risklidir."
+    },
+
     {
       "type": "list",
-      "title": "9) Liveness problemleri",
+      "title": "Concurrency buglarini bulma checklist",
       "items": [
-        "Deadlock: threadler karsilikli lock bekler, ilerleme durur",
-        "Starvation: bir thread surekli kaynak alamaz",
-        "Livelock: threadler aktif gorunur ama ilerleme yok",
-        "Interrupt: zorla oldurme degil, isbirlikci durdurma sinyali"
+        "Ayni testi tekrarli kos (flaky bug yakalamak icin)",
+        "Timeoutlu test yaz (sonsuz bekleme yakalamak icin)",
+        "jstack ile BLOCKED/WAITING zincirini incele",
+        "Pool metriklerini izle: active thread, queue size, reject count",
+        "Uygulama loguna request-id ve thread-name ekle"
       ]
     },
+
     {
-      "type": "code",
-      "language": "java",
-      "code": "java.util.concurrent.locks.ReentrantLock a = new java.util.concurrent.locks.ReentrantLock();\njava.util.concurrent.locks.ReentrantLock b = new java.util.concurrent.locks.ReentrantLock();\n\nboolean transfer() throws InterruptedException {\n    if (!a.tryLock(100, java.util.concurrent.TimeUnit.MILLISECONDS)) return false;\n    try {\n        if (!b.tryLock(100, java.util.concurrent.TimeUnit.MILLISECONDS)) return false;\n        try {\n            return true; // kritik is\n        } finally {\n            b.unlock();\n        }\n    } finally {\n        a.unlock();\n    }\n}"
+      "type": "callout",
+      "tone": "debug",
+      "title": "Mulakatta guclu cevap sirasi",
+      "items": [
+        "1) Shared mutable state var mi?",
+        "2) Hangi garanti eksik: atomiklik mi gorunurluk mu?",
+        "3) Liveness riski var mi: deadlock/starvation/livelock?",
+        "4) Primitive secimi neye gore? (synchronized, lock, atomic, volatile)",
+        "5) Production etkisi ne? (latency, throughput, kaynak, gozlemlenebilirlik)"
+      ]
     },
+
     {
       "type": "paragraph",
-      "text": "Deadlock onlemede en guclu iki teknik: global lock ordering ve tryLock+timeout. Starvation riskinde fairness secenegi degerlendirilebilir ama throughput maliyeti olabilir."
-    },
-    {
-      "type": "list",
-      "title": "10) Concurrent collections ve immutability",
-      "items": [
-        "ConcurrentHashMap: paylasilan key-value yapisi icin standart secenek",
-        "CopyOnWriteArrayList: read agir, write seyrek durumlarda uygun",
-        "Collections.synchronizedList ile iterasyonda dis lock gerekir",
-        "Immutable nesneler race riskini kokten azaltir"
-      ]
-    },
-    {
-      "type": "code",
-      "language": "java",
-      "code": "java.util.concurrent.ConcurrentHashMap<String, Integer> map =\n    new java.util.concurrent.ConcurrentHashMap<>();\n\nmap.merge(\"java\", 1, Integer::sum);\nmap.computeIfAbsent(\"threads\", k -> 0);"
-    },
-    {
-      "type": "paragraph",
-      "text": "ThreadLocal thread bazli veri izolasyonu saglar ama pool ortaminda remove edilmezse bir isteki veri sonraki ise sizabilir. Bu hem bug hem guvenlik riskidir."
-    },
-    {
-      "type": "code",
-      "language": "java",
-      "code": "ThreadLocal<String> requestId = new ThreadLocal<>();\n\ntry {\n    requestId.set(\"req-123\");\n    // is\n} finally {\n    requestId.remove(); // pool reuse icin kritik\n}"
-    },
-    {
-      "type": "list",
-      "title": "11) Interrupt dostu kapanis",
-      "items": [
-        "InterruptedException yakalayinca interrupt flagini restore et",
-        "Sonsuz dongulerde isInterrupted kontrolu yap",
-        "finally bloklarinda kaynaklari kapat",
-        "Iptal semantigini best-effort olarak tasarla"
-      ]
-    },
-    {
-      "type": "code",
-      "language": "java",
-      "code": "while (!Thread.currentThread().isInterrupted()) {\n    try {\n        java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);\n        // is\n    } catch (InterruptedException e) {\n        Thread.currentThread().interrupt();\n        break;\n    }\n}\n// cleanup"
-    },
-    {
-      "type": "list",
-      "title": "12) Concurrency buglarini nasil test/analiz edersin?",
-      "items": [
-        "Ayni testi cok tekrar kos (flaky buglar icin)",
-        "Timeoutlu test yaz, sonsuz beklemeyi erken yakala",
-        "Thread dump (jstack) ile BLOCKED/WAITING zincirini incele",
-        "Kritik metrikleri izle: queue size, reject sayisi, latency p95/p99"
-      ]
-    },
-    {
-      "type": "list",
-      "title": "13) Mulakatta guclu kapanis cumlesi",
-      "items": [
-        "Once paylasilan mutable state var mi bakarim",
-        "Varsa atomiklik ve gorunurlugu ayri degerlendiririm",
-        "Basit durumda synchronized, ileri kontrol lazimsa ReentrantLock, sadece gorunurlukte volatile kullanirim",
-        "Thread acmaktan cok ExecutorService ile task yonetirim",
-        "Tasarimda immutable nesne ve concurrent collection tercih ederim",
-        "Kapanis ve iptal davranisinda interrupt disiplinine uyarim"
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "Ozetle: Concurrencyde ustalik, daha cok API bilmekten ziyade dogru soruyu sirayla sormaktir. Shared state, atomiklik, gorunurluk, liveness, performans ve operasyon etkisini birlikte dusunursen hem mulakatta hem productionda guclu sonuc alirsin."
+      "text": "Kisa ozet: Concurrency ustaligi daha fazla API ezberlemek degil, dogru soruyu dogru sirada sormaktir. Shared state -> atomiklik/gorunurluk -> liveness -> performans/operasyon zincirini kurarsan hem mulakatta hem productionda cok daha saglam cozum uretirsin."
     }
   ]
 }

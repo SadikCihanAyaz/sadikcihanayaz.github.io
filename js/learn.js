@@ -311,6 +311,23 @@
         `;
       }
 
+      if (block.type === 'callout') {
+        const toneRaw = String(block.tone || 'info').toLowerCase();
+        const tone = /^[a-z0-9-]+$/.test(toneRaw) ? toneRaw : 'info';
+        const items = Array.isArray(block.items)
+          ? block.items.map((item) => `<li>${esc(item)}</li>`).join('')
+          : '';
+
+        return `
+          <div class="article-block callout callout-${tone}">
+            ${block.title ? `<h4>${esc(block.title)}</h4>` : ''}
+            ${block.text ? `<p>${esc(block.text)}</p>` : ''}
+            ${items ? `<ul>${items}</ul>` : ''}
+            ${block.code ? `<pre class="code"><code>${esc(block.code)}</code></pre>` : ''}
+          </div>
+        `;
+      }
+
       return '';
     }).join('');
 

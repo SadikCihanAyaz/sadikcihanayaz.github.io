@@ -163,6 +163,50 @@ a:hover {
   color: #223;
 }
 
+.callout h4 {
+  margin: 0 0 8px;
+}
+
+.callout p {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.55;
+}
+
+.callout ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.callout .code {
+  margin-top: 10px;
+}
+
+.callout-info {
+  border-left-color: #0d6efd;
+  background: #eef5ff;
+}
+
+.callout-concept {
+  border-left-color: #f59f00;
+  background: #fff8e8;
+}
+
+.callout-caution {
+  border-left-color: #dc3545;
+  background: #fff0f2;
+}
+
+.callout-success {
+  border-left-color: #198754;
+  background: #ecfbf2;
+}
+
+.callout-debug {
+  border-left-color: #6f42c1;
+  background: #f4f0ff;
+}
+
 .article-block {
   margin-top: 14px;
 }
