@@ -33,26 +33,9 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Soru Metni\nJPA default fetch tipi icin hangi eslesme dogrudur?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - @ManyToOne EAGER, @OneToMany LAZY\n\n### Sorunun Olctugu Kavram\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **@ManyToOne EAGER, @OneToMany LAZY** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Tum iliskileri eager yapmak asiri veri cekimi ve N+1 benzeri performans sorunlari yaratabilir.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `D`: YANLIS -> Tum iliskileri eager yapmak asiri veri cekimi ve N+1 benzeri performans sorunlari yaratabilir.\n\n> Not: Siklikla yapilan hata -> OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Mini Pekistirme Ornegi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** @ManyToOne LAZY, @OneToMany EAGER\n\n### Neden Yanlis?\nTum iliskileri eager yapmak asiri veri cekimi ve N+1 benzeri performans sorunlari yaratabilir.\n\n### Dogru Model Ne?\nDogrusu: **@ManyToOne EAGER, @OneToMany LAZY**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** @ManyToOne EAGER, @OneToMany LAZY\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Pratik etkisi: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tum iliskiler default LAZY\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **@ManyToOne EAGER, @OneToMany LAZY**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tum iliskiler default EAGER\n\n### Neden Yanlis?\nTum iliskileri eager yapmak asiri veri cekimi ve N+1 benzeri performans sorunlari yaratabilir.\n\n### Dogru Model Ne?\nDogrusu: **@ManyToOne EAGER, @OneToMany LAZY**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        }
-      ],
-      "answerCode": "@javax.persistence.ManyToOne(fetch = javax.persistence.FetchType.LAZY)\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+      "answerBody": "### Dogru Cevap\n- B: @ManyToOne EAGER, @OneToMany LAZY",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i4-q2",
@@ -81,26 +64,9 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Soru Metni\nLazyInitializationException en tipik hangi durumda gorulur?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Lazy iliskiye, persistence context kapanmisken erisildiginde.\n\n### Sorunun Olctugu Kavram\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Lazy iliskiye, persistence context kapanmisken erisildiginde.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `C`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `D`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n> Not: Siklikla yapilan hata -> OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Mini Pekistirme Ornegi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Lazy iliskiye, persistence context kapanmisken erisildiginde.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Pratik etkisi: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Entity save edilmeden once.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Lazy iliskiye, persistence context kapanmisken erisildiginde.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece native queryde.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Lazy iliskiye, persistence context kapanmisken erisildiginde.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece @Version oldugunda.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Lazy iliskiye, persistence context kapanmisken erisildiginde.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        }
-      ],
-      "answerCode": "order.getItems().size(); // tx disinda ise risk\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+      "answerBody": "### Dogru Cevap\n- A: Lazy iliskiye, persistence context kapanmisken erisildiginde.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i4-q3",
@@ -129,26 +95,9 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Soru Metni\nN+1 problemi icin en dogru tanim hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - 1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.\n\n### Sorunun Olctugu Kavram\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `D`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n> Not: Siklikla yapilan hata -> OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Mini Pekistirme Ornegi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tek sorguda tum verinin ideal gelmesidir.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** 1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Pratik etkisi: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece write islemlerinde gorulur.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Connection pool hatasidir.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        }
-      ],
-      "answerCode": "for (User u : users) { u.getOrders().size(); }\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+      "answerBody": "### Dogru Cevap\n- B: 1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i4-q4",
@@ -177,26 +126,9 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Soru Metni\nJOIN FETCH kullaniminin ana amaci nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.\n\n### Sorunun Olctugu Kavram\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `D`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n> Not: Siklikla yapilan hata -> OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Mini Pekistirme Ornegi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Transaction propagation belirlemek.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Pratik etkisi: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece insert hizini arttirmak.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Entityyi detached yapmak.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        }
-      ],
-      "answerCode": "@org.springframework.data.jpa.repository.Query(\"select distinct u from User u join fetch u.orders\")\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+      "answerBody": "### Dogru Cevap\n- B: Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i4-q5",
@@ -225,26 +157,9 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Soru Metni\n@EntityGraph neyi saglar?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Repository seviyesinde fetch planini declarative sekilde tanimlamayi.\n\n### Sorunun Olctugu Kavram\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Repository seviyesinde fetch planini declarative sekilde tanimlamayi.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `C`: YANLIS -> Rollback davranisi exception tipi ve propagation politikasina baglidir.\n- `D`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n> Not: Siklikla yapilan hata -> OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Mini Pekistirme Ornegi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Repository seviyesinde fetch planini declarative sekilde tanimlamayi.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Pratik etkisi: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** SQL migration scripti yazmayi.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Repository seviyesinde fetch planini declarative sekilde tanimlamayi.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Rollback kurallarini degistirmeyi.\n\n### Neden Yanlis?\nRollback davranisi exception tipi ve propagation politikasina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Repository seviyesinde fetch planini declarative sekilde tanimlamayi.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Connection pool boyutunu ayarlamayi.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Repository seviyesinde fetch planini declarative sekilde tanimlamayi.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        }
-      ],
-      "answerCode": "@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+      "answerBody": "### Dogru Cevap\n- A: Repository seviyesinde fetch planini declarative sekilde tanimlamayi.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i4-q6",
@@ -273,26 +188,9 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Soru Metni\nhibernate.default_batch_fetch_size ayarinin temel faydasi nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.\n\n### Sorunun Olctugu Kavram\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> JPQL, derived query, specification gibi alternatifler vardir; native SQL tek yol degildir.\n- `C`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `D`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n> Not: Siklikla yapilan hata -> OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Mini Pekistirme Ornegi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Pratik etkisi: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tum sorgulari native SQLe cevirmek.\n\n### Neden Yanlis?\nJPQL, derived query, specification gibi alternatifler vardir; native SQL tek yol degildir.\n\n### Dogru Model Ne?\nDogrusu: **Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her transactioni REQUIRES_NEW yapmak.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Dirty checkingi kapatmak.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        }
-      ],
-      "answerCode": "spring.jpa.properties.hibernate.default_batch_fetch_size=50\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+      "answerBody": "### Dogru Cevap\n- A: Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i4-q7",
@@ -321,26 +219,9 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Soru Metni\nOSIV (Open Session In View) acik oldugunda en kritik risk hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.\n\n### Sorunun Olctugu Kavram\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `C`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `D`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n> Not: Siklikla yapilan hata -> OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Mini Pekistirme Ornegi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Pratik etkisi: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Uygulamanin derlenmemesi.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece insertlerin calismasi.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Repositorylerin kapanmasi.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n"
-        }
-      ],
-      "answerCode": "spring.jpa.open-in-view=false\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();"
+      "answerBody": "### Dogru Cevap\n- A: Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i4-q8",
@@ -369,26 +250,9 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Soru Metni\nAsagidaki kod icin en dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.\n\n### Sorunun Olctugu Kavram\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.\n2. Kod satiri: `java.util.List<User> users = userRepository.findAll();`\n3. Kod satiri: `for (User u : users) {`\n4. Kod satiri: `System.out.println(u.getOrders().size());`\n5. Kod satiri: `}`\n6. Bu adimlarin sonucu olarak dogru cikti/yorum: **users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `C`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `D`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n> Not: Siklikla yapilan hata -> OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Mini Pekistirme Ornegi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Pratik etkisi: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Dongu hicbir zaman query tetiklemez.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu kod sadece delete SQL uretir.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** N+1 sadece write tarafinda olur.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n\n### Kod Baglami\nKodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.\n"
-        }
-      ],
-      "answerCode": "java.util.List<User> users = userRepository.findAll();\nfor (User u : users) {\n    u.getOrders().size();\n}\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();",
+      "answerBody": "### Dogru Cevap\n- A: users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.",
+      "optionExplanations": [],
+      "answerCode": "",
       "questionCode": " java.util.List<User> users = userRepository.findAll();\n for (User u : users) {\n     System.out.println(u.getOrders().size());\n }"
     },
     {
@@ -418,26 +282,9 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Soru Metni\nBu join fetch sorgusunda neden distinct kullanimi gerekebilir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.\n\n### Sorunun Olctugu Kavram\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Fetch plani tek sorguda iliskili veriyi cekerek N+1 riskini azaltir.\n2. Kod satiri: `@org.springframework.data.jpa.repository.Query(\"select u from User u join fetch u.orders\")`\n3. Kod satiri: `java.util.List<User> findAllWithOrders();`\n4. Bu adimlarin sonucu olarak dogru cikti/yorum: **One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `D`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n> Not: Siklikla yapilan hata -> OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Mini Pekistirme Ornegi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Cunku distinct olmadan SQL syntax hatasi olur.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n\n### Kod Baglami\nFetch plani tek sorguda iliskili veriyi cekerek N+1 riskini azaltir.\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Pratik etkisi: Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n\n### Kod Baglami\nFetch plani tek sorguda iliskili veriyi cekerek N+1 riskini azaltir.\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Distinct her zaman performansi kotulestirir.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n\n### Kod Baglami\nFetch plani tek sorguda iliskili veriyi cekerek N+1 riskini azaltir.\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Distinct sadece count sorgusunda vardir.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.**\n\n- Konu aciklamasi: Yanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n- Bu secenek secilirse risk: OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n\n### Kod Baglami\nFetch plani tek sorguda iliskili veriyi cekerek N+1 riskini azaltir.\n"
-        }
-      ],
-      "answerCode": "@org.springframework.data.jpa.repository.Query(\"select distinct u from User u join fetch u.orders\")\njava.util.List<User> findAllWithOrders();\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();",
+      "answerBody": "### Dogru Cevap\n- B: One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.",
+      "optionExplanations": [],
+      "answerCode": "",
       "questionCode": " @org.springframework.data.jpa.repository.Query(\"select u from User u join fetch u.orders\")\n java.util.List<User> findAllWithOrders();"
     },
     {
@@ -445,9 +292,10 @@
       "type": "code",
       "question": "User ile Orders iliskisini N+1siz getiren bir repository + service kodu yaz. EntityGraph veya fetch join kullanabilir, sonucu DTOya map et.",
       "starterCode": "interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    // TODO\n}\n\nclass UserService {\n    private final UserRepository userRepository;\n\n    UserService(UserRepository userRepository) {\n        this.userRepository = userRepository;\n    }\n\n    // TODO\n}\n",
-      "answerBody": "### Soru Metni\nUser ile Orders iliskisini N+1siz getiren bir repository + service kodu yaz. EntityGraph veya fetch join kullanabilir, sonucu DTOya map et.\n\n### Bu Soru Neyi Olcuyor?\nYanlis fetch plani N+1 ve asiri veri cekimi uretir. Fetch join, EntityGraph, projection ve batch fetch ayarlari sorgu sayisini kontrol etmekte kritik rol oynar.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari tam karsila (input, output, hata akis).\n2. Teknik garanti dogru olsun (state/lock/tx/fetch semantigi).\n3. Kenar durumlarini ele al (timeout, null, duplicate, interrupt, rollback).\n4. Kaynaklari dogru kapat (finally, cleanup, shutdown).\n\n### Neden Bu Sekilde Tasarlanir?\n- Endpoint bazli fetch plani tasarla. Her iliskiyi global eager yapmak yerine ihtiyac kadar veriyi tek sorguda cek.\n- OSIVe asiri guvenmek view asamasinda kontrolsuz query patlamasina yol acar.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip hata akislarini bos birakmak\n- Sinyal/transaction/lock semantigini yarim birakmak\n- API sozlesmesini bozacak imza degisikligi yapmak\n\n### Starter Code Notu\nVerilen iskelette TODO alanlarini doldururken method imzalari ve field yapisi korunmali.\n\n### Mini Referans Ornek\n```java\n@EntityGraph(attributePaths = \"orders\")\nList<User> findAllByStatus(String status);\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu bununla semantik olarak karsilastir.",
+      "answerBody": "### Dogru Cevap\nAsagidaki referans kodu inceleyebilirsin.",
       "answerCode": "interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User, Long> {\n    @org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\n    java.util.List<User> findByStatus(String status);\n}\n\n@org.springframework.transaction.annotation.Transactional(readOnly = true)\npublic java.util.List<UserOrderDto> listActiveUsers() {\n    java.util.List<User> users = userRepository.findByStatus(\"ACTIVE\");\n    return users.stream()\n        .map(u -> new UserOrderDto(u.getId(), u.getEmail(), u.getOrders().size()))\n        .toList();\n}\n\nrecord UserOrderDto(Long id, String email, int orderCount) {}\n\n// Ek ogretici ornek\n@org.springframework.data.jpa.repository.EntityGraph(attributePaths = {\"orders\"})\njava.util.List<User> findAll();",
-      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz",
+      "optionExplanations": []
     }
   ]
 }

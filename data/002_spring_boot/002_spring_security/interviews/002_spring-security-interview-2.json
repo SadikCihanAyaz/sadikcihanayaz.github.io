@@ -34,26 +34,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nStateful ve Stateless authentication farki icin en dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Stateful modelde server oturum bilgisi tutar; stateless modelde her request tokenla kimlik tasir.\n\n### Sorunun Olctugu Kavram\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Stateful modelde server oturum bilgisi tutar; stateless modelde her request tokenla kimlik tasir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Stateful modelde server hic state tutmaz; stateless modelde session zorunludur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Stateful modelde server oturum bilgisi tutar; stateless modelde her request tokenla kimlik tasir.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Stateful modelde server oturum bilgisi tutar; stateless modelde her request tokenla kimlik tasir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Pratik etkisi: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Ikisinde de kesin olarak cookie kullanmak zorunludur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Stateful modelde server oturum bilgisi tutar; stateless modelde her request tokenla kimlik tasir.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Stateless modelde logout mumkun degildir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Stateful modelde server oturum bilgisi tutar; stateless modelde her request tokenla kimlik tasir.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        }
-      ],
-      "answerCode": "http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));"
+      "answerBody": "### Dogru Cevap\n- B: Stateful modelde server oturum bilgisi tutar; stateless modelde her request tokenla kimlik tasir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i2-q2",
@@ -83,26 +66,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nSessionCreationPolicy.STATELESS ayari neyi ifade eder?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Spring Security authentication statei icin HttpSession kullanmaz; her request bagimsiz ele alinir.\n\n### Sorunun Olctugu Kavram\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Spring Security authentication statei icin HttpSession kullanmaz; her request bagimsiz ele alinir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Spring Security her requestte yeni HttpSession olusturur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Spring Security authentication statei icin HttpSession kullanmaz; her request bagimsiz ele alinir.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Spring Security authentication statei icin HttpSession kullanmaz; her request bagimsiz ele alinir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Pratik etkisi: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece static resource requestleri etkilenir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Spring Security authentication statei icin HttpSession kullanmaz; her request bagimsiz ele alinir.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu ayar sadece test profilinde calisir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Spring Security authentication statei icin HttpSession kullanmaz; her request bagimsiz ele alinir.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        }
-      ],
-      "answerCode": "http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));"
+      "answerBody": "### Dogru Cevap\n- B: Spring Security authentication statei icin HttpSession kullanmaz; her request bagimsiz ele alinir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i2-q3",
@@ -132,26 +98,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nCSRF korumasi en kritik hangi senaryoda gereklidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Tarayicinin otomatik gonderdigi cookie tabanli auth kullanan stateful formlarda.\n\n### Sorunun Olctugu Kavram\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Tarayicinin otomatik gonderdigi cookie tabanli auth kullanan stateful formlarda.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Tarayicinin otomatik gonderdigi cookie tabanli auth kullanan stateful formlarda.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Pratik etkisi: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece command-line clientlarda.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Tarayicinin otomatik gonderdigi cookie tabanli auth kullanan stateful formlarda.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her zaman JWT Authorization header kullanan tamamen stateless APIlerde mutlak zorunludur.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Tarayicinin otomatik gonderdigi cookie tabanli auth kullanan stateful formlarda.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece GET requestlerde.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Tarayicinin otomatik gonderdigi cookie tabanli auth kullanan stateful formlarda.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        }
-      ],
-      "answerCode": "http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));"
+      "answerBody": "### Dogru Cevap\n- A: Tarayicinin otomatik gonderdigi cookie tabanli auth kullanan stateful formlarda.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i2-q4",
@@ -181,26 +130,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nCORS preflight (OPTIONS) requestlerinin fail etmesinin tipik sebebi hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - OPTIONS requestine izin verilmemesi veya allowed headers/origin taniminin eksik olmasi.\n\n### Sorunun Olctugu Kavram\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **OPTIONS requestine izin verilmemesi veya allowed headers/origin taniminin eksik olmasi.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Spring hasRole ROLE_ prefix semantigine dikkat ister.\n\n> Not: Siklikla yapilan hata -> Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** OPTIONS requestine izin verilmemesi veya allowed headers/origin taniminin eksik olmasi.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Pratik etkisi: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** BCrypt kullanmak.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **OPTIONS requestine izin verilmemesi veya allowed headers/origin taniminin eksik olmasi.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT exp claiminin uzun olmasi.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **OPTIONS requestine izin verilmemesi veya allowed headers/origin taniminin eksik olmasi.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Role adinda ROLE_ prefixi bulunmasi.\n\n### Neden Yanlis?\nSpring hasRole ROLE_ prefix semantigine dikkat ister.\n\n### Dogru Model Ne?\nDogrusu: **OPTIONS requestine izin verilmemesi veya allowed headers/origin taniminin eksik olmasi.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        }
-      ],
-      "answerCode": "http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));"
+      "answerBody": "### Dogru Cevap\n- A: OPTIONS requestine izin verilmemesi veya allowed headers/origin taniminin eksik olmasi.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i2-q5",
@@ -230,26 +162,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nBearer tokeni Authorization headerda tasimanin temel faydasi hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Token explicit gonderildigi icin request bazli kontrol daha net olur.\n\n### Sorunun Olctugu Kavram\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Token explicit gonderildigi icin request bazli kontrol daha net olur.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> CSRF ihtiyaci authentication mekanizmasina baglidir; cookie tabanli akista kritik, bearer header senaryosunda farklidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tarayici tokeni otomatik her domaine yollar.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token explicit gonderildigi icin request bazli kontrol daha net olur.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Token explicit gonderildigi icin request bazli kontrol daha net olur.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Pratik etkisi: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** CSRF her durumda tamamen ortadan kalkar ve baska risk kalmaz.\n\n### Neden Yanlis?\nCSRF ihtiyaci authentication mekanizmasina baglidir; cookie tabanli akista kritik, bearer header senaryosunda farklidir.\n\n### Dogru Model Ne?\nDogrusu: **Token explicit gonderildigi icin request bazli kontrol daha net olur.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Server stateful olmak zorunda kalir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token explicit gonderildigi icin request bazli kontrol daha net olur.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        }
-      ],
-      "answerCode": "http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));"
+      "answerBody": "### Dogru Cevap\n- B: Token explicit gonderildigi icin request bazli kontrol daha net olur.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i2-q6",
@@ -279,26 +194,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nSecurityContextHolder hangi kapsamda dusunulmelidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Request akisinda thread baglaminda tutulan gecici authentication contextidir.\n\n### Sorunun Olctugu Kavram\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Request akisinda thread baglaminda tutulan gecici authentication contextidir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Global kalici user veritabani gibi tum uygulama omru boyunca saklanir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Request akisinda thread baglaminda tutulan gecici authentication contextidir.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Request akisinda thread baglaminda tutulan gecici authentication contextidir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Pratik etkisi: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece cache katmanidir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Request akisinda thread baglaminda tutulan gecici authentication contextidir.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece OAuth2 login icin vardir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Request akisinda thread baglaminda tutulan gecici authentication contextidir.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        }
-      ],
-      "answerCode": "http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));"
+      "answerBody": "### Dogru Cevap\n- B: Request akisinda thread baglaminda tutulan gecici authentication contextidir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i2-q7",
@@ -328,26 +226,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nStateless JWT APIde en saglikli hata cevabi yaklasimi hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Authentication hatalarinda 401, yetki hatalarinda 403 donmek ve tutarli error contract kullanmak.\n\n### Sorunun Olctugu Kavram\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Authentication hatalarinda 401, yetki hatalarinda 403 donmek ve tutarli error contract kullanmak.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tum guvenlik hatalarinda 200 donup bodyde message yazmak.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Authentication hatalarinda 401, yetki hatalarinda 403 donmek ve tutarli error contract kullanmak.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Authentication hatalarinda 401, yetki hatalarinda 403 donmek ve tutarli error contract kullanmak.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Pratik etkisi: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her durumda 500 donmek.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Authentication hatalarinda 401, yetki hatalarinda 403 donmek ve tutarli error contract kullanmak.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Token yoksa random status kodu secmek.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Authentication hatalarinda 401, yetki hatalarinda 403 donmek ve tutarli error contract kullanmak.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```"
-        }
-      ],
-      "answerCode": "http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));"
+      "answerBody": "### Dogru Cevap\n- B: Authentication hatalarinda 401, yetki hatalarinda 403 donmek ve tutarli error contract kullanmak.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i2-q8",
@@ -377,26 +258,9 @@
         "C"
       ],
       "questionCode": "http\n  .csrf(csrf -> csrf.disable())\n  .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))\n  .authorizeHttpRequests(auth -> auth.anyRequest().authenticated());",
-      "answerBody": "### Soru Metni\nBu konfigurasyona gore en dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `C` - Session state beklemeden token-bazli stateless akis icin uygun temel kurulumdur.\n\n### Sorunun Olctugu Kavram\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Session state beklemeden token-bazli stateless akis icin uygun temel kurulumdur.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: STATELESS oldugunda server session kimlik kaynagi olmaz; her request tokenla dogrulanir.\n2. Kod satiri: `http`\n3. Kod satiri: `.csrf(csrf -> csrf.disable())`\n4. Kod satiri: `.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))`\n5. Kod satiri: `.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());`\n6. Bu adimlarin sonucu olarak dogru cikti/yorum: **Session state beklemeden token-bazli stateless akis icin uygun temel kurulumdur.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Server authentication statei icin sessiona guvenir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Session state beklemeden token-bazli stateless akis icin uygun temel kurulumdur.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```\n\n### Kod Baglami\nSTATELESS oldugunda server session kimlik kaynagi olmaz; her request tokenla dogrulanir."
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Stateful login akisina gore tasarlanmistir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Session state beklemeden token-bazli stateless akis icin uygun temel kurulumdur.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```\n\n### Kod Baglami\nSTATELESS oldugunda server session kimlik kaynagi olmaz; her request tokenla dogrulanir."
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** DOGRU\n**Secenek metni:** Session state beklemeden token-bazli stateless akis icin uygun temel kurulumdur.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Pratik etkisi: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```\n\n### Kod Baglami\nSTATELESS oldugunda server session kimlik kaynagi olmaz; her request tokenla dogrulanir."
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu ayarlarla CORS tamamen devre disi kalir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Session state beklemeden token-bazli stateless akis icin uygun temel kurulumdur.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```\n\n### Kod Baglami\nSTATELESS oldugunda server session kimlik kaynagi olmaz; her request tokenla dogrulanir."
-        }
-      ],
-      "answerCode": "http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));"
+      "answerBody": "### Dogru Cevap\n- C: Session state beklemeden token-bazli stateless akis icin uygun temel kurulumdur.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i2-q9",
@@ -426,26 +290,9 @@
         "A"
       ],
       "questionCode": "HttpSession session = request.getSession(false);\nObject auth = (session == null) ? null : session.getAttribute(\"SPRING_SECURITY_CONTEXT\");",
-      "answerBody": "### Soru Metni\nBu kod parcasi stateless tasarimda hangi riski gosterir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.\n\n### Sorunun Olctugu Kavram\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.\n2. Kod satiri: `HttpSession session = request.getSession(false);`\n3. Kod satiri: `Object auth = (session == null) ? null : session.getAttribute(\"SPRING_SECURITY_CONTEXT\");`\n4. Bu adimlarin sonucu olarak dogru cikti/yorum: **Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> 403, kimlik var ama yetki yok durumudur; 401 ile karistirilmamali.\n\n> Not: Siklikla yapilan hata -> Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Pratik etkisi: JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Sessiona bagli kimlik varsayimi stateless JWT modelini bozar."
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kod performansli oldugu icin risk yoktur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Sessiona bagli kimlik varsayimi stateless JWT modelini bozar."
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece logging kodudur, guvenlikle ilgisi yoktur.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Sessiona bagli kimlik varsayimi stateless JWT modelini bozar."
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu kod mutlaka 403 dondurur.\n\n### Neden Yanlis?\n403, kimlik var ama yetki yok durumudur; 401 ile karistirilmamali.\n\n### Dogru Model Ne?\nDogrusu: **Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.**\n- Konu aciklamasi: Stateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n- Bu secenek secilirse risk: Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Sessiona bagli kimlik varsayimi stateless JWT modelini bozar."
-        }
-      ],
-      "answerCode": "http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));"
+      "answerBody": "### Dogru Cevap\n- A: Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i2-q10",
@@ -453,7 +300,8 @@
       "question": "JWT kullanan stateless API icin SecurityFilterChain yaz: CORS acik olsun, CSRF kapali olsun, `/auth/**` permitAll, digerleri authenticated olsun.",
       "starterCode": "class SecurityConfig {\n    // TODO\n}",
       "answerCode": "@Configuration\n@EnableWebSecurity\nclass SecurityConfig {\n\n    @Bean\n    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\n        return http\n            .csrf(csrf -> csrf.disable())\n            .cors(Customizer.withDefaults())\n            .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))\n            .authorizeHttpRequests(auth -> auth\n                .requestMatchers(\"/auth/**\").permitAll()\n                .anyRequest().authenticated()\n            )\n            .build();\n    }\n\n    @Bean\n    CorsConfigurationSource corsConfigurationSource() {\n        CorsConfiguration cfg = new CorsConfiguration();\n        cfg.setAllowedOrigins(List.of(\"https://example.com\"));\n        cfg.setAllowedMethods(List.of(\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"));\n        cfg.setAllowedHeaders(List.of(\"Authorization\", \"Content-Type\"));\n\n        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();\n        source.registerCorsConfiguration(\"/**\", cfg);\n        return source;\n    }\n}",
-      "answerBody": "### Soru Metni\nJWT kullanan stateless API icin SecurityFilterChain yaz: CORS acik olsun, CSRF kapali olsun, `/auth/**` permitAll, digerleri authenticated olsun.\n\n### Bu Soru Neyi Olcuyor?\nStateful ve stateless guvenlik modelleri session yonetimi, CSRF ihtiyaci ve token tasima yontemleri uzerinden farklilasir.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari eksiksiz karsila (input, output, hata akis).\n2. Security semantigini dogru kur (authentication, authorization, token/role kontrolu).\n3. Kenar durumlarini ele al (null, invalid token, expired token, authority yok).\n4. Guvenlik loglarini ve failure case davranisini acikca tasarla.\n\n### Neden Bu Sekilde Tasarlanir?\n- JWT tabanli APIlerde SessionCreationPolicy.STATELESS, dogru CORS ve net hata yonetimi birlikte kurulmalidir.\n- Stateful varsayimlari stateless APIye tasimak (session beklemek, CSRF yorumunu karistirmak) ciddi bug uretir.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip 401/403 ayrimini atlamak\n- SecurityContext veya authority maplemeyi yarim birakmak\n- Token hata durumlarinda zinciri/scopeu yanlis yonetmek\n\n### Mini Referans Ornek\n```java\nhttp.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu semantik olarak bununla karsilastir."
+      "answerBody": "### Dogru Cevap\nAsagidaki referans kodu inceleyebilirsin.",
+      "optionExplanations": []
     }
   ]
 }

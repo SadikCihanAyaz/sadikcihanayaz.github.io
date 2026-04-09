@@ -34,26 +34,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nAccess token ve refresh token ayrimi icin en dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Access token API erisimi icin kisa omurludur; refresh token yeni access token almak icin kullanilir.\n\n### Sorunun Olctugu Kavram\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Access token API erisimi icin kisa omurludur; refresh token yeni access token almak icin kullanilir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Mini Pekistirme Ornegi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Ikisi de ayni amacla kullanilir, sadece isimleri farklidir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Access token API erisimi icin kisa omurludur; refresh token yeni access token almak icin kullanilir.**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Access token API erisimi icin kisa omurludur; refresh token yeni access token almak icin kullanilir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Pratik etkisi: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Refresh token her endpointte access token yerine gonderilir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Access token API erisimi icin kisa omurludur; refresh token yeni access token almak icin kullanilir.**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Access token asla expire olmaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Access token API erisimi icin kisa omurludur; refresh token yeni access token almak icin kullanilir.**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        }
-      ],
-      "answerCode": "if (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }"
+      "answerBody": "### Dogru Cevap\n- B: Access token API erisimi icin kisa omurludur; refresh token yeni access token almak icin kullanilir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i5-q2",
@@ -83,26 +66,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nRefresh token rotation neyi hedefler?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Her refreshte yeni token verip eskisini invalid yaparak token sizintisi etkisini azaltmak\n\n### Sorunun Olctugu Kavram\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Her refreshte yeni token verip eskisini invalid yaparak token sizintisi etkisini azaltmak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Mini Pekistirme Ornegi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Ayni refresh tokeni sonsuza kadar kullanmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Her refreshte yeni token verip eskisini invalid yaparak token sizintisi etkisini azaltmak**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Her refreshte yeni token verip eskisini invalid yaparak token sizintisi etkisini azaltmak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Pratik etkisi: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece UI performansini arttirmak\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Her refreshte yeni token verip eskisini invalid yaparak token sizintisi etkisini azaltmak**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT signaturei kaldirmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Her refreshte yeni token verip eskisini invalid yaparak token sizintisi etkisini azaltmak**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        }
-      ],
-      "answerCode": "if (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }"
+      "answerBody": "### Dogru Cevap\n- B: Her refreshte yeni token verip eskisini invalid yaparak token sizintisi etkisini azaltmak",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i5-q3",
@@ -132,26 +98,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nStateless sistemde logoutin etkili olmasi icin ne gerekir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Token revocation/denylist veya token version kontrolu gibi bir server-side strateji\n\n### Sorunun Olctugu Kavram\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Token revocation/denylist veya token version kontrolu gibi bir server-side strateji** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Mini Pekistirme Ornegi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Token revocation/denylist veya token version kontrolu gibi bir server-side strateji\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Pratik etkisi: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece tarayiciyi kapatmak\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Token revocation/denylist veya token version kontrolu gibi bir server-side strateji**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Access token suresini sonsuz yapmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token revocation/denylist veya token version kontrolu gibi bir server-side strateji**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** PasswordEncoderi kaldirmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token revocation/denylist veya token version kontrolu gibi bir server-side strateji**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        }
-      ],
-      "answerCode": "if (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }"
+      "answerBody": "### Dogru Cevap\n- A: Token revocation/denylist veya token version kontrolu gibi bir server-side strateji",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i5-q4",
@@ -181,26 +130,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nRefresh endpointi icin en saglikli guvenlik yaklasimi hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Refresh tokeni dogrulayip aktif/revoked durumunu kontrol ederek yeni access token uretmek\n\n### Sorunun Olctugu Kavram\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Refresh tokeni dogrulayip aktif/revoked durumunu kontrol ederek yeni access token uretmek** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Sifreler asla plain text tutulmaz; guclu hash ve salting zorunludur.\n\n> Not: Siklikla yapilan hata -> Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Mini Pekistirme Ornegi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Refresh tokeni dogrulayip aktif/revoked durumunu kontrol ederek yeni access token uretmek\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Pratik etkisi: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tokeni kontrol etmeden her istekte yeni token uretmek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Refresh tokeni dogrulayip aktif/revoked durumunu kontrol ederek yeni access token uretmek**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Refresh endpointini herkes icin acik birakmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Refresh tokeni dogrulayip aktif/revoked durumunu kontrol ederek yeni access token uretmek**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Refresh tokeni URL queryde plain text gecirmek\n\n### Neden Yanlis?\nSifreler asla plain text tutulmaz; guclu hash ve salting zorunludur.\n\n### Dogru Model Ne?\nDogrusu: **Refresh tokeni dogrulayip aktif/revoked durumunu kontrol ederek yeni access token uretmek**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        }
-      ],
-      "answerCode": "if (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }"
+      "answerBody": "### Dogru Cevap\n- A: Refresh tokeni dogrulayip aktif/revoked durumunu kontrol ederek yeni access token uretmek",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i5-q5",
@@ -230,26 +162,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nPassword degisimi sonrasi tum aktif tokenlari etkisiz kilmak icin tipik cozum nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Token version claimi ve user record tokenVersion alanini karsilastirmak\n\n### Sorunun Olctugu Kavram\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Token version claimi ve user record tokenVersion alanini karsilastirmak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Mini Pekistirme Ornegi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Token version claimi ve user record tokenVersion alanini karsilastirmak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Pratik etkisi: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Token expiryyi tamamen kaldirmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token version claimi ve user record tokenVersion alanini karsilastirmak**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece log yazmak\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Token version claimi ve user record tokenVersion alanini karsilastirmak**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** CORSu kapatmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token version claimi ve user record tokenVersion alanini karsilastirmak**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        }
-      ],
-      "answerCode": "if (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }"
+      "answerBody": "### Dogru Cevap\n- A: Token version claimi ve user record tokenVersion alanini karsilastirmak",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i5-q6",
@@ -279,26 +194,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nRefresh token storage icin guvenlik acisindan daha guclu yaklasim hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Refresh token metadata/hashini serverda tutup durum takibi yapmak\n\n### Sorunun Olctugu Kavram\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Refresh token metadata/hashini serverda tutup durum takibi yapmak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Sifreler asla plain text tutulmaz; guclu hash ve salting zorunludur.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Token storage karari XSS/CSRF trade-offu ile birlikte degerlendirilmelidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Mini Pekistirme Ornegi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tokeni plain text loglara yazmak\n\n### Neden Yanlis?\nSifreler asla plain text tutulmaz; guclu hash ve salting zorunludur.\n\n### Dogru Model Ne?\nDogrusu: **Refresh token metadata/hashini serverda tutup durum takibi yapmak**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Refresh token metadata/hashini serverda tutup durum takibi yapmak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Pratik etkisi: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Refresh tokeni frontendde localStorageda kalici ve sifresiz tutmak\n\n### Neden Yanlis?\nToken storage karari XSS/CSRF trade-offu ile birlikte degerlendirilmelidir.\n\n### Dogru Model Ne?\nDogrusu: **Refresh token metadata/hashini serverda tutup durum takibi yapmak**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Refresh tokeni email body ile dagitmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Refresh token metadata/hashini serverda tutup durum takibi yapmak**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        }
-      ],
-      "answerCode": "if (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }"
+      "answerBody": "### Dogru Cevap\n- B: Refresh token metadata/hashini serverda tutup durum takibi yapmak",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i5-q7",
@@ -328,26 +226,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nSliding session modeli neyi ifade eder?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - User aktif oldugu surece refresh mekanizmasiyla oturum suresinin kontrollu uzatilmasi\n\n### Sorunun Olctugu Kavram\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **User aktif oldugu surece refresh mekanizmasiyla oturum suresinin kontrollu uzatilmasi** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Mini Pekistirme Ornegi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** User aktif oldugu surece refresh mekanizmasiyla oturum suresinin kontrollu uzatilmasi\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Pratik etkisi: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tokenlerin surelerinin rastgele degismesi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **User aktif oldugu surece refresh mekanizmasiyla oturum suresinin kontrollu uzatilmasi**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tum tokenlerin her dakika invalidate edilmesi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **User aktif oldugu surece refresh mekanizmasiyla oturum suresinin kontrollu uzatilmasi**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece cookie tabanli oturumlarda gecerlidir\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **User aktif oldugu surece refresh mekanizmasiyla oturum suresinin kontrollu uzatilmasi**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```"
-        }
-      ],
-      "answerCode": "if (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }"
+      "answerBody": "### Dogru Cevap\n- A: User aktif oldugu surece refresh mekanizmasiyla oturum suresinin kontrollu uzatilmasi",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i5-q8",
@@ -377,26 +258,9 @@
         "A"
       ],
       "questionCode": "if (refreshToken == null) return 401;\nTokenRecord rec = refreshStore.find(refreshToken);\nif (rec == null || rec.isRevoked()) return 401;\nString newAccess = jwtService.generateAccess(rec.getSubject());",
-      "answerBody": "### Soru Metni\nBu akis icin en dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.\n\n### Sorunun Olctugu Kavram\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.\n2. Kod satiri: `if (refreshToken == null) return 401;`\n3. Kod satiri: `TokenRecord rec = refreshStore.find(refreshToken);`\n4. Kod satiri: `if (rec == null || rec.isRevoked()) return 401;`\n5. Kod satiri: `String newAccess = jwtService.generateAccess(rec.getSubject());`\n6. Bu adimlarin sonucu olarak dogru cikti/yorum: **Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Mini Pekistirme Ornegi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Pratik etkisi: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur."
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Refresh token kontrolune gerek yoktur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur."
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Refresh endpointte authorization mantigi olamaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur."
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Kod sadece CORSu etkiler.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur."
-        }
-      ],
-      "answerCode": "if (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }"
+      "answerBody": "### Dogru Cevap\n- A: Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i5-q9",
@@ -426,26 +290,9 @@
         "A"
       ],
       "questionCode": "int currentVersion = user.getTokenVersion();\nint tokenVersion = claims.get(\"ver\", Integer.class);\nboolean valid = tokenVersion == currentVersion;",
-      "answerBody": "### Soru Metni\nBu tasarim icin en dogru sonuc hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.\n\n### Sorunun Olctugu Kavram\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.\n2. Kod satiri: `int currentVersion = user.getTokenVersion();`\n3. Kod satiri: `int tokenVersion = claims.get(\"ver\", Integer.class);`\n4. Kod satiri: `boolean valid = tokenVersion == currentVersion;`\n5. Bu adimlarin sonucu olarak dogru cikti/yorum: **tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Mini Pekistirme Ornegi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Pratik etkisi: Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur."
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** tokenVersion hicbir ise yaramaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur."
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** tokenVersion sadece CORS icindir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur."
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** tokenVersion oldugunda exp claimine gerek kalmaz.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.**\n- Konu aciklamasi: Access token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n- Bu secenek secilirse risk: Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur."
-        }
-      ],
-      "answerCode": "if (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }"
+      "answerBody": "### Dogru Cevap\n- A: tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i5-q10",
@@ -453,7 +300,8 @@
       "question": "Refresh endpointini yaz: refresh tokeni validate et, aktif degilse 401 don, aktifse rotation yapip yeni access + refresh token don.",
       "starterCode": "class TokenService {\n    // TODO: refresh()\n}",
       "answerCode": "class TokenService {\n    private final JwtService jwtService;\n    private final RefreshTokenStore refreshTokenStore;\n\n    TokenPair refresh(String refreshTokenValue) {\n        RefreshTokenRecord record = refreshTokenStore.findActiveByToken(refreshTokenValue)\n            .orElseThrow(() -> new UnauthorizedException(\"invalid refresh token\"));\n\n        if (record.isExpired()) {\n            throw new UnauthorizedException(\"refresh token expired\");\n        }\n\n        // rotation: old token revoke\n        refreshTokenStore.revoke(record.getId(), \"ROTATED\");\n\n        String accessToken = jwtService.generateAccessToken(record.getSubject(), record.getAuthorities());\n        String newRefresh = jwtService.generateRefreshToken(record.getSubject());\n        refreshTokenStore.saveNew(record.getSubject(), newRefresh, record.getAuthorities());\n\n        return new TokenPair(accessToken, newRefresh);\n    }\n}",
-      "answerBody": "### Soru Metni\nRefresh endpointini yaz: refresh tokeni validate et, aktif degilse 401 don, aktifse rotation yapip yeni access + refresh token don.\n\n### Bu Soru Neyi Olcuyor?\nAccess token kisa omurlu API erisimi icindir; refresh token yeni access token uretir. Rotation/revocation stratejisi guvenligin omurgasidir.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari eksiksiz karsila (input, output, hata akis).\n2. Security semantigini dogru kur (authentication, authorization, token/role kontrolu).\n3. Kenar durumlarini ele al (null, invalid token, expired token, authority yok).\n4. Guvenlik loglarini ve failure case davranisini acikca tasarla.\n\n### Neden Bu Sekilde Tasarlanir?\n- Refresh tokeni server tarafinda takip etmek, rotation yapmak ve reuse detection eklemek guvenlik dayanimini arttirir.\n- Refresh tokeni sinirsiz omurlu credential gibi kullanmak ve logout/revoke senaryosunu tasarlamamak risklidir.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip 401/403 ayrimini atlamak\n- SecurityContext veya authority maplemeyi yarim birakmak\n- Token hata durumlarinda zinciri/scopeu yanlis yonetmek\n\n### Mini Referans Ornek\n```java\nif (!refreshStore.isActive(refreshTokenId)) { throw new SecurityException(\"revoked\"); }\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu semantik olarak bununla karsilastir."
+      "answerBody": "### Dogru Cevap\nAsagidaki referans kodu inceleyebilirsin.",
+      "optionExplanations": []
     }
   ]
 }

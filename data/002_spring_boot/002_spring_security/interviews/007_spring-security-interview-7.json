@@ -34,26 +34,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nOAuth2nin temel amaci nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Clientin kullanici adina belirli scope ile kaynaga erismesine yetki vermek\n\n### Sorunun Olctugu Kavram\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Clientin kullanici adina belirli scope ile kaynaga erismesine yetki vermek** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sifre hashlemek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Clientin kullanici adina belirli scope ile kaynaga erismesine yetki vermek**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Clientin kullanici adina belirli scope ile kaynaga erismesine yetki vermek\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Pratik etkisi: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece DB migration yapmak\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Clientin kullanici adina belirli scope ile kaynaga erismesine yetki vermek**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece session olusturmak\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Clientin kullanici adina belirli scope ile kaynaga erismesine yetki vermek**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        }
-      ],
-      "answerCode": "http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));"
+      "answerBody": "### Dogru Cevap\n- B: Clientin kullanici adina belirli scope ile kaynaga erismesine yetki vermek",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q2",
@@ -83,26 +66,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nAuthorization Server ile Resource Server farki icin dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Authorization Server token verir; Resource Server tokeni dogrulayip kaynagi korur.\n\n### Sorunun Olctugu Kavram\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Authorization Server token verir; Resource Server tokeni dogrulayip kaynagi korur.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Authorization Server protected API business logicini calistirir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Authorization Server token verir; Resource Server tokeni dogrulayip kaynagi korur.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Authorization Server token verir; Resource Server tokeni dogrulayip kaynagi korur.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Pratik etkisi: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Ikisi her zaman ayni process olmak zorundadir.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Authorization Server token verir; Resource Server tokeni dogrulayip kaynagi korur.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Resource Server token uretir, Authorization Server sadece log atar.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Authorization Server token verir; Resource Server tokeni dogrulayip kaynagi korur.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        }
-      ],
-      "answerCode": "http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));"
+      "answerBody": "### Dogru Cevap\n- B: Authorization Server token verir; Resource Server tokeni dogrulayip kaynagi korur.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q3",
@@ -132,26 +98,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nAuthorization Code + PKCE neden tercih edilir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Code interception riskini azaltip public clientlarda guvenli token degisimi saglar.\n\n### Sorunun Olctugu Kavram\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Code interception riskini azaltip public clientlarda guvenli token degisimi saglar.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Code interception riskini azaltip public clientlarda guvenli token degisimi saglar.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Pratik etkisi: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her durumda sifreyi clientta saklamayi zorunlu kilar.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Code interception riskini azaltip public clientlarda guvenli token degisimi saglar.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWTyi yasaklar.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Code interception riskini azaltip public clientlarda guvenli token degisimi saglar.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece legacy browserlarda calisir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Code interception riskini azaltip public clientlarda guvenli token degisimi saglar.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        }
-      ],
-      "answerCode": "http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));"
+      "answerBody": "### Dogru Cevap\n- A: Code interception riskini azaltip public clientlarda guvenli token degisimi saglar.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q4",
@@ -181,26 +130,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nOAuth2de scope neyi temsil eder?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Izin verilen erisim siniri/kapabilite seti\n\n### Sorunun Olctugu Kavram\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Izin verilen erisim siniri/kapabilite seti** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tokenin hash algoritmasi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Izin verilen erisim siniri/kapabilite seti**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Izin verilen erisim siniri/kapabilite seti\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Pratik etkisi: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sifrenin uzunlugu\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Izin verilen erisim siniri/kapabilite seti**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** CORS header listesi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Izin verilen erisim siniri/kapabilite seti**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        }
-      ],
-      "answerCode": "http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));"
+      "answerBody": "### Dogru Cevap\n- B: Izin verilen erisim siniri/kapabilite seti",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q5",
@@ -230,26 +162,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nOIDC ile OAuth2 iliskisi icin dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - OIDC, OAuth2 uzerine kimlik katmani ekler.\n\n### Sorunun Olctugu Kavram\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **OIDC, OAuth2 uzerine kimlik katmani ekler.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** OIDC, OAuth2 uzerine kimlik katmani ekler.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Pratik etkisi: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** OIDC sadece database cache protokoludur.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **OIDC, OAuth2 uzerine kimlik katmani ekler.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** OAuth2 ve OIDC tamamen ilgisizdir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **OIDC, OAuth2 uzerine kimlik katmani ekler.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** OIDC sadece mobile appte vardir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **OIDC, OAuth2 uzerine kimlik katmani ekler.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        }
-      ],
-      "answerCode": "http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));"
+      "answerBody": "### Dogru Cevap\n- A: OIDC, OAuth2 uzerine kimlik katmani ekler.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q6",
@@ -279,26 +194,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nAuth code flowda token endpointe giderken PKCE tarafinda ne kullanilir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - code_verifier\n\n### Sorunun Olctugu Kavram\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **code_verifier** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** code_verifier\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Pratik etkisi: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** csrf_token_only\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **code_verifier**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** db_password\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **code_verifier**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** session id zorunlu\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **code_verifier**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        }
-      ],
-      "answerCode": "http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));"
+      "answerBody": "### Dogru Cevap\n- A: code_verifier",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q7",
@@ -328,26 +226,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nResource server JWT dogrulamada tipik olarak hangi mekanizmayi kullanir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Introspection veya JWK set uzerinden signature/claim validation\n\n### Sorunun Olctugu Kavram\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Introspection veya JWK set uzerinden signature/claim validation** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Introspection veya JWK set uzerinden signature/claim validation\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Pratik etkisi: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Random role atama\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Introspection veya JWK set uzerinden signature/claim validation**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece request body uzunlugu\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Introspection veya JWK set uzerinden signature/claim validation**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece cookie domaini\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Introspection veya JWK set uzerinden signature/claim validation**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```"
-        }
-      ],
-      "answerCode": "http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));"
+      "answerBody": "### Dogru Cevap\n- A: Introspection veya JWK set uzerinden signature/claim validation",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q8",
@@ -358,7 +239,7 @@
       "choices": [
         {
           "id": "A",
-          "text": "Code alma -> token endpointten token alma -> resource eri\u015fimi"
+          "text": "Code alma -> token endpointten token alma -> resource erişimi"
         },
         {
           "id": "B",
@@ -377,26 +258,9 @@
         "A"
       ],
       "questionCode": "1) /authorize -> user login + consent\n2) client authorization code alir\n3) /token endpointte code + verifier ile access token alir\n4) access token ile API cagirir",
-      "answerBody": "### Soru Metni\nBu adim sirasinda dogru order hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Code alma -> token endpointten token alma -> resource eri\u015fimi\n\n### Sorunun Olctugu Kavram\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Code alma -> token endpointten token alma -> resource eri\u015fimi** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Bearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur.\n2. Kod satiri: `1) /authorize -> user login + consent`\n3. Kod satiri: `2) client authorization code alir`\n4. Kod satiri: `3) /token endpointte code + verifier ile access token alir`\n5. Kod satiri: `4) access token ile API cagirir`\n6. Bu adimlarin sonucu olarak dogru cikti/yorum: **Code alma -> token endpointten token alma -> resource eri\u015fimi**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Code alma -> token endpointten token alma -> resource eri\u015fimi\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Pratik etkisi: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```\n\n### Kod Baglami\nBearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur."
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Resource erisimi -> code alma -> login\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Code alma -> token endpointten token alma -> resource eri\u015fimi**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```\n\n### Kod Baglami\nBearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur."
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Token alma -> login -> code alma\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Code alma -> token endpointten token alma -> resource eri\u015fimi**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```\n\n### Kod Baglami\nBearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur."
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Code adimi yoktur\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Code alma -> token endpointten token alma -> resource eri\u015fimi**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```\n\n### Kod Baglami\nBearer token parse/validate adimlarinda hata olursa authentication kurulmaz ve 401/403 akisina dusulur."
-        }
-      ],
-      "answerCode": "http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));"
+      "answerBody": "### Dogru Cevap\n- A: Code alma -> token endpointten token alma -> resource erişimi",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q9",
@@ -426,26 +290,9 @@
         "A"
       ],
       "questionCode": "http\n  .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())\n  .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));",
-      "answerBody": "### Soru Metni\nAsagidaki konfigurasyon icin en dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Resource server gelen bearer JWTyi dogrulayarak endpointleri korur.\n\n### Sorunun Olctugu Kavram\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Resource server gelen bearer JWTyi dogrulayarak endpointleri korur.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: OAuth2 akista step sirasi degisirse token alma ve erisim kontrolu bozulur.\n2. Kod satiri: `http`\n3. Kod satiri: `.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())`\n4. Kod satiri: `.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));`\n5. Bu adimlarin sonucu olarak dogru cikti/yorum: **Resource server gelen bearer JWTyi dogrulayarak endpointleri korur.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Mini Pekistirme Ornegi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Resource server gelen bearer JWTyi dogrulayarak endpointleri korur.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Pratik etkisi: Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```\n\n### Kod Baglami\nOAuth2 akista step sirasi degisirse token alma ve erisim kontrolu bozulur."
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu ayar token uretir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Resource server gelen bearer JWTyi dogrulayarak endpointleri korur.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```\n\n### Kod Baglami\nOAuth2 akista step sirasi degisirse token alma ve erisim kontrolu bozulur."
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu ayar sadece CSRFu acar.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Resource server gelen bearer JWTyi dogrulayarak endpointleri korur.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```\n\n### Kod Baglami\nOAuth2 akista step sirasi degisirse token alma ve erisim kontrolu bozulur."
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu ayar oauth2yi kapatir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Resource server gelen bearer JWTyi dogrulayarak endpointleri korur.**\n- Konu aciklamasi: OAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n- Bu secenek secilirse risk: OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```\n\n### Kod Baglami\nOAuth2 akista step sirasi degisirse token alma ve erisim kontrolu bozulur."
-        }
-      ],
-      "answerCode": "http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));"
+      "answerBody": "### Dogru Cevap\n- A: Resource server gelen bearer JWTyi dogrulayarak endpointleri korur.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q10",
@@ -453,7 +300,8 @@
       "question": "Kisa bir Security konfigurasyonu yaz: `/public/**` acik, diger endpointler authenticated olsun ve uygulama OAuth2 Resource Server olarak JWT kabul etsin.",
       "starterCode": "class SecurityConfig {\n    // TODO\n}",
       "answerCode": "@Configuration\n@EnableWebSecurity\nclass SecurityConfig {\n\n    @Bean\n    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\n        return http\n            .csrf(csrf -> csrf.disable())\n            .authorizeHttpRequests(auth -> auth\n                .requestMatchers(\"/public/**\").permitAll()\n                .anyRequest().authenticated()\n            )\n            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))\n            .build();\n    }\n}",
-      "answerBody": "### Soru Metni\nKisa bir Security konfigurasyonu yaz: `/public/**` acik, diger endpointler authenticated olsun ve uygulama OAuth2 Resource Server olarak JWT kabul etsin.\n\n### Bu Soru Neyi Olcuyor?\nOAuth2, istemciye kullanici adina yetki vermeyi tanimlar; Authorization Code + PKCE modern guvenli akis olarak kullanilir.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari eksiksiz karsila (input, output, hata akis).\n2. Security semantigini dogru kur (authentication, authorization, token/role kontrolu).\n3. Kenar durumlarini ele al (null, invalid token, expired token, authority yok).\n4. Guvenlik loglarini ve failure case davranisini acikca tasarla.\n\n### Neden Bu Sekilde Tasarlanir?\n- Resource server tokeni dogrular, authorization server tokeni uretir; bu rollerin ayrimi mimariyi netlestirir.\n- OAuth2yi dogrudan authentication protokolu gibi anlatmak veya auth code adimlarini karistirmak mulakatta zayiflik yaratir.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip 401/403 ayrimini atlamak\n- SecurityContext veya authority maplemeyi yarim birakmak\n- Token hata durumlarinda zinciri/scopeu yanlis yonetmek\n\n### Mini Referans Ornek\n```java\nhttp.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu semantik olarak bununla karsilastir."
+      "answerBody": "### Dogru Cevap\nAsagidaki referans kodu inceleyebilirsin.",
+      "optionExplanations": []
     }
   ]
 }

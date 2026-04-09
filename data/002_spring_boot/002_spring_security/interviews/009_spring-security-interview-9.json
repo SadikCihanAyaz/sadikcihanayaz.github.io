@@ -34,26 +34,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nSifre saklama icin en dogru yaklasim hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - BCrypt/Argon2 gibi guclu hash algoritmasi ve uygun cost parametresi kullanmak\n\n### Sorunun Olctugu Kavram\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **BCrypt/Argon2 gibi guclu hash algoritmasi ve uygun cost parametresi kullanmak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Sifreler asla plain text tutulmaz; guclu hash ve salting zorunludur.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Mini Pekistirme Ornegi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Plain text saklamak\n\n### Neden Yanlis?\nSifreler asla plain text tutulmaz; guclu hash ve salting zorunludur.\n\n### Dogru Model Ne?\nDogrusu: **BCrypt/Argon2 gibi guclu hash algoritmasi ve uygun cost parametresi kullanmak**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** BCrypt/Argon2 gibi guclu hash algoritmasi ve uygun cost parametresi kullanmak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Pratik etkisi: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Base64 encode etmek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **BCrypt/Argon2 gibi guclu hash algoritmasi ve uygun cost parametresi kullanmak**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sifreyi JWT payloada koymak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **BCrypt/Argon2 gibi guclu hash algoritmasi ve uygun cost parametresi kullanmak**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        }
-      ],
-      "answerCode": "if (failedAttempts > 5) { lockAccount(username); }"
+      "answerBody": "### Dogru Cevap\n- B: BCrypt/Argon2 gibi guclu hash algoritmasi ve uygun cost parametresi kullanmak",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i9-q2",
@@ -83,26 +66,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nBrute-force login denemelerine karsi tipik savunma hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Rate limit, progressive delay, temporary lockout ve audit log kullanmak\n\n### Sorunun Olctugu Kavram\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Rate limit, progressive delay, temporary lockout ve audit log kullanmak** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Mini Pekistirme Ornegi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sinirsiz denemeye izin vermek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Rate limit, progressive delay, temporary lockout ve audit log kullanmak**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Rate limit, progressive delay, temporary lockout ve audit log kullanmak\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Pratik etkisi: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sifreyi kisaltmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Rate limit, progressive delay, temporary lockout ve audit log kullanmak**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** CSRFu kapatmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Rate limit, progressive delay, temporary lockout ve audit log kullanmak**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        }
-      ],
-      "answerCode": "if (failedAttempts > 5) { lockAccount(username); }"
+      "answerBody": "### Dogru Cevap\n- B: Rate limit, progressive delay, temporary lockout ve audit log kullanmak",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i9-q3",
@@ -132,26 +98,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nTokeni localStorageda saklamanin temel riski nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - XSS oldugunda tokenin JavaScript ile okunabilmesi\n\n### Sorunun Olctugu Kavram\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **XSS oldugunda tokenin JavaScript ile okunabilmesi** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Mini Pekistirme Ornegi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** XSS oldugunda tokenin JavaScript ile okunabilmesi\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Pratik etkisi: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tokenin otomatik hashlenmesi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **XSS oldugunda tokenin JavaScript ile okunabilmesi**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** CORSu otomatik cozmesi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **XSS oldugunda tokenin JavaScript ile okunabilmesi**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Refresh token gereksinimini kaldirmasi\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **XSS oldugunda tokenin JavaScript ile okunabilmesi**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        }
-      ],
-      "answerCode": "if (failedAttempts > 5) { lockAccount(username); }"
+      "answerBody": "### Dogru Cevap\n- A: XSS oldugunda tokenin JavaScript ile okunabilmesi",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i9-q4",
@@ -181,26 +130,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nhttpOnly cookie tabanli token saklamada en kritik ek kontrol nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - CSRF mitigasyonu (token/same-site/pattern) stratejisi\n\n### Sorunun Olctugu Kavram\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **CSRF mitigasyonu (token/same-site/pattern) stratejisi** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Mini Pekistirme Ornegi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** CSRF mitigasyonu (token/same-site/pattern) stratejisi\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Pratik etkisi: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece GET endpoint kullanmak\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **CSRF mitigasyonu (token/same-site/pattern) stratejisi**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Role kontrolunu tamamen kapatmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **CSRF mitigasyonu (token/same-site/pattern) stratejisi**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT expirationi kaldirmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **CSRF mitigasyonu (token/same-site/pattern) stratejisi**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        }
-      ],
-      "answerCode": "if (failedAttempts > 5) { lockAccount(username); }"
+      "answerBody": "### Dogru Cevap\n- A: CSRF mitigasyonu (token/same-site/pattern) stratejisi",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i9-q5",
@@ -230,26 +162,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nJWT key rotation neden onemlidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Anahtar sizintisi etkisini sinirlamak ve guvenlik hijyenini surdurmek icin\n\n### Sorunun Olctugu Kavram\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Anahtar sizintisi etkisini sinirlamak ve guvenlik hijyenini surdurmek icin** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> 401/403 farki kimlik ve yetki asamalarinin karistirilmasiyla sik bozulur.\n\n> Not: Siklikla yapilan hata -> Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Mini Pekistirme Ornegi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Anahtar sizintisi etkisini sinirlamak ve guvenlik hijyenini surdurmek icin\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Pratik etkisi: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Token boyutunu kucultmek icin\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Anahtar sizintisi etkisini sinirlamak ve guvenlik hijyenini surdurmek icin**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** CORSu otomatik acmak icin\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Anahtar sizintisi etkisini sinirlamak ve guvenlik hijyenini surdurmek icin**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** 401/403 ayrimini kaldirmak icin\n\n### Neden Yanlis?\n401/403 farki kimlik ve yetki asamalarinin karistirilmasiyla sik bozulur.\n\n### Dogru Model Ne?\nDogrusu: **Anahtar sizintisi etkisini sinirlamak ve guvenlik hijyenini surdurmek icin**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        }
-      ],
-      "answerCode": "if (failedAttempts > 5) { lockAccount(username); }"
+      "answerBody": "### Dogru Cevap\n- A: Anahtar sizintisi etkisini sinirlamak ve guvenlik hijyenini surdurmek icin",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i9-q6",
@@ -279,26 +194,9 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nCORS konfigurasyonunda `allowedOrigins=*` ve `allowCredentials=true` birlikteligine neden dikkat edilir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Genis origin + credential kombinasyonu guvenlik riskidir; dar whitelist tercih edilir.\n\n### Sorunun Olctugu Kavram\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Genis origin + credential kombinasyonu guvenlik riskidir; dar whitelist tercih edilir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Mutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n- `C`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Mini Pekistirme Ornegi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Genis origin + credential kombinasyonu guvenlik riskidir; dar whitelist tercih edilir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Pratik etkisi: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu kombinasyon her zaman en guvenlisidir.\n\n### Neden Yanlis?\nMutlak ifadeler guvenlikte genelde yanlistir; davranis context ve policyye baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Genis origin + credential kombinasyonu guvenlik riskidir; dar whitelist tercih edilir.**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece performansi etkiler, guvenlige etkisi yoktur.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Genis origin + credential kombinasyonu guvenlik riskidir; dar whitelist tercih edilir.**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** JWT ile ilgisizdir, hic onemli degildir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Genis origin + credential kombinasyonu guvenlik riskidir; dar whitelist tercih edilir.**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        }
-      ],
-      "answerCode": "if (failedAttempts > 5) { lockAccount(username); }"
+      "answerBody": "### Dogru Cevap\n- A: Genis origin + credential kombinasyonu guvenlik riskidir; dar whitelist tercih edilir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i9-q7",
@@ -328,26 +226,9 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Soru Metni\nSecret management icin en saglikli yaklasim hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Secret manager/KMS kullanip rotation ve erisim loglarini yonetmek\n\n### Sorunun Olctugu Kavram\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Secret manager/KMS kullanip rotation ve erisim loglarini yonetmek** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Mini Pekistirme Ornegi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Secretlari source code icine gommek\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Secret manager/KMS kullanip rotation ve erisim loglarini yonetmek**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Secret manager/KMS kullanip rotation ve erisim loglarini yonetmek\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Pratik etkisi: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Secreti READMEye yazmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Secret manager/KMS kullanip rotation ve erisim loglarini yonetmek**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her ortamda ayni static key kullanmak\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Secret manager/KMS kullanip rotation ve erisim loglarini yonetmek**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```"
-        }
-      ],
-      "answerCode": "if (failedAttempts > 5) { lockAccount(username); }"
+      "answerBody": "### Dogru Cevap\n- B: Secret manager/KMS kullanip rotation ve erisim loglarini yonetmek",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i9-q8",
@@ -377,26 +258,9 @@
         "A"
       ],
       "questionCode": "CorsConfiguration c = new CorsConfiguration();\nc.setAllowedOrigins(List.of(\"*\"));\nc.setAllowCredentials(true);",
-      "answerBody": "### Soru Metni\nBu konfigurasyon icin dogru guvenlik yorumu hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.\n\n### Sorunun Olctugu Kavram\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.\n2. Kod satiri: `CorsConfiguration c = new CorsConfiguration();`\n3. Kod satiri: `c.setAllowedOrigins(List.of(\"*\"));`\n4. Kod satiri: `c.setAllowCredentials(true);`\n5. Bu adimlarin sonucu olarak dogru cikti/yorum: **allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n> Not: Siklikla yapilan hata -> Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Mini Pekistirme Ornegi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Pratik etkisi: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur."
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu ayar en guvenli varsayilandir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur."
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu ayar JWT imzasini guclendirir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur."
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu ayar password hash costunu artirir.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur."
-        }
-      ],
-      "answerCode": "if (failedAttempts > 5) { lockAccount(username); }"
+      "answerBody": "### Dogru Cevap\n- A: allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i9-q9",
@@ -426,34 +290,18 @@
         "A"
       ],
       "questionCode": "String kid = jwtHeader.get(\"kid\");\nPublicKey key = keyStore.findByKid(kid);\nboolean valid = verifier.verify(token, key);",
-      "answerBody": "### Soru Metni\nkid tabanli key selection akisi icin en dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.\n\n### Sorunun Olctugu Kavram\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.** ifadesi guvenlik akisindaki dogru semantigi temsil eder.\nPratikte uygulama notu: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.\n2. Kod satiri: `String kid = jwtHeader.get(\"kid\");`\n3. Kod satiri: `PublicKey key = keyStore.findByKid(kid);`\n4. Kod satiri: `boolean valid = verifier.verify(token, key);`\n5. Bu adimlarin sonucu olarak dogru cikti/yorum: **Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n- `C`: YANLIS -> Bu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n- `D`: YANLIS -> Bu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n> Not: Siklikla yapilan hata -> Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Mini Pekistirme Ornegi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.\n\n### Neden Dogru?\nBu secenek sorunun olctugu guvenlik semantigini dogru yakaliyor.\n- Kavram ozeti: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Pratik etkisi: Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n\n> Not: Mulakatta dogru secenegi soylerken HTTP sonucu, filter zinciri ve authority etkisini birlikte acikla.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir."
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** kid sadece log etiketi oldugu icin guvenlige etkisi yoktur.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir."
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** kid oldugunda signature kontrolune gerek yoktur.\n\n### Neden Yanlis?\nBu secenek sorunun olctugu teknik garantiyle uyumlu degil veya kritik bir ayrimi atliyor.\n\n### Dogru Model Ne?\nDogrusu: **Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir."
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** kid sadece cookie auth icindir.\n\n### Neden Yanlis?\nBu secenek konuyu asiri indirger; guvenlik davranisi cok katmanlidir.\n\n### Dogru Model Ne?\nDogrusu: **Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.**\n- Konu aciklamasi: Uretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n- Bu secenek secilirse risk: Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n> Not: Guvenlik sorularinda yari dogru secenekler cok olur; kritik ayrim genelde 401/403, role/authority veya stateful/stateless farkindadir.\n\n### Mini Kod Referansi\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```\n\n### Kod Baglami\nKodun belirleyici noktasi dogru secenekteki davranisi dogruluyor: Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir."
-        }
-      ],
-      "answerCode": "if (failedAttempts > 5) { lockAccount(username); }"
+      "answerBody": "### Dogru Cevap\n- A: Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i9-q10",
       "type": "code",
-      "question": "Basit bir login attempt limiter yaz: kullanici bazli failed attempt sayisini tut, esik asilinca hesab\u0131 gecici lockla, basarili loginde saya\u00e7 sifirlansin.",
+      "question": "Basit bir login attempt limiter yaz: kullanici bazli failed attempt sayisini tut, esik asilinca hesabı gecici lockla, basarili loginde sayaç sifirlansin.",
       "starterCode": "class LoginAttemptService {\n    // TODO\n}",
       "answerCode": "class LoginAttemptService {\n    private static final int MAX_FAILED = 5;\n    private final Map<String, Integer> failedByUser = new ConcurrentHashMap<>();\n    private final Map<String, Instant> lockUntil = new ConcurrentHashMap<>();\n\n    boolean isLocked(String username) {\n        Instant until = lockUntil.get(username);\n        return until != null && until.isAfter(Instant.now());\n    }\n\n    void onFailure(String username) {\n        int failed = failedByUser.merge(username, 1, Integer::sum);\n        if (failed >= MAX_FAILED) {\n            lockUntil.put(username, Instant.now().plus(10, ChronoUnit.MINUTES));\n        }\n    }\n\n    void onSuccess(String username) {\n        failedByUser.remove(username);\n        lockUntil.remove(username);\n    }\n}",
-      "answerBody": "### Soru Metni\nBasit bir login attempt limiter yaz: kullanici bazli failed attempt sayisini tut, esik asilinca hesab\u0131 gecici lockla, basarili loginde saya\u00e7 sifirlansin.\n\n### Bu Soru Neyi Olcuyor?\nUretim guvenligi sadece login kodu degil; token saklama, key management, rate limit, audit ve incident response ile tamamlanir.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari eksiksiz karsila (input, output, hata akis).\n2. Security semantigini dogru kur (authentication, authorization, token/role kontrolu).\n3. Kenar durumlarini ele al (null, invalid token, expired token, authority yok).\n4. Guvenlik loglarini ve failure case davranisini acikca tasarla.\n\n### Neden Bu Sekilde Tasarlanir?\n- Security controls katmanli kurulmali: application, network, secret management ve monitoring beraber calisir.\n- Sadece framework defaultlarina guvenip operasyonel kontrolleri atlamak ciddi aciklara yol acar.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip 401/403 ayrimini atlamak\n- SecurityContext veya authority maplemeyi yarim birakmak\n- Token hata durumlarinda zinciri/scopeu yanlis yonetmek\n\n### Mini Referans Ornek\n```java\nif (failedAttempts > 5) { lockAccount(username); }\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu semantik olarak bununla karsilastir."
+      "answerBody": "### Dogru Cevap\nAsagidaki referans kodu inceleyebilirsin.",
+      "optionExplanations": []
     }
   ]
 }

@@ -33,26 +33,9 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Soru Metni\nREAD_COMMITTED seviyesi en net hangi anomalileri ele alir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Dirty readi engeller; diger anomaliler DB davranisina gore halen gorulebilir.\n\n### Sorunun Olctugu Kavram\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Dirty readi engeller; diger anomaliler DB davranisina gore halen gorulebilir.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `D`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n> Not: Siklikla yapilan hata -> Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Mini Pekistirme Ornegi\n```java\n@Version\nprivate Long version;\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Dirty readi engeller, non-repeatable/phantom tamamen engeller.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Dirty readi engeller; diger anomaliler DB davranisina gore halen gorulebilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Dirty readi engeller; diger anomaliler DB davranisina gore halen gorulebilir.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Pratik etkisi: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Tum anomalileri kesin engeller.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Dirty readi engeller; diger anomaliler DB davranisina gore halen gorulebilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece write islemlerini engeller.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Dirty readi engeller; diger anomaliler DB davranisina gore halen gorulebilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        }
-      ],
-      "answerCode": "@org.springframework.transaction.annotation.Transactional(isolation = org.springframework.transaction.annotation.Isolation.READ_COMMITTED)\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;"
+      "answerBody": "### Dogru Cevap\n- B: Dirty readi engeller; diger anomaliler DB davranisina gore halen gorulebilir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q2",
@@ -81,26 +64,9 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Soru Metni\nREPEATABLE_READ icin en dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Ayni transaction icinde ayni satir tekrar okundugunda tutarliligi arttirir; phantom korumasi DBye gore degisebilir.\n\n### Sorunun Olctugu Kavram\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Ayni transaction icinde ayni satir tekrar okundugunda tutarliligi arttirir; phantom korumasi DBye gore degisebilir.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `C`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `D`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n> Not: Siklikla yapilan hata -> Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Mini Pekistirme Ornegi\n```java\n@Version\nprivate Long version;\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Ayni transaction icinde ayni satir tekrar okundugunda tutarliligi arttirir; phantom korumasi DBye gore degisebilir.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Pratik etkisi: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Dirty reade izin verir.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Ayni transaction icinde ayni satir tekrar okundugunda tutarliligi arttirir; phantom korumasi DBye gore degisebilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her zaman SERIALIZABLE ile aynidir.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Ayni transaction icinde ayni satir tekrar okundugunda tutarliligi arttirir; phantom korumasi DBye gore degisebilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece native queryde vardir.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Ayni transaction icinde ayni satir tekrar okundugunda tutarliligi arttirir; phantom korumasi DBye gore degisebilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        }
-      ],
-      "answerCode": "@org.springframework.transaction.annotation.Transactional(isolation = org.springframework.transaction.annotation.Isolation.REPEATABLE_READ)\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;"
+      "answerBody": "### Dogru Cevap\n- A: Ayni transaction icinde ayni satir tekrar okundugunda tutarliligi arttirir; phantom korumasi DBye gore degisebilir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q3",
@@ -129,26 +95,9 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Soru Metni\nSERIALIZABLE seviyesi icin en kritik trade-off nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - En guclu tutarlilik ama lock/bekleme maliyeti nedeniyle throughput dususu riski.\n\n### Sorunun Olctugu Kavram\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **En guclu tutarlilik ama lock/bekleme maliyeti nedeniyle throughput dususu riski.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `D`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n> Not: Siklikla yapilan hata -> Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Mini Pekistirme Ornegi\n```java\n@Version\nprivate Long version;\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** En zayif tutarlilik, en iyi throughput.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **En guclu tutarlilik ama lock/bekleme maliyeti nedeniyle throughput dususu riski.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** En guclu tutarlilik ama lock/bekleme maliyeti nedeniyle throughput dususu riski.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Pratik etkisi: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Transactionlari tamamen kapatir.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **En guclu tutarlilik ama lock/bekleme maliyeti nedeniyle throughput dususu riski.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece select calistirir.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **En guclu tutarlilik ama lock/bekleme maliyeti nedeniyle throughput dususu riski.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        }
-      ],
-      "answerCode": "@org.springframework.transaction.annotation.Transactional(isolation = org.springframework.transaction.annotation.Isolation.SERIALIZABLE)\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;"
+      "answerBody": "### Dogru Cevap\n- B: En guclu tutarlilik ama lock/bekleme maliyeti nedeniyle throughput dususu riski.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q4",
@@ -177,26 +126,9 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Soru Metni\nOptimistic locking hangi mekanizma ile uygulanir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - @Version kolonu ile guncellemede version kontrolu yapilarak.\n\n### Sorunun Olctugu Kavram\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **@Version kolonu ile guncellemede version kontrolu yapilarak.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `C`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `D`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n> Not: Siklikla yapilan hata -> Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Mini Pekistirme Ornegi\n```java\n@Version\nprivate Long version;\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** @Version kolonu ile guncellemede version kontrolu yapilarak.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Pratik etkisi: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece SELECT * FOR UPDATE ile.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **@Version kolonu ile guncellemede version kontrolu yapilarak.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece readOnly transactionla.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **@Version kolonu ile guncellemede version kontrolu yapilarak.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Connection pool boyutunu arttirarak.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **@Version kolonu ile guncellemede version kontrolu yapilarak.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        }
-      ],
-      "answerCode": "@javax.persistence.Version\nprivate Long version;\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;"
+      "answerBody": "### Dogru Cevap\n- A: @Version kolonu ile guncellemede version kontrolu yapilarak.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q5",
@@ -225,26 +157,9 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Soru Metni\nPessimistic locking ne zaman daha uygun olabilir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Yuksek cakismanin oldugu kritik satir guncellemelerinde bekletmeli kilit kontrolu istendiginde.\n\n### Sorunun Olctugu Kavram\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Yuksek cakismanin oldugu kritik satir guncellemelerinde bekletmeli kilit kontrolu istendiginde.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `C`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `D`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n> Not: Siklikla yapilan hata -> Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Mini Pekistirme Ornegi\n```java\n@Version\nprivate Long version;\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Yuksek cakismanin oldugu kritik satir guncellemelerinde bekletmeli kilit kontrolu istendiginde.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Pratik etkisi: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece log okumada.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Yuksek cakismanin oldugu kritik satir guncellemelerinde bekletmeli kilit kontrolu istendiginde.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Version kolonunu kaldirmak icin.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Yuksek cakismanin oldugu kritik satir guncellemelerinde bekletmeli kilit kontrolu istendiginde.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Projection sorgularinda.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Yuksek cakismanin oldugu kritik satir guncellemelerinde bekletmeli kilit kontrolu istendiginde.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        }
-      ],
-      "answerCode": "@org.springframework.data.jpa.repository.Lock(javax.persistence.LockModeType.PESSIMISTIC_WRITE)\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;"
+      "answerBody": "### Dogru Cevap\n- A: Yuksek cakismanin oldugu kritik satir guncellemelerinde bekletmeli kilit kontrolu istendiginde.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q6",
@@ -273,26 +188,9 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Soru Metni\nLost update riskini azaltmak icin en dogru yaklasim hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Uygun isolation + optimistic/pessimistic lock stratejisini is senaryosuna gore secmek.\n\n### Sorunun Olctugu Kavram\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Uygun isolation + optimistic/pessimistic lock stratejisini is senaryosuna gore secmek.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `D`: YANLIS -> OSIV kolaylik saglasa da view katmaninda kontrolsuz query tetikleme riski tasir.\n\n> Not: Siklikla yapilan hata -> Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Mini Pekistirme Ornegi\n```java\n@Version\nprivate Long version;\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Sadece readOnly kullanmak.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Uygun isolation + optimistic/pessimistic lock stratejisini is senaryosuna gore secmek.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Uygun isolation + optimistic/pessimistic lock stratejisini is senaryosuna gore secmek.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Pratik etkisi: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Her methodu native query yapmak.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Uygun isolation + optimistic/pessimistic lock stratejisini is senaryosuna gore secmek.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** OSIVyi acmak.\n\n### Neden Yanlis?\nOSIV kolaylik saglasa da view katmaninda kontrolsuz query tetikleme riski tasir.\n\n### Dogru Model Ne?\nDogrusu: **Uygun isolation + optimistic/pessimistic lock stratejisini is senaryosuna gore secmek.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        }
-      ],
-      "answerCode": "@javax.persistence.Version\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;"
+      "answerBody": "### Dogru Cevap\n- B: Uygun isolation + optimistic/pessimistic lock stratejisini is senaryosuna gore secmek.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q7",
@@ -321,26 +219,9 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Soru Metni\nIsolation ve locking iliskisi icin en dogru ifade hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Isolation okuma anomalilerini sinirlar; update cakismlarinda lock stratejisiyle birlikte dusunulmelidir.\n\n### Sorunun Olctugu Kavram\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Isolation okuma anomalilerini sinirlar; update cakismlarinda lock stratejisiyle birlikte dusunulmelidir.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `D`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n> Not: Siklikla yapilan hata -> Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Mini Pekistirme Ornegi\n```java\n@Version\nprivate Long version;\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Isolation tek basina tum concurrency buglarini kesin cozer.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Isolation okuma anomalilerini sinirlar; update cakismlarinda lock stratejisiyle birlikte dusunulmelidir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Isolation okuma anomalilerini sinirlar; update cakismlarinda lock stratejisiyle birlikte dusunulmelidir.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Pratik etkisi: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Locking sadece cache ile ilgilidir.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Isolation okuma anomalilerini sinirlar; update cakismlarinda lock stratejisiyle birlikte dusunulmelidir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Ikisi tamamen alakasizdir.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Isolation okuma anomalilerini sinirlar; update cakismlarinda lock stratejisiyle birlikte dusunulmelidir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n"
-        }
-      ],
-      "answerCode": "SELECT ... FOR UPDATE\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;"
+      "answerBody": "### Dogru Cevap\n- B: Isolation okuma anomalilerini sinirlar; update cakismlarinda lock stratejisiyle birlikte dusunulmelidir.",
+      "optionExplanations": [],
+      "answerCode": ""
     },
     {
       "id": "i7-q8",
@@ -369,26 +250,9 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Soru Metni\nBu optimistic locking senaryosunun sonucu en olasi nedir?\n\n### Kisa Sonuc\n**Dogru cevap:** `B` - Ikinci committe version catismasi nedeniyle OptimisticLockException olusabilir.\n\n### Sorunun Olctugu Kavram\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Ikinci committe version catismasi nedeniyle OptimisticLockException olusabilir.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Bulk update persistence contexti atlayabilir; stale entity riskine karsi clear/refresh gerekir.\n2. Kod satiri: `T1: Account(v=3) read -> balance=100`\n3. Kod satiri: `T2: Account(v=3) read -> balance=100`\n4. Kod satiri: `T1: update balance=90, v=4 commit`\n5. Kod satiri: `T2: update balance=80 with old version=3 commit`\n6. Bu adimlarin sonucu olarak dogru cikti/yorum: **Ikinci committe version catismasi nedeniyle OptimisticLockException olusabilir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n- `B`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `C`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `D`: YANLIS -> Bu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n> Not: Siklikla yapilan hata -> Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Mini Pekistirme Ornegi\n```java\n@Version\nprivate Long version;\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** YANLIS\n**Secenek metni:** Iki transaction da ayni satiri sorunsuz overwrite eder.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Ikinci committe version catismasi nedeniyle OptimisticLockException olusabilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n\n### Kod Baglami\nBulk update persistence contexti atlayabilir; stale entity riskine karsi clear/refresh gerekir.\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** DOGRU\n**Secenek metni:** Ikinci committe version catismasi nedeniyle OptimisticLockException olusabilir.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Pratik etkisi: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n\n### Kod Baglami\nBulk update persistence contexti atlayabilir; stale entity riskine karsi clear/refresh gerekir.\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Version kolonu sadece insertte kullanilir.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Ikinci committe version catismasi nedeniyle OptimisticLockException olusabilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n\n### Kod Baglami\nBulk update persistence contexti atlayabilir; stale entity riskine karsi clear/refresh gerekir.\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Runtimeda hic exception olusmaz.\n\n### Neden Yanlis?\nBu secenek sorunun kritik teknik garantisini eksik veya hatali yorumluyor.\n\n### Dogru Model Ne?\nDogrusu: **Ikinci committe version catismasi nedeniyle OptimisticLockException olusabilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n\n### Kod Baglami\nBulk update persistence contexti atlayabilir; stale entity riskine karsi clear/refresh gerekir.\n"
-        }
-      ],
-      "answerCode": "Account acc = repo.findById(id).orElseThrow();\nacc.setBalance(acc.getBalance().subtract(amount));\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;",
+      "answerBody": "### Dogru Cevap\n- B: Ikinci committe version catismasi nedeniyle OptimisticLockException olusabilir.",
+      "optionExplanations": [],
+      "answerCode": "",
       "questionCode": " T1: Account(v=3) read -> balance=100\n T2: Account(v=3) read -> balance=100\n T1: update balance=90, v=4 commit\n T2: update balance=80 with old version=3 commit"
     },
     {
@@ -418,26 +282,9 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Soru Metni\nPessimistic write lock icin dogru yorum hangisidir?\n\n### Kisa Sonuc\n**Dogru cevap:** `A` - Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.\n\n### Sorunun Olctugu Kavram\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Neden Bu Cevap Dogru?\nBu soruda kritik ayrim su: **Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.** ifadesi, teknik garanti ve pratik davranis acisindan tutarli tek secenektir.\nPratikte uygulama notu: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n### Kodu Adim Adim Oku\n1. Ana davranis: Kodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.\n2. Kod satiri: `@org.springframework.data.jpa.repository.Lock(javax.persistence.LockModeType.PESSIMISTI...`\n3. Kod satiri: `java.util.Optional<Account> findById(Long id);`\n4. Bu adimlarin sonucu olarak dogru cikti/yorum: **Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.**\n\n### Tum Siklarin Ozet Analizi\n- `A`: DOGRU -> Sorudaki teknik garantiyle birebir uyumlu.\n- `B`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n- `C`: YANLIS -> Rollback davranisi exception tipi ve propagation politikasina baglidir.\n- `D`: YANLIS -> Mutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n> Not: Siklikla yapilan hata -> Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Mini Pekistirme Ornegi\n```java\n@Version\nprivate Long version;\n```",
-      "optionExplanations": [
-        {
-          "id": "A",
-          "text": "### Secenek A Analizi\n**Durum:** DOGRU\n**Secenek metni:** Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.\n\n### Neden Dogru?\nBu secenek sorunun aradigi teknik garantiyle uyumlu.\n\n- Kavram ozeti: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Pratik etkisi: Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n\n> Not: Mulakatta sadece dogru secenegi soylemek yetmez; neden digerlerinin eksik oldugunu da netlestir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n\n### Kod Baglami\nKodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.\n"
-        },
-        {
-          "id": "B",
-          "text": "### Secenek B Analizi\n**Durum:** YANLIS\n**Secenek metni:** Pessimistic lock sadece read davranisidir, writei etkilemez.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n\n### Kod Baglami\nKodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.\n"
-        },
-        {
-          "id": "C",
-          "text": "### Secenek C Analizi\n**Durum:** YANLIS\n**Secenek metni:** Lock oldugunda DB daima otomatik rollback yapar.\n\n### Neden Yanlis?\nRollback davranisi exception tipi ve propagation politikasina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n\n### Kod Baglami\nKodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.\n"
-        },
-        {
-          "id": "D",
-          "text": "### Secenek D Analizi\n**Durum:** YANLIS\n**Secenek metni:** Bu lock sadece testte calisir.\n\n### Neden Yanlis?\nMutlak ifadeler JPA davranisinda risklidir; sonuc transaction, fetch ve lifecycle kosullarina baglidir.\n\n### Dogru Model Ne?\nDogrusu: **Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.**\n\n- Konu aciklamasi: Isolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n- Bu secenek secilirse risk: Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n> Not: Bu tip yanlis secenekler genelde \"yari dogru\" bilgi tasir. Kritik eksigi bulmak gerekir.\n\n### Mini Kod Referansi\n```java\n@Version\nprivate Long version;\n```\n\n### Kod Baglami\nKodun belirleyici noktasi persistence context + transaction + fetch semantigidir; bu, dogru secenekle uyumludur: Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.\n"
-        }
-      ],
-      "answerCode": "@org.springframework.data.jpa.repository.Lock(javax.persistence.LockModeType.PESSIMISTIC_WRITE)\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;",
+      "answerBody": "### Dogru Cevap\n- A: Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.",
+      "optionExplanations": [],
+      "answerCode": "",
       "questionCode": " @org.springframework.data.jpa.repository.Lock(javax.persistence.LockModeType.PESSIMISTIC_WRITE)\n java.util.Optional<Account> findById(Long id);"
     },
     {
@@ -445,9 +292,10 @@
       "type": "code",
       "question": "@Version kullanan bir Account entity ve update service yaz. OptimisticLockException durumunda sinirli retry (max 3) uygulasin.",
       "starterCode": "@javax.persistence.Entity\nclass Account {\n    @javax.persistence.Id\n    Long id;\n    java.math.BigDecimal balance;\n    // TODO @Version\n}\n\nclass AccountService {\n    // TODO\n}\n",
-      "answerBody": "### Soru Metni\n@Version kullanan bir Account entity ve update service yaz. OptimisticLockException durumunda sinirli retry (max 3) uygulasin.\n\n### Bu Soru Neyi Olcuyor?\nIsolation anomalileri kontrol eder; lock stratejisi catismayi yonetir. Optimistic lock @Version ile commit asamasinda catismayi yakalar, pessimistic lock DB seviyesinde kilit koyar.\n\n### Beklenen Cozum Yaklasimi\n1. Sorudaki fonksiyonel kosullari tam karsila (input, output, hata akis).\n2. Teknik garanti dogru olsun (state/lock/tx/fetch semantigi).\n3. Kenar durumlarini ele al (timeout, null, duplicate, interrupt, rollback).\n4. Kaynaklari dogru kapat (finally, cleanup, shutdown).\n\n### Neden Bu Sekilde Tasarlanir?\n- Okuma agirlikli sistemlerde optimistic lock genelde daha ucuzdur. Kritik update yolunda lost update riski varsa lock stratejisi acikca secilmelidir.\n- Gereksiz yuksek izolasyon/lock secimi throughputu ciddi dusurebilir.\n\n### Siklikla Yapilan Hatalar\n- Sadece happy-path yazip hata akislarini bos birakmak\n- Sinyal/transaction/lock semantigini yarim birakmak\n- API sozlesmesini bozacak imza degisikligi yapmak\n\n### Starter Code Notu\nVerilen iskelette TODO alanlarini doldururken method imzalari ve field yapisi korunmali.\n\n### Mini Referans Ornek\n```java\n@Version\nprivate Long version;\n```\n\n> Not: Asagidaki Referans Kod bolumunde calisan bir cozum var. Kendi cozumunu bununla semantik olarak karsilastir.",
+      "answerBody": "### Dogru Cevap\nAsagidaki referans kodu inceleyebilirsin.",
       "answerCode": "@javax.persistence.Entity\nclass Account {\n    @javax.persistence.Id\n    Long id;\n    java.math.BigDecimal balance;\n\n    @javax.persistence.Version\n    Long version;\n}\n\nclass AccountService {\n    private final AccountRepository repo;\n\n    AccountService(AccountRepository repo) { this.repo = repo; }\n\n    @org.springframework.transaction.annotation.Transactional\n    public void debit(Long id, java.math.BigDecimal amount) {\n        int maxRetry = 3;\n        for (int i = 1; i <= maxRetry; i++) {\n            try {\n                Account a = repo.findById(id).orElseThrow();\n                a.setBalance(a.getBalance().subtract(amount));\n                repo.flush();\n                return;\n            } catch (org.springframework.orm.ObjectOptimisticLockingFailureException ex) {\n                if (i == maxRetry) {\n                    throw ex;\n                }\n            }\n        }\n    }\n}\n\n// Ek ogretici ornek\n@javax.persistence.Version\nprivate Long version;",
-      "publicSolutionUrl": "https://github.com/SadikCihanAyaz"
+      "publicSolutionUrl": "https://github.com/SadikCihanAyaz",
+      "optionExplanations": []
     }
   ]
 }
