@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Mutual exclusion ve memory visibility birlikte saglar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "### Dogru Cevap\n- C: Threadler arasi gorunurluk saglar ama compound islemleri atomik yapmaz.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "D"
       ],
-      "answerBody": "### Dogru Cevap\n- D: Class object locku (ClassName.class)",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: tryLock/timeout/fairness gibi ileri kontrol gerektiginde",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Starvation riskini azaltir ama throughput dusurebilir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "### Dogru Cevap\n- C: 2000 garanti degil; race condition nedeniyle daha dusuk cikabilir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class C {\n    volatile int value = 0;\n    void inc() { value++; }\n}\n\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.value);",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: A-B bitmeden C baslayamaz",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class S {\n    synchronized void m1() {\n        System.out.print(\"A\");\n        try { Thread.sleep(100); } catch (InterruptedException e) {}\n        System.out.print(\"B\");\n    }\n    synchronized void m2() { System.out.print(\"C\"); }\n}\nS s = new S();\nThread t1 = new Thread(s::m1);\nThread t2 = new Thread(s::m2);\nt1.start();\nThread.sleep(10);\nt2.start();\nt1.join(); t2.join();",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Metodlar birbirini bloklamaz; paralel calisabilir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Object lockA = new Object();\nObject lockB = new Object();\n\nRunnable r1 = () -> { synchronized (lockA) { System.out.print(\"A\"); } };\nRunnable r2 = () -> { synchronized (lockB) { System.out.print(\"B\"); } };\n\nThread t1 = new Thread(r1);\nThread t2 = new Thread(r2);\nt1.start(); t2.start();\nt1.join(); t2.join();",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: ok yazar, cunku synchronized reentranttir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class R {\n    synchronized void outer() { inner(); }\n    synchronized void inner() { System.out.println(\"ok\"); }\n}\nnew R().outer();",
       "answerCode": ""

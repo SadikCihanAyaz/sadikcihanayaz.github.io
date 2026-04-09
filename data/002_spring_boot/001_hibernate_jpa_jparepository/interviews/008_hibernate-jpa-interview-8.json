@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Her sorguda yeni fiziksel baglanti acma maliyetini azaltip throughputu dengeler.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Benzer DML operasyonlarini batchleyerek network/round-trip maliyetini azaltmayi.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Persistence contextte biriken managed entity sayisini kontrol ederek memory ve dirty checking maliyetini azaltmak.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Ihtiyac olan kolonlari alarak transfer ve memory maliyetini azaltabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Bulk update persistence contexti bypass edebilir; stale data riskine karsi clear/refresh stratejisi gerekir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Sik filtre/siralama kolonlarinda dogru index secimi query costu ciddi azaltabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Olcum yapmak: query sayisi, query suresi, lock beklemeleri ve hotspot sorgulari tespit etmek.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Contextte eski deger kalabilir; stale data gorulebilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.data.jpa.repository.Modifying\n @org.springframework.data.jpa.repository.Query(\"update User u set u.status = PASSIVE where u.lastLogin < :t\")\n int deactivate(java.time.Instant t);"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Her 50 kayitta flush/clear ile memory bloat ve dirty checking yukunu kontrol altina almak.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " for (int i = 1; i <= items.size(); i++) {\n    entityManager.persist(items.get(i - 1));\n    if (i % 50 == 0) {\n       entityManager.flush();\n       entityManager.clear();\n    }\n }"

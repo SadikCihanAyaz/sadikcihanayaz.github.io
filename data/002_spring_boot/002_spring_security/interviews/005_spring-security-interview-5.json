@@ -34,7 +34,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Access token API erisimi icin kisa omurludur; refresh token yeni access token almak icin kullanilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Her refreshte yeni token verip eskisini invalid yaparak token sizintisi etkisini azaltmak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Token revocation/denylist veya token version kontrolu gibi bir server-side strateji",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Refresh tokeni dogrulayip aktif/revoked durumunu kontrol ederek yeni access token uretmek",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Token version claimi ve user record tokenVersion alanini karsilastirmak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Refresh token metadata/hashini serverda tutup durum takibi yapmak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: User aktif oldugu surece refresh mekanizmasiyla oturum suresinin kontrollu uzatilmasi",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "A"
       ],
       "questionCode": "if (refreshToken == null) return 401;\nTokenRecord rec = refreshStore.find(refreshToken);\nif (rec == null || rec.isRevoked()) return 401;\nString newAccess = jwtService.generateAccess(rec.getSubject());",
-      "answerBody": "### Dogru Cevap\n- A: Refresh token kontrol edilmeden access token basilirsa replay/sizinti riski buyur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "A"
       ],
       "questionCode": "int currentVersion = user.getTokenVersion();\nint tokenVersion = claims.get(\"ver\", Integer.class);\nboolean valid = tokenVersion == currentVersion;",
-      "answerBody": "### Dogru Cevap\n- A: tokenVersion kontrolu varsa eski versionla uretilmis tokenlar gecersiz olur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

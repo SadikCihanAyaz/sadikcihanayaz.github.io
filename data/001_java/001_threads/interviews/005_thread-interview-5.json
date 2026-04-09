@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Callable deger dondurur ve checked exception firlatabilir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Task sonucu hazir degilse bloklar",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Calisan threade interrupt gondermeyi dener; best-effort davranistir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: thenApply T->U map yapar, thenCompose T->CompletableFuture<U> flatten eder",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Asenkron zincirde exception oldugunda fallback degeri uretmek icin",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: 20",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "int v = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> 10)\n    .thenApply(x -> x * 2)\n    .join();\nSystem.out.println(v);",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: 21",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "int v = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> 7)\n    .thenCompose(x -> java.util.concurrent.CompletableFuture.supplyAsync(() -> x * 3))\n    .join();\nSystem.out.println(v);",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: fallback",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "String s = java.util.concurrent.CompletableFuture\n    .supplyAsync(() -> { throw new RuntimeException(\"boom\"); })\n    .exceptionally(ex -> \"fallback\")\n    .join();\nSystem.out.println(s);",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Ilk tamamlanan future degeri ile doner",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.CompletableFuture<String> slow = java.util.concurrent.CompletableFuture.supplyAsync(() -> {\n    try { Thread.sleep(200); } catch (InterruptedException e) {}\n    return \"slow\";\n});\njava.util.concurrent.CompletableFuture<String> fast = java.util.concurrent.CompletableFuture.completedFuture(\"fast\");\nObject result = java.util.concurrent.CompletableFuture.anyOf(slow, fast).join();\nSystem.out.println(result);",
       "answerCode": ""

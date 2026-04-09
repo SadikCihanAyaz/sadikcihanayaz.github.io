@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "D"
       ],
-      "answerBody": "### Dogru Cevap\n- D: Auto rollback",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Kilit alma sirasini global olarak sabitlemek",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Bir threadin uzun sure kaynak alamamasi",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Deadlockta ilerleme yoktur; livelockta threadler aktif ama is ilerlemez",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Thread.currentThread().interrupt() ile interrupt flagini restore edip uygun sekilde cikmak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Kilit alma sirasi ters oldugu icin deadlock olusabilir ve program takilabilir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Object a = new Object();\nObject b = new Object();\n\nThread t1 = new Thread(() -> {\n    synchronized (a) {\n        try { Thread.sleep(50); } catch (InterruptedException e) {}\n        synchronized (b) { System.out.println(\"t1 done\"); }\n    }\n});\nThread t2 = new Thread(() -> {\n    synchronized (b) {\n        try { Thread.sleep(50); } catch (InterruptedException e) {}\n        synchronized (a) { System.out.println(\"t2 done\"); }\n    }\n});",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Deadlocku teorik olarak azaltip sonsuz beklemeyi kirar",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.locks.ReentrantLock lock = new java.util.concurrent.locks.ReentrantLock();\nif (lock.tryLock(100, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n    try {\n        System.out.println(\"work\");\n    } finally {\n        lock.unlock();\n    }\n} else {\n    System.out.println(\"fallback\");\n}",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Cogu durumda false, cunku exception atilirken interrupt statusu temizlenir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Thread t = new Thread(() -> {\n    try {\n        Thread.sleep(1000);\n    } catch (InterruptedException e) {\n        System.out.println(Thread.currentThread().isInterrupted());\n    }\n});\nt.start();\nt.interrupt();\nt.join();",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Tum user threadler bittiginde JVM kapanabilir ve daemonlar yarida kesilebilir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Thread d = new Thread(() -> {\n    while (true) {}\n});\nd.setDaemon(true);\nd.start();\nSystem.out.println(\"main done\");",
       "answerCode": ""

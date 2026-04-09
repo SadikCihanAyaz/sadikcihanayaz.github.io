@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Cagri synchronized blok/metod icinde ve ilgili monitor locku eldeyken yapilmali",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Monitor lock birakilir ve sinyal beklenir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "### Dogru Cevap\n- C: notify bir bekleyeni, notifyAll tum bekleyenleri uyandirir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Tek seferlik countdown kapisidir; sifira inince await gecilir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Bir grup threadin belirli noktada birbirini bekleyip tekrar kullanilabilir bariyer olusturmasi",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: before -> waiting -> after sirasi beklenir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Object lock = new Object();\nThread notifier = new Thread(() -> {\n    synchronized (lock) {\n        System.out.print(\"waiting \");\n        lock.notify();\n    }\n});\n\nsynchronized (lock) {\n    System.out.print(\"before \");\n    notifier.start();\n    lock.wait();\n    System.out.print(\"after\");\n}\nnotifier.join();",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: IllegalMonitorStateException olusur",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Object lock = new Object();\nlock.wait();",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Iki countDown sonrasi await gecer ve done yazilir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(2);\nnew Thread(() -> { latch.countDown(); latch.countDown(); }).start();\nlatch.await();\nSystem.out.println(\"done\");",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: tryAcquire kesin false",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.Semaphore sem = new java.util.concurrent.Semaphore(2);\nsem.acquire();\nsem.acquire();\nSystem.out.println(sem.tryAcquire());",
       "answerCode": ""

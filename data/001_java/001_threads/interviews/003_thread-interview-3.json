@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Birden fazla threadin ayni mutable statei uygun senkronizasyon olmadan guncellemesi",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Lock kullanmadan atomik read-modify-write operasyonlari sunar",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Deger expected ise update yazar ve true doner, degilse false doner",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Yuksek contention altinda sik increment edilen metrik sayaclari",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: AtomicInteger ai; ai.incrementAndGet();",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Kesin 2000",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(0);\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(ai.get());",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Race condition nedeniyle 2000 garanti degildir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class C { int v = 0; void inc(){ v++; } }\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.v);",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: true false 5",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(1);\nboolean r1 = ai.compareAndSet(1, 5);\nboolean r2 = ai.compareAndSet(1, 7);\nSystem.out.println(r1 + \" \" + r2 + \" \" + ai.get());",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "### Dogru Cevap\n- C: 3",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.atomic.LongAdder adder = new java.util.concurrent.atomic.LongAdder();\nadder.increment();\nadder.add(2);\nSystem.out.println(adder.sum());",
       "answerCode": ""

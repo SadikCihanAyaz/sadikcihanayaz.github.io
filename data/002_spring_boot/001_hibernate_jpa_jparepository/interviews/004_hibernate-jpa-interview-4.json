@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: @ManyToOne EAGER, @OneToMany LAZY",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Lazy iliskiye, persistence context kapanmisken erisildiginde.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: 1 ana sorgu + her satir icin ek iliski sorgulari atilmasidir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Iliskili veriyi ayni sorguda getirip N+1 riskini azaltmak.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Repository seviyesinde fetch planini declarative sekilde tanimlamayi.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Lazy iliski yuklemelerinde tek tek degil toplu fetch davranisi ile query sayisini azaltabilmek.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Controller/view katmaninda kontrolsuz lazy tetiklenmesi ve gizli N+1 maliyeti.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: users = findAll tek query olsa bile dongude orders erisimi her user icin ek query uretip N+1e neden olabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " java.util.List<User> users = userRepository.findAll();\n for (User u : users) {\n     System.out.println(u.getOrders().size());\n }"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: One-to-many join fetch satir carpimi yaratip ayni parenti birden fazla satirda dondurebilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.data.jpa.repository.Query(\"select u from User u join fetch u.orders\")\n java.util.List<User> findAllWithOrders();"

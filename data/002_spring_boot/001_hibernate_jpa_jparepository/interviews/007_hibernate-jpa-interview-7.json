@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Dirty readi engeller; diger anomaliler DB davranisina gore halen gorulebilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Ayni transaction icinde ayni satir tekrar okundugunda tutarliligi arttirir; phantom korumasi DBye gore degisebilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: En guclu tutarlilik ama lock/bekleme maliyeti nedeniyle throughput dususu riski.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: @Version kolonu ile guncellemede version kontrolu yapilarak.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Yuksek cakismanin oldugu kritik satir guncellemelerinde bekletmeli kilit kontrolu istendiginde.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Uygun isolation + optimistic/pessimistic lock stratejisini is senaryosuna gore secmek.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Isolation okuma anomalilerini sinirlar; update cakismlarinda lock stratejisiyle birlikte dusunulmelidir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Ikinci committe version catismasi nedeniyle OptimisticLockException olusabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " T1: Account(v=3) read -> balance=100\n T2: Account(v=3) read -> balance=100\n T1: update balance=90, v=4 commit\n T2: update balance=80 with old version=3 commit"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Ikinci transaction ayni satiri yazmak isteyince lock serbest kalana kadar bekleyebilir/timeout alabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.data.jpa.repository.Lock(javax.persistence.LockModeType.PESSIMISTIC_WRITE)\n java.util.Optional<Account> findById(Long id);"

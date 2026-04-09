@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Sadece kaydin var-yok kontrolu gerektiginde, tum entityyi cekmeden.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Cogu senaryoda islem sessiz tamamlanir; davranis implementasyon detayina bagli olsa da garanti bir NotFound yoktur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: saveAll genel olarak her entity icin persist/merge surecini isletir; batching ayarlariyla daha verimli hale getirilebilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Sayfa indexi 1 oldugu icin ikinci sayfadan 20 kayit getir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: INSERT/UPDATE/DELETE gibi veri degistiren @Query cagrilarinda.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "### Dogru Cevap\n- C: JPQL entity odakli ve daha portabledir; native SQL daha esnek ama DB bagimliligini arttirir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: findByNameContainingIgnoreCase ifadesi case-insensitive benzerlik aramasi icin kullanilabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: page=1 ikinci sayfayi ifade eder; size=20 ve DESC sorting ile calisir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": "org.springframework.data.domain.Pageable p =\n    org.springframework.data.domain.PageRequest.of(1, 20,\n        org.springframework.data.domain.Sort.by(\"createdAt\").descending());"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Statusa gore filtreleyip createdAt DESC sirasiyla en yeni ilk 3 kaydi getirir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": "java.util.List<User> findTop3ByStatusOrderByCreatedAtDesc(String status);"

@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: CPU core sayisina yakin tutmak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Cunku threadler sik sik beklemede kalir; biraz daha yuksek pool fayda saglayabilir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Kisa ve ucuz hesaplarda overhead faydayi gecerse",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Pool threadleri yeniden kullanildigi icin temizlenmeyen ThreadLocal degeri sonraki islere sizabilir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Thread dump (jstack) ve lock bilgilerini incelemek",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: forEach paralelde sira garantisi vermez, cikti sirasi degisebilir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.stream.IntStream.rangeClosed(1, 4)\n    .parallel()\n    .forEach(System.out::print);",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: forEachOrdered nedeniyle 1234 sirasi korunur",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.stream.IntStream.rangeClosed(1, 4)\n    .parallel()\n    .forEachOrdered(System.out::print);",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Ayni worker tekrar kullanildigindan ikinci task onceki degeri gorebilir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "ThreadLocal<String> ctx = new ThreadLocal<>();\njava.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\nex.submit(() -> ctx.set(\"REQ-1\")).get();\nSystem.out.println(ex.submit(() -> ctx.get()).get());\nex.shutdown();",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: take() ilk submit edileni degil, ilk tamamlanani verir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(2);\njava.util.concurrent.CompletionService<String> cs = new java.util.concurrent.ExecutorCompletionService<>(ex);\ncs.submit(() -> { Thread.sleep(200); return \"slow\"; });\ncs.submit(() -> \"fast\");\nSystem.out.println(cs.take().get());\nex.shutdown();",
       "answerCode": ""

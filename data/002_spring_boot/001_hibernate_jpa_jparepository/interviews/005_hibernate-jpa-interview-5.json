@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Methodu transaction boundary icinde calistirir; commit/rollback ve persistence context davranisini etkiler.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: RuntimeException ve altlarinda rollback tipik olarak vardir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: @Transactional(rollbackFor = Exception.class) gibi bir ayar kullanmalisin.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Read intent belirtir; DB/JPA tarafinda optimizasyon ipucu olabilir ama yazma davranisi implementasyona baglidir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Ayni class icinden method cagrisi proxyyi bypass edip anotasyonun beklenen etkisini gostermemesine neden olabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Service katmaninda, is kurali birimini kapsayacak sekilde.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Flush commit oncesi ve bazi querylerden once tetiklenebilir; commit ile ayni kavram degildir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Runtime exception firlatildigi icin transaction rollback olur, insert kalici olmayabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void create(){\n   repo.save(new User(\"a@x.com\"));\n   throw new RuntimeException(\"fail\");\n }"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Checked exception oldugu icin varsayilan rollback davranisi otomatik garanti degildir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void createChecked() throws Exception {\n   repo.save(new User(\"b@x.com\"));\n   throw new Exception(\"checked\");\n }"

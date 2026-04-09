@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Dinamik filtre kosullarini composable bicimde kurmak.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Page toplam count bilgisi tasir; Slice genelde sadece sonraki sayfa var mi bilgisini odaklar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: @CreatedDate/@LastModifiedDate alanlari + @EnableJpaAuditing konfigurasyonu.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: deleted flag/timestamp tutup sorgularda aktif kayitlari filtrelemek.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: orphanRemoval cocuk koleksiyondan cikarildiginda silmeyi tetikleyebilir; CascadeType.REMOVE parent remove oldugunda cocuklari siler.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Sadece id referansi yeterliyse ve tum alanlari hemen okumaya ihtiyac yoksa.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Specification / Criteria tabanli composable kosullar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: orphanRemoval true oldugunda cocuk listeden cikarilinca committe DELETE SQLi olusabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @javax.persistence.OneToMany(mappedBy = \"order\", cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true)\n private java.util.List<OrderItem> items;"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Parent persist edilince childlarin da persist edilmesi tetiklenebilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @javax.persistence.OneToMany(mappedBy = \"order\", cascade = javax.persistence.CascadeType.PERSIST)\n private java.util.List<OrderItem> items;"

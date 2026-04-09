@@ -34,7 +34,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Clientin kullanici adina belirli scope ile kaynaga erismesine yetki vermek",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Authorization Server token verir; Resource Server tokeni dogrulayip kaynagi korur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Code interception riskini azaltip public clientlarda guvenli token degisimi saglar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Izin verilen erisim siniri/kapabilite seti",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: OIDC, OAuth2 uzerine kimlik katmani ekler.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: code_verifier",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Introspection veya JWK set uzerinden signature/claim validation",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "A"
       ],
       "questionCode": "1) /authorize -> user login + consent\n2) client authorization code alir\n3) /token endpointte code + verifier ile access token alir\n4) access token ile API cagirir",
-      "answerBody": "### Dogru Cevap\n- A: Code alma -> token endpointten token alma -> resource erişimi",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "A"
       ],
       "questionCode": "http\n  .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())\n  .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));",
-      "answerBody": "### Dogru Cevap\n- A: Resource server gelen bearer JWTyi dogrulayarak endpointleri korur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Ayni process icindeki threadler heapi paylasir, stackleri ayridir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "### Dogru Cevap\n- C: start() yeni bir thread scheduler tarafindan calistirilir; run() direkt metot cagrisi gibi calisir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "### Dogru Cevap\n- C: BLOCKED",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Cunku Java tek kalitim kisitina takilmadan is mantigini ayirmayi saglar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: wait locku serbest birakir ve notify/notifyAll bekler.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: worker main-end",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Thread t = new Thread(() -> System.out.print(\"worker \"));\nt.run();\nSystem.out.print(\"main-end\");",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: AB",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Thread t = new Thread(() -> System.out.print(\"A\"));\nt.start();\nt.join();\nSystem.out.print(\"B\");",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "### Dogru Cevap\n- C: TIMED_WAITING",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Thread t = new Thread(() -> {\n    try { Thread.sleep(300); } catch (InterruptedException e) {}\n});\nt.start();\nThread.sleep(50);\nSystem.out.println(t.getState());",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "C"
       ],
-      "answerBody": "### Dogru Cevap\n- C: IllegalThreadStateException firlatilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "Thread t = new Thread(() -> {});\nt.start();\nt.setDaemon(true);",
       "answerCode": ""

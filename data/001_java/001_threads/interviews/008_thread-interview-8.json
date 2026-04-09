@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: null key/value desteklemez",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Read agirlikli ve iterasyon yogun senaryolarda",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Iterasyon sırasında disardan synchronized(list) ile lock alinmali",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Cunku nesne state degismedigi icin lock ihtiyaci azalir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Producer-consumer koordinasyonunu lock/free ve bekleme semantiklerini kapsayacak sekilde kolaylastirir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Iterasyonda snapshot nedeniyle 1 2 gorulur; final listede 3 vardir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.CopyOnWriteArrayList<Integer> list = new java.util.concurrent.CopyOnWriteArrayList<>(java.util.List.of(1, 2));\nfor (Integer v : list) {\n    if (v == 1) {\n        list.add(3);\n    }\n    System.out.print(v + \" \");\n}\nSystem.out.println(\"| size=\" + list.size());",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Thread-safe mapte anahtar yoksa atomik sekilde deger hesaplayip yazar",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.ConcurrentHashMap<String, Integer> map = new java.util.concurrent.ConcurrentHashMap<>();\nInteger v = map.computeIfAbsent(\"java\", k -> 1);\nSystem.out.println(v + \" / \" + map.get(\"java\"));",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Davranis tanimsiz hale gelebilir; veri kaybi/tutarsizlik riski vardir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.HashMap<Integer, Integer> map = new java.util.HashMap<>();\n// iki thread ayni anda put yapiyor varsay\n// Sonuc deterministic garanti edilmez.",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: 2",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.List<Integer> base = new java.util.ArrayList<>(java.util.List.of(1));\njava.util.List<Integer> ro = java.util.Collections.unmodifiableList(base);\nbase.add(2);\nSystem.out.println(ro.size());",
       "answerCode": ""

@@ -34,7 +34,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Testte gercek DB kullanicisi olusturmak zorunlulugunu azaltip guvenlik contexti taklit etmek icin",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: HTTP seviyesinde endpoint davranisini (status, auth, role) hizli dogrulamak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: @WebMvcTest daha dar slice test, @SpringBootTest tum context/integration senaryolari icin uygundur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Kimlik ve yetki hatalarini ayri dogrulamak, client tarafi davranisi ve guvenlik kontratini netlestirir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Beklenen endpointte random 401/403 veya auth contextin kurulmamis gorunmesiyle",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Stateful form akislarda CSRF tokenli ve tokensiz requestlerin ayrik sonucu",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Failed login oranlari, 401/403 dagilimi, refresh reuse eventleri, filter exception loglari",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "A"
       ],
       "questionCode": "mockMvc.perform(get(\"/admin/panel\"))\n    .andExpect(status().isUnauthorized());",
-      "answerBody": "### Dogru Cevap\n- A: Anonymous request /admin endpointinde unauthorized/forbidden beklenir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "A"
       ],
       "questionCode": "@WithMockUser(username = \"alice\", roles = {\"ADMIN\"})\n@Test\nvoid adminEndpoint_shouldReturn200() throws Exception {\n    mockMvc.perform(get(\"/admin/panel\")).andExpect(status().isOk());\n}",
-      "answerBody": "### Dogru Cevap\n- A: Method/URL role kontrollerinin ADMIN yetkisiyle expected sonucu verip vermedigini dogrulamak icin",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

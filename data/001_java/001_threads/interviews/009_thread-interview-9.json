@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Happens-before iliskisi olusur ve onceki yazilar gorunur hale gelir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Write, sonraki volatile readlere gorunur ve belirli reorder engelleri getirir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Constructor tamamlandiktan sonra dogru publish edilen final alanlar diger threadlerde tutarli gorulur",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: volatile olmali",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Tek thread semantigini bozmadan JVM/CPU belirli reorder yapabilir; concurrencyde gorunurluk sorunu dogurabilir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: stop volatile degilse loop bazi calismalarda sonlanmayabilir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class Flag {\n    boolean stop = false;\n}\nFlag f = new Flag();\nThread t = new Thread(() -> {\n    while (!f.stop) {\n        // busy loop\n    }\n    System.out.println(\"stopped\");\n});\nt.start();\nThread.sleep(100);\nf.stop = true;",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: stop degisimi gorulebilir ve looptan cikis beklenir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class Flag {\n    volatile boolean stop = false;\n}\nFlag f = new Flag();\nThread t = new Thread(() -> {\n    while (!f.stop) {}\n    System.out.println(\"stopped\");\n});\nt.start();\nThread.sleep(100);\nf.stop = true;",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Partially constructed object gozlenebilir",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class Singleton {\n    private static Singleton instance; // volatile degil\n    private Singleton() {}\n    static Singleton get() {\n        if (instance == null) {\n            synchronized (Singleton.class) {\n                if (instance == null) {\n                    instance = new Singleton();\n                }\n            }\n        }\n        return instance;\n    }\n}",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Hem race riskini azaltir hem write-read gorunurluk iliskisi kurar",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class Counter {\n    private int value = 0;\n    synchronized void inc() { value++; }\n    synchronized int get() { return value; }\n}",
       "answerCode": ""

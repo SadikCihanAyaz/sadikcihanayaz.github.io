@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Repository ve JPA katmanina odakli test slice saglar; her testte rollback davranisi tipik olarak vardir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Persistence context davranisini testte daha kontrollu yonetmek (persist/flush/clear) istediginde.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: logging.level.org.hibernate.SQL=DEBUG ve parameter binding loglari.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Schema degisikliklerini versiyonlayip ortamlarda tutarli migration akisi sagladigi icin.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Dialect, lock semantigi, index planlari farkli olabilecegi icin kritik sorgular production benzeri DBde de test edilmelidir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Cunku rollback, lock, stale data, unique constraint gibi hata senaryolari kacirilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Persistence context kapanmis/tx disi durumda lazy alana erisimi bilincli test etmek.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Test methodu sonunda tipik rollback nedeniyle veri bir sonraki teste kalici tasinmayabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest\n class UserRepoTest {\n   @org.junit.jupiter.api.Test\n   void t1(){ repo.save(new User(\"a@x.com\")); }\n }"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Lazy relation tx/persistence context disinda erisildiginde LazyInitializationException alinabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " User user = repo.findById(id).orElseThrow();\n // tx kapanmis olsun\n user.getOrders().size();"

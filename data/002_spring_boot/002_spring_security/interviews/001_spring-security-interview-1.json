@@ -34,7 +34,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Authentication kimligi dogrular, Authorization dogrulanan kimligin hangi kaynaga erisecegini belirler.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Bearer token yoktur veya gecersizdir, request authenticated olmasi gereken endpointtedir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Kullanici dogrulanmistir ancak endpoint authority/role kosulunu saglamaz.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Requestlerin guvenlik filtrelerinden hangi sirayla gecip hangi kurallara tabi olacagini tanimlar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Ilk eslesen kural uygulanir; genis bir kurali once yazarsan ozel kurallar etkisiz kalabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: permitAll endpointte token olsa da olmasa da izin verir; authenticated endpoint kimlik gerektirir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Ayni request icinde filtre mantiginin tek kez calismasini garanti etmek.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "C"
       ],
       "questionCode": "http.authorizeHttpRequests(auth -> auth\n    .requestMatchers(\"/public/**\").permitAll()\n    .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n    .anyRequest().authenticated()\n);",
-      "answerBody": "### Dogru Cevap\n- C: Sadece ROLE_ADMIN authoritysine sahip authenticated userlar",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "B"
       ],
       "questionCode": "String header = request.getHeader(\"Authorization\");\nif (header == null || !header.startsWith(\"Bearer \")) {\n    chain.doFilter(request, response);\n    return;\n}",
-      "answerBody": "### Dogru Cevap\n- B: Token yoksa chain devam edip protected endpointte 401/403 akisina girilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: execute void doner; submit Future doner",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: shutdown yeni task kabul etmez, eldeki tasklerin bitmesini bekler; shutdownNow devam edenleri interrupt etmeye calisir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Ayni anda en fazla 4 worker thread calisir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Tasklar submit sirasina gore ardil calisir",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Executor shutdown olduktan sonra submit/execute cagrilirsa",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: AB",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\nex.execute(() -> System.out.print(\"A\"));\nex.execute(() -> System.out.print(\"B\"));\nex.shutdown();\nex.awaitTermination(1, java.util.concurrent.TimeUnit.SECONDS);",
       "answerCode": ""
@@ -220,7 +220,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: null",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newSingleThreadExecutor();\njava.util.concurrent.Future<?> f = ex.submit(() -> System.out.print(\"run \"));\nSystem.out.println(f.get());\nex.shutdown();",
       "answerCode": ""
@@ -252,7 +252,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: RejectedExecutionException olusur",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(1);\nex.shutdown();\nex.submit(() -> System.out.println(\"x\"));",
       "answerCode": ""
@@ -284,7 +284,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Liste boyu 2 olur ve get() ile degerler okunur",
+      "answerBody": "",
       "optionExplanations": [],
       "questionCode": "java.util.concurrent.ExecutorService ex = java.util.concurrent.Executors.newFixedThreadPool(2);\njava.util.List<java.util.concurrent.Callable<Integer>> tasks = java.util.List.of(\n    () -> 1,\n    () -> 2\n);\njava.util.List<java.util.concurrent.Future<Integer>> results = ex.invokeAll(tasks);\nSystem.out.println(results.size());\nex.shutdown();",
       "answerCode": ""

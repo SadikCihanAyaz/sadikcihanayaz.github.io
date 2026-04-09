@@ -34,7 +34,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Username/email ile kullaniciyi yukleyip UserDetails donmek.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Raw sifrenin verilen hash ile semantik olarak eslesmesini",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Genelde farkli hashler cikar; dogrulama matches ile yapilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: UserDetailsService ve PasswordEncoder",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Authenticated bir Authentication objesi doner.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: UsernameNotFoundException firlatmak.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: ROLE_ prefix semantigine dikkat edilmelidir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "B"
       ],
       "questionCode": "String h1 = encoder.encode(\"secret\");\nString h2 = encoder.encode(\"secret\");\nboolean ok = encoder.matches(\"secret\", h1);\nSystem.out.println(h1.equals(h2) + \" / \" + ok);",
-      "answerBody": "### Dogru Cevap\n- B: h1 ve h2 tipik olarak farklidir; matches true doner.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "A"
       ],
       "questionCode": "Authentication auth = authenticationManager.authenticate(\n    new UsernamePasswordAuthenticationToken(email, rawPassword)\n);",
-      "answerBody": "### Dogru Cevap\n- A: Yanlis sifrede BadCredentialsException benzeri authentication hatasi olusur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

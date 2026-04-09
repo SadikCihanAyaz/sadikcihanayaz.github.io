@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: JPA spesifikasyondur, Hibernate implementasyondur, Spring Data JPA repository abstraction saglar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: CRUD, paging/sorting, derived query, @Query ve repository proxy olusumu saglar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Dirty checking sayesinde flush/commit aninda gerekli UPDATE SQLi olusur; her seferinde save zorunlu degildir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: findById genelde DBye gidip entityyi getirir; getReferenceById proxy donup alan erisimi aninda initialize olabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: JpaRepository, CrudRepository/PagingAndSorting yeteneklerini kapsayip ek JPA odakli metotlar sunar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Karmasik join + aggregation + subquery senaryolarinda method ismi fazla buyuyup okunabilirlik azalir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Karmasik JPQL/native SQL, ozel join, aggregation veya performans kontrolu gereken sorgularda.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: User managed oldugu icin commit/flush asamasinda UPDATE SQLi olusur; ayrica save cagrisi zorunlu degildir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void rename(Long id) {\n     User u = repo.findById(id).orElseThrow();\n     u.setName(\"Bahar\");\n }"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Proxy nesnesinde id erisimi cogu durumda initialize etmeden donebilir; diger alanlar (or. email) erisilince SELECT tetiklenebilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " User ref = repo.getReferenceById(10L);\n Long onlyId = ref.getId();\n String email = ref.getEmail();"

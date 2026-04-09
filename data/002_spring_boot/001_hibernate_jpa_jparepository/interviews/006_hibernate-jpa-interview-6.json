@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Varsa mevcut transactiona katilir, yoksa yeni transaction acilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Mevcut transactioni askiya alip yeni bagimsiz transaction baslatir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Mevcut transaction yoksa exception firlatir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Mevcut tx varsa ona katilir, yoksa txsiz calisir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Mevcut tx varsa askiya alip txsiz calisabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Savepoint destekli transaction manager/DB altyapisinda alt savepoint rollback senaryosu gerektiginde.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Inner akista rollback-only set edilip outer akista commit beklenince.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Inner REQUIRED hata alip catch edilse de rollback-only bayragi tasinabilecegi icin outer committe UnexpectedRollbackException alinabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void outer(){\n   try{ innerRequired(); } catch (RuntimeException ignore){}\n   repo.save(new AuditLog(\"outer\"));\n }\n\n @org.springframework.transaction.annotation.Transactional\n public void innerRequired(){ throw new RuntimeException(\"x\"); }"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Inner REQUIRES_NEW rollback olsa bile outer transaction uygun kosulda commit olabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void outer(){\n    try{ auditService.saveAuditRequiresNew(); }catch(Exception e){}\n    orderRepo.save(new Order(\"OK\"));\n }"

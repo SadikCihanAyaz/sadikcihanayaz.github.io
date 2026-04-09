@@ -34,7 +34,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Stateful modelde server oturum bilgisi tutar; stateless modelde her request tokenla kimlik tasir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Spring Security authentication statei icin HttpSession kullanmaz; her request bagimsiz ele alinir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Tarayicinin otomatik gonderdigi cookie tabanli auth kullanan stateful formlarda.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: OPTIONS requestine izin verilmemesi veya allowed headers/origin taniminin eksik olmasi.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Token explicit gonderildigi icin request bazli kontrol daha net olur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Request akisinda thread baglaminda tutulan gecici authentication contextidir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Authentication hatalarinda 401, yetki hatalarinda 403 donmek ve tutarli error contract kullanmak.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "C"
       ],
       "questionCode": "http\n  .csrf(csrf -> csrf.disable())\n  .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))\n  .authorizeHttpRequests(auth -> auth.anyRequest().authenticated());",
-      "answerBody": "### Dogru Cevap\n- C: Session state beklemeden token-bazli stateless akis icin uygun temel kurulumdur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "A"
       ],
       "questionCode": "HttpSession session = request.getSession(false);\nObject auth = (session == null) ? null : session.getAttribute(\"SPRING_SECURITY_CONTEXT\");",
-      "answerBody": "### Dogru Cevap\n- A: Sessiona bagli kimlik varsayimi stateless JWT modelini bozar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

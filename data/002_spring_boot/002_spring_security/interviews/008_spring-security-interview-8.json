@@ -34,7 +34,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Role daha ust seviye etiket, authority daha granular izin ifadesi olarak kullanilabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: ROLE_ADMIN authority semantigi",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: @EnableMethodSecurity",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Methoda girmeden once authorization kosulunu degerlendirir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Sadece owner kendi kaydina erisir (principal name id semantigine uygunsa).",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Method sonucuna gore ek kontrol gereken durumlarda kullanilabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: RBAC role tabanli, ABAC context/attribute tabanli daha dinamik kurallar kurabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "B"
       ],
       "questionCode": "@PreAuthorize(\"hasRole('ADMIN') or #id == authentication.name\")\npublic AccountDto findById(String id) { ... }",
-      "answerBody": "### Dogru Cevap\n- B: Allow, cunku ikinci kosul saglanir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "A"
       ],
       "questionCode": "http.authorizeHttpRequests(a -> a.requestMatchers(\"/api/**\").authenticated());\n// service methodu\n@PreAuthorize(\"hasAuthority('invoice:read')\")\npublic Invoice read(...) { ... }",
-      "answerBody": "### Dogru Cevap\n- A: Method-level kontroller URL-levelin tamamlayicisidir; ikisi birlikte defense-in-depth saglar.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

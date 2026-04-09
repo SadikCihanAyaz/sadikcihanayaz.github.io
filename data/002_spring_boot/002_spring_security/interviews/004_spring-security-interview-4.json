@@ -34,7 +34,7 @@
         "C"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- C: header.payload.signature",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Tokenin degistirilmedigini (integrity) ve imzayi ureten kaynaga guveni destekler.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Tokenin gecersiz olacagi son an",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Payload base64url encoded oldugu icin okunabilir; gizli bilgi koymamak gerekir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: HS256 tek secret ile simetrik imzalama, RS256 private/public key ile asimetrik imzalama kullanir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Kimlik/yetki icin gerekli minimal claimleri koymak, hassas veriyi tokena koymamak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Sadece expiration kontrol edip signature kontrolu yapmamak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "A"
       ],
       "questionCode": "boolean valid = jwtService.isTokenValid(token, userDetails);\nif (!valid) {\n    response.setStatus(401);\n}",
-      "answerBody": "### Dogru Cevap\n- A: true ise token en azindan exp ve signature kontrollerini gecmis olmalidir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "B"
       ],
       "questionCode": "Instant now = Instant.now();\nString token = jwtService.generateToken(subject, now.plus(15, ChronoUnit.MINUTES));\n// 20 dakika sonra validate(token)",
-      "answerBody": "### Dogru Cevap\n- B: exp now+15m ise 20 dakika sonra token gecersiz kabul edilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

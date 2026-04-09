@@ -34,7 +34,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: UsernamePasswordAuthenticationFilter oncesi",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: chain.doFilter ile devam edip protected endpointin standart auth akisina birakmak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Contexti kirletmeden requesti uygun auth hata akisina yonlendirmek (genelde 401)",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Thread/request baglaminda authentication tutar; uygun yerde temizlenmesi gerekir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Thread-local baglam oldugu icin context otomatik her zaman ayni sekilde tasinmayabilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Token validse ve contextte halihazirda authentication yoksa",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Exceptionde contexti bozuk birakmamak ve zinciri tutarli sonlandirmak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "A"
       ],
       "questionCode": "if (header == null || !header.startsWith(\"Bearer \")) {\n    chain.doFilter(request, response);\n    return;\n}",
-      "answerBody": "### Dogru Cevap\n- A: Token yoksa da chain devam ettigi icin endpoint kendi auth kuralina gore karar verir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "A"
       ],
       "questionCode": "if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {\n    // create auth and set context\n}",
-      "answerBody": "### Dogru Cevap\n- A: Contextte zaten auth varsa gereksiz overwrite edilmesini onler.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

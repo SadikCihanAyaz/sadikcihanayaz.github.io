@@ -34,7 +34,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: BCrypt/Argon2 gibi guclu hash algoritmasi ve uygun cost parametresi kullanmak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -66,7 +66,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Rate limit, progressive delay, temporary lockout ve audit log kullanmak",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,7 +98,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: XSS oldugunda tokenin JavaScript ile okunabilmesi",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -130,7 +130,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: CSRF mitigasyonu (token/same-site/pattern) stratejisi",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -162,7 +162,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Anahtar sizintisi etkisini sinirlamak ve guvenlik hijyenini surdurmek icin",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -194,7 +194,7 @@
         "A"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- A: Genis origin + credential kombinasyonu guvenlik riskidir; dar whitelist tercih edilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -226,7 +226,7 @@
         "B"
       ],
       "questionCode": null,
-      "answerBody": "### Dogru Cevap\n- B: Secret manager/KMS kullanip rotation ve erisim loglarini yonetmek",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -258,7 +258,7 @@
         "A"
       ],
       "questionCode": "CorsConfiguration c = new CorsConfiguration();\nc.setAllowedOrigins(List.of(\"*\"));\nc.setAllowCredentials(true);",
-      "answerBody": "### Dogru Cevap\n- A: allowCredentials true iken wildcard origin guvenli kabul edilmemelidir; explicit whitelist daha dogrudur.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -290,7 +290,7 @@
         "A"
       ],
       "questionCode": "String kid = jwtHeader.get(\"kid\");\nPublicKey key = keyStore.findByKid(kid);\nboolean valid = verifier.verify(token, key);",
-      "answerBody": "### Dogru Cevap\n- A: Token headerindaki kid ile dogru public key secilip signature dogrulanabilir; key rotationi kolaylastirir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },

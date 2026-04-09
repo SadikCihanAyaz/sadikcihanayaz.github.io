@@ -33,7 +33,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: new ile olusturulmus, henuz persistence context tarafindan izlenmeyen entitydir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,7 +64,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Degisiklikleri commit/flush asamasinda otomatik tespit edilip SQLe donusturulebilir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -95,7 +95,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Detached entity persistence context disindadir; otomatik dirty checking uygulanmaz.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -126,7 +126,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Detached veriyi persistence contexte kopyalar ve managed bir donus degeri uretir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -157,7 +157,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: Flush SQL senkronizasyonudur; commit transactioni kalici sonlandirir.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -188,7 +188,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Tum managed entityleri detached hale getirir (persistence context temizlenir).",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -219,7 +219,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: Entitynin managed durumda olmasi ve degisikligin transaction boundary icinde yapilmasi.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -250,7 +250,7 @@
       "correctChoiceIds": [
         "A"
       ],
-      "answerBody": "### Dogru Cevap\n- A: clear sonrasi user detached oldugu icin setName degisikligi otomatik updatee donmez.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " @org.springframework.transaction.annotation.Transactional\n public void demo(Long id){\n     User user = entityManager.find(User.class, id);\n     entityManager.clear();\n     user.setName(\"X\");\n }"
@@ -282,7 +282,7 @@
       "correctChoiceIds": [
         "B"
       ],
-      "answerBody": "### Dogru Cevap\n- B: merge donus degeri managed olabilir; eski detached referansta yapilan degisiklikler otomatik takip edilmez.",
+      "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
       "questionCode": " User oldRef = detachedUser;\n User merged = entityManager.merge(detachedUser);\n oldRef.setName(\"old\");\n merged.setName(\"managed\");"
