@@ -539,6 +539,23 @@
     els.checkResult.innerHTML = `<p class="${css}">${esc(result.text)}</p>`;
   }
 
+  function hasDetailedAnswer(question) {
+    return Boolean(
+      String(question?.answerBody || '').trim() ||
+      String(question?.answerCode || '').trim()
+    );
+  }
+
+  function getQuestionTitle(question) {
+    if (question.type === 'code') {
+      return 'Kod Yazma Sorusu';
+    }
+    if (question.questionKind === 'code-output') {
+      return 'Kod Ciktisi Sorusu';
+    }
+    return 'Kavramsal Test Sorusu';
+  }
+
   function renderQuestion() {
     const question = state.questions[state.currentIndex];
     if (!question) {
@@ -550,12 +567,11 @@
     els.errorBox.classList.add('hidden');
 
     els.progress.textContent = `Soru ${state.currentIndex + 1} / ${state.questions.length}`;
-    if (question.type === 'code') {
-      els.questionTitle.textContent = 'Kod Yazma Sorusu';
-    } else if (question.questionKind === 'code-output') {
-      els.questionTitle.textContent = 'Kod Ciktisi Sorusu';
+    const title = getQuestionTitle(question);
+    if (hasDetailedAnswer(question)) {
+      els.questionTitle.innerHTML = `${esc(title)} <span class="answer-tag">Cevap Var</span>`;
     } else {
-      els.questionTitle.textContent = 'Kavramsal Test Sorusu';
+      els.questionTitle.textContent = title;
     }
     els.questionText.textContent = question.question || '';
     els.checkResult.innerHTML = '';
