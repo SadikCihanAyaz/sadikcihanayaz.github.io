@@ -30,7 +30,9 @@
           "text": "Validationi devre disi birakmak."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -59,7 +61,9 @@
           "text": "Sadece testlerde kullanilir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -88,7 +92,9 @@
           "text": "MapStruct Spring Bootta calismaz."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -117,7 +123,9 @@
           "text": "SecurityFilterChain icinde."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -146,7 +154,9 @@
           "text": "Sadece response statusunu degistirir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -175,7 +185,9 @@
           "text": "Sadece path variable kullanmak."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -204,7 +216,9 @@
           "text": "CORS konfigurasyonunu otomatik yapmasi."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -233,7 +247,9 @@
           "text": "Mapping sadece runtime exception firlatir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
@@ -263,7 +279,9 @@
           "text": "Sadece POST metodlari bozulur."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",

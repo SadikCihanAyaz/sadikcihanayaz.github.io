@@ -30,7 +30,9 @@
           "text": "Validationi kapatmak icin."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -59,7 +61,9 @@
           "text": "Aralarinda hic fark yoktur."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -88,7 +92,9 @@
           "text": "Rastgele secilir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -117,7 +123,9 @@
           "text": "Validationi controllerda try-catch ile tamamen manuel yapmak."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -146,7 +154,9 @@
           "text": "SQL injection riski sifirlanir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -175,7 +185,9 @@
           "text": "Validationla ilgisi yoktur."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -204,7 +216,9 @@
           "text": "Serializationi devre disi birakmak."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -233,7 +247,9 @@
           "text": "500 ve stack trace"
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
@@ -263,7 +279,9 @@
           "text": "304"
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",

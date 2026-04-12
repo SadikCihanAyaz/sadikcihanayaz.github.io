@@ -30,7 +30,9 @@
           "text": "Logback"
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -59,7 +61,9 @@
           "text": "Validation group aktif eder."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -88,7 +92,9 @@
           "text": "Header mapping yapar."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -117,7 +123,9 @@
           "text": "@FormatDate"
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -146,7 +154,9 @@
           "text": "Requesti sadece GETe cevirmek."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -175,7 +185,9 @@
           "text": "@Bean / @Primary"
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -204,7 +216,9 @@
           "text": "@NotNull"
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -233,7 +247,9 @@
           "text": "Sadece password gorunur."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
@@ -263,7 +279,9 @@
           "text": "Mapper sadece write islemlerinde calisir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",

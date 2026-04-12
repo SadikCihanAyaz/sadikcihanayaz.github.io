@@ -30,7 +30,9 @@
           "text": "Yanit suresi 100ms altinda olan metodlardir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -59,7 +61,9 @@
           "text": "Idempotency sadece frontend cache davranisidir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -88,7 +92,9 @@
           "text": "304 Not Modified"
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -117,7 +123,9 @@
           "text": "Her zaman redirect anlamina gelir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -146,7 +154,9 @@
           "text": "Kullanici rol yetkisi yok."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -175,7 +185,9 @@
           "text": "PUT idempotent degildir ama PATCH idempotenttir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -204,7 +216,9 @@
           "text": "Sadece debug logu yazmak."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -233,7 +247,9 @@
           "text": "Status 302 redirect."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
@@ -263,7 +279,9 @@
           "text": "500 Internal Server Error"
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",

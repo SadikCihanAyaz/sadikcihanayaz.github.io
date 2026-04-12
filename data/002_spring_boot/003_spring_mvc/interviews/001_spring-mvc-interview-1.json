@@ -30,7 +30,9 @@
           "text": "@Controller sadece POST isteklerinde calisir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -59,7 +61,9 @@
           "text": "Request bodyyi otomatik sifreler."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -88,7 +92,9 @@
           "text": "Validation kurallarini aktif eder."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -117,7 +123,9 @@
           "text": "@GetMapping mutlaka @PostMapping ile birlikte yazilmalidir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -146,7 +154,9 @@
           "text": "Controller beaninin scopeunu belirlemek icin."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -175,7 +185,9 @@
           "text": "Spring otomatik merge eder."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -204,7 +216,9 @@
           "text": "Resource yerine DB tablo adlarini birebir expose etmek."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -233,7 +247,9 @@
           "text": "Iki method da calisir ve body birlesir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
@@ -263,7 +279,9 @@
           "text": "Iki method round-robin calisir."
         }
       ],
-      "correctChoiceIds": [],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": "",
