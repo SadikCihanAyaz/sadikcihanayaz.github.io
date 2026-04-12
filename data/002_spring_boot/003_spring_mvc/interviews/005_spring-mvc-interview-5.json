@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-5",
+  "title": "Spring MVC Interview - 5",
+  "description": "@Valid, @Validated ve Bean Validation anotasyonlari",
+  "questions": [
+    {
+      "id": "i5-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Valid ve @Validated farki icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@Valid group destekler, @Validated desteklemez."
+        },
+        {
+          "id": "B",
+          "text": "@Validated Spring anotasyonudur ve group bazli validationi destekler."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi sadece primitive alanlarda calisir."
+        },
+        {
+          "id": "D",
+          "text": "@Valid sadece service katmaninda kullanilir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@NotNull, @NotEmpty, @NotBlank arasinda en dogru yorum hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ucunun anlami birebir aynidir."
+        },
+        {
+          "id": "B",
+          "text": "@NotBlank stringte bosluk disi karakter de ister; @NotEmpty bos koleksiyon/stringi reddeder; @NotNull sadece nullu reddeder."
+        },
+        {
+          "id": "C",
+          "text": "@NotBlank sayisal alanlarda kullanilir."
+        },
+        {
+          "id": "D",
+          "text": "@NotNull yalnizca entity alanlarinda calisir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "String alanda @Size(min=3,max=20) neyi dogrular?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Stringin byte uzunlugunu zorunlu UTF-16 yapar."
+        },
+        {
+          "id": "B",
+          "text": "Karakter uzunlugunun min/max araligini dogrular."
+        },
+        {
+          "id": "C",
+          "text": "Sadece null degerleri dogrular."
+        },
+        {
+          "id": "D",
+          "text": "Stringin email formatini dogrular."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Nested DTO validasyonunun tetiklenmesi icin hangi kullanim gerekir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ic alanda da @Valid kullanmak gerekir."
+        },
+        {
+          "id": "B",
+          "text": "Sadece parent classa @Entity koymak yeterlidir."
+        },
+        {
+          "id": "C",
+          "text": "@Autowired kullanmak gerekir."
+        },
+        {
+          "id": "D",
+          "text": "Nested validation Spring MVCde desteklenmez."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Validation group kullanimi hangi senaryoda anlamlidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Create ve update akislari icin farkli kurallar uygulamak istendiginde."
+        },
+        {
+          "id": "B",
+          "text": "Sadece GET endpointlerini kapatmak icin."
+        },
+        {
+          "id": "C",
+          "text": "JSON serialization hizlandirmak icin."
+        },
+        {
+          "id": "D",
+          "text": "CORS hatalarini cozmek icin."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Validation anotasyonlarini DTO uzerinde tutmanin tipik avantajiu nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "API kontratini persistence modelinden bagimsiz yonetebilmek."
+        },
+        {
+          "id": "B",
+          "text": "Hibernatei tamamen devre disi birakmak."
+        },
+        {
+          "id": "C",
+          "text": "Controller kullanmadan endpoint acmak."
+        },
+        {
+          "id": "D",
+          "text": "Sadece testte calismak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Email anotasyonu icin daha dogru yorum hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her zaman domainin DNSte var oldugunu garanti eder."
+        },
+        {
+          "id": "B",
+          "text": "Format seviyesinde bir dogrulama yapar; is kuralina gore ek kontrol gerekebilir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece @NotBlank ile birlikte calisir."
+        },
+        {
+          "id": "D",
+          "text": "Yalnizca nullable alanlarda calisir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu endpointe asagidaki body gonderilirse tipik sonuc nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "200 OK"
+        },
+        {
+          "id": "B",
+          "text": "400 Bad Request (validation hatasi)"
+        },
+        {
+          "id": "C",
+          "text": "401 Unauthorized"
+        },
+        {
+          "id": "D",
+          "text": "409 Conflict"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "record UserCreateRequest(@NotBlank String name) {}\n\n@PostMapping(\"/users\")\npublic void create(@Valid @RequestBody UserCreateRequest req) {}\n\n// body: {\"name\":\"   \"}"
+    },
+    {
+      "id": "i5-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki group-based validation kullaniminda hangi kural dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@Validated(CreateGroup.class) sadece CreateGroup anotasyonlu constraintleri calistirir."
+        },
+        {
+          "id": "B",
+          "text": "Group secimi validationi tamamen kapatir."
+        },
+        {
+          "id": "C",
+          "text": "@Validated group ile kullanilamaz."
+        },
+        {
+          "id": "D",
+          "text": "Group sadece @PathVariable icin vardir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "interface CreateGroup {}\nrecord UserDto(@NotNull(groups = CreateGroup.class) Long id, @NotBlank String name) {}\n\n@PostMapping\npublic void create(@Validated(CreateGroup.class) @RequestBody UserDto dto) {}"
+    },
+    {
+      "id": "i5-q10",
+      "type": "code",
+      "question": "Bir UserCreateRequest DTO yaz: email zorunlu + email formatinda, fullName en az 3 karakter, age minimum 18. Sonra bu DTOyu @Valid ile kabul eden bir POST endpoint yaz.",
+      "starterCode": "// TODO: DTO\n// TODO: Controller method\n@RestController\n@RequestMapping(\"/users\")\nclass UserCommandController {}",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}

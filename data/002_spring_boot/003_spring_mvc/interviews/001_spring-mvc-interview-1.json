@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-1",
+  "title": "Spring MVC Interview - 1",
+  "description": "Controller modeli, mapping anotasyonlari ve endpoint tasarim temelleri",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@RestController ile @Controller arasindaki temel fark nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@RestController view name doner, @Controller JSON doner."
+        },
+        {
+          "id": "B",
+          "text": "@RestController = @Controller + @ResponseBody; HTTP body olarak veri donmeye odaklidir."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi de aynidir, sadece package farki vardir."
+        },
+        {
+          "id": "D",
+          "text": "@Controller sadece POST isteklerinde calisir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@ResponseBody anotasyonunun amaci nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Methodun donus degerini HTTP response bodyye yazar."
+        },
+        {
+          "id": "B",
+          "text": "Methodu transaction icinde calistirir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece XML serialization zorunlu kilar."
+        },
+        {
+          "id": "D",
+          "text": "Request bodyyi otomatik sifreler."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Class seviyesinde @RequestMapping(\"/users\") kullanmanin en dogru anlami nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece GET metodlari aktif olur."
+        },
+        {
+          "id": "B",
+          "text": "Controller altindaki tum endpointler icin ortak path prefix tanimlanir."
+        },
+        {
+          "id": "C",
+          "text": "Path degil, sadece HTTP header eslestirir."
+        },
+        {
+          "id": "D",
+          "text": "Validation kurallarini aktif eder."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@GetMapping ile @RequestMapping(method = RequestMethod.GET) iliskisi icin dogru ifade hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@GetMapping yalnizca Spring Boot 1.xte calisir."
+        },
+        {
+          "id": "B",
+          "text": "@GetMapping ayni semantigin daha okunabilir kisaltmasidir."
+        },
+        {
+          "id": "C",
+          "text": "@RequestMapping GET desteklemez."
+        },
+        {
+          "id": "D",
+          "text": "@GetMapping mutlaka @PostMapping ile birlikte yazilmalidir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "consumes ve produces ozellikleri hangi durumlari kontrol etmek icin kullanilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece SQL sorgu tipini secmek icin."
+        },
+        {
+          "id": "B",
+          "text": "Istek Content-Type ve cevap Accept/MediaType uyumunu kontrol etmek icin."
+        },
+        {
+          "id": "C",
+          "text": "Sadece path variable tip donusumu icin."
+        },
+        {
+          "id": "D",
+          "text": "Controller beaninin scopeunu belirlemek icin."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Ayni path + ayni HTTP method icin iki handler method tanimlanirsa tipik sonuc nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Uygulama acilir, random birini secer."
+        },
+        {
+          "id": "B",
+          "text": "Ambiguous mapping hatasiyla startup asamasinda fail olur."
+        },
+        {
+          "id": "C",
+          "text": "Sadece productionda hata verir, localde vermez."
+        },
+        {
+          "id": "D",
+          "text": "Spring otomatik merge eder."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "REST endpoint isimlendirmesi icin daha dogru yaklasim hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "URIlerde fiil agirlikli tasarim: /getUsers, /deleteUser."
+        },
+        {
+          "id": "B",
+          "text": "Kaynak odakli isimlendirme: /users, /users/{id}; islem HTTP methodu ile anlatilir."
+        },
+        {
+          "id": "C",
+          "text": "Tum endpointler tek path altinda: /api/do."
+        },
+        {
+          "id": "D",
+          "text": "Resource yerine DB tablo adlarini birebir expose etmek."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki kodda GET /users/42 istegi icin hangi handler calisir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "list() cagrilir cunku class path sadece /users."
+        },
+        {
+          "id": "B",
+          "text": "getById() cagrilir cunku method pathi /{id} ile eslesir."
+        },
+        {
+          "id": "C",
+          "text": "Hicbiri calismaz, 415 doner."
+        },
+        {
+          "id": "D",
+          "text": "Iki method da calisir ve body birlesir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@RestController\n@RequestMapping(\"/users\")\nclass UserController {\n  @GetMapping public String list(){ return \"list\"; }\n  @GetMapping(\"/{id}\") public String getById(@PathVariable Long id){ return \"one\"; }\n}"
+    },
+    {
+      "id": "i1-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun startup davranisi icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Uygulama acilir, ikinci method birincinin ustune yazar."
+        },
+        {
+          "id": "B",
+          "text": "Ayni mapping nedeniyle ambiguous mapping/startup hatasi alinir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece actuator aciksa hata verir."
+        },
+        {
+          "id": "D",
+          "text": "Iki method round-robin calisir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@RestController\n@RequestMapping(\"/api\")\nclass DemoController {\n  @GetMapping(\"/ping\") String a(){ return \"a\"; }\n  @GetMapping(\"/ping\") String b(){ return \"b\"; }\n}"
+    },
+    {
+      "id": "i1-q10",
+      "type": "code",
+      "question": "Base path'i /products olan bir controller yaz. GET /products/{id} endpointi ProductDto donsun, POST /products endpointi bodyden ProductCreateRequest alip 201 donsun.",
+      "starterCode": "@RestController\n@RequestMapping(\"/products\")\nclass ProductController {\n    // TODO: GET /{id}\n    // TODO: POST /\n}\n\nrecord ProductDto(Long id, String name) {}\nrecord ProductCreateRequest(String name) {}",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}

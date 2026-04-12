@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-10",
+  "title": "Spring MVC Interview - 10",
+  "description": "MockMvc testleri, CORS, filter/interceptor ve troubleshooting yaklasimlari",
+  "questions": [
+    {
+      "id": "i10-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@WebMvcTest ile @SpringBootTest secimi icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@WebMvcTest tum altyapiyi ayaioa kaldirir, @SpringBootTest sadece controlleri."
+        },
+        {
+          "id": "B",
+          "text": "@WebMvcTest web slice testtir; @SpringBootTest tum context/integration icin kullanilir."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi tamamen ayni kapsamda calisir."
+        },
+        {
+          "id": "D",
+          "text": "@SpringBootTest guvenlik testlerinde kullanilamaz."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i10-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@WithMockUser anotasyonunun testlerde tipik faydasi nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Gercek DB kullanicisi olusturmadan SecurityContexti simule etmek."
+        },
+        {
+          "id": "B",
+          "text": "JWT imzalama yapmak."
+        },
+        {
+          "id": "C",
+          "text": "CORS policy olusturmak."
+        },
+        {
+          "id": "D",
+          "text": "Serializationi hizlandirmak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i10-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "MockMvc ile JSON response dogrulamak icin yaygin yaklasim hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece status kontrolu yeterli olur, body kontrol edilmez."
+        },
+        {
+          "id": "B",
+          "text": "status + contentType + jsonPath ile kontrat dogrulanir."
+        },
+        {
+          "id": "C",
+          "text": "Yalnizca loglara bakilir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece browserdan manuel test edilir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i10-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Stateful form akista POST testlerinde CSRF icin ne yapilmalidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "CSRF her zaman kapatilir."
+        },
+        {
+          "id": "B",
+          "text": "with(csrf()) ile tokenli ve tokensiz senaryolar ayrik test edilir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece GET test edilir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece @Valid test edilir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i10-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "allowCredentials(true) kullanilirken CORS origin ayari icin dogru olan nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "allowedOrigins('*') en guvenli secimdir."
+        },
+        {
+          "id": "B",
+          "text": "Wildcard yerine explicit whitelist origin kullanilmalidir."
+        },
+        {
+          "id": "C",
+          "text": "Origin tanimi gereksizdir."
+        },
+        {
+          "id": "D",
+          "text": "Bu ayar sadece unit testte gereklidir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i10-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Filter ve HandlerInterceptor sirasi icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Interceptorlar servlet filterdan once calisir."
+        },
+        {
+          "id": "B",
+          "text": "Filterlar servlet katmaninda daha dista calisir; interceptorlar MVC handler asamasinda devreye girer."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi ayni mekanizmadir."
+        },
+        {
+          "id": "D",
+          "text": "Filter sadece response olduktan sonra calisir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i10-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "HandlerMethodArgumentResolver hangi ihtiyac icin uygundur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Custom method argumanlarini merkezi sekilde resolve etmek (or. current tenant/current user)."
+        },
+        {
+          "id": "B",
+          "text": "SQL migration calistirmak."
+        },
+        {
+          "id": "C",
+          "text": "JWT key rotation yapmak."
+        },
+        {
+          "id": "D",
+          "text": "Bean validation annotation yazmak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i10-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu test sinifinda @MockBean eksikse tipik ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Test her zaman gecer."
+        },
+        {
+          "id": "B",
+          "text": "ApplicationContext yuklenirken ilgili dependency bulunamadigi icin test fail olur."
+        },
+        {
+          "id": "C",
+          "text": "Sadece warning basilir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece production profilde fail olur."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@WebMvcTest(UserController.class)\nclass UserControllerTest {\n  @Autowired MockMvc mockMvc;\n  // UserController constructorinda UserService var ama @MockBean yok\n}"
+    },
+    {
+      "id": "i10-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki testte neden 415 gorulebilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Authorization header olmadigi icin."
+        },
+        {
+          "id": "B",
+          "text": "Request body JSON ama Content-Type belirtilmedigi icin."
+        },
+        {
+          "id": "C",
+          "text": "Path variable eksik oldugu icin."
+        },
+        {
+          "id": "D",
+          "text": "CSRF token oldugu icin."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "mockMvc.perform(post(\"/users\")\n    .content(\"{\\\"email\\\":\\\"a@a.com\\\"}\"))\n  .andExpect(status().isUnsupportedMediaType());"
+    },
+    {
+      "id": "i10-q10",
+      "type": "code",
+      "question": "MockMvc testi yaz: POST /users endpointine gecersiz body (name bos) gonder ve 400 + $.errors.name alani dogrula.",
+      "starterCode": "@WebMvcTest(UserController.class)\nclass UserControllerTest {\n    @Autowired MockMvc mockMvc;\n\n    @Test\n    void invalidRequest_returns400() throws Exception {\n        // TODO\n    }\n}",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}

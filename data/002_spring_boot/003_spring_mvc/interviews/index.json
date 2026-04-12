@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "interviews": [
+    {
+      "id": "spring-mvc-interview-1",
+      "title": "Spring MVC Interview - 1",
+      "description": "Controller modeli, mapping anotasyonlari ve endpoint tasarim temelleri",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/001_spring-mvc-interview-1.json"
+    },
+    {
+      "id": "spring-mvc-interview-2",
+      "title": "Spring MVC Interview - 2",
+      "description": "HTTP method semantikleri, idempotency ve dogru status code secimi",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/002_spring-mvc-interview-2.json"
+    },
+    {
+      "id": "spring-mvc-interview-3",
+      "title": "Spring MVC Interview - 3",
+      "description": "PathVariable, RequestParam, RequestBody ve request veri binding pratikleri",
+      "order": 3,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/003_spring-mvc-interview-3.json"
+    },
+    {
+      "id": "spring-mvc-interview-4",
+      "title": "Spring MVC Interview - 4",
+      "description": "ResponseEntity, media type negotiation ve HTTP cevap tasarimi",
+      "order": 4,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/004_spring-mvc-interview-4.json"
+    },
+    {
+      "id": "spring-mvc-interview-5",
+      "title": "Spring MVC Interview - 5",
+      "description": "@Valid, @Validated ve Bean Validation anotasyonlari",
+      "order": 5,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/005_spring-mvc-interview-5.json"
+    },
+    {
+      "id": "spring-mvc-interview-6",
+      "title": "Spring MVC Interview - 6",
+      "description": "Method argument validation, BindingResult ve custom validation davranislari",
+      "order": 6,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/006_spring-mvc-interview-6.json"
+    },
+    {
+      "id": "spring-mvc-interview-7",
+      "title": "Spring MVC Interview - 7",
+      "description": "@ControllerAdvice, global exception handling ve standart hata cevabi",
+      "order": 7,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/007_spring-mvc-interview-7.json"
+    },
+    {
+      "id": "spring-mvc-interview-8",
+      "title": "Spring MVC Interview - 8",
+      "description": "Jackson JSON serialization/deserialization ve API payload kontrolu",
+      "order": 8,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/008_spring-mvc-interview-8.json"
+    },
+    {
+      "id": "spring-mvc-interview-9",
+      "title": "Spring MVC Interview - 9",
+      "description": "DTO tasarimi, entity mapping ve API kontrati evrimi",
+      "order": 9,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/009_spring-mvc-interview-9.json"
+    },
+    {
+      "id": "spring-mvc-interview-10",
+      "title": "Spring MVC Interview - 10",
+      "description": "MockMvc testleri, CORS, filter/interceptor ve troubleshooting yaklasimlari",
+      "order": 10,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/003_spring_mvc/interviews/010_spring-mvc-interview-10.json"
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-2",
+  "title": "Spring MVC Interview - 2",
+  "description": "HTTP method semantikleri, idempotency ve dogru status code secimi",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "HTTP 'safe method' kavrami icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Server durumunu degistirmemesi beklenen metodlardir (or. GET)."
+        },
+        {
+          "id": "B",
+          "text": "Sadece HTTPS ile calisan metodlardir."
+        },
+        {
+          "id": "C",
+          "text": "Authentication gerektirmeyen metodlardir."
+        },
+        {
+          "id": "D",
+          "text": "Yanit suresi 100ms altinda olan metodlardir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Idempotent method icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ayni request tekrarlandiginda sistem durumu ayni kalir."
+        },
+        {
+          "id": "B",
+          "text": "Sadece GET idempotenttir."
+        },
+        {
+          "id": "C",
+          "text": "Yalnizca POST idempotenttir."
+        },
+        {
+          "id": "D",
+          "text": "Idempotency sadece frontend cache davranisidir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Yeni kaynak olusturan basarili bir POST isteginde tipik status code hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "200 OK"
+        },
+        {
+          "id": "B",
+          "text": "201 Created"
+        },
+        {
+          "id": "C",
+          "text": "204 No Content"
+        },
+        {
+          "id": "D",
+          "text": "304 Not Modified"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "204 No Content icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Mutlaka JSON body donmek zorundadir."
+        },
+        {
+          "id": "B",
+          "text": "Basarili islem vardir ama response body beklenmez."
+        },
+        {
+          "id": "C",
+          "text": "Sadece DELETEte yasal, digerlerinde degil."
+        },
+        {
+          "id": "D",
+          "text": "Her zaman redirect anlamina gelir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidakilerden hangisi 400 Bad Request'e daha uygundur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Kaynak bulunamadi."
+        },
+        {
+          "id": "B",
+          "text": "Istek semantik/format olarak gecersiz (or. validation/parsing hatasi)."
+        },
+        {
+          "id": "C",
+          "text": "Kullanici login degil."
+        },
+        {
+          "id": "D",
+          "text": "Kullanici rol yetkisi yok."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "PUT ve PATCH farki icin daha dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi tamamen aynidir."
+        },
+        {
+          "id": "B",
+          "text": "PUT genelde tam guncelleme, PATCH kismi guncelleme icindir."
+        },
+        {
+          "id": "C",
+          "text": "PATCH sadece GET yerine kullanilir."
+        },
+        {
+          "id": "D",
+          "text": "PUT idempotent degildir ama PATCH idempotenttir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "201 Created ile birlikte Location header donmenin amaci nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Yeni olusan kaynagin URI bilgisini istemciye bildirmek."
+        },
+        {
+          "id": "B",
+          "text": "JWT tokeni set etmek."
+        },
+        {
+          "id": "C",
+          "text": "CORS origin listesi donmek."
+        },
+        {
+          "id": "D",
+          "text": "Sadece debug logu yazmak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kod calistiginda response tarafinda ne beklenir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Status 200, Location yok."
+        },
+        {
+          "id": "B",
+          "text": "Status 201 ve Location: /users/10 headeri."
+        },
+        {
+          "id": "C",
+          "text": "Status 204 ve JSON body."
+        },
+        {
+          "id": "D",
+          "text": "Status 302 redirect."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "return ResponseEntity.status(HttpStatus.CREATED)\n    .header(HttpHeaders.LOCATION, \"/users/10\")\n    .build();"
+    },
+    {
+      "id": "i2-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki methodun basarili response statusu ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "200 OK"
+        },
+        {
+          "id": "B",
+          "text": "201 Created"
+        },
+        {
+          "id": "C",
+          "text": "204 No Content"
+        },
+        {
+          "id": "D",
+          "text": "500 Internal Server Error"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@DeleteMapping(\"/users/{id}\")\n@ResponseStatus(HttpStatus.NO_CONTENT)\npublic void delete(@PathVariable Long id) {\n    service.delete(id);\n}"
+    },
+    {
+      "id": "i2-q10",
+      "type": "code",
+      "question": "POST /users endpointi yaz. Basarili olunca 201 Created ve Location: /users/{id} donsun. Request: UserCreateRequest, response bodyde UserDto donsun.",
+      "starterCode": "@RestController\n@RequestMapping(\"/users\")\nclass UserController {\n    // TODO: create endpoint\n}\n\nrecord UserCreateRequest(String email, String fullName) {}\nrecord UserDto(Long id, String email, String fullName) {}",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}

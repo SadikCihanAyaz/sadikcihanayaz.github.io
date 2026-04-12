@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-8",
+  "title": "Spring MVC Interview - 8",
+  "description": "Jackson JSON serialization/deserialization ve API payload kontrolu",
+  "questions": [
+    {
+      "id": "i8-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring MVCde default JSON serialization genelde hangi kutuphane ile yapilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Gson"
+        },
+        {
+          "id": "B",
+          "text": "Jackson"
+        },
+        {
+          "id": "C",
+          "text": "JAXB"
+        },
+        {
+          "id": "D",
+          "text": "Logback"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i8-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@JsonIgnore anotasyonunun temel etkisi nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Alani requestte zorunlu yapar."
+        },
+        {
+          "id": "B",
+          "text": "Alani serialization/deserializationdan haricg tutar (kullanima gore)."
+        },
+        {
+          "id": "C",
+          "text": "Entityyi otomatik persist eder."
+        },
+        {
+          "id": "D",
+          "text": "Validation group aktif eder."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i8-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@JsonProperty(\"full_name\") kullanimi ne saglar?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Java field adini derleme zamaninda degistirir."
+        },
+        {
+          "id": "B",
+          "text": "JSON alan adi ile Java property adini eslestirmeyi ozellestirir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece XMLte calisir."
+        },
+        {
+          "id": "D",
+          "text": "Header mapping yapar."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i8-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Tarih formatini JSONda kontrol etmek icin tipik anotasyon hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@DatePattern"
+        },
+        {
+          "id": "B",
+          "text": "@JsonFormat"
+        },
+        {
+          "id": "C",
+          "text": "@TemporalOnly"
+        },
+        {
+          "id": "D",
+          "text": "@FormatDate"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i8-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Bilinmeyen JSON alanlari geldigi icin parse hatasi almak istemiyorsan hangi yaklasim uygundur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "FAIL_ON_UNKNOWN_PROPERTIES'i false yapmak veya uygun ignore ayari kullanmak."
+        },
+        {
+          "id": "B",
+          "text": "@Valid kaldirmak."
+        },
+        {
+          "id": "C",
+          "text": "Controlleri @Service yapmak."
+        },
+        {
+          "id": "D",
+          "text": "Requesti sadece GETe cevirmek."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i8-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Bidirectional iliskilerde sonsuz recursion riskini yonetmek icin hangi anotasyonlar sik kullanilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@JsonManagedReference / @JsonBackReference veya @JsonIgnore stratejileri"
+        },
+        {
+          "id": "B",
+          "text": "@ResponseStatus / @PathVariable"
+        },
+        {
+          "id": "C",
+          "text": "@Validated / @NotNull"
+        },
+        {
+          "id": "D",
+          "text": "@Bean / @Primary"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i8-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Sadece null olmayan alanlari JSONa yazmak icin hangi anotasyon kullanilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@JsonInclude(JsonInclude.Include.NON_NULL)"
+        },
+        {
+          "id": "B",
+          "text": "@JsonRequired"
+        },
+        {
+          "id": "C",
+          "text": "@JsonNullable"
+        },
+        {
+          "id": "D",
+          "text": "@NotNull"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i8-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu DTO serialize edildiginde bodyde ne beklenir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "password alani da gorunur."
+        },
+        {
+          "id": "B",
+          "text": "password alani gorunmez, sadece email gorunur."
+        },
+        {
+          "id": "C",
+          "text": "Hicbir alan serialize edilmez."
+        },
+        {
+          "id": "D",
+          "text": "Sadece password gorunur."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "record UserDto(String email, @JsonIgnore String password) {}"
+    },
+    {
+      "id": "i8-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki ObjectMapper ayariyla unknown field iceren JSON icin en dogru yorum hangisi?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Parse her durumda fail olur."
+        },
+        {
+          "id": "B",
+          "text": "Unknown field ignore edilir, mapping devam eder."
+        },
+        {
+          "id": "C",
+          "text": "Sadece XML parse edilir."
+        },
+        {
+          "id": "D",
+          "text": "Mapper sadece write islemlerinde calisir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "ObjectMapper mapper = new ObjectMapper()\n    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);"
+    },
+    {
+      "id": "i8-q10",
+      "type": "code",
+      "question": "Bir PersonResponse DTO yaz: fullName JSONda full_name olarak donsun, birthDate alanini yyyy-MM-dd formatinda serialize et.",
+      "starterCode": "// TODO DTO\n// fields: String fullName, java.time.LocalDate birthDate",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}

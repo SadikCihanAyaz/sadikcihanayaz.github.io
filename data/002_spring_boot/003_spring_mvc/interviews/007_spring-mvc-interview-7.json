@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-7",
+  "title": "Spring MVC Interview - 7",
+  "description": "@ControllerAdvice, global exception handling ve standart hata cevabi",
+  "questions": [
+    {
+      "id": "i7-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@ControllerAdvice ne amacla kullanilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tum controllerlar icin ortak exception/model binding davranislarini merkezilestirmek icin."
+        },
+        {
+          "id": "B",
+          "text": "Sadece CORS ayari yapmak icin."
+        },
+        {
+          "id": "C",
+          "text": "Repository beanlerini olusturmak icin."
+        },
+        {
+          "id": "D",
+          "text": "Validationi kapatmak icin."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i7-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@RestControllerAdvice ile @ControllerAdvice arasindaki temel fark nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@RestControllerAdvice = @ControllerAdvice + @ResponseBody semantigi."
+        },
+        {
+          "id": "B",
+          "text": "@ControllerAdvice JSON zorunlu kilar, @RestControllerAdvice view dondurur."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi sadece testte calisir."
+        },
+        {
+          "id": "D",
+          "text": "Aralarinda hic fark yoktur."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i7-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Ayni exception icin hem controller icinde hem global advice icinde handler varsa tipik olarak hangisi onceliklidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Global handler her zaman baskindir."
+        },
+        {
+          "id": "B",
+          "text": "Controller icindeki local @ExceptionHandler daha onceliklidir."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi de calisir, body birlesir."
+        },
+        {
+          "id": "D",
+          "text": "Rastgele secilir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i7-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "MethodArgumentNotValidException icin en iyi pratiklerden biri hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tum field hatalarini tek bir map/list yapisinda donmek."
+        },
+        {
+          "id": "B",
+          "text": "Her zaman stack trace'i istemciye acik donmek."
+        },
+        {
+          "id": "C",
+          "text": "Hata oldugunda 200 donmek."
+        },
+        {
+          "id": "D",
+          "text": "Validationi controllerda try-catch ile tamamen manuel yapmak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i7-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Exception.class icin catch-all handler yazarken hangi risk vardir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Daha spesifik handlerlarin anlami kalmayabilir; hata siniflandirmasi kaybolabilir."
+        },
+        {
+          "id": "B",
+          "text": "Uygulama daha hizli calisir."
+        },
+        {
+          "id": "C",
+          "text": "CORS otomatik duzelir."
+        },
+        {
+          "id": "D",
+          "text": "SQL injection riski sifirlanir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i7-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Standart error response contract (or. code, message, timestamp, path) neden faydalidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Frontend ve observability tarafinda tutarli hata isleme saglar."
+        },
+        {
+          "id": "B",
+          "text": "Sadece logging kapatmak icin gerekir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece SOAP servislerde kullanilir."
+        },
+        {
+          "id": "D",
+          "text": "Validationla ilgisi yoktur."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i7-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ResponseStatusException kullaniminin tipik avantaji nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Controller/service icinde belirli bir HTTP status + mesajla hizli hata firlatabilmek."
+        },
+        {
+          "id": "B",
+          "text": "Tum exception handling ihtiyacini ortadan kaldirmak."
+        },
+        {
+          "id": "C",
+          "text": "DTO mapping yapmak."
+        },
+        {
+          "id": "D",
+          "text": "Serializationi devre disi birakmak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i7-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki handler aktifken IllegalArgumentException firlatilinca ne doner?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "200 ve bos body"
+        },
+        {
+          "id": "B",
+          "text": "400 ve body: bad input"
+        },
+        {
+          "id": "C",
+          "text": "401 ve body: bad input"
+        },
+        {
+          "id": "D",
+          "text": "500 ve stack trace"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@RestControllerAdvice\nclass GlobalHandler {\n  @ExceptionHandler(IllegalArgumentException.class)\n  ResponseEntity<String> handle(IllegalArgumentException ex) {\n    return ResponseEntity.badRequest().body(\"bad input\");\n  }\n}"
+    },
+    {
+      "id": "i7-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Global/local hic handler yok ve RuntimeException firlatildi. Tipik HTTP sonuc nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "204"
+        },
+        {
+          "id": "B",
+          "text": "302"
+        },
+        {
+          "id": "C",
+          "text": "500"
+        },
+        {
+          "id": "D",
+          "text": "304"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@GetMapping(\"/boom\")\npublic String boom() {\n  throw new RuntimeException(\"x\");\n}"
+    },
+    {
+      "id": "i7-q10",
+      "type": "code",
+      "question": "@RestControllerAdvice sinifi yaz. MethodArgumentNotValidException icin field->message map ile 400 donsun; diger tum Exceptionlar icin 500 ve sabit bir mesaj donsun.",
+      "starterCode": "@RestControllerAdvice\nclass GlobalExceptionHandler {\n    // TODO: validation handler\n    // TODO: generic handler\n}",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-9",
+  "title": "Spring MVC Interview - 9",
+  "description": "DTO tasarimi, entity mapping ve API kontrati evrimi",
+  "questions": [
+    {
+      "id": "i9-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Entity yerine DTO donmenin en temel nedeni nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hibernate performansini sifira indirmek."
+        },
+        {
+          "id": "B",
+          "text": "API kontratini kontrol etmek ve ic modelin dogrudan expose edilmesini engellemek."
+        },
+        {
+          "id": "C",
+          "text": "Controller yazmamak."
+        },
+        {
+          "id": "D",
+          "text": "Validationi devre disi birakmak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i9-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Request DTO ve Response DTO ayirma karari hangi faydayi saglar?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ayni alanlari mecburen iki kez yazdirir ama fayda vermez."
+        },
+        {
+          "id": "B",
+          "text": "Input/output kontratlarini bagimsiz yonetmeyi ve guvenligi/art niyeti azaltmayi saglar."
+        },
+        {
+          "id": "C",
+          "text": "Sadece legacy SOAPta gerekir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece testlerde kullanilir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i9-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "MapStruct ve ModelMapper farki icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi de compile-time kod uretir."
+        },
+        {
+          "id": "B",
+          "text": "MapStruct compile-time mapper uretir; ModelMapper reflection tabanli runtime mapping yapar."
+        },
+        {
+          "id": "C",
+          "text": "ModelMapper sadece primitive mapler."
+        },
+        {
+          "id": "D",
+          "text": "MapStruct Spring Bootta calismaz."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i9-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Mapping sorumlulugunu nereye koymak tipik olarak daha sagliklidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Controller metotlari icinde daginik sekilde."
+        },
+        {
+          "id": "B",
+          "text": "Service/mapper katmaninda merkezi ve test edilebilir sekilde."
+        },
+        {
+          "id": "C",
+          "text": "Repository icinde native SQL olarak."
+        },
+        {
+          "id": "D",
+          "text": "SecurityFilterChain icinde."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i9-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "DTOlar API versiyonlamaya nasil yardim eder?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Versiyonlamayi gereksiz yapar."
+        },
+        {
+          "id": "B",
+          "text": "Ic entity degissede dis kontrati v1/v2 DTOlarla geriye donuk yonetmeye izin verir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece URL pathini otomatik degistirir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece response statusunu degistirir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i9-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Partial update (PATCH) akisi icin DTO tasariminda tipik yaklasim nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Tum alanlari zorunlu yapmak."
+        },
+        {
+          "id": "B",
+          "text": "Opsiyonel/nullable alanlarla sadece gelen alanlari uygulamak."
+        },
+        {
+          "id": "C",
+          "text": "Entityyi direkt request body yapmak."
+        },
+        {
+          "id": "D",
+          "text": "Sadece path variable kullanmak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i9-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidakilerden hangisi DTO kullaniminin guvenlik faydalarindan biridir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "passwordHash gibi hassas alanlari disariya cikarmamayi kolaylastirmasi."
+        },
+        {
+          "id": "B",
+          "text": "JWT imza algoritmasini otomatik secmesi."
+        },
+        {
+          "id": "C",
+          "text": "SQL injectioni tek basina sifirlamasi."
+        },
+        {
+          "id": "D",
+          "text": "CORS konfigurasyonunu otomatik yapmasi."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i9-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu mapping kodunun responsea etkisi ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "DTOya passwordHash da otomatik kopyalanir."
+        },
+        {
+          "id": "B",
+          "text": "Sadece secili alanlar doner; passwordHash expose edilmez."
+        },
+        {
+          "id": "C",
+          "text": "Kod compile olmaz."
+        },
+        {
+          "id": "D",
+          "text": "Mapping sadece runtime exception firlatir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "UserDto dto = new UserDto(entity.getId(), entity.getEmail());\n// entity.getPasswordHash() DTOda yok"
+    },
+    {
+      "id": "i9-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Controllerdan JPA entityyi direkt donmek hangi riski dogurabilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hicg risk yok, her zaman daha dogrudur."
+        },
+        {
+          "id": "B",
+          "text": "Lazy relation, hassas alan expose ve kontrat bagimliligi gibi riskler dogabilir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece compile suresi uzar."
+        },
+        {
+          "id": "D",
+          "text": "Sadece POST metodlari bozulur."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@GetMapping(\"/users/{id}\")\npublic User get(@PathVariable Long id) {\n  return userRepository.findById(id).orElseThrow();\n}"
+    },
+    {
+      "id": "i9-q10",
+      "type": "code",
+      "question": "User entity -> UserDto mapleyen bir mapper ve create akisinda UserCreateRequest -> User entity -> UserDto donen service metodu yaz.",
+      "starterCode": "record UserCreateRequest(String email, String fullName) {}\nrecord UserDto(Long id, String email, String fullName) {}\nclass User { Long id; String email; String fullName; }\n\nclass UserService {\n    // TODO mapper kullanarak create akisinin iskeletini yaz\n}",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}

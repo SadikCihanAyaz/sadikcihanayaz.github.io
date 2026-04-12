@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-3",
+  "title": "Spring MVC Interview - 3",
+  "description": "PathVariable, RequestParam, RequestBody ve request veri binding pratikleri",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@PathVariable ile @RequestParam farki icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi de sadece request bodyden veri okur."
+        },
+        {
+          "id": "B",
+          "text": "@PathVariable URL path segmentinden, @RequestParam query paramdan veri alir."
+        },
+        {
+          "id": "C",
+          "text": "@RequestParam sadece POSTta calisir."
+        },
+        {
+          "id": "D",
+          "text": "@PathVariable sadece String tipinde olur."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@RequestParam(required = false) kullanildiginda ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Parametre verilmezse otomatik 500 doner."
+        },
+        {
+          "id": "B",
+          "text": "Parametre opsiyonel olur; gelmezse null (veya defaultValue varsa o) kullanilir."
+        },
+        {
+          "id": "C",
+          "text": "Parametre zorunlu kalir ama warning basar."
+        },
+        {
+          "id": "D",
+          "text": "Sadece Integer parametrelerde gecerlidir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@RequestParam(defaultValue = \"10\") icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "defaultValue varsa parametre null olamaz, gelmezse 400 olur."
+        },
+        {
+          "id": "B",
+          "text": "Parametre gelmezse 10 kullanilir; required davranisi pratikte opsiyonel hale gelir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece GETte degil, hicbir methodda calismaz."
+        },
+        {
+          "id": "D",
+          "text": "defaultValue sadece Stringte kullanilir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@RequestBody hangi durumda tercih edilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "URL path icindeki id degeri icin."
+        },
+        {
+          "id": "B",
+          "text": "Query stringden filtre almak icin."
+        },
+        {
+          "id": "C",
+          "text": "JSON/XML gibi body payloadini Java objesine maplemek icin."
+        },
+        {
+          "id": "D",
+          "text": "Response header okumak icin."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidakilerden hangisi @RequestHeader kullanimina tipik bir ornektir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "URL pathdeki id degerini okumak."
+        },
+        {
+          "id": "B",
+          "text": "Authorization veya X-Correlation-Id gibi header degerlerini almak."
+        },
+        {
+          "id": "C",
+          "text": "Request bodyyi parse etmek."
+        },
+        {
+          "id": "D",
+          "text": "Multipart file upload yapmak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Tekrarlanan query parametrelerini liste olarak almak icin en uygun imza hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "public void f(@RequestBody List<String> tags)"
+        },
+        {
+          "id": "B",
+          "text": "public void f(@PathVariable List<String> tags)"
+        },
+        {
+          "id": "C",
+          "text": "public void f(@RequestParam List<String> tags)"
+        },
+        {
+          "id": "D",
+          "text": "public void f(HttpServletResponse tags)"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "multipart/form-data isteklerinde JSON metadata + file birlikte almak icin hangi kombinasyon daha uygundur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@RequestBody ile ikisini de tek string almak"
+        },
+        {
+          "id": "B",
+          "text": "@RequestPart(\"meta\") + @RequestPart(\"file\") kombinasyonu"
+        },
+        {
+          "id": "C",
+          "text": "Sadece @PathVariable kullanmak"
+        },
+        {
+          "id": "D",
+          "text": "Sadece @RequestHeader kullanmak"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun en olasi calisma sonucu nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "id degeri sorunsuz maplenir."
+        },
+        {
+          "id": "B",
+          "text": "Path variable isimleri eslesmedigi icin binding hatasi olusur."
+        },
+        {
+          "id": "C",
+          "text": "Her zaman 200 doner, id null gelir."
+        },
+        {
+          "id": "D",
+          "text": "Compile-time hatasi olur, uygulama acilmaz."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@GetMapping(\"/users/{id}\")\npublic String get(@PathVariable(\"userId\") Long id) {\n  return \"ok\";\n}"
+    },
+    {
+      "id": "i3-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "GET /users cagrisi icin bu methodun page degeri ne olur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "null"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "1"
+        },
+        {
+          "id": "D",
+          "text": "400 Bad Request"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@GetMapping(\"/users\")\npublic String list(@RequestParam(defaultValue = \"1\") int page) {\n    return \"page=\" + page;\n}"
+    },
+    {
+      "id": "i3-q10",
+      "type": "code",
+      "question": "GET /users/search endpointi yaz. q opsiyonel olsun, page default 1, size default 20 olsun. Donus tipi ResponseEntity<List<UserDto>> olsun.",
+      "starterCode": "@RestController\n@RequestMapping(\"/users\")\nclass UserSearchController {\n    // TODO: search endpoint\n}\n\nrecord UserDto(Long id, String name) {}",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}

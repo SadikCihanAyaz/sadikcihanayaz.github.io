@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-topic",
+  "title": "Spring MVC (REST, Validation, DTO, Jackson) - Derin Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu konu Spring MVC tarafinda REST endpoint tasarimi, request/response binding, validation, global error handling, Jackson ve DTO desenlerini interview ve production akisiyla birlestirmek icin hazirlandi."
+    },
+    {
+      "type": "list",
+      "title": "Bu konuyu bitirince net bilmen gerekenler",
+      "items": [
+        "@RestController ve @Controller farki",
+        "Request mapping ailesi: @GetMapping, @PostMapping, @PutMapping, @PatchMapping, @DeleteMapping",
+        "@PathVariable, @RequestParam, @RequestBody ve @RequestHeader kullanimi",
+        "ResponseEntity ile status/header/body kontrolu",
+        "@Valid vs @Validated ve Bean Validation anotasyonlari",
+        "Method argument validation + BindingResult + exception turleri",
+        "@ControllerAdvice/@RestControllerAdvice ile standard error contract",
+        "Jackson serialization/deserialization kontrol noktalar",
+        "DTO tasarimi, mapping ve API kontratini koruma",
+        "MockMvc ile web/security/validation testleri"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "@RestController vs @Controller",
+      "text": "@RestController, @Controller + @ResponseBody etkisini birlikte verir. REST APIlerde method donus degeri dogrudan response bodyye yazilir. @Controller ise tipik olarak view rendering akislariyla kullanilir."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@RestController\n@RequestMapping(\"/users\")\nclass UserController {\n  @GetMapping(\"/{id}\")\n  UserDto get(@PathVariable Long id) {\n    return new UserDto(id, \"demo@mail.com\");\n  }\n}\n\nrecord UserDto(Long id, String email) {}"
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Request binding katmanlari",
+      "items": [
+        "Path: @PathVariable -> /users/{id}",
+        "Query: @RequestParam -> /users?page=1",
+        "Body: @RequestBody -> JSON/XML payload",
+        "Header: @RequestHeader -> Authorization, correlation-id"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "HTTP method semantigi",
+      "items": [
+        "GET: read",
+        "POST: create",
+        "PUT: full update (genelde idempotent)",
+        "PATCH: partial update",
+        "DELETE: remove"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "debug",
+      "title": "Status code karar noktasi",
+      "items": [
+        "200 OK: basarili okuma/normal cevap",
+        "201 Created: yeni kaynak olustu",
+        "204 No Content: basarili ama body yok",
+        "400 Bad Request: parse/validation/request hatasi",
+        "404 Not Found: kaynak yok",
+        "415 Unsupported Media Type: Content-Type uyumsuz",
+        "406 Not Acceptable: Accept uyumsuz"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@PostMapping(\"/users\")\npublic ResponseEntity<UserDto> create(@RequestBody UserCreateRequest req) {\n  UserDto saved = service.create(req);\n  URI location = URI.create(\"/users/\" + saved.id());\n  return ResponseEntity.created(location).body(saved);\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Validation temel kurallar",
+      "items": [
+        "@Valid: standart bean validation tetikler",
+        "@Validated: Spring anotasyonu, group destegi verir",
+        "@NotNull/@NotEmpty/@NotBlank farkini net bil",
+        "Nested DTO validation icin child alana da @Valid ekle"
+      ]
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "record UserCreateRequest(\n  @NotBlank String fullName,\n  @Email @NotBlank String email,\n  @Min(18) int age\n) {}\n\n@PostMapping(\"/users\")\npublic ResponseEntity<Void> create(@Valid @RequestBody UserCreateRequest req) {\n  return ResponseEntity.status(HttpStatus.CREATED).build();\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Validation exception ayrimi",
+      "items": [
+        "@Valid @RequestBody hatalari -> MethodArgumentNotValidException",
+        "@PathVariable/@RequestParam kisit ihlali -> ConstraintViolationException (method validation aktifse)",
+        "BindingResult ile otomatik exception yerine manual response yonetebilirsin"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Global error handling",
+      "text": "@RestControllerAdvice ile tum controllerlar icin ortak error formati donmek, frontend/monitoring tarafinda hatalari tutarli ele almayi saglar."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "code": "@RestControllerAdvice\nclass GlobalHandler {\n  @ExceptionHandler(MethodArgumentNotValidException.class)\n  ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {\n    Map<String, String> errors = new LinkedHashMap<>();\n    ex.getBindingResult().getFieldErrors().forEach(e -> errors.put(e.getField(), e.getDefaultMessage()));\n    return ResponseEntity.badRequest().body(errors);\n  }\n}"
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "Jackson notlari",
+      "items": [
+        "@JsonProperty ile JSON field adini kontrol et",
+        "@JsonIgnore ile hassas alanlari cikart",
+        "@JsonFormat ile tarih formatini sabitle",
+        "Unknown property davranisini bilincli yonet"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "concept",
+      "title": "DTO neden kritik?",
+      "items": [
+        "Entityyi direkt expose etmezsin",
+        "API kontratini ic modelden bagimsiz yonetirsin",
+        "Hassas alan sizmasi riskini azaltirsin",
+        "Versiyonlama/migration surecini kolaylastirirsin"
+      ]
+    },
+    {
+      "type": "callout",
+      "tone": "caution",
+      "title": "Sik yapilan hatalar",
+      "items": [
+        "Ayni path + ayni method ile duplicate mapping",
+        "Validationi DTO yerine daginik noktalarda yapmak",
+        "Error response formatini tutarsiz birakmak",
+        "Entityyi dogrudan response olarak dondurmek",
+        "Testte sadece 200 kontrolu yapip body kontratini dogrulamamak"
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Testing checklist",
+      "items": [
+        "MockMvc ile status + contentType + jsonPath kontrol et",
+        "Validation fail senaryolarini (400) ayri test et",
+        "Bulunamayan kaynak (404) ve media type hatalari (415/406) test et",
+        "Gerekiyorsa web-slice (@WebMvcTest) ve full-context (@SpringBootTest) ayrimini bilincli yap"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Ozet: Spring MVCde guclu bir API tasarimi; dogru mapping, net HTTP semantigi, DTO + validation disiplini, tutarli error handling ve guvenilir test stratejilerinin birlikte uygulanmasiyla olusur."
+    }
+  ]
+}

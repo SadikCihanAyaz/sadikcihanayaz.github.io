@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-4",
+  "title": "Spring MVC Interview - 4",
+  "description": "ResponseEntity, media type negotiation ve HTTP cevap tasarimi",
+  "questions": [
+    {
+      "id": "i4-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ResponseEntity kullanmanin en temel faydasi nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Controller beaninin singleton olmasini saglar."
+        },
+        {
+          "id": "B",
+          "text": "HTTP status, header ve bodyyi birlikte kontrol etmeyi saglar."
+        },
+        {
+          "id": "C",
+          "text": "Validationi otomatik kapatir."
+        },
+        {
+          "id": "D",
+          "text": "Serializationi devre disi birakir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Controller methodu sadece bir POJO dondururse default status tipik olarak nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "201 Created"
+        },
+        {
+          "id": "B",
+          "text": "204 No Content"
+        },
+        {
+          "id": "C",
+          "text": "200 OK"
+        },
+        {
+          "id": "D",
+          "text": "500 Internal Server Error"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@ResponseStatus anotasyonu icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece exception classlari uzerinde calisir."
+        },
+        {
+          "id": "B",
+          "text": "Method veya exception seviyesinde sabit HTTP status tanimlamayi saglar."
+        },
+        {
+          "id": "C",
+          "text": "Yanit bodysini zorunlu olarak XML yapar."
+        },
+        {
+          "id": "D",
+          "text": "Security role kontrolu yapar."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "consumes = application/json tanimli endpointe text/plain gonderilirse tipik sonuc nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "200 OK"
+        },
+        {
+          "id": "B",
+          "text": "404 Not Found"
+        },
+        {
+          "id": "C",
+          "text": "415 Unsupported Media Type"
+        },
+        {
+          "id": "D",
+          "text": "409 Conflict"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "produces = application/json tanimli endpointte istemci Accept: text/plain gonderirse tipik sonuc nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "406 Not Acceptable"
+        },
+        {
+          "id": "B",
+          "text": "401 Unauthorized"
+        },
+        {
+          "id": "C",
+          "text": "302 Found"
+        },
+        {
+          "id": "D",
+          "text": "201 Created"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidakilerden hangisi 404 icin iyi bir pattern'dir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Her durumda null donmek."
+        },
+        {
+          "id": "B",
+          "text": "Bulunamayan kaynakta ResponseEntity.notFound().build() donmek."
+        },
+        {
+          "id": "C",
+          "text": "Bulunamayan kaynakta 200 ve bos string donmek."
+        },
+        {
+          "id": "D",
+          "text": "Bulunamayan kaynakta 500 donmek."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ETag/If-None-Match mekanizmasinin temel amaci nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "JWT olusturmak."
+        },
+        {
+          "id": "B",
+          "text": "Cache dogrulamasi ile gereksiz veri transferini azaltmak."
+        },
+        {
+          "id": "C",
+          "text": "CORS preflight isteklerini devre disi birakmak."
+        },
+        {
+          "id": "D",
+          "text": "Request body encryption yapmak."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu methodun status kodu nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "200"
+        },
+        {
+          "id": "B",
+          "text": "201"
+        },
+        {
+          "id": "C",
+          "text": "204"
+        },
+        {
+          "id": "D",
+          "text": "404"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@GetMapping(\"/users/{id}\")\npublic ResponseEntity<UserDto> get(@PathVariable Long id) {\n    return ResponseEntity.notFound().build();\n}"
+    },
+    {
+      "id": "i4-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki endpointe uygun olmayan Content-Type ile istek gelirse tipik davranis nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "415 Unsupported Media Type"
+        },
+        {
+          "id": "B",
+          "text": "200 OK"
+        },
+        {
+          "id": "C",
+          "text": "301 Moved Permanently"
+        },
+        {
+          "id": "D",
+          "text": "502 Bad Gateway"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@PostMapping(value = \"/users\", consumes = MediaType.APPLICATION_JSON_VALUE)\npublic ResponseEntity<Void> create(@RequestBody UserCreateRequest dto) {\n    return ResponseEntity.ok().build();\n}"
+    },
+    {
+      "id": "i4-q10",
+      "type": "code",
+      "question": "GET /users/{id} endpointi yaz. Kullanici varsa 200 + body, yoksa 404 donsun. ResponseEntity kullan.",
+      "starterCode": "@RestController\n@RequestMapping(\"/users\")\nclass UserQueryController {\n    // TODO\n}\n\nrecord UserDto(Long id, String email) {}",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}

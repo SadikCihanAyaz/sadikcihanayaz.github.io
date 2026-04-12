@@ -21,6 +21,16 @@
       "topicFile": "/data/002_spring_boot/002_spring_security/topic/001_topic.json",
       "interviewsFile": "/data/002_spring_boot/002_spring_security/interviews/index.json",
       "interviewCount": 10
+    },
+    {
+      "id": "spring-mvc",
+      "title": "Spring MVC",
+      "description": "REST controller, request/response mapping, validation, exception handling, Jackson ve DTO tasarimi",
+      "order": 3,
+      "folder": "003_spring_mvc",
+      "topicFile": "/data/002_spring_boot/003_spring_mvc/topic/001_topic.json",
+      "interviewsFile": "/data/002_spring_boot/003_spring_mvc/interviews/index.json",
+      "interviewCount": 10
     }
   ]
 }

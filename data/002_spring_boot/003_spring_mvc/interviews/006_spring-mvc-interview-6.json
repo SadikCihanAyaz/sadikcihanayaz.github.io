@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-mvc",
+  "id": "spring-mvc-interview-6",
+  "title": "Spring MVC Interview - 6",
+  "description": "Method argument validation, BindingResult ve custom validation davranislari",
+  "questions": [
+    {
+      "id": "i6-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@PathVariable uzerindeki @Min gibi kisitlarin calismasi icin class seviyesinde hangi anotasyon genelde gerekir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "@ResponseBody"
+        },
+        {
+          "id": "B",
+          "text": "@Transactional"
+        },
+        {
+          "id": "C",
+          "text": "@Validated"
+        },
+        {
+          "id": "D",
+          "text": "@Primary"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Valid @RequestBody hatalarinda tipik exception hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "ConstraintViolationException"
+        },
+        {
+          "id": "B",
+          "text": "MethodArgumentNotValidException"
+        },
+        {
+          "id": "C",
+          "text": "NoHandlerFoundException"
+        },
+        {
+          "id": "D",
+          "text": "HttpRequestMethodNotSupportedException"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Method parametre (or. @RequestParam, @PathVariable) kisit ihlallerinde tipik exception hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "MethodArgumentNotValidException"
+        },
+        {
+          "id": "B",
+          "text": "ConstraintViolationException"
+        },
+        {
+          "id": "C",
+          "text": "DataIntegrityViolationException"
+        },
+        {
+          "id": "D",
+          "text": "EntityNotFoundException"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "BindingResult kullanimi icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece response tarafinda kullanilir."
+        },
+        {
+          "id": "B",
+          "text": "Valid edilen argumandan hemen sonra method parametresi olarak yer almalidir."
+        },
+        {
+          "id": "C",
+          "text": "Validationi her zaman devre disi birakir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece GET metodunda calisir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "BindingResult kullanilmayan @Valid @RequestBody hatalarinda tipik davranis nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Controller methodu normal calisir."
+        },
+        {
+          "id": "B",
+          "text": "Framework exception firlatir ve genelde 400 doner."
+        },
+        {
+          "id": "C",
+          "text": "Hata yok sayilir."
+        },
+        {
+          "id": "D",
+          "text": "Her zaman 500 doner."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Custom validation anotasyonu yazarken asagidakilerden hangisi dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Sadece enumlarda calisir."
+        },
+        {
+          "id": "B",
+          "text": "@Constraint(validatedBy = ...) ile ConstraintValidator implementasyonu baglanir."
+        },
+        {
+          "id": "C",
+          "text": "Spring Bean olmadan calisamaz."
+        },
+        {
+          "id": "D",
+          "text": "Yalnizca XML config ile tanimlanir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Service katmaninda method-level validation icin tipik yaklasim hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Service beanine @Validated koyup method argumanlarina constraint koymak."
+        },
+        {
+          "id": "B",
+          "text": "Sadece @Repositoryde validation calisir."
+        },
+        {
+          "id": "C",
+          "text": "Validation sadece controllerda yapilabilir."
+        },
+        {
+          "id": "D",
+          "text": "@EnableWebMvc eklemek yeterlidir."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q8",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu endpointe /users/0 cagrisi geldiginde tipik olarak ne beklenir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "200 OK"
+        },
+        {
+          "id": "B",
+          "text": "400 Bad Request veya global handlerina bagli validasyon hatasi response'u"
+        },
+        {
+          "id": "C",
+          "text": "201 Created"
+        },
+        {
+          "id": "D",
+          "text": "204 No Content"
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@Validated\n@RestController\nclass UserController {\n  @GetMapping(\"/users/{id}\")\n  public String get(@PathVariable @Min(1) Long id) {\n    return \"ok\";\n  }\n}"
+    },
+    {
+      "id": "i6-q9",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun davranisi icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "BindingResult dolu olsa bile methoda hic girilmez."
+        },
+        {
+          "id": "B",
+          "text": "Methoda girilir; hasErrors() kontrolu ile custom bad request response dondurulebilir."
+        },
+        {
+          "id": "C",
+          "text": "BindingResult sadece file uploadta calisir."
+        },
+        {
+          "id": "D",
+          "text": "Kod compile olmaz."
+        }
+      ],
+      "correctChoiceIds": [],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": "",
+      "questionCode": "@PostMapping(\"/users\")\npublic ResponseEntity<?> create(@Valid @RequestBody UserDto dto, BindingResult br) {\n    if (br.hasErrors()) return ResponseEntity.badRequest().body(\"invalid\");\n    return ResponseEntity.ok().build();\n}"
+    },
+    {
+      "id": "i6-q10",
+      "type": "code",
+      "question": "POST /orders endpointi yaz. @Valid ile OrderCreateRequest al, BindingResult ile hata varsa field->message map dondur, yoksa 201 Created dondur.",
+      "starterCode": "@RestController\n@RequestMapping(\"/orders\")\nclass OrderController {\n    // TODO\n}\n\nrecord OrderCreateRequest(@NotBlank String customerName, @Min(1) int quantity) {}",
+      "answerBody": "",
+      "answerCode": "",
+      "optionExplanations": []
+    }
+  ]
+}
