@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-core",
+  "id": "spring-core-interview-1",
+  "title": "Spring Core Interview - 1",
+  "description": "IoC/DI temelleri, bean kapsamlari ve bagimlilik yonetimi",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "IoC (Inversion of Control) icin en dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Nesne olusturma ve bagimlilik baglama kontrolunun framework/container tarafina gecmesidir." },
+        { "id": "B", "text": "Tum bagimliliklarin static metotlarla olusturulmasidir." },
+        { "id": "C", "text": "Sadece XML ile konfigurasyon yapma zorunlulugudur." },
+        { "id": "D", "text": "Sadece singleton scope kullanilmasidir." }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Dependency Injection'in new kullanimina gore ana avantaji nedir?",
+      "choices": [
+        { "id": "A", "text": "Daha siki baglilik olusturmasi" },
+        { "id": "B", "text": "Test edilebilirligi ve gevsek bagliligi artirmasi" },
+        { "id": "C", "text": "Thread-safe olmasi" },
+        { "id": "D", "text": "JVM memory kullanimini sifirlamasi" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring projelerinde neden constructor injection genelde field injection'a tercih edilir?",
+      "choices": [
+        { "id": "A", "text": "Zorunlu bagimliliklari acik hale getirip immutable tasarima imkan vermesi" },
+        { "id": "B", "text": "Bean'i daha gec olusturmasi" },
+        { "id": "C", "text": "Sadece prototype scope'ta calismasi" },
+        { "id": "D", "text": "@Autowired'u gereksiz kilmasi" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring'te varsayilan bean scope hangisidir?",
+      "choices": [
+        { "id": "A", "text": "prototype" },
+        { "id": "B", "text": "request" },
+        { "id": "C", "text": "singleton" },
+        { "id": "D", "text": "session" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Ayni tipten birden fazla bean varken injection belirsizligini cozmek icin en dogru arac hangisidir?",
+      "choices": [
+        { "id": "A", "text": "@Scope" },
+        { "id": "B", "text": "@Qualifier" },
+        { "id": "C", "text": "@Lazy" },
+        { "id": "D", "text": "@Import" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Primary anotasyonunun temel amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "Bean'i prototype yapmak" },
+        { "id": "B", "text": "Ayni tipte birden fazla bean oldugunda varsayilan secimi belirlemek" },
+        { "id": "C", "text": "Bean'i profile ozel yapmak" },
+        { "id": "D", "text": "Bean'i transaction disi calistirmak" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Constructor injection kullanan iki bean birbirine dogrudan bagimliysa tipik sonuc nedir?",
+      "choices": [
+        { "id": "A", "text": "Spring otomatik olarak ikisini de static yapar" },
+        { "id": "B", "text": "Circular dependency hatasi olusabilir" },
+        { "id": "C", "text": "Sorunsuz calisir, Spring her zaman cozer" },
+        { "id": "D", "text": "Bean'ler prototype'a donusur" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ApplicationContext ile BeanFactory arasindaki en dogru fark hangisidir?",
+      "choices": [
+        { "id": "A", "text": "ApplicationContext, BeanFactory'nin enterprise ozelliklerle genisletilmis halidir" },
+        { "id": "B", "text": "BeanFactory sadece web uygulamalarinda calisir" },
+        { "id": "C", "text": "ApplicationContext injection desteklemez" },
+        { "id": "D", "text": "Ikisi tamamen ayni siniftir" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Prototype bean'i singleton icine dogrudan inject ettiginizde hangi davranis gorulur?",
+      "choices": [
+        { "id": "A", "text": "Her kullanimda yeni prototype olusur" },
+        { "id": "B", "text": "Injection aninda tek bir prototype olusur ve o kullanilir" },
+        { "id": "C", "text": "Spring uygulamayi baslatmaz" },
+        { "id": "D", "text": "Prototype otomatik singleton'a donusur" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidakilerden hangisi gevsek baglilik (loose coupling) icin en iyi pratiktir?",
+      "choices": [
+        { "id": "A", "text": "Somut sinif tiplerini constructor'da zorunlu kilmak" },
+        { "id": "B", "text": "Bagimliliklari interface uzerinden enjekte etmek" },
+        { "id": "C", "text": "Tum bean'leri static yapmak" },
+        { "id": "D", "text": "Field injection'i refleksiyonla zorlamak" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

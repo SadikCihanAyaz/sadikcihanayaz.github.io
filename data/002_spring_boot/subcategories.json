@@ -31,6 +31,16 @@
       "topicFile": "/data/002_spring_boot/003_spring_mvc/topic/001_topic.json",
       "interviewsFile": "/data/002_spring_boot/003_spring_mvc/interviews/index.json",
       "interviewCount": 10
+    },
+    {
+      "id": "spring-core",
+      "title": "Spring Core",
+      "description": "DI, IoC, configuration, auto-configuration, profiles ve configuration properties temelleri",
+      "order": 4,
+      "folder": "004_spring_core",
+      "topicFile": "/data/002_spring_boot/004_spring_core/topic/001_topic.json",
+      "interviewsFile": "/data/002_spring_boot/004_spring_core/interviews/index.json",
+      "interviewCount": 4
     }
   ]
 }

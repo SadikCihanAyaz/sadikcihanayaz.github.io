@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-core",
+  "interviews": [
+    {
+      "id": "spring-core-interview-1",
+      "title": "Spring Core Interview - 1",
+      "description": "IoC/DI temelleri, bean kapsamlari ve bagimlilik yonetimi",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/004_spring_core/interviews/001_spring-core-interview-1.json"
+    },
+    {
+      "id": "spring-core-interview-2",
+      "title": "Spring Core Interview - 2",
+      "description": "Configuration, bean yasam dongusu ve stereotype anotasyonlari",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/004_spring_core/interviews/002_spring-core-interview-2.json"
+    },
+    {
+      "id": "spring-core-interview-3",
+      "title": "Spring Core Interview - 3",
+      "description": "Spring Boot auto-configuration, starterlar ve kosullu konfig",
+      "order": 3,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/004_spring_core/interviews/003_spring-core-interview-3.json"
+    },
+    {
+      "id": "spring-core-interview-4",
+      "title": "Spring Core Interview - 4",
+      "description": "Profiles, dissal konfig yonetimi ve configuration properties",
+      "order": 4,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/004_spring_core/interviews/004_spring-core-interview-4.json"
+    }
+  ]
+}

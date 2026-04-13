@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-core",
+  "id": "spring-core-interview-3",
+  "title": "Spring Core Interview - 3",
+  "description": "Spring Boot auto-configuration, starterlar ve kosullu konfig",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@SpringBootApplication hangi uc anotasyonun bilesimidir?",
+      "choices": [
+        { "id": "A", "text": "@Configuration, @EnableAutoConfiguration, @ComponentScan" },
+        { "id": "B", "text": "@Controller, @Service, @Repository" },
+        { "id": "C", "text": "@Bean, @Import, @Profile" },
+        { "id": "D", "text": "@Entity, @Table, @Id" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring Boot starter paketlerinin temel amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "JVM garbage collector'u degistirmek" },
+        { "id": "B", "text": "Belirli bir ozellik icin uyumlu bagimliliklari tek paketle kolayca saglamak" },
+        { "id": "C", "text": "Tum bean'leri prototype yapmak" },
+        { "id": "D", "text": "Sadece test ortamina ozel class yuklemek" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Auto-configuration sinifi, kullanici kendi bean'ini tanimladiginda nasil davranir?",
+      "choices": [
+        { "id": "A", "text": "Her zaman kullanici bean'ini ezer" },
+        { "id": "B", "text": "@ConditionalOnMissingBean gibi kosullarla geri cekilebilir" },
+        { "id": "C", "text": "Uygulamayi baslatmaz" },
+        { "id": "D", "text": "Tum bean'leri @Primary yapar" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Belirli bir auto-configuration'i devre disi birakmak icin hangi yaklasim dogrudur?",
+      "choices": [
+        { "id": "A", "text": "@EnableAutoConfiguration(exclude = ...) veya spring.autoconfigure.exclude kullanmak" },
+        { "id": "B", "text": "@ComponentScan'i kapatmak" },
+        { "id": "C", "text": "Sadece @Primary eklemek" },
+        { "id": "D", "text": "Bean isimlerini buyuk harf yapmak" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidakilerden hangisi tipik bir auto-config kosul anotasyonudur?",
+      "choices": [
+        { "id": "A", "text": "@ConditionalOnClass" },
+        { "id": "B", "text": "@OnlyInTest" },
+        { "id": "C", "text": "@NoAutoBean" },
+        { "id": "D", "text": "@EnableScopeAuto" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Auto-configuration'in neden \"kosullu\" olmasi gerekir?",
+      "choices": [
+        { "id": "A", "text": "Cunku tum uygulamalarda ayni classpath ve ayni ihtiyaclar yoktur" },
+        { "id": "B", "text": "Cunku kosulsuz konfigurasyon daha yavas derlenir" },
+        { "id": "C", "text": "Cunku sadece XML projelerinde calisir" },
+        { "id": "D", "text": "Cunku @Bean anotasyonu bunu zorunlu kilar" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring Boot'ta hangi arguman auto-configuration raporunu konsolda daha detayli gormeye yardimci olur?",
+      "choices": [
+        { "id": "A", "text": "--debug" },
+        { "id": "B", "text": "--safe" },
+        { "id": "C", "text": "--minimal" },
+        { "id": "D", "text": "--strict-di" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@EnableAutoConfiguration tek basina kullanildiginda hangi ozelligi vermez?",
+      "choices": [
+        { "id": "A", "text": "Auto-configuration aktivasyonu" },
+        { "id": "B", "text": "Component scan'in varsayilan konforu" },
+        { "id": "C", "text": "Kosullu bean kaydi" },
+        { "id": "D", "text": "Classpath'e bagli konfigurasyon" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "spring-boot-starter-web tipik olarak ne saglar?",
+      "choices": [
+        { "id": "A", "text": "Sadece JPA bagimliligini" },
+        { "id": "B", "text": "Web uygulamasi icin gerekli temel bagimliliklarin uyumlu setini" },
+        { "id": "C", "text": "Sadece Tomcat'i tek basina" },
+        { "id": "D", "text": "Profil aktivasyonunu" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Auto-configuration ile manuel @Configuration siniflari birlikte kullanildiginda ideal yaklasim nedir?",
+      "choices": [
+        { "id": "A", "text": "Tum manuel konfigurasyonlari kaldirmak" },
+        { "id": "B", "text": "Auto-config'i varsayilan kabul edip proje ihtiyacina gore manuel bean'lerle override/ozellestirme yapmak" },
+        { "id": "C", "text": "Her zaman tum auto-config'i kapatmak" },
+        { "id": "D", "text": "Yalnizca XML config kullanmak" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-core",
+  "id": "spring-core-interview-4",
+  "title": "Spring Core Interview - 4",
+  "description": "Profiles, dissal konfig yonetimi ve configuration properties",
+  "questions": [
+    {
+      "id": "i4-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring profile kavraminin temel amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "Ayni kod tabaninda ortama gore farkli bean/ayar secmek" },
+        { "id": "B", "text": "JVM thread sayisini artirmak" },
+        { "id": "C", "text": "Entity'leri otomatik olusturmak" },
+        { "id": "D", "text": "JSON parse hizini artirmak" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "application.properties ile application-{profile}.properties iliskisinde dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Profile dosyalari daima default dosyadan sonra yuklenip ilgili alanlari override edebilir" },
+        { "id": "B", "text": "Iki dosya birlikte kullanilamaz" },
+        { "id": "C", "text": "Sadece yml formatinda profile kullanilir" },
+        { "id": "D", "text": "Profile dosyalari sadece testte okunur" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Aktif profile belirlemek icin en yaygin property hangisidir?",
+      "choices": [
+        { "id": "A", "text": "spring.profile.mode" },
+        { "id": "B", "text": "spring.profiles.active" },
+        { "id": "C", "text": "spring.env.current" },
+        { "id": "D", "text": "spring.active.env" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Profile anotasyonu neyi kontrol eder?",
+      "choices": [
+        { "id": "A", "text": "Bean'in hangi profile aktifken context'e alinacagini" },
+        { "id": "B", "text": "Bean'in singleton mi prototype mi oldugunu" },
+        { "id": "C", "text": "Bean'in lazy olup olmadigini" },
+        { "id": "D", "text": "Bean'in transaction timeout degerini" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Birden fazla profile aktif oldugunda ayni key icin deger cakismasi varsa tipik davranis nedir?",
+      "choices": [
+        { "id": "A", "text": "Uygulama daima hata verir" },
+        { "id": "B", "text": "Property source oncelik kurallarina gore biri digerini override eder" },
+        { "id": "C", "text": "Iki deger de listede birlesir" },
+        { "id": "D", "text": "Cakisma sadece YAML'da olur" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "application.properties ve application.yml icin dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Yalnizca biri desteklenir" },
+        { "id": "B", "text": "Ikisi de desteklenir; yml hiyerarsik yapilari daha okunakli ifade edebilir" },
+        { "id": "C", "text": "properties sadece testte calisir" },
+        { "id": "D", "text": "yml ile @ConfigurationProperties kullanilamaz" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@ConfigurationProperties'in @Value'a gore temel avantaji nedir?",
+      "choices": [
+        { "id": "A", "text": "Tamamen reflection'siz calismasi" },
+        { "id": "B", "text": "Gruplanmis, type-safe ve bakimi kolay property baglama saglamasi" },
+        { "id": "C", "text": "Sadece primitive tipleri desteklemesi" },
+        { "id": "D", "text": "Environment'i devre disi birakmasi" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@ConfigurationProperties'de relaxed binding hangi esnekligi saglar?",
+      "choices": [
+        { "id": "A", "text": "Property adlarinin kebab-case, snake_case, camelCase gibi varyasyonlarla baglanabilmesi" },
+        { "id": "B", "text": "Sadece buyuk harfli key'lerin okunmasi" },
+        { "id": "C", "text": "Profile mekanizmasini kaldirmasi" },
+        { "id": "D", "text": "Bean scope'unu otomatik secmesi" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Configuration properties validasyonu icin tipik yaklasim hangisidir?",
+      "choices": [
+        { "id": "A", "text": "@ConfigurationProperties class'inda @Validated ve Bean Validation anotasyonlarini kullanmak" },
+        { "id": "B", "text": "Sadece try/catch yazmak" },
+        { "id": "C", "text": "@Primary eklemek" },
+        { "id": "D", "text": "@Lazy ile kontrol etmek" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Production ortaminda profile ve dissal konfig yonetimi icin en iyi pratik hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Tum ayarlari kod icine hard-code etmek" },
+        { "id": "B", "text": "Ortak varsayilanlari default dosyada tutup ortam ozel ayarlari profile/external source ile ayirmak" },
+        { "id": "C", "text": "Sadece test profile'i ile deploy etmek" },
+        { "id": "D", "text": "Properties yerine sadece Java constant kullanmak" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

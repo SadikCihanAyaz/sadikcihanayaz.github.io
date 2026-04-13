@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-core",
+  "id": "spring-core-interview-2",
+  "title": "Spring Core Interview - 2",
+  "description": "Configuration, bean yasam dongusu ve stereotype anotasyonlari",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Configuration anotasyonunun @Component'e gore kritik farki nedir?",
+      "choices": [
+        { "id": "A", "text": "@Configuration sinifi CGLIB proxy ile islenerek @Bean singleton semantigi korunabilir" },
+        { "id": "B", "text": "@Configuration sadece testte calisir" },
+        { "id": "C", "text": "@Configuration injection'i kapatir" },
+        { "id": "D", "text": "@Configuration ile @Bean birlikte kullanilamaz" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Bean kullanimi hangi senaryoda en uygundur?",
+      "choices": [
+        { "id": "A", "text": "Kendi yazmadigin 3rd-party class'i Spring bean yapmak" },
+        { "id": "B", "text": "Sadece enum siniflarini inject etmek" },
+        { "id": "C", "text": "Yalnizca request scope bean olusturmak" },
+        { "id": "D", "text": "Autowired zorunlulugunu kaldirmak" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@PostConstruct ne zaman calisir?",
+      "choices": [
+        { "id": "A", "text": "Bean yok edilmeden hemen once" },
+        { "id": "B", "text": "Bean olusturulup bagimliliklari inject edildikten sonra" },
+        { "id": "C", "text": "ApplicationContext olusmadan once" },
+        { "id": "D", "text": "Sadece prototype bean'lerde" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@PreDestroy ile ilgili dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Singleton bean icin context kapanirken yok etme callback'i olarak calisir" },
+        { "id": "B", "text": "Sadece static metotlarda kullanilir" },
+        { "id": "C", "text": "Bean olusmadan once cagrilir" },
+        { "id": "D", "text": "Her HTTP isteginde cagrilir" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Repository anotasyonunun sagladigi teknik avantaj nedir?",
+      "choices": [
+        { "id": "A", "text": "Persistence exception'larini Spring DataAccessException hiyerarsisine cevirme destegi" },
+        { "id": "B", "text": "Tum SQL sorgularini cache'leme" },
+        { "id": "C", "text": "Bean'i otomatik prototype yapma" },
+        { "id": "D", "text": "Transaction'i daima rollback etme" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Service anotasyonunun ana rolu nedir?",
+      "choices": [
+        { "id": "A", "text": "MVC view render etmek" },
+        { "id": "B", "text": "Business logic katmanini semantik olarak isaretlemek" },
+        { "id": "C", "text": "Sadece JDBC baglantisi acmak" },
+        { "id": "D", "text": "Bean'i lazy yapmayi zorlamak" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@ComponentScan'in varsayilan tarama davranisi icin dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Sadece java.lang paketini tarar" },
+        { "id": "B", "text": "Main config class'in bulundugu paketten baslayip alt paketleri tarar" },
+        { "id": "C", "text": "Tarama yapmaz, tum bean'ler manuel olmali" },
+        { "id": "D", "text": "Sadece @Bean anotasyonlarini tarar" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Lazy anotasyonu bean olusumunu nasil etkiler?",
+      "choices": [
+        { "id": "A", "text": "Bean olusumunu uygulama kapanisina erteler" },
+        { "id": "B", "text": "Bean'i ilk ihtiyac anina kadar erteleyebilir" },
+        { "id": "C", "text": "Bean'i otomatik olarak prototype yapar" },
+        { "id": "D", "text": "Dependency injection'i devre disi birakir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Bean lifecycle siralamasinda en dogru akisi veren secenek hangisidir?",
+      "choices": [
+        { "id": "A", "text": "@PostConstruct -> Constructor -> DI" },
+        { "id": "B", "text": "Constructor -> DI -> @PostConstruct" },
+        { "id": "C", "text": "DI -> Constructor -> @PreDestroy" },
+        { "id": "D", "text": "@PreDestroy -> Constructor -> DI" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Configuration sinifinda bir @Bean metodunu ayni sinif icinden cagirmada singleton korunmasi hangi mekanizma ile saglanir?",
+      "choices": [
+        { "id": "A", "text": "JDK dynamic proxy" },
+        { "id": "B", "text": "CGLIB tabanli configuration class proxy'si" },
+        { "id": "C", "text": "ClassLoader izolasyonu" },
+        { "id": "D", "text": "ReflectionFactory" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}
