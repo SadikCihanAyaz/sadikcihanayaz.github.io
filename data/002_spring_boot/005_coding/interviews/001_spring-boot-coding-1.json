@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "interviewId": "spring-boot-coding-1",
+  "title": "Spring Boot Coding - 1",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir Spring Boot uygulamasinda asagidaki Product modeli oldugunu dusun:\n\npublic class Product {\n    private Long id;\n    private String name;\n    private String category;\n    private BigDecimal price;\n    private Double rating;\n    private boolean inStock;\n}\n\nSu endpointi yaz:\nGET /api/products\n\nBu endpoint asagidaki query parametrelerini desteklemeli:\n- category (kategoriye gore filtreleme)\n- minPrice (minimum fiyat)\n- maxPrice (maksimum fiyat)\n- inStock (stokta olup olmama durumu)\n- sortBy (price, rating, name)\n- direction (asc veya desc)\n\nBeklenen davranis (ornek):\nGET /api/products?category=Electronics&minPrice=100&maxPrice=1000&inStock=true&sortBy=price&direction=asc\n\nBu istek:\n- sadece Electronics kategorisindeki urunleri getirmeli\n- fiyati 100 ile 1000 arasinda olmali\n- stokta olmali\n- fiyat artan sekilde siralanmali\n\nBeklentiler:\n- Controller katmani olmali\n- Service katmaninda filter ve sort logic kurulmali\n- Parametreler opsiyonel olmali\n- Hic parametre gelmezse tum urunler donmeli\n- Gecersiz sortBy veya direction icin uygun hata yonetimi yapilmali\n\nFollow-up sorular:\n- Filter ve sort logic neden controller yerine service icinde olmali?\n- sortBy degerini string almak ne gibi riskler dogurur?\n- Gecersiz query parametreleri icin nasil validation yaparsin?\n- Veri sayisi cok buyurse bunu memory icinde filtrelemek neden kotu olur?\n- Bu cozumu JPA Specification veya QueryDSL ile nasil gelistirirsin?\n- Pagination nasil eklersin?\n- Bu endpoint icin hangi testleri yazarsin?\n- Response icin entity yerine DTO kullanir misin, neden?\n- Sorting alanlarini daha guvenli hale nasil getirirsin?\n- Hem filtering hem sorting hem pagination varsa method tasarimini nasil sade tutarsin?",
+      "starterCode": "// Product.java\npublic class Product {\n    private Long id;\n    private String name;\n    private String category;\n    private BigDecimal price;\n    private Double rating;\n    private boolean inStock;\n}\n\n// TODO: ProductController\n// GET /api/products endpoint\n\n// TODO: ProductService\n// Optional filter + sort logic\n\n// TODO: Error handling\n// Invalid sortBy/direction -> meaningful 400 response",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

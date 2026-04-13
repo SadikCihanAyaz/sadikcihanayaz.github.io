@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "coding",
+  "interviews": [
+    {
+      "id": "spring-boot-coding-1",
+      "title": "Spring Boot Coding - 1",
+      "description": "REST endpoint yaz ve listeyi filter/sort et",
+      "order": 1,
+      "questionCount": 1,
+      "file": "/data/002_spring_boot/005_coding/interviews/001_spring-boot-coding-1.json"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "coding",
+  "id": "coding-topic",
+  "title": "Spring Boot Coding - Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu kategori icin konu anlatimi bulunmuyor."
+    }
+  ]
+}

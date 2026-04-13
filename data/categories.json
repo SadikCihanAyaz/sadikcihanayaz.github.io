@@ -16,7 +16,7 @@
       "description": "Spring Boot guvenlik ve veri katmani: Spring Security, JWT, OAuth2, RBAC, Hibernate, JPA",
       "order": 2,
       "folder": "002_spring_boot",
-      "subcategoryCount": 4,
+      "subcategoryCount": 5,
       "subcategoriesFile": "/data/002_spring_boot/subcategories.json"
     }
   ]
