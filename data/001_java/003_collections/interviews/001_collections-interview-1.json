@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "Hangi collection turu ayni elemandan birden fazla tutulmasina izin vermez?",
       "choices": [
-        { "id": "A", "text": "List" },
-        { "id": "B", "text": "Set" },
-        { "id": "C", "text": "Queue" },
-        { "id": "D", "text": "Map" }
+        {
+          "id": "A",
+          "text": "List"
+        },
+        {
+          "id": "B",
+          "text": "Set"
+        },
+        {
+          "id": "C",
+          "text": "Queue"
+        },
+        {
+          "id": "D",
+          "text": "Map"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,12 +44,26 @@
       "singleChoice": true,
       "question": "Set implementasyonlarindan hangisi insertion order'i korur?",
       "choices": [
-        { "id": "A", "text": "HashSet" },
-        { "id": "B", "text": "TreeSet" },
-        { "id": "C", "text": "LinkedHashSet" },
-        { "id": "D", "text": "ConcurrentSkipListSet" }
+        {
+          "id": "A",
+          "text": "HashSet"
+        },
+        {
+          "id": "B",
+          "text": "TreeSet"
+        },
+        {
+          "id": "C",
+          "text": "LinkedHashSet"
+        },
+        {
+          "id": "D",
+          "text": "ConcurrentSkipListSet"
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "ArrayList icin index bazli get operasyonunun ortalama karmasikligi nedir?",
       "choices": [
-        { "id": "A", "text": "O(1)" },
-        { "id": "B", "text": "O(log n)" },
-        { "id": "C", "text": "O(n)" },
-        { "id": "D", "text": "O(n log n)" }
+        {
+          "id": "A",
+          "text": "O(1)"
+        },
+        {
+          "id": "B",
+          "text": "O(log n)"
+        },
+        {
+          "id": "C",
+          "text": "O(n)"
+        },
+        {
+          "id": "D",
+          "text": "O(n log n)"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Doğru cevap: **$O(1)$**\n\nArrayList, isminden de anlaşılacağı üzere arka planda standart bir **Array (Dizi)** kullanır. Bilgisayar belleğinde diziler yan yana dizilmiş kutucuklar gibidir. Bir index verildiğinde (örneğin 500. eleman), başlangıç adresinin üzerine 500 ekleyerek o veriye **doğrudan** ulaşılabilir. Bu yüzden listenin boyutu ne olursa olsun erişim süresi değişmez.\n\n---\n\n### ArrayList Karmaşıklık ($O$) Tablosu\n\n| İşlem | Zaman Karmaşıklığı | Neden? |\n| :--- | :--- | :--- |\n| **Erişim (get)** | $O(1)$ | Index üzerinden direkt adrese gidilir. |\n| **Arama (contains)** | $O(n)$ | Elemanı bulana kadar tüm listeyi tek tek gezmek gerekir. |\n| **Sona Ekleme (add)** | $O(1)$ (Amortized) | Genelde sadece sona eklenir. Kapasite dolarsa liste yeniden oluşturulur. |\n| **Araya Ekleme (add i, e)**| $O(n)$ | Eklenen yerden sonraki tüm elemanları sağa kaydırmak gerekir. |\n| **Silme (remove)** | $O(n)$ | Silinen yerden sonraki tüm elemanları sola kaydırmak gerekir. |\n\n---\n\n### Nedenleri ile Detaylı Açıklama\n\n#### 1. Okuma (get) -> $O(1)$\nArrayList rastgele erişime (Random Access) izin verir. Elinizde 1 milyon eleman olsa bile 5. eleman ile 999.999. elemana ulaşma süresi aynıdır. Çünkü matematiksel olarak adres hesaplanır ve zıplanır.\n\n#### 2. Yazma / Sona Ekleme -> $O(1)$ (Ortalama)\nNormalde sona bir eleman eklemek çok hızlıdır. Ancak ArrayList'in kapasitesi dolduğunda (varsayılan genelde 10'dur), Java arka planda %50 daha büyük yeni bir dizi oluşturur ve eski elemanları oraya kopyalar. Bu kopyalama işlemi $O(n)$ olsa da, çok nadir gerçekleştiği için ortalamada $O(1)$ kabul edilir.\n\n\n\n#### 3. Araya Ekleme ve Silme -> $O(n)$\nDiyelim ki 10 elemanlı bir listenin en başına yeni bir eleman eklemek istiyorsunuz.\n* Mevcut 10 elemanın her birini bir sağdaki kutucuğa itmeniz gerekir.\n* Eğer listenin başında işlem yapıyorsanız tüm listeyi (n kadar eleman) kaydırdığınız için karmaşıklık listenin boyutuyla doğru orantılı artar.\n\n\n\n---\n\n### Özet: Ne Zaman Kullanmalı?\n* **ArrayList:** Verilere sürekli index ile erişecekseniz veya veriyi hep sona ekleyecekseniz kraldır.\n* **LinkedList:** Eğer listenin sürekli başına veya ortasına bir şeyler ekleyip silecekseniz, LinkedList daha mantıklıdır (Çünkü eleman kaydırma yapmaz, sadece bağları/pointerları değiştirir).\n\nSıradaki sorumuz veri yapıları arasındaki farklar mı olsun, yoksa Java'nın bu yapıları arka planda nasıl yönettiğiyle mi devam edelim?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,13 +106,27 @@
       "singleChoice": true,
       "question": "Ortadaki elemanlara sik ekleme/silme islemi icin hangi yapi daha uygundur?",
       "choices": [
-        { "id": "A", "text": "ArrayList" },
-        { "id": "B", "text": "LinkedList" },
-        { "id": "C", "text": "Vector" },
-        { "id": "D", "text": "CopyOnWriteArrayList" }
+        {
+          "id": "A",
+          "text": "ArrayList"
+        },
+        {
+          "id": "B",
+          "text": "LinkedList"
+        },
+        {
+          "id": "C",
+          "text": "Vector"
+        },
+        {
+          "id": "D",
+          "text": "CopyOnWriteArrayList"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **LinkedList**\n\nArrayList'in aksine, **LinkedList** ortadaki elemanlara ekleme ve silme işlemlerinde çok daha verimlidir çünkü elemanları kaydırmak zorunda kalmaz; sadece komşu elemanların birbirini gösteren referanslarını (bağlarını) günceller.\n\n---\n\n### LinkedList Karmaşıklık ($O$) Tablosu\n\n| İşlem | Zaman Karmaşıklığı | Neden? |\n| :--- | :--- | :--- |\n| **Başa/Sona Erişim** | $O(1)$ | İlk (`head`) ve son (`tail`) elemanların adresi bellidir. |\n| **İndex ile Erişim (get)** | $O(n)$ | İstenen indexe ulaşana kadar düğümleri tek tek gezmek gerekir. |\n| **Arama (contains)** | $O(n)$ | Tüm listeyi baştan sona taramak gerekir. |\n| **Ekleme / Silme (Eleman belliyse)** | $O(1)$ | Sadece pointerlar (bağlar) güncellenir. |\n| **İndex ile Ekleme / Silme** | $O(n)$ | Önce o indexe gitmek ($O(n)$), sonra bağları değiştirmek ($O(1)$) gerekir. |\n\n---\n\n### Nedenleri ile Detaylı Açıklama\n\n#### 1. Okuma / Erişim (get) -> $O(n)$\nLinkedList elemanları bellekte yan yana durmazlar. Her bir eleman (Node), bir sonraki elemanın adresini içinde barındıran bir \"zincir halkası\" gibidir. \n* 500. elemanı okumak isterseniz, bilgisayar 1'den başlar, 2'ye geçer, 3'e geçer... ta ki 500'e ulaşana kadar. \n* Bu yüzden ArrayList'teki gibi doğrudan adrese zıplama ($O(1)$) yapılamaz.\n\n\n\n#### 2. Ekleme ve Silme (Ortada) -> $O(1)$ (Adres biliniyorsa)\nLinkedList'in en büyük gücü buradadır. Bir elemanı silmek veya araya bir şey eklemek için diğer elemanları sağa-sola kaydırmanız gerekmez.\n* **Silme:** Silinecek elemandan önceki eleman, artık silinecek elemandan sonrakini göstermeye başlar. \n* **Ekleme:** Yeni eleman araya girer ve komşularının adreslerini üzerine alır.\nBu işlem sadece 2-3 adres güncellemesinden ibarettir, bu yüzden sabittir ($O(1)$).\n\n\n\n---\n\n### ArrayList vs LinkedList: Ne Zaman Hangisi?\n\n* **Okuma (get) yoğunluklu** bir uygulamanız varsa: **ArrayList** seçin ($O(1)$ erişim).\n* **Ekleme/Silme yoğunluklu** bir listeniz varsa ve listenin başında/ortasında çok işlem yapıyorsanız: **LinkedList** seçin.\n* **Bellek Kullanımı:** LinkedList her eleman için ekstradan \"önceki\" ve \"sonraki\" adreslerini de tuttuğu için ArrayList'ten daha fazla RAM harcar.\n\n\n\n### Özet Karar\nEğer listenizin boyutunu önceden bilmiyorsanız ve sürekli aralara bir şeyler sokup çıkarıyorsanız **LinkedList** bir kurtarıcıdır. Ancak sadece \"verileri tutayım ve lazım olunca index ile çağırayım\" diyorsanız **ArrayList** her zaman daha hızlıdır.\n\nJava'da bu yapıların \"Thread-Safe\" hallerini (Vector veya CopyOnWriteArrayList gibi) incelemek ister misin? Özellikle çoklu thread yapılarında bu karmaşıklıklar değişebiliyor.",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -81,13 +137,27 @@
       "singleChoice": true,
       "question": "HashMap icin null anahtar/deger kurali hangisidir?",
       "choices": [
-        { "id": "A", "text": "Null anahtar ve null deger yasaktir." },
-        { "id": "B", "text": "Bir null anahtar ve birden fazla null deger olabilir." },
-        { "id": "C", "text": "Birden fazla null anahtar olabilir." },
-        { "id": "D", "text": "Null anahtar yasak, null deger serbesttir." }
+        {
+          "id": "A",
+          "text": "Null anahtar ve null deger yasaktir."
+        },
+        {
+          "id": "B",
+          "text": "Bir null anahtar ve birden fazla null deger olabilir."
+        },
+        {
+          "id": "C",
+          "text": "Birden fazla null anahtar olabilir."
+        },
+        {
+          "id": "D",
+          "text": "Null anahtar yasak, null deger serbesttir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Bir null anahtar ve birden fazla null değer olabilir.**\n\nJava'da `HashMap`, anahtar-değer (key-value) çiftlerini saklarken oldukça esnektir. Ancak bu esneklik, `Hashtable` veya `TreeMap` gibi diğer Map türleriyle karıştırılmamalıdır.\n\n---\n\n### HashMap'in Null Kuralları\n\n1.  **Tek Bir Null Anahtar:** `HashMap`, anahtar olarak yalnızca **bir adet `null`** değerine izin verir. Eğer ikinci bir `null` anahtar eklemeye çalışırsanız, mevcut `null` anahtarına karşılık gelen değerin üzerine yazar (update eder).\n2.  **Birden Fazla Null Değer:** Değer (Value) kısmında ise herhangi bir kısıtlama yoktur. İstediğiniz kadar anahtara karşılık `null` değeri atayabilirsiniz.\n\n---\n\n### HashMap Arka Planda Null Anahtarı Nasıl Tutar?\n\nNormalde `HashMap`, bir anahtarın nereye yerleştirileceğini belirlemek için o anahtarın `hashCode()` metodunu çağırır. Ancak `null` bir objenin `hashCode()` metodu çağrılamaz (NullPointerException alınırdı).\n\nBu yüzden Java geliştiricileri `HashMap` içine özel bir kontrol koymuştur:\n> Eğer anahtar `null` ise, `hash` değeri her zaman **0** kabul edilir. Bu da `null` anahtarının her zaman dahili dizinin (bucket) **0. indexine** yerleştirileceği anlamına gelir.\n\n\n\n---\n\n### Diğer Map Yapılarıyla Karşılaştırma\n\n| Map Türü | Null Anahtar (Key) | Null Değer (Value) |\n| :--- | :--- | :--- |\n| **HashMap** | **1 tane izin verir** | **Sınırsız izin verir** |\n| **LinkedHashMap** | 1 tane izin verir | Sınırsız izin verir |\n| **TreeMap** | **Kesinlikle yasak** (Sıralama yaptığı için) | Sınırsız izin verir |\n| **Hashtable** | **Kesinlikle yasak** | **Kesinlikle yasak** |\n| **ConcurrentHashMap**| **Kesinlikle yasak** | **Kesinlikle yasak** |\n\n---\n\n### Neden `ConcurrentHashMap` veya `Hashtable` Null İzin Vermez?\n\nBu yapılar çoklu thread (multi-threaded) ortamlar için tasarlanmıştır. Eğer `map.get(key)` size `null` dönerse, iki ihtimal vardır:\n1.  Anahtar gerçekten haritada yok.\n2.  Anahtar haritada var ama değeri `null`.\n\nTek thread'li `HashMap`'te bunu `containsKey(key)` ile kontrol edebilirsiniz. Ancak çok thread'li ortamlarda, siz kontrolü yapıp değeri alana kadar başka bir thread aradaki durumu değiştirebilir. Bu belirsizliği (ambiguity) önlemek için thread-safe haritalarda `null` tamamen yasaklanmıştır.\n\n\n\nBir anahtara `null` atamak sence iyi bir pratik mi, yoksa \"Null Object Pattern\" gibi yapılar mı tercih edilmeli?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,13 +168,27 @@
       "singleChoice": true,
       "question": "TreeMap elemanlari nasil siralar?",
       "choices": [
-        { "id": "A", "text": "Ekleme sirasina gore" },
-        { "id": "B", "text": "Hash bucket dagilimina gore" },
-        { "id": "C", "text": "Anahtarin natural order'i veya Comparator'a gore" },
-        { "id": "D", "text": "Deger uzunluguna gore" }
+        {
+          "id": "A",
+          "text": "Ekleme sirasina gore"
+        },
+        {
+          "id": "B",
+          "text": "Hash bucket dagilimina gore"
+        },
+        {
+          "id": "C",
+          "text": "Anahtarin natural order'i veya Comparator'a gore"
+        },
+        {
+          "id": "D",
+          "text": "Deger uzunluguna gore"
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru cevap: **Anahtarin natural order'ı veya Comparator'a göre.**\n\n`TreeMap`, Java'da **NavigableMap** arayüzünü uygulayan ve arka planda **Red-Black Tree** (Kırmızı-Siyah Ağaç) veri yapısını kullanan bir harita türüdür. Onu `HashMap`'ten ayıran en temel özellik, anahtarları her zaman sıralı tutmasıdır.\n\n---\n\n### TreeMap'in Özellikleri\n\n* **Sıralama:** Varsayılan olarak anahtarların \"Natural Ordering\" (Doğal Sıralama - örneğin sayılar için küçükten büyüğe, metinler için alfabetik) kuralına göre sıralar. İstenirse `Comparator` verilerek özel bir sıralama da yapılabilir.\n* **Performans:** Ekleme, silme ve arama işlemleri için zaman karmaşıklığı **$O(\\log n)$**'dir.\n* **Null Kuralı:** Anahtar (Key) kısmında `null` kabul etmez (Çünkü kıyaslama yapamaz), ancak değer (Value) kısmında birden fazla `null` tutabilir.\n\n\n\n---\n\n### Kod Örneği ve Önemli Metotlar\n\nAşağıdaki örnekte hem temel kullanımını hem de `TreeMap`'i güçlü kılan \"aralık sorgulama\" metotlarını görebilirsin:\n\n```java\nimport java.util.TreeMap;\nimport java.util.Map;\n\npublic class TreeMapExample {\n    public static void main(String[] args) {\n        // TreeMap oluşturma\n        TreeMap<Integer, String> students = new TreeMap<>();\n\n        // Eleman ekleme (Karışık sırada ekliyoruz)\n        students.put(105, \"Ali\");\n        students.put(101, \"Zeynep\");\n        students.put(110, \"Can\");\n        students.put(103, \"Ayşe\");\n\n        // Yazdırdığımızda anahtarların 101, 103, 105, 110 şeklinde sıralandığını görürüz\n        System.out.println(\"Sıralı Liste: \" + students);\n\n        // --- Önemli ve Kullanışlı Metotlar ---\n\n        // 1. En küçük ve en büyük anahtarlar\n        System.out.println(\"İlk Anahtar (En Küçük): \" + students.firstKey()); // 101\n        System.out.println(\"Son Anahtar (En Büyük): \" + students.lastKey());  // 110\n\n        // 2. floorKey: Verilen sayıya eşit veya ondan küçük en büyük anahtar\n        System.out.println(\"104'ten küçük eşit en büyük: \" + students.floorKey(104)); // 103\n\n        // 3. ceilingKey: Verilen sayıya eşit veya ondan büyük en küçük anahtar\n        System.out.println(\"104'ten büyük eşit en küçük: \" + students.ceilingKey(104)); // 105\n\n        // 4. subMap: Belirli bir aralıktaki kayıtları alma (Başlangıç dahil, bitiş hariç)\n        Map<Integer, String> range = students.subMap(101, 105);\n        System.out.println(\"101-105 Arasındaki Öğrenciler: \" + range); // {101=Zeynep, 103=Ayşe}\n\n        // 5. descendingMap: Ters sıraya çevirme\n        System.out.println(\"Ters Sıralama: \" + students.descendingMap());\n    }\n}\n```\n\n---\n\n### TreeMap Metotları Özet Tablosu\n\n| Metot | Açıklama |\n| :--- | :--- |\n| `firstKey() / lastKey()` | Haritadaki en küçük ve en büyük anahtarı döner. |\n| `pollFirstEntry()` | En küçük anahtara sahip kaydı döner ve haritadan siler. |\n| `higherKey(K key)` | Verilen anahtardan **kesinlikle büyük** olan ilk anahtarı döner. |\n| `lowerKey(K key)` | Verilen anahtardan **kesinlikle küçük** olan ilk anahtarı döner. |\n| `subMap(from, to)` | Belirtilen anahtar aralığındaki bir görünüm (view) sunar. |\n\n### Ne Zaman Kullanmalı?\nEğer verilerin bellekte sadece \"saklanması\" değil, aynı zamanda her zaman **alfabetik veya sayısal olarak sıralı** durması gerekiyorsa (örneğin bir telefon rehberi veya skor tablosu gibi) `TreeMap` en iyi tercihtir. Eğer sıralama önemli değilse, performans avantajı nedeniyle (ortalama $O(1)$) `HashMap` kullanmak daha mantıklıdır.\n\nPeki, nesneleri (User, Product vb.) anahtar olarak kullanmak istersen `TreeMap`'in hata vermemesi için o sınıfa ne eklemen gerektiğini biliyor musun? (İpucu: `Comparable` arayüzü).",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -115,13 +199,27 @@
       "singleChoice": true,
       "question": "HashSet/HashMap kullaniminda equals-hashCode icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "equals true ise hashCode farkli olmalidir." },
-        { "id": "B", "text": "equals true olan iki nesnenin hashCode'u ayni olmalidir." },
-        { "id": "C", "text": "Sadece hashCode kullanilir, equals kullanilmaz." },
-        { "id": "D", "text": "hashCode her zaman tum nesneler icin benzersiz olmalidir." }
+        {
+          "id": "A",
+          "text": "equals true ise hashCode farkli olmalidir."
+        },
+        {
+          "id": "B",
+          "text": "equals true olan iki nesnenin hashCode'u ayni olmalidir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece hashCode kullanilir, equals kullanilmaz."
+        },
+        {
+          "id": "D",
+          "text": "hashCode her zaman tum nesneler icin benzersiz olmalidir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **equals true olan iki nesnenin hashCode'u ayni olmalidir.**\n\nBu kural, Java'da **\"The equals and hashCode Contract\"** (equals ve hashCode Sözleşmesi) olarak bilinir. Eğer bu kuralı bozarsanız, `HashMap`, `HashSet` veya `Hashtable` gibi koleksiyonlar düzgün çalışmaz ve \"kayıp nesne\" problemleriyle karşılaşırsınız.\n\n---\n\n### Neden `equals` True ise `hashCode` Aynı Olmalı?\n\n`HashMap` veya `HashSet` bir nesneyi ararken şu iki aşamalı süreci izler:\n\n1.  **Aşama (Kova/Bucket Bulma):** Önce nesnenin `hashCode()` değerine bakılır. Bu değer, nesnenin hangi \"kova\"da (bucket) saklandığını belirler.\n2.  **Aşama (Kesin Karşılaştırma):** Eğer kovada birden fazla nesne varsa (Hash Collision), doğru nesneyi bulmak için `equals()` metodu çağrılır.\n\n**Kural İhlali Durumunda Ne Olur?**\nEğer iki nesne mantıksal olarak birbirine eşitse (`equals` true) ama `hashCode` değerleri farklıysa, Java bu iki nesneyi **farklı kovalara** koyar. Siz nesneyi `set.contains(nesne)` ile aradığınızda, Java farklı bir kovaya baktığı için nesne orada olsa bile \"bulunamadı\" der.\n\n\n\n---\n\n### equals ve hashCode Sözleşmesi Özeti\n\n| Durum | Kural | Açıklama |\n| :--- | :--- | :--- |\n| **`equals` TRUE ise** | **`hashCode` AYNI OLMALI** | Mutlaka sağlanması gereken zorunlu kuraldır. |\n| **`hashCode` AYNI ise** | **`equals` TRUE/FALSE OLABİLİR** | \"Hash Collision\" (Çakışma) durumudur. Farklı nesneler tesadüfen aynı hash koduna sahip olabilir. |\n| **`hashCode` FARKLI ise** | **`equals` FALSE OLMALI** | Farklı hash koduna sahip nesneler zaten birbirine eşit olamaz. |\n\n---\n\n### Kod Üzerinden Bir Hata Örneği\n\nDiyelim ki bir `User` sınıfınız var ve sadece `equals` metodunu ezdiniz ama `hashCode` metodunu unuttunuz:\n\n```java\npublic class User {\n    private String tckn;\n\n    public User(String tckn) { this.tckn = tckn; }\n\n    @Override\n    public boolean equals(Object o) {\n        if (this == o) return true;\n        if (!(o instanceof User)) return false;\n        User user = (User) o;\n        return Objects.equals(tckn, user.tckn);\n    }\n    // hashCode() metodunun ezilmediğini varsayalım\n}\n```\n\n**Problem:**\n```java\nHashSet<User> users = new HashSet<>();\nusers.add(new User(\"123\"));\n\nSystem.out.println(users.contains(new User(\"123\"))); \n// ÇIKTI: FALSE! (Çünkü iki nesnenin hash kodları farklı, Java farklı kovaya baktı)\n```\n\n\n\n### Önemli İpucu\nModern IDE'ler (IntelliJ, Eclipse vb.) veya **Lombok** (`@EqualsAndHashCode`) bu iki metodu her zaman birlikte oluşturmanızı önerir. Birini ezerseniz, diğerini de mutlaka o nesnenin **değişmez (immutable)** alanlarını kullanarak ezmelisiniz.\n\nGenelde projelerinde bu metotları manuel mi yazıyorsun yoksa `@Data` gibi anotasyonlarla Lombok'a mı bırakıyorsun?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -132,13 +230,27 @@
       "singleChoice": true,
       "question": "ArrayList uzerinde iterator ile gezerken koleksiyon disaridan degistirilirse tipik sonuc nedir?",
       "choices": [
-        { "id": "A", "text": "Degisiklikler sessizce birlesir." },
-        { "id": "B", "text": "Iterator otomatik senkronize olur." },
-        { "id": "C", "text": "ConcurrentModificationException olusur." },
-        { "id": "D", "text": "Tum elemanlar iki kez okunur." }
+        {
+          "id": "A",
+          "text": "Degisiklikler sessizce birlesir."
+        },
+        {
+          "id": "B",
+          "text": "Iterator otomatik senkronize olur."
+        },
+        {
+          "id": "C",
+          "text": "ConcurrentModificationException olusur."
+        },
+        {
+          "id": "D",
+          "text": "Tum elemanlar iki kez okunur."
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru cevap: **ConcurrentModificationException oluşur.**\n\nBu durum Java'da **\"Fail-Fast\"** mekanizması olarak adlandırılır. Java, bir koleksiyonun yapısı (ekleme, silme) üzerinde gezinme (iteration) işlemi devam ederken dışarıdan bir müdahale yapıldığını fark ederse, tutarsız veri okumasını önlemek için anında hata fırlatır.\n\n---\n\n### Fail-Fast Mekanizması Nasıl Çalışır?\n\nArrayList sınıfının içinde `modCount` (modification count) adında bir değişken bulunur. Bu değişken, listeye her eleman eklendiğinde veya silindiğinde artırılır.\n\n1.  **Iterator Oluşturma:** Bir iterator oluşturduğunuzda, listenin o anki `modCount` değerini kendi içine `expectedModCount` olarak kaydeder.\n2.  **Her Adımda Kontrol:** Siz her `next()` dediğinizde, iterator listenin güncel `modCount` değeri ile kendi içindeki `expectedModCount` değerini karşılaştırır.\n3.  **Çakışma Anı:** Eğer dışarıdan bir metot (`list.remove()` veya `list.add()`) çağrılmışsa, listenin `modCount` değeri değişir ama iterator'ın beklediği değer aynı kalır.\n4.  **Hata:** Değerler eşleşmediği anda iterator \"Dur!\" der ve `ConcurrentModificationException` fırlatır.\n\n\n\n---\n\n### Hatalı Kod Örneği\n\nAşağıdaki kod parçası tipik bir hata örneğidir:\n\n```java\nList<String> diller = new ArrayList<>(Arrays.asList(\"Java\", \"Python\", \"C++\"));\n\nfor (String dil : diller) { // Arka planda iterator kullanır\n    if (dil.equals(\"Python\")) {\n        diller.remove(dil); // HATA! Koleksiyon dışarıdan değiştirildi.\n    }\n}\n```\n\n---\n\n### Bu Durumdan Nasıl Kaçınılır?\n\nEğer gezinme sırasında bir eleman silmeniz gerekiyorsa şu yöntemleri kullanmalısınız:\n\n* **1. Iterator'ın Kendi remove() Metodu:** Bu güvenli yoldur çünkü iterator kendi üzerinden silme yaparken `expectedModCount` değerini de günceller.\n    ```java\n    Iterator<String> it = diller.iterator();\n    while (it.hasNext()) {\n        if (it.next().equals(\"Python\")) {\n            it.remove(); // Güvenli silme\n        }\n    }\n    ```\n* **2. removeIf (Java 8+):** Modern ve en temiz yöntemdir.\n    ```java\n    diller.removeIf(dil -> dil.equals(\"Python\"));\n    ```\n* **3. CopyOnWriteArrayList:** Eğer çoklu thread (multi-thread) ortamındaysanız, bu sınıf her değişiklikte listenin bir kopyasını oluşturduğu için hata fırlatmaz.\n\n---\n\n### Özet Tablo\n\n| Yaklaşım | Sonuç | Nedeni |\n| :--- | :--- | :--- |\n| **List.remove()** (Döngü içinde) | **Hata fırlatır** | `modCount` değişir, iterator fark eder. |\n| **Iterator.remove()** | **Güvenli** | Değişikliği iterator kendisi yönetir. |\n| **CopyOnWriteArrayList** | **Güvenli** | Gezinme eski kopya üzerinden yapılır. |\n\n\n\nGenellikle bu hatayı bir `foreach` döngüsü içinde liste temizlemeye çalışırken mi aldın? Yazılımda bu hata \"beklenmedik\" gibi görünse de aslında bizi çok büyük mantık hatalarından koruyan bir emniyet kemeridir.",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -149,13 +261,27 @@
       "singleChoice": true,
       "question": "Collections.unmodifiableList(list) icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Listeyi deep immutable hale getirir." },
-        { "id": "B", "text": "Yapisal degisikliklerde UnsupportedOperationException firlatan bir view verir." },
-        { "id": "C", "text": "Listeyi otomatik thread-safe yapar." },
-        { "id": "D", "text": "Her zaman yeni bir fiziksel kopya olusturur." }
+        {
+          "id": "A",
+          "text": "Listeyi deep immutable hale getirir."
+        },
+        {
+          "id": "B",
+          "text": "Yapisal degisikliklerde UnsupportedOperationException firlatan bir view verir."
+        },
+        {
+          "id": "C",
+          "text": "Listeyi otomatik thread-safe yapar."
+        },
+        {
+          "id": "D",
+          "text": "Her zaman yeni bir fiziksel kopya olusturur."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Yapisal degisikliklerde UnsupportedOperationException firlatan bir view verir.**\n\nBu metot, isminde \"unmodifiable\" (değiştirilemez) kelimesi geçtiği için genellikle \"immutable\" (sabit) ile karıştırılır. Ancak aralarında teknik olarak çok kritik bir fark vardır.\n\n---\n\n### UnmodifiableList'in Çalışma Mantığı\n\n`Collections.unmodifiableList(list)` gerçekte yeni bir liste oluşturmaz. Mevcut listenin üzerinde bir **\"görünüm\" (view)** veya bir \"zırh\" oluşturur.\n\n1.  **Doğrudan Müdahale Engellenir:** Eğer bu \"view\" üzerinden `add()`, `remove()` veya `set()` gibi metotları çağırmaya çalışırsanız, Java anında `UnsupportedOperationException` fırlatır.\n2.  **Orijinal Liste Değişirse:** İşte burası en kritik nokta! Eğer orijinal listenin referansına hala sahipseniz ve orijinal listede bir değişiklik yaparsanız, bu değişiklik `unmodifiableList` üzerinden de görülür. Çünkü ikisi de bellekte aynı veriye bakmaktadır.\n\n\n\n---\n\n### Kod Örneği\n\n```java\nList<String> orijinalListe = new ArrayList<>();\norijinalListe.add(\"Java\");\n\nList<String> korumaliListe = Collections.unmodifiableList(orijinalListe);\n\n// 1. Senaryo: Korumalı liste üzerinden ekleme (HATA)\n// korumaliListe.add(\"Python\"); // UnsupportedOperationException firlatir!\n\n// 2. Senaryo: Orijinal liste üzerinden ekleme (DİKKAT)\norijinalListe.add(\"Python\"); \n\nSystem.out.println(korumaliListe); \n// ÇIKTI: [Java, Python] -> Korumalı liste de güncellendi!\n```\n\n---\n\n### Karıştırmaman Gereken Kavramlar\n\n| Özellik | `unmodifiableList` | `List.of` (Immutable List) |\n| :--- | :--- | :--- |\n| **Yapı** | Orijinal listeye bağlı bir \"view\" (bakış) | Kendi başına bağımsız bir kopya |\n| **Kaynak Değişimi** | Kaynak değişirse bu da değişir | Kaynaktan tamamen bağımsızdır |\n| **Hata Yönetimi** | `add/remove` anında hata verir | `add/remove` anında hata verir |\n| **Bellek** | Ekstra kopya oluşturmaz (Ekonomik) | Yeni bir veri yapısı oluşturur |\n\n---\n\n### Özetle\n* **Deep Immutable DEĞİLDİR:** Sadece listenin yapısını korur. Eğer listenin içindeki nesneler (örneğin bir `User` nesnesi) değiştirilebilir (mutable) ise, o nesnelerin içine girip `setName()` diyerek veriyi hala değiştirebilirsin.\n* **Thread-Safe DEĞİLDİR:** Bir thread listeyi okurken diğeri orijinal listeden veri silerse `ConcurrentModificationException` riski devam eder.\n\nGenelde bu metodu, bir sınıfın içindeki `private List`'i dışarıya açarken, dışarıdaki kodun senin listeni kafasına göre bozmamasını (ekleme/çıkarma yapmamasını) sağlamak için kullanırız. \n\nBu \"view\" mantığı kafana yattı mı, yoksa neden \"Deep Immutable\" olmadığını bir örnekle daha açalım mı?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -166,13 +292,27 @@
       "singleChoice": true,
       "question": "Comparable ve Comparator farki icin en dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Ikisi de sadece primitive tiplerde calisir." },
-        { "id": "B", "text": "Comparable sinif icinde tek natural order tanimlar; Comparator disaridan farkli siralama stratejileri sunar." },
-        { "id": "C", "text": "Comparator zorunlu olarak entity icinde implement edilir." },
-        { "id": "D", "text": "Comparable ve Comparator ayni seydir." }
+        {
+          "id": "A",
+          "text": "Ikisi de sadece primitive tiplerde calisir."
+        },
+        {
+          "id": "B",
+          "text": "Comparable sinif icinde tek natural order tanimlar; Comparator disaridan farkli siralama stratejileri sunar."
+        },
+        {
+          "id": "C",
+          "text": "Comparator zorunlu olarak entity icinde implement edilir."
+        },
+        {
+          "id": "D",
+          "text": "Comparable ve Comparator ayni seydir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Comparable sınıf içinde tek natural order tanımlar; Comparator dışarıdan farklı sıralama stratejileri sunar.**\n\nBu iki arayüz (interface) Java'da nesneleri sıralamak için kullanılır, ancak kullanım amaçları ve yerleri tamamen farklıdır.\n\n---\n\n### 1. Comparable (Doğal Sıralama)\nBir sınıfın \"varsayılan\" olarak nasıl sıralanacağını belirler. Sınıfın bizzat kendisine uygulanır (`implements Comparable`).\n* **Metot:** `compareTo(Object o)`\n* **Mantık:** \"Ben kendimi başka bir nesneyle nasıl kıyaslarım?\" sorusuna cevap verir.\n* **Kullanım:** Sadece bir tane sıralama kuralı tanımlayabilirsiniz (Örn: ID'ye göre).\n\n### 2. Comparator (Özel/Esnek Sıralama)\nSınıfın dışından, farklı sıralama kuralları oluşturmanıza olanak tanır. Orijinal sınıfı değiştirmenize gerek kalmaz.\n* **Metot:** `compare(Object o1, Object o2)`\n* **Mantık:** \"İki yabancı nesneyi alıp birbiriyle kıyaslayan bir hakem\" gibidir.\n* **Kullanım:** Birden fazla strateji tanımlayabilirsiniz (Örn: İsme göre, fiyata göre, tarihe göre).\n\n\n\n---\n\n### Gerçek Hayat Örneği: Ürün Listeleme\nBir e-ticaret sistemindeki `Product` (Ürün) sınıfını ele alalım. Varsayılan olarak ürünleri **ID**'lerine göre sıralamak isteyebiliriz (Comparable). Ancak kullanıcı arayüzünde **Fiyat** veya **İsim** sıralaması da gerekebilir (Comparator).\n\n#### Kod Örneği\n\n```java\nimport java.util.*;\n\n// 1. Comparable: Ürünün kendisi ID'ye göre sıralanmayı öğreniyor\nclass Product implements Comparable<Product> {\n    int id;\n    String name;\n    double price;\n\n    public Product(int id, String name, double price) {\n        this.id = id;\n        this.name = name;\n        this.price = price;\n    }\n\n    @Override\n    public int compareTo(Product other) {\n        // Küçükten büyüğe ID sıralaması (Natural Order)\n        return this.id - other.id;\n    }\n\n    @Override\n    public String toString() {\n        return id + \":\" + name + \":\" + price + \"TL\";\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Product> products = new ArrayList<>();\n        products.add(new Product(3, \"Laptop\", 15000));\n        products.add(new Product(1, \"Telefon\", 8000));\n        products.add(new Product(2, \"Tablet\", 5000));\n\n        // --- COMPARABLE KULLANIMI ---\n        Collections.sort(products); // compareTo metodunu kullanır\n        System.out.println(\"ID Sıralaması (Comparable): \" + products);\n\n        // --- COMPARATOR KULLANIMI (Fiyata Göre) ---\n        // Sınıfa dokunmadan, dışarıdan bir kural veriyoruz\n        Comparator<Product> priceComparator = (p1, p2) -> Double.compare(p1.price, p2.price);\n        Collections.sort(products, priceComparator);\n        System.out.println(\"Fiyat Sıralaması (Comparator): \" + products);\n\n        // --- COMPARATOR KULLANIMI (İsme Göre) ---\n        Collections.sort(products, (p1, p2) -> p1.name.compareTo(p2.name));\n        System.out.println(\"İsim Sıralaması (Comparator): \" + products);\n    }\n}\n```\n\n---\n\n### Karşılaştırma Özeti\n\n| Özellik | Comparable | Comparator |\n| :--- | :--- | :--- |\n| **Paket** | `java.lang` | `java.util` |\n| **Metot** | `compareTo(obj)` | `compare(obj1, obj2)` |\n| **Sınıf Modifikasyonu** | Sınıfı değiştirmeniz gerekir. | Sınıfı değiştirmeniz gerekmez. |\n| **Strateji Sayısı** | Tek bir kural (Doğal sıralama). | Sınırsız sayıda farklı kural. |\n| **Kullanım** | `Collections.sort(list)` | `Collections.sort(list, comparator)` |\n\n\n\n**Özetle:** Eğer \"Bu nesne her zaman şuna göre sıralanır\" diyorsan **Comparable**; \"Bazen şuna, bazen buna göre sıralansın\" diyorsan **Comparator** kullanmalısın.\n\nÖzellikle Java 8 ile gelen `Comparator.comparing()` gibi hazır fonksiyonları projelerinde kullanıyor musun, yoksa yukarıdaki gibi Lambda ile mi yazmayı tercih edersin?",
       "optionExplanations": [],
       "answerCode": ""
     }
