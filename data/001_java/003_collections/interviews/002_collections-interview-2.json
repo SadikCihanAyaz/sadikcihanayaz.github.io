@@ -13,13 +13,27 @@
       "singleChoice": true,
       "question": "ConcurrentHashMap'in Hashtable'a gore temel avantaji hangisidir?",
       "choices": [
-        { "id": "A", "text": "Null key ve null value desteklemesi" },
-        { "id": "B", "text": "Tum operasyonlari tek global lock ile calistirmasi" },
-        { "id": "C", "text": "Daha iyi eszamanlilik ile thread-safe erisim saglamasi" },
-        { "id": "D", "text": "Anahtarlari her zaman sirali tutmasi" }
+        {
+          "id": "A",
+          "text": "Null key ve null value desteklemesi"
+        },
+        {
+          "id": "B",
+          "text": "Tum operasyonlari tek global lock ile calistirmasi"
+        },
+        {
+          "id": "C",
+          "text": "Daha iyi eszamanlilik ile thread-safe erisim saglamasi"
+        },
+        {
+          "id": "D",
+          "text": "Anahtarlari her zaman sirali tutmasi"
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru cevap: **Daha iyi eşzamanlılık ile thread-safe erişim sağlaması.**\n\n`Hashtable` ve `ConcurrentHashMap` her ikisi de thread-safe (çoklu thread ortamında güvenli) yapılardır. Ancak çalışma prensipleri arasındaki fark, performans açısından dünyalar kadar fark yaratır.\n\n---\n\n### Hashtable vs ConcurrentHashMap: Temel Fark\n\n**Hashtable:** Bir \"Global Lock\" (Bütünsel Kilit) kullanır. Bir thread `put` veya `get` işlemi yaparken bütün tabloyu kilitler. O sırada başka bir thread okuma bile yapamaz, kapıda beklemek zorundadır.\n\n**ConcurrentHashMap:** \"Lock Striping\" (Parçalı Kilitleme) tekniğini kullanır. Tabloyu küçük parçalara (segment/bucket) böler. Bir thread 1. parçada işlem yaparken, başka bir thread 5. parçada rahatça çalışabilir.\n\n\n\n---\n\n### Kod Örnekleri ve Karşılaştırma\n\n#### 1. Hashtable Örneği (Eski ve Yavaş Yöntem)\n`Hashtable` metodun tamamını `synchronized` yapar.\n\n```java\nimport java.util.Hashtable;\n\npublic class HashtableExample {\n    public static void main(String[] args) {\n        Hashtable<String, Integer> table = new Hashtable<>();\n        \n        // Hashtable null kabul etmez! Aşağıdaki satır hata fırlatır:\n        // table.put(null, 1); \n\n        table.put(\"Elma\", 10);\n        \n        // Bu get işlemi sırasında bütün tablo kilitlenir.\n        System.out.println(\"Değer: \" + table.get(\"Elma\"));\n    }\n}\n```\n\n#### 2. ConcurrentHashMap Örneği (Modern ve Hızlı Yöntem)\nYüksek trafikli uygulamalarda standarttır. Okuma işlemleri (`get`) genellikle kilit gerektirmez, bu da onu inanılmaz hızlı yapar.\n\n```java\nimport java.util.concurrent.ConcurrentHashMap;\n\npublic class ConcurrentHashMapExample {\n    public static void main(String[] args) {\n        ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();\n\n        // 1. Thread-safe ekleme\n        map.put(\"Java\", 100);\n\n        // 2. Atomik işlem örneği: computeIfPresent\n        // Eğer \"Java\" varsa değerini 10 artır (Thread-safe ve atomik)\n        map.computeIfPresent(\"Java\", (key, val) -> val + 10);\n\n        // 3. putIfAbsent: Eğer anahtar yoksa ekle (Check-then-act problemini çözer)\n        map.putIfAbsent(\"Python\", 200);\n\n        System.out.println(map);\n    }\n}\n```\n\n---\n\n### Temel Karşılaştırma Tablosu\n\n| Özellik | Hashtable | ConcurrentHashMap |\n| :--- | :--- | :--- |\n| **Kilitleme Stratejisi** | Global Lock (Tüm tablo kilitlenir) | Parçalı Kilit (Sadece ilgili segment) |\n| **Performans** | Düşük (Thread'ler birbirini bekler) | Çok Yüksek (Eşzamanlı erişim) |\n| **Null İzinleri** | Null Key/Value yasak | Null Key/Value yasak |\n| **Eskilik** | Java 1.0 (Legacy) | Java 1.5+ (Modern) |\n| **Iterator** | Fail-fast (Hata verebilir) | Fail-safe (Hata vermez, kopyada gezer) |\n\n\n\n### Özetle\nEğer uygulamanızda birden fazla thread (iş parçacığı) aynı haritaya sürekli veri yazıp okuyorsa, **`ConcurrentHashMap`** kullanmalısınız. `Hashtable` artık \"deprecated\" sayılmasa da modern Java geliştirmede yerini tamamen `ConcurrentHashMap` yapısına bırakmıştır.\n\nÇok thread'li (multithreading) yapılarda \"Atomic\" operasyonlar (örneğin `putIfAbsent`) senin için kritik mi, yoksa sadece güvenli bir veri saklama alanı mı arıyorsun?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -30,13 +44,27 @@
       "singleChoice": true,
       "question": "CopyOnWriteArrayList hangi senaryoda daha uygundur?",
       "choices": [
-        { "id": "A", "text": "Yazma operasyonu cok yogun oldugunda" },
-        { "id": "B", "text": "Okuma cok, yazma az oldugunda" },
-        { "id": "C", "text": "Sadece LIFO yapisi istendiginde" },
-        { "id": "D", "text": "Her iterasyonda koleksiyon silinecekse" }
+        {
+          "id": "A",
+          "text": "Yazma operasyonu cok yogun oldugunda"
+        },
+        {
+          "id": "B",
+          "text": "Okuma cok, yazma az oldugunda"
+        },
+        {
+          "id": "C",
+          "text": "Sadece LIFO yapisi istendiginde"
+        },
+        {
+          "id": "D",
+          "text": "Her iterasyonda koleksiyon silinecekse"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Okuma çok, yazma az olduğunda.**\n\n`CopyOnWriteArrayList`, Java'nın `java.util.concurrent` paketinde yer alan, thread-safe (iş parçacığı güvenli) bir liste yapısıdır. İsmi aslında çalışma mantığını özetler: **\"Yazarken Kopyala\"**.\n\n---\n\n### Çalışma Mantığı Nedir?\n\nBu liste türünde, içerikte herhangi bir değişiklik (ekleme, silme, güncelleme) yapılacağı zaman mevcut dizinin **tam bir kopyası** oluşturulur. Değişiklik bu yeni kopya üzerinde yapılır ve işlem bittiğinde listenin referansı bu yeni kopyaya yönlendirilir.\n\n* **Okuma (get, iterator):** Doğrudan mevcut dizi üzerinden yapılır. Hiçbir kilitleme (locking) mekanizması yoktur, bu yüzden inanılmaz hızlıdır.\n* **Yazma (add, remove, set):** Her seferinde tüm diziyi kopyaladığı için çok maliyetlidir. Liste boyutu büyükse performans ciddi şekilde düşer.\n\n\n\n---\n\n### Kod Örneği\n\nBu yapı, özellikle `Iterator` kullanırken `ConcurrentModificationException` hatasını önlemek için mükemmeldir.\n\n```java\nimport java.util.concurrent.CopyOnWriteArrayList;\nimport java.util.Iterator;\nimport java.util.List;\n\npublic class CopyOnWriteExample {\n    public static void main(String[] args) {\n        // Okuma yoğunluklu bir senaryo için liste oluşturuyoruz\n        List<String> list = new CopyOnWriteArrayList<>();\n        list.add(\"Java\");\n        list.add(\"Spring\");\n        list.add(\"Microservices\");\n\n        // İterasyon sırasında eleman ekleme/silme yapabiliriz\n        Iterator<String> it = list.iterator();\n\n        while (it.hasNext()) {\n            String item = it.next();\n            System.out.println(\"Okunan: \" + item);\n            \n            if (item.equals(\"Java\")) {\n                // Bu işlem orijinal listeyi etkilemez, yeni bir kopya oluşturur\n                // İteratör eski kopya üzerinden dönmeye devam eder (Fail-Safe)\n                list.add(\"Kubernetes\"); \n                System.out.println(\"--- Yeni eleman eklendi ama iteratör bunu şu an görmez ---\");\n            }\n        }\n\n        System.out.println(\"Listenin Son Hali: \" + list);\n    }\n}\n```\n\n---\n\n### Neden \"Okuma Çok, Yazma Az\" Senaryosu?\n\n1.  **Hız:** Okuma yapan threadler birbirini asla beklemez. Kilitleme olmadığı için standart bir `ArrayList` kadar hızlı okuma yapar.\n2.  **Tutarlılık:** Bir thread listeyi gezerken (iterate), başka bir thread listeyi değiştirse bile okuyan thread işlemine başladığı andaki verileri görmeye devam eder.\n3.  **Yazma Maliyeti:** Eğer saniyede 1000 tane yazma yapıyorsanız, sistem 1000 kez dizinin kopyasını oluşturur. Bu hem işlemciyi hem de belleği (RAM) hızla tüketir.\n\n\n\n### Kullanım Alanları\n* **Listener/Observer Listeleri:** Bir event (olay) olduğunda bildirim gönderilecek sistemlerin listesi. Genelde bir kez kaydedilir (yazma) ama olay gerçekleştiğinde binlerce kez okunur.\n* **Whitelist/Blacklist:** Uygulama ayağa kalkarken bir kez yüklenen ve sadece okunarak kontrol edilen güvenli/yasaklı IP listeleri.\n\nBu kopyalama mantığı bellekte \"garbage collection\" (çöp toplama) yükünü artırabilir. Uygulamanızda listenin boyutu çok büyük mü olacak, yoksa birkaç yüz elemanlık bir yapıdan mı bahsediyoruz?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "BlockingQueue en cok hangi amacla kullanilir?",
       "choices": [
-        { "id": "A", "text": "Map anahtarlarini siralamak" },
-        { "id": "B", "text": "Producer-consumer deseninde, bos/dolu durumda beklemeli kuyruk yonetimi" },
-        { "id": "C", "text": "JSON parse performansi arttirmak" },
-        { "id": "D", "text": "Entity relationlarini cachelemek" }
+        {
+          "id": "A",
+          "text": "Map anahtarlarini siralamak"
+        },
+        {
+          "id": "B",
+          "text": "Producer-consumer deseninde, bos/dolu durumda beklemeli kuyruk yonetimi"
+        },
+        {
+          "id": "C",
+          "text": "JSON parse performansi arttirmak"
+        },
+        {
+          "id": "D",
+          "text": "Entity relationlarini cachelemek"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Producer-consumer deseninde, boş/dolu durumda beklemeli kuyruk yönetimi.**\n\n`BlockingQueue`, Java'nın `java.util.concurrent` paketinde yer alan ve çoklu iş parçacığı (multithreading) programlamada hayati öneme sahip bir kuyruk yapısıdır.\n\n---\n\n### BlockingQueue Nedir ve Nasıl Çalışır?\n\n`BlockingQueue`, standart bir kuyruktan farklı olarak **bloklayıcı** (bekletici) bir yapıya sahiptir. İki temel durumu yönetir:\n\n1.  **Kuyruk Boşsa:** Bir tüketici (consumer) kuyruktan veri almak istediğinde, kuyrukta veri olana kadar **bekletilir (block)**.\n2.  **Kuyruk Doluysa:** Bir üretici (producer) kuyruğa veri eklemek istediğinde (eğer kuyruğun kapasitesi sınırlıysa), kuyrukta yer açılana kadar **bekletilir (block)**.\n\nBu mekanizma sayesinde yazılımcıların manuel olarak `wait()` ve `notify()` metodlarını kullanarak thread'leri yönetmesine gerek kalmaz; `BlockingQueue` bu senkronizasyonu kendisi yapar.\n\n\n\n---\n\n### Kod Örneği: Producer-Consumer (Üretici-Tüketici)\n\nAşağıda bir üreticinin veri bastığı, tüketicinin ise veri gelene kadar beklediği basit bir senaryo yer almaktadır:\n\n```java\nimport java.util.concurrent.ArrayBlockingQueue;\nimport java.util.concurrent.BlockingQueue;\n\npublic class BlockingQueueExample {\n    public static void main(String[] args) throws InterruptedException {\n        // Kapasitesi 10 olan bir kuyruk\n        BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);\n\n        // Producer (Üretici) Thread\n        Thread producer = new Thread(() -> {\n            try {\n                for (int i = 1; i <= 5; i++) {\n                    System.out.println(\"Üretiliyor: \" + i);\n                    queue.put(i); // Kuyruk doluysa burada bekler\n                    Thread.sleep(1000);\n                }\n            } catch (InterruptedException e) { Thread.currentThread().interrupt(); }\n        });\n\n        // Consumer (Tüketici) Thread\n        Thread consumer = new Thread(() -> {\n            try {\n                while (true) {\n                    // Kuyruk boşsa veri gelene kadar burada bekler (bloklanır)\n                    Integer value = queue.take(); \n                    System.out.println(\"Tüketildi: \" + value);\n                    if (value == 5) break;\n                }\n            } catch (InterruptedException e) { Thread.currentThread().interrupt(); }\n        });\n\n        producer.start();\n        consumer.start();\n    }\n}\n```\n\n---\n\n### En Önemli Metotları\n\n`BlockingQueue` metotları, işlem başarısız olduğunda ne yapacaklarına göre 4 kategoriye ayrılır:\n\n| İşlem | İstisna Fırlatır | Özel Değer Döner | Bloklar (Bekler) | Zaman Aşımı |\n| :--- | :--- | :--- | :--- | :--- |\n| **Ekleme** | `add(e)` | `offer(e)` | **`put(e)`** | `offer(e, time, unit)` |\n| **Çıkarma** | `remove()` | `poll()` | **`take()`** | `poll(time, unit)` |\n\n---\n\n### Yaygın Kullanılan İmplementasyonlar\n\n* **`ArrayBlockingQueue`:** Sabit kapasiteli, dizi tabanlı bir kuyruk.\n* **`LinkedBlockingQueue`:** Kapasitesi isteğe bağlı (opsiyonel), bağlı liste tabanlı bir kuyruk.\n* **`PriorityBlockingQueue`:** Elemanları öncelik sırasına göre çıkaran, sınırsız bir kuyruk.\n* **`SynchronousQueue`:** Her `put` işleminin bir `take` işlemi ile eşleşmesi gereken, iç kapasitesi sıfır olan özel bir kuyruk.\n\n\n\n### Özetle\nEğer elinde iş parçacıkları (threads) arasında iş yükünü paylaştırmak istediğin bir senaryo varsa (örneğin arka planda e-posta gönderme kuyruğu veya log işleme), **BlockingQueue** en güvenli ve performanslı araçtır.\n\nGenelde projelerinde asenkron işleri yönetmek için `ExecutorService` mi kullanıyorsun, yoksa doğrudan bu tip kuyruk yapılarını mı kurguluyorsun?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,13 +106,27 @@
       "singleChoice": true,
       "question": "PriorityQueue elemanlari hangi kurala gore getirir?",
       "choices": [
-        { "id": "A", "text": "Her zaman FIFO" },
-        { "id": "B", "text": "Her zaman LIFO" },
-        { "id": "C", "text": "Natural order veya Comparator ile belirlenen oncelige gore" },
-        { "id": "D", "text": "Sadece ekleme sirasina gore" }
+        {
+          "id": "A",
+          "text": "Her zaman FIFO"
+        },
+        {
+          "id": "B",
+          "text": "Her zaman LIFO"
+        },
+        {
+          "id": "C",
+          "text": "Natural order veya Comparator ile belirlenen oncelige gore"
+        },
+        {
+          "id": "D",
+          "text": "Sadece ekleme sirasina gore"
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru cevap: **Natural order veya Comparator ile belirlenen önceliğe göre.**\n\n`PriorityQueue`, elemanların eklendiği sıraya veya geliş zamanına bakmaz. Her zaman \"en yüksek önceliğe\" sahip olan elemanı listenin başında tutar ve ilk olarak onu sunar.\n\n---\n\n### PriorityQueue Nasıl Çalışır?\n\n`PriorityQueue`, arka planda **Binary Heap** (genellikle Min-Heap) veri yapısını kullanır. \n\n* **Sıralama Mantığı:** Elemanlar eklendikçe, kuyruk onları sürekli olarak yeniden düzenler. Varsayılan olarak (eğer sayı ise) en küçük sayı en önceliklidir (Min-Heap).\n* **Tam Bir Sıralama Yoktur:** İlginç bir bilgi; `PriorityQueue`'yu yazdırdığınızda tüm elemanların sıralı olduğunu göremezsiniz. Sadece **en baştaki elemanın** (root) en küçük/en öncelikli olduğu garanti edilir.\n* **Performans:** Eleman ekleme (`offer`) ve çıkarma (`poll`) işlemleri **$O(\\log n)$** karmaşıklığındadır. En öncelikli elemana bakmak (`peek`) ise **$O(1)$**'dir.\n\n\n\n---\n\n### Kod Örneği: Varsayılan ve Özel Öncelik\n\n```java\nimport java.util.PriorityQueue;\nimport java.util.Comparator;\n\npublic class PriorityQueueExample {\n    public static void main(String[] args) {\n        // 1. Varsayılan (Natural Order): En küçük sayı en önceliklidir.\n        PriorityQueue<Integer> pq = new PriorityQueue<>();\n        pq.add(50);\n        pq.add(10);\n        pq.add(30);\n\n        System.out.println(\"En öncelikli (küçük) eleman çekiliyor: \" + pq.poll()); // 10\n        System.out.println(\"Sıradaki: \" + pq.poll()); // 30\n\n        // 2. Özel Sıralama (Comparator): En büyük sayı en öncelikli olsun (Max-Heap)\n        PriorityQueue<Integer> maxPq = new PriorityQueue<>(Comparator.reverseOrder());\n        maxPq.add(10);\n        maxPq.add(50);\n        maxPq.add(30);\n\n        System.out.println(\"En öncelikli (büyük) eleman çekiliyor: \" + maxPq.poll()); // 50\n    }\n}\n```\n\n---\n\n### Gerçek Hayat Senaryosu: Acil Servis (ER)\n\nHastaneye gelen hastaları bir kuyruğa aldığımızı düşünelim. Geliş sırasına göre değil, hastalığın ciddiyetine göre işlem yapılması gerekir.\n\n```java\nclass Patient implements Comparable<Patient> {\n    String name;\n    int urgency; // 1: En acil, 5: Az acil\n\n    public Patient(String name, int urgency) {\n        this.name = name;\n        this.urgency = urgency;\n    }\n\n    @Override\n    public int compareTo(Patient other) {\n        return this.urgency - other.urgency; // Küçük olan kazansın\n    }\n}\n```\n\n---\n\n### Önemli Notlar\n* **Null Yasaktır:** `PriorityQueue` içine `null` ekleyemezsiniz (Karşılaştırma yapamaz).\n* **Thread-Safe Değildir:** Çoklu thread ortamında kullanılacaksa `PriorityBlockingQueue` tercih edilmelidir.\n* **Arama:** Bir elemanı içeride aramak (`contains`) veya belirli bir elemanı silmek $O(n)$ süresini alır.\n\n\n\n### Özet Karar\nSisteminde elemanların \"geldiği sıranın\" bir önemi yoksa ve senin için \"en önemli/en küçük/en büyük elemanı hemen almalıyım\" kuralı geçerliyse, `PriorityQueue` tam aradığın araçtır. \n\nGenelde bu yapıyı algoritmik problemlerde (örneğin Dijkstra'nın en kısa yol algoritması) mi kullanıyorsun, yoksa bir iş kuyruğu mantığında mı?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -81,12 +137,26 @@
       "singleChoice": true,
       "question": "Bir koleksiyon uzerinde gezerken guvenli silme icin hangi yontem kullanilmalidir?",
       "choices": [
-        { "id": "A", "text": "for-each icinde collection.remove()" },
-        { "id": "B", "text": "Iterator.remove()" },
-        { "id": "C", "text": "Thread.sleep()" },
-        { "id": "D", "text": "Collections.sort()" }
+        {
+          "id": "A",
+          "text": "for-each icinde collection.remove()"
+        },
+        {
+          "id": "B",
+          "text": "Iterator.remove()"
+        },
+        {
+          "id": "C",
+          "text": "Thread.sleep()"
+        },
+        {
+          "id": "D",
+          "text": "Collections.sort()"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -98,13 +168,27 @@
       "singleChoice": true,
       "question": "LinkedHashMap accessOrder=true ile tipik olarak hangi amac icin kullanilir?",
       "choices": [
-        { "id": "A", "text": "Hash collision azaltmak" },
-        { "id": "B", "text": "LRU cache davranisi kurmak" },
-        { "id": "C", "text": "Map'i immutable yapmak" },
-        { "id": "D", "text": "SQL injection onlemek" }
+        {
+          "id": "A",
+          "text": "Hash collision azaltmak"
+        },
+        {
+          "id": "B",
+          "text": "LRU cache davranisi kurmak"
+        },
+        {
+          "id": "C",
+          "text": "Map'i immutable yapmak"
+        },
+        {
+          "id": "D",
+          "text": "SQL injection onlemek"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **LRU (Least Recently Used) cache davranışı kurmak.**\n\n`LinkedHashMap`, standart `HashMap`'ten farklı olarak elemanların birbirine bağlı olduğu bir çift yönlü bağlı liste (doubly-linked list) tutar. `accessOrder` parametresi bu listenin nasıl güncelleneceğini belirler.\n\n---\n\n### accessOrder=true Parametresi Nasıl Çalışır?\n\n`LinkedHashMap` oluştururken kullanılan bu parametre, elemanların sıralanma mantığını değiştirir:\n\n1.  **Varsayılan Durum (false):** Elemanlar **eklenme sırasına** (insertion-order) göre tutulur.\n2.  **accessOrder=true Durumu:** Elemanlar **erişilme sırasına** (access-order) göre tutulur. Bir elemanı `get()` veya `put()` ile çağırdığınızda, o eleman listenin en sonuna (en yeni eleman olarak) taşınır.\n\nBu sayede listenin en başında **en az kullanılan** (Least Recently Used), en sonunda ise **en son kullanılan** eleman kalır.\n\n---\n\n### LRU Cache Örneği\n\n`LinkedHashMap`'i gerçek bir LRU Cache'e dönüştürmek için `removeEldestEntry` metodunu ezmek (override) yeterlidir. Bu metot, limit aşıldığında en eski elemanın silinip silinmeyeceğine karar verir.\n\n\n\n```java\nimport java.util.LinkedHashMap;\nimport java.util.Map;\n\npublic class LRUCache<K, V> extends LinkedHashMap<K, V> {\n    private final int MAX_CAPACITY;\n\n    public LRUCache(int capacity) {\n        // initialCapacity, loadFactor, accessOrder (true!!)\n        super(capacity, 0.75f, true);\n        this.MAX_CAPACITY = capacity;\n    }\n\n    @Override\n    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {\n        // Eğer boyut limiti aşarsa en eski (en az erişilen) elemanı siler\n        return size() > MAX_CAPACITY;\n    }\n\n    public static void main(String[] args) {\n        LRUCache<Integer, String> cache = new LRUCache<>(3);\n\n        cache.put(1, \"A\");\n        cache.put(2, \"B\");\n        cache.put(3, \"C\");\n\n        // Şimdi 2 numaralı elemana erişelim. 2 en sona taşınacak.\n        cache.get(2); \n\n        // 4 numaralı elemanı ekleyelim. Kapasite 3 olduğu için en eski silinecek.\n        // Sıralama şu an: [1, 3, 2] şeklindeydi (1 en eski).\n        cache.put(4, \"D\");\n\n        System.out.println(cache); // Çıktı: {3=C, 2=B, 4=D} (1 silindi!)\n    }\n}\n```\n\n---\n\n### Önemli Avantajları\n\n* **Hız:** Hem harita (hash) hem de liste (link) yapısını birleştirdiği için erişim ve güncelleme işlemleri $O(1)$ süresinde gerçekleşir.\n* **Basitlik:** Karmaşık kütüphaneler kullanmadan Java'nın standart sınıflarıyla güçlü bir cache yapısı kurmanıza olanak tanır.\n\n\n\n### Özet Karar\nEğer bir sistemde belleği verimli kullanmak istiyorsan ve \"en uzun süredir dokunulmayan verileri temizle\" kuralını uygulamak istiyorsan, `LinkedHashMap`'in `accessOrder=true` özelliği senin için en pratik çözümdür.\n\nBu yapıyı genelde veritabanı sorgularını cache'lemek için mi düşünüyorsun, yoksa hesaplama maliyeti yüksek olan fonksiyon sonuçları için mi?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -115,13 +199,27 @@
       "singleChoice": true,
       "question": "NavigableMap.ceilingKey(k) ne dondurur?",
       "choices": [
-        { "id": "A", "text": "k'den kucuk en buyuk key" },
-        { "id": "B", "text": "k'ye esit veya k'den buyuk en kucuk key" },
-        { "id": "C", "text": "Sadece tam esit key, yoksa exception" },
-        { "id": "D", "text": "k'den kucuk tum key'lerin listesi" }
+        {
+          "id": "A",
+          "text": "k'den kucuk en buyuk key"
+        },
+        {
+          "id": "B",
+          "text": "k'ye esit veya k'den buyuk en kucuk key"
+        },
+        {
+          "id": "C",
+          "text": "Sadece tam esit key, yoksa exception"
+        },
+        {
+          "id": "D",
+          "text": "k'den kucuk tum key'lerin listesi"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **k'ye eşit veya k'den büyük en küçük key.**\n\n`NavigableMap` (ve onun en yaygın implementasyonu olan `TreeMap`), standart harita özelliklerine ek olarak \"yakınlık\" tabanlı arama yapmamızı sağlayan harika metotlar sunar. Bu metotları bir sayı doğrusu veya merdiven basamakları gibi düşünebilirsin.\n\n---\n\n### Ceiling ve Diğer Navigable Metotları\n\n\"Ceiling\" kelimesi İngilizce'de **tavan** demektir. Bir değer verdiğinde, o değerin \"tavanını\" (yani kendisini veya bir üstündeki en yakın değeri) bulur.\n\nİşte en çok karıştırılan o 4 temel metot:\n\n| Metot | Tanım | Matematiksel Karşılığı |\n| :--- | :--- | :--- |\n| **`lowerKey(k)`** | k'den **kesinlikle küçük** en büyük anahtar. | $< k$ |\n| **`floorKey(k)`** | k'ye **eşit veya küçük** en büyük anahtar. | $\\leq k$ |\n| **`ceilingKey(k)`** | k'ye **eşit veya büyük** en küçük anahtar. | $\\geq k$ |\n| **`higherKey(k)`** | k'den **kesinlikle büyük** en yakın anahtar. | $> k$ |\n\n\n\n---\n\n### Kod Örneği\n\nDiyelim ki bir depo yönetim sistemin var ve rafların numaraları `10, 20, 30` şeklinde.\n\n```java\nNavigableMap<Integer, String> shelves = new TreeMap<>();\nshelves.put(10, \"Raf A\");\nshelves.put(20, \"Raf B\");\nshelves.put(30, \"Raf C\");\n\n// 1. Tam eşleşme durumu\nSystem.out.println(shelves.ceilingKey(20)); \n// Çıktı: 20 (Çünkü 20 var, direkt kendisini döndürür)\n\n// 2. Arada kalma durumu\nSystem.out.println(shelves.ceilingKey(15)); \n// Çıktı: 20 (15 yok, 15'ten büyük olanların en küçüğü 20'dir)\n\n// 3. Üst sınırın dışına çıkma\nSystem.out.println(shelves.ceilingKey(35)); \n// Çıktı: null (35'ten büyük veya eşit hiçbir anahtar yok)\n```\n\n---\n\n### Kullanım Alanları\n\n* **Fiyat Aralığı Hesaplama:** Bir indirim kuponunun hangi bareme girdiğini bulmak (Örn: 100 TL üstüne %10, 200 TL üstüne %20).\n* **IP Blokları:** Gelen bir IP adresinin hangi IP aralığına ait olduğunu bulmak için en yakın başlangıç noktasını aramak.\n* **Zaman Çizelgesi:** Bir randevu saatine en yakın boş slotu bulmak.\n\n\n\n### Özetle\n`ceilingKey` metodunu \"Yukarı yuvarla ama sadece mevcut olanlara yuvarla\" şeklinde kodlayabilirsin. Eğer aradığın değer listede varsa kendisini, yoksa bir üstündekini verir.\n\nBu metotlar özellikle \"aralık sorguları\" (range queries) yaparken hayat kurtarır. Genelde veritabanı yerine veriyi bellekte tutup bu şekilde mi yönetiyorsun, yoksa bu işlemleri SQL tarafında `LIMIT 1` ile mi çözüyorsun?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -132,13 +230,27 @@
       "singleChoice": true,
       "question": "Collections.synchronizedList(list) kullaniminda iteration icin ne dogrudur?",
       "choices": [
-        { "id": "A", "text": "Ek bir senkronizasyona gerek yoktur." },
-        { "id": "B", "text": "Iteration sirasinda synchronized(list) blogu kullanilmalidir." },
-        { "id": "C", "text": "Sadece remove icin synchronized gerekir." },
-        { "id": "D", "text": "Sadece add icin synchronized gerekir." }
+        {
+          "id": "A",
+          "text": "Ek bir senkronizasyona gerek yoktur."
+        },
+        {
+          "id": "B",
+          "text": "Iteration sirasinda synchronized(list) blogu kullanilmalidir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece remove icin synchronized gerekir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece add icin synchronized gerekir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Iteration sırasında synchronized(list) bloğu kullanılmalıdır.**\n\n`Collections.synchronizedList`, listenin temel metotlarını (`add`, `remove`, `get` vb.) `synchronized` anahtar kelimesiyle sarmalayarak thread-safe hale getirir. Ancak, listenin üzerinde bir **iterator** (veya `foreach` döngüsü) ile gezerken bu koruma otomatik olarak sağlanmaz.\n\n---\n\n### Neden `synchronized` Bloğu Gereklidir?\n\nListenin tekil metotları güvenli olsa da, iterasyon işlemi birden fazla metot çağrısından (örneğin `hasNext()` ve `next()`) oluşur. Siz bu iki adım arasındayken başka bir thread listeye müdahale ederse, iterator tutarsız bir duruma düşer ve meşhur `ConcurrentModificationException` hatasını fırlatır.\n\nJava dokümantasyonu bu durumu açıkça belirtir: Kullanıcı, iterasyon sırasında liste referansı üzerinde manuel olarak senkronizasyon yapmalıdır.\n\n\n\n---\n\n### Doğru Kullanım Örneği\n\nAşağıdaki kodda, iterasyon işlemi boyunca listenin başka hiçbir thread tarafından değiştirilemeyeceğinden emin olmak için `synchronized` bloğu kullanılmıştır:\n\n```java\nList<String> syncList = Collections.synchronizedList(new ArrayList<>());\nsyncList.add(\"Java\");\nsyncList.add(\"Kotlin\");\nsyncList.add(\"Scala\");\n\n// İterasyon sırasında manuel kilitleme ŞART\nsynchronized (syncList) {\n    Iterator<String> it = syncList.iterator();\n    while (it.hasNext()) {\n        System.out.println(it.next());\n    }\n}\n```\n\n---\n\n### SynchronizedList vs CopyOnWriteArrayList\n\nEğer iterasyon sırasında sürekli manuel kilitleme yapmak istemiyorsan, alternatif yapılara bakmalısın:\n\n| Özellik | `Collections.synchronizedList` | `CopyOnWriteArrayList` |\n| :--- | :--- | :--- |\n| **Kilitleme** | Manuel `synchronized` bloğu gerekir. | Otomatik güvenlidir, kilit gerekmez. |\n| **İterasyon** | Hızlıdır ama dış müdahaleye açıktır. | Kendi kopyası üzerinde gezer (Fail-safe). |\n| **Performans** | Yazma işlemleri nispeten hızlıdır. | Yazma işlemleri çok maliyetlidir (Kopyalama). |\n\n\n\n### Özetle\n`Collections.synchronizedList` kullanırken \"ben bunu thread-safe yaptım, artık her şey güvende\" yanılgısına düşmemek gerekir. Okuma/Yazma metotları güvendedir ama **gezinme (traverse)** işlemi için kilit sorumluluğu tamamen yazılımcıdadır.\n\nBu kilit mekanizması (locking) senin sisteminde bir darboğaz (bottleneck) oluşturuyor mu, yoksa veri tutarlılığı her şeyden daha mı önemli?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -149,12 +261,26 @@
       "singleChoice": true,
       "question": "Sirali ve thread-safe bir Set ihtiyaci icin hangisi uygundur?",
       "choices": [
-        { "id": "A", "text": "HashSet" },
-        { "id": "B", "text": "LinkedHashSet" },
-        { "id": "C", "text": "ConcurrentSkipListSet" },
-        { "id": "D", "text": "ArrayDeque" }
+        {
+          "id": "A",
+          "text": "HashSet"
+        },
+        {
+          "id": "B",
+          "text": "LinkedHashSet"
+        },
+        {
+          "id": "C",
+          "text": "ConcurrentSkipListSet"
+        },
+        {
+          "id": "D",
+          "text": "ArrayDeque"
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -166,13 +292,27 @@
       "singleChoice": true,
       "question": "Map.computeIfAbsent(key, fn) icin en dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Var olan key'i her zaman siler." },
-        { "id": "B", "text": "Key yoksa degeri lazily hesaplayip map'e yazar." },
-        { "id": "C", "text": "Map'i otomatik immutable yapar." },
-        { "id": "D", "text": "Her durumda eski degeri null yapar." }
+        {
+          "id": "A",
+          "text": "Var olan key'i her zaman siler."
+        },
+        {
+          "id": "B",
+          "text": "Key yoksa degeri lazily hesaplayip map'e yazar."
+        },
+        {
+          "id": "C",
+          "text": "Map'i otomatik immutable yapar."
+        },
+        {
+          "id": "D",
+          "text": "Her durumda eski degeri null yapar."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Key yoksa degeri lazily hesaplayip map'e yazar.**\n\n`computeIfAbsent`, Java 8 ile hayatımıza giren ve \"Boşsa hesapla ve ekle\" mantığıyla çalışan çok güçlü bir metottur. Özellikle karmaşık veri yapıları (örneğin `Map<String, List<String>>`) oluştururken veya cache mekanizmalarında hayat kurtarır.\n\n---\n\n### Nasıl Çalışır?\n\nMetot iki parametre alır: Bir **key** ve bir **mapping function**.\n\n1.  **Key Varsa:** Eğer anahtar zaten Map içinde mevcutsa ve değeri `null` değilse, mevcut değeri döndürür ve fonksiyona hiç dokunmaz.\n2.  **Key Yoksa:** Fonksiyonu (lambda) çalıştırır, sonucu hesaplar, Map'e ekler ve yeni değeri döndürür.\n\nBuna **\"Lazy Evaluation\"** denir; çünkü değer sadece gerçekten ihtiyaç duyulduğunda (key yoksa) hesaplanır.\n\n---\n\n### Kod Örneği: Klasik Yöntem vs computeIfAbsent\n\nDiyelim ki bir kelime listesini baş harflerine göre gruplamak istiyorsun.\n\n#### Eski Yöntem (Java 8 Öncesi):\n```java\nList<String> list = map.get(\"A\");\nif (list == null) {\n    list = new ArrayList<>();\n    map.put(\"A\", list);\n}\nlist.add(\"Apple\");\n```\n\n#### Modern Yöntem (`computeIfAbsent` ile):\n```java\n// Eğer \"A\" anahtarı yoksa yeni bir ArrayList oluştur, ekle ve bana döndür.\nmap.computeIfAbsent(\"A\", k -> new ArrayList<>()).add(\"Apple\");\n```\nTek satırda hem kontrolü, hem oluşturmayı, hem de eklemeyi yapmış olduk.\n\n---\n\n### Kritik Farklar\n\n| Metot | Özellik |\n| :--- | :--- |\n| **`putIfAbsent`** | Değeri parametre olarak alır. Değer önceden hesaplanmış olmalıdır (Eager). |\n| **`computeIfAbsent`** | Değeri bir fonksiyonla hesaplar. Sadece ihtiyaç varsa hesaplar (Lazy). |\n\n\n\n---\n\n### Önemli Not: Null Durumu\nEğer mapping function `null` döndürürse, Map'e hiçbir şey eklenmez. Ayrıca `ConcurrentHashMap` kullanıyorsanız, bu metot **atomik** (atomic) çalışır; yani aynı key için hesaplama yapılırken başka bir thread araya girip o key'i oluşturamaz.\n\n\n\nGenellikle bu metodu veritabanından veri çeken pahalı fonksiyonları cache'lemek için mi kullanıyorsun, yoksa koleksiyonları gruplamak için mi?",
       "optionExplanations": [],
       "answerCode": ""
     }
