@@ -4,35 +4,21 @@
   "subcategoryId": "threads",
   "id": "thread-interview-3",
   "title": "Thread Interview - 3",
-  "description": "Race condition, CAS, AtomicInteger ve LongAdder",
+  "description": "ExecutorService, Future/Callable, koordinasyon araclari ve problem alanlari",
   "questions": [
     {
       "id": "i3-q1",
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "Race condition tanimi icin en dogru secenek hangisi?",
+      "question": "new Thread() yerine ExecutorService tercihinin temel sebebi hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Tek threadin kendi local degiskenini degistirmesi"
-        },
-        {
-          "id": "B",
-          "text": "Birden fazla threadin ayni mutable statei uygun senkronizasyon olmadan guncellemesi"
-        },
-        {
-          "id": "C",
-          "text": "Sadece deadlock olusmasi"
-        },
-        {
-          "id": "D",
-          "text": "Sadece CPU yavasligi"
-        }
+        { "id": "A", "text": "Thread havuzu ile kaynak yonetimini merkezi ve olceklenebilir yapmak" },
+        { "id": "B", "text": "Sadece daemon thread uretebilmek" },
+        { "id": "C", "text": "JVM GC'sini kapatmak" },
+        { "id": "D", "text": "Hicbir fark yoktur" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -42,28 +28,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "AtomicInteger hangi avantajla gelir?",
+      "question": "Runnable ve Callable farki icin en dogru ifade hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Lock kullanmadan atomik read-modify-write operasyonlari sunar"
-        },
-        {
-          "id": "B",
-          "text": "Tum kodu otomatik synchronized yapar"
-        },
-        {
-          "id": "C",
-          "text": "Deadlocku otomatik engeller"
-        },
-        {
-          "id": "D",
-          "text": "Sadece tek threadde calisir"
-        }
+        { "id": "A", "text": "Ikisi de sonuc dondurur" },
+        { "id": "B", "text": "Callable sonuc dondurebilir ve checked exception firlatabilir" },
+        { "id": "C", "text": "Runnable yalnizca IO islerinde kullanilir" },
+        { "id": "D", "text": "Callable sadece single-thread modunda calisir" }
       ],
-      "correctChoiceIds": [
-        "A"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -73,28 +45,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "compareAndSet(expected, update) ne yapar?",
+      "question": "Future.get() cagrisi icin dogru ifade hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Her zaman update yazar"
-        },
-        {
-          "id": "B",
-          "text": "Deger expected ise update yazar ve true doner, degilse false doner"
-        },
-        {
-          "id": "C",
-          "text": "Yalnizca read yapar"
-        },
-        {
-          "id": "D",
-          "text": "Synchronized lock alir"
-        }
+        { "id": "A", "text": "Asla bloklamaz" },
+        { "id": "B", "text": "Task bitmemisse cagrilan threadi bekletir" },
+        { "id": "C", "text": "Taski otomatik iptal eder" },
+        { "id": "D", "text": "Sadece timeout ile calisir" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -104,28 +62,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "LongAdder hangi senaryoda daha uygundur?",
+      "question": "CompletableFuture'in temel avantaji hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Tek threadli basit sayac"
-        },
-        {
-          "id": "B",
-          "text": "Yuksek contention altinda sik increment edilen metrik sayaclari"
-        },
-        {
-          "id": "C",
-          "text": "Map key saklama"
-        },
-        {
-          "id": "D",
-          "text": "Immutable nesne olusturma"
-        }
+        { "id": "A", "text": "Asenkron adimlari compose ederek callback cehennemini azaltmasi" },
+        { "id": "B", "text": "Tum operasyonlari single-thread'e zorlamasi" },
+        { "id": "C", "text": "Sadece CPU-bound islerde calismasi" },
+        { "id": "D", "text": "Locksuz oldugu icin her zaman deterministic olmasi" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -135,28 +79,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "Asagidakilerden hangisi atomik operasyondur?",
+      "question": "ExecutorService.shutdown() ve shutdownNow() farki icin dogru ifade hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "int x; x++;"
-        },
-        {
-          "id": "B",
-          "text": "AtomicInteger ai; ai.incrementAndGet();"
-        },
-        {
-          "id": "C",
-          "text": "volatile int v; v++;"
-        },
-        {
-          "id": "D",
-          "text": "x = x + 1 ve iki thread"
-        }
+        { "id": "A", "text": "Ikisi de ayni davranir" },
+        { "id": "B", "text": "shutdown yeni task kabul etmez ama mevcutlari bitirir; shutdownNow calisanlari interrupt etmeye calisir" },
+        { "id": "C", "text": "shutdown thread havuzunu buyutur" },
+        { "id": "D", "text": "shutdownNow daima tum tasklari garantili bitirir" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -164,140 +94,87 @@
     {
       "id": "i3-q6",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Kodun ciktisi ne olur?",
+      "question": "CountDownLatch en uygun olarak hangi durumda kullanilir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Kesin 2000"
-        },
-        {
-          "id": "B",
-          "text": "Kesin 0"
-        },
-        {
-          "id": "C",
-          "text": "2000 veya daha dusuk rastgele"
-        },
-        {
-          "id": "D",
-          "text": "Compile error"
-        }
+        { "id": "A", "text": "Belirli sayida is parcasi tamamlanana kadar bir noktada beklemek" },
+        { "id": "B", "text": "Ring buffer olusturmak" },
+        { "id": "C", "text": "Deadlocku otomatik cozmek" },
+        { "id": "D", "text": "HashMap'i thread-safe yapmak" }
       ],
-      "correctChoiceIds": [
-        "A"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(0);\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) ai.incrementAndGet(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(ai.get());",
       "answerCode": ""
     },
     {
       "id": "i3-q7",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Bu kodun en dogru yorumu hangisi?",
+      "question": "Semaphore hangi problemi cozmeye yarar?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Her zaman 2000 yazar"
-        },
-        {
-          "id": "B",
-          "text": "Race condition nedeniyle 2000 garanti degildir"
-        },
-        {
-          "id": "C",
-          "text": "Her zaman negatif yazar"
-        },
-        {
-          "id": "D",
-          "text": "Threadler otomatik synchronize olur"
-        }
+        { "id": "A", "text": "Belirli bir kaynaga ayni anda erisebilecek thread sayisini sinirlamak" },
+        { "id": "B", "text": "Hash collision azaltmak" },
+        { "id": "C", "text": "Thread local degerleri paylastirmak" },
+        { "id": "D", "text": "Sadece monitor lock yerine gecmek" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "class C { int v = 0; void inc(){ v++; } }\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.v);",
       "answerCode": ""
     },
     {
       "id": "i3-q8",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Kodun sonucu nedir?",
+      "question": "Deadlock tanimi icin en dogru secenek hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "true true 7"
-        },
-        {
-          "id": "B",
-          "text": "true false 5"
-        },
-        {
-          "id": "C",
-          "text": "false true 7"
-        },
-        {
-          "id": "D",
-          "text": "false false 1"
-        }
+        { "id": "A", "text": "Threadlerin sirayla calismasi" },
+        { "id": "B", "text": "Iki veya daha fazla threadin birbirinin tuttugu locku bekleyip sonsuza kadar ilerleyememesi" },
+        { "id": "C", "text": "CPU'nun %100 calismasi" },
+        { "id": "D", "text": "Garbage collector gecikmesi" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "java.util.concurrent.atomic.AtomicInteger ai = new java.util.concurrent.atomic.AtomicInteger(1);\nboolean r1 = ai.compareAndSet(1, 5);\nboolean r2 = ai.compareAndSet(1, 7);\nSystem.out.println(r1 + \" \" + r2 + \" \" + ai.get());",
       "answerCode": ""
     },
     {
       "id": "i3-q9",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Bu kod ne yazdirir?",
+      "question": "Starvation neyi ifade eder?",
       "choices": [
-        {
-          "id": "A",
-          "text": "0"
-        },
-        {
-          "id": "B",
-          "text": "1"
-        },
-        {
-          "id": "C",
-          "text": "3"
-        },
-        {
-          "id": "D",
-          "text": "Runtime error"
-        }
+        { "id": "A", "text": "Bir threadin surekli kaynak alamayip ilerleyememesi" },
+        { "id": "B", "text": "Tum threadlerin ayni anda bitmesi" },
+        { "id": "C", "text": "Sadece IO threadlerinin kapanmasi" },
+        { "id": "D", "text": "Bir lockun recursive alinmasi" }
       ],
-      "correctChoiceIds": [
-        "C"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "java.util.concurrent.atomic.LongAdder adder = new java.util.concurrent.atomic.LongAdder();\nadder.increment();\nadder.add(2);\nSystem.out.println(adder.sum());",
       "answerCode": ""
     },
     {
       "id": "i3-q10",
-      "type": "code",
-      "question": "Order id ureten thread-safe bir generator yaz. Her cagrida sirali ve benzersiz id donsun.",
-      "starterCode": "class OrderIdGenerator {\n    // TODO\n    String nextId() {\n        return null;\n    }\n}",
-      "answerBody": "### Dogru Cevap\nAsagidaki referans kodu inceleyebilirsin.",
-      "answerCode": "class OrderIdGenerator {\n    private final java.util.concurrent.atomic.AtomicLong seq = new java.util.concurrent.atomic.AtomicLong(0);\n\n    String nextId() {\n        long n = seq.incrementAndGet();\n        return String.format(\"ORD-%06d\", n);\n    }\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass Metrics {\n    private final java.util.concurrent.atomic.LongAdder success = new java.util.concurrent.atomic.LongAdder();\n    void markSuccess() { success.increment(); }\n    long read() { return success.sum(); }\n}",
-      "publicSolutionUrl": "https://github.com/SadikCihanAyaz",
-      "optionExplanations": []
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "CPU-bound task agirlikli bir servis icin thread pool seciminde en dogru yaklasim hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Core sayisindan cok daha fazla thread acmak" },
+        { "id": "B", "text": "Genelde CPU cekirdek sayisina yakin fixed pool ile baslamak" },
+        { "id": "C", "text": "Her request icin yeni thread acmak" },
+        { "id": "D", "text": "Thread sayisini rastgele secmek" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
     }
   ]
 }

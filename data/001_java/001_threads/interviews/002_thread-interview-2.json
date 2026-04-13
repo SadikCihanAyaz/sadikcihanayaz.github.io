@@ -4,35 +4,21 @@
   "subcategoryId": "threads",
   "id": "thread-interview-2",
   "title": "Thread Interview - 2",
-  "description": "synchronized, volatile ve ReentrantLock secim mantigi",
+  "description": "Senkronizasyon, lock stratejileri, atomikler ve concurrent collections",
   "questions": [
     {
       "id": "i2-q1",
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "synchronized bir bolge icin en dogru ifade hangisidir?",
+      "question": "synchronized kullanimi icin en dogru ifade hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Sadece atomiklik saglar, gorunurluk saglamaz."
-        },
-        {
-          "id": "B",
-          "text": "Mutual exclusion ve memory visibility birlikte saglar."
-        },
-        {
-          "id": "C",
-          "text": "Sadece read islemlerini kilitler."
-        },
-        {
-          "id": "D",
-          "text": "Sadece static metodlarda calisir."
-        }
+        { "id": "A", "text": "Sadece atomiklik saglar, gorunurluk saglamaz" },
+        { "id": "B", "text": "Mutual exclusion ve visibility birlikte saglar" },
+        { "id": "C", "text": "Sadece write islemlerini kilitler" },
+        { "id": "D", "text": "Yalnizca static metotlarda calisir" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -42,28 +28,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "volatile ile ilgili hangisi dogrudur?",
+      "question": "static synchronized metot hangi lock ile calisir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "value++ islemini atomik yapar."
-        },
-        {
-          "id": "B",
-          "text": "Sadece write islemlerini hizlandirir."
-        },
-        {
-          "id": "C",
-          "text": "Threadler arasi gorunurluk saglar ama compound islemleri atomik yapmaz."
-        },
-        {
-          "id": "D",
-          "text": "Deadlocku engeller."
-        }
+        { "id": "A", "text": "this locku" },
+        { "id": "B", "text": "Method local lock" },
+        { "id": "C", "text": "Class object locku" },
+        { "id": "D", "text": "Thread stack locku" }
       ],
-      "correctChoiceIds": [
-        "C"
-      ],
+      "correctChoiceIds": ["C"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -73,28 +45,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "static synchronized metodlar hangi locku kullanir?",
+      "question": "ReentrantLock hangi durumda synchronized'a gore daha anlamlidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Her thread kendi stack lockunu"
-        },
-        {
-          "id": "B",
-          "text": "Method local locku"
-        },
-        {
-          "id": "C",
-          "text": "Nesne locku (this)"
-        },
-        {
-          "id": "D",
-          "text": "Class object locku (ClassName.class)"
-        }
+        { "id": "A", "text": "tryLock, timeout veya fairness gibi kontrol ihtiyacinda" },
+        { "id": "B", "text": "Sadece primitive tiplerde" },
+        { "id": "C", "text": "Hicbir fark yoktur" },
+        { "id": "D", "text": "Sadece tek threadli programda" }
       ],
-      "correctChoiceIds": [
-        "D"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -104,28 +62,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "ReentrantLock hangi durumda synchronizeda gore daha uygundur?",
+      "question": "volatile int v icin v++ islemi neden guvenli degildir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "tryLock/timeout/fairness gibi ileri kontrol gerektiginde"
-        },
-        {
-          "id": "B",
-          "text": "Sadece primitive alanlari korurken"
-        },
-        {
-          "id": "C",
-          "text": "Hicbir durumda uygun degildir"
-        },
-        {
-          "id": "D",
-          "text": "Sadece tek thread varken"
-        }
+        { "id": "A", "text": "Cunku volatile sadece gorunurluk verir, atomiklik vermez" },
+        { "id": "B", "text": "Cunku volatile sadece static alanlarda calisir" },
+        { "id": "C", "text": "Cunku volatile sadece read'i engeller" },
+        { "id": "D", "text": "Cunku JVM volatile'i ignore eder" }
       ],
-      "correctChoiceIds": [
-        "A"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -135,28 +79,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "Fair lock icin en dogru trade-off hangisidir?",
+      "question": "AtomicInteger.compareAndSet(expected, update) semantigi hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Her zaman daha hizlidir"
-        },
-        {
-          "id": "B",
-          "text": "Starvation riskini azaltir ama throughput dusurebilir"
-        },
-        {
-          "id": "C",
-          "text": "Deadlocku tamamen bitirir"
-        },
-        {
-          "id": "D",
-          "text": "Visibility garantisini kaldirir"
-        }
+        { "id": "A", "text": "Her zaman update yazar" },
+        { "id": "B", "text": "Deger expected ise update yazar ve true doner" },
+        { "id": "C", "text": "Sadece read yapar" },
+        { "id": "D", "text": "Synchronized lock alir" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -164,140 +94,87 @@
     {
       "id": "i2-q6",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Bu kodda final value icin en dogru ifade hangisidir?",
+      "question": "LongAdder hangi senaryoda AtomicLong'a gore daha avantajlidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Kesinlikle 2000"
-        },
-        {
-          "id": "B",
-          "text": "Kesinlikle 0"
-        },
-        {
-          "id": "C",
-          "text": "2000 garanti degil; race condition nedeniyle daha dusuk cikabilir"
-        },
-        {
-          "id": "D",
-          "text": "Program derlenmez"
-        }
+        { "id": "A", "text": "Yuksek contention altinda sik artirim yapilan metrik sayaclarda" },
+        { "id": "B", "text": "Tek threadde tek sefer artirimda" },
+        { "id": "C", "text": "Map key siralamada" },
+        { "id": "D", "text": "Immutable nesne olusturmada" }
       ],
-      "correctChoiceIds": [
-        "C"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "class C {\n    volatile int value = 0;\n    void inc() { value++; }\n}\n\nC c = new C();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.inc(); });\nt1.start(); t2.start();\nt1.join(); t2.join();\nSystem.out.println(c.value);",
       "answerCode": ""
     },
     {
       "id": "i2-q7",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Asagidaki akista muhtemel ciktinin dogru yorumu nedir?",
+      "question": "ConcurrentHashMap'in temel avantaji hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "A ve C kesin paralel gider"
-        },
-        {
-          "id": "B",
-          "text": "A-B bitmeden C baslayamaz"
-        },
-        {
-          "id": "C",
-          "text": "C her zaman A ile ayni anda baslar"
-        },
-        {
-          "id": "D",
-          "text": "synchronized etkisizdir"
-        }
+        { "id": "A", "text": "Null key/value desteklemesi" },
+        { "id": "B", "text": "Tum islemlerde tek global lock kullanmasi" },
+        { "id": "C", "text": "Daha iyi eszamanlilikla thread-safe erisim saglamasi" },
+        { "id": "D", "text": "Keyleri otomatik olarak sorted tutmasi" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["C"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "class S {\n    synchronized void m1() {\n        System.out.print(\"A\");\n        try { Thread.sleep(100); } catch (InterruptedException e) {}\n        System.out.print(\"B\");\n    }\n    synchronized void m2() { System.out.print(\"C\"); }\n}\nS s = new S();\nThread t1 = new Thread(s::m1);\nThread t2 = new Thread(s::m2);\nt1.start();\nThread.sleep(10);\nt2.start();\nt1.join(); t2.join();",
       "answerCode": ""
     },
     {
       "id": "i2-q8",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Iki farkli lock objesi kullanilan bu kodla ilgili dogru ifade hangisi?",
+      "question": "CopyOnWriteArrayList en uygun olarak hangi profilde kullanilir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Metodlar yine de ayni locku paylasir"
-        },
-        {
-          "id": "B",
-          "text": "Metodlar birbirini bloklamaz; paralel calisabilir"
-        },
-        {
-          "id": "C",
-          "text": "Kod compile olmaz"
-        },
-        {
-          "id": "D",
-          "text": "Threadler otomatik serialized olur"
-        }
+        { "id": "A", "text": "Yazma cok, okuma az" },
+        { "id": "B", "text": "Okuma cok, yazma az" },
+        { "id": "C", "text": "Sadece LIFO stack ihtiyacinda" },
+        { "id": "D", "text": "Yuksek frekansli removeIf operasyonunda" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "Object lockA = new Object();\nObject lockB = new Object();\n\nRunnable r1 = () -> { synchronized (lockA) { System.out.print(\"A\"); } };\nRunnable r2 = () -> { synchronized (lockB) { System.out.print(\"B\"); } };\n\nThread t1 = new Thread(r1);\nThread t2 = new Thread(r2);\nt1.start(); t2.start();\nt1.join(); t2.join();",
       "answerCode": ""
     },
     {
       "id": "i2-q9",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Bu kodun sonucu ne olur?",
+      "question": "Collections.synchronizedList(list) ile iteration icin dogru kullanim hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Deadlock olur"
-        },
-        {
-          "id": "B",
-          "text": "ok yazar, cunku synchronized reentranttir"
-        },
-        {
-          "id": "C",
-          "text": "Compile hatasi verir"
-        },
-        {
-          "id": "D",
-          "text": "NullPointerException firlatir"
-        }
+        { "id": "A", "text": "Ek kilit gerekmez, foreach daima guvenlidir" },
+        { "id": "B", "text": "Iteration sirasinda synchronized(list) blogu kullanilmalidir" },
+        { "id": "C", "text": "Sadece remove icin synchronized gerekir" },
+        { "id": "D", "text": "Yalnizca read islemleri yasaklanmalidir" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "class R {\n    synchronized void outer() { inner(); }\n    synchronized void inner() { System.out.println(\"ok\"); }\n}\nnew R().outer();",
       "answerCode": ""
     },
     {
       "id": "i2-q10",
-      "type": "code",
-      "question": "Money transferde lock beklemesini sonsuza birakma. ReentrantLock ile timeoutlu transfer metodu yaz.",
-      "starterCode": "class Account {\n    final java.util.concurrent.locks.ReentrantLock lock = new java.util.concurrent.locks.ReentrantLock();\n    int balance;\n}\n\nboolean transfer(Account from, Account to, int amount) throws InterruptedException {\n    // TODO\n    return false;\n}",
-      "answerBody": "### Dogru Cevap\nAsagidaki referans kodu inceleyebilirsin.",
-      "answerCode": "boolean transfer(Account from, Account to, int amount) throws InterruptedException {\n    if (!from.lock.tryLock(200, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n        return false;\n    }\n    try {\n        if (!to.lock.tryLock(200, java.util.concurrent.TimeUnit.MILLISECONDS)) {\n            return false;\n        }\n        try {\n            if (from.balance < amount) {\n                return false;\n            }\n            from.balance -= amount;\n            to.balance += amount;\n            return true;\n        } finally {\n            to.lock.unlock();\n        }\n    } finally {\n        from.lock.unlock();\n    }\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass LockCounter {\n    private final java.util.concurrent.locks.ReentrantLock lock =\n        new java.util.concurrent.locks.ReentrantLock();\n    private int value;\n\n    void inc() {\n        lock.lock();\n        try { value++; } finally { lock.unlock(); }\n    }\n}",
-      "publicSolutionUrl": "https://github.com/SadikCihanAyaz",
-      "optionExplanations": []
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "BlockingQueue'nin producer-consumer desenindeki kilit faydasi nedir?",
+      "choices": [
+        { "id": "A", "text": "Her durumda busy-wait zorunlu kilmasi" },
+        { "id": "B", "text": "Bos/dolu durumda threadleri otomatik bekletip uyandirmasi" },
+        { "id": "C", "text": "Sadece single-thread calismasi" },
+        { "id": "D", "text": "Iteratori tamamen kaldirmasi" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
     }
   ]
 }

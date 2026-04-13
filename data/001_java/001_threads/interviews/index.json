@@ -6,7 +6,7 @@
     {
       "id": "thread-interview-1",
       "title": "Thread Interview - 1",
-      "description": "Temel thread mantigi, lifecycle ve temel API farklari",
+      "description": "Thread temelleri, lifecycle, race condition ve gorunurluk",
       "order": 1,
       "questionCount": 10,
       "file": "/data/001_java/001_threads/interviews/001_thread-interview-1.json"
@@ -14,7 +14,7 @@
     {
       "id": "thread-interview-2",
       "title": "Thread Interview - 2",
-      "description": "synchronized, volatile ve ReentrantLock secim mantigi",
+      "description": "Senkronizasyon, lock stratejileri, atomikler ve concurrent collections",
       "order": 2,
       "questionCount": 10,
       "file": "/data/001_java/001_threads/interviews/002_thread-interview-2.json"
@@ -22,66 +22,10 @@
     {
       "id": "thread-interview-3",
       "title": "Thread Interview - 3",
-      "description": "Race condition, CAS, AtomicInteger ve LongAdder",
+      "description": "ExecutorService, Future/Callable, koordinasyon araclari ve problem alanlari",
       "order": 3,
       "questionCount": 10,
       "file": "/data/001_java/001_threads/interviews/003_thread-interview-3.json"
-    },
-    {
-      "id": "thread-interview-4",
-      "title": "Thread Interview - 4",
-      "description": "ExecutorService, pool yonetimi ve task lifecycle",
-      "order": 4,
-      "questionCount": 10,
-      "file": "/data/001_java/001_threads/interviews/004_thread-interview-4.json"
-    },
-    {
-      "id": "thread-interview-5",
-      "title": "Thread Interview - 5",
-      "description": "Callable, Future ve CompletableFuture derin pratik",
-      "order": 5,
-      "questionCount": 10,
-      "file": "/data/001_java/001_threads/interviews/005_thread-interview-5.json"
-    },
-    {
-      "id": "thread-interview-6",
-      "title": "Thread Interview - 6",
-      "description": "wait/notify, latch, barrier, semaphore, blocking queue",
-      "order": 6,
-      "questionCount": 10,
-      "file": "/data/001_java/001_threads/interviews/006_thread-interview-6.json"
-    },
-    {
-      "id": "thread-interview-7",
-      "title": "Thread Interview - 7",
-      "description": "Deadlock, starvation, livelock ve interrupt disiplini",
-      "order": 7,
-      "questionCount": 10,
-      "file": "/data/001_java/001_threads/interviews/007_thread-interview-7.json"
-    },
-    {
-      "id": "thread-interview-8",
-      "title": "Thread Interview - 8",
-      "description": "Thread-safe collections, immutability ve veri modelleme",
-      "order": 8,
-      "questionCount": 10,
-      "file": "/data/001_java/001_threads/interviews/008_thread-interview-8.json"
-    },
-    {
-      "id": "thread-interview-9",
-      "title": "Thread Interview - 9",
-      "description": "Java Memory Model, happens-before, safe publication",
-      "order": 9,
-      "questionCount": 10,
-      "file": "/data/001_java/001_threads/interviews/009_thread-interview-9.json"
-    },
-    {
-      "id": "thread-interview-10",
-      "title": "Thread Interview - 10",
-      "description": "Performance, parallel stream, ThreadLocal ve production pratikleri",
-      "order": 10,
-      "questionCount": 10,
-      "file": "/data/001_java/001_threads/interviews/010_thread-interview-10.json"
     }
   ]
 }

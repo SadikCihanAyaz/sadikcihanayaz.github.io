@@ -10,7 +10,7 @@
       "folder": "001_threads",
       "topicFile": "/data/001_java/001_threads/topic/001_topic.json",
       "interviewsFile": "/data/001_java/001_threads/interviews/index.json",
-      "interviewCount": 10
+      "interviewCount": 3
     },
     {
       "id": "java-core",

@@ -4,35 +4,21 @@
   "subcategoryId": "threads",
   "id": "thread-interview-1",
   "title": "Thread Interview - 1",
-  "description": "Temel thread mantigi, lifecycle ve temel API farklari",
+  "description": "Thread temelleri, lifecycle, race condition ve gorunurluk",
   "questions": [
     {
       "id": "i1-q1",
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "Process ve thread bellek modeli icin en dogru ifade hangisidir?",
+      "question": "Ayni process icindeki threadler icin bellek modeli hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Her thread ayri heap kullanir, process ile paylasim yoktur."
-        },
-        {
-          "id": "B",
-          "text": "Ayni process icindeki threadler heapi paylasir, stackleri ayridir."
-        },
-        {
-          "id": "C",
-          "text": "Threadler stack ve heapi tum processlerle global paylasir."
-        },
-        {
-          "id": "D",
-          "text": "Threadler yalnizca CPU registerlarini paylasir."
-        }
+        { "id": "A", "text": "Her thread ayri heap kullanir." },
+        { "id": "B", "text": "Threadler heapi paylasir, stackleri ayridir." },
+        { "id": "C", "text": "Tum threadler tum processlerle stack paylasir." },
+        { "id": "D", "text": "Heap sadece main thread tarafindan kullanilir." }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -42,28 +28,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "Thread.start() ve Thread.run() farki nedir?",
+      "question": "Thread.start() ve run() farki icin dogru ifade hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Ikisi de yeni thread acmaz, sadece run metodunu ayni threadde cagirir."
-        },
-        {
-          "id": "B",
-          "text": "run() yeni thread acar, start() mevcut threadde calisir."
-        },
-        {
-          "id": "C",
-          "text": "start() yeni bir thread scheduler tarafindan calistirilir; run() direkt metot cagrisi gibi calisir."
-        },
-        {
-          "id": "D",
-          "text": "start() ve run() rastgele farkli davranir."
-        }
+        { "id": "A", "text": "run() yeni thread acarken start() acmaz." },
+        { "id": "B", "text": "Ikisi de daima yeni thread acar." },
+        { "id": "C", "text": "start() yeni thread baslatir, run() normal metot cagrisi gibi calisir." },
+        { "id": "D", "text": "Ikisi de yalnizca daemon threadlerde calisir." }
       ],
-      "correctChoiceIds": [
-        "C"
-      ],
+      "correctChoiceIds": ["C"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -73,28 +45,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "Bir thread synchronized bloga girmek istiyor ama lock baska threadde. Hangi durumda olur?",
+      "question": "Bir thread monitor lock bekledigi icin synchronized bloga giremiyorsa hangi state tipiktir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "WAITING"
-        },
-        {
-          "id": "B",
-          "text": "TIMED_WAITING"
-        },
-        {
-          "id": "C",
-          "text": "BLOCKED"
-        },
-        {
-          "id": "D",
-          "text": "TERMINATED"
-        }
+        { "id": "A", "text": "WAITING" },
+        { "id": "B", "text": "TIMED_WAITING" },
+        { "id": "C", "text": "BLOCKED" },
+        { "id": "D", "text": "NEW" }
       ],
-      "correctChoiceIds": [
-        "C"
-      ],
+      "correctChoiceIds": ["C"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -104,28 +62,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "Runnable neden Thread classini extend etmeye gore daha cok tercih edilir?",
+      "question": "join() metodunun temel amaci nedir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "Cunku Runnable sadece primitive tiplerle calisir."
-        },
-        {
-          "id": "B",
-          "text": "Cunku Java tek kalitim kisitina takilmadan is mantigini ayirmayi saglar."
-        },
-        {
-          "id": "C",
-          "text": "Cunku Runnable her zaman daha hizlidir."
-        },
-        {
-          "id": "D",
-          "text": "Cunku Thread API Runnable kabul etmez."
-        }
+        { "id": "A", "text": "Threadi zorla sonlandirmak" },
+        { "id": "B", "text": "Baska bir thread bitene kadar beklemek" },
+        { "id": "C", "text": "Threadi daemon yapmak" },
+        { "id": "D", "text": "Locku serbest birakmak" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -135,28 +79,14 @@
       "type": "mcq",
       "questionKind": "direct",
       "singleChoice": true,
-      "question": "sleep(), wait(), join() ile ilgili hangi ifade dogrudur?",
+      "question": "wait() ile sleep() arasindaki temel fark nedir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "sleep locku serbest birakir."
-        },
-        {
-          "id": "B",
-          "text": "wait locku serbest birakir ve notify/notifyAll bekler."
-        },
-        {
-          "id": "C",
-          "text": "join locku her zaman serbest birakir."
-        },
-        {
-          "id": "D",
-          "text": "Uc metod da yalnizca BLOCKED durumu olusturur."
-        }
+        { "id": "A", "text": "wait() locku birakabilir, sleep() locku birakmaz." },
+        { "id": "B", "text": "sleep() locku birakir, wait() birakmaz." },
+        { "id": "C", "text": "Ikisi de locku daima birakir." },
+        { "id": "D", "text": "Ikisi de sadece static metotlarda kullanilir." }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -164,140 +94,87 @@
     {
       "id": "i1-q6",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Asagidaki kodun ekrana yazdigi sira nedir?",
+      "question": "Race condition tanimi icin en dogru secenek hangisidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "main-end worker"
-        },
-        {
-          "id": "B",
-          "text": "worker main-end"
-        },
-        {
-          "id": "C",
-          "text": "Sadece worker"
-        },
-        {
-          "id": "D",
-          "text": "Sadece main-end"
-        }
+        { "id": "A", "text": "Tek threadin kendi local degiskenini degistirmesi" },
+        { "id": "B", "text": "Birden fazla threadin paylasilan mutable state uzerinde kontrolsuz islem yapmasi" },
+        { "id": "C", "text": "Sadece deadlock olusmasi" },
+        { "id": "D", "text": "CPU clock hizinin dusuk olmasi" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "Thread t = new Thread(() -> System.out.print(\"worker \"));\nt.run();\nSystem.out.print(\"main-end\");",
       "answerCode": ""
     },
     {
       "id": "i1-q7",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Bu kodun kesin ciktisi hangisidir?",
+      "question": "volatile keywordu neyi garanti eder?",
       "choices": [
-        {
-          "id": "A",
-          "text": "BA"
-        },
-        {
-          "id": "B",
-          "text": "AB"
-        },
-        {
-          "id": "C",
-          "text": "A veya B tek basina"
-        },
-        {
-          "id": "D",
-          "text": "Cikti belirsiz, her sey olabilir"
-        }
+        { "id": "A", "text": "Compound islemleri atomik yapar" },
+        { "id": "B", "text": "Sadece performansi artirir" },
+        { "id": "C", "text": "Threadler arasi gorunurluk (visibility) saglar" },
+        { "id": "D", "text": "Deadlocku tamamen engeller" }
       ],
-      "correctChoiceIds": [
-        "B"
-      ],
+      "correctChoiceIds": ["C"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "Thread t = new Thread(() -> System.out.print(\"A\"));\nt.start();\nt.join();\nSystem.out.print(\"B\");",
       "answerCode": ""
     },
     {
       "id": "i1-q8",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Main thread ikinci sleep sonrasinda t.getState() yazdiriyor. Beklenen state hangisidir?",
+      "question": "Asagidakilerden hangisi happens-before iliskisi olusturur?",
       "choices": [
-        {
-          "id": "A",
-          "text": "NEW"
-        },
-        {
-          "id": "B",
-          "text": "RUNNABLE"
-        },
-        {
-          "id": "C",
-          "text": "TIMED_WAITING"
-        },
-        {
-          "id": "D",
-          "text": "TERMINATED"
-        }
+        { "id": "A", "text": "Ayni degiskeni iki threadin rastgele okumasi" },
+        { "id": "B", "text": "Bir threadin monitor unlock etmesi ve digerinin ayni monitoru lock etmesi" },
+        { "id": "C", "text": "Thread.sleep() cagrisi" },
+        { "id": "D", "text": "System.out.println() cagrisi" }
       ],
-      "correctChoiceIds": [
-        "C"
-      ],
+      "correctChoiceIds": ["B"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "Thread t = new Thread(() -> {\n    try { Thread.sleep(300); } catch (InterruptedException e) {}\n});\nt.start();\nThread.sleep(50);\nSystem.out.println(t.getState());",
       "answerCode": ""
     },
     {
       "id": "i1-q9",
       "type": "mcq",
-      "questionKind": "code-output",
+      "questionKind": "direct",
       "singleChoice": true,
-      "question": "Bu kod calistiginda ne olur?",
+      "question": "Immutability concurrency acisindan neden onemlidir?",
       "choices": [
-        {
-          "id": "A",
-          "text": "daemon moda gecer ve normal devam eder."
-        },
-        {
-          "id": "B",
-          "text": "Derleme hatasi alinir."
-        },
-        {
-          "id": "C",
-          "text": "IllegalThreadStateException firlatilir."
-        },
-        {
-          "id": "D",
-          "text": "Thread otomatik durdurulur ama hata olmaz."
-        }
+        { "id": "A", "text": "Mutable state paylasimi ortadan kalktigi icin senkronizasyon ihtiyaci azalir" },
+        { "id": "B", "text": "Sadece bellek tuketimini sifirlar" },
+        { "id": "C", "text": "Thread sayisini otomatik azaltir" },
+        { "id": "D", "text": "CPU frekansini artirir" }
       ],
-      "correctChoiceIds": [
-        "C"
-      ],
+      "correctChoiceIds": ["A"],
       "answerBody": "",
       "optionExplanations": [],
-      "questionCode": "Thread t = new Thread(() -> {});\nt.start();\nt.setDaemon(true);",
       "answerCode": ""
     },
     {
       "id": "i1-q10",
-      "type": "code",
-      "question": "Durdurulabilir bir worker yaz. Hem volatile stop bayragi hem de interrupt kontrolu ile temiz kapanis yapsin.",
-      "starterCode": "class Worker implements Runnable {\n    private volatile boolean running = true;\n\n    @Override\n    public void run() {\n        // TODO\n    }\n\n    public void stop() {\n        // TODO\n    }\n}",
-      "answerBody": "### Dogru Cevap\nAsagidaki referans kodu inceleyebilirsin.",
-      "answerCode": "class Worker implements Runnable {\n    private volatile boolean running = true;\n    private Thread owner;\n\n    @Override\n    public void run() {\n        owner = Thread.currentThread();\n        while (running && !Thread.currentThread().isInterrupted()) {\n            try {\n                // is birimi\n                Thread.sleep(100);\n            } catch (InterruptedException e) {\n                Thread.currentThread().interrupt();\n                break;\n            }\n        }\n        // cleanup\n    }\n\n    public void stop() {\n        running = false;\n        Thread t = owner;\n        if (t != null) {\n            t.interrupt();\n        }\n    }\n}\n\n// Kisa test iskeleti\npublic class ConcurrencyTest {\n    public static void main(String[] args) throws Exception {\n        // Burada cozumunu coklu thread ile tekrarli sekilde test et.\n    }\n}\n\n// Ek ogretici ornek\n// Ayni kavrami daha net gosteren mini parca\nclass WorkerDemo {\n    static class Job implements Runnable {\n        public void run() { System.out.println(Thread.currentThread().getName()); }\n    }\n\n    public static void main(String[] args) {\n        Thread t = new Thread(new Job(), \"worker-1\");\n        t.start();\n        new Job().run();\n    }\n}",
-      "publicSolutionUrl": "https://github.com/SadikCihanAyaz",
-      "optionExplanations": []
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Interrupt alan bir worker thread icin en saglikli yaklasim hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Interruptu yoksayip sonsuza kadar devam etmek" },
+        { "id": "B", "text": "InterruptedException yakalayip interrupt flagini restore ederek temiz cikis yapmak" },
+        { "id": "C", "text": "Her zaman RuntimeException firlatmak" },
+        { "id": "D", "text": "Thread.stop() cagrisi yapmak" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
     }
   ]
 }
