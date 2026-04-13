@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "Primitive tiplerle ilgili dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Primitive tipler object degildir ve null olamaz." },
-        { "id": "B", "text": "Primitive tipler her zaman heap'te tutulur." },
-        { "id": "C", "text": "Primitive tipler referans tipi olarak davranir." },
-        { "id": "D", "text": "Primitive tiplerin boyutu runtime'da degisir." }
+        {
+          "id": "A",
+          "text": "Primitive tipler object degildir ve null olamaz."
+        },
+        {
+          "id": "B",
+          "text": "Primitive tipler her zaman heap'te tutulur."
+        },
+        {
+          "id": "C",
+          "text": "Primitive tipler referans tipi olarak davranir."
+        },
+        {
+          "id": "D",
+          "text": "Primitive tiplerin boyutu runtime'da degisir."
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,12 +44,26 @@
       "singleChoice": true,
       "question": "Widening conversion icin hangisi derleme hatasi vermez?",
       "choices": [
-        { "id": "A", "text": "long x = 10; int y = x;" },
-        { "id": "B", "text": "int i = 10; long l = i;" },
-        { "id": "C", "text": "double d = 1.2; float f = d;" },
-        { "id": "D", "text": "short s = 7; byte b = s;" }
+        {
+          "id": "A",
+          "text": "long x = 10; int y = x;"
+        },
+        {
+          "id": "B",
+          "text": "int i = 10; long l = i;"
+        },
+        {
+          "id": "C",
+          "text": "double d = 1.2; float f = d;"
+        },
+        {
+          "id": "D",
+          "text": "short s = 7; byte b = s;"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "Bu kodun ciktisi hangisidir?",
       "choices": [
-        { "id": "A", "text": "true true" },
-        { "id": "B", "text": "false false" },
-        { "id": "C", "text": "true false" },
-        { "id": "D", "text": "false true" }
+        {
+          "id": "A",
+          "text": "true true"
+        },
+        {
+          "id": "B",
+          "text": "false false"
+        },
+        {
+          "id": "C",
+          "text": "true false"
+        },
+        {
+          "id": "D",
+          "text": "false true"
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Bu sorunun cevabı Java'daki **Integer Cache** mekanizması nedeniyle şöyledir:\n\n**Çıktı:**\n```text\ntrue\nfalse\n```\n\n---\n\n### Neden Böyle Olur? (Integer Cache Mekanizması)\n\nJava'da `Integer` bir **wrapper (sarmalayıcı)** sınıftır ve bir nesnedir. Nesneleri `==` operatörü ile karşılaştırdığınızda, değerlerine değil **bellekteki adreslerine (referanslarına)** bakarsınız.\n\n1.  **Integer Cache Aralığı:** Java, performans optimizasyonu için **-128 ile 127** arasındaki tam sayıları bellekte önbelleğe (cache) alır.\n2.  **a == b (127):** Her iki değişken de 127 değerine atandığında, Java yeni bir nesne oluşturmak yerine önbellekteki aynı 127 nesnesini kullanır. Referanslar aynı olduğu için sonuç `true` döner.\n3.  **c == d (128):** 128 değeri önbellek aralığının dışındadır. Bu yüzden `c` için yeni bir nesne, `d` için ise bellekte bambaşka bir yeni nesne oluşturulur. Değerleri aynı olsa bile bellekteki adresleri farklı olduğu için `==` karşılaştırması `false` döner.\n\n\n\n---\n\n### Güvenli Karşılaştırma Nasıl Yapılır?\n\nWrapper sınıfları (Integer, Long, String vb.) karşılaştırırken referans kontrolü yapan `==` yerine her zaman **`.equals()`** metodunu kullanmalısınız.\n\n```java\nSystem.out.println(c.equals(d)); // Bu her zaman TRUE döner, çünkü değerleri kontrol eder.\n```\n\n### Özet Bilgiler\n\n* **Önbellek Aralığı:** -128 ile 127 arası (Bu değer JVM parametreleri ile değiştirilebilir ancak varsayılan budur).\n* **Otomatik Kutulama (Autoboxing):** `Integer a = 127;` yazdığınızda Java arka planda `Integer.valueOf(127)` metodunu çağırır. Önbellek kontrolü bu metodun içinde yapılır.\n* **Diğer Tipler:** `Byte`, `Short`, `Long` sınıflarında da benzer önbellek mekanizmaları mevcuttur.\n\nBu \"tuzak\" soru genellikle Java mülakatlarının vazgeçilmezidir. Aradaki fark netleşti mi?\n",
       "optionExplanations": [],
       "questionCode": "Integer a = 127;\nInteger b = 127;\nInteger c = 128;\nInteger d = 128;\nSystem.out.println(a == b);\nSystem.out.println(c == d);",
       "answerCode": ""
@@ -65,13 +107,27 @@
       "singleChoice": true,
       "question": "String immutability icin en dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "String icerigi degistirilince ayni object mutate edilir." },
-        { "id": "B", "text": "String uzerinde degisiklik yapildiginda yeni object olusur." },
-        { "id": "C", "text": "String sadece tek threadde kullanilabilir." },
-        { "id": "D", "text": "String final olunca her zaman intern edilir." }
+        {
+          "id": "A",
+          "text": "String icerigi degistirilince ayni object mutate edilir."
+        },
+        {
+          "id": "B",
+          "text": "String uzerinde degisiklik yapildiginda yeni object olusur."
+        },
+        {
+          "id": "C",
+          "text": "String sadece tek threadde kullanilabilir."
+        },
+        {
+          "id": "D",
+          "text": "String final olunca her zaman intern edilir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru ifade şudur: **String üzerinde değişiklik yapıldığında yeni object oluşur.**\n\nJava'da `String` nesneleri **immutable** (değişmez) yapıdadır. Bir String üzerinde `concat()`, `toUpperCase()` veya `replace()` gibi işlemler yaptığınızda, orijinal String nesnesi bellekte olduğu gibi kalır; Java bu işlemin sonucunda **yeni bir String nesnesi** oluşturur.\n\n---\n\n### String, StringBuilder ve StringBuffer Karşılaştırması\n\nString'in değişmezliği (immutability), döngü içinde çok fazla metin birleştirme yapıldığında performans sorununa yol açar (sürekli yeni nesne üretildiği için). Bu sorunu çözmek için **mutable** (değiştirilebilir) olan `StringBuilder` ve `StringBuffer` kullanılır.\n\n| Özellik | **String** | **StringBuilder** | **StringBuffer** |\n| :--- | :--- | :--- | :--- |\n| **Mutable?** | Hayır (Immutable) | Evet | Evet |\n| **Thread-Safe?** | Evet (Değişmediği için) | **Hayır** | **Evet** (Synchronized) |\n| **Performans** | Düşük (Sürekli nesne üretir) | **En Yüksek** | Orta (Sync maliyeti) |\n| **Kullanım Yeri** | Sabit metinler, anahtarlar. | Tek thread, yoğun ekleme. | Çoklu thread, yoğun ekleme. |\n\n\n\n---\n\n### Kod Örnekleri\n\n#### 1. String İmmutability (Bellek Tuzağı)\n```java\nString s = \"Java\";\ns.concat(\" SE\"); // s hala \"Java\"dır! Dönüş değerini bir yere atamanız gerekir.\nSystem.out.println(s); // Çıktı: Java\n\ns = s + \" 21\"; // Yeni bir nesne oluşturulur ve s artık ona işaret eder.\n```\n\n#### 2. StringBuilder (Hızlı - Tek Thread)\nDöngülerde veya yoğun metin işlemlerinde tercih edilir.\n```java\nStringBuilder sb = new StringBuilder(\"Java\");\nfor(int i = 0; i < 100; i++) {\n    sb.append(i); // Orijinal nesne üzerinde değişiklik yapar, yeni nesne üretmez.\n}\nString result = sb.toString();\n```\n\n#### 3. StringBuffer (Thread-Safe - Çoklu Thread)\nEğer birden fazla thread aynı metin üzerinde değişiklik yapıyorsa kullanılır. Metotları `synchronized` anahtar kelimesiyle korunur.\n\n---\n\n### Thread Safety Örneği\n\nNeden `StringBuilder` thread-safe değildir?\n\n```java\nStringBuilder sb = new StringBuilder();\n// 10 tane thread'in aynı StringBuilder'a \"A\" harfi eklediğini düşünelim.\n// Sync olmadığı için karakterler üst üste binebilir, data race oluşur ve \n// beklediğimiz uzunluktan daha kısa veya hatalı bir metin çıkabilir.\n\nStringBuffer sbf = new StringBuffer();\n// StringBuffer'da metotlar kilitli (locked) olduğu için threadler sıraya girer.\n// Sonuç her zaman tutarlıdır.\n```\n\n### Özet: Ne Zaman Hangisi?\n* **String:** Metin değişmeyecekse veya çok az değişecekse.\n* **StringBuilder:** Metin üzerinde yoğun işlem yapılacaksa ve uygulama **tek bir thread** üzerinde çalışıyorsa (Genellikle budur).\n* **StringBuffer:** Metin üzerinde yoğun işlem yapılacaksa ve bu işlem **farklı thread'lerden** aynı anda yapılacaksa.\n\nPeki, `String s1 = \"Merhaba\"; String s2 = \"Merhaba\";` dediğinde Java'nın bunları aynı adreste tuttuğu **String Pool** (Havuz) kavramı hakkında ne düşünüyorsun? Bu da bellek yönetimi için harika bir Java özelliğidir.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -82,12 +138,26 @@
       "singleChoice": true,
       "question": "StringBuilder ve StringBuffer farki hangisidir?",
       "choices": [
-        { "id": "A", "text": "StringBuilder synchronized, StringBuffer degildir." },
-        { "id": "B", "text": "Ikisi de synchronized oldugu icin fark yoktur." },
-        { "id": "C", "text": "StringBuffer synchronized'dir; StringBuilder genelde daha hizlidir." },
-        { "id": "D", "text": "StringBuffer sadece compile-time sabitler icin kullanilir." }
+        {
+          "id": "A",
+          "text": "StringBuilder synchronized, StringBuffer degildir."
+        },
+        {
+          "id": "B",
+          "text": "Ikisi de synchronized oldugu icin fark yoktur."
+        },
+        {
+          "id": "C",
+          "text": "StringBuffer synchronized'dir; StringBuilder genelde daha hizlidir."
+        },
+        {
+          "id": "D",
+          "text": "StringBuffer sadece compile-time sabitler icin kullanilir."
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -99,13 +169,27 @@
       "singleChoice": true,
       "question": "enum kullanmanin temel kazanci nedir?",
       "choices": [
-        { "id": "A", "text": "Tip guvenli sabit deger seti saglar." },
-        { "id": "B", "text": "Runtime'da sonsuz yeni enum degeri uretilir." },
-        { "id": "C", "text": "Yalnizca switch icinde kullanilabilir." },
-        { "id": "D", "text": "Object olusumunu tamamen engeller." }
+        {
+          "id": "A",
+          "text": "Tip guvenli sabit deger seti saglar."
+        },
+        {
+          "id": "B",
+          "text": "Runtime'da sonsuz yeni enum degeri uretilir."
+        },
+        {
+          "id": "C",
+          "text": "Yalnizca switch icinde kullanilabilir."
+        },
+        {
+          "id": "D",
+          "text": "Object olusumunu tamamen engeller."
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Doğru ifade şudur: **Tip güvenli (type-safe) sabit değer seti sağlar.**\n\nJava'da `enum` sadece bir sabitler listesi değildir; aslında **özel bir sınıf (class) türüdür.** String veya Integer sabitler kullanmak yerine `enum` kullanmak, geçersiz bir değerin sisteme girmesini derleme zamanında engeller.\n\n---\n\n### Java Enum: Detaylı İnceleme\n\nJava'da Enum'lar çok güçlüdür; içlerinde değişkenler, constructor'lar, normal metotlar ve hatta **abstract metotlar** barındırabilirler.\n\n#### Tam Kapsamlı Enum Örneği\n\nSenaryo: Bir ödeme sistemindeki \"Ödeme Durumlarını\" (`PaymentStatus`) yöneten bir enum yazalım. Her durumun bir başarı kodu olsun ve her durumun kendine has bir \"işleme\" mantığı (abstract method) olsun.\n\n```java\npublic enum PaymentStatus {\n    \n    // 1. Enum Sabitleri (Her biri aslında PaymentStatus tipinde bir nesnedir)\n    SUCCESS(100, \"İşlem Başarılı\") {\n        @Override\n        public void printAction() {\n            System.out.println(\"Fatura oluşturuluyor ve e-posta gönderiliyor.\");\n        }\n    },\n    \n    FAILED(400, \"İşlem Başarısız\") {\n        @Override\n        public void printAction() {\n            System.out.println(\"Kullanıcıya hata mesajı gösteriliyor ve log tutuluyor.\");\n        }\n    },\n    \n    PENDING(200, \"Beklemede\") {\n        @Override\n        public void printAction() {\n            System.out.println(\"Sistem 5 dakika sonra tekrar kontrol edecek.\");\n        }\n    };\n\n    // 2. Instance Variables (Alanlar)\n    private final int code;\n    private final String description;\n\n    // 3. Constructor (Enum constructor'ları her zaman private'tır)\n    PaymentStatus(int code, String description) {\n        this.code = code;\n        this.description = description;\n    }\n\n    // 4. Normal Metot (Tüm enum sabitleri için ortak)\n    public String getFullDetail() {\n        return \"Kod: \" + this.code + \", Mesaj: \" + this.description;\n    }\n\n    // 5. Abstract Metot (Her enum sabiti bunu kendine göre implement etmelidir)\n    public abstract void printAction();\n}\n```\n\n---\n\n### Enum Özellikleri ve Kurallar\n\n1.  **Tip Güvenliği (Type Safety):** `void process(PaymentStatus status)` şeklinde bir metodunuz varsa, buraya yanlışlıkla \"BilinmeyenDurum\" gibi bir string gönderemezsiniz.\n2.  **Singleton Doğası:** Her enum sabiti (`SUCCESS`, `FAILED`) JVM üzerinde sadece bir kez oluşturulur. Bu yüzden `==` ile güvenle karşılaştırılabilirler.\n3.  **Metotlar:**\n    * `values()`: Tüm enum sabitlerini bir dizi olarak döner.\n    * `valueOf(String)`: String isminden enum nesnesini bulur.\n    * `ordinal()`: Sabitin sırasını (0, 1, 2...) verir (Ancak kullanılması önerilmez, sıra değişirse kod kırılır).\n4.  **Switch Case:** Enum'lar switch bloklarında mükemmel çalışır ve okunabilirliği artırır.\n\n\n\n---\n\n### Kullanım Örneği\n\n```java\npublic class PaymentManager {\n    public static void main(String[] args) {\n        PaymentStatus currentStatus = PaymentStatus.SUCCESS;\n\n        // Ortak metodun çağrılması\n        System.out.println(currentStatus.getFullDetail());\n\n        // Abstract metodun (polimorfik) çağrılması\n        currentStatus.printAction(); \n\n        // Switch kullanımı\n        switch (currentStatus) {\n            case SUCCESS -> System.out.println(\"Yeşil ışık yak.\");\n            case FAILED -> System.out.println(\"Kırmızı ışık yak.\");\n            case PENDING -> System.out.println(\"Sarı ışık yak.\");\n        }\n    }\n}\n```\n\n### Neden \"Sonsuz Değer Üretilir\" Seçeneği Yanlıştır?\nEnum'ların temel olayı **sonlu** bir küme olmasıdır. Çalışma zamanında (runtime) yeni bir enum sabiti ekleyemezsiniz. Eğer değerlerinizin ne olduğu önceden belliyse (Haftanın günleri, HTTP hata kodları, Sipariş statüleri) Enum kullanmalısınız.\n\nEnum içindeki bu \"abstract method\" yapısı (`printAction` örneğindeki gibi) aslında **Strategy Pattern**'in en sade uygulanış biçimlerinden biridir. Bu yapı karmaşık `if-else` bloklarından kurtulmanı sağlar. Projende statüleri nasıl yönetiyorsun, `if(status == 1)` gibi \"magic number\"lar mı kullanıyorsun yoksa Enum'a geçiş yaptın mı?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -116,12 +200,26 @@
       "singleChoice": true,
       "question": "Java'da var anahtar sozcugu icin hangisi dogrudur?",
       "choices": [
-        { "id": "A", "text": "Field tanimlarinda kullanilabilir." },
-        { "id": "B", "text": "Tip cikarimi compile-time yapilir; dynamic typing degildir." },
-        { "id": "C", "text": "Method parametresinde zorunludur." },
-        { "id": "D", "text": "null ile baslatildiginda tip otomatik Object olur." }
+        {
+          "id": "A",
+          "text": "Field tanimlarinda kullanilabilir."
+        },
+        {
+          "id": "B",
+          "text": "Tip cikarimi compile-time yapilir; dynamic typing degildir."
+        },
+        {
+          "id": "C",
+          "text": "Method parametresinde zorunludur."
+        },
+        {
+          "id": "D",
+          "text": "null ile baslatildiginda tip otomatik Object olur."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -133,12 +231,26 @@
       "singleChoice": true,
       "question": "== ve equals karsilastirmasi icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "== her zaman object icerigini karsilastirir." },
-        { "id": "B", "text": "equals primitive tipler icin zorunludur." },
-        { "id": "C", "text": "equals defaultta referans esitligi kullanir; class override edebilir." },
-        { "id": "D", "text": "String'de equals kullanmak compile error verir." }
+        {
+          "id": "A",
+          "text": "== her zaman object icerigini karsilastirir."
+        },
+        {
+          "id": "B",
+          "text": "equals primitive tipler icin zorunludur."
+        },
+        {
+          "id": "C",
+          "text": "equals defaultta referans esitligi kullanir; class override edebilir."
+        },
+        {
+          "id": "D",
+          "text": "String'de equals kullanmak compile error verir."
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -150,13 +262,27 @@
       "singleChoice": true,
       "question": "Sealed class yapisinin amaci nedir?",
       "choices": [
-        { "id": "A", "text": "Kalitimi tamamen kapatmak." },
-        { "id": "B", "text": "Sadece izin verilen siniflarin kalitim alabilmesini saglamak." },
-        { "id": "C", "text": "Tum methodlari static yapmak." },
-        { "id": "D", "text": "Reflection'i devre disi birakmak." }
+        {
+          "id": "A",
+          "text": "Kalitimi tamamen kapatmak."
+        },
+        {
+          "id": "B",
+          "text": "Sadece izin verilen siniflarin kalitim alabilmesini saglamak."
+        },
+        {
+          "id": "C",
+          "text": "Tum methodlari static yapmak."
+        },
+        {
+          "id": "D",
+          "text": "Reflection'i devre disi birakmak."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru ifade şudur: **Sadece izin verilen sınıfların kalıtım alabilmesini sağlamak.**\n\nJava 17 ile kararlı hale gelen **Sealed Classes (Mühürlü Sınıflar)**, bir sınıfın veya arayüzün hangi sınıflar tarafından genişletilebileceğini (miras alınabileceğini) açıkça belirlemenizi sağlar. Bu, \"ya tam açık (normal class) ya tam kapalı (final class)\" ikilemi arasına çok güçlü bir kontrol katmanı ekler.\n\n---\n\n### 1. Sealed Class Örneği\n\nDiyelim ki bir ödeme sisteminde sadece `KrediKartı` ve `Havale` yöntemlerine izin vermek istiyorsunuz; başka kimse sizin `OdemeYontemi` sınıfınızı kafasına göre genişletemesin.\n\n```java\n// Sadece KrediKarti ve Havale bu sinifi extend edebilir\npublic sealed class OdemeYontemi permits KrediKarti, Havale {\n    public abstract void isle();\n}\n\n// Alt siniflar su 3 durumdan birinde olmalidir: final, sealed veya non-sealed\npublic final class KrediKarti extends OdemeYontemi {\n    @Override public void isle() { System.out.println(\"Kartla odendi.\"); }\n}\n\npublic final class Havale extends OdemeYontemi {\n    @Override public void isle() { System.out.println(\"Havale yapildi.\"); }\n}\n\n/* // HATA: permits listesinde olmadigi icin derleme hatası verir!\npublic class Bitcoin extends OdemeYontemi { ... } \n*/\n```\n\n**Neden Kullanılır?**\n* **Domain Kontrolü:** İş mantığınızdaki hiyerarşiyi sabitlersiniz.\n* **Pattern Matching:** Java'nın yeni `switch` yapısında, tüm alt sınıfları kapsadığınızı derleyici bilir ve \"default\" case yazmanıza gerek kalmaz.\n\n---\n\n### 2. Reflection (Yansıma) Nedir?\n\n**Reflection**, bir programın çalışma zamanında (runtime) kendi yapısını incelemesine ve değiştirmesine olanak tanıyan bir Java API'sidir. Normalde erişemediğiniz `private` alanlara erişebilir, sınıfların metotlarını ve isimlerini kod çalışırken öğrenebilirsiniz.\n\n**Ne işe yarar?** Spring, Hibernate ve JUnit gibi kütüphanelerin temel taşıdır. Örneğin Spring, sınıflarınızın üzerindeki `@Service` anotasyonunu reflection ile okur ve nesneyi ona göre oluşturur.\n\n#### Reflection Örneği\nNormalde bir nesnenin `private` değişkenini dışarıdan göremezsiniz, ama Reflection ile bu \"duvarı\" delebilirsiniz:\n\n```java\nimport java.lang.reflect.Field;\n\nclass GizliKasa {\n    private String sifre = \"12345\";\n}\n\npublic class ReflectionTest {\n    public static void main(String[] args) throws Exception {\n        GizliKasa kasa = new GizliKasa();\n\n        // 1. Sinif yapisini runtime'da aliyoruz\n        Field field = GizliKasa.class.getDeclaredField(\"sifre\");\n\n        // 2. Private duvarini asiyoruz\n        field.setAccessible(true);\n\n        // 3. Degeri okuyoruz\n        String deger = (String) field.get(kasa);\n        System.out.println(\"Reflection ile calinan sifre: \" + deger);\n    }\n}\n```\n\n---\n\n### Karşılaştırmalı Özet Liste\n\n| Özellik | Sealed Classes | Reflection |\n| :--- | :--- | :--- |\n| **Zamanlama** | Derleme Zamanı (Compile-time) | Çalışma Zamanı (Runtime) |\n| **Amacı** | Hiyerarşiyi kısıtlamak, güvenli yapı. | Kodu esnekleştirmek, iç yapıya müdahale etmek. |\n| **Güvenlik** | Güvenliği artırır (Kontrollü kalıtım). | Güvenliği delebilir (Private erişimi). |\n| **Performans** | Standart sınıf performansıdır. | Normal koda göre daha yavaştır (Maliyetli işlem). |\n\n\n\n**Özetle:** Sealed class ile kapıyı kimlerin çalabileceğini en baştan belirlersiniz; Reflection ise kapı kilitli olsa bile anahtarsız içeri girme yeteneğidir. \n\nGenellikle kurumsal projelerde `Sealed Class` mimariyi korumak için, `Reflection` ise esnek framework yapıları kurmak için kullanılır. Kendi projende hiç `private` bir alana dışarıdan erişmen (örneğin testlerde) gerekmiş miydi?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -167,13 +293,27 @@
       "singleChoice": true,
       "question": "Asagidaki kodun ciktisi nedir?",
       "choices": [
-        { "id": "A", "text": "98" },
-        { "id": "B", "text": "b" },
-        { "id": "C", "text": "Compile error" },
-        { "id": "D", "text": "Runtime error" }
+        {
+          "id": "A",
+          "text": "98"
+        },
+        {
+          "id": "B",
+          "text": "b"
+        },
+        {
+          "id": "C",
+          "text": "Compile error"
+        },
+        {
+          "id": "D",
+          "text": "Runtime error"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Doğru cevap: **98**\n\nJava'da `char` tipi arka planda ASCII/Unicode sayısal değerlerini tutar. `'a'` karakterinin sayısal değeri **97**'dir. `c + 1` işlemi yapıldığında Java bu karakteri `int` değerine yükseltir (promotion) ve sonuç $97 + 1 = 98$ olur.\n\n---\n\n### Java Veri Tipleri\n\nJava'da tipler iki ana gruba ayrılır: **Primitive** (İlkel) ve **Reference** (Referans) tipler.\n\n#### 1. Primitive Tipler\nBu tipler belleğin **Stack** bölgesinde tutulur ve sadece değer barındırırlar.\n\n| Tip | Boyut | Örnek | Not |\n| :--- | :--- | :--- | :--- |\n| **byte** | 8-bit | `byte b = 100;` | -128 ile 127 arası. |\n| **short** | 16-bit | `short s = 5000;` | |\n| **int** | 32-bit | `int i = 100000;` | En yaygın tam sayı tipi. |\n| **long** | 64-bit | `long l = 100L;` | Sonuna `L` eklenmesi önerilir. |\n| **float** | 32-bit | `float f = 3.14f;` | Sonuna `f` eklenmesi zorunludur. |\n| **double** | 64-bit | `double d = 3.14;` | Hassas ondalıklı işlemler için. |\n| **char** | 16-bit | `char c = 'A';` | Tek karakter/Unicode tutar. |\n| **boolean**| 1-bit | `boolean b = true;` | `true` veya `false`. |\n\n\n\n#### 2. Reference Tipler\nNesneleri temsil ederler. Belleğin **Heap** bölgesinde tutulurlar.\n* **String:** `String isim = \"Gemini\";`\n* **Arrays:** `int[] sayilar = {1, 2, 3};`\n* **Classes:** `User user = new User();`\n\n---\n\n### Tip Dönüşümleri (Casting)\n\nJava'da iki tür dönüşüm vardır:\n\n#### A. Widening (Otomatik Dönüşüm)\nKüçük tip büyük tipe atanırken veri kaybı riski olmadığı için Java bunu otomatik yapar.\n`byte -> short -> char -> int -> long -> float -> double`\n```java\nint i = 100;\ndouble d = i; // Otomatik dönüşüm: 100.0\n```\n\n#### B. Narrowing (Manuel Dönüşüm)\nBüyük tip küçük tipe atanırken veri kaybı olabilir, bu yüzden programcı açıkça belirtmelidir.\n```java\ndouble d = 9.78;\nint i = (int) d; // i = 9 (Virgülden sonrası atılır)\n```\n\n---\n\n### Eşitlik Kontrolleri (`==` vs `.equals()`)\n\nJava'da en çok karıştırılan konulardan biridir:\n\n1.  **Primitive Tiplerde:** `==` değeri kontrol eder.\n    ```java\n    int a = 5; int b = 5;\n    System.out.println(a == b); // true\n    ```\n2.  **Referans Tiplerde:** `==` nesnenin bellekteki **adresini** kontrol eder. `.equals()` ise nesnenin **içeriğini** kontrol eder.\n    ```java\n    String s1 = new String(\"Merhaba\");\n    String s2 = new String(\"Merhaba\");\n    \n    System.out.println(s1 == s2);      // false (Farklı nesneler)\n    System.out.println(s1.equals(s2)); // true  (İçerik aynı)\n    ```\n\n\n\n---\n\n### Önemli Bir Not: Char ve Int İlişkisi\nSoru örneğindeki gibi, bir `char` doğrudan `int` bir değere atanabilir veya matematiksel işleme sokulabilir:\n```java\nchar r = 'A'; // 65\nint ascii = r; \nchar nextChar = (char) (r + 1); // 'B'\n```\n\nTip dönüşümleri sırasında veri kaybı (overflow) yaşadığın veya \"neden `true` dönmüyor?\" dediğin bir karşılaştırma hatasıyla hiç karşılaştın mı?\n",
       "optionExplanations": [],
       "questionCode": "char c = 'a';\nint x = c + 1;\nSystem.out.println(x);",
       "answerCode": ""
