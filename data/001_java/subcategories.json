@@ -21,6 +21,16 @@
       "topicFile": "/data/001_java/002_java_core/topic/001_topic.json",
       "interviewsFile": "/data/001_java/002_java_core/interviews/index.json",
       "interviewCount": 6
+    },
+    {
+      "id": "collections",
+      "title": "Collections",
+      "description": "Java Collections Framework: List, Set, Map, Queue, iterator ve concurrent collection temelleri",
+      "order": 3,
+      "folder": "003_collections",
+      "topicFile": "/data/001_java/003_collections/topic/001_topic.json",
+      "interviewsFile": "/data/001_java/003_collections/interviews/index.json",
+      "interviewCount": 2
     }
   ]
 }

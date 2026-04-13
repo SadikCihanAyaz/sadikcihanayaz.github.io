@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "collections",
+  "id": "collections-interview-1",
+  "title": "Collections Interview - 1",
+  "description": "Collection framework temelleri, List/Set/Map secimi ve temel complexity",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Hangi collection turu ayni elemandan birden fazla tutulmasina izin vermez?",
+      "choices": [
+        { "id": "A", "text": "List" },
+        { "id": "B", "text": "Set" },
+        { "id": "C", "text": "Queue" },
+        { "id": "D", "text": "Map" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Set implementasyonlarindan hangisi insertion order'i korur?",
+      "choices": [
+        { "id": "A", "text": "HashSet" },
+        { "id": "B", "text": "TreeSet" },
+        { "id": "C", "text": "LinkedHashSet" },
+        { "id": "D", "text": "ConcurrentSkipListSet" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ArrayList icin index bazli get operasyonunun ortalama karmasikligi nedir?",
+      "choices": [
+        { "id": "A", "text": "O(1)" },
+        { "id": "B", "text": "O(log n)" },
+        { "id": "C", "text": "O(n)" },
+        { "id": "D", "text": "O(n log n)" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Ortadaki elemanlara sik ekleme/silme islemi icin hangi yapi daha uygundur?",
+      "choices": [
+        { "id": "A", "text": "ArrayList" },
+        { "id": "B", "text": "LinkedList" },
+        { "id": "C", "text": "Vector" },
+        { "id": "D", "text": "CopyOnWriteArrayList" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "HashMap icin null anahtar/deger kurali hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Null anahtar ve null deger yasaktir." },
+        { "id": "B", "text": "Bir null anahtar ve birden fazla null deger olabilir." },
+        { "id": "C", "text": "Birden fazla null anahtar olabilir." },
+        { "id": "D", "text": "Null anahtar yasak, null deger serbesttir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "TreeMap elemanlari nasil siralar?",
+      "choices": [
+        { "id": "A", "text": "Ekleme sirasina gore" },
+        { "id": "B", "text": "Hash bucket dagilimina gore" },
+        { "id": "C", "text": "Anahtarin natural order'i veya Comparator'a gore" },
+        { "id": "D", "text": "Deger uzunluguna gore" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "HashSet/HashMap kullaniminda equals-hashCode icin dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "equals true ise hashCode farkli olmalidir." },
+        { "id": "B", "text": "equals true olan iki nesnenin hashCode'u ayni olmalidir." },
+        { "id": "C", "text": "Sadece hashCode kullanilir, equals kullanilmaz." },
+        { "id": "D", "text": "hashCode her zaman tum nesneler icin benzersiz olmalidir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ArrayList uzerinde iterator ile gezerken koleksiyon disaridan degistirilirse tipik sonuc nedir?",
+      "choices": [
+        { "id": "A", "text": "Degisiklikler sessizce birlesir." },
+        { "id": "B", "text": "Iterator otomatik senkronize olur." },
+        { "id": "C", "text": "ConcurrentModificationException olusur." },
+        { "id": "D", "text": "Tum elemanlar iki kez okunur." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Collections.unmodifiableList(list) icin dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Listeyi deep immutable hale getirir." },
+        { "id": "B", "text": "Yapisal degisikliklerde UnsupportedOperationException firlatan bir view verir." },
+        { "id": "C", "text": "Listeyi otomatik thread-safe yapar." },
+        { "id": "D", "text": "Her zaman yeni bir fiziksel kopya olusturur." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Comparable ve Comparator farki icin en dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Ikisi de sadece primitive tiplerde calisir." },
+        { "id": "B", "text": "Comparable sinif icinde tek natural order tanimlar; Comparator disaridan farkli siralama stratejileri sunar." },
+        { "id": "C", "text": "Comparator zorunlu olarak entity icinde implement edilir." },
+        { "id": "D", "text": "Comparable ve Comparator ayni seydir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

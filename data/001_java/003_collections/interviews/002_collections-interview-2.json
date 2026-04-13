@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "collections",
+  "id": "collections-interview-2",
+  "title": "Collections Interview - 2",
+  "description": "Concurrent collectionlar, iteration guvenligi ve ileri seviye kullanim",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ConcurrentHashMap'in Hashtable'a gore temel avantaji hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Null key ve null value desteklemesi" },
+        { "id": "B", "text": "Tum operasyonlari tek global lock ile calistirmasi" },
+        { "id": "C", "text": "Daha iyi eszamanlilik ile thread-safe erisim saglamasi" },
+        { "id": "D", "text": "Anahtarlari her zaman sirali tutmasi" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "CopyOnWriteArrayList hangi senaryoda daha uygundur?",
+      "choices": [
+        { "id": "A", "text": "Yazma operasyonu cok yogun oldugunda" },
+        { "id": "B", "text": "Okuma cok, yazma az oldugunda" },
+        { "id": "C", "text": "Sadece LIFO yapisi istendiginde" },
+        { "id": "D", "text": "Her iterasyonda koleksiyon silinecekse" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "BlockingQueue en cok hangi amacla kullanilir?",
+      "choices": [
+        { "id": "A", "text": "Map anahtarlarini siralamak" },
+        { "id": "B", "text": "Producer-consumer deseninde, bos/dolu durumda beklemeli kuyruk yonetimi" },
+        { "id": "C", "text": "JSON parse performansi arttirmak" },
+        { "id": "D", "text": "Entity relationlarini cachelemek" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "PriorityQueue elemanlari hangi kurala gore getirir?",
+      "choices": [
+        { "id": "A", "text": "Her zaman FIFO" },
+        { "id": "B", "text": "Her zaman LIFO" },
+        { "id": "C", "text": "Natural order veya Comparator ile belirlenen oncelige gore" },
+        { "id": "D", "text": "Sadece ekleme sirasina gore" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Bir koleksiyon uzerinde gezerken guvenli silme icin hangi yontem kullanilmalidir?",
+      "choices": [
+        { "id": "A", "text": "for-each icinde collection.remove()" },
+        { "id": "B", "text": "Iterator.remove()" },
+        { "id": "C", "text": "Thread.sleep()" },
+        { "id": "D", "text": "Collections.sort()" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "LinkedHashMap accessOrder=true ile tipik olarak hangi amac icin kullanilir?",
+      "choices": [
+        { "id": "A", "text": "Hash collision azaltmak" },
+        { "id": "B", "text": "LRU cache davranisi kurmak" },
+        { "id": "C", "text": "Map'i immutable yapmak" },
+        { "id": "D", "text": "SQL injection onlemek" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "NavigableMap.ceilingKey(k) ne dondurur?",
+      "choices": [
+        { "id": "A", "text": "k'den kucuk en buyuk key" },
+        { "id": "B", "text": "k'ye esit veya k'den buyuk en kucuk key" },
+        { "id": "C", "text": "Sadece tam esit key, yoksa exception" },
+        { "id": "D", "text": "k'den kucuk tum key'lerin listesi" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Collections.synchronizedList(list) kullaniminda iteration icin ne dogrudur?",
+      "choices": [
+        { "id": "A", "text": "Ek bir senkronizasyona gerek yoktur." },
+        { "id": "B", "text": "Iteration sirasinda synchronized(list) blogu kullanilmalidir." },
+        { "id": "C", "text": "Sadece remove icin synchronized gerekir." },
+        { "id": "D", "text": "Sadece add icin synchronized gerekir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Sirali ve thread-safe bir Set ihtiyaci icin hangisi uygundur?",
+      "choices": [
+        { "id": "A", "text": "HashSet" },
+        { "id": "B", "text": "LinkedHashSet" },
+        { "id": "C", "text": "ConcurrentSkipListSet" },
+        { "id": "D", "text": "ArrayDeque" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Map.computeIfAbsent(key, fn) icin en dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Var olan key'i her zaman siler." },
+        { "id": "B", "text": "Key yoksa degeri lazily hesaplayip map'e yazar." },
+        { "id": "C", "text": "Map'i otomatik immutable yapar." },
+        { "id": "D", "text": "Her durumda eski degeri null yapar." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

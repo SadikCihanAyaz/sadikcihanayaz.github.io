@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "collections",
+  "id": "collections-topic",
+  "title": "Collections - Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu konu anlatimi henuz hazir degil. Icerik yakinda eklenecek."
+    }
+  ]
+}
