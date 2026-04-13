@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "streams",
+  "id": "streams-topic",
+  "title": "Streams - Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu konu anlatimi henuz hazir degil. Icerik yakinda eklenecek."
+    }
+  ]
+}

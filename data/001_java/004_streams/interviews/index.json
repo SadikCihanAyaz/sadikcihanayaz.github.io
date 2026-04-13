@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "streams",
+  "interviews": [
+    {
+      "id": "streams-interview-1",
+      "title": "Streams Interview - 1",
+      "description": "Stream pipeline, intermediate/terminal operasyonlar ve collector pratikleri",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/001_java/004_streams/interviews/001_streams-interview-1.json"
+    }
+  ]
+}

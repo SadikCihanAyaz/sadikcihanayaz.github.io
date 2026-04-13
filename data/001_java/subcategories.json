@@ -31,6 +31,16 @@
       "topicFile": "/data/001_java/003_collections/topic/001_topic.json",
       "interviewsFile": "/data/001_java/003_collections/interviews/index.json",
       "interviewCount": 2
+    },
+    {
+      "id": "streams",
+      "title": "Streams",
+      "description": "Java Stream API: pipeline, map/filter/reduce, collectors ve parallel stream temelleri",
+      "order": 4,
+      "folder": "004_streams",
+      "topicFile": "/data/001_java/004_streams/topic/001_topic.json",
+      "interviewsFile": "/data/001_java/004_streams/interviews/index.json",
+      "interviewCount": 1
     }
   ]
 }

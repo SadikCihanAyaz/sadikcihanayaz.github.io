@@ -1,0 +1,320 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "streams",
+  "id": "streams-interview-1",
+  "title": "Streams Interview - 1",
+  "description": "Stream pipeline, intermediate/terminal operasyonlar ve collector pratikleri",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Java Stream pipeline'inda hangi ifade dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Intermediate operasyonlar terminal operasyon olmadan calismaya baslar."
+        },
+        {
+          "id": "B",
+          "text": "Pipeline yalnizca terminal operasyon cagrildiginda evaluate edilir."
+        },
+        {
+          "id": "C",
+          "text": "forEach bir intermediate operasyondur."
+        },
+        {
+          "id": "D",
+          "text": "map operasyonu kaynagi kalici olarak degistirir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "map ve flatMap farki icin en dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "map bir Stream<Stream<T>> uretebilirken flatMap bu ic ice yapilari tek seviyeye indirir."
+        },
+        {
+          "id": "B",
+          "text": "flatMap yalnizca primitive streamlerde kullanilir."
+        },
+        {
+          "id": "C",
+          "text": "map her zaman filtreleme yapar, flatMap siralama yapar."
+        },
+        {
+          "id": "D",
+          "text": "Ikisi de ayni isi yapar; fark yalnizca performanstir."
+        }
+      ],
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Stream reuse davranisi icin dogru ifade hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ayni stream uzerinde birden fazla terminal operasyon guvenle tekrar tekrar cagrilabilir."
+        },
+        {
+          "id": "B",
+          "text": "Bir terminal operasyon sonrasi stream tekrar kullanilmaya calisilirsa IllegalStateException alinabilir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece parallel streamlerde reuse yasaktir."
+        },
+        {
+          "id": "D",
+          "text": "Stream reuse kurali yalnizca map operasyonu icin gecerlidir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Parallel stream kullanirken hangi yaklasim daha guvenlidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "forEach icinde ortak mutable ArrayList'e synchronized olmadan ekleme yapmak"
+        },
+        {
+          "id": "B",
+          "text": "Yan etkili (side-effect) global degiskenleri artirmak"
+        },
+        {
+          "id": "C",
+          "text": "Sonucu collect(toList()) gibi collectorlarla toplamak"
+        },
+        {
+          "id": "D",
+          "text": "Her adimda random ile sleep cagirip threadleri dengelemek"
+        }
+      ],
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "findFirst ve findAny icin en dogru yorum hangisidir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ikisi de encounter order'i daima ayni sekilde garanti eder."
+        },
+        {
+          "id": "B",
+          "text": "findAny ozellikle parallel streamde daha esnek davranip potansiyel performans avantajı saglayabilir."
+        },
+        {
+          "id": "C",
+          "text": "findFirst yalnizca unordered streamlerde calisir."
+        },
+        {
+          "id": "D",
+          "text": "findAny her zaman son elemani dondurur."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Ayni streamde once sorted(), sonra distinct() uygulandiginda hangisi dogrudur?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "distinct() daima siralamayi bozar."
+        },
+        {
+          "id": "B",
+          "text": "Sirali streamde distinct() encounter order'i korur; sonuc sorted duzenini koruyabilir."
+        },
+        {
+          "id": "C",
+          "text": "distinct() sadece Set kaynaklarinda calisir."
+        },
+        {
+          "id": "D",
+          "text": "sorted() terminal operasyon oldugu icin distinct() calismaz."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Collectors.groupingBy ve partitioningBy farki nedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "groupingBy daima 2 grup uretir, partitioningBy sinirsiz grup uretir."
+        },
+        {
+          "id": "B",
+          "text": "partitioningBy boolean predicate'e gore tam olarak 2 bolme yapar; groupingBy anahtar fonksiyonuna gore coklu grup uretebilir."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi de yalnizca mapToInt sonrasinda kullanilir."
+        },
+        {
+          "id": "D",
+          "text": "groupingBy sonucu List doner, partitioningBy sonucu Optional doner."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "reduce operasyonu icin hangi kosul kritik onemdedir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Accumulator fonksiyonu yan etkili olmalidir."
+        },
+        {
+          "id": "B",
+          "text": "Accumulator ve combiner ozellikle parallel calismada associative olmalidir."
+        },
+        {
+          "id": "C",
+          "text": "Identity degeri daima null olmalidir."
+        },
+        {
+          "id": "D",
+          "text": "reduce sadece String streamlerde kullanilabilir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Neden bazen Stream<Integer> yerine IntStream tercih edilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "IntStream immutable olmadigi icin"
+        },
+        {
+          "id": "B",
+          "text": "Boxing/unboxing maliyetini azaltip sayisal terminal operasyonlari (sum, average) daha dogrudan sunmasi"
+        },
+        {
+          "id": "C",
+          "text": "IntStream yalnizca parallel streamde calisir"
+        },
+        {
+          "id": "D",
+          "text": "IntStream ile filter kullanilamaz"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "asagidaki toMap kullanimlarindan hangisi guvenli bir yaklasimdir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Ayni key olusma ihtimali varsa merge fonksiyonu vermeden toMap kullanmak"
+        },
+        {
+          "id": "B",
+          "text": "Duplicate key olasiliginda toMap'e uygun bir merge fonksiyonu saglamak"
+        },
+        {
+          "id": "C",
+          "text": "toMap'in duplicate key durumunda her zaman son degeri sessizce yazdigini varsaymak"
+        },
+        {
+          "id": "D",
+          "text": "toMap'in duplicate key oldugunda otomatik olarak groupingBy'a donustugunu varsaymak"
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

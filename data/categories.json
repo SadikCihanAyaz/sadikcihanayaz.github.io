@@ -7,7 +7,7 @@
       "description": "Core Java, concurrency ve backend temelleri",
       "order": 1,
       "folder": "001_java",
-      "subcategoryCount": 3,
+      "subcategoryCount": 4,
       "subcategoriesFile": "/data/001_java/subcategories.json"
     },
     {
