@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "Checked ve unchecked exception farki icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Checked exceptionlar RuntimeExceptiondan turetilir." },
-        { "id": "B", "text": "Unchecked exceptionlar compiler tarafindan zorunlu yakalanir." },
-        { "id": "C", "text": "Checked exceptionlar compiler tarafindan handle veya throws edilmeye zorlanir." },
-        { "id": "D", "text": "Ikisi arasinda hicbir fark yoktur." }
+        {
+          "id": "A",
+          "text": "Checked exceptionlar RuntimeExceptiondan turetilir."
+        },
+        {
+          "id": "B",
+          "text": "Unchecked exceptionlar compiler tarafindan zorunlu yakalanir."
+        },
+        {
+          "id": "C",
+          "text": "Checked exceptionlar compiler tarafindan handle veya throws edilmeye zorlanir."
+        },
+        {
+          "id": "D",
+          "text": "Ikisi arasinda hicbir fark yoktur."
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,12 +44,26 @@
       "singleChoice": true,
       "question": "throw ve throws arasindaki dogru fark hangisidir?",
       "choices": [
-        { "id": "A", "text": "throw method imzasinda, throws method govdesinde kullanilir." },
-        { "id": "B", "text": "throw bir exception firlatir, throws methodun firlatabilecegini bildirir." },
-        { "id": "C", "text": "throws sadece RuntimeException icin kullanilir." },
-        { "id": "D", "text": "throw ve throws ayni amaca hizmet eder." }
+        {
+          "id": "A",
+          "text": "throw method imzasinda, throws method govdesinde kullanilir."
+        },
+        {
+          "id": "B",
+          "text": "throw bir exception firlatir, throws methodun firlatabilecegini bildirir."
+        },
+        {
+          "id": "C",
+          "text": "throws sadece RuntimeException icin kullanilir."
+        },
+        {
+          "id": "D",
+          "text": "throw ve throws ayni amaca hizmet eder."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "try-with-resources yapisinin temel faydasi nedir?",
       "choices": [
-        { "id": "A", "text": "Sadece RuntimeExceptionlari yakalar." },
-        { "id": "B", "text": "Resource kapatma isini otomatik ve guvenli sekilde yapar." },
-        { "id": "C", "text": "finally blogunu yasaklar." },
-        { "id": "D", "text": "Sadece NIO siniflarinda calisir." }
+        {
+          "id": "A",
+          "text": "Sadece RuntimeExceptionlari yakalar."
+        },
+        {
+          "id": "B",
+          "text": "Resource kapatma isini otomatik ve guvenli sekilde yapar."
+        },
+        {
+          "id": "C",
+          "text": "finally blogunu yasaklar."
+        },
+        {
+          "id": "D",
+          "text": "Sadece NIO siniflarinda calisir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru ifade şudur: **Resource (kaynak) kapatma işini otomatik ve güvenli şekilde yapar.**\n\n**Try-with-resources**, Java 7 ile gelen ve `AutoCloseable` arayüzünü (interface) implement eden nesnelerin (dosya akışları, veritabanı bağlantıları, socketler vb.) işlem bittikten sonra otomatik olarak kapatılmasını sağlayan bir yapıdır.\n\n---\n\n### Neden Kullanılır? (Geleneksel Yöntem vs. Try-with-resources)\n\n#### 1. Eski Yöntem (Try-Catch-Finally)\nEskiden kaynakları kapatmak için `finally` bloğu kullanmak zorundaydık. Bu hem kod kalabalığına yol açar hem de kapatma sırasında oluşabilecek hataları yönetmeyi zorlaştırırdı.\n\n```java\n// ESKİ YÖNTEM\nScanner scanner = null;\ntry {\n    scanner = new Scanner(new File(\"test.txt\"));\n    while (scanner.hasNext()) {\n        System.out.println(scanner.nextLine());\n    }\n} catch (FileNotFoundException e) {\n    e.printStackTrace();\n} finally {\n    if (scanner != null) {\n        scanner.close(); // Manuel kapatma şart!\n    }\n}\n```\n\n#### 2. Yeni Yöntem (Try-with-resources)\nParantez içinde tanımlanan kaynak, `try` bloğu bittiği anda (hata olsa da olmasa da) otomatik olarak kapatılır.\n\n```java\n// YENİ VE GÜVENLİ YÖNTEM\ntry (Scanner scanner = new Scanner(new File(\"test.txt\"))) {\n    while (scanner.hasNext()) {\n        System.out.println(scanner.nextLine());\n    }\n} catch (FileNotFoundException e) {\n    e.printStackTrace();\n}\n// scanner.close() metodunu Java arka planda bizim için çağırdı.\n```\n\n\n\n---\n\n### Try-with-resources Hakkında Kritik Bilgiler\n\n1.  **AutoCloseable Şartı:** Bu yapıda kullanacağınız her nesne `java.lang.AutoCloseable` veya `java.io.Closeable` arayüzünü implement etmiş olmalıdır.\n2.  **Çoklu Kaynak Yönetimi:** Birden fazla kaynağı noktalı virgül (`;`) ile ayırarak tanımlayabilirsiniz:\n    ```java\n    try (BufferedReader br = new BufferedReader(new FileReader(\"input.txt\"));\n         PrintWriter pw = new PrintWriter(new FileWriter(\"output.txt\"))) {\n        // İki kaynak da otomatik kapanacak\n    }\n    ```\n3.  **Kapanma Sırası:** Kaynaklar, tanımlandıkları sıranın **tersine** kapatılır (LIFO - Last In First Out). Yani önce `pw`, sonra `br` kapatılır.\n4.  **Suppressed Exceptions:** Eğer hem `try` bloğu içinde hem de `close()` metodu sırasında hata oluşursa; Java asıl hatayı fırlatır, kapatma sırasındaki hatayı \"bastırılmış hata\" (suppressed) olarak ekler. Eski `finally` yönteminde asıl hatayı kaybetme riski vardı.\n\n### Özet Karşılaştırma\n\n| Özellik | Geleneksel Try-Finally | Try-with-resources |\n| :--- | :--- | :--- |\n| **Kod Uzunluğu** | Uzun ve karmaşık | Kısa ve temiz |\n| **Güvenlik** | Unutulursa Memory Leak riski var | Kaynak sızıntısı önlenir |\n| **Hata Yönetimi** | Hatalar birbirini ezebilir | Bastırılmış hata desteği var |\n| **Gereksinim** | Manuel müdahale | `AutoCloseable` desteği |\n\n\"finally bloğunu yasaklar\" seçeneği yanlıştır; try-with-resources ile birlikte isterseniz yine de bir `finally` bloğu yazabilirsiniz, ancak kaynak kapatmak için ona ihtiyacınız kalmaz.\n\nJava'da dosya okuma veya veritabanı (JDBC) işlemlerinde kaynakları açık unutup uygulamanın kilitlendiği (Resource Leak) bir durumla karşılaştın mı?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,13 +106,27 @@
       "singleChoice": true,
       "question": "Asagidaki kodun ciktisi nedir?",
       "choices": [
-        { "id": "A", "text": "try" },
-        { "id": "B", "text": "finally" },
-        { "id": "C", "text": "try finally" },
-        { "id": "D", "text": "Compile error" }
+        {
+          "id": "A",
+          "text": "try"
+        },
+        {
+          "id": "B",
+          "text": "finally"
+        },
+        {
+          "id": "C",
+          "text": "try finally"
+        },
+        {
+          "id": "D",
+          "text": "Compile error"
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru cevap: **try finally**\n\nBu soru, Java'daki `finally` bloğunun ne kadar \"sadık\" olduğunu ölçen klasik bir sorudur.\n\n### Neden \"try finally\"?\n\nJava'da `finally` bloğu, `try` bloğu içinde ne olursa olsun (hata çıksa da, çıkmasa da ve hatta **`return`**, `break` veya `continue` komutları çalışsa da) çalışması garanti edilen bir alandır.\n\n**Adım adım çalışma sırası:**\n1.  `try` bloğu başlar, ekrana `\"try \"` yazdırılır.\n2.  `return` komutu görülür. Java, metottan çıkmadan önce \"Yapmam gereken bir `finally` işi var mı?\" diye kontrol eder.\n3.  `finally` bloğuna girer ve ekrana `\"finally\"` yazdırılır.\n4.  `finally` bloğu bittikten sonra metottan asıl çıkış (`return`) gerçekleşir.\n\n---\n\n### `finally` Bloğunun İstisnaları (Ne Zaman Çalışmaz?)\n\n`finally` bloğu neredeyse her zaman çalışır demiştik, ancak şu çok nadir durumlarda çalışmayabilir:\n* **System.exit():** Eğer `try` içinde `System.exit(0)` çağrılırsa JVM tamamen duracağı için `finally` çalışmaz.\n* **Sonsuz Döngü / Crash:** JVM aniden çökerse veya işletim sistemi işlemi zorla sonlandırırsa.\n* **Elektrik Kesintisi:** Donanım seviyesinde bir durma söz konusuysa.\n\n---\n\n### Try-Catch-Finally Akış Özeti\n\n| Blok | Görevi |\n| :--- | :--- |\n| **try** | Riskli kodun yazıldığı yer. |\n| **catch** | Hata oluşursa hatayı yakalayıp yönettiğimiz yer. |\n| **finally** | Hata olsa da olmasa da temizlik işlemlerinin (dosya kapama, bağlantı kesme) yapıldığı yer. |\n\n\n\n### Önemli Bir \"Tuzak\" (Return Değeri)\nEğer hem `try` içinde hem de `finally` içinde bir `return` değeri varsa, **`finally` içindeki `return` değeri geçerli olur.** Ancak bu, kodun okunabilirliğini bozduğu için profesyonel projelerde asla tavsiye edilmez.\n\n```java\npublic int test() {\n    try {\n        return 1;\n    } finally {\n        return 2; // Bu değer döner!\n    }\n}\n```\n\nBu örnekle birlikte, `try-with-resources` konusunun `finally` yazma ihtiyacını nasıl azalttığını daha net görebiliyor musun?\n",
       "optionExplanations": [],
       "questionCode": "try {\n  System.out.print(\"try \" );\n  return;\n} finally {\n  System.out.print(\"finally\");\n}",
       "answerCode": ""
@@ -82,13 +138,27 @@
       "singleChoice": true,
       "question": "Genericsde type erasure neyi ifade eder?",
       "choices": [
-        { "id": "A", "text": "Generic tiplerin runtime da aynen korunmasini." },
-        { "id": "B", "text": "Compilerin generic tip bilgisini runtime oncesi silmesini." },
-        { "id": "C", "text": "JVMin generic siniflari calistirmamasini." },
-        { "id": "D", "text": "Sadece primitive tiplerle generic kullanilabilmesini." }
+        {
+          "id": "A",
+          "text": "Generic tiplerin runtime da aynen korunmasini."
+        },
+        {
+          "id": "B",
+          "text": "Compilerin generic tip bilgisini runtime oncesi silmesini."
+        },
+        {
+          "id": "C",
+          "text": "JVMin generic siniflari calistirmamasini."
+        },
+        {
+          "id": "D",
+          "text": "Sadece primitive tiplerle generic kullanilabilmesini."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Compiler'ın generic tip bilgisini runtime öncesi silmesini.**\n\nJava'da **Type Erasure (Tip Silme)**, Java 5 ile gelen Generics özelliğinin geriye dönük uyumluluğunu (backward compatibility) sağlamak için kullanılan bir yöntemdir. Basitçe; yazdığın `<T>` veya `<String>` gibi tip bilgileri sadece **derleme (compile-time)** aşamasında kontrol edilir, ancak kod bytecode'a çevrildiğinde bu bilgiler silinir.\n\n---\n\n### Type Erasure Nasıl Çalışır?\n\nDerleyici (compiler) şu iki ana adımı izler:\n\n1.  **Tip Bilgisini Silme:** Tüm generic tipler, eğer bir sınır (bound) belirtilmemişse `Object` tipine çevrilir. Eğer `<T extends Number>` gibi bir sınır varsa, `Number` tipine çevrilir.\n2.  **Casting Ekleme:** Tip güvenliğini sağlamak için gerekli yerlere otomatik olarak \"type cast\" (tip dönüşümü) kodları eklenir.\n\n#### Örnekle Açıklama\n\n**Senin yazdığın kod:**\n```java\nList<String> liste = new ArrayList<>();\nliste.add(\"Merhaba\");\nString s = liste.get(0);\n```\n\n**Derleyicinin (Runtime için) oluşturduğu kod:**\n```java\nList liste = new ArrayList();\nliste.add(\"Merhaba\");\nString s = (String) liste.get(0); // Cast otomatik eklendi, generic bilgi silindi!\n```\n\n\n\n---\n\n### Type Erasure'ın Sonuçları (Neleri Yapamazsın?)\n\nTip bilgisi çalışma zamanında (runtime) silindiği için bazı kısıtlamalar doğar:\n\n* **Instanceof Kontrolü Yapılamaz:** `if (obj instanceof List<String>)` diyemezsin, çünkü çalışma zamanında o sadece bir `List`'tir.\n* **Generic Tipte Nesne Oluşturulamaz:** `T obj = new T();` yazamazsın. Derleyici `new Object();` mi yoksa başka bir şey mi yapacağını bilemez.\n* **Primitive Tipler Kullanılamaz:** `List<int>` yazamazsın. Çünkü `int` bir nesne değildir ve `Object`'e (veya silinen tipe) dönüştürülemez. Bu yüzden `Integer` gibi wrapper sınıflar kullanılır.\n* **Aynı Sınıfın Farklı Generic Tipleriyle Overload Yapılamaz:**\n    ```java\n    // HATA: Derleme zamanında ikisi de print(List l) olarak göründüğü için çakışır.\n    void print(List<String> l) {}\n    void print(List<Integer> l) {} \n    ```\n\n---\n\n### Neden Böyle Bir Şey Var?\n\nEğer Java generic bilgileri runtime'da korusaydı, Java 5 öncesi yazılmış milyonlarca satır kod (generic içermeyenler) yeni JVM üzerinde çalışamazdı. Type Erasure sayesinde, eski `List` (Raw Type) ile yeni `List<String>` bytecode seviyesinde birbirine uyumlu hale gelir.\n\nGenerics kullanırken hiç `List<String>` beklediğin bir yerde `List<Integer>` gelmesi gibi garip bir \"Heap Pollution\" hatasıyla karşılaştın mı?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -99,12 +169,26 @@
       "singleChoice": true,
       "question": "class Box<T extends Number> tanimi ne saglar?",
       "choices": [
-        { "id": "A", "text": "T sadece String olabilir." },
-        { "id": "B", "text": "T herhangi bir primitive tip olabilir." },
-        { "id": "C", "text": "T Number veya alt tipleri ile sinirlanir." },
-        { "id": "D", "text": "T runtime da Numbera cast edilir." }
+        {
+          "id": "A",
+          "text": "T sadece String olabilir."
+        },
+        {
+          "id": "B",
+          "text": "T herhangi bir primitive tip olabilir."
+        },
+        {
+          "id": "C",
+          "text": "T Number veya alt tipleri ile sinirlanir."
+        },
+        {
+          "id": "D",
+          "text": "T runtime da Numbera cast edilir."
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -116,12 +200,26 @@
       "singleChoice": true,
       "question": "Immutable class tasarimi icin dogru pratik hangisidir?",
       "choices": [
-        { "id": "A", "text": "Fieldlari public yapmak." },
-        { "id": "B", "text": "Setter methodlari ile disardan degisiklige izin vermek." },
-        { "id": "C", "text": "Fieldlari final yapmak ve mutable referanslari defensive copy ile korumak." },
-        { "id": "D", "text": "Classi abstract yapmak." }
+        {
+          "id": "A",
+          "text": "Fieldlari public yapmak."
+        },
+        {
+          "id": "B",
+          "text": "Setter methodlari ile disardan degisiklige izin vermek."
+        },
+        {
+          "id": "C",
+          "text": "Fieldlari final yapmak ve mutable referanslari defensive copy ile korumak."
+        },
+        {
+          "id": "D",
+          "text": "Classi abstract yapmak."
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -133,13 +231,27 @@
       "singleChoice": true,
       "question": "Java record tipleri icin hangisi dogrudur?",
       "choices": [
-        { "id": "A", "text": "Record alanlari varsayilan olarak mutabledir." },
-        { "id": "B", "text": "Recordlar veri tasima icin kisa ve final field odakli bir yapidir." },
-        { "id": "C", "text": "Record classlar mutlaka bir classi extend etmelidir." },
-        { "id": "D", "text": "Record icinde hic method yazilamaz." }
+        {
+          "id": "A",
+          "text": "Record alanlari varsayilan olarak mutabledir."
+        },
+        {
+          "id": "B",
+          "text": "Recordlar veri tasima icin kisa ve final field odakli bir yapidir."
+        },
+        {
+          "id": "C",
+          "text": "Record classlar mutlaka bir classi extend etmelidir."
+        },
+        {
+          "id": "D",
+          "text": "Record icinde hic method yazilamaz."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Recordlar veri taşıma için kısa ve final field odakli bir yapıdır.**\n\nJava 14 ile (Java 16'da tam olarak) gelen **Record** yapısı, sadece veri taşımak amacıyla kullanılan (DTO, Value Object gibi) sınıfları daha az kodla (boilerplate kodlardan arınmış şekilde) yazmamızı sağlar.\n\n### Record Yapısının Özellikleri\n\n1.  **Immutable (Değişmez):** Tüm alanlar (`fields`) otomatik olarak `private final` olur. Yani bir record nesnesi oluşturulduktan sonra içindeki veriyi değiştiremezsiniz.\n2.  **Otomatik Metotlar:** Java, yazdığınız alanlar için şu metotları arka planda otomatik olarak oluşturur:\n    * **Constructor** (Tüm alanları içeren yapıcı metot)\n    * **Getter** metotları (Ancak `getName()` yerine sadece `name()` şeklinde)\n    * **equals()** ve **hashCode()**\n    * **toString()**\n3.  **Kalıtım Kısıtlaması:** Recordlar otomatik olarak `final` sınıflardır, başka bir sınıfı **extend edemezler** ve kendilerinden kalıtım alınamaz. Ancak `interface` implement edebilirler.\n\n---\n\n### Örnek: Normal Class vs Record\n\nDiyelim ki bir kullanıcı verisi taşıyacağız.\n\n#### 1. Geleneksel Yöntem (Lombok veya manuel yazım olmadan):\n```java\npublic class User {\n    private final String name;\n    private final int age;\n\n    public User(String name, int age) {\n        this.name = name;\n        this.age = age;\n    }\n\n    public String name() { return name; }\n    public int age() { return age; }\n\n    @Override\n    public boolean equals(Object o) { ... }\n    @Override\n    public int hashCode() { ... }\n    @Override\n    public String toString() { ... }\n}\n```\n\n#### 2. Record ile Aynı Yapı:\nSadece bir satırda aynı işi yapabilirsiniz:\n```java\npublic record User(String name, int age) {}\n```\n\n### Record İçinde Metot Yazılabilir mi?\nEvet, \"Record içinde hiç method yazılamaz\" seçeneği yanlıştır. Record içine yardımcı metotlar, statik metotlar veya özel bir constructor (Compact Constructor) ekleyebilirsiniz.\n\n**Detaylı Örnek:**\n```java\npublic record User(String name, int age) {\n    \n    // Compact Constructor: Doğrulama (Validation) yapmak için kullanılır\n    public User {\n        if (age < 0) {\n            throw new IllegalArgumentException(\"Yaş negatif olamaz!\");\n        }\n    }\n\n    // Ekstra metot eklenebilir\n    public String nameInUpperCase() {\n        return name.toUpperCase();\n    }\n}\n```\n\n\n\n### Özetle Farklar\n\n| Özellik | Normal Class | Record |\n| :--- | :--- | :--- |\n| **Field Durumu** | Mutable olabilir | Her zaman `final` (Immutable) |\n| **Boilerplate Kod** | Fazla (Getter, Setter, vb.) | Çok az (Otomatik oluşturulur) |\n| **Kalıtım** | Serbest | Kısıtlı (Sadece interface) |\n| **Kullanım Amacı** | İş mantığı (Business Logic) | Veri taşıma (Data Carrier) |\n\nRecordlar, özellikle **Spring Boot** projelerinde API'den dönen cevaplar (DTO) için hayat kurtarıcıdır. Lombok kullanıyor musun, yoksa projende Record'lara şans verdin mi?\n\n\n**Lombok**, Java dünyasında \"boilerplate\" (basmakalıp/tekrarlayan) kodları temizlemek için kullanılan, derleme zamanında (compile-time) çalışan çok popüler bir kütüphanedir.\n\nAslında az önce konuştuğumuz **Record** yapısının sunduğu imkanları (ve çok daha fazlasını), standart Java sınıflarına **anotasyonlar** aracılığıyla getirir.\n\n---\n\n### Lombok Neyi Çözer?\nNormal bir Java sınıfında (POJO), sadece iki alanı olan bir sınıf için bile onlarca satır kod yazman gerekir:\n1.  **Getter/Setter** metotları.\n2.  **toString()** metodu.\n3.  **equals()** ve **hashCode()** metotları.\n4.  **Constructor**lar (No-args, All-args).\n\nLombok ile tüm bu zahmetten tek bir kelimeyle kurtulursun.\n\n---\n\n### Örnek Karşılaştırma\n\n#### Lombok Olmadan (Klasik Yöntem)\n```java\npublic class User {\n    private Long id;\n    private String name;\n\n    public User() {}\n    public User(Long id, String name) { this.id = id; this.name = name; }\n    \n    public Long getId() { return id; }\n    public void setId(Long id) { this.id = id; }\n    // ... toString, equals, hashCode ... (Sıkıcı ve uzun)\n}\n```\n\n#### Lombok İle\nAynı sınıf, derleme sırasında yukarıdaki tüm metotlara sahip olur:\n```java\n@Data // Getter, Setter, toString, equals, hashCode hepsini üretir\n@NoArgsConstructor // Parametresiz constructor üretir\n@AllArgsConstructor // Tüm alanları içeren constructor üretir\npublic class User {\n    private Long id;\n    private String name;\n}\n```\n\n---\n\n### En Çok Kullanılan Lombok Anotasyonları\n\n| Anotasyon | Ne İşe Yarar? |\n| :--- | :--- |\n| **@Getter / @Setter** | İlgili alanlar için okuma ve yazma metotlarını üretir. |\n| **@ToString** | Nesnenin içeriğini yazdıran metodu üretir. |\n| **@EqualsAndHashCode** | Nesne karşılaştırma mantığını kurar. |\n| **@Data** | Yukarıdakilerin hepsini kapsayan \"süper\" anotasyondur. |\n| **@Builder** | Nesne oluştururken `User.builder().name(\"Ali\").id(1L).build()` şeklinde zincirleme yapı sağlar. |\n| **@Slf4j** | Sınıf içine otomatik olarak bir `log` nesnesi ekler. |\n| **@Value** | Sınıfı immutable (değişmez) yapar (Record'a çok benzer). |\n\n---\n\n### Lombok Nasıl Çalışır? (Büyü Mü?)\nHayır, büyü değil. Lombok bir **Annotation Processor**'dır. \n\n1.  Sen kodunu yazarsın (`@Data` ile).\n2.  Java derleyicisi (javac) çalışmaya başlar.\n3.  Lombok araya girer, senin sınıflarını inceler ve o anlattığımız Getter/Setter metodlarını **bytecode** seviyesinde sınıfın içine \"enjekte\" eder.\n4.  Sonuçta oluşan `.class` dosyasında tüm o metotlar sanki sen elinle yazmışsın gibi yer alır.\n\n---\n\n### Lombok vs. Record\n* **Record:** Java'nın yerleşik özelliğidir, tamamen **immutable**'dır (veriyi değiştiremezsin).\n* **Lombok:** Harici bir kütüphanedir. Eğer sınıfının verilerini sonradan değiştirmek istiyorsan (**Setter** gerekiyorsa), Record kullanamazsın ama Lombok kullanabilirsin.\n\n\n\n**Küçük Bir Uyarı:** Lombok kullanabilmek için sadece projenin içine eklemek yetmez; kullandığın IDE'ye (IntelliJ veya Eclipse) **Lombok Plugin**'ini de yüklemen gerekir. Aksi halde IDE'n \"Getter metodunu bulamıyorum\" diye hata verir ama kodun terminalden sorunsuz derlenir.\n\nSenin projende verileri genelde nesne oluştuktan sonra değiştiriyor musun (Setter lazım mı), yoksa veriler sabit mi kalıyor?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -150,13 +262,27 @@
       "singleChoice": true,
       "question": "Custom exception tasariminda en iyi yaklasim hangisidir?",
       "choices": [
-        { "id": "A", "text": "Tum hatalari tek bir Exception classinda toplamak." },
-        { "id": "B", "text": "Anlamli domain exceptionlari tanimlayip context bilgisi tasimak." },
-        { "id": "C", "text": "Sadece Error turevleri kullanmak." },
-        { "id": "D", "text": "Mesajsiz bos exception firlatmak." }
+        {
+          "id": "A",
+          "text": "Tum hatalari tek bir Exception classinda toplamak."
+        },
+        {
+          "id": "B",
+          "text": "Anlamli domain exceptionlari tanimlayip context bilgisi tasimak."
+        },
+        {
+          "id": "C",
+          "text": "Sadece Error turevleri kullanmak."
+        },
+        {
+          "id": "D",
+          "text": "Mesajsiz bos exception firlatmak."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru yaklaşım: **Anlamlı domain exceptionları tanımlayıp context (bağlam) bilgisi taşımak.**\n\nYazılımda \"Ne olduğu\" (Hata tipi) kadar, \"Neden ve hangi şartlarda olduğu\" (Context) da önemlidir. Sadece `RuntimeException` fırlatmak yerine, iş mantığına (Domain) özel hata sınıfları oluşturmak; hata ayıklamayı (debugging), loglamayı ve kullanıcıya anlamlı cevap dönmeyi kolaylaştırır.\n\nİşte profesyonel bir **Custom Domain Exception** tasarımı ve kullanımı:\n\n---\n\n### 1. Temel Domain Exception (Base Exception)\nÖnce tüm custom hataların türeyeceği, içinde hata kodu ve zaman damgası gibi ortak alanlar barındıran bir temel sınıf yazılır.\n\n```java\npublic abstract class BaseException extends RuntimeException {\n    private final String errorCode;\n    private final LocalDateTime timestamp;\n\n    public BaseException(String message, String errorCode) {\n        super(message);\n        this.errorCode = errorCode;\n        this.timestamp = LocalDateTime.now();\n    }\n    // Getterlar...\n}\n```\n\n### 2. Özel Domain Exception (Context Bilgisi ile)\nDiyelim ki bir stok yetersizliği hatası tasarlıyoruz. Sadece \"Stok yok\" demek yerine; hangi üründen ne kadar istendiğini ve stokta ne kadar kaldığını da içine ekliyoruz.\n\n```java\npublic class InsufficientStockException extends BaseException {\n    private final String productId;\n    private final Integer requestedQuantity;\n    private final Integer availableQuantity;\n\n    public InsufficientStockException(String productId, Integer requested, Integer available) {\n        super(\n            String.format(\"Ürün (ID: %s) için yetersiz stok. İstenen: %d, Mevcut: %d\", \n                          productId, requested, available),\n            \"ERR_STOCK_001\"\n        );\n        this.productId = productId;\n        this.requestedQuantity = requested;\n        this.availableQuantity = available;\n    }\n}\n```\n\n### 3. Kullanımı (Business Logic)\nServis katmanında bu hatayı fırlatırken tüm detayları içine gömüyoruz.\n\n```java\n@Service\npublic class OrderService {\n    public void processOrder(String productId, int quantity) {\n        int currentStock = stockRepository.getAmount(productId);\n\n        if (currentStock < quantity) {\n            // Context bilgisi taşınıyor!\n            throw new InsufficientStockException(productId, quantity, currentStock);\n        }\n        // Sipariş işlemleri...\n    }\n}\n```\n\n### 4. Global Exception Handler (Spring Boot Örneği)\nBu hatayı yakalayıp kullanıcıya şık bir JSON dönmek için kullanılır.\n\n```java\n@RestControllerAdvice\npublic class GlobalExceptionHandler {\n\n    @ExceptionHandler(InsufficientStockException.class)\n    public ResponseEntity<ErrorResponse> handleStockException(InsufficientStockException ex) {\n        ErrorResponse error = new ErrorResponse(\n            ex.getErrorCode(),\n            ex.getMessage(),\n            LocalDateTime.now()\n        );\n        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);\n    }\n}\n```\n\n\n\n---\n\n### Neden Bu Yaklaşım En İyisidir?\n\n* **Loglama:** Loglara baktığında sadece \"Hata oluştu\" değil, \"Ürün X için 500 istendi ama sadece 3 tane vardı\" bilgisini görürsün. Bu, hatayı çözme süreni %80 kısaltır.\n* **Kullanıcı Deneyimi:** Frontend'e hata kodunu (`ERR_STOCK_001`) göndererek, arayüzün bu duruma özel bir \"Stok Güncelle\" butonu çıkarmasını sağlayabilirsin.\n* **Temiz Kod:** `try-catch` bloklarını Controller'lardan temizler, hatayı merkezi bir yerde (Global Handler) yönetirsin.\n\n**Pro tüyosu:** Eğer hata mesajlarını `messages.properties` gibi dosyalardan yönetirsen (i18n), custom exception yapın çok dilli desteğe de tam uyumlu hale gelir. Projende hata mesajlarını kodun içine mi yazıyorsun yoksa dışarıdan mı yönetiyorsun?\n\n\n---\n\nRestControllerAdvice bir interceptors mudur?\n\n\nHayır, **`@RestControllerAdvice`** teknik olarak bir **Interceptor değildir**, ancak her ikisi de Spring'in **AOP (Aspect Oriented Programming - Cephe Yönelimli Programlama)** mantığına dayanan \"çapraz kesen ilgiler\" (cross-cutting concerns) mekanizmasıdır.\n\nAralarındaki farkı bir benzetmeyle açıklayalım: **Interceptor** bir binanın girişindeki **güvenlik görevlisidir**, **@RestControllerAdvice** ise binanın içindeki **revir/yardım masasıdır.**\n\n---\n\n### Temel Farklar\n\n| Özellik | Interceptor (`HandlerInterceptor`) | `@RestControllerAdvice` |\n| :--- | :--- | :--- |\n| **Görevi** | İstek gelince veya giderken araya girmek. | Hata yönetimini ve veri dönüşümünü merkezileştirmek. |\n| **Odak Noktası** | **HTTP İstek Akışı** (Auth, Loglama, Süre ölçme). | **İstisna (Exception)** ve **Response Gövdesi**. |\n| **Müdahale Zamanı** | Metot çalışmadan önce, sonra ve tamamlanınca. | Metot içinde bir hata fırlatıldığında. |\n| **Bağlam (Context)** | `HttpServletRequest` ve `Response` objelerine erişir. | Direkt olarak fırlatılan **Exception** nesnesine erişir. |\n\n---\n\n### @RestControllerAdvice Neler Yapar?\n\nBu anotasyon sadece hataları yakalamakla kalmaz, üç ana yeteneği birleştirir:\n\n1.  **@ExceptionHandler:** Fırlatılan özel exception'ları yakalayıp kullanıcıya şık bir JSON döner.\n2.  **@ModelAttribute:** Tüm Controller'lar için ortak veriler (örneğin giriş yapmış kullanıcı bilgisi) ekler.\n3.  **@InitBinder:** Veri bağlama (Data Binding) kurallarını (örneğin tarih formatı) tüm uygulama için sabitler.\n\n\n\n### Akış Nasıl İşler?\n\n1.  İstemci bir istek gönderir.\n2.  **Filter**'lar çalışır.\n3.  **Interceptor** (`preHandle`) devreye girer (Token kontrolü vb.).\n4.  İstek **Controller** metoduna ulaşır.\n5.  **HATA OLUŞUR:** Metot içinde bir `throw new InsufficientStockException()` yapılır.\n6.  İşte burada **`@RestControllerAdvice`** devreye girer. Interceptor bu hatayı \"yönetmek\" için değil, sadece \"görmek\" için oradadır. Advice ise hatayı alır, paketler ve \"400 Bad Request\" gibi bir cevaba dönüştürür.\n7.  **Interceptor** (`afterCompletion`) çalışır ve döngü biter.\n\n### Neden İkisi de Lazım?\n\n* Eğer isteğin içeriğine bakıp \"Senin yetkin yok, içeri giremezsin\" demek istiyorsan **Interceptor** kullanmalısın.\n* Eğer \"İçeride bir şeyler ters gitti, bunu kullanıcıya nasıl açıklayacağım?\" diyorsan **`@RestControllerAdvice`** kullanmalısın.\n\nYani `@RestControllerAdvice`, interceptor'ların yapamadığı **\"metot içindeki patlamaları kontrollü bir şekilde dışarı sızdırma\"** görevini üstlenir. \n\nŞu anki projende hata yönetimi için `@RestControllerAdvice` kullanıyor musun, yoksa her metodun içinde `try-catch` mi yazıyorsun?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -167,12 +293,26 @@
       "singleChoice": true,
       "question": "Bu kodun sonucu ne olur?",
       "choices": [
-        { "id": "A", "text": "checked" },
-        { "id": "B", "text": "unchecked" },
-        { "id": "C", "text": "Compile error" },
-        { "id": "D", "text": "Hicbir sey yazmaz" }
+        {
+          "id": "A",
+          "text": "checked"
+        },
+        {
+          "id": "B",
+          "text": "unchecked"
+        },
+        {
+          "id": "C",
+          "text": "Compile error"
+        },
+        {
+          "id": "D",
+          "text": "Hicbir sey yazmaz"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class MyEx extends Exception {}\ntry {\n  throw new MyEx();\n} catch (Exception e) {\n  System.out.println(\"checked\");\n}",

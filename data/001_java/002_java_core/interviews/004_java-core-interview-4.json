@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "InputStream ve Reader arasindaki temel fark nedir?",
       "choices": [
-        { "id": "A", "text": "InputStream character, Reader byte bazlidir." },
-        { "id": "B", "text": "InputStream byte, Reader character bazlidir." },
-        { "id": "C", "text": "Ikisi de sadece text dosyalari okuyabilir." },
-        { "id": "D", "text": "Reader sadece network socket icin kullanilir." }
+        {
+          "id": "A",
+          "text": "InputStream character, Reader byte bazlidir."
+        },
+        {
+          "id": "B",
+          "text": "InputStream byte, Reader character bazlidir."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi de sadece text dosyalari okuyabilir."
+        },
+        {
+          "id": "D",
+          "text": "Reader sadece network socket icin kullanilir."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,12 +44,26 @@
       "singleChoice": true,
       "question": "try-with-resources kullanildiginda ne garanti edilir?",
       "choices": [
-        { "id": "A", "text": "Resource sadece hata durumunda kapanir." },
-        { "id": "B", "text": "Resource kapanmasi finally yazmadan otomatik saglanir." },
-        { "id": "C", "text": "Sadece FileInputStream icin gecerlidir." },
-        { "id": "D", "text": "close metodu hic cagrilmaz." }
+        {
+          "id": "A",
+          "text": "Resource sadece hata durumunda kapanir."
+        },
+        {
+          "id": "B",
+          "text": "Resource kapanmasi finally yazmadan otomatik saglanir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece FileInputStream icin gecerlidir."
+        },
+        {
+          "id": "D",
+          "text": "close metodu hic cagrilmaz."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "BufferedInputStream veya BufferedReader kullanmanin temel sebebi nedir?",
       "choices": [
-        { "id": "A", "text": "Dosyanin encodingini otomatik UTF-8 yapmasi." },
-        { "id": "B", "text": "Sistem cagrilarini azaltarak IO performansini arttirmasi." },
-        { "id": "C", "text": "Dosya boyutunu kucultmesi." },
-        { "id": "D", "text": "Sadece binary dosya desteklemesi." }
+        {
+          "id": "A",
+          "text": "Dosyanin encodingini otomatik UTF-8 yapmasi."
+        },
+        {
+          "id": "B",
+          "text": "Sistem cagrilarini azaltarak IO performansini arttirmasi."
+        },
+        {
+          "id": "C",
+          "text": "Dosya boyutunu kucultmesi."
+        },
+        {
+          "id": "D",
+          "text": "Sadece binary dosya desteklemesi."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Sistem çağrılarını azaltarak IO performansını artırması.**\n\nVeri okuma işlemlerinde disk veya ağ gibi fiziksel katmanlara erişmek \"maliyetli\" bir iştir. Her bir karakter veya byte için doğrudan işletim sistemine gidip \"Bana bir sonrakini ver\" demek, uygulamanın ciddi şekilde yavaşlamasına neden olur.\n\n---\n\n### Nasıl Çalışır? (Buffering Mantığı)\n\n**Buffered** sınıfları, \"arka planda toplu alışveriş yapan bir kurye\" gibi çalışır:\n\n1.  Siz `read()` dediğinizde, bu sınıflar diske gidip sadece o 1 karakteri almaz.\n2.  Arka planda (genellikle **8 KB** boyutunda) büyük bir parçayı tek seferde okuyup bellekteki bir **tampon (buffer)** alana atarlar.\n3.  Siz sonraki karakterleri istediğinizde, bunlar diskten değil, bellekteki bu hazır alandan (RAM) çok hızlı bir şekilde size sunulur.\n4.  Bellekteki veri bittiğinde, tekrar bir \"sistem çağrısı\" (System Call) yapılarak bir sonraki büyük parça çekilir.\n\n\n\n---\n\n### BufferedReader vs. BufferedInputStream\n\nİkisi de aynı performansı hedefler ancak çalıştıkları veri tipi farklıdır:\n\n| Sınıf | Veri Tipi | Kullanım Alanı | Önemli Metot |\n| :--- | :--- | :--- | :--- |\n| **BufferedInputStream** | Byte (8-bit) | Resim, video, PDF gibi binary dosyalar. | `read()` |\n| **BufferedReader** | Character (16-bit) | `.txt`, `.csv`, `.json` gibi metin dosyaları. | `readLine()` |\n\n### Kod Örneği (BufferedReader)\n\nMetin dosyalarını satır satır okumak için en verimli yöntem budur:\n\n```java\ntry (BufferedReader br = new BufferedReader(new FileReader(\"notlar.txt\"))) {\n    String line;\n    while ((line = br.readLine()) != null) {\n        System.out.println(line); // Bellekten hızlıca okur\n    }\n} catch (IOException e) {\n    e.printStackTrace();\n}\n```\n\n---\n\n### Özet Avantajlar\n\n* **Performans:** Disk/Ağ erişim sayısını minimize eder.\n* **Kolaylık:** `BufferedReader` içindeki `readLine()` metodu, metin dosyalarını işlemeyi çok pratik hale getirir.\n* **Verimlilik:** İşlemci (CPU), sürekli I/O beklemek yerine işine odaklanabilir.\n\n**Unutma:** `BufferedWriter` veya `BufferedOutputStream` kullanarak veri yazarken, bazen verinin diske hemen gitmesini garanti altına almak için `flush()` metodunu çağırman gerekebilir. Aksi takdirde veri tamponda (buffer) asılı kalabilir ve program kapandığında kaybolabilir.\n\nGenelde büyük veri dosyalarıyla (Loglar, CSV dataları vb.) mı çalışıyorsun?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,13 +106,27 @@
       "singleChoice": true,
       "question": "Files.readAllBytes(path) icin en buyuk risk hangisidir?",
       "choices": [
-        { "id": "A", "text": "Kucuk dosyalarda calismamasi." },
-        { "id": "B", "text": "Buyuk dosyalarda tum icerigi memorye alarak OutOfMemory riski olusturmasi." },
-        { "id": "C", "text": "Sadece Windows'ta calismasi." },
-        { "id": "D", "text": "Binary dosyalari okumamasi." }
+        {
+          "id": "A",
+          "text": "Kucuk dosyalarda calismamasi."
+        },
+        {
+          "id": "B",
+          "text": "Buyuk dosyalarda tum icerigi memorye alarak OutOfMemory riski olusturmasi."
+        },
+        {
+          "id": "C",
+          "text": "Sadece Windows'ta calismasi."
+        },
+        {
+          "id": "D",
+          "text": "Binary dosyalari okumamasi."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Büyük dosyalarda tüm içeriği memorye (RAM) alarak OutOfMemory (OOM) riski oluşturması.**\n\n`Files.readAllBytes(path)` metodu, dosyanın tamamını tek seferde okur ve bir `byte[]` dizisine aktarır. Eğer dosya boyutu (örneğin 2 GB), uygulamanızın kullanabileceği maksimum bellek miktarından (Heap Size) büyükse, Java `java.lang.OutOfMemoryError` fırlatarak çöker.\n\n---\n\n### Çözümü: Stream (Akış) Kullanımı\n\nBüyük dosyaları güvenli bir şekilde işlemenin yolu, dosyayı belleğe tek seferde yüklemek yerine **parça parça (chunk by chunk)** okumaktır. Bu sayede bellek kullanımı dosya boyutundan bağımsız olarak sabit kalır.\n\nJava'da bunun için iki yaygın çözüm vardır:\n\n#### 1. Files.lines() (Metin Dosyaları İçin)\nJava 8 ile gelen bu metot, dosyayı satır satır okur ve bellek dostu bir `Stream` döndürür.\n\n```java\nimport java.nio.file.*;\nimport java.io.IOException;\nimport java.util.stream.Stream;\n\npublic class LargeFileScanner {\n    public static void main(String[] args) {\n        Path path = Paths.get(\"cok_buyuk_dosya.txt\");\n\n        // try-with-resources kullanımı bellek ve kaynak yönetimi için kritiktir\n        try (Stream<String> lines = Files.lines(path)) {\n            lines.forEach(line -> {\n                // Her satırı burada işle\n                // Bellekte sadece o anki satır tutulur\n                System.out.println(\"Okunan satır: \" + line);\n            });\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }\n}\n```\n\n#### 2. InputStream ile Manuel Buffer Kullanımı (Binary Dosyalar İçin)\nResim, video gibi binary dosyalar için belirli boyutlarda (örneğin 8 KB) parçalar halinde okuma yapılır.\n\n```java\nimport java.io.*;\nimport java.nio.file.*;\n\npublic class LargeBinaryReader {\n    public static void main(String[] args) {\n        Path path = Paths.get(\"buyuk_video.mp4\");\n\n        try (InputStream is = Files.newInputStream(path)) {\n            byte[] buffer = new byte[8192]; // 8 KB'lık bir tampon\n            int bytesRead;\n            \n            while ((bytesRead = is.read(buffer)) != -1) {\n                // buffer içinde o an okunan 8KB'lık veri var\n                // Bu parçayı bir yere yazabilir veya işleyebilirsiniz\n            }\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }\n}\n```\n\n\n\n---\n\n### Özet Karşılaştırma\n\n| Metot | Bellek Kullanımı | Risk | Önerilen Durum |\n| :--- | :--- | :--- | :--- |\n| **readAllBytes()** | Dosya boyutu kadar | Çok Yüksek (OOM) | Sadece KB seviyesindeki küçük dosyalar. |\n| **Files.lines()** | Satır boyutu kadar | Düşük | Büyük metin/log dosyaları. |\n| **newInputStream()** | Tanımlanan buffer kadar | Çok Düşük | Büyük binary veya her türden devasa dosyalar. |\n\n**Pro İpucu:** Eğer modern Java (Java 11+) kullanıyorsan ve dosya çok büyük değilse (birkaç MB), `Files.readString(path)` metodu da konforludur ancak o da arka planda tüm içeriği belleğe aldığı için dikkatli kullanılmalıdır. \n\nGenellikle işlediğin dosyalar GB seviyesinde mi yoksa daha küçük yapılandırma dosyaları mı?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -81,12 +137,26 @@
       "singleChoice": true,
       "question": "java.io.File yerine java.nio.file.Path tercih etmenin nedeni nedir?",
       "choices": [
-        { "id": "A", "text": "Path sadece string tutar, IO yapamaz." },
-        { "id": "B", "text": "NIO API daha zengin operasyonlar ve daha modern file system desteği sunar." },
-        { "id": "C", "text": "File artik deprecated oldugu icin kullanilamaz." },
-        { "id": "D", "text": "Path sadece Linux'ta calisir." }
+        {
+          "id": "A",
+          "text": "Path sadece string tutar, IO yapamaz."
+        },
+        {
+          "id": "B",
+          "text": "NIO API daha zengin operasyonlar ve daha modern file system desteği sunar."
+        },
+        {
+          "id": "C",
+          "text": "File artik deprecated oldugu icin kullanilamaz."
+        },
+        {
+          "id": "D",
+          "text": "Path sadece Linux'ta calisir."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -98,13 +168,27 @@
       "singleChoice": true,
       "question": "NIO Buffer icin flip() metodunun amaci nedir?",
       "choices": [
-        { "id": "A", "text": "Bufferi sifirlayip capacityyi degistirmek." },
-        { "id": "B", "text": "Write moddan read moda gecis icin limit ve position ayarlamak." },
-        { "id": "C", "text": "Bufferi diske yazmak." },
-        { "id": "D", "text": "Channeli kapatmak." }
+        {
+          "id": "A",
+          "text": "Bufferi sifirlayip capacityyi degistirmek."
+        },
+        {
+          "id": "B",
+          "text": "Write moddan read moda gecis icin limit ve position ayarlamak."
+        },
+        {
+          "id": "C",
+          "text": "Bufferi diske yazmak."
+        },
+        {
+          "id": "D",
+          "text": "Channeli kapatmak."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Write moddan read moda geçiş için limit ve position ayarlamak.**\n\nJava NIO (New I/O) dünyasında Buffer'lar, verinin geçici olarak depolandığı alanlardır. Ancak standart bir `Array` gibi çalışmazlar; içeride verinin nerede olduğunu takip eden **Position** ve **Limit** adlı imleçler (pointer) vardır.\n\n---\n\n### `flip()` Metodu Neden Gereklidir?\n\nBir Buffer'a veri yazdığınızda, `position` imleci her yeni veriyle birlikte ileri gider. Yazma işlemi bittiğinde ve bu veriyi okumak istediğinizde, imleç verinin sonunda kalır. Eğer doğrudan okumaya çalışırsanız, imleç son noktada olduğu için hiçbir şey okuyamazsınız.\n\nİşte `flip()` tam burada devreye girer:\n1.  **Limit** değerini, o anki `position` değerine eşitler (Böylece \"buraya kadar okuyabilirsin\" der).\n2.  **Position** değerini **0**'a çeker (Böylece \"baştan okumaya başla\" der).\n\n\n\n---\n\n### Kod Örneği\n\nAşağıdaki örnekte bir mesajın Buffer'a yazılıp, ardından `flip()` ile okunmasını görebilirsin:\n\n```java\nimport java.nio.ByteBuffer;\n\npublic class NIOExample {\n    public static void main(String[] args) {\n        // 1. 1024 byte kapasiteli bir buffer oluştur\n        ByteBuffer buffer = ByteBuffer.allocate(1024);\n\n        // 2. Buffer'a veri yaz (Write Mode)\n        // Şu an Position: 4, Limit: 1024\n        buffer.put((byte) 'H');\n        buffer.put((byte) 'e');\n        buffer.put((byte) 'l');\n        buffer.put((byte) 'l');\n\n        // 3. FLIP YAP! (Read Mode'a geçiş)\n        // Position 0'a döner, Limit 4 olur.\n        buffer.flip();\n\n        // 4. Veriyi oku\n        while (buffer.hasRemaining()) {\n            System.out.print((char) buffer.get());\n        }\n        \n        // 5. Temizle (Yeniden yazmaya hazır hale getir)\n        buffer.clear();\n    }\n}\n```\n\n---\n\n### Buffer'daki 3 Ana Durum (Pointerlar)\n\n| Durum | Açıklama |\n| :--- | :--- |\n| **Position** | O an işlem yapılan (okunan veya yazılan) index. |\n| **Limit** | İşlem yapılabilecek maksimum index (Yazarken kapasiteye, okurken verinin sonuna eşittir). |\n| **Capacity** | Buffer'ın toplam boyutu (Hiç değişmez). |\n\n### Alternatif Metotlar\n* **`clear()`**: Veriyi silmez, sadece pointerları başa sarar (Yeniden yazmak için).\n* **`rewind()`**: Limiti ellemez, sadece position'ı 0 yapar (Aynı veriyi tekrar okumak için).\n\nNIO'nun bu karmaşık yapısı, aslında yüksek performanslı (Non-blocking) sunucu sistemleri kurmak içindir. Standart IO'dan (`InputStream`) NIO'ya geçmeyi mi düşünüyorsun, yoksa sadece çalışma mantığını mı merak ettin?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -115,13 +199,27 @@
       "singleChoice": true,
       "question": "Java serializationda serialVersionUID ne icin kullanilir?",
       "choices": [
-        { "id": "A", "text": "Objectin hashCode degerini saklamak icin." },
-        { "id": "B", "text": "Class versiyon uyumlulugunu kontrol etmek icin." },
-        { "id": "C", "text": "Tum fieldlari otomatik sifrelemek icin." },
-        { "id": "D", "text": "Sadece network timeout ayari icin." }
+        {
+          "id": "A",
+          "text": "Objectin hashCode degerini saklamak icin."
+        },
+        {
+          "id": "B",
+          "text": "Class versiyon uyumlulugunu kontrol etmek icin."
+        },
+        {
+          "id": "C",
+          "text": "Tum fieldlari otomatik sifrelemek icin."
+        },
+        {
+          "id": "D",
+          "text": "Sadece network timeout ayari icin."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Class versiyon uyumluluğunu kontrol etmek için.**\n\n---\n\n### Serialization (Serileştirme) Nedir?\n\n**Serialization**, bir Java nesnesinin (Object) durumunu bir **byte akışına (byte stream)** dönüştürme işlemidir. Bu sayede nesneyi bir dosyaya kaydedebilir, bir veritabanında saklayabilir veya ağ (network) üzerinden başka bir makineye gönderebilirsiniz.\n\nTersi olan **Deserialization** ise, bu byte akışını kullanarak nesneyi bellekte tekrar inşa etme işlemidir.\n\n### serialVersionUID Neden Önemlidir?\n\nBir nesneyi serileştirip dosyaya yazdığınızı düşünün. Aradan zaman geçti ve siz sınıfınızda (class) bir değişiklik yaptınız (örneğin yeni bir alan eklediniz). \n* Eğer bu dosyayı tekrar okumaya (deserialization) çalışırsanız, Java dosyadaki versiyon ile sınıftaki versiyonun aynı olup olmadığına bakar.\n* Eğer `serialVersionUID` değerleri eşleşmezse, Java **`InvalidClassException`** fırlatır ve işlemi durdurur.\n\nBu değişken, sınıfın \"parmak izi\" gibidir. Eğer siz açıkça tanımlamazsanız, Java bunu otomatik hesaplar; ancak sınıfta yapılan en küçük değişiklik bu otomatik değerin değişmesine neden olur ve eski kayıtlı dosyalarınız okunamaz hale gelir.\n\n---\n\n### Kod Örneği\n\nBir sınıfı serileştirilebilir yapmak için `Serializable` arayüzünü (interface) implement etmesi gerekir.\n\n```java\nimport java.io.Serializable;\n\npublic class User implements Serializable {\n    // Manuel olarak tanımlamak her zaman en iyi pratiktir\n    private static final long serialVersionUID = 1L; \n\n    private String name;\n    private int age;\n    \n    // transient anahtar kelimesi bu alanın serileştirilmesini engeller\n    private transient String password; \n\n    public User(String name, int age, String password) {\n        this.name = name;\n        this.age = age;\n        this.password = password;\n    }\n}\n```\n\n#### Nesneyi Dosyaya Yazma (Serialization)\n```java\nUser user = new User(\"Ali\", 25, \"gizli123\");\ntry (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(\"user.ser\"))) {\n    oos.writeObject(user);\n}\n```\n\n\n\n---\n\n### Kritik Bilgiler Listesi\n\n* **`transient`**: Hassas verilerin (şifre, kredi kartı vb.) serileştirilmesini, yani dosyaya yazılmasını istemiyorsanız bu anahtar kelimeyi kullanırsınız.\n* **Static Alanlar**: `static` değişkenler sınıfa aittir, nesneye değil. Bu yüzden serileştirilmezler.\n* **Kalıtım**: Eğer bir üst sınıf `Serializable` ise, tüm alt sınıfları da otomatik olarak serileştirilebilir olur.\n* **Uyumsuzluk**: Eğer `serialVersionUID` değişirse, eski veriler \"çöp\" olur. Bu yüzden profesyonel projelerde bu değer `1L` gibi sabit bir değer olarak elle verilir.\n\nSerialization işlemini genelde bir cache mekanizması (Redis vb.) için mi yoksa verileri diskte saklamak için mi kullanmayı planlıyorsun?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -132,12 +230,26 @@
       "singleChoice": true,
       "question": "transient anahtar sozcugu serialization sirasinda ne yapar?",
       "choices": [
-        { "id": "A", "text": "Fieldi zorunlu serialize eder." },
-        { "id": "B", "text": "Fieldi serialization disinda birakir." },
-        { "id": "C", "text": "Fieldi final yapar." },
-        { "id": "D", "text": "Fieldi static yapar." }
+        {
+          "id": "A",
+          "text": "Fieldi zorunlu serialize eder."
+        },
+        {
+          "id": "B",
+          "text": "Fieldi serialization disinda birakir."
+        },
+        {
+          "id": "C",
+          "text": "Fieldi final yapar."
+        },
+        {
+          "id": "D",
+          "text": "Fieldi static yapar."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -149,13 +261,27 @@
       "singleChoice": true,
       "question": "Serializable ve Externalizable arasindaki dogru fark nedir?",
       "choices": [
-        { "id": "A", "text": "Ikisi tamamen ayni sekilde calisir." },
-        { "id": "B", "text": "Externalizable ile okuma/yazma akisini gelistirici manuel kontrol eder." },
-        { "id": "C", "text": "Serializable daha fazla kod yazmayi zorunlu kilar." },
-        { "id": "D", "text": "Externalizable sadece primitive alanlar icin gecerlidir." }
+        {
+          "id": "A",
+          "text": "Ikisi tamamen ayni sekilde calisir."
+        },
+        {
+          "id": "B",
+          "text": "Externalizable ile okuma/yazma akisini gelistirici manuel kontrol eder."
+        },
+        {
+          "id": "C",
+          "text": "Serializable daha fazla kod yazmayi zorunlu kilar."
+        },
+        {
+          "id": "D",
+          "text": "Externalizable sadece primitive alanlar icin gecerlidir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Externalizable ile okuma/yazma akışını geliştirici manuel kontrol eder.**\n\nJava'da nesneleri serileştirmek için iki ana yol vardır. `Serializable` \"otomatik ve kolay\" olan yoldur, `Externalizable` ise \"manuel ve performanslı\" olan yoldur.\n\n---\n\n### 1. Serializable (Otomatik)\n`Serializable` bir **marker interface**'dir (içinde metot bulunmaz). Java'ya \"bu sınıfı serileştirebilirsin\" mesajını verir. Java arka planda **Reflection** kullanarak tüm alanları otomatik olarak byte akışına yazar.\n\n* **Kontrol:** Java'dadır.\n* **Performans:** Reflection kullandığı için daha yavaştır.\n* **Esneklik:** `transient` ile alan gizlenebilir ama akışa tam müdahale edilemez.\n\n```java\nimport java.io.Serializable;\n\npublic class User implements Serializable {\n    private String name;\n    private int age;\n    // Java her şeyi otomatik halleder.\n}\n```\n\n---\n\n### 2. Externalizable (Manuel)\n`Externalizable` arayüzü, `Serializable`'dan türetilmiştir ancak içinde iki metot barındırır: `writeExternal()` ve `readExternal()`.\n\n* **Kontrol:** Tamamen yazılımcıdadır. Hangi alanın hangi sırayla yazılacağını siz belirlersiniz.\n* **Performans:** Çok daha hızlıdır (Reflection yükü yoktur).\n* **Şart:** Bu yapıda sınıfın **public ve parametresiz bir constructor**'ı olması zorunludur.\n\n#### Örnek Uygulama:\n\n\n```java\nimport java.io.Externalizable;\nimport java.io.IOException;\nimport java.io.ObjectInput;\nimport java.io.ObjectOutput;\n\npublic class Product implements Externalizable {\n    private String title;\n    private double price;\n\n    // ZORUNLU: Parametresiz constructor\n    public Product() {}\n\n    public Product(String title, double price) {\n        this.title = title;\n        this.price = price;\n    }\n\n    @Override\n    public void writeExternal(ObjectOutput out) throws IOException {\n        // Sadece istediğimiz verileri, istediğimiz formatta yazıyoruz\n        out.writeUTF(title);\n        out.writeDouble(price);\n    }\n\n    @Override\n    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {\n        // Yazdığımız sırayla geri okuyoruz\n        this.title = in.readUTF();\n        this.price = in.readDouble();\n    }\n}\n```\n\n---\n\n### Temel Farklar Özeti\n\n| Özellik | Serializable | Externalizable |\n| :--- | :--- | :--- |\n| **Arayüz Tipi** | Marker (Metot yok) | 2 Metot barındırır |\n| **Sorumluluk** | JVM / Standart Protokol | Yazılımcı (Manuel) |\n| **Performans** | Daha Yavaş (Reflection) | Daha Hızlı |\n| **Constructor** | Şart değil | `public no-arg` constructor şart! |\n| **Hassas Veri** | `transient` ile korunur | Metot içinde yazmayarak korunur |\n\n\n\n**Ne zaman hangisi kullanılır?**\nEğer küçük ve basit nesnelerle çalışıyorsan `Serializable` hayat kurtarır. Ancak saniyede binlerce nesnenin gidip geldiği yüksek performanslı bir sistem veya çok karmaşık bir nesne yapın varsa `Externalizable` kullanmak sistemin nefes almasını sağlar.\n\nGenellikle kurumsal projelerde hızdan ziyade kolaylık ön planda olduğu için `Serializable` daha yaygındır. Senin senaryonda performans çok kritik mi?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "Asagidaki senaryoda object deserialize edilince token alani ne olur?",
       "choices": [
-        { "id": "A", "text": "orijinal degerini korur" },
-        { "id": "B", "text": "null (veya primitive ise varsayilan) olur" },
-        { "id": "C", "text": "compile error olur" },
-        { "id": "D", "text": "runtimeda her zaman SecurityException firlatir" }
+        {
+          "id": "A",
+          "text": "orijinal degerini korur"
+        },
+        {
+          "id": "B",
+          "text": "null (veya primitive ise varsayilan) olur"
+        },
+        {
+          "id": "C",
+          "text": "compile error olur"
+        },
+        {
+          "id": "D",
+          "text": "runtimeda her zaman SecurityException firlatir"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class Session implements java.io.Serializable {\n  String user;\n  transient String token;\n}",

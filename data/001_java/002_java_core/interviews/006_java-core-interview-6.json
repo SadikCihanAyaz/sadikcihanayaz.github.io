@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "PreparedStatement kullanmanin en temel sebebi nedir?",
       "choices": [
-        { "id": "A", "text": "Sadece Oracle veritabaninda calismasi." },
-        { "id": "B", "text": "SQL injection riskini azaltip parametre baglamayi guvenli yapmak." },
-        { "id": "C", "text": "Auto commiti otomatik kapatmasi." },
-        { "id": "D", "text": "Tum sorgulari memory cachete tutmasi." }
+        {
+          "id": "A",
+          "text": "Sadece Oracle veritabaninda calismasi."
+        },
+        {
+          "id": "B",
+          "text": "SQL injection riskini azaltip parametre baglamayi guvenli yapmak."
+        },
+        {
+          "id": "C",
+          "text": "Auto commiti otomatik kapatmasi."
+        },
+        {
+          "id": "D",
+          "text": "Tum sorgulari memory cachete tutmasi."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,13 +44,27 @@
       "singleChoice": true,
       "question": "ACID icindeki A harfi neyi ifade eder?",
       "choices": [
-        { "id": "A", "text": "Availability" },
-        { "id": "B", "text": "Atomicity" },
-        { "id": "C", "text": "Asynchrony" },
-        { "id": "D", "text": "Aggregation" }
+        {
+          "id": "A",
+          "text": "Availability"
+        },
+        {
+          "id": "B",
+          "text": "Atomicity"
+        },
+        {
+          "id": "C",
+          "text": "Asynchrony"
+        },
+        {
+          "id": "D",
+          "text": "Aggregation"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Atomicity (Atomiklik)**.\n\n**ACID**, bir veritabanı işleminin (transaction) güvenilirliğini garanti altına alan dört temel ilkenin kısaltmasıdır. **Atomicity** ise bu ilkelerin en başında gelir.\n\n### Atomicity (Atomiklik) Nedir?\n\"Ya hep ya hiç\" kuralıdır. Bir işlem (transaction) birden fazla adımdan oluşuyorsa, bu adımların ya **tamamı** başarıyla gerçekleşir ya da **hiçbiri** gerçekleşmez. İşlem sırasında bir hata oluşursa, o ana kadar yapılmış tüm değişiklikler geri alınır (rollback) ve veritabanı işlemin başındaki haline döner.\n\n\n\n---\n\n### Örnekle Açıklama (Banka Transferi)\nDiyelim ki Ali, Veli'ye **100 TL** gönderiyor. Bu işlem iki temel adımdan oluşur:\n1.  Ali'nin hesabından 100 TL düşülür.\n2.  Veli'nin hesabına 100 TL eklenir.\n\n**Atomicity burada neden kritiktir?**\nEğer sistem 1. adımı yapar ama tam 2. adımı yapacakken elektrik kesilirse veya bir hata oluşursa; para Ali'nin hesabından çıkmış ama Veli'ye ulaşmamış olur. Para havada asılı kalır.\n* **Atomicity devreye girdiğinde:** Sistem 2. adımın başarısız olduğunu görür ve 1. adımı da iptal eder. Ali'nin parası hesabına geri döner.\n\n---\n\n### ACID'in Diğer Harfleri Ne Anlama Gelir?\n\n| Harf | Terim | Açıklama |\n| :--- | :--- | :--- |\n| **A** | **Atomicity** | İşlemin bölünemez olması (Ya hep ya hiç). |\n| **C** | **Consistency** | İşlem öncesi ve sonrası verilerin kurallara (constraint) uygun kalması. |\n| **I** | **Isolation** | Aynı anda çalışan işlemlerin birbirini etkilememesi. |\n| **D** | **Durability** | İşlem tamamlandıktan (commit) sonra verinin kalıcı olması (elektrik kesilse bile). |\n\n\n\n### Özetle\nVeritabanı dünyasında \"Atomicity\" sayesinde, sistemler karmaşık işlemleri güvenle yönetebilir. Yazılım geliştirirken, özellikle finansal veya kritik veri taşıyan uygulamalarda veritabanının bu özelliğine sırtımızı yaslarız.\n\nBu kavramı genellikle SQL veritabanları (PostgreSQL, MySQL vb.) üzerinden mi inceliyorsun, yoksa NoSQL sistemlerdeki karşılığını mı merak ediyorsun?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -47,12 +75,26 @@
       "singleChoice": true,
       "question": "JDBCde auto-commit true oldugunda ne olur?",
       "choices": [
-        { "id": "A", "text": "Her SQL ifadesi sonunda otomatik commit edilir." },
-        { "id": "B", "text": "Commit cagirmadan transaction acik kalir." },
-        { "id": "C", "text": "Rollback her zaman otomatik olur." },
-        { "id": "D", "text": "Sadece select sorgulari calisir." }
+        {
+          "id": "A",
+          "text": "Her SQL ifadesi sonunda otomatik commit edilir."
+        },
+        {
+          "id": "B",
+          "text": "Commit cagirmadan transaction acik kalir."
+        },
+        {
+          "id": "C",
+          "text": "Rollback her zaman otomatik olur."
+        },
+        {
+          "id": "D",
+          "text": "Sadece select sorgulari calisir."
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -64,12 +106,26 @@
       "singleChoice": true,
       "question": "Dirty read hangi isolation level problemidir?",
       "choices": [
-        { "id": "A", "text": "Read Uncommitted seviyesinde gorulebilir." },
-        { "id": "B", "text": "Serializable seviyesinde zorunludur." },
-        { "id": "C", "text": "Sadece repeatable read de olur." },
-        { "id": "D", "text": "Isolation ile ilgisi yoktur." }
+        {
+          "id": "A",
+          "text": "Read Uncommitted seviyesinde gorulebilir."
+        },
+        {
+          "id": "B",
+          "text": "Serializable seviyesinde zorunludur."
+        },
+        {
+          "id": "C",
+          "text": "Sadece repeatable read de olur."
+        },
+        {
+          "id": "D",
+          "text": "Isolation ile ilgisi yoktur."
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -81,12 +137,26 @@
       "singleChoice": true,
       "question": "ORM tarafinda N+1 problemi en cok ne zaman olusur?",
       "choices": [
-        { "id": "A", "text": "Tek bir insert atildiginda." },
-        { "id": "B", "text": "Parent listeleyip her parent icin ayri lazy child sorgusu calistiginda." },
-        { "id": "C", "text": "Batch update acikken." },
-        { "id": "D", "text": "Primary key integer oldugunda." }
+        {
+          "id": "A",
+          "text": "Tek bir insert atildiginda."
+        },
+        {
+          "id": "B",
+          "text": "Parent listeleyip her parent icin ayri lazy child sorgusu calistiginda."
+        },
+        {
+          "id": "C",
+          "text": "Batch update acikken."
+        },
+        {
+          "id": "D",
+          "text": "Primary key integer oldugunda."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -98,12 +168,26 @@
       "singleChoice": true,
       "question": "FetchType.LAZY icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Iliskili veri her zaman hemen yuklenir." },
-        { "id": "B", "text": "Iliskili veri ilk erisim aninda yuklenir." },
-        { "id": "C", "text": "Sadece native querylerde gecerlidir." },
-        { "id": "D", "text": "LAZY kullanilinca transaction gereksiz olur." }
+        {
+          "id": "A",
+          "text": "Iliskili veri her zaman hemen yuklenir."
+        },
+        {
+          "id": "B",
+          "text": "Iliskili veri ilk erisim aninda yuklenir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece native querylerde gecerlidir."
+        },
+        {
+          "id": "D",
+          "text": "LAZY kullanilinca transaction gereksiz olur."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -115,13 +199,27 @@
       "singleChoice": true,
       "question": "JPA birinci seviye cache (persistence context) icin hangisi dogrudur?",
       "choices": [
-        { "id": "A", "text": "Uygulama genelinde sonsuza kadar yasar." },
-        { "id": "B", "text": "Ayni EntityManager oturumu icinde ayni entityyi tekrar sorgulamada DB hitini azaltir." },
-        { "id": "C", "text": "Sadece ikinci seviye cache aktifse calisir." },
-        { "id": "D", "text": "Sadece native SQL icin calisir." }
+        {
+          "id": "A",
+          "text": "Uygulama genelinde sonsuza kadar yasar."
+        },
+        {
+          "id": "B",
+          "text": "Ayni EntityManager oturumu icinde ayni entityyi tekrar sorgulamada DB hitini azaltir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece ikinci seviye cache aktifse calisir."
+        },
+        {
+          "id": "D",
+          "text": "Sadece native SQL icin calisir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Aynı EntityManager oturumu içinde aynı entity'yi tekrar sorgulamada DB hitini azaltır.**\n\nJPA'da (ve dolayısıyla Hibernate'de) cache mekanizması, uygulamanın veritabanına gitme sıklığını azaltarak performansı artırmak için iki kademeli olarak tasarlanmıştır.\n\n---\n\n### 1. Birinci Seviye Cache (First-Level Cache / Persistence Context)\n\nBirinci seviye cache, **EntityManager** (veya Hibernate'deki `Session`) seviyesindedir. Her `EntityManager` nesnesinin kendine ait bir önbelleği vardır.\n\n* **Kapsam:** Sadece geçerli olan oturum (Session/Transaction) süresince yaşar. Oturum kapandığında cache temizlenir.\n* **Zorunluluk:** Varsayılan olarak her zaman **açıktır** ve kapatılamaz.\n* **Çalışma Mantığı:** Eğer aynı ID'ye sahip bir nesne o anki `EntityManager` içinde zaten varsa, JPA veritabanına tekrar `SELECT` sorgusu atmaz; bellekteki nesneyi verir.\n\n\n\n**Örnek Senaryo:**\n```java\n@Transactional\npublic void firstLevelCacheExample() {\n    // 1. Sorgu: DB'ye gider ve nesneyi cache'e atar.\n    User user1 = entityManager.find(User.class, 1L); \n    \n    // 2. Sorgu: DB'ye GİTMEZ! Cache'den (Persistence Context) getirir.\n    User user2 = entityManager.find(User.class, 1L); \n    \n    System.out.println(user1 == user2); // Sonuç: TRUE (Aynı referans)\n}\n```\n\n---\n\n### 2. İkinci Seviye Cache (Second-Level Cache - L2)\n\nİkinci seviye cache, **EntityManagerFactory** seviyesindedir. Uygulama genelinde (tüm sessionlar arasında) paylaşılan bir önbellektir.\n\n* **Kapsam:** Uygulama ayakta olduğu sürece yaşar. Farklı kullanıcıların oturumları aynı veriyi buradan okuyabilir.\n* **Zorunluluk:** Varsayılan olarak **kapalıdır**. Kullanmak için bir sağlayıcı (Ehcache, Hazelcast, Redis vb.) entegre edilmelidir.\n* **Çalışma Mantığı:** Bir `EntityManager` kendi önbelleğinde veriyi bulamazsa, DB'ye gitmeden önce L2 Cache'e bakar.\n\n\n\n**Örnek Senaryo:**\nFarklı iki isteğin (iki farklı Transaction) aynı veriyi istediğini düşünelim:\n1.  **İstek A:** `User(id=1)`'i arar. L1'de yok, L2'de yok -> DB'ye gider. Sonucu L2 Cache'e yazar.\n2.  **İstek B:** `User(id=1)`'i arar. Kendi L1'inde yok ama **L2 Cache'de var** -> DB'ye gitmeden L2'den alır.\n\n---\n\n### Temel Farklar Özeti\n\n| Özellik | L1 Cache (Persistence Context) | L2 Cache (Shared Cache) |\n| :--- | :--- | :--- |\n| **Kapsam** | Session (EntityManager) Bazlı | Uygulama (Factory) Bazlı |\n| **Ömür** | Transaction bitene kadar | Uygulama kapanana kadar |\n| **Paylaşım** | Sadece tek bir thread/session | Tüm threadler ve kullanıcılar |\n| **Konfigürasyon** | Otomatiktir, ayar gerektirmez | Manuel yapılandırma gerektirir |\n| **Veritabanı Hiti** | Aynı session'daki tekrarları önler | Farklı session'lardaki tekrarları önler |\n\n---\n\n### Neden İkisine de İhtiyacımız Var?\n\nBirinci seviye cache, **veritabanı tutarlılığını** sağlar. Bir transaction içinde bir nesne üzerinde 5 kere değişiklik yaparsanız, Hibernate bunları cache'de toplar ve transaction sonunda (flush) tek bir `UPDATE` sorgusu ile DB'ye yansıtır (Dirty Checking).\n\nİkinci seviye cache ise **ölçeklenebilirliği** sağlar. Çok sık okunan ama az değişen veriler (örneğin; Şehir listesi, Kategori isimleri) için her istekte DB'ye gitmek büyük bir israftır. L2 Cache bu yükü veritabanının üzerinden alır.\n\nŞu an geliştirdiğin projede çok sık değişmeyen \"statik\" veriler için bir önbellekleme yapısı kullanıyor musun?\n\nİkinci seviye (L2) cache için **Redis** kullanmak, özellikle mikroservis mimarilerinde veya birden fazla sunucunun (instance) çalıştığı sistemlerde \"merkezi bir bellek\" görevi gördüğü için en profesyonel çözümdür.\n\nRedis'i Hibernate L2 Cache olarak kullanmak için en yaygın ve stabil kütüphane **Redisson**'dur. İşte adım adım Redis tabanlı L2 Cache kurulumu ve kod örneği:\n\n---\n\n### 1. Adım: Bağımlılıkları Ekle (pom.xml)\nStandard Spring Data Redis kütüphanesi dışında, Hibernate ile Redis'i bağlayacak olan `redisson-hibernate` kütüphanesine ihtiyacımız var.\n\n```xml\n<dependency>\n    <groupId>org.redisson</groupId>\n    <artifactId>redisson-hibernate-6</artifactId> <version>3.21.0</version>\n</dependency>\n```\n\n### 2. Adım: Hibernate & Redis Yapılandırması (application.properties)\nBurada Hibernate'e \"verileri DB'den aldıktan sonra Redis'e yaz\" talimatını veriyoruz.\n\n```properties\n# L2 Cache'i aktif et\nspring.jpa.properties.hibernate.cache.use_second_level_cache=true\n\n# Redisson Bölge Fabrikasını (Region Factory) belirle\nspring.jpa.properties.hibernate.cache.region.factory_class=org.redisson.hibernate.RedissonRegionFactory\n\n# Redis bağlantı ayarlarının olduğu dosya yolu\nspring.jpa.properties.hibernate.cache.redisson.config=classpath:redisson.yaml\n\n# Sorgu sonuçlarını da cache'lemek isterseniz (isteğe bağlı)\nspring.jpa.properties.hibernate.cache.use_query_cache=true\n```\n\n### 3. Adım: Redisson Yapılandırması (redisson.yaml)\n`src/main/resources` altına bu dosyayı ekleyerek Redis sunucunuzun adresini belirtmelisiniz.\n\n```yaml\nsingleServerConfig:\n  address: \"redis://127.0.0.1:6379\"\n  password: null\n  database: 0\n```\n\n---\n\n### 4. Adım: Entity (Model) Kod Örneği\nBurada en kritik nokta `@Cache` anotasyonudur. Bu anotasyon olmazsa Hibernate o tabloyu Redis'e taşımaz.\n\n```java\nimport jakarta.persistence.*;\nimport org.hibernate.annotations.Cache;\nimport org.hibernate.annotations.CacheConcurrencyStrategy;\nimport java.io.Serializable;\n\n@Entity\n@Table(name = \"cities\")\n@Cacheable // JPA standartı: Bu sınıf önbelleklenebilir\n@Cache(usage = CacheConcurrencyStrategy.READ_WRITE) // Hibernate stratejisi: Oku ve Yaz\npublic class City implements Serializable { // Redis'e yazılacağı için Serializable şarttır\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n\n    private String name;\n\n    private String plateCode;\n\n    // Getter, Setter ve Constructorlar\n}\n```\n\n\n---\n\n### 5. Adım: Kullanım ve Redis'te Görme\nKod tarafında ekstra bir şey yapmanıza gerek kalmaz. `cityRepository.findById(1L)` dediğinizde akış şöyle işler:\n\n1. **İstek:** `findById(1L)` çağrılır.\n2. **L1 Kontrol:** Önce mevcut Transaction (EntityManager) içine bakılır.\n3. **L2 (Redis) Kontrol:** Eğer L1'de yoksa, Hibernate **Redis**'e gider ve \"City:1\" anahtarı var mı diye bakar.\n4. **DB Hit:** Eğer Redis'te de yoksa veritabanına `SELECT` atılır.\n5. **Cache Fill:** DB'den gelen veri hem L1'e hem de **Redis'e (L2)** yazılır.\n\n**Redis CLI üzerinden kontrol ettiğinizde şöyle bir yapı görürsünüz:**\n```bash\n127.0.0.1:6379> KEYS *\n1) \"com.example.entity.City\"\n2) \"com.example.entity.City->1\" # ID'si 1 olan şehrin verisi burada durur\n```\n\n---\n\n### Özetle Neden Redis?\n* **Paylaşımlı Bellek:** Uygulamanın 10 tane kopyası olsa bile, hepsi aynı Redis'e baktığı için birinin cache'lediği veriyi diğeri de kullanır.\n* **Kalıcılık:** Uygulama restart edilse bile cache'teki veriler Redis'te durmaya devam eder (TTL ayarlanmadıysa).\n* **Performans:** Veritabanına (Disk) gitmek yerine network üzerinden Redis'e (RAM) gitmek çok daha hızlıdır.\n\n**Dikkat:** L2 Cache kullanırken verilerin `Serializable` olması zorunludur çünkü nesne Java dışına çıkıp Redis'e byte dizisi olarak yazılır. Projende Redis kurulu mu yoksa Docker üzerinden mi deneyeceksin?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -132,13 +230,27 @@
       "singleChoice": true,
       "question": "Optimistic locking genel olarak nasil calisir?",
       "choices": [
-        { "id": "A", "text": "Kaydi update etmeden once her zaman DB lock koyar." },
-        { "id": "B", "text": "Version alanini kontrol ederek cakisma varsa guncellemeyi reddeder." },
-        { "id": "C", "text": "Sadece read-only transactionlarda kullanilir." },
-        { "id": "D", "text": "Deadlock riskini arttirmak icin tasarlanmistir." }
+        {
+          "id": "A",
+          "text": "Kaydi update etmeden once her zaman DB lock koyar."
+        },
+        {
+          "id": "B",
+          "text": "Version alanini kontrol ederek cakisma varsa guncellemeyi reddeder."
+        },
+        {
+          "id": "C",
+          "text": "Sadece read-only transactionlarda kullanilir."
+        },
+        {
+          "id": "D",
+          "text": "Deadlock riskini arttirmak icin tasarlanmistir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Version alanını kontrol ederek çakışma varsa güncellemeyi reddeder.**\n\nYazılım dünyasında aynı veriye aynı anda erişen (concurrency) kullanıcıların veriyi bozmasını engellemek için iki temel yaklaşım vardır: **Optimistic** (İyimser) ve **Pessimistic** (Kötümser) kilitleme.\n\n---\n\n### 1. Optimistic Locking (İyimser Kilitleme)\n\n**Mantık:** \"Çakışma ihtimali düşüktür, bu yüzden veritabanını kilitleyip performansı düşürmeyeyim. Sadece veriyi yazarken bir değişiklik olup olmadığını kontrol edeyim.\"\n\n* **Nasıl Çalışır?** Tabloya bir `@Version` kolonu eklenir. Her güncellemede bu numara artar. Eğer siz veriyi okuduğunuzdaki versiyon ile yazmaya çalıştığınızdaki versiyon farklıysa, biri sizden önce davranmış demektir.\n* **Çözdüğü Problem:** **Lost Update (Kayıp Güncelleme)**. İki kişi aynı veriyi açıp düzenlediğinde, en son \"kaydet\"e basanın diğerinin verisini sessizce ezmesini engeller.\n\n#### Kod Örneği (JPA/Hibernate):\n\n```java\n@Entity\npublic class Account {\n    @Id\n    private Long id;\n    private Double balance;\n\n    @Version // JPA bu alanı otomatik yönetir\n    private Long version;\n}\n```\n\n**Senaryo:**\n1. Ali hesabı okur (Bakiye: 100, Versiyon: 5).\n2. Ayşe hesabı okur (Bakiye: 100, Versiyon: 5).\n3. Ali 20 TL ekler ve kaydeder. (DB'de Bakiye: 120, **Versiyon: 6** olur).\n4. Ayşe 10 TL ekler ve kaydetmeye çalışır. Hibernate bakar: \"Ayşe'nin elindeki versiyon 5 ama DB'de 6 var!\".\n5. **Sonuç:** `OptimisticLockException` fırlatılır. Ayşe'nin işlemi reddedilir.\n\n\n\n---\n\n### 2. Pessimistic Locking (Kötümser Kilitleme)\n\n**Mantık:** \"Çakışma ihtimali çok yüksek veya veri çok kritik. Ben bu kaydı okuduğum an kapıyı kilitleyeyim, işim bitene kadar kimse dokunamasın.\"\n\n* **Nasıl Çalışır?** Veritabanı seviyesinde `SELECT ... FOR UPDATE` sorgusu atılır. Bu, o satırı fiziksel olarak kilitler.\n* **Çözdüğü Problem:** Veri tutarlılığının hayati olduğu ve hata toleransının sıfır olduğu (bankacılık transferleri, stok düşümü vb.) durumlar.\n\n#### Kod Örneği (Spring Data JPA):\n\n```java\npublic interface AccountRepository extends JpaRepository<Account, Long> {\n\n    @Lock(LockModeType.PESSIMISTIC_WRITE) // Veritabanında fiziksel kilit koyar\n    @Query(\"SELECT a FROM Account a WHERE a.id = :id\")\n    Optional<Account> findByIdWithLock(Long id);\n}\n```\n\n**Senaryo:**\n1. Ali `findByIdWithLock` ile kaydı çağırır. DB bu satırı kilitler.\n2. Ayşe aynı kaydı okumaya çalışır ama **beklemek zorundadır.**\n3. Ali işlemi bitirip `commit` yapana kadar Ayşe'nin sorgusu askıda kalır.\n4. Ali bitirince kilit açılır, Ayşe güncel veriyi alır ve kendi işlemini yapar.\n\n\n\n---\n\n### Karşılaştırma Özeti\n\n| Özellik | Optimistic Locking | Pessimistic Locking |\n| :--- | :--- | :--- |\n| **Mekanizma** | Uygulama seviyesinde (Version) | Veritabanı seviyesinde (Lock) |\n| **Performans** | **Yüksek** (Kimse beklemez) | **Düşük** (Bekleme süreleri oluşur) |\n| **Hata Durumu** | İstisna fırlatır, kullanıcıya \"tekrar dene\" denir | Sorgu sıraya girer, gecikme yaşanır |\n| **Kullanım Alanı** | Web siteleri, CMS, Bloglar | Bankacılık, Stok yönetimi, Biletleme |\n| **Risk** | Çok sık çakışma olursa kullanıcıyı yorar | **Deadlock** (Ölümcül kilitlenme) riski vardır |\n\n---\n\n### Hangisini Seçmeli?\n\n* Eğer kullanıcıların aynı anda aynı satırı düzenleme ihtimali **düşükse** ve sistemin hızlı cevap vermesi önemliyse: **Optimistic**.\n* Eğer aynı veriye saniyede onlarca işlem geliyorsa (örneğin bir ürünün stoğunu düşmek) ve hata alıp başa dönmek maliyetliyse: **Pessimistic**.\n\nDAHA AÇIK AÇIKLAMA\n\nÇok güzel bir noktaya değindin. Bu mekanizmaların \"nasıl anladığı\" kısmı genellikle arka planda çalışan otomatik bir SQL mekanizmasına dayanır. Hemen netleştirelim:\n\n---\n\n### 1. Optimistic Lock: \"Farkı Nasıl Anlıyor?\"\n\nSenin sorun: *\"Birisi select çekerse önceki versiyonla yenisini nasıl karşılaştıracak?\"*\n\nAslında karşılaştırma **`SELECT`** anında değil, **`UPDATE`** anında yapılır. Olay şu adımlarla gerçekleşir:\n\n1.  **Sen (Kullanıcı A):** Bir kaydı okudun. `id=1, name='Elma', version=5`. Bu `version=5` bilgisi senin uygulamanın belleğinde (Java nesnesinde) durur.\n2.  **Başkası (Kullanıcı B):** Aynı kaydı okudu (`version=5`). Senden hızlı davrandı ve ismi 'Armut' yapıp kaydetti. Veritabanındaki versiyon artık **6** oldu.\n3.  **Sen (Kullanıcı A):** 'Elma' ismini 'Çilek' yapmak için kaydet butonuna bastın. \n\nHibernate (veya JPA) arka planda şu SQL'i çalıştırır:\n```sql\nUPDATE products \nSET name = 'Çilek', version = 6 \nWHERE id = 1 AND version = 5; -- Kritik nokta burası!\n```\n**İşin sırrı `WHERE` şartında:**\n* Veritabanı bakar; `id=1` olan ve `version` değeri **hâlâ 5** olan bir kayıt var mı?\n* Yok! (Çünkü Kullanıcı B onu 6 yapmıştı).\n* SQL \"0 satır güncellendi\" cevabı döner. \n* Hibernate bu \"0\" sonucunu görünce anlar ki biri araya girmiş ve hemen sana `OptimisticLockException` fırlatır.\n\n\n\n---\n\n### 2. Pessimistic Lock: \"Tam Olarak Neyi Kilitliyor?\"\n\nSenin sorun: *\"Ekleme bitene kadar select çektirmiyor.\"*\n\nBurada küçük ama önemli bir düzeltme yapalım: **Standart `SELECT` sorguları genellikle engellenmez.**\n\n* Pessimistic Lock (genellikle `SELECT FOR UPDATE` kullanılır), sadece **yazma (update/delete)** ve **diğer kilitli okuma** taleplerini durdurur.\n* Eğer bir kullanıcı sadece \"Ben şu listeye bir bakayım\" diyerek düz bir `SELECT` atarsa, kilitli olsa bile verinin o anki (en son commit edilmiş) halini görebilir. \n* Ancak ikinci bir kişi de `findByIdWithLock` (kilitli okuma) yapmaya çalışırsa, o kişi bekletilir.\n\n\n\n---\n\n### Özetle Farklar\n\n| Durum | Optimistic (İyimser) | Pessimistic (Kötümser) |\n| :--- | :--- | :--- |\n| **Kilit Ne Zaman?** | Sadece Update anında (milisaniyelik). | Kayıt okunduğu andan işlem bitene kadar. |\n| **SQL Farkı** | `WHERE version = old_version` | `SELECT ... FOR UPDATE` |\n| **Performans** | Çok yüksek, kimse beklemez. | Daha düşük, kullanıcılar birbirini bekler. |\n| **Engelleme** | Kimseyi engellemez, çakışırsa hata verir. | Diğer yazma/kilitleme taleplerini bekletir. |\n\n**Hangi Problemi Çözer?**\n* **Optimistic:** \"Verimi başkası ezmesin, gerekirse ben hata alıp işlemi baştan yapayım\" dediğin yerlerde.\n* **Pessimistic:** \"Bu veri çok kritik (örn: banka bakiyesi), ben işlem yaparken kimse bu verinin yanına bile yaklaşmasın, beklesinler\" dediğin yerlerde.\n\nBu mekanizma kafanda tam oturdu mu, yoksa SQL tarafındaki o `WHERE` şartı biraz kafa karıştırıcı mı geliyor?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -149,12 +261,26 @@
       "singleChoice": true,
       "question": "Toplu insert performansini arttirmak icin hangi yontem en uygundur?",
       "choices": [
-        { "id": "A", "text": "Her satir icin yeni connection acmak." },
-        { "id": "B", "text": "Batch insert ve uygun transaction sinirlari kullanmak." },
-        { "id": "C", "text": "Her satir sonrasi manual flush ve clear zorunlu kılmak." },
-        { "id": "D", "text": "SQL yerine sadece console log yazmak." }
+        {
+          "id": "A",
+          "text": "Her satir icin yeni connection acmak."
+        },
+        {
+          "id": "B",
+          "text": "Batch insert ve uygun transaction sinirlari kullanmak."
+        },
+        {
+          "id": "C",
+          "text": "Her satir sonrasi manual flush ve clear zorunlu kılmak."
+        },
+        {
+          "id": "D",
+          "text": "SQL yerine sadece console log yazmak."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "SQL injection riskini azaltmak icin en dogru yaklasim hangisidir?",
       "choices": [
-        { "id": "A", "text": "Sorguyu string birlestirme ile olusturmak." },
-        { "id": "B", "text": "Kullanicidan gelen degeri replace ile temizlemek." },
-        { "id": "C", "text": "Parametreli sorgu (PreparedStatement) kullanmak." },
-        { "id": "D", "text": "Tum inputlari uppercase yapmak." }
+        {
+          "id": "A",
+          "text": "Sorguyu string birlestirme ile olusturmak."
+        },
+        {
+          "id": "B",
+          "text": "Kullanicidan gelen degeri replace ile temizlemek."
+        },
+        {
+          "id": "C",
+          "text": "Parametreli sorgu (PreparedStatement) kullanmak."
+        },
+        {
+          "id": "D",
+          "text": "Tum inputlari uppercase yapmak."
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
