@@ -31,6 +31,42 @@
     <priority>0.90</priority>
   </url>
   <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=java&amp;subcategory=java-core&amp;interview=java-core-interview-1</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=java&amp;subcategory=java-core&amp;interview=java-core-interview-2</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=java&amp;subcategory=java-core&amp;interview=java-core-interview-3</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=java&amp;subcategory=java-core&amp;interview=java-core-interview-4</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=java&amp;subcategory=java-core&amp;interview=java-core-interview-5</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=java&amp;subcategory=java-core&amp;interview=java-core-interview-6</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://sadikcihanayaz.github.io/interview.html?category=java&amp;subcategory=threads&amp;interview=thread-interview-1</loc>
     <lastmod>2026-04-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -281,6 +317,18 @@
     <lastmod>2026-04-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/learn.html?category=java&amp;subcategory=java-core</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/learn.html?category=java&amp;subcategory=java-core&amp;view=topic</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
   </url>
   <url>
     <loc>https://sadikcihanayaz.github.io/learn.html?category=java&amp;subcategory=threads</loc>
