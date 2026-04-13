@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "Class ve object arasindaki farki en dogru anlatan ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Class calisan bir instance'dir, object ise sabit semadir." },
-        { "id": "B", "text": "Class bir sema/tanimdir, object bu semadan uretilen ornektir." },
-        { "id": "C", "text": "Class sadece primitive tip tutar, object referans tutar." },
-        { "id": "D", "text": "Class ve object Java'da ayni kavramdir." }
+        {
+          "id": "A",
+          "text": "Class calisan bir instance'dir, object ise sabit semadir."
+        },
+        {
+          "id": "B",
+          "text": "Class bir sema/tanimdir, object bu semadan uretilen ornektir."
+        },
+        {
+          "id": "C",
+          "text": "Class sadece primitive tip tutar, object referans tutar."
+        },
+        {
+          "id": "D",
+          "text": "Class ve object Java'da ayni kavramdir."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,12 +44,26 @@
       "singleChoice": true,
       "question": "Encapsulation prensibinin en dogru amaci nedir?",
       "choices": [
-        { "id": "A", "text": "Tum field'lari public yaparak erisimi kolaylastirmak." },
-        { "id": "B", "text": "Kod tekrarini azaltmak icin her methodu static yapmak." },
-        { "id": "C", "text": "Veri ve davranisi bir arada tutup kontrolsuz erisimi sinirlamak." },
-        { "id": "D", "text": "Inheritance'i tamamen kaldirmak." }
+        {
+          "id": "A",
+          "text": "Tum field'lari public yaparak erisimi kolaylastirmak."
+        },
+        {
+          "id": "B",
+          "text": "Kod tekrarini azaltmak icin her methodu static yapmak."
+        },
+        {
+          "id": "C",
+          "text": "Veri ve davranisi bir arada tutup kontrolsuz erisimi sinirlamak."
+        },
+        {
+          "id": "D",
+          "text": "Inheritance'i tamamen kaldirmak."
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "Asagidaki durumlardan hangisinde composition, inheritance'a gore daha uygundur?",
       "choices": [
-        { "id": "A", "text": "IS-A iliskisi net ve kaliciysa." },
-        { "id": "B", "text": "Davranisi runtime'da degistirmek ve gevsek baglilik istendiginde." },
-        { "id": "C", "text": "Tum metodlari otomatik miras almak zorunluysa." },
-        { "id": "D", "text": "Superclass constructor'i private ise." }
+        {
+          "id": "A",
+          "text": "IS-A iliskisi net ve kaliciysa."
+        },
+        {
+          "id": "B",
+          "text": "Davranisi runtime'da degistirmek ve gevsek baglilik istendiginde."
+        },
+        {
+          "id": "C",
+          "text": "Tum metodlari otomatik miras almak zorunluysa."
+        },
+        {
+          "id": "D",
+          "text": "Superclass constructor'i private ise."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru ifade şudur: **Davranışı runtime'da (çalışma zamanında) değiştirmek ve gevşek bağlılık (loose coupling) istendiğinde.**\n\nInheritance (Kalıtım) \"beyaz kutu\" (white-box) tekrar kullanımıdır ve nesneler arasında çok sıkı bir bağ kurar. **Composition** ise \"siyah kutu\" (black-box) tekrar kullanımıdır; nesneler birbirinin iç yapısını bilmez, sadece arayüzleri (interface) üzerinden haberleşirler.\n\n---\n\n### Neden Composition?\n1.  **Gevşek Bağlılık:** Bir sınıfı değiştirdiğinizde, ona bağlı olan diğer sınıfların \"kırılma\" ihtimali çok daha düşüktür.\n2.  **Esneklik:** Kalıtımda bir sınıf sadece bir sınıftan miras alabilir (Java'da), ancak composition ile onlarca farklı yeteneği sınıfınıza dahil edebilirsiniz.\n3.  **Dinamiklik:** Çalışma zamanında bir nesnenin içindeki stratejiyi veya davranışı başka bir nesneyle kolayca değiştirebilirsiniz.\n\n---\n\n### Tam Bir Composition Örneği\n\nSenaryo: Bir `PaymentProcessor` (Ödeme İşleyici) sınıfımız var. Bu sınıfın ödeme yöntemini (Kredi Kartı, Crypto, Havale) kalıtımla değil, composition ile içeri alıyoruz. Böylece yeni bir ödeme yöntemi geldiğinde ana kodu değiştirmemize gerek kalmıyor.\n\n#### 1. Davranışı Tanımlayan Interface (Strategy)\n```java\npublic interface PaymentStrategy {\n    void pay(double amount);\n}\n```\n\n#### 2. Farklı Uygulamalar (Componentler)\n```java\npublic class CreditCardPayment implements PaymentStrategy {\n    @Override\n    public void pay(double amount) {\n        System.out.println(amount + \" TL Kredi Kartı ile ödendi.\");\n    }\n}\n\npublic class CryptoPayment implements PaymentStrategy {\n    @Override\n    public void pay(double amount) {\n        System.out.println(amount + \" TL Bitcoin ile ödendi.\");\n    }\n}\n```\n\n#### 3. Composition Kullanan Ana Sınıf\nBurada `PaymentService` sınıfı bir ödeme yöntemi **değildir**, bir ödeme yöntemine **sahiptir** (HAS-A ilişkisi).\n\n```java\npublic class PaymentService {\n    // Composition: Sınıfın içinde interface tipinde bir alan tutuyoruz.\n    private PaymentStrategy strategy;\n\n    // Dependency Injection ile dışarıdan veriyoruz\n    public PaymentService(PaymentStrategy strategy) {\n        this.strategy = strategy;\n    }\n\n    // Çalışma zamanında stratejiyi değiştirmemize olanak tanır\n    public void setStrategy(PaymentStrategy strategy) {\n        this.strategy = strategy;\n    }\n\n    public void processOrder(double amount) {\n        // İş mantığı burada çalışır, ödeme detayını strategy nesnesine delege eder\n        strategy.pay(amount);\n    }\n}\n```\n\n#### 4. Kullanım\n```java\npublic class Main {\n    public static void main(String[] args) {\n        // İlk başta kredi kartı ile başla\n        PaymentService service = new PaymentService(new CreditCardPayment());\n        service.processOrder(100.0);\n\n        // Runtime'da (çalışma zamanında) davranışı değiştir!\n        service.setStrategy(new CryptoPayment());\n        service.processOrder(250.0);\n    }\n}\n```\n\n### Özet Karşılaştırma\n\n| Özellik | Inheritance (Kalıtım) | Composition (Bileşim) |\n| :--- | :--- | :--- |\n| **İlişki Tipi** | IS-A (Bir ...'dır) | HAS-A (Bir ...'ya sahiptir) |\n| **Bağlılık** | Sıkı (Tight Coupling) | Gevşek (Loose Coupling) |\n| **Değişim** | Zordur, üst sınıf değişirse alt sınıf sarsılır. | Kolaydır, componentler bağımsızdır. |\n| **Görünürlük** | Alt sınıf üst sınıfın içini görebilir. | Nesneler birbirinin içini görmez (Encapsulation). |\n\n\"Favor composition over inheritance\" (Kalıtım yerine bileşimi tercih et) prensibi, tasarım desenlerinin (Design Patterns) çoğunun temelini oluşturur. Bu örnekteki yapı aynı zamanda **Strategy Pattern** olarak da bilinir.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,12 +106,26 @@
       "singleChoice": true,
       "question": "Polymorphism icin en dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Ayni method adinin farkli siniflarda farkli davranis verebilmesi." },
-        { "id": "B", "text": "Her sinifin yalnizca tek method icermesi." },
-        { "id": "C", "text": "Overloading'in Java'da yasak olmasi." },
-        { "id": "D", "text": "Sadece interface kullaninca olusur, class'larda olmaz." }
+        {
+          "id": "A",
+          "text": "Ayni method adinin farkli siniflarda farkli davranis verebilmesi."
+        },
+        {
+          "id": "B",
+          "text": "Her sinifin yalnizca tek method icermesi."
+        },
+        {
+          "id": "C",
+          "text": "Overloading'in Java'da yasak olmasi."
+        },
+        {
+          "id": "D",
+          "text": "Sadece interface kullaninca olusur, class'larda olmaz."
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -81,13 +137,27 @@
       "singleChoice": true,
       "question": "Method overriding ile ilgili hangisi dogrudur?",
       "choices": [
-        { "id": "A", "text": "private method'lar override edilebilir." },
-        { "id": "B", "text": "Return type tamamen alakasiz bir tipe degisebilir." },
-        { "id": "C", "text": "Access modifier daha kisitlayici yapilamaz." },
-        { "id": "D", "text": "Method ismi farkliysa da override sayilir." }
+        {
+          "id": "A",
+          "text": "private method'lar override edilebilir."
+        },
+        {
+          "id": "B",
+          "text": "Return type tamamen alakasiz bir tipe degisebilir."
+        },
+        {
+          "id": "C",
+          "text": "Access modifier daha kisitlayici yapilamaz."
+        },
+        {
+          "id": "D",
+          "text": "Method ismi farkliysa da override sayilir."
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru ifade şudur: **Access modifier daha kısıtlayıcı yapılamaz.**\n\nMethod overriding (Metot Ezme), alt sınıfın (child class), üst sınıftan (parent class) miras aldığı bir metodu kendi ihtiyacına göre yeniden tanımlamasıdır. Ancak bu işlem yapılırken Java'nın katı kuralları vardır:\n\n* **Erişim Belirleyici (Access Modifier):** Alt sınıftaki metodun erişim seviyesi, üst sınıftakinden daha kısıtlı olamaz. Örneğin, üst sınıfta `protected` olan bir metodu alt sınıfta `private` yapamazsınız; ancak `public` yapabilirsiniz (genişletebilirsiniz).\n* **İsim ve Parametre:** Metot ismi ve parametre listesi (imzası) birebir aynı olmalıdır.\n* **Return Type:** Dönüş tipi aynı olmalı veya \"covariant\" (üst tipin alt tipi) olmalıdır.\n\n---\n\n### Overriding Kuralları ve Geçersiz Durumlar\n\n| Durum | Kural |\n| :--- | :--- |\n| **Private Metotlar** | `private` metotlar sadece o sınıfa özeldir, miras alınamazlar. Bu yüzden **override edilemezler.** |\n| **Static Metotlar** | `static` metotlar sınıfa aittir, nesneye değil. Override edilemezler, ancak \"method hiding\" (metot gizleme) yapılabilir. |\n| **Final Metotlar** | `final` anahtar kelimesi metodun değiştirilmesini yasaklar, dolayısıyla override edilemezler. |\n| **Exception** | Alt sınıf, üst sınıftaki metodun fırlattığından daha geniş bir \"checked exception\" fırlatamaz. |\n\n---\n\n### Kod Örneği\n\nAşağıdaki örnekte erişim belirleyicinin nasıl genişletilebileceğini ama daraltılamayacağını görebilirsin:\n\n```java\nclass Hayvan {\n    protected void sesCikar() {\n        System.out.println(\"Hayvan ses çıkarıyor...\");\n    }\n}\n\nclass Kedi extends Hayvan {\n    // DOĞRU: protected -> public (Erişim genişletildi, sorun yok)\n    @Override\n    public void sesCikar() {\n        System.out.println(\"Miyav!\");\n    }\n    \n    /* YANLIŞ: protected -> private (Erişim kısıtlanamaz!)\n    @Override\n    private void sesCikar() { ... } \n    */\n}\n```\n\n\n\n### Neden Kısıtlayıcı Yapılamaz?\nBu durum **Liskov Substitution Principle (LSP)** ile ilgilidir. Eğer üst sınıf tipinde bir referans kullanıyorsan (`Hayvan h = new Kedi();`), `h.sesCikar()` metodunu çağırabilmen garanti olmalıdır. Eğer alt sınıf bu metodu `private` yapsaydı, kod çalışma zamanında erişim hatası verirdi ve nesne yönelimli programlama mantığı çökerdi.\n\nMetot ezme (overriding) ile metot yükleme (overloading) arasındaki farkı karıştırıyor musun, yoksa bu kısım net mi?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,12 +168,26 @@
       "singleChoice": true,
       "question": "Abstract class ve interface icin en dogru karsilastirma hangisidir?",
       "choices": [
-        { "id": "A", "text": "Interface state tutabilir, abstract class tutamaz." },
-        { "id": "B", "text": "Bir class birden fazla abstract class'i extend edebilir." },
-        { "id": "C", "text": "Abstract class ortak temel davranis, interface sozlesme taniminda gucludur." },
-        { "id": "D", "text": "Ikisi de constructor tanimlayamaz." }
+        {
+          "id": "A",
+          "text": "Interface state tutabilir, abstract class tutamaz."
+        },
+        {
+          "id": "B",
+          "text": "Bir class birden fazla abstract class'i extend edebilir."
+        },
+        {
+          "id": "C",
+          "text": "Abstract class ortak temel davranis, interface sozlesme taniminda gucludur."
+        },
+        {
+          "id": "D",
+          "text": "Ikisi de constructor tanimlayamaz."
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -115,12 +199,26 @@
       "singleChoice": true,
       "question": "static bir method icinde asagidakilerden hangisi kullanilamaz?",
       "choices": [
-        { "id": "A", "text": "Class seviyesinde static field" },
-        { "id": "B", "text": "this referansi" },
-        { "id": "C", "text": "Local variable" },
-        { "id": "D", "text": "Static helper method" }
+        {
+          "id": "A",
+          "text": "Class seviyesinde static field"
+        },
+        {
+          "id": "B",
+          "text": "this referansi"
+        },
+        {
+          "id": "C",
+          "text": "Local variable"
+        },
+        {
+          "id": "D",
+          "text": "Static helper method"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -132,13 +230,27 @@
       "singleChoice": true,
       "question": "final anahtar sozcugu ile ilgili hangisi dogrudur?",
       "choices": [
-        { "id": "A", "text": "final class'tan kalitim alinabilir ama methodlari override edilmez." },
-        { "id": "B", "text": "final variable her zaman compile-time sabiti olmak zorundadir." },
-        { "id": "C", "text": "final method override edilemez." },
-        { "id": "D", "text": "final referansin gosterdigi object mutate edilemez." }
+        {
+          "id": "A",
+          "text": "final class'tan kalitim alinabilir ama methodlari override edilmez."
+        },
+        {
+          "id": "B",
+          "text": "final variable her zaman compile-time sabiti olmak zorundadir."
+        },
+        {
+          "id": "C",
+          "text": "final method override edilemez."
+        },
+        {
+          "id": "D",
+          "text": "final referansin gosterdigi object mutate edilemez."
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru ifade şudur: **final method override edilemez.**\n\nJava'da `final` anahtar sözcüğü \"son halini almış\", \"değiştirilemez\" anlamını taşır. Kullanıldığı yere göre (değişken, metot, sınıf) farklı kısıtlamalar getirir.\n\n---\n\n### `final` Anahtar Sözcüğünün Kullanım Alanları\n\n#### 1. Değişkenler (Variables) üzerinde:\nBir değişken `final` olarak tanımlandığında, ona sadece **bir kez** değer atanabilir.\n* **Local Variables:** Tanımlandığı yerde veya constructor içinde değeri verilmelidir. Daha sonra değiştirilemez.\n* **Önemli Yanılgı:** Eğer `final` olan bir referans tipi ise (örneğin bir Liste), referansın kendisi başka bir nesneye yönlendirilemez ama içindeki veriler değiştirilebilir (**mutate** edilebilir).\n\n```java\nfinal List<String> isimler = new ArrayList<>();\nisimler.add(\"Ahmet\"); // ÇALIŞIR: Nesnenin içeriği değişebilir.\n// isimler = new ArrayList<>(); // HATA: Referans değiştirilemez.\n```\n\n#### 2. Metotlar (Methods) üzerinde:\nBir metodu `final` yaparsanız, alt sınıflar (subclasses) bu metodu **ezemez (override edemez)**.\n* **Neden kullanılır?** Metodun mantığının tüm alt sınıflarda aynı kalmasını garanti etmek ve güvenliği sağlamak için.\n\n#### 3. Sınıflar (Classes) üzerinde:\nBir sınıf `final` yapıldığında, o sınıftan **kalıtım (inheritance) alınamaz.** Yani o sınıfın \"çocuğu\" olamaz.\n* **Örnek:** Java'daki `String`, `Integer` gibi wrapper sınıflar `final`'dır. Kimsenin `String` sınıfını genişletip temel string davranışını bozmasını istemeyiz.\n\n#### 4. Parametreler üzerinde:\nMetot parametreleri `final` yapılabilir. Bu, metot gövdesi içinde o parametreye yeni bir değer atanmasını engeller.\n\n---\n\n### Özet Liste: `final` Kuralları\n\n| Kullanım Yeri | Etkisi |\n| :--- | :--- |\n| **Sınıf (Class)** | Genişletilemez (extends edilemez). |\n| **Metot (Method)** | Ezilemez (override edilemez). |\n| **İlkel Değişken (Primitive)** | Değeri değiştirilemez (sabit olur). |\n| **Referans Değişken (Object)** | Başka bir nesneye işaret edemez ama nesne içeriği değişebilir. |\n| **Statik Değişken (static final)** | \"Constant\" (Sabit) olarak adlandırılır. Büyük harfle yazılır (`MY_CONSTANT`). |\n\n---\n\n### Yanlış Bilinenlerin Düzeltilmesi\n\n* **\"final referansın gösterdiği object mutate edilemez\":** Yanlış. Yukarıdaki liste örneğinde olduğu gibi, nesnenin içindeki alanlar `final` değilse değiştirilebilir. Sadece referansın (adresin) kendisi sabittir.\n* **\"final variable her zaman compile-time sabiti olmalıdır\":** Yanlış. Bir `final` değişkenin değeri çalışma zamanında (runtime) bir hesaplama sonucunda veya constructor içinde belirlenebilir. Sadece bir kez atanması yeterlidir.\n\n\n\nÖzellikle **Immutable (değişmez)** nesneler tasarlarken `final` anahtar kelimesi bizim en büyük yardımcımızdır. Projelerinde \"Thread-safe\" yapılar kurarken bu özellikten bolca faydalanabilirsin! Başka hangi anahtar kelime (örneğin `static` veya `volatile`) kafanı karıştırıyor?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -149,13 +261,27 @@
       "singleChoice": true,
       "question": "Constructor chaining (this()/super()) icin hangi kural dogrudur?",
       "choices": [
-        { "id": "A", "text": "this() ve super() ayni constructor icinde birlikte cagrilabilir." },
-        { "id": "B", "text": "Constructor icinde this()/super() cagrisi ilk satir olmali." },
-        { "id": "C", "text": "super() sadece interface'lerde kullanilir." },
-        { "id": "D", "text": "this() ile zincirleme yasaktir." }
+        {
+          "id": "A",
+          "text": "this() ve super() ayni constructor icinde birlikte cagrilabilir."
+        },
+        {
+          "id": "B",
+          "text": "Constructor icinde this()/super() cagrisi ilk satir olmali."
+        },
+        {
+          "id": "C",
+          "text": "super() sadece interface'lerde kullanilir."
+        },
+        {
+          "id": "D",
+          "text": "this() ile zincirleme yasaktir."
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru ifade şudur: **Constructor içinde `this()`/`super()` çağrısı ilk satır olmalı.**\n\nJava'da bir constructor çalışmaya başladığında, nesne hiyerarşisinin bozulmaması için önce üst sınıfın (parent) inşa edilmesi veya aynı sınıf içindeki diğer constructor'ın çalıştırılması gerekir. Bu yüzden bu çağrılar metodun en tepesinde yer almalıdır.\n\n---\n\n### `this` ve `super` Hakkında Tüm Bilgiler\n\nBu iki anahtar kelime hem metotlarda/değişkenlerde hem de constructor'larda farklı amaçlarla kullanılır.\n\n#### 1. `this` Anahtar Kelimesi (O anki nesne)\n`this`, içinde bulunulan sınıfın nesnesini temsil eder.\n\n* **Instance Değişkenlerine Erişim:** Parametre ismi ile sınıfın field ismi aynı olduğunda (`shadowing`) field'ı belirtmek için kullanılır: `this.name = name;`.\n* **Constructor Chaining (`this()`):** Aynı sınıf içindeki bir constructor'dan diğerini çağırmak için kullanılır. Kod tekrarını önler.\n* **Metot Çağrısı:** Sınıf içindeki başka bir metodu çağırmak için kullanılabilir (zorunlu değildir ama netlik sağlar).\n* **Argüman Olarak Gönderme:** O anki nesneyi başka bir metoda parametre olarak geçmek için kullanılır: `otherMethod(this);`.\n* **Static İçinde Kullanılamaz:** `this` nesneye bağlıdır, `static` metotlar ise sınıfa bağlıdır. Bu yüzden static bloklarda `this` kullanılamaz.\n\n#### 2. `super` Anahtar Kelimesi (Üst sınıf nesnesi)\n`super`, bir alt sınıfın (subclass) doğrudan miras aldığı üst sınıfı temsil eder.\n\n* **Üst Sınıf Değişkenleri:** Eğer alt sınıf üst sınıftaki bir değişkeni ezerse (hidden field), üst sınıftakine erişmek için: `super.variableName`.\n* **Üst Sınıf Metotları:** Override edilmiş bir metodun orijinal (üst sınıftaki) halini çağırmak için: `super.methodName()`.\n* **Constructor Chaining (`super()`):** Üst sınıfın constructor'ını çağırmak için kullanılır.\n* **Varsayılan Çağrı:** Eğer siz yazmazsanız, Java her constructor'ın ilk satırına gizli bir `super();` ekler. Eğer üst sınıfın parametresiz constructor'ı yoksa, bunu manuel yazmak zorunludur.\n\n---\n\n### Kritik Kurallar Listesi\n\n| Kural | `this()` / `this` | `super()` / `super` |\n| :--- | :--- | :--- |\n| **Satır Sırası** | `this()` çağrısı ilk satır olmalı. | `super()` çağrısı ilk satır olmalı. |\n| **Birlikte Kullanım** | Bir constructor içinde **ya `this()` ya `super()`** olur. İkisi aynı anda olamaz. | (Aynı kural geçerli) |\n| **Static Bağlam** | Static metotlarda kullanılamaz. | Static metotlarda kullanılamaz. |\n| **Kullanım Amacı** | Mevcut nesne ve constructor yönetimi. | Üst sınıf mirası ve constructor yönetimi. |\n\n### Örnek Kod\n\n```java\nclass Person {\n    String name;\n    Person(String name) { this.name = name; }\n}\n\nclass Employee extends Person {\n    int id;\n    \n    // 1. Senaryo: this() ile zincirleme\n    Employee() {\n        this(\"Bilinmiyor\", 0); // Diğer constructor'a git\n    }\n\n    // 2. Senaryo: super() ile üst sınıfa git\n    Employee(String name, int id) {\n        super(name); // Person constructor'ını çağır (İLK SATIR!)\n        this.id = id;\n    }\n}\n```\n\n\n\nBu yapıda neden `this()` ve `super()` aynı anda kullanılamaz? Çünkü `this()` zaten başka bir constructor'a gider ve o gittiği constructor en nihayetinde bir `super()` çağırmak zorundadır. İkisini aynı anda çağırmak, üst sınıfın iki kez inşa edilmeye çalışılmasına neden olur ki bu da nesne bütünlüğünü bozar. \n\nConstructor zincirleme (chaining) mantığı oturdu mu? Yoksa bir \"hata\" senaryosu üzerinden mi inceleyelim?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "Asagidaki kodun ciktisi nedir?",
       "choices": [
-        { "id": "A", "text": "Animal" },
-        { "id": "B", "text": "Dog" },
-        { "id": "C", "text": "Compile error" },
-        { "id": "D", "text": "Runtime error" }
+        {
+          "id": "A",
+          "text": "Animal"
+        },
+        {
+          "id": "B",
+          "text": "Dog"
+        },
+        {
+          "id": "C",
+          "text": "Compile error"
+        },
+        {
+          "id": "D",
+          "text": "Runtime error"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "questionCode": "class Animal { String sound() { return \"Animal\"; } }\nclass Dog extends Animal { @Override String sound() { return \"Dog\"; } }\nAnimal a = new Dog();\nSystem.out.println(a.sound());",
