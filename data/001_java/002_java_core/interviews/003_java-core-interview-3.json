@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "java-core",
+  "id": "java-core-interview-3",
+  "title": "Java Core Interview - 3",
+  "description": "Exception handling, generics ve immutability",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Checked ve unchecked exception farki icin dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Checked exceptionlar RuntimeExceptiondan turetilir." },
+        { "id": "B", "text": "Unchecked exceptionlar compiler tarafindan zorunlu yakalanir." },
+        { "id": "C", "text": "Checked exceptionlar compiler tarafindan handle veya throws edilmeye zorlanir." },
+        { "id": "D", "text": "Ikisi arasinda hicbir fark yoktur." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "throw ve throws arasindaki dogru fark hangisidir?",
+      "choices": [
+        { "id": "A", "text": "throw method imzasinda, throws method govdesinde kullanilir." },
+        { "id": "B", "text": "throw bir exception firlatir, throws methodun firlatabilecegini bildirir." },
+        { "id": "C", "text": "throws sadece RuntimeException icin kullanilir." },
+        { "id": "D", "text": "throw ve throws ayni amaca hizmet eder." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "try-with-resources yapisinin temel faydasi nedir?",
+      "choices": [
+        { "id": "A", "text": "Sadece RuntimeExceptionlari yakalar." },
+        { "id": "B", "text": "Resource kapatma isini otomatik ve guvenli sekilde yapar." },
+        { "id": "C", "text": "finally blogunu yasaklar." },
+        { "id": "D", "text": "Sadece NIO siniflarinda calisir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q4",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki kodun ciktisi nedir?",
+      "choices": [
+        { "id": "A", "text": "try" },
+        { "id": "B", "text": "finally" },
+        { "id": "C", "text": "try finally" },
+        { "id": "D", "text": "Compile error" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "questionCode": "try {\n  System.out.print(\"try \" );\n  return;\n} finally {\n  System.out.print(\"finally\");\n}",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Genericsde type erasure neyi ifade eder?",
+      "choices": [
+        { "id": "A", "text": "Generic tiplerin runtime da aynen korunmasini." },
+        { "id": "B", "text": "Compilerin generic tip bilgisini runtime oncesi silmesini." },
+        { "id": "C", "text": "JVMin generic siniflari calistirmamasini." },
+        { "id": "D", "text": "Sadece primitive tiplerle generic kullanilabilmesini." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "class Box<T extends Number> tanimi ne saglar?",
+      "choices": [
+        { "id": "A", "text": "T sadece String olabilir." },
+        { "id": "B", "text": "T herhangi bir primitive tip olabilir." },
+        { "id": "C", "text": "T Number veya alt tipleri ile sinirlanir." },
+        { "id": "D", "text": "T runtime da Numbera cast edilir." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Immutable class tasarimi icin dogru pratik hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Fieldlari public yapmak." },
+        { "id": "B", "text": "Setter methodlari ile disardan degisiklige izin vermek." },
+        { "id": "C", "text": "Fieldlari final yapmak ve mutable referanslari defensive copy ile korumak." },
+        { "id": "D", "text": "Classi abstract yapmak." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Java record tipleri icin hangisi dogrudur?",
+      "choices": [
+        { "id": "A", "text": "Record alanlari varsayilan olarak mutabledir." },
+        { "id": "B", "text": "Recordlar veri tasima icin kisa ve final field odakli bir yapidir." },
+        { "id": "C", "text": "Record classlar mutlaka bir classi extend etmelidir." },
+        { "id": "D", "text": "Record icinde hic method yazilamaz." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Custom exception tasariminda en iyi yaklasim hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Tum hatalari tek bir Exception classinda toplamak." },
+        { "id": "B", "text": "Anlamli domain exceptionlari tanimlayip context bilgisi tasimak." },
+        { "id": "C", "text": "Sadece Error turevleri kullanmak." },
+        { "id": "D", "text": "Mesajsiz bos exception firlatmak." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q10",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun sonucu ne olur?",
+      "choices": [
+        { "id": "A", "text": "checked" },
+        { "id": "B", "text": "unchecked" },
+        { "id": "C", "text": "Compile error" },
+        { "id": "D", "text": "Hicbir sey yazmaz" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "questionCode": "class MyEx extends Exception {}\ntry {\n  throw new MyEx();\n} catch (Exception e) {\n  System.out.println(\"checked\");\n}",
+      "answerCode": ""
+    }
+  ]
+}

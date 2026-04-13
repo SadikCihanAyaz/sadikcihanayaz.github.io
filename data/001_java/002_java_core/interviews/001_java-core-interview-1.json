@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "java-core",
+  "id": "java-core-interview-1",
+  "title": "Java Core Interview - 1",
+  "description": "OOP temelleri, sinif tasarimi ve object modeli",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Class ve object arasindaki farki en dogru anlatan ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Class calisan bir instance'dir, object ise sabit semadir." },
+        { "id": "B", "text": "Class bir sema/tanimdir, object bu semadan uretilen ornektir." },
+        { "id": "C", "text": "Class sadece primitive tip tutar, object referans tutar." },
+        { "id": "D", "text": "Class ve object Java'da ayni kavramdir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Encapsulation prensibinin en dogru amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "Tum field'lari public yaparak erisimi kolaylastirmak." },
+        { "id": "B", "text": "Kod tekrarini azaltmak icin her methodu static yapmak." },
+        { "id": "C", "text": "Veri ve davranisi bir arada tutup kontrolsuz erisimi sinirlamak." },
+        { "id": "D", "text": "Inheritance'i tamamen kaldirmak." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Asagidaki durumlardan hangisinde composition, inheritance'a gore daha uygundur?",
+      "choices": [
+        { "id": "A", "text": "IS-A iliskisi net ve kaliciysa." },
+        { "id": "B", "text": "Davranisi runtime'da degistirmek ve gevsek baglilik istendiginde." },
+        { "id": "C", "text": "Tum metodlari otomatik miras almak zorunluysa." },
+        { "id": "D", "text": "Superclass constructor'i private ise." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Polymorphism icin en dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Ayni method adinin farkli siniflarda farkli davranis verebilmesi." },
+        { "id": "B", "text": "Her sinifin yalnizca tek method icermesi." },
+        { "id": "C", "text": "Overloading'in Java'da yasak olmasi." },
+        { "id": "D", "text": "Sadece interface kullaninca olusur, class'larda olmaz." }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Method overriding ile ilgili hangisi dogrudur?",
+      "choices": [
+        { "id": "A", "text": "private method'lar override edilebilir." },
+        { "id": "B", "text": "Return type tamamen alakasiz bir tipe degisebilir." },
+        { "id": "C", "text": "Access modifier daha kisitlayici yapilamaz." },
+        { "id": "D", "text": "Method ismi farkliysa da override sayilir." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Abstract class ve interface icin en dogru karsilastirma hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Interface state tutabilir, abstract class tutamaz." },
+        { "id": "B", "text": "Bir class birden fazla abstract class'i extend edebilir." },
+        { "id": "C", "text": "Abstract class ortak temel davranis, interface sozlesme taniminda gucludur." },
+        { "id": "D", "text": "Ikisi de constructor tanimlayamaz." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "static bir method icinde asagidakilerden hangisi kullanilamaz?",
+      "choices": [
+        { "id": "A", "text": "Class seviyesinde static field" },
+        { "id": "B", "text": "this referansi" },
+        { "id": "C", "text": "Local variable" },
+        { "id": "D", "text": "Static helper method" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "final anahtar sozcugu ile ilgili hangisi dogrudur?",
+      "choices": [
+        { "id": "A", "text": "final class'tan kalitim alinabilir ama methodlari override edilmez." },
+        { "id": "B", "text": "final variable her zaman compile-time sabiti olmak zorundadir." },
+        { "id": "C", "text": "final method override edilemez." },
+        { "id": "D", "text": "final referansin gosterdigi object mutate edilemez." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Constructor chaining (this()/super()) icin hangi kural dogrudur?",
+      "choices": [
+        { "id": "A", "text": "this() ve super() ayni constructor icinde birlikte cagrilabilir." },
+        { "id": "B", "text": "Constructor icinde this()/super() cagrisi ilk satir olmali." },
+        { "id": "C", "text": "super() sadece interface'lerde kullanilir." },
+        { "id": "D", "text": "this() ile zincirleme yasaktir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q10",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki kodun ciktisi nedir?",
+      "choices": [
+        { "id": "A", "text": "Animal" },
+        { "id": "B", "text": "Dog" },
+        { "id": "C", "text": "Compile error" },
+        { "id": "D", "text": "Runtime error" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "questionCode": "class Animal { String sound() { return \"Animal\"; } }\nclass Dog extends Animal { @Override String sound() { return \"Dog\"; } }\nAnimal a = new Dog();\nSystem.out.println(a.sound());",
+      "answerCode": ""
+    }
+  ]
+}

@@ -11,6 +11,16 @@
       "topicFile": "/data/001_java/001_threads/topic/001_topic.json",
       "interviewsFile": "/data/001_java/001_threads/interviews/index.json",
       "interviewCount": 10
+    },
+    {
+      "id": "java-core",
+      "title": "Java Core",
+      "description": "OOP, type system (collections haric), exception, generics, IO/NIO, JVM ve JDBC/ORM temelleri",
+      "order": 2,
+      "folder": "002_java_core",
+      "topicFile": "/data/001_java/002_java_core/topic/001_topic.json",
+      "interviewsFile": "/data/001_java/002_java_core/interviews/index.json",
+      "interviewCount": 6
     }
   ]
 }

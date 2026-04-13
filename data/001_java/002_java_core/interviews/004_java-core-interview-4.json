@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "java-core",
+  "id": "java-core-interview-4",
+  "title": "Java Core Interview - 4",
+  "description": "IO/NIO, file handling ve serialization",
+  "questions": [
+    {
+      "id": "i4-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "InputStream ve Reader arasindaki temel fark nedir?",
+      "choices": [
+        { "id": "A", "text": "InputStream character, Reader byte bazlidir." },
+        { "id": "B", "text": "InputStream byte, Reader character bazlidir." },
+        { "id": "C", "text": "Ikisi de sadece text dosyalari okuyabilir." },
+        { "id": "D", "text": "Reader sadece network socket icin kullanilir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "try-with-resources kullanildiginda ne garanti edilir?",
+      "choices": [
+        { "id": "A", "text": "Resource sadece hata durumunda kapanir." },
+        { "id": "B", "text": "Resource kapanmasi finally yazmadan otomatik saglanir." },
+        { "id": "C", "text": "Sadece FileInputStream icin gecerlidir." },
+        { "id": "D", "text": "close metodu hic cagrilmaz." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "BufferedInputStream veya BufferedReader kullanmanin temel sebebi nedir?",
+      "choices": [
+        { "id": "A", "text": "Dosyanin encodingini otomatik UTF-8 yapmasi." },
+        { "id": "B", "text": "Sistem cagrilarini azaltarak IO performansini arttirmasi." },
+        { "id": "C", "text": "Dosya boyutunu kucultmesi." },
+        { "id": "D", "text": "Sadece binary dosya desteklemesi." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Files.readAllBytes(path) icin en buyuk risk hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Kucuk dosyalarda calismamasi." },
+        { "id": "B", "text": "Buyuk dosyalarda tum icerigi memorye alarak OutOfMemory riski olusturmasi." },
+        { "id": "C", "text": "Sadece Windows'ta calismasi." },
+        { "id": "D", "text": "Binary dosyalari okumamasi." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "java.io.File yerine java.nio.file.Path tercih etmenin nedeni nedir?",
+      "choices": [
+        { "id": "A", "text": "Path sadece string tutar, IO yapamaz." },
+        { "id": "B", "text": "NIO API daha zengin operasyonlar ve daha modern file system desteği sunar." },
+        { "id": "C", "text": "File artik deprecated oldugu icin kullanilamaz." },
+        { "id": "D", "text": "Path sadece Linux'ta calisir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "NIO Buffer icin flip() metodunun amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "Bufferi sifirlayip capacityyi degistirmek." },
+        { "id": "B", "text": "Write moddan read moda gecis icin limit ve position ayarlamak." },
+        { "id": "C", "text": "Bufferi diske yazmak." },
+        { "id": "D", "text": "Channeli kapatmak." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Java serializationda serialVersionUID ne icin kullanilir?",
+      "choices": [
+        { "id": "A", "text": "Objectin hashCode degerini saklamak icin." },
+        { "id": "B", "text": "Class versiyon uyumlulugunu kontrol etmek icin." },
+        { "id": "C", "text": "Tum fieldlari otomatik sifrelemek icin." },
+        { "id": "D", "text": "Sadece network timeout ayari icin." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "transient anahtar sozcugu serialization sirasinda ne yapar?",
+      "choices": [
+        { "id": "A", "text": "Fieldi zorunlu serialize eder." },
+        { "id": "B", "text": "Fieldi serialization disinda birakir." },
+        { "id": "C", "text": "Fieldi final yapar." },
+        { "id": "D", "text": "Fieldi static yapar." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Serializable ve Externalizable arasindaki dogru fark nedir?",
+      "choices": [
+        { "id": "A", "text": "Ikisi tamamen ayni sekilde calisir." },
+        { "id": "B", "text": "Externalizable ile okuma/yazma akisini gelistirici manuel kontrol eder." },
+        { "id": "C", "text": "Serializable daha fazla kod yazmayi zorunlu kilar." },
+        { "id": "D", "text": "Externalizable sadece primitive alanlar icin gecerlidir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q10",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki senaryoda object deserialize edilince token alani ne olur?",
+      "choices": [
+        { "id": "A", "text": "orijinal degerini korur" },
+        { "id": "B", "text": "null (veya primitive ise varsayilan) olur" },
+        { "id": "C", "text": "compile error olur" },
+        { "id": "D", "text": "runtimeda her zaman SecurityException firlatir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "questionCode": "class Session implements java.io.Serializable {\n  String user;\n  transient String token;\n}",
+      "answerCode": ""
+    }
+  ]
+}

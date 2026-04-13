@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "java-core",
+  "interviews": [
+    {
+      "id": "java-core-interview-1",
+      "title": "Java Core Interview - 1",
+      "description": "OOP temelleri, sinif tasarimi ve object modeli",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/001_java/002_java_core/interviews/001_java-core-interview-1.json"
+    },
+    {
+      "id": "java-core-interview-2",
+      "title": "Java Core Interview - 2",
+      "description": "Java type system, primitives, references ve dil temel davranislari",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/001_java/002_java_core/interviews/002_java-core-interview-2.json"
+    },
+    {
+      "id": "java-core-interview-3",
+      "title": "Java Core Interview - 3",
+      "description": "Exception handling, generics ve immutability",
+      "order": 3,
+      "questionCount": 10,
+      "file": "/data/001_java/002_java_core/interviews/003_java-core-interview-3.json"
+    },
+    {
+      "id": "java-core-interview-4",
+      "title": "Java Core Interview - 4",
+      "description": "IO/NIO, file handling ve serialization",
+      "order": 4,
+      "questionCount": 10,
+      "file": "/data/001_java/002_java_core/interviews/004_java-core-interview-4.json"
+    },
+    {
+      "id": "java-core-interview-5",
+      "title": "Java Core Interview - 5",
+      "description": "JVM, memory model, GC ve performance temelleri",
+      "order": 5,
+      "questionCount": 10,
+      "file": "/data/001_java/002_java_core/interviews/005_java-core-interview-5.json"
+    },
+    {
+      "id": "java-core-interview-6",
+      "title": "Java Core Interview - 6",
+      "description": "SQL, JDBC ve ORM temelleri",
+      "order": 6,
+      "questionCount": 10,
+      "file": "/data/001_java/002_java_core/interviews/006_java-core-interview-6.json"
+    }
+  ]
+}

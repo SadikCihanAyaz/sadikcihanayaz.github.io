@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "java-core",
+  "id": "java-core-interview-6",
+  "title": "Java Core Interview - 6",
+  "description": "SQL, JDBC ve ORM temelleri",
+  "questions": [
+    {
+      "id": "i6-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "PreparedStatement kullanmanin en temel sebebi nedir?",
+      "choices": [
+        { "id": "A", "text": "Sadece Oracle veritabaninda calismasi." },
+        { "id": "B", "text": "SQL injection riskini azaltip parametre baglamayi guvenli yapmak." },
+        { "id": "C", "text": "Auto commiti otomatik kapatmasi." },
+        { "id": "D", "text": "Tum sorgulari memory cachete tutmasi." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ACID icindeki A harfi neyi ifade eder?",
+      "choices": [
+        { "id": "A", "text": "Availability" },
+        { "id": "B", "text": "Atomicity" },
+        { "id": "C", "text": "Asynchrony" },
+        { "id": "D", "text": "Aggregation" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JDBCde auto-commit true oldugunda ne olur?",
+      "choices": [
+        { "id": "A", "text": "Her SQL ifadesi sonunda otomatik commit edilir." },
+        { "id": "B", "text": "Commit cagirmadan transaction acik kalir." },
+        { "id": "C", "text": "Rollback her zaman otomatik olur." },
+        { "id": "D", "text": "Sadece select sorgulari calisir." }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Dirty read hangi isolation level problemidir?",
+      "choices": [
+        { "id": "A", "text": "Read Uncommitted seviyesinde gorulebilir." },
+        { "id": "B", "text": "Serializable seviyesinde zorunludur." },
+        { "id": "C", "text": "Sadece repeatable read de olur." },
+        { "id": "D", "text": "Isolation ile ilgisi yoktur." }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "ORM tarafinda N+1 problemi en cok ne zaman olusur?",
+      "choices": [
+        { "id": "A", "text": "Tek bir insert atildiginda." },
+        { "id": "B", "text": "Parent listeleyip her parent icin ayri lazy child sorgusu calistiginda." },
+        { "id": "C", "text": "Batch update acikken." },
+        { "id": "D", "text": "Primary key integer oldugunda." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "FetchType.LAZY icin dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Iliskili veri her zaman hemen yuklenir." },
+        { "id": "B", "text": "Iliskili veri ilk erisim aninda yuklenir." },
+        { "id": "C", "text": "Sadece native querylerde gecerlidir." },
+        { "id": "D", "text": "LAZY kullanilinca transaction gereksiz olur." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JPA birinci seviye cache (persistence context) icin hangisi dogrudur?",
+      "choices": [
+        { "id": "A", "text": "Uygulama genelinde sonsuza kadar yasar." },
+        { "id": "B", "text": "Ayni EntityManager oturumu icinde ayni entityyi tekrar sorgulamada DB hitini azaltir." },
+        { "id": "C", "text": "Sadece ikinci seviye cache aktifse calisir." },
+        { "id": "D", "text": "Sadece native SQL icin calisir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Optimistic locking genel olarak nasil calisir?",
+      "choices": [
+        { "id": "A", "text": "Kaydi update etmeden once her zaman DB lock koyar." },
+        { "id": "B", "text": "Version alanini kontrol ederek cakisma varsa guncellemeyi reddeder." },
+        { "id": "C", "text": "Sadece read-only transactionlarda kullanilir." },
+        { "id": "D", "text": "Deadlock riskini arttirmak icin tasarlanmistir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Toplu insert performansini arttirmak icin hangi yontem en uygundur?",
+      "choices": [
+        { "id": "A", "text": "Her satir icin yeni connection acmak." },
+        { "id": "B", "text": "Batch insert ve uygun transaction sinirlari kullanmak." },
+        { "id": "C", "text": "Her satir sonrasi manual flush ve clear zorunlu kılmak." },
+        { "id": "D", "text": "SQL yerine sadece console log yazmak." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "SQL injection riskini azaltmak icin en dogru yaklasim hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Sorguyu string birlestirme ile olusturmak." },
+        { "id": "B", "text": "Kullanicidan gelen degeri replace ile temizlemek." },
+        { "id": "C", "text": "Parametreli sorgu (PreparedStatement) kullanmak." },
+        { "id": "D", "text": "Tum inputlari uppercase yapmak." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

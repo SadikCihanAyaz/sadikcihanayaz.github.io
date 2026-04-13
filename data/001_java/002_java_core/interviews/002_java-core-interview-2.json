@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "java-core",
+  "id": "java-core-interview-2",
+  "title": "Java Core Interview - 2",
+  "description": "Java type system, primitives, references ve dil temel davranislari",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Primitive tiplerle ilgili dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Primitive tipler object degildir ve null olamaz." },
+        { "id": "B", "text": "Primitive tipler her zaman heap'te tutulur." },
+        { "id": "C", "text": "Primitive tipler referans tipi olarak davranir." },
+        { "id": "D", "text": "Primitive tiplerin boyutu runtime'da degisir." }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Widening conversion icin hangisi derleme hatasi vermez?",
+      "choices": [
+        { "id": "A", "text": "long x = 10; int y = x;" },
+        { "id": "B", "text": "int i = 10; long l = i;" },
+        { "id": "C", "text": "double d = 1.2; float f = d;" },
+        { "id": "D", "text": "short s = 7; byte b = s;" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q3",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Bu kodun ciktisi hangisidir?",
+      "choices": [
+        { "id": "A", "text": "true true" },
+        { "id": "B", "text": "false false" },
+        { "id": "C", "text": "true false" },
+        { "id": "D", "text": "false true" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "questionCode": "Integer a = 127;\nInteger b = 127;\nInteger c = 128;\nInteger d = 128;\nSystem.out.println(a == b);\nSystem.out.println(c == d);",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "String immutability icin en dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "String icerigi degistirilince ayni object mutate edilir." },
+        { "id": "B", "text": "String uzerinde degisiklik yapildiginda yeni object olusur." },
+        { "id": "C", "text": "String sadece tek threadde kullanilabilir." },
+        { "id": "D", "text": "String final olunca her zaman intern edilir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "StringBuilder ve StringBuffer farki hangisidir?",
+      "choices": [
+        { "id": "A", "text": "StringBuilder synchronized, StringBuffer degildir." },
+        { "id": "B", "text": "Ikisi de synchronized oldugu icin fark yoktur." },
+        { "id": "C", "text": "StringBuffer synchronized'dir; StringBuilder genelde daha hizlidir." },
+        { "id": "D", "text": "StringBuffer sadece compile-time sabitler icin kullanilir." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "enum kullanmanin temel kazanci nedir?",
+      "choices": [
+        { "id": "A", "text": "Tip guvenli sabit deger seti saglar." },
+        { "id": "B", "text": "Runtime'da sonsuz yeni enum degeri uretilir." },
+        { "id": "C", "text": "Yalnizca switch icinde kullanilabilir." },
+        { "id": "D", "text": "Object olusumunu tamamen engeller." }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Java'da var anahtar sozcugu icin hangisi dogrudur?",
+      "choices": [
+        { "id": "A", "text": "Field tanimlarinda kullanilabilir." },
+        { "id": "B", "text": "Tip cikarimi compile-time yapilir; dynamic typing degildir." },
+        { "id": "C", "text": "Method parametresinde zorunludur." },
+        { "id": "D", "text": "null ile baslatildiginda tip otomatik Object olur." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "== ve equals karsilastirmasi icin dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "== her zaman object icerigini karsilastirir." },
+        { "id": "B", "text": "equals primitive tipler icin zorunludur." },
+        { "id": "C", "text": "equals defaultta referans esitligi kullanir; class override edebilir." },
+        { "id": "D", "text": "String'de equals kullanmak compile error verir." }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Sealed class yapisinin amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "Kalitimi tamamen kapatmak." },
+        { "id": "B", "text": "Sadece izin verilen siniflarin kalitim alabilmesini saglamak." },
+        { "id": "C", "text": "Tum methodlari static yapmak." },
+        { "id": "D", "text": "Reflection'i devre disi birakmak." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q10",
+      "type": "mcq",
+      "questionKind": "code-output",
+      "singleChoice": true,
+      "question": "Asagidaki kodun ciktisi nedir?",
+      "choices": [
+        { "id": "A", "text": "98" },
+        { "id": "B", "text": "b" },
+        { "id": "C", "text": "Compile error" },
+        { "id": "D", "text": "Runtime error" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "questionCode": "char c = 'a';\nint x = c + 1;\nSystem.out.println(x);",
+      "answerCode": ""
+    }
+  ]
+}

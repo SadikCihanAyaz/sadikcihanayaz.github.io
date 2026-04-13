@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "java-core",
+  "id": "java-core-topic",
+  "title": "Java Core - Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu makale henuz yazilmadi. Icerik yakinda eklenecek."
+    }
+  ]
+}

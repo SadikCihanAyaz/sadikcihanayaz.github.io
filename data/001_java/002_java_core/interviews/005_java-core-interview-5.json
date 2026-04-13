@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "java",
+  "subcategoryId": "java-core",
+  "id": "java-core-interview-5",
+  "title": "Java Core Interview - 5",
+  "description": "JVM, memory model, GC ve performance temelleri",
+  "questions": [
+    {
+      "id": "i5-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Stack ve heap icin dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Objectler stackte tutulur, local variablelar heapte tutulur." },
+        { "id": "B", "text": "Method cagri frame ve local variablelar stackte; objectler genelde heapte tutulur." },
+        { "id": "C", "text": "Stack ve heap ayni bellek bolgesidir." },
+        { "id": "D", "text": "Heap sadece primitive tipler icindir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Metaspace neyi tutar?",
+      "choices": [
+        { "id": "A", "text": "Thread local variablelarini." },
+        { "id": "B", "text": "Class metadata bilgisini." },
+        { "id": "C", "text": "JIT cache disindaki tum objectleri." },
+        { "id": "D", "text": "Sadece String poolu." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Minor GC genellikle hangi bolgede calisir?",
+      "choices": [
+        { "id": "A", "text": "Young generation" },
+        { "id": "B", "text": "Metaspace" },
+        { "id": "C", "text": "Code cache" },
+        { "id": "D", "text": "Thread stack" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Java uygulamasinda memory leak en dogru nasil tanimlanir?",
+      "choices": [
+        { "id": "A", "text": "GC oldugu icin Java da memory leak olamaz." },
+        { "id": "B", "text": "Artik kullanilmayan objectlere hala ulasilabildigi icin toplanamama durumu." },
+        { "id": "C", "text": "Sadece native kodda olusan bellek artisi." },
+        { "id": "D", "text": "Her OutOfMemoryError otomatik memory leak demektir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "WeakReference icin dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Strong referans gibi davranir, asla toplanmaz." },
+        { "id": "B", "text": "GC sirasinda baska strong referans yoksa object toplanabilir." },
+        { "id": "C", "text": "Sadece primitive degerleri referanslayabilir." },
+        { "id": "D", "text": "Mutlaka disk cache icin kullanilir." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "-Xms ve -Xmx parametreleri neyi belirler?",
+      "choices": [
+        { "id": "A", "text": "Thread stack min ve max boyutunu." },
+        { "id": "B", "text": "Heap baslangic ve maksimum boyutunu." },
+        { "id": "C", "text": "Metaspace min ve max boyutunu." },
+        { "id": "D", "text": "JIT compile seviyesini." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JIT compilerin temel amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "Source codeu class dosyasina cevirmek." },
+        { "id": "B", "text": "Sik calisan kodu optimize ederek runtime performansi arttirmak." },
+        { "id": "C", "text": "Sadece bytecode dogrulamak." },
+        { "id": "D", "text": "GC yerine bellek yonetimini tamamen almak." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Escape analysis ile JVM hangi optimizasyona karar verebilir?",
+      "choices": [
+        { "id": "A", "text": "Objectin heap yerine stackte allocate edilmesi gibi optimizasyonlar." },
+        { "id": "B", "text": "Tum synchronized bloklari kaldirmak." },
+        { "id": "C", "text": "Disk IOyu tamamen kapatmak." },
+        { "id": "D", "text": "Class loadingi devre disi birakmak." }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Performance problemi oldugunda ilk adim ne olmalidir?",
+      "choices": [
+        { "id": "A", "text": "Rastgele cache eklemek." },
+        { "id": "B", "text": "Olcum/profiling yaparak darbozazgi veriye dayali tespit etmek." },
+        { "id": "C", "text": "Tum kodu synchronized yapmak." },
+        { "id": "D", "text": "JVM versiyonunu rastgele degistirmek." }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "High throughput bir serviste Full GC artisi goruluyorsa ilk bakilacak metrik hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Heap occupancy trendi ve allocation rate" },
+        { "id": "B", "text": "Sadece CPU model numarasi" },
+        { "id": "C", "text": "Sadece disk partition boyutu" },
+        { "id": "D", "text": "IDE tema rengi" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}
