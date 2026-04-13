@@ -54,6 +54,18 @@ a:hover {
   color: var(--text);
 }
 
+.brand-btn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.brand-btn:hover {
+  text-decoration: underline;
+}
+
 .main {
   max-width: 1100px;
   margin: 0 auto;
@@ -145,6 +157,17 @@ a:hover {
 .btn-primary:hover {
   background: var(--primary-strong);
   border-color: var(--primary-strong);
+}
+
+.btn-saved-active {
+  border-color: var(--ok);
+  background: var(--ok);
+  color: #fff;
+}
+
+.btn-saved-active:hover {
+  border-color: #157347;
+  background: #157347;
 }
 
 .btn-link {
@@ -421,6 +444,105 @@ textarea.code-input {
   margin-top: 18px;
   color: var(--muted);
   font-size: 13px;
+}
+
+.saved-list-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+}
+
+.saved-list-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 32, 0.5);
+}
+
+.saved-list-panel {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 100%);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.saved-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.saved-list-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.saved-list-content {
+  padding: 12px 16px;
+  overflow: auto;
+}
+
+.saved-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.saved-item {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.saved-item:hover {
+  border-color: #b6c5d3;
+  background: #f8fbff;
+}
+
+.saved-item-title {
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.saved-item-meta {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.saved-empty {
+  margin: 4px 0;
+  color: var(--muted);
+}
+
+.saved-list-footer {
+  margin-top: 0;
+  padding: 12px 16px;
+  border-top: 1px solid var(--line);
+  justify-content: flex-end;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
 
 .hidden {

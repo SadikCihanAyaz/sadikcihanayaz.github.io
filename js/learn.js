@@ -6,7 +6,12 @@
     breadcrumb: document.getElementById('breadcrumb'),
     title: document.getElementById('title'),
     subtitle: document.getElementById('subtitle'),
-    app: document.getElementById('app')
+    app: document.getElementById('app'),
+    savedListOpenBtn: document.getElementById('savedListOpenBtn'),
+    savedListModal: document.getElementById('savedListModal'),
+    savedListCloseBtn: document.getElementById('savedListCloseBtn'),
+    savedListContent: document.getElementById('savedListContent'),
+    savedListClearBtn: document.getElementById('savedListClearBtn')
   };
 
   function esc(value) {
@@ -353,7 +358,23 @@
     els.app.innerHTML = `<div class="callout">${esc(message)}</div>`;
   }
 
+  function setupSavedListModal() {
+    if (!window.SavedQuestionList) {
+      return;
+    }
+
+    window.SavedQuestionList.attachModal({
+      openBtn: els.savedListOpenBtn,
+      modal: els.savedListModal,
+      closeBtn: els.savedListCloseBtn,
+      contentEl: els.savedListContent,
+      clearBtn: els.savedListClearBtn
+    });
+  }
+
   async function init() {
+    setupSavedListModal();
+
     try {
       const categoryId = q('category');
       const subcategoryId = q('subcategory');

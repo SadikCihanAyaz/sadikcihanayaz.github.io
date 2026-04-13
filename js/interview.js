@@ -10,7 +10,8 @@
     currentIndex: 0,
     responses: {},
     revealed: {},
-    checks: {}
+    checks: {},
+    savedListController: null
   };
 
   const els = {
@@ -24,12 +25,18 @@
     questionBody: document.getElementById('questionBody'),
     checkBtn: document.getElementById('checkBtn'),
     toggleAnswerBtn: document.getElementById('toggleAnswerBtn'),
+    bookmarkQuestionBtn: document.getElementById('bookmarkQuestionBtn'),
     checkResult: document.getElementById('checkResult'),
     answerBox: document.getElementById('answerBox'),
     prevBtn: document.getElementById('prevBtn'),
     nextBtn: document.getElementById('nextBtn'),
     errorBox: document.getElementById('errorBox'),
-    backToSub: document.getElementById('backToSub')
+    backToSub: document.getElementById('backToSub'),
+    savedListOpenBtn: document.getElementById('savedListOpenBtn'),
+    savedListModal: document.getElementById('savedListModal'),
+    savedListCloseBtn: document.getElementById('savedListCloseBtn'),
+    savedListContent: document.getElementById('savedListContent'),
+    savedListClearBtn: document.getElementById('savedListClearBtn')
   };
 
   function esc(value) {
@@ -375,6 +382,81 @@
     });
   }
 
+  function getSavedQuestionEntry(question) {
+    return {
+      categoryId: String(state.category?.id || ''),
+      categoryTitle: String(state.category?.title || ''),
+      subcategoryId: String(state.subcategory?.id || ''),
+      subcategoryTitle: String(state.subcategory?.title || ''),
+      interviewId: String(state.interview?.id || ''),
+      interviewTitle: String(state.interview?.title || ''),
+      questionId: String(question?.id || ''),
+      questionText: String(question?.question || ''),
+      questionOrder: state.currentIndex + 1
+    };
+  }
+
+  function syncBookmarkButton(question) {
+    if (!els.bookmarkQuestionBtn) {
+      return;
+    }
+
+    if (!window.SavedQuestionList) {
+      els.bookmarkQuestionBtn.classList.add('hidden');
+      return;
+    }
+
+    const entry = getSavedQuestionEntry(question);
+    const saved = window.SavedQuestionList.isSaved(entry);
+
+    els.bookmarkQuestionBtn.textContent = saved ? 'Listeden Kaldir' : 'Listeye Ekle';
+    els.bookmarkQuestionBtn.classList.toggle('btn-saved-active', saved);
+  }
+
+  function setupSavedListModal() {
+    if (!window.SavedQuestionList) {
+      return;
+    }
+
+    state.savedListController = window.SavedQuestionList.attachModal({
+      openBtn: els.savedListOpenBtn,
+      modal: els.savedListModal,
+      closeBtn: els.savedListCloseBtn,
+      contentEl: els.savedListContent,
+      clearBtn: els.savedListClearBtn,
+      onNavigate: (entry) => {
+        if (!state.interview || !state.category || !state.subcategory) {
+          return false;
+        }
+
+        const sameInterview = (
+          String(entry.categoryId) === String(state.category.id) &&
+          String(entry.subcategoryId) === String(state.subcategory.id) &&
+          String(entry.interviewId) === String(state.interview.id)
+        );
+
+        if (!sameInterview) {
+          return false;
+        }
+
+        const index = state.questions.findIndex((question) => String(question.id) === String(entry.questionId));
+        if (index < 0) {
+          return false;
+        }
+
+        state.currentIndex = index;
+        renderQuestion();
+        return true;
+      },
+      onAfterClear: () => {
+        const current = state.questions[state.currentIndex];
+        if (current) {
+          syncBookmarkButton(current);
+        }
+      }
+    });
+  }
+
   function getQuestionState(question) {
     if (!state.responses[question.id]) {
       state.responses[question.id] = {
@@ -586,6 +668,7 @@
 
     renderCheckResult(question);
     renderAnswer(question);
+    syncBookmarkButton(question);
 
     els.prevBtn.disabled = state.currentIndex === 0;
     els.nextBtn.disabled = state.currentIndex >= state.questions.length - 1;
@@ -617,15 +700,40 @@
       state.revealed[question.id] = !state.revealed[question.id];
       renderAnswer(question);
     });
+
+    if (els.bookmarkQuestionBtn) {
+      els.bookmarkQuestionBtn.addEventListener('click', () => {
+        const question = state.questions[state.currentIndex];
+        if (!question || !window.SavedQuestionList) {
+          return;
+        }
+
+        const entry = getSavedQuestionEntry(question);
+        const saved = window.SavedQuestionList.isSaved(entry);
+
+        if (saved) {
+          window.SavedQuestionList.remove(entry);
+        } else {
+          window.SavedQuestionList.add(entry);
+        }
+
+        syncBookmarkButton(question);
+        if (state.savedListController) {
+          state.savedListController.refresh();
+        }
+      });
+    }
   }
 
   async function init() {
     bindEvents();
+    setupSavedListModal();
 
     try {
       const categoryId = q('category');
       const subcategoryId = q('subcategory');
       const interviewId = q('interview');
+      const questionId = q('question');
 
       if (!categoryId || !subcategoryId || !interviewId) {
         throw new Error('Eksik query parametresi.');
@@ -659,6 +767,14 @@
       state.subcategory = subcategory;
       state.interview = interview;
       state.questions = questions;
+      state.currentIndex = 0;
+
+      if (questionId) {
+        const targetIndex = questions.findIndex((question) => String(question.id) === String(questionId));
+        if (targetIndex >= 0) {
+          state.currentIndex = targetIndex;
+        }
+      }
 
       setHeader();
       renderQuestion();

@@ -32,7 +32,7 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="/learn.html">Learning Hub</a>
+      <button id="savedListOpenBtn" type="button" class="brand brand-btn">Listem</button>
       <a href="/index.html" class="btn">Giris Sayfasi</a>
     </div>
   </header>
@@ -49,6 +49,21 @@
     <p class="footer-note">Icerik yapisi coklu JSON formatinda calisir: once <code>data/categories.json</code>, sonra kategori/alt kategori altindaki ayri topic ve interview dosyalari.</p>
   </main>
 
+  <div id="savedListModal" class="saved-list-modal hidden" aria-hidden="true">
+    <div class="saved-list-backdrop" data-close-saved-list></div>
+    <section class="saved-list-panel" role="dialog" aria-modal="true" aria-labelledby="savedListTitle">
+      <div class="saved-list-header">
+        <h2 id="savedListTitle">Listem</h2>
+        <button id="savedListCloseBtn" type="button" class="btn">Kapat</button>
+      </div>
+      <div id="savedListContent" class="saved-list-content"></div>
+      <div class="actions saved-list-footer">
+        <button id="savedListClearBtn" type="button" class="btn">Listeyi Temizle</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="/js/saved-list.js"></script>
   <script src="/js/learn.js"></script>
 </body>
 </html>

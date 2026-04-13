@@ -32,7 +32,7 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="/learn.html">Learning Hub</a>
+      <button id="savedListOpenBtn" type="button" class="brand brand-btn">Listem</button>
       <a id="backToSub" href="/learn.html" class="btn">Geri</a>
     </div>
   </header>
@@ -52,6 +52,7 @@
       <div class="actions">
         <button id="checkBtn" class="btn">Yanitimi Kontrol Et</button>
         <button id="toggleAnswerBtn" class="btn">Cevabi Goster</button>
+        <button id="bookmarkQuestionBtn" class="btn">Listeye Ekle</button>
       </div>
 
       <div id="checkResult" class="article-block"></div>
@@ -66,6 +67,21 @@
     <section id="errorBox" class="callout hidden"></section>
   </main>
 
+  <div id="savedListModal" class="saved-list-modal hidden" aria-hidden="true">
+    <div class="saved-list-backdrop" data-close-saved-list></div>
+    <section class="saved-list-panel" role="dialog" aria-modal="true" aria-labelledby="savedListTitle">
+      <div class="saved-list-header">
+        <h2 id="savedListTitle">Listem</h2>
+        <button id="savedListCloseBtn" type="button" class="btn">Kapat</button>
+      </div>
+      <div id="savedListContent" class="saved-list-content"></div>
+      <div class="actions saved-list-footer">
+        <button id="savedListClearBtn" type="button" class="btn">Listeyi Temizle</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="/js/saved-list.js"></script>
   <script src="/js/interview.js"></script>
 </body>
 </html>
