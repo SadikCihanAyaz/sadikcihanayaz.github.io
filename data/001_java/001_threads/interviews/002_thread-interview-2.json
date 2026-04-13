@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "synchronized kullanimi icin en dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Sadece atomiklik saglar, gorunurluk saglamaz" },
-        { "id": "B", "text": "Mutual exclusion ve visibility birlikte saglar" },
-        { "id": "C", "text": "Sadece write islemlerini kilitler" },
-        { "id": "D", "text": "Yalnizca static metotlarda calisir" }
+        {
+          "id": "A",
+          "text": "Sadece atomiklik saglar, gorunurluk saglamaz"
+        },
+        {
+          "id": "B",
+          "text": "Mutual exclusion ve visibility birlikte saglar"
+        },
+        {
+          "id": "C",
+          "text": "Sadece write islemlerini kilitler"
+        },
+        {
+          "id": "D",
+          "text": "Yalnizca static metotlarda calisir"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,13 +44,27 @@
       "singleChoice": true,
       "question": "static synchronized metot hangi lock ile calisir?",
       "choices": [
-        { "id": "A", "text": "this locku" },
-        { "id": "B", "text": "Method local lock" },
-        { "id": "C", "text": "Class object locku" },
-        { "id": "D", "text": "Thread stack locku" }
+        {
+          "id": "A",
+          "text": "this locku"
+        },
+        {
+          "id": "B",
+          "text": "Method local lock"
+        },
+        {
+          "id": "C",
+          "text": "Class object locku"
+        },
+        {
+          "id": "D",
+          "text": "Thread stack locku"
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru cevap: **Class object locku**\n\nJava'da bir metodu hem `static` hem de `synchronized` olarak işaretlediğinizde, bu kilit artık nesneye (**instance**) değil, sınıfın bizzat kendisine (**Class object**) ait olur.\n\n---\n\n### Neden Class Object Lock?\n\n1.  **Static Farkı:** `static` metotlar nesneye bağlı değildir. Dolayısıyla ortada bir `this` referansı yoktur.\n2.  **Kilit Kapsamı:** Bu kilidi kullandığınızda, o sınıftan üretilen **tüm nesneler** aynı kilide tabi olur. Yani A nesnesi üzerinden static synchronized bir metoda girildiğinde, B nesnesi üzerinden de o metoda (veya başka bir static synchronized metoda) aynı anda girilemez.\n\n\n\n---\n\n### Kilitleme Türleri Arasındaki Farklar\n\n| Metot Türü | Kilitlenen Nesne (Lock) | Kapsam |\n| :--- | :--- | :--- |\n| **Normal `synchronized`** | `this` (Mevcut nesne örneği) | Sadece o nesne üzerinden erişim engellenir. |\n| **`static synchronized`** | `YourClass.class` (Class objesi) | Sınıfın tüm örnekleri (instance) için erişim engellenir. |\n\n---\n\n### Kod Örneği ile Gösterim\n\nAşağıdaki örnekte, iki farklı nesne olmasına rağmen `static` kilit nedeniyle thread'ler birbirini beklemek zorundadır:\n\n```java\nclass Counter {\n    // Bu metot Counter.class objesini kilitler\n    public static synchronized void increment() {\n        System.out.println(Thread.currentThread().getName() + \" girdi.\");\n        try { Thread.sleep(2000); } catch (InterruptedException e) {}\n        System.out.println(Thread.currentThread().getName() + \" çıktı.\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Counter obj1 = new Counter();\n        Counter obj2 = new Counter();\n\n        // İki farklı nesne üzerinden çağrılsa bile aynı Class Lock'u beklerler\n        new Thread(() -> obj1.increment(), \"Thread-1\").start();\n        new Thread(() -> obj2.increment(), \"Thread-2\").start();\n    }\n}\n```\n\n---\n\n### Dikkat Edilmesi Gereken Önemli Bir Nokta\n\nBir sınıfta hem `static synchronized` hem de normal `synchronized` metotlar varsa, bu iki metot **birbirini engellemez.** Çünkü biri **Class Lock**'u kullanırken diğeri **Instance Lock**'u kullanır. İki farklı anahtar, iki farklı kapı gibi düşünebilirsin.\n\n\n\n**Özetle:** Sınıf düzeyinde (global) bir koruma istiyorsan `static synchronized` doğru tercihtir. Eğer her nesnenin kendi içinde tutarlı olması yeterliyse, sadece `synchronized` kullanmalısın.\n\nBu kilit hiyerarşisi (Class vs Instance) kafanı karıştırdı mı, yoksa net mi?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -47,12 +75,26 @@
       "singleChoice": true,
       "question": "ReentrantLock hangi durumda synchronized'a gore daha anlamlidir?",
       "choices": [
-        { "id": "A", "text": "tryLock, timeout veya fairness gibi kontrol ihtiyacinda" },
-        { "id": "B", "text": "Sadece primitive tiplerde" },
-        { "id": "C", "text": "Hicbir fark yoktur" },
-        { "id": "D", "text": "Sadece tek threadli programda" }
+        {
+          "id": "A",
+          "text": "tryLock, timeout veya fairness gibi kontrol ihtiyacinda"
+        },
+        {
+          "id": "B",
+          "text": "Sadece primitive tiplerde"
+        },
+        {
+          "id": "C",
+          "text": "Hicbir fark yoktur"
+        },
+        {
+          "id": "D",
+          "text": "Sadece tek threadli programda"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -64,12 +106,26 @@
       "singleChoice": true,
       "question": "volatile int v icin v++ islemi neden guvenli degildir?",
       "choices": [
-        { "id": "A", "text": "Cunku volatile sadece gorunurluk verir, atomiklik vermez" },
-        { "id": "B", "text": "Cunku volatile sadece static alanlarda calisir" },
-        { "id": "C", "text": "Cunku volatile sadece read'i engeller" },
-        { "id": "D", "text": "Cunku JVM volatile'i ignore eder" }
+        {
+          "id": "A",
+          "text": "Cunku volatile sadece gorunurluk verir, atomiklik vermez"
+        },
+        {
+          "id": "B",
+          "text": "Cunku volatile sadece static alanlarda calisir"
+        },
+        {
+          "id": "C",
+          "text": "Cunku volatile sadece read'i engeller"
+        },
+        {
+          "id": "D",
+          "text": "Cunku JVM volatile'i ignore eder"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -81,12 +137,26 @@
       "singleChoice": true,
       "question": "AtomicInteger.compareAndSet(expected, update) semantigi hangisidir?",
       "choices": [
-        { "id": "A", "text": "Her zaman update yazar" },
-        { "id": "B", "text": "Deger expected ise update yazar ve true doner" },
-        { "id": "C", "text": "Sadece read yapar" },
-        { "id": "D", "text": "Synchronized lock alir" }
+        {
+          "id": "A",
+          "text": "Her zaman update yazar"
+        },
+        {
+          "id": "B",
+          "text": "Deger expected ise update yazar ve true doner"
+        },
+        {
+          "id": "C",
+          "text": "Sadece read yapar"
+        },
+        {
+          "id": "D",
+          "text": "Synchronized lock alir"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -98,13 +168,27 @@
       "singleChoice": true,
       "question": "LongAdder hangi senaryoda AtomicLong'a gore daha avantajlidir?",
       "choices": [
-        { "id": "A", "text": "Yuksek contention altinda sik artirim yapilan metrik sayaclarda" },
-        { "id": "B", "text": "Tek threadde tek sefer artirimda" },
-        { "id": "C", "text": "Map key siralamada" },
-        { "id": "D", "text": "Immutable nesne olusturmada" }
+        {
+          "id": "A",
+          "text": "Yuksek contention altinda sik artirim yapilan metrik sayaclarda"
+        },
+        {
+          "id": "B",
+          "text": "Tek threadde tek sefer artirimda"
+        },
+        {
+          "id": "C",
+          "text": "Map key siralamada"
+        },
+        {
+          "id": "D",
+          "text": "Immutable nesne olusturmada"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Doğru cevap: **Yuksek contention altinda sik artirim yapilan metrik sayaclarda**\n\n`LongAdder`, Java 8 ile birlikte `java.util.concurrent.atomic` paketine eklenen ve özellikle yüksek rekabetin (**high contention**) olduğu sistemlerde `AtomicLong`’un performans darboğazlarını aşmak için tasarlanmış bir sınıftır.\n\n---\n\n### Neden LongAdder? (AtomicLong ile Farkı)\n\n**AtomicLong**, değerini güncellemek için tek bir değişken üzerinde **CAS (Compare-And-Swap)** operasyonunu kullanır. Çok fazla thread aynı anda bu tek değişkeni artırmaya çalışırsa (yüksek contention), çoğu thread başarısız olur ve sürekli bir döngü içinde (retry) tekrar denemek zorunda kalır. Bu da CPU kaynaklarını boşa harcar.\n\n**LongAdder** ise içeride bir **hücre dizisi (array of cells)** tutar.\n* **Düşük Contention:** Tıpkı `AtomicLong` gibi davranır.\n* **Yüksek Contention:** Thread'ler arasındaki çarpışmayı azaltmak için farklı thread'leri farklı \"hücrelere\" yönlendirir. Her thread kendi hücresindeki değeri artırır.\n* **Sonuç Alma:** `sum()` metodu çağrıldığında, tüm hücrelerdeki değerleri toplayarak nihai sonucu verir.\n\n\n\n---\n\n### Kod Örneği: Metrik Sayacı\n\nTipik bir kullanım senaryosu olan \"istek sayacı\" (request counter) örneğine bakalım:\n\n```java\nimport java.util.concurrent.atomic.LongAdder;\n\npublic class MetricCounter {\n    // Yüksek trafikli bir web sunucusundaki istek sayacı\n    private final LongAdder requestCount = new LongAdder();\n\n    public void handleRequest() {\n        // Her thread kendi hücresini günceller, kilitlenme veya yoğun CAS denemesi yaşanmaz\n        requestCount.increment();\n    }\n\n    public long getTotalRequests() {\n        // Sadece raporlama anında tüm hücreler toplanır\n        return requestCount.sum();\n    }\n}\n```\n\n---\n\n### Ne Zaman Hangisi Kullanılmalı?\n\n| Özellik | AtomicLong | LongAdder |\n| :--- | :--- | :--- |\n| **Hız (Düşük Trafik)** | Çok hızlı. | Çok hafif daha yavaş (overhead). |\n| **Hız (Yüksek Trafik)** | Yavaşlar (CAS başarısızlıkları). | **Çok hızlı** (Paralel yazma). |\n| **Bellek Kullanımı** | Çok düşük (Tek bir `long`). | Daha yüksek (Hücre dizisi tutar). |\n| **Kullanım Amacı** | Hassas sıralı işlemler, `set`/`get` ihtiyaçları. | **Sadece istatistiksel toplamlar** (Sayaçlar). |\n\n\n\n---\n\n### Özet Karar\n\n* Eğer bir **sayaç** yapıyorsan (örneğin: saniyedeki istek sayısı, hata sayısı) ve thread sayısı fazlaysa: **LongAdder**.\n* Eğer kesin bir sırayla sayı üretmen gerekiyorsa (örneğin: `getAndIncrement` ile ID üretmek) veya anlık olarak en güncel değeri sürekli okuman gerekiyorsa: **AtomicLong**.\n\n`LongAdder`’ın `sum()` metodu, toplama anında yapılan güncellemeleri tam o an yakalayamayabilir (yani \"eventual consistency\" prensibine yakındır). Bu durum senin metriklerin için kabul edilebilir mi, yoksa atomik bir kesinlik mi arıyorsun?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -115,12 +199,26 @@
       "singleChoice": true,
       "question": "ConcurrentHashMap'in temel avantaji hangisidir?",
       "choices": [
-        { "id": "A", "text": "Null key/value desteklemesi" },
-        { "id": "B", "text": "Tum islemlerde tek global lock kullanmasi" },
-        { "id": "C", "text": "Daha iyi eszamanlilikla thread-safe erisim saglamasi" },
-        { "id": "D", "text": "Keyleri otomatik olarak sorted tutmasi" }
+        {
+          "id": "A",
+          "text": "Null key/value desteklemesi"
+        },
+        {
+          "id": "B",
+          "text": "Tum islemlerde tek global lock kullanmasi"
+        },
+        {
+          "id": "C",
+          "text": "Daha iyi eszamanlilikla thread-safe erisim saglamasi"
+        },
+        {
+          "id": "D",
+          "text": "Keyleri otomatik olarak sorted tutmasi"
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -132,12 +230,26 @@
       "singleChoice": true,
       "question": "CopyOnWriteArrayList en uygun olarak hangi profilde kullanilir?",
       "choices": [
-        { "id": "A", "text": "Yazma cok, okuma az" },
-        { "id": "B", "text": "Okuma cok, yazma az" },
-        { "id": "C", "text": "Sadece LIFO stack ihtiyacinda" },
-        { "id": "D", "text": "Yuksek frekansli removeIf operasyonunda" }
+        {
+          "id": "A",
+          "text": "Yazma cok, okuma az"
+        },
+        {
+          "id": "B",
+          "text": "Okuma cok, yazma az"
+        },
+        {
+          "id": "C",
+          "text": "Sadece LIFO stack ihtiyacinda"
+        },
+        {
+          "id": "D",
+          "text": "Yuksek frekansli removeIf operasyonunda"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -149,13 +261,27 @@
       "singleChoice": true,
       "question": "Collections.synchronizedList(list) ile iteration icin dogru kullanim hangisidir?",
       "choices": [
-        { "id": "A", "text": "Ek kilit gerekmez, foreach daima guvenlidir" },
-        { "id": "B", "text": "Iteration sirasinda synchronized(list) blogu kullanilmalidir" },
-        { "id": "C", "text": "Sadece remove icin synchronized gerekir" },
-        { "id": "D", "text": "Yalnizca read islemleri yasaklanmalidir" }
+        {
+          "id": "A",
+          "text": "Ek kilit gerekmez, foreach daima guvenlidir"
+        },
+        {
+          "id": "B",
+          "text": "Iteration sirasinda synchronized(list) blogu kullanilmalidir"
+        },
+        {
+          "id": "C",
+          "text": "Sadece remove icin synchronized gerekir"
+        },
+        {
+          "id": "D",
+          "text": "Yalnizca read islemleri yasaklanmalidir"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Iteration sırasında synchronized(list) bloğu kullanılmalıdır.**\n\nBu konu, Java mülakatlarında en çok sorulan \"tuzak\" sorulardan biridir. `Collections.synchronizedList`, listenin bireysel metotlarını (`add`, `remove`, `get`) `synchronized` yaparak thread-safe hale getirse de, listenin üzerinde gezinme (iteration) işlemini otomatik olarak korumaz.\n\n---\n\n### Neden Manuel Kilitleme (Synchronized Block) Şart?\n\nBir listenin üzerinde `iterator`, `listIterator` veya `foreach` ile gezerken aslında arka arkaya birçok metot çağrısı yapılır (örneğin `hasNext()` ve `next()`). \n\nEğer siz bu iki adım arasındayken (yani henüz bir sonraki elemana geçmemişken) başka bir thread araya girip listeye bir eleman ekler veya silerse, iterator'ın iç yapısı bozulur. Bu durum meşhur **`ConcurrentModificationException`** hatasına yol açar.\n\n\n\n---\n\n### Doğru Kod Örneği\n\nListenin üzerinde gezerken, tüm iterasyon süreci boyunca listenin \"kilidini\" elinizde tutmanız gerekir:\n\n```java\nList<String> syncList = Collections.synchronizedList(new ArrayList<>());\nsyncList.add(\"Java\");\nsyncList.add(\"Kotlin\");\n\n// İterasyon sırasında LİSTE referansı üzerinde kilit açılmalı\nsynchronized (syncList) {\n    Iterator<String> it = syncList.iterator();\n    while (it.hasNext()) {\n        System.out.println(it.next());\n    }\n}\n```\n\n---\n\n### Alternatif: CopyOnWriteArrayList\n\nEğer sürekli `synchronized` bloklarıyla uğraşmak istemiyorsanız ve listenizdeki okuma operasyonları yazma operasyonlarından çok daha fazlaysa, **`CopyOnWriteArrayList`** kullanabilirsiniz.\n\n* **`CopyOnWriteArrayList`**: Her yazma işleminde listenin yeni bir kopyasını oluşturur. Bu sayede iterasyon yaparken liste asla değişmez ve manuel kilitleme gerektirmez.\n\n\n\n---\n\n### Özet Karşılaştırma\n\n| Yaklaşım | Kilitleme | Hata Riski | Kullanım Alanı |\n| :--- | :--- | :--- | :--- |\n| **`synchronizedList`** | İterasyon için manuel `synchronized(list)` şart! | Kilit unutulursa `ConcurrentModificationException` | Yazma işlemlerinin sık olduğu durumlar. |\n| **`CopyOnWriteArrayList`** | Kilit gerektirmez (Fail-safe). | Hata fırlatmaz, kendi kopyasında gezer. | Okuma çok, yazma az olan durumlar (Cache vb.). |\n\n**Unutma:** `synchronizedList` kullanıyorsan, kilit sorumluluğu tamamen sende. `foreach` döngüsü kullanıyor olsan bile onu bir `synchronized` bloğu içine almalısın.\n\nBu kilit mekanizması kodunda bir karmaşaya mı yol açıyor, yoksa performans tarafında mı endişelerin var?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "BlockingQueue'nin producer-consumer desenindeki kilit faydasi nedir?",
       "choices": [
-        { "id": "A", "text": "Her durumda busy-wait zorunlu kilmasi" },
-        { "id": "B", "text": "Bos/dolu durumda threadleri otomatik bekletip uyandirmasi" },
-        { "id": "C", "text": "Sadece single-thread calismasi" },
-        { "id": "D", "text": "Iteratori tamamen kaldirmasi" }
+        {
+          "id": "A",
+          "text": "Her durumda busy-wait zorunlu kilmasi"
+        },
+        {
+          "id": "B",
+          "text": "Bos/dolu durumda threadleri otomatik bekletip uyandirmasi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece single-thread calismasi"
+        },
+        {
+          "id": "D",
+          "text": "Iteratori tamamen kaldirmasi"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""

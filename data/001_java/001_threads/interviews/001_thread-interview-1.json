@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "Ayni process icindeki threadler icin bellek modeli hangisidir?",
       "choices": [
-        { "id": "A", "text": "Her thread ayri heap kullanir." },
-        { "id": "B", "text": "Threadler heapi paylasir, stackleri ayridir." },
-        { "id": "C", "text": "Tum threadler tum processlerle stack paylasir." },
-        { "id": "D", "text": "Heap sadece main thread tarafindan kullanilir." }
+        {
+          "id": "A",
+          "text": "Her thread ayri heap kullanir."
+        },
+        {
+          "id": "B",
+          "text": "Threadler heapi paylasir, stackleri ayridir."
+        },
+        {
+          "id": "C",
+          "text": "Tum threadler tum processlerle stack paylasir."
+        },
+        {
+          "id": "D",
+          "text": "Heap sadece main thread tarafindan kullanilir."
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,13 +44,27 @@
       "singleChoice": true,
       "question": "Thread.start() ve run() farki icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "run() yeni thread acarken start() acmaz." },
-        { "id": "B", "text": "Ikisi de daima yeni thread acar." },
-        { "id": "C", "text": "start() yeni thread baslatir, run() normal metot cagrisi gibi calisir." },
-        { "id": "D", "text": "Ikisi de yalnizca daemon threadlerde calisir." }
+        {
+          "id": "A",
+          "text": "run() yeni thread acarken start() acmaz."
+        },
+        {
+          "id": "B",
+          "text": "Ikisi de daima yeni thread acar."
+        },
+        {
+          "id": "C",
+          "text": "start() yeni thread baslatir, run() normal metot cagrisi gibi calisir."
+        },
+        {
+          "id": "D",
+          "text": "Ikisi de yalnizca daemon threadlerde calisir."
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru cevap: **`start()` yeni thread başlatır, `run()` normal metot çağrısı gibi çalışır.**\n\nBu, Java Concurrency (Eşzamanlılık) konusundaki en temel kavram yanılgılarından biridir. İşin sırrı Java'nın bu metotları arka planda nasıl yönettiğinde saklıdır.\n\n---\n\n### Thread.start() vs Thread.run()\n\n* **`start()`:** Java Runtime'a \"Bana yeni bir iş parçacığı (thread) ayır\" der. İşletim sistemi seviyesinde yeni bir thread oluşturulur ve bu yeni thread içinden `run()` metodu otomatik olarak tetiklenir. **Asenkron** çalışır.\n* **`run()`:** Sadece bir sınıfın içindeki sıradan bir metottur. Eğer `run()` metodunu doğrudan çağırırsanız, yeni bir thread oluşmaz; o an hangi thread'in (genelde `main` thread) içindeyseniz, kod o thread üzerinden **senkron** bir şekilde çalışmaya devam eder.\n\n\n\n#### Kod Örneği\n\n```java\nclass MyTask extends Thread {\n    @Override\n    public void run() {\n        System.out.println(\"Çalışan Thread: \" + Thread.currentThread().getName());\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        MyTask t1 = new MyTask();\n\n        // 1. Durum: run() doğrudan çağrılırsa\n        System.out.print(\"run() çağrısı sonucu -> \");\n        t1.run(); // Çıktı: main (Yeni thread açılmadı!)\n\n        // 2. Durum: start() çağrılırsa\n        System.out.print(\"start() çağrısı sonucu -> \");\n        t1.start(); // Çıktı: Thread-0 (Yeni bir iş parçacığı başladı!)\n    }\n}\n```\n\n---\n\n### Thread ve Concurrency Arasındaki Fark\n\nBu iki kavram sıklıkla birbirinin yerine kullanılsa da, biri **\"araç\"**, diğeri ise **\"amaç/yaklaşım\"**dır.\n\n| Kavram | Tanım | Örnek |\n| :--- | :--- | :--- |\n| **Thread (İş Parçacığı)** | CPU üzerinde yürütülen en küçük birimdir. Programın içindeki bir \"işçidir\". | Bir dosya indirilirken kullanılan tek bir `Thread` nesnesi. |\n| **Concurrency (Eşzamanlılık)** | Aynı zaman diliminde birden fazla işin ilerlemesi durumudur. Bu bir tasarım mimarisidir. | Bir web sunucusunun aynı anda 100 kullanıcıya cevap verebilmesi (birçok thread kullanarak). |\n\n**Görsel Analoji:**\n* **Thread:** Mutfağınızdaki bir **aşçıdır**.\n* **Concurrency:** Mutfağınızda aynı anda hem çorbanın pişmesi, hem salatanın yapılması, hem de ekmeğin ısınmasıdır. Bunu tek bir aşçı (hızlıca iş değiştirerek - *Context Switching*) yapabileceği gibi, birden fazla aşçı (paralellik) da yapabilir.\n\n\n\n#### Temel Farklar Tablosu\n\n* **Thread**, eşzamanlılığı sağlamak için kullanılan **mekanizmadır**.\n* **Concurrency**, programın birden fazla görevi aynı anda yönetebilme **yetenisidir**.\n* Her `Thread` bir concurrency örneği olabilir, ancak concurrency sadece thread'lerden ibaret değildir (örneğin asenkron I/O işlemleri thread harcamadan da concurrency sağlayabilir).\n\nModern Java projelerinde doğrudan `Thread` oluşturmak yerine genellikle `ExecutorService` veya `CompletableFuture` gibi concurrency araçlarını mı tercih ediyorsun?\n\n\nKesinlikle evet. Modern Java dünyasında manuel olarak `new Thread().start()` demek, artık \"eski usul\" (legacy) kabul ediliyor. Bunun çok haklı performans ve yönetimsel sebepleri var.\n\nİşte neden doğrudan **Thread** yerine **ExecutorService** veya **CompletableFuture** tercih ettiğimizin analizi:\n\n---\n\n### 1. Thread Yönetimi: ExecutorService\nBir fabrikada her iş geldiğinde yeni bir işçi tutup, iş bitince işçiyi kovduğunuzu düşünün. Bu çok maliyetlidir. **ExecutorService** ise içeride bir **Thread Pool (İşçi Havuzu)** tutar.\n\n* **Neden Tercih Edilir?** Thread oluşturmak maliyetli bir işlemdir (bellek ayrılması, OS seviyesinde kayıt vb.). ExecutorService, mevcut thread'leri **yeniden kullanarak** bu maliyeti düşürür.\n* **Kontrol:** Aynı anda maksimum kaç işin çalışacağını belirleyerek sistemin çökmesini engellersiniz.\n\n\n\n```java\n// Modern Yaklaşım: Sabit 4 işçisi olan bir havuz oluştur\nExecutorService executor = Executors.newFixedThreadPool(4);\n\nexecutor.submit(() -> {\n    System.out.println(\"Havuzdaki bir thread çalışıyor: \" + Thread.currentThread().getName());\n});\n\nexecutor.shutdown(); // Havuzu kapatmayı unutma!\n```\n\n---\n\n### 2. Asenkron Zincirleme: CompletableFuture\n`ExecutorService` işi başlatır ama sonuçları yönetmek (bir iş bitince diğerini başlat, hataları yakala) hala zordur. **CompletableFuture**, Java 8 ile gelen bir \"vaat\" (Promise) yapısıdır.\n\n* **Neden Tercih Edilir?** İşleri birbirine bağlamanıza olanak tanır. \"A işini yap, bitince B işini başlat, eğer hata olursa C metoduna git\" gibi akışları **Callback Hell**'e düşmeden yazmanızı sağlar.\n* **Non-blocking:** Bir thread'in sonucunu beklerken ana thread'i bloklamaz.\n\n```java\nCompletableFuture.supplyAsync(() -> \"Veri çekildi\") // 1. Adım: Veri çek\n    .thenApply(data -> data + \" ve işlendi\")       // 2. Adım: Veriyi işle\n    .thenAccept(System.out::println)               // 3. Adım: Sonucu yazdır\n    .exceptionally(ex -> {                         // Hata yönetimi\n        System.err.println(\"Hata: \" + ex.getMessage());\n        return null;\n    });\n```\n\n---\n\n### 3. Aralarındaki Temel Farklar\n\n| Özellik | Thread | ExecutorService | CompletableFuture |\n| :--- | :--- | :--- | :--- |\n| **Seviye** | Düşük Seviye (Manuel) | Orta Seviye (Yönetilen) | Yüksek Seviye (Fonksiyonel) |\n| **Maliyet** | Her seferinde yeni thread (Yüksek) | Thread Pool (Düşük) | ForkJoinPool (Dinamik/Düşük) |\n| **Sonuç Alma** | Zor (`join` kullanmak gerekir) | `Future` ile (Bloklayıcı) | `then` metotları ile (Non-blocking) |\n| **Kullanım Amacı** | Basit, tek seferlik işler | Yoğun iş yükü yönetimi | Karmaşık asenkron akışlar |\n\n\n\n### Özetle\nGüncel projelerde:\n1.  Eğer sadece \"arka planda bir havuz yöneteyim\" diyorsak: **ExecutorService**.\n2.  Eğer \"birden fazla API'ye istek atıp sonuçlarını birleştireyim\" veya \"bir işlem bitince diğerini tetikleyeyim\" diyorsak: **CompletableFuture**.\n\nHatta Java 21 ile gelen **Virtual Threads** (Project Loom) konusunu duydun mu? Binlerce thread açmayı artık çok daha hafif (lightweight) hale getiriyor, concurrency dünyasında kartlar yeniden dağıtılıyor. Bu yeni nesil thread yapısını incelemek ister misin?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "Bir thread monitor lock bekledigi icin synchronized bloga giremiyorsa hangi state tipiktir?",
       "choices": [
-        { "id": "A", "text": "WAITING" },
-        { "id": "B", "text": "TIMED_WAITING" },
-        { "id": "C", "text": "BLOCKED" },
-        { "id": "D", "text": "NEW" }
+        {
+          "id": "A",
+          "text": "WAITING"
+        },
+        {
+          "id": "B",
+          "text": "TIMED_WAITING"
+        },
+        {
+          "id": "C",
+          "text": "BLOCKED"
+        },
+        {
+          "id": "D",
+          "text": "NEW"
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Doğru cevap: **BLOCKED**\n\nBir thread, başka bir thread tarafından kilitlenmiş (locked) bir `synchronized` bloğuna veya metoduna girmeye çalıştığında, o kilidi (monitor lock) elde edene kadar **BLOCKED** durumunda bekler.\n\n---\n\n### Thread Durumları ve Oluşma Senaryoları\n\nJava'da bir thread'in yaşam döngüsü `Thread.State` enum yapısı ile tanımlanır. Aşağıdaki tablo, her bir durumun hangi senaryoda ortaya çıktığını özetlemektedir:\n\n| Durum (State) | Tanım ve Oluşma Senaryosu |\n| :--- | :--- |\n| **NEW** | Thread nesnesi oluşturulmuş ancak henüz `start()` metodu çağrılmamıştır. |\n| **RUNNABLE** | Thread çalışmaya hazırdır veya halihazırda CPU üzerinde yürütülüyordur. |\n| **BLOCKED** | Thread, bir **monitor lock** (synchronized blok) bekliyordur. Başka bir thread kilidi bırakınca tekrar `RUNNABLE` olabilir. |\n| **WAITING** | Süre sınırı olmadan başka bir thread'in belirli bir eylemi yapmasını bekler. `Object.wait()`, `Thread.join()` veya `LockSupport.park()` ile tetiklenir. |\n| **TIMED_WAITING** | Belirli bir süre boyunca bekler. `Thread.sleep(ms)`, `Object.wait(ms)` veya `Thread.join(ms)` çağrılarıyla bu duruma geçer. |\n| **TERMINATED** | Thread'in `run()` metodu tamamlanmış veya bir hata nedeniyle sonlanmıştır. |\n\n---\n\n### BLOCKED ve WAITING Arasındaki Kritik Fark\n\nBu iki durum sıklıkla birbirine karıştırılır, ancak tetiklenme nedenleri tamamen farklıdır:\n\n* **BLOCKED:** Tamamen **\"kaynak kavgası\"** ile ilgilidir. İki kişi aynı kapıdan (synchronized) geçmeye çalışıyordur; biri içerideyken diğeri kapıda (BLOCKED) bekler.\n* **WAITING:** Tamamen **\"haberleşme\"** ile ilgilidir. Thread, işini yapmak için başka bir thread'den gelecek bir veriyi veya sinyali (`notify()`) beklemek üzere bilerek kenara çekilir.\n\n\n\n---\n\n### Kod Üzerinde Durum Analizi\n\n```java\npublic class ThreadStateDemo {\n    public static synchronized void commonResource() {\n        while(true) { \n            // Sonsuz döngü: Kilidi asla bırakmaz\n        }\n    }\n\n    public static void main(String[] args) throws InterruptedException {\n        Thread t1 = new Thread(() -> commonResource(), \"Thread-1\");\n        Thread t2 = new Thread(() -> commonResource(), \"Thread-2\");\n\n        t1.start();\n        Thread.sleep(100); // t1'in kilidi almasını bekle\n        \n        t2.start();\n        Thread.sleep(100); // t2'nin kilidi denemesini bekle\n\n        System.out.println(\"t1 durumu: \" + t1.getState()); // RUNNABLE\n        System.out.println(\"t2 durumu: \" + t2.getState()); // BLOCKED\n    }\n}\n```\n\nBu örnekte, `t1` metodu kilitlediği ve asla bırakmadığı için `t2` o kapıdan içeri giremez ve sonsuza kadar **BLOCKED** durumunda kalır.\n\nÖzellikle büyük ölçekli sistemlerde thread'lerin BLOCKED durumunda yığılması (Thread Dump analizlerinde sıkça görülür), sistemin yanıt vermemesine neden olur. Hiç \"Thread Dump\" analizi yaparak bir tıkanıklığı (deadlock gibi) çözmen gerekti mi?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,13 +106,27 @@
       "singleChoice": true,
       "question": "join() metodunun temel amaci nedir?",
       "choices": [
-        { "id": "A", "text": "Threadi zorla sonlandirmak" },
-        { "id": "B", "text": "Baska bir thread bitene kadar beklemek" },
-        { "id": "C", "text": "Threadi daemon yapmak" },
-        { "id": "D", "text": "Locku serbest birakmak" }
+        {
+          "id": "A",
+          "text": "Threadi zorla sonlandirmak"
+        },
+        {
+          "id": "B",
+          "text": "Baska bir thread bitene kadar beklemek"
+        },
+        {
+          "id": "C",
+          "text": "Threadi daemon yapmak"
+        },
+        {
+          "id": "D",
+          "text": "Locku serbest birakmak"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Başka bir thread bitene kadar beklemek.**\n\n`join()` metodu, bir thread'in (genellikle ana thread) başka bir thread'in işini bitirmesini beklemesini sağlar. Örneğin, bir rapor oluşturmak için veri çeken bir thread'iniz varsa, ana programın o veri gelmeden rapora başlamaması için `join()` kullanılır.\n\n---\n\n### Önemli Thread Metotları Karşılaştırması\n\nJava'da thread yönetimi için kullanılan en kritik metotları şu tabloda görebilirsin:\n\n| Metot | Amacı | Önemli Not |\n| :--- | :--- | :--- |\n| **`join()`** | Çağrıldığı thread bitene kadar mevcut thread'i bekletir. | Senkronizasyon sağlar; \"Sen bitmeden ben devam etmem\" der. |\n| **`wait()`** | Bir thread'in, başka bir thread'den sinyal (`notify`) gelene kadar beklemesini sağlar. | Mutlaka `synchronized` blok içinde kullanılmalıdır; **lock'u serbest bırakır.** |\n| **`notify()` / `notifyAll()`** | `wait()` ile bekleyen thread'i/thread'leri uyandırır. | Sadece bekleyen thread'e \"Devam edebilirsin\" sinyali gönderir. |\n| **`sleep(ms)`** | Mevcut thread'i belirli bir süre durdurur. | **Lock'u serbest bırakmaz!** Sadece zaman geçmesini bekler. |\n| **`yield()`** | İşlemciye \"Benim işim acil değil, diğer thread'lere öncelik verebilirsin\" mesajı gönderir. | Kesinlik garantisi yoktur; sadece bir ipucudur. |\n| **`interrupt()`** | Bir thread'e \"Durman gerekiyor\" sinyali gönderir. | Thread'in içinde bu sinyalin kontrol edilmesi (`isInterrupted`) gerekir. |\n\n---\n\n### join() ve wait() Arasındaki Fark\n\nBu ikisi çok karıştırılır çünkü ikisi de \"bekleme\" yapar. Ancak mantıkları tamamen farklıdır:\n\n1.  **`join()`:** Bir thread'in **ölmesini/tamamlanmasını** bekler. (Thread-level)\n2.  **`wait()`:** Bir **koşulun gerçekleşmesini** (başka bir thread'in veri üretmesi gibi) bekler. (Object-level/Monitor-level)\n\n\n\n---\n\n### Kod Örneği: join() Kullanımı\n\n```java\nThread t1 = new Thread(() -> {\n    try {\n        System.out.println(\"Hesaplama yapılıyor...\");\n        Thread.sleep(2000); // 2 saniye sürsün\n        System.out.println(\"Hesaplama bitti.\");\n    } catch (InterruptedException e) {}\n});\n\nt1.start();\nSystem.out.println(\"Ana program bekliyor...\");\n\nt1.join(); // t1 bitene kadar main thread burada durur\n\nSystem.out.println(\"Sonuç raporlanıyor.\"); // Sadece t1 bittikten sonra çalışır\n```\n\n\n\n### Özetle\n* **`wait`** ve **`notify`**, thread'ler arası **mesajlaşma** içindir.\n* **`join`**, thread'ler arası **sıralama** (birinin bitişini bekleme) içindir.\n\nBu metotları doğrudan kullanmak yerine, modern Java'da işleri daha kolaylaştıran `CountDownLatch` veya `CyclicBarrier` gibi yapıları duymuş muydun? Bunlar birden fazla thread'in birbirini beklemesi gereken durumlarda çok daha güvenlidir.",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -81,13 +137,27 @@
       "singleChoice": true,
       "question": "wait() ile sleep() arasindaki temel fark nedir?",
       "choices": [
-        { "id": "A", "text": "wait() locku birakabilir, sleep() locku birakmaz." },
-        { "id": "B", "text": "sleep() locku birakir, wait() birakmaz." },
-        { "id": "C", "text": "Ikisi de locku daima birakir." },
-        { "id": "D", "text": "Ikisi de sadece static metotlarda kullanilir." }
+        {
+          "id": "A",
+          "text": "wait() locku birakabilir, sleep() locku birakmaz."
+        },
+        {
+          "id": "B",
+          "text": "sleep() locku birakir, wait() birakmaz."
+        },
+        {
+          "id": "C",
+          "text": "Ikisi de locku daima birakir."
+        },
+        {
+          "id": "D",
+          "text": "Ikisi de sadece static metotlarda kullanilir."
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Doğru cevap: **`wait()` lock'u bırakabilir, `sleep()` lock'u bırakmaz.**\n\nBu fark, Java Concurrency (eşzamanlılık) mülakatlarının ve sınavlarının en popüler sorusudur. Çünkü bu iki metodun \"bekleme\" yaparken sergilediği davranış, programınızın kilitlenip kilitlenmeyeceğini (deadlock) belirler.\n\n---\n\n### Temel Farklar Tablosu\n\n| Özellik | `wait()` | `sleep()` |\n| :--- | :--- | :--- |\n| **Lock (Kilit) Durumu** | Üzerinde çalıştığı objenin **monitör kilidini bırakır.** | **Kilidi asla bırakmaz.** Uyurken bile elinde tutar. |\n| **Sınıf / Tür** | `java.lang.Object` metodudur (instance method). | `java.lang.Thread` metodudur (static method). |\n| **Bağlam (Context)** | Mutlaka `synchronized` blok/metot içinde olmalıdır. | Herhangi bir yerden çağrılabilir. |\n| **Uyanma Şartı** | `notify()` / `notifyAll()` gelene veya süre bitene kadar. | Belirlenen süre dolduğunda otomatik uyanır. |\n| **Kullanım Amacı** | Thread'ler arası iletişim (Inter-thread communication). | Sadece belirli bir süre beklemek (Execution pause). |\n\n---\n\n### Görsel Mantık: wait() vs sleep()\n\n\n\n* **`sleep()`** yapan bir thread, restoran masasında oturup uyuyakalan birine benzer. Masa hala onundur, başkası oturamaz.\n* **`wait()`** yapan bir thread ise, siparişi hazır olana kadar sırasını başkasına verip kenarda bekleyen birine benzer. Masa (lock) boşa çıkar, başkası kullanabilir.\n\n---\n\n### Kod Örneği ile Analiz\n\n```java\npublic class WaitSleepDemo {\n    private static final Object LOCK = new Object();\n\n    public static void main(String[] args) throws InterruptedException {\n        \n        Thread t1 = new Thread(() -> {\n            synchronized (LOCK) {\n                try {\n                    System.out.println(\"Thread 1: Kilidi aldı ve wait() moduna geçiyor...\");\n                    LOCK.wait(); // KİLİDİ BIRAKIR!\n                    System.out.println(\"Thread 1: Yeniden uyandı ve devam ediyor.\");\n                } catch (InterruptedException e) e.printStackTrace();\n            }\n        });\n\n        Thread t2 = new Thread(() -> {\n            synchronized (LOCK) { // T1 wait() dediği için T2 buraya girebilir\n                System.out.println(\"Thread 2: Kilidi T1'den devraldı.\");\n                LOCK.notify(); // T1'e \"Uyanabilirsin\" sinyali gönderir\n                System.out.println(\"Thread 2: İşini bitirdi.\");\n            }\n        });\n\n        t1.start();\n        Thread.sleep(100); // T1'in önce girmesini garanti etmek için\n        t2.start();\n    }\n}\n```\n\n> **Dikkat:** Eğer yukarıdaki kodda `wait()` yerine `Thread.sleep(5000)` kullansaydık, **Thread 2** asla o `synchronized` bloğa giremezdi çünkü Thread 1 uyurken bile kilidi elinde tutmaya devam ederdi.\n\n---\n\n### Diğer Kritik Thread Metotları (Özet)\n\nDaha önceki sorularda da bahsettiğimiz gibi, bu metotlar thread yönetiminin temel taşlarıdır:\n\n| Metot | Kısa Tanım |\n| :--- | :--- |\n| **`join()`** | Çağrılan thread bitene kadar bekletir. |\n| **`yield()`** | İşlemciyi (CPU) diğer thread'lere bırakmak için bir ipucu verir. |\n| **`interrupt()`** | Thread'e bir kesinti sinyali gönderir. |\n\n\n\n`wait()` ve `notify()` ikilisini kullanırken en sık yapılan hata, bunları `synchronized` blok dışında çağırmaya çalışmaktır; bu durum `IllegalMonitorStateException` hatasına yol açar. Bu hatayla daha önce karşılaştın mı?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,12 +168,26 @@
       "singleChoice": true,
       "question": "Race condition tanimi icin en dogru secenek hangisidir?",
       "choices": [
-        { "id": "A", "text": "Tek threadin kendi local degiskenini degistirmesi" },
-        { "id": "B", "text": "Birden fazla threadin paylasilan mutable state uzerinde kontrolsuz islem yapmasi" },
-        { "id": "C", "text": "Sadece deadlock olusmasi" },
-        { "id": "D", "text": "CPU clock hizinin dusuk olmasi" }
+        {
+          "id": "A",
+          "text": "Tek threadin kendi local degiskenini degistirmesi"
+        },
+        {
+          "id": "B",
+          "text": "Birden fazla threadin paylasilan mutable state uzerinde kontrolsuz islem yapmasi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece deadlock olusmasi"
+        },
+        {
+          "id": "D",
+          "text": "CPU clock hizinin dusuk olmasi"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -115,12 +199,26 @@
       "singleChoice": true,
       "question": "volatile keywordu neyi garanti eder?",
       "choices": [
-        { "id": "A", "text": "Compound islemleri atomik yapar" },
-        { "id": "B", "text": "Sadece performansi artirir" },
-        { "id": "C", "text": "Threadler arasi gorunurluk (visibility) saglar" },
-        { "id": "D", "text": "Deadlocku tamamen engeller" }
+        {
+          "id": "A",
+          "text": "Compound islemleri atomik yapar"
+        },
+        {
+          "id": "B",
+          "text": "Sadece performansi artirir"
+        },
+        {
+          "id": "C",
+          "text": "Threadler arasi gorunurluk (visibility) saglar"
+        },
+        {
+          "id": "D",
+          "text": "Deadlocku tamamen engeller"
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -132,13 +230,27 @@
       "singleChoice": true,
       "question": "Asagidakilerden hangisi happens-before iliskisi olusturur?",
       "choices": [
-        { "id": "A", "text": "Ayni degiskeni iki threadin rastgele okumasi" },
-        { "id": "B", "text": "Bir threadin monitor unlock etmesi ve digerinin ayni monitoru lock etmesi" },
-        { "id": "C", "text": "Thread.sleep() cagrisi" },
-        { "id": "D", "text": "System.out.println() cagrisi" }
+        {
+          "id": "A",
+          "text": "Ayni degiskeni iki threadin rastgele okumasi"
+        },
+        {
+          "id": "B",
+          "text": "Bir threadin monitor unlock etmesi ve digerinin ayni monitoru lock etmesi"
+        },
+        {
+          "id": "C",
+          "text": "Thread.sleep() cagrisi"
+        },
+        {
+          "id": "D",
+          "text": "System.out.println() cagrisi"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **Bir threadin monitor unlock etmesi ve digerinin ayni monitoru lock etmesi**\n\nJava Bellek Modeli'nde (JMM), **Happens-Before** ilişkisi, bir kod bloğunun yaptığı değişikliklerin diğer bir kod bloğu tarafından görünür olmasını garanti eden kurallar bütünüdür. Eğer iki işlem arasında happens-before ilişkisi yoksa, Java derleyicisi veya CPU bu işlemleri optimize etmek için yer değiştirebilir (reordering), bu da çok thread'li yapılarda tutarsız veri okumalarına yol açar.\n\n---\n\n### Happens-Before İlişkisi Oluşturan Temel Durumlar\n\nJava'da görünürlüğü garanti altına alan en kritik kurallar şunlardır:\n\n1.  **Monitor Lock Kuralı (Soru Cevabı):** Bir `synchronized` bloğundan veya metodundan çıkış (unlock), aynı monitor üzerindeki sonraki girişle (lock) happens-before ilişkisine sahiptir. Yani, kilidi bırakan thread'in yaptığı tüm değişiklikler, kilidi devralan thread tarafından görünürdür.\n2.  **Volatile Değişken Kuralı:** Bir `volatile` değişkene yapılan yazma işlemi, aynı değişkenin sonraki her okunmasından önce gerçekleşmiş kabul edilir.\n3.  **Thread Start Kuralı:** Bir thread üzerinde `start()` çağrılması, o thread'in `run()` metodu içindeki her işlemden önce gerçekleşir.\n4.  **Thread Join Kuralı:** Bir thread'in tamamlanması, başka bir thread'in o thread üzerinde `join()` metodundan başarıyla dönmesinden önce gerçekleşir.\n5.  **Program Order Kuralı:** Tek bir thread içinde, kod sırasına göre her işlem bir sonrakinden önce gerçekleşmiş sayılır.\n\n\n\n---\n\n### Kod Üzerinde Analiz\n\nNeden rastgele okuma veya `sleep()` bir garanti sunmaz?\n\n```java\nclass SharedData {\n    int value = 0;\n    boolean ready = false;\n\n    // synchronized kullanımı Happens-Before oluşturur\n    public synchronized void writer() {\n        value = 42;\n        ready = true; // Unlock anında veriler belleğe itilir\n    }\n\n    public synchronized void reader() {\n        if (ready) { // Lock anında güncel veriler bellekten çekilir\n            System.out.println(value); // 42 olması garantidir\n        }\n    }\n}\n```\n\n* **Rastgele Okuma:** İki thread bir `synchronized` veya `volatile` koruması olmadan aynı değişkeni okuyorsa, biri diğerinin yazdığı güncel değeri göremeyebilir (Visibility problem).\n* **Thread.sleep():** Sadece mevcut thread'i durdurur; bellekteki verilerin diğer thread'lere \"yayınlanmasını\" (flush) veya senkronizasyonunu sağlamaz.\n\n---\n\n### Görünürlük (Visibility) ve Yeniden Sıralama (Reordering)\n\nEğer happens-before kuralı işletilmezse, CPU performans için kodun sırasını değiştirebilir:\n\n\n\n| Durum | Happens-Before Var mı? | Sonuç |\n| :--- | :--- | :--- |\n| `synchronized` | Evet | Veri tutarlı, görünürlük tam. |\n| `volatile` | Evet | Yazma/Okuma garantisi var. |\n| Normal Değişken | Hayır | Thread'ler eski (stale) veriyi görebilir. |\n| `Thread.sleep()` | Hayır | Sadece zaman geçer, veri garantisi yok. |\n\n**Özetle:** Çok thread'li bir ortamda \"Bir thread bir işi bitirdi, diğeri bunun farkında olsun\" diyorsanız, mutlaka happens-before oluşturan bir mekanizma (`synchronized`, `Lock`, `volatile`, `Atomic` sınıflar vb.) kullanmalısınız.\n\nBu bellek modeli (JMM) kavramları, özellikle karmaşık `ConcurrentHashMap` implementasyonlarını veya `Lock-free` algoritmaları anlamak için temel teşkil eder. Bellek bariyerleri (Memory Barriers) konusuna girmemizi ister misin?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -149,12 +261,26 @@
       "singleChoice": true,
       "question": "Immutability concurrency acisindan neden onemlidir?",
       "choices": [
-        { "id": "A", "text": "Mutable state paylasimi ortadan kalktigi icin senkronizasyon ihtiyaci azalir" },
-        { "id": "B", "text": "Sadece bellek tuketimini sifirlar" },
-        { "id": "C", "text": "Thread sayisini otomatik azaltir" },
-        { "id": "D", "text": "CPU frekansini artirir" }
+        {
+          "id": "A",
+          "text": "Mutable state paylasimi ortadan kalktigi icin senkronizasyon ihtiyaci azalir"
+        },
+        {
+          "id": "B",
+          "text": "Sadece bellek tuketimini sifirlar"
+        },
+        {
+          "id": "C",
+          "text": "Thread sayisini otomatik azaltir"
+        },
+        {
+          "id": "D",
+          "text": "CPU frekansini artirir"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -166,13 +292,27 @@
       "singleChoice": true,
       "question": "Interrupt alan bir worker thread icin en saglikli yaklasim hangisidir?",
       "choices": [
-        { "id": "A", "text": "Interruptu yoksayip sonsuza kadar devam etmek" },
-        { "id": "B", "text": "InterruptedException yakalayip interrupt flagini restore ederek temiz cikis yapmak" },
-        { "id": "C", "text": "Her zaman RuntimeException firlatmak" },
-        { "id": "D", "text": "Thread.stop() cagrisi yapmak" }
+        {
+          "id": "A",
+          "text": "Interruptu yoksayip sonsuza kadar devam etmek"
+        },
+        {
+          "id": "B",
+          "text": "InterruptedException yakalayip interrupt flagini restore ederek temiz cikis yapmak"
+        },
+        {
+          "id": "C",
+          "text": "Her zaman RuntimeException firlatmak"
+        },
+        {
+          "id": "D",
+          "text": "Thread.stop() cagrisi yapmak"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **InterruptedException yakalayıp interrupt flag’ini restore ederek temiz çıkış yapmak.**\n\nBu, Java’da \"interrupt\" (yarıda kesme) mekanizmasına verilen profesyonel ve etik bir cevaptır. Nedenini ve nasıl yapıldığını adım adım inceleyelim.\n\n---\n\n### Neden \"Flag'i Restore Etmek\" Zorundayız?\n\nJava'da bir thread `InterruptedException` fırlattığında, JVM güvenlik gereği o thread üzerindeki **\"interrupted status\" (kesilme bayrağı)** bilgisini otomatik olarak **temizler (false yapar)**.\n\nEğer sen bu hatayı `catch` bloğunda yakalayıp hiçbir şey yapmazsan, thread'in üst katmanları (örneğin onu yöneten bir `ExecutorService` veya kütüphane) bu thread'in durdurulmak istendiği bilgisini kaybeder. Bu duruma **\"swallowing the interrupt\" (interrupt'ı yutmak)** denir ve kötü bir programlama pratiğidir.\n\n\n\n---\n\n### En Sağlıklı Yaklaşım (Kod Örneği)\n\nİdeal bir worker thread (işçi parçacığı) şu şekilde yazılmalıdır:\n\n```java\npublic void run() {\n    try {\n        while (!Thread.currentThread().isInterrupted()) {\n            // Uzun süren veya bloklayan bir işlem\n            Thread.sleep(1000); \n            System.out.println(\"İşlem yapılıyor...\");\n        }\n    } catch (InterruptedException e) {\n        // 1. Durumu geri yükle (Bayrağı tekrar true yap)\n        Thread.currentThread().interrupt();\n        \n        // 2. Temizlik işlemlerini yap (Dosya kapatma vs.)\n        System.out.println(\"Thread yarıda kesildi, temizlik yapılıyor...\");\n    }\n    // 3. Metottan çık ve thread'in doğal yollarla ölmesine izin ver\n}\n```\n\n---\n\n### Diğer Seçenekler Neden Yanlış?\n\n* **Interrupt'ı yoksaymak:** Programın kapatılmasına engel olur, \"zombi thread\"ler oluşur.\n* **RuntimeException fırlatmak:** Eğer thread havuzu kullanıyorsan, bu durum thread'in aniden ölmesine ve havuzun düzgün yönetilememesine neden olabilir.\n* **Thread.stop() kullanmak:** Java'da **deprecated (kullanımdan kaldırılmış)** bir metottur. Nesnelerin kilitlerini (monitor locks) aniden bıraktığı için verilerin bozulmasına (corrupted data) yol açar. Güvensizdir.\n\n---\n\n### Thread Metotları Hatırlatıcısı\n\nBu süreçte kullanılan üç temel metodu birbiriyle karıştırmamak gerekir:\n\n| Metot | İşlevi |\n| :--- | :--- |\n| **`interrupt()`** | Bir thread'e \"Dur!\" sinyali gönderir (Bayrağı `true` yapar). |\n| **`isInterrupted()`** | Bayrağın durumuna bakar ama bayrağı değiştirmez. |\n| **`Thread.interrupted()`** | **Statiktir.** Mevcut thread'in bayrağına bakar ve baktıktan sonra bayrağı **sıfırlar (`false` yapar)**. |\n\n\n\n### Özet\nProfesyonel bir worker thread, dışarıdan gelen \"dur\" sinyallerine karşı nazik olmalıdır. `InterruptedException` geldiğinde \"Benim işim bitti\" diyerek bayrağı tekrar dikmeli (`Thread.currentThread().interrupt()`) ve sahneden çekilmelidir.",
       "optionExplanations": [],
       "answerCode": ""
     }

@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "new Thread() yerine ExecutorService tercihinin temel sebebi hangisidir?",
       "choices": [
-        { "id": "A", "text": "Thread havuzu ile kaynak yonetimini merkezi ve olceklenebilir yapmak" },
-        { "id": "B", "text": "Sadece daemon thread uretebilmek" },
-        { "id": "C", "text": "JVM GC'sini kapatmak" },
-        { "id": "D", "text": "Hicbir fark yoktur" }
+        {
+          "id": "A",
+          "text": "Thread havuzu ile kaynak yonetimini merkezi ve olceklenebilir yapmak"
+        },
+        {
+          "id": "B",
+          "text": "Sadece daemon thread uretebilmek"
+        },
+        {
+          "id": "C",
+          "text": "JVM GC'sini kapatmak"
+        },
+        {
+          "id": "D",
+          "text": "Hicbir fark yoktur"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,12 +44,26 @@
       "singleChoice": true,
       "question": "Runnable ve Callable farki icin en dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Ikisi de sonuc dondurur" },
-        { "id": "B", "text": "Callable sonuc dondurebilir ve checked exception firlatabilir" },
-        { "id": "C", "text": "Runnable yalnizca IO islerinde kullanilir" },
-        { "id": "D", "text": "Callable sadece single-thread modunda calisir" }
+        {
+          "id": "A",
+          "text": "Ikisi de sonuc dondurur"
+        },
+        {
+          "id": "B",
+          "text": "Callable sonuc dondurebilir ve checked exception firlatabilir"
+        },
+        {
+          "id": "C",
+          "text": "Runnable yalnizca IO islerinde kullanilir"
+        },
+        {
+          "id": "D",
+          "text": "Callable sadece single-thread modunda calisir"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -47,12 +75,26 @@
       "singleChoice": true,
       "question": "Future.get() cagrisi icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Asla bloklamaz" },
-        { "id": "B", "text": "Task bitmemisse cagrilan threadi bekletir" },
-        { "id": "C", "text": "Taski otomatik iptal eder" },
-        { "id": "D", "text": "Sadece timeout ile calisir" }
+        {
+          "id": "A",
+          "text": "Asla bloklamaz"
+        },
+        {
+          "id": "B",
+          "text": "Task bitmemisse cagrilan threadi bekletir"
+        },
+        {
+          "id": "C",
+          "text": "Taski otomatik iptal eder"
+        },
+        {
+          "id": "D",
+          "text": "Sadece timeout ile calisir"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -64,13 +106,27 @@
       "singleChoice": true,
       "question": "CompletableFuture'in temel avantaji hangisidir?",
       "choices": [
-        { "id": "A", "text": "Asenkron adimlari compose ederek callback cehennemini azaltmasi" },
-        { "id": "B", "text": "Tum operasyonlari single-thread'e zorlamasi" },
-        { "id": "C", "text": "Sadece CPU-bound islerde calismasi" },
-        { "id": "D", "text": "Locksuz oldugu icin her zaman deterministic olmasi" }
+        {
+          "id": "A",
+          "text": "Asenkron adimlari compose ederek callback cehennemini azaltmasi"
+        },
+        {
+          "id": "B",
+          "text": "Tum operasyonlari single-thread'e zorlamasi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece CPU-bound islerde calismasi"
+        },
+        {
+          "id": "D",
+          "text": "Locksuz oldugu icin her zaman deterministic olmasi"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Doğru cevap: **Asenkron adımları compose ederek callback cehennemini (callback hell) azaltması.**\n\n`CompletableFuture`, Java 8 ile gelen ve asenkron programlamayı bir \"akış\" haline getiren en güçlü araçlardan biridir. JavaScript'teki `Promise` yapısının Java'daki karşılığıdır.\n\n---\n\n### CompletableFuture Nedir ve Ne İşe Yarar?\n\n`CompletableFuture`, hem bir **Future** (gelecekte bitecek bir işlemin sonucu) hem de bir **CompletionStage** (bir işlem bittiğinde tetiklenecek adım) arayüzünü uygular.\n\n**Temel amacı şudur:** Bir işlemin sonucunu beklerken ana thread'i (main thread) bloklamadan, o işlem bittiğinde ne yapılacağını önceden tarif etmenizi sağlar.\n\n\n\n---\n\n### ExecutorService veya Thread'in Alternatifi Midir?\n\nBu soruya **\"Evet, ama farklı bir seviyede\"** cevabını verebiliriz:\n\n1.  **Thread'e karşı:** `Thread` çok düşük seviyeli bir birimdir. `Thread` ile iş yönetmek zordur. `CompletableFuture`, thread'leri bir araç olarak kullanır ama size yüksek seviyeli bir yönetim imkanı sunar.\n2.  **ExecutorService'e karşı:** `ExecutorService` bir **işçi havuzudur**. Size bir işin bittiğine dair bir `Future` verir. Ancak o `Future` nesnesinden sonucu almak için `.get()` demeniz gerekir ki bu da o an thread'i durdurur (blocking).\n    * `CompletableFuture` ise `ExecutorService`'in üzerine inşa edilmiş bir **orkestra şefidir**. İşleri havuzda çalıştırır ama sonuçları bloklamadan birbirine bağlar.\n\n---\n\n### Temel Avantajları ve Yetenekleri\n\n* **Non-blocking (Bloklamayan Yapı):** `.get()` çağırıp beklemenize gerek kalmaz. `.thenAccept()` diyerek \"bitince şunu yap\" dersiniz.\n* **Chaining (Zincirleme):** Birçok asenkron işlemi sıraya dizebilirsiniz.\n* **Combination (Birleştirme):** İki farklı asenkron işlemin (örneğin iki farklı API çağrısı) sonuçlarını aynı anda bekleyip ikisi de bitince bir işlem başlatabilirsiniz.\n* **Exception Handling:** Hata yönetimini bir akış içinde (`.exceptionally()`) yapmanıza olanak tanır.\n\n\n\n---\n\n### Kod Örneği: Geleneksel Yöntem vs CompletableFuture\n\nDiyelim ki bir kullanıcının ID'si ile önce bilgilerini, sonra o bilgilere göre kredi skorunu çekeceksiniz.\n\n#### Geleneksel (Future ile):\n```java\nFuture<User> userFuture = executor.submit(() -> userService.getUser(id));\nUser user = userFuture.get(); // BURADA DURUR (BLOCKING)!\nFuture<Integer> scoreFuture = executor.submit(() -> scoreService.getScore(user));\nInteger score = scoreFuture.get(); // YİNE DURUR!\n```\n\n#### CompletableFuture ile:\n```java\nCompletableFuture.supplyAsync(() -> userService.getUser(id))\n    .thenCompose(user -> CompletableFuture.supplyAsync(() -> scoreService.getScore(user)))\n    .thenAccept(score -> System.out.println(\"Skor: \" + score))\n    .exceptionally(ex -> {\n        System.out.println(\"Hata oluştu: \" + ex.getMessage());\n        return null;\n    });\n// Ana thread burada ASLA durmaz, akış arka planda kendi kendine tamamlanır.\n```\n\n---\n\n### Ne Zaman Kullanılır?\n\n* Mikroservisler arası asenkron çağrılar yaparken.\n* Arayüzü (UI) dondurmadan arka planda veri işlerken.\n* Karmaşık asenkron iş akışları (Pipeline) kurgularken.\n\n**Özetle:** `CompletableFuture`, thread yönetimini otomatikleştirir ve kodunuzu \"makarna koda\" (callback hell) dönüşmekten kurtarır. \n\nGenellikle bir web projesinde API'lerden veri toplamak için mi bu yapıya ihtiyaç duydun, yoksa yoğun bir veri işleme süreci mi tasarlıyorsun?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -81,13 +137,27 @@
       "singleChoice": true,
       "question": "ExecutorService.shutdown() ve shutdownNow() farki icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Ikisi de ayni davranir" },
-        { "id": "B", "text": "shutdown yeni task kabul etmez ama mevcutlari bitirir; shutdownNow calisanlari interrupt etmeye calisir" },
-        { "id": "C", "text": "shutdown thread havuzunu buyutur" },
-        { "id": "D", "text": "shutdownNow daima tum tasklari garantili bitirir" }
+        {
+          "id": "A",
+          "text": "Ikisi de ayni davranir"
+        },
+        {
+          "id": "B",
+          "text": "shutdown yeni task kabul etmez ama mevcutlari bitirir; shutdownNow calisanlari interrupt etmeye calisir"
+        },
+        {
+          "id": "C",
+          "text": "shutdown thread havuzunu buyutur"
+        },
+        {
+          "id": "D",
+          "text": "shutdownNow daima tum tasklari garantili bitirir"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Doğru cevap: **`shutdown` yeni task kabul etmez ama mevcutları bitirir; `shutdownNow` çalışanları interrupt etmeye çalışır.**\n\nBir `ExecutorService` ile işiniz bittiğinde onu kapatmak çok kritiktir, aksi takdirde uygulama arka planda çalışmaya devam edebilir (özellikle JVM'in kapanmasını engelleyen non-daemon thread'ler yüzünden). Ancak bu iki kapatma yöntemi arasında \"nezaket\" farkı vardır.\n\n---\n\n### shutdown() vs shutdownNow() Karşılaştırması\n\n| Özellik | `shutdown()` (Nazik Kapatma) | `shutdownNow()` (Sert Kapatma) |\n| :--- | :--- | :--- |\n| **Yeni Görevler** | Kabul edilmez (`RejectedExecutionException`). | Kabul edilmez. |\n| **Bekleyen Görevler** | Kuyrukta (Queue) bekleyen tüm görevler tamamlanır. | Kuyrukta bekleyen görevler **iptal edilir** ve bir liste olarak döndürülür. |\n| **Çalışan Görevler** | Bitene kadar çalışmalarına izin verilir. | `Thread.interrupt()` sinyali gönderilerek durdurulmaya çalışılır. |\n| **Garanti** | Tüm işlerin bitmesini bekler. | Çalışan işlerin interrupt sinyaline nasıl tepki vereceğine bağlıdır (Garantisi yoktur). |\n\n\n\n---\n\n### Kod Üzerinde Gösterim\n\nİki yöntemin farkını şu örnekle daha iyi anlayabiliriz:\n\n```java\nExecutorService executor = Executors.newFixedThreadPool(2);\n\nexecutor.submit(() -> {\n    try {\n        Thread.sleep(5000);\n        System.out.println(\"Görev 1 bitti.\");\n    } catch (InterruptedException e) {\n        System.out.println(\"Görev 1 INTERRUPT edildi!\");\n    }\n});\n\n// Senaryo A: shutdown()\n// executor.shutdown(); \n// Sonuç: 5 saniye bekler, \"Görev 1 bitti\" yazar ve kapanır.\n\n// Senaryo B: shutdownNow()\nList<Runnable> neverStarted = executor.shutdownNow();\n// Sonuç: Hemen \"Görev 1 INTERRUPT edildi!\" yazar. \n// Varsa kuyrukta bekleyip hiç başlamayan işleri liste olarak döndürür.\n```\n\n---\n\n### Kritik Bir Bilgi: awaitTermination()\n\nNe `shutdown()` ne de `shutdownNow()` metodu, servis tamamen kapanana kadar kodun akışını **bekletmez**. Çağrıldıkları anda kontrol bir sonraki satıra geçer. Eğer servisin gerçekten kapandığından emin olmak istiyorsanız, ardından `awaitTermination` kullanmalısınız:\n\n```java\nexecutor.shutdown();\ntry {\n    if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {\n        executor.shutdownNow(); // 60 sn içinde bitmezse zorla kapat\n    }\n} catch (InterruptedException e) {\n    executor.shutdownNow();\n}\n```\n\n\n\n---\n\n### Özet Karar\n* Uygulamanın normal kapanış sürecindeyseniz ve verilerin kaybolmamasını istiyorsanız: **`shutdown()`**.\n* Acil bir durum varsa, kullanıcı işlemi iptal ettiyse veya uygulama hata alıp hemen çıkması gerekiyorsa: **`shutdownNow()`**.\n\nBu yöntemleri genelde uygulama sunucusu (Tomcat, Spring vb.) kapanırken \"clean-up\" (temizlik) aşamasında mı kullanıyorsun, yoksa dinamik olarak oluşturduğun kısa ömürlü thread havuzları için mi?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,13 +168,27 @@
       "singleChoice": true,
       "question": "CountDownLatch en uygun olarak hangi durumda kullanilir?",
       "choices": [
-        { "id": "A", "text": "Belirli sayida is parcasi tamamlanana kadar bir noktada beklemek" },
-        { "id": "B", "text": "Ring buffer olusturmak" },
-        { "id": "C", "text": "Deadlocku otomatik cozmek" },
-        { "id": "D", "text": "HashMap'i thread-safe yapmak" }
+        {
+          "id": "A",
+          "text": "Belirli sayida is parcasi tamamlanana kadar bir noktada beklemek"
+        },
+        {
+          "id": "B",
+          "text": "Ring buffer olusturmak"
+        },
+        {
+          "id": "C",
+          "text": "Deadlocku otomatik cozmek"
+        },
+        {
+          "id": "D",
+          "text": "HashMap'i thread-safe yapmak"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Doğru cevap: **Belirli sayıda iş parçası tamamlanana kadar bir noktada beklemek.**\n\n`CountDownLatch`, Java'nın `java.util.concurrent` paketinde yer alan ve bir veya daha fazla thread'in, diğer thread'ler tarafından gerçekleştirilen bir dizi işlem tamamlanana kadar **beklemesini** sağlayan çok güçlü bir senkronizasyon aracıdır.\n\n---\n\n### CountDownLatch Nasıl Çalışır?\n\nMantığı oldukça basittir: Bir \"geri sayım sayacı\" gibi çalışır.\n\n1.  **Başlangıç:** Bir sayaç değeriyle oluşturulur (Örneğin: `new CountDownLatch(3)`).\n2.  **Bekleme (`await`):** Ana thread (veya bekleyen herhangi bir thread) `await()` metodunu çağırır ve sayaç sıfır olana kadar orada durur.\n3.  **Geri Sayım (`countDown`):** Diğer worker thread'ler işlerini bitirdikçe `countDown()` metodunu çağırır. Her çağrı sayacı 1 azaltır.\n4.  **Açılış:** Sayaç sıfıra ulaştığında, bekleyen thread üzerindeki engel kalkar ve yoluna devam eder.\n\n\n\n---\n\n### Tipik Kullanım Senaryosu: Sistem Başlatma\n\nBir uygulamanın ayağa kalkması için 3 farklı servisin (Veritabanı, Mesaj Kuyruğu, Cache) hazır olması gerektiğini düşünelim.\n\n```java\nimport java.util.concurrent.CountDownLatch;\n\npublic class SystemStarter {\n    public static void main(String[] args) throws InterruptedException {\n        CountDownLatch latch = new CountDownLatch(3); // 3 servis beklenecek\n\n        // Servisleri başlatan thread'ler\n        new Thread(new Service(\"Database\", 2000, latch)).start();\n        new Thread(new Service(\"Cache\", 1000, latch)).start();\n        new Thread(new Service(\"Messaging\", 3000, latch)).start();\n\n        System.out.println(\"Ana sistem servislerin hazır olmasını bekliyor...\");\n        \n        latch.await(); // Sayaç 0 olana kadar burada BLOKLANIR.\n\n        System.out.println(\"Tüm servisler hazır. Sistem açılıyor!\");\n    }\n}\n\nclass Service implements Runnable {\n    private String name;\n    private int duration;\n    private CountDownLatch latch;\n\n    public Service(String name, int duration, CountDownLatch latch) {\n        this.name = name;\n        this.duration = duration;\n        this.latch = latch;\n    }\n\n    @Override\n    public void run() {\n        try {\n            Thread.sleep(duration); // İş yapılıyor simülasyonu\n            System.out.println(name + \" hazır.\");\n        } catch (InterruptedException e) {\n            e.printStackTrace();\n        } finally {\n            latch.countDown(); // İş bitti, sayacı bir azalt!\n        }\n    }\n}\n```\n\n---\n\n### CountDownLatch vs CyclicBarrier\n\nBu iki yapı çok karıştırılır. Aralarındaki en temel fark şudur:\n\n| Özellik | CountDownLatch | CyclicBarrier |\n| :--- | :--- | :--- |\n| **Yeniden Kullanım** | **Tek kullanımlıktır.** Sayaç sıfıra inince tekrar kurulamaz. | **Resetlenebilir.** İşlem bittikten sonra sayaç başa döner ve tekrar kullanılır. |\n| **Bekleme Mantığı** | Bir ana thread, worker'ları bekler. | Thread'lerin hepsi birbirini bir noktada bekler (Buluşma noktası). |\n| **Metotlar** | `countDown()` ve `await()` farklı thread'lerce çağrılabilir. | Herkes aynı `await()` metodunu çağırır. |\n\n\n\n---\n\n### Özet Karar\n\n* Eğer bir işlemin başlaması için **X tane başka işlemin bitmesi** gerekiyorsa: **CountDownLatch**.\n* Eğer bir grup thread'in **aynı anda bir noktaya varmasını** ve sonra hep beraber devam etmesini istiyorsan: **CyclicBarrier**.\n\nGenellikle bu yapıyı test otomasyonlarında (paralel testlerin bitişini beklemek gibi) mı kullanıyorsun, yoksa uygulama içindeki bağımlı servislerin yönetiminde mi?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -115,13 +199,27 @@
       "singleChoice": true,
       "question": "Semaphore hangi problemi cozmeye yarar?",
       "choices": [
-        { "id": "A", "text": "Belirli bir kaynaga ayni anda erisebilecek thread sayisini sinirlamak" },
-        { "id": "B", "text": "Hash collision azaltmak" },
-        { "id": "C", "text": "Thread local degerleri paylastirmak" },
-        { "id": "D", "text": "Sadece monitor lock yerine gecmek" }
+        {
+          "id": "A",
+          "text": "Belirli bir kaynaga ayni anda erisebilecek thread sayisini sinirlamak"
+        },
+        {
+          "id": "B",
+          "text": "Hash collision azaltmak"
+        },
+        {
+          "id": "C",
+          "text": "Thread local degerleri paylastirmak"
+        },
+        {
+          "id": "D",
+          "text": "Sadece monitor lock yerine gecmek"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Doğru cevap: **Belirli bir kaynağa aynı anda erişebilecek thread sayısını sınırlamak.**\n\n`Semaphore` (Semafor), bir kaynağın sınırlı sayıda \"izni\" (permit) olduğunu hayal ederek çalışır. Bir nevi dijital bir **\"Kapasite Kontrol\"** mekanizmasıdır.\n\n---\n\n### Semaphore Nasıl Çalışır?\n\nMantığı bir otoparka çok benzer:\n1.  **Kapasite Belirleme:** Semafor oluşturulurken kaç thread'in aynı anda çalışabileceği belirlenir. (Örneğin 5 izinli bir semafor).\n2.  **İzin Alma (`acquire`):** Bir thread işleme başlamadan önce semafordan izin ister. Eğer izin varsa bir tane alır ve devam eder. İzin yoksa (otopark doluysa), biri izni bırakana kadar bekler.\n3.  **İzin Bırakma (`release`):** Thread işini bitirdiğinde aldığı izni semafora geri iade eder. Böylece bekleyen bir sonraki thread içeri girebilir.\n\n\n\n---\n\n### Kod Örneği: Veritabanı Bağlantı Havuzu Simülasyonu\n\nDiyelim ki veritabanınız aynı anda sadece 3 bağlantıyı kaldırabiliyor ama sistemde 10 tane thread işlem yapmak istiyor.\n\n```java\nimport java.util.concurrent.Semaphore;\n\npublic class DatabaseAccess {\n    // Sadece 3 thread'in aynı anda erişimine izin veriyoruz\n    private static final Semaphore semaphore = new Semaphore(3);\n\n    public void accessDatabase(String threadName) {\n        try {\n            System.out.println(threadName + \" izin bekliyor...\");\n            semaphore.acquire(); // İzin al (Eğer yoksa burada durur)\n            \n            System.out.println(threadName + \" VERİYE ERİŞTİ. (İşlem yapılıyor...)\");\n            Thread.sleep(2000); // Veritabanı işlemi simülasyonu\n            \n        } catch (InterruptedException e) {\n            e.printStackTrace();\n        } finally {\n            System.out.println(threadName + \" işini bitirdi, izin bırakılıyor.\");\n            semaphore.release(); // İzni geri ver!\n        }\n    }\n\n    public static void main(String[] args) {\n        DatabaseAccess db = new DatabaseAccess();\n        for (int i = 1; i <= 6; i++) {\n            String name = \"Thread-\" + i;\n            new Thread(() -> db.accessDatabase(name)).start();\n        }\n    }\n}\n```\n\n---\n\n### Semaphore vs Mutex (synchronized)\n\nBirçok kişi Semafor ile Kilit (Lock/Mutex) arasındaki farkı karıştırır:\n\n| Özellik | Mutex (synchronized / ReentrantLock) | Semaphore |\n| :--- | :--- | :--- |\n| **İzin Sayısı** | Daima 1'dir. | Birden fazla (N) olabilir. |\n| **Sahiplik** | Kilidi hangi thread aldıysa, o bırakmalıdır. | İzni alan thread ile bırakan thread farklı olabilir. |\n| **Kullanım Amacı** | Kritik bölgeyi (data race) korumak. | **Kapasiteyi** ve **kaynak kullanımını** yönetmek (Throttling). |\n\n\n\n---\n\n### Gerçek Hayat Senaryosu: Rate Limiting\nBir web servisinden veri çekiyorsunuz ve servis size \"Saniyede en fazla 10 istek atabilirsin\" diyor. Bu sınırı aşmamak için kodunuzda 10 izinlik bir `Semaphore` kullanarak sistemin çökmesini veya banlanmasını engelleyebilirsiniz.\n\n**Özetle:** Eğer \"Bu kapıdan sadece bir kişi geçebilir\" diyorsan **Lock**, \"Bu otoparka aynı anda 50 araba girebilir\" diyorsan **Semaphore** kullanmalısın.\n\nŞu ana kadar işlediğimiz `CountDownLatch`, `CyclicBarrier` ve `Semaphore` arasından en çok hangisi senin kullanım senaryona hitap ediyor?",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -132,12 +230,26 @@
       "singleChoice": true,
       "question": "Deadlock tanimi icin en dogru secenek hangisidir?",
       "choices": [
-        { "id": "A", "text": "Threadlerin sirayla calismasi" },
-        { "id": "B", "text": "Iki veya daha fazla threadin birbirinin tuttugu locku bekleyip sonsuza kadar ilerleyememesi" },
-        { "id": "C", "text": "CPU'nun %100 calismasi" },
-        { "id": "D", "text": "Garbage collector gecikmesi" }
+        {
+          "id": "A",
+          "text": "Threadlerin sirayla calismasi"
+        },
+        {
+          "id": "B",
+          "text": "Iki veya daha fazla threadin birbirinin tuttugu locku bekleyip sonsuza kadar ilerleyememesi"
+        },
+        {
+          "id": "C",
+          "text": "CPU'nun %100 calismasi"
+        },
+        {
+          "id": "D",
+          "text": "Garbage collector gecikmesi"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -149,12 +261,26 @@
       "singleChoice": true,
       "question": "Starvation neyi ifade eder?",
       "choices": [
-        { "id": "A", "text": "Bir threadin surekli kaynak alamayip ilerleyememesi" },
-        { "id": "B", "text": "Tum threadlerin ayni anda bitmesi" },
-        { "id": "C", "text": "Sadece IO threadlerinin kapanmasi" },
-        { "id": "D", "text": "Bir lockun recursive alinmasi" }
+        {
+          "id": "A",
+          "text": "Bir threadin surekli kaynak alamayip ilerleyememesi"
+        },
+        {
+          "id": "B",
+          "text": "Tum threadlerin ayni anda bitmesi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece IO threadlerinin kapanmasi"
+        },
+        {
+          "id": "D",
+          "text": "Bir lockun recursive alinmasi"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "CPU-bound task agirlikli bir servis icin thread pool seciminde en dogru yaklasim hangisidir?",
       "choices": [
-        { "id": "A", "text": "Core sayisindan cok daha fazla thread acmak" },
-        { "id": "B", "text": "Genelde CPU cekirdek sayisina yakin fixed pool ile baslamak" },
-        { "id": "C", "text": "Her request icin yeni thread acmak" },
-        { "id": "D", "text": "Thread sayisini rastgele secmek" }
+        {
+          "id": "A",
+          "text": "Core sayisindan cok daha fazla thread acmak"
+        },
+        {
+          "id": "B",
+          "text": "Genelde CPU cekirdek sayisina yakin fixed pool ile baslamak"
+        },
+        {
+          "id": "C",
+          "text": "Her request icin yeni thread acmak"
+        },
+        {
+          "id": "D",
+          "text": "Thread sayisini rastgele secmek"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
