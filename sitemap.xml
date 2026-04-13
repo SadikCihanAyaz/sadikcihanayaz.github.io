@@ -163,6 +163,30 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-core&amp;interview=spring-core-interview-1</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-core&amp;interview=spring-core-interview-2</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-core&amp;interview=spring-core-interview-3</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-core&amp;interview=spring-core-interview-4</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-mvc&amp;interview=spring-mvc-interview-1</loc>
     <lastmod>2026-04-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -356,6 +380,18 @@
   </url>
   <url>
     <loc>https://sadikcihanayaz.github.io/learn.html?category=spring-boot&amp;subcategory=hibernate-jpa-jparepository&amp;view=topic</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/learn.html?category=spring-boot&amp;subcategory=spring-core</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/learn.html?category=spring-boot&amp;subcategory=spring-core&amp;view=topic</loc>
     <lastmod>2026-04-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
