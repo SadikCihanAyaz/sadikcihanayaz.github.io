@@ -10,6 +10,14 @@
       "order": 1,
       "questionCount": 20,
       "file": "/data/002_spring_boot/008_mixed_questions/interviews/001_questions-1.json"
+    },
+    {
+      "id": "mixed-questions-2",
+      "title": "Questions-2",
+      "description": "Spring Boot core, API tasarimi ve async odakli sozlu mulakat sorulari",
+      "order": 2,
+      "questionCount": 20,
+      "file": "/data/002_spring_boot/008_mixed_questions/interviews/002_questions-2.json"
     }
   ]
 }

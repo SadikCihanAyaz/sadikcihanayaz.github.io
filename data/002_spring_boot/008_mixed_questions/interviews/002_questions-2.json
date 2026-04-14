@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "mixed-questions",
+  "id": "mixed-questions-2",
+  "title": "Questions-2",
+  "description": "Spring Boot core ve backend odakli sozlu mulakat soru-cevaplari",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "@Component, @Service ve @Repository arasindaki fark nedir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Ucu de Spring bean olusturur ama semantik amaclari farklidir. Guclu cevap: Teknik olarak hepsi stereotype annotationdir ve bean olarak register edilir. Ancak @Service business logic, @Repository veri erisimi, @Component ise genel amacli bilesenler icin kullanilir. @Repository veri erisim katmaninda ayrica persistence exceptionlarini Spring veri erisim exception hiyerarsisine cevirmede anlamlidir. Bu semantik ayrim okunabilirlik ve bakim kalitesini artirir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q2",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Dependency Injection neden onemlidir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Siki bagliligi azaltir, test edilebilirlik ve bakim kolayligi saglar. Guclu cevap: Dependency Injection bir sinifin bagimliliklarini kendisinin yaratmasi yerine disaridan almasidir. Bu sayede coupling azalir, test yazmak kolaylasir, implementasyon degisikligi daha guvenli olur. Service icinde repositoryyi new ile yaratmak yerine inject etmek mocklamayi ve farkli implementasyonlarla calismayi kolaylastirir. Ek iyi nokta: Constructor injection zorunlu bagimliliklari net gosterir ve immutable tasarima daha uygundur.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q3",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Constructor injection ile field injection farki nedir, hangisini tercih edersin?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Constructor injection daha guvenli ve test edilebilirdir. Guclu cevap: Constructor injection bagimliliklari acikca gosterir, final alan kullanimini destekler ve sinifi Springsiz testte de kolay kurdurur. Field injection daha kisa gorunse de bagimliliklari gizler ve test yazimini zorlastirir. Production kodda constructor injection daha temiz yaklasimdir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q4",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Spring bean scopelari nelerdir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: singleton, prototype, request, session en temel scopelardir. Guclu cevap: Springde en yaygin scope singletondur ve cogu bean uygulama boyunca tek instance olur. Prototype her injectionda yeni nesne uretir. Web uygulamalarinda request ve session scopelari da kullanilir. Scope seciminde singleton icinde state tutmanin thread safety riski yaratabilecegi unutulmamalidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q5",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Spring Boot auto-configuration mantigi nedir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Classpath, config ve mevcut bean durumuna bakarak otomatik konfig yapar. Guclu cevap: Spring Boot classpathteki kutuphaneleri, environment configlerini ve var olan beanleri kontrol ederek otomatik bean tanimlar. Web starter varsa MVC, data starter varsa datasource ve JPA tarafini hizla hazirlar. Bu hiz kazandirir ancak arka planda ne oldugunu bilmeden kullanmak debugi zorlastirabilir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q6",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "@Configuration ile @Bean ne zaman kullanilir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Ucuncu parti veya ozel bean tanimlari icin kullanilir. Guclu cevap: @Component ile taranamayacak veya ozel kurulum gerektiren nesneler icin @Configuration sinifi icinde @Bean tanimlarim. Ucuncu parti client, ozel mapper, custom executor veya profilea gore degisen bean tanimlarinda bu yaklasim cok uygundur.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q7",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "@Profile ne ise yarar, nerede kullanirsin?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Ortama gore farkli bean veya config aktif etmeyi saglar. Guclu cevap: @Profile ile dev ortaminda fake servis, prod ortaminda gercek servis gibi environment specific davranislar acilir. Bu yapiyi gerekli oldugunda kullanirim; cok fazla profile uretmek config karmasasina yol acabilecegi icin olculu kullanmak gerekir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q8",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "@ConditionalOnProperty gibi conditional bean tanimlari ne zaman kullanilir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Feature toggle veya configurable altyapi secimlerinde kullanilir. Guclu cevap: Confige gore bean acip kapatmak gerektiginde idealdir. Ornegin cache aciksa gercek cache bean, degilse no-op bean vermek gibi. Bu yaklasim moduler sistemlerde, feature flag mantiginda ve farkli deployment ihtiyaclarinda cok faydalidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q9",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "@RestController ile @Controller farki nedir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: @RestController, @Controller + @ResponseBody gibidir. Guclu cevap: @Controller klasik MVCde view dondurur. @RestController ise JSON veya XML gibi response body donduren APIler icin uygundur. Backend API gelistirirken amac template render etmek degil veri donmek oldugu icin cogu senaryoda @RestController tercih edilir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q10",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "ResponseEntity ne zaman kullanilir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Status code, header ve body kontrolu gerektiginde kullanilir. Guclu cevap: Basit durumda DTO donmek yeterli olabilir ama 201 Created, Location header, farkli hata statusleri gibi durumlarda ResponseEntity daha nettir. Ozellikle API sozlesmesinde durum kodu ve header semantigi onemliyse ResponseEntity tercih ederim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q11",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Paginationi backendde nasil tasarlarsin?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Pagination sorting ve filtering ile birlikte dusunulmelidir. Guclu cevap: Yalnizca page ve size degil, sorting ve filteringi de birlikte tasarlarim. Buyuk datasetlerde tum veriyi tek seferde donmek yerine kontrollu veri donmek gerekir. Springde Pageable kullanilabilir ama cogu durumda entityyi direkt donmek yerine DTO tercih ederim. Ek kritik nokta: Cok buyuk offsetlerde cursor based yaklasim daha verimli olabilir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q12",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "DTO neden kullanirsin, entityyi direkt dondurmek neden riskli?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: API contract ile persistence model ayrilmalidir. Guclu cevap: Entityyi direkt donmek persistence modeli ile API contracti baglar. Lazy relation sorunlari, gereksiz alan sizmasi ve versiyonlama zorlugu yaratabilir. DTO kullanmak disariya acilan alani net kontrol etmeyi ve API evrimini daha guvenli yonetmeyi saglar.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q13",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "MapStruct veya benzeri mapper araclarini ne zaman kullanirsin?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Yogun DTO entity donusumlerinde faydalidir. Guclu cevap: Az sayida donusumde elle mapping yeterli olabilir; proje buyudukce mapping kodu dagilir. MapStruct gibi araclar tip guvenli, hizli ve daha okunabilir bir cozum sunar. Cok sayida DTO oldugunda bakim maliyetini dusurdugu icin tercih ederim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q14",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Optional nerede kullanilmali, nerede kullanilmamali?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Return type icin faydali olabilir ama her yere yayilmamali. Guclu cevap: Optionali deger olmayabilir bilgisini return type seviyesinde ifade etmek icin faydali bulurum. Ancak fieldlarda, entity icinde veya method parametresinde kullanimi iyi tasarim degildir. Asiri Optional kullanimi kodu netlestirmek yerine karmasiklastirabilir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q15",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Checked ve unchecked exception farki nedir, pratikte nasil yaklasirsin?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Checked compile timeda zorlar, unchecked runtimeda gelir. Guclu cevap: Checked exception zorunlu ele alma saglar ancak modern backendde asiri kullanimi kodu gurultulu yapabilir. Business ve validation tarafinda cogu durumda domaine uygun runtime exception yaklasimi daha pratiktir. Asil onemli nokta exception turunden cok hata modelinin tutarli olmasidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q16",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Comparable ve Comparator farki nedir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Comparable dogal siralama, Comparator disaridan farkli siralama stratejisidir. Guclu cevap: Comparable sinifin kendi dogal sirasini tanimlar. Comparator ise fiyat, puan, tarih gibi birden fazla alternatif siralama kuralini disaridan vermeyi saglar. Varsayilan tek siralama icin Comparable, use-case bazli farkli siralamalar icin Comparator daha uygundur.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q17",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Java Stream APIyi ne zaman kullanirsin, ne zaman kullanmazsin?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Deklaratif ve okunabilir donusumlerde iyidir ama her yerde kullanilmamali. Guclu cevap: filter map group collect gibi donusumlerde Stream API okunabilirligi artirir. Ancak karmasik stateful akislarda, zor debug edilen senaryolarda veya performans kritik hot pathlerde klasik loop daha net olabilir. Streami modern oldugu icin degil, gercekten kodu iyilestirdigi durumda kullanirim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q18",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Parallel stream kullanir misin?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Her yerde kullanilmaz, yanlis kullanim zarar verebilir. Guclu cevap: Parallel streami otomatik performans cozumlu olarak gormem. CPU bound ve bagimsiz islemlerde, yeterli veri hacminde fayda saglayabilir. Shared state, IO bound isler, thread pool kontrolu gereken alanlar veya request threadi icinde gelisiguzel kullanim risklidir. Once olcmeden parallel stream tercih etmem.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q19",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "ExecutorService veya async processing ne zaman gerekir?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Uzun suren veya bagimsiz isleri ana request akisindan ayirmak icin gerekir. Guclu cevap: Eposta gonderimi, rapor hazirlama, dis sistem cagrisi sonrasi yan etkiler gibi isleri response suresinden ayirmak icin async yaklasim uygundur. Ancak async tek basina cozum degildir; thread pool boyutu, backpressure, retry, hata yonetimi ve gozlemlenebilirlik birlikte tasarlanmalidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q20",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "@Async kullanirken nelere dikkat edersin?",
+      "starterCode": "",
+      "answerBody": "Beklenen cevap mantigi: Proxy, thread pool, exception handling ve context propagation kritiktir. Guclu cevap: @Async proxy tabanli oldugu icin self invocation problemi yasayabilir. Default executor yerine cogu zaman ozel thread pool tanimlamak daha dogrudur. Security context, MDC ve tracing context bilgisinin yeni threade tasinmasi kontrol edilmelidir. Async hatalari sessiz kaybolmamali, hata yonetimi ve gozlemlenebilirlik net kurulmalidir.",
+      "answerCode": ""
+    }
+  ]
+}
