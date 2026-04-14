@@ -1,0 +1,253 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "mixed-questions",
+  "id": "mixed-questions-6",
+  "title": "Questions-6",
+  "description": "Genel teknik, mimari, testing ve production odakli sozlu mulakat soru-cevaplari",
+  "questions": [
+    {
+      "id": "i6-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Basvurdugun sirket hakkinda ne biliyorsun?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Gorusme oncesi sirketin teknik odagini, sektorlerini ve muhendislik yaklasimini arastiririm. Benim icin onemli olan sadece buyukluk degil; proje tipi, ekip yapisi, muhendislik kalitesi ve rolun teknik derinligidir. Bu rolu Java Spring Boot, backend ownership ve production problem solving deneyimimle uyumlu buldugum icin ozellikle ilgileniyorum. Dikkat: Wikipedia ozeti degil, sektor plus proje tipi plus neden uyum var ucgenini ver.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q2",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Agile ortamda calistin mi?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Evet, Agile ortamda calistim. Benim icin Agile sadece stand up, sprint ve retrospective degil; refinementta teknik riskleri konusmak, isleri dogru parcaya bolmek, blockerlari erken gorunur kilmak ve sprint sonunda uretilebilir is cikarmaktir. Gelistirme disinda code review, test kalitesi ve release readiness tarafina da katki veririm.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q3",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "OOP prensiplerini say ve ornek ver.",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: OOPte encapsulation, abstraction, inheritance ve polymorphism temel prensiplerdir. Encapsulation veri ve davranisi kontrollu sekilde bir arada tutar. Abstraction gereksiz detayi gizler. Inheritance tekrar azaltabilir ama asiri kullanimi coupling uretebilir. Polymorphism ayni arayuzle farkli davranislar sunar. Gercek projede en cok encapsulation ve polymorphism esneklik ve bakim kolayligi saglar.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q4",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Collections ve Stream APIyi nerede kullanirsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Collection seciminde once ihtiyaca bakarim: random access, uniqueness, ordering veya concurrency onceligi neyse ona gore secim yaparim. Stream APIyi filtreleme, map, grouping ve aggregation gibi deklaratif donusumlerde kullanirim. Ama her yerde stream kullanmam; okunurluk dusuyorsa veya stateful karmasik akis varsa klasik loop daha dogru olur.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q5",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Spring IoC ve Dependency Injection nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: IoC, nesne yasam dongusu ve bagimlilik yonetiminin uygulama kodu yerine framework tarafindan yonetilmesidir. DI bunun pratik gorunen kismidir. Asil deger, sinifin bagimliligini kendisinin olusturmamasidir; bu test edilebilirligi artirir ve couplingi azaltir. Ozellikle constructor injection tercih ederim cunku bagimliliklari acik ve guvenli yapar.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q6",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Validationi nasil kurarsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Validationi iki seviyede kurarim. Request seviyesinde format, zorunlu alan ve uzunluk gibi kurallar icin bean validation kullanirim. Business seviyesinde ise tekrarlanan islem, limit veya domain kurallarini service katmaninda kontrol ederim. Kritik ayrim su: input validation ve business validation ayni sey degildir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q7",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Microservice yazarken config ve profilelari nasil yonetirsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Configi koddan ayirir, environment bazli yonetirim. Dev test prod farklarini profile veya dis config ile tasirim ama asiri profile kullanip karmasa yaratmam. Ayrica config ve secreti ayiririm: timeout endpoint feature flag configtir; password ve API key secrettir. Amac uygulamayi yeniden build etmeden ortama tasiyabilmektir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q8",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Lazy loading neden patlar?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Lazy loading genelde relationa transaction veya persistence context disinda erisildiginde patlar; proxy veri cekmek ister ama aktif context yoktur. Ayrica sadece exception degil, sessizce N plus 1 performans problemi de uretebilir. Bu nedenle entity graphi use casee gore tasarlarim; ezbere eager veya ezbere lazy kullanmam.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q9",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "@Transactional ile persistence context iliskisi nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Transaction siniri ve persistence context cogu zaman birlikte calisir. Transaction acikken managed entityler izlenir ve dirty checking yapilir. Bu nedenle @Transactional sadece commit rollback degil; entity lifecycle, lazy loading ve update yonetimi icin de kritik sinirdir. Transactioni veri guvenligi kadar JPA davranisinin calisma alani olarak gorurum.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q10",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Cucumber nedir, ne zaman kullanilir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Cucumber davranis odakli testlerde kullanilan bir aractir ve business ile ortak dil kurmayi kolaylastirir. Ancak her testte kullanmam; asiri kullanimi bakim maliyeti yaratir. Ozellikle acceptance seviyesi akislarda business senaryosunu gorunur kilmak icin dusunurum, unit testin yerine koymam.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q11",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Test pyramid nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Test pyramid cok sayida hizli unit test, daha az integration test ve sinirli end to end test dengesidir. Her seyi full integration veya UI seviyesinde test etmek pahali ve yavas olur. Sadece mocklu unit test de yetmez. Hedef hizli geri bildirimle gercek sistem guveni arasinda denge kurmaktir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q12",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Neyi unit test, neyi integration test yaparsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Business rule ve izole edilebilen davranislari unit test ederim; service karar mantigi, hesaplama, branching gibi. Wiring, config, DB query, serialization, security filter chain ve transaction davranisi gibi entegrasyon noktalarini integration test ile dogrularim. Temel soru su: saf is kurali mi testliyorum, yoksa birden fazla bilesenin birlikte calismasini mi?",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q13",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Controller, service, repository testi nasil ayrilir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Controller testinde HTTP katmani, request mapping, validation, status code ve response formatina bakarim. Service testinde business logici dependencyleri mocklayarak izole test ederim. Repository testinde custom query, pagination, filtering, join ve veri erisim davranisini dogrularim. Her katmani kendi sorumluluguna gore test ederim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q14",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Yuksek trafikte bir servisi nasil scale edersin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Once darbozazi olcerim: CPU, DB, thread pool, connection pool, network veya cache miss kaynakli mi anlarim. Rastgele scale etmem. Sonra duruma gore horizontal scaling, cache, query optimization, async processing, batching, read write ayrimi veya rate limiting uygularim. Olcekleme sadece instance arttirmak degil, tutan kati bulmaktir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q15",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Monolith vs microservice",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Bunu ideolojik degil trade off olarak gorurum. Monolith baslangicta daha basit deploy, daha kolay transaction yonetimi ve daha dusuk operasyonel karmasa saglar. Microservice bagimsiz deploy, bounded context ayrimi ve farkli olcekleme ihtiyaclarinda avantajlidir ama distributed complexity getirir. Domain ve organizasyon uygunsa microservice mantiklidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q16",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Cachei nereye koyarsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Cache konumu optimize etmek istedigim katmana baglidir. Uygulama ici kisa omurlu cache baska, dagitik cache baska problemdir. Sik okunan ve nadir degisen veride cache mantikli olabilir. Ama stale data riski yuksekse veya invalidation zor ise cache yerine baska optimizasyon dusunurum. Cachei otomatik hizlandirma degil, trade off araci gorurum.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q17",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Logging ve monitoring nasil kurulur?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Gozlemlenebilirligi uc parca dusunurum: log, metric, trace. Log detay verir, metric trend gosterir, trace requestin servisler arasi yolunu gosterir. Productionda sadece log basmak yetmez; yapisal log, correlation id, latency metricleri, error rate ve kritik business metricleri takip etmek gerekir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q18",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Connection pooling neden onemli?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Her istek icin DB baglantisi ac kapa yapmak pahali oldugu icin connection pool throughputu arttirir ve gecikmeyi azaltir. Ama sonsuz cozum degildir; yavas query veya uzun transaction varsa pool yine tukenebilir. Bunu performans ayari kadar uygulama ve DB arasinda kapasite kontrol mekanizmasi olarak gorurum.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q19",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Neden long transaction kotu?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Uzun transaction daha uzun lock suresi, daha fazla contention, daha yuksek rollback maliyeti ve daha fazla kaynak tuketimi yaratir. Transaction icine gereksiz dis servis cagri veya kullanici bekleme suresi girdiginde olceklenme daha da bozulur. Bu nedenle transaction sinirlarini kisa ve is acisindan tutarli tutarim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q20",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "En zor bug neydi, nasil cozdun?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Cevapta once semptomu, sonra etki alanini nasil daralttigimi, en sonda root cause ve kalici cozumu anlatirim. Ozellikle aralikli production buglarda log metric trace, config farki ve son deploy degisiklikleriyle sistematik ilerledigimi gosteririm. Formul: problem neydi, nasil izole ettin, kok neden neydi, tekrar etmemesi icin ne yaptin.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q21",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Prod incident yasadin mi?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Evet, yasadim. Kritik nokta panik degil sistematik ilerlemektir. Once kullanici etkisini, kapsami ve aciliyeti netlestiririm; sonra rollback, hotfix veya feature kapatma seceneklerinden dogrusunu secerim. Incident cozulunce konu bitmez; root cause, aksiyon maddeleri ve monitoring surec iyilestirmesi cikarmak gerekir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q22",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir query performans sorununu nasil cozdun?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Guclu cevap index ekledim demekle bitmez. Once execution plana bakip maliyetli join veya scani tespit ederim. Sonra index, query rewrite, gereksiz kolonlari azaltma, pagination veya veri modeli duzeltmesi gibi kalici adimlari uygularim. Yaklasimim tahmine degil olcume dayanir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q23",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Legacy kodda neyi iyilestirdin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Legacyde buyuk bang rewrite yapmam. Once en cok aci veren veya riski yuksek bolumu secerim. Buyuk service classi sorumluluklara ayirmak, kritik akis icin test guvenlik agi eklemek, tekrar eden kodu ortaklastirmak ve gizli business rulelari netlestirmek gibi adimlarla ilerlerim. Hedef estetik degil degisiklik maliyetini dusurmektir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q24",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Takim icinde anlasmazlik yasadin mi?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Evet, normaldir. Bunu kisisel catismaya cevirmem. Once problemi netlestirir, sonra secenekleri trade offlariyla ortaya koyarim. Amac kimin hakli oldugu degil ekip icin surdurulebilir dogru karar vermektir. Gerektiginde kucuk proof of concept veya olcumle tartismayi veriyle cozerim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q25",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir featurei bastan tasarlasaydin neyi farkli yapardin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Burada mukemmelmis gibi konusmam. Ilk tasarimin is ihtiyacina gore dogru oldugunu ama uzun vadede sinirlar ciktigini soylerim. Daha net modul ayrimi, daha iyi event yapisi, daha kontrollu DTO contract tasarimi veya bastan test edilebilirlik gibi bir noktayi secip ne ogrendigimi anlatirim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q26",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir juniora transaction konusunu nasil anlatirsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Transactioni tek bir isin ya tamamen olmasi ya hic olmamasi gereken guvenli calisma alani olarak anlatirim. Sonra transactionin sadece commit rollback degil; lock, isolation, persistence context ve performans etkisi de oldugunu eklerim. Juniora banka transferi gibi somut ornek verip teknik tarafi da adim adim acarim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i6-q27",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Neden bu teknolojiyi sectin, alternatif neydi?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Teknoloji secimini fanboylukla degil problem ve kisitlarla yaparim. Problem neydi, ekip ne biliyordu, operasyonel maliyet neydi bakarim. Sectigim cozumun nedenini anlatirken alternatifleri de soylerim: daha hizli ama kisitli secenek neydi, daha guclu ama daha pahali secenek neydi. Guclu cevap sadece ne sectigimiz degil neden digerlerini secmedigimizi de anlatabilmektir.",
+      "answerCode": ""
+    }
+  ]
+}

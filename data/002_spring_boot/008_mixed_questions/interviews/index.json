@@ -42,6 +42,14 @@
       "order": 5,
       "questionCount": 20,
       "file": "/data/002_spring_boot/008_mixed_questions/interviews/005_questions-5.json"
+    },
+    {
+      "id": "mixed-questions-6",
+      "title": "Questions-6",
+      "description": "Genel teknik, mimari, testing ve production odakli sozlu mulakat soru-cevaplari",
+      "order": 6,
+      "questionCount": 27,
+      "file": "/data/002_spring_boot/008_mixed_questions/interviews/006_questions-6.json"
     }
   ]
 }
