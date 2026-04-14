@@ -169,6 +169,18 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-cloud&amp;interview=spring-cloud-interview-1</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-cloud&amp;interview=spring-cloud-interview-2</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-core&amp;interview=spring-core-interview-1</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -398,6 +410,18 @@
   </url>
   <url>
     <loc>https://sadikcihanayaz.github.io/learn.html?category=spring-boot&amp;subcategory=hibernate-jpa-jparepository&amp;view=topic</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/learn.html?category=spring-boot&amp;subcategory=spring-cloud</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://sadikcihanayaz.github.io/learn.html?category=spring-boot&amp;subcategory=spring-cloud&amp;view=topic</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
