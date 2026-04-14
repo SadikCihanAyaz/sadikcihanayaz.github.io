@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-cloud",
+  "id": "spring-cloud-interview-1",
+  "title": "Spring Cloud Interview - 1",
+  "description": "Config yonetimi, Config Server/Client ve runtime refresh",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring Cloud Config'in temel amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "Tum servislerin log seviyesini kodla sabitlemek" },
+        { "id": "B", "text": "Konfigurasyonu merkezi olarak yonetmek ve servislere dagitmak" },
+        { "id": "C", "text": "Sadece database migration calistirmak" },
+        { "id": "D", "text": "Sadece API Gateway routing yapmak" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Config Server ile Config Client arasindaki dogru sorumluluk dagilimi hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Config Server config'i kullanir, Client config'i saklar" },
+        { "id": "B", "text": "Config Server config'i sunar, Client startup'ta alip uygular" },
+        { "id": "C", "text": "Ikisi de sadece service registry isidir" },
+        { "id": "D", "text": "Sadece Client Git repository okur" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring Boot 2.4+ sonrasinda Config Server import etmek icin tipik ayar hangisidir?",
+      "choices": [
+        { "id": "A", "text": "spring.cloud.config.import=configserver:" },
+        { "id": "B", "text": "spring.config.import=configserver:" },
+        { "id": "C", "text": "spring.config.location=eureka:" },
+        { "id": "D", "text": "spring.cloud.bootstrap.enabled=always" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "application.properties ve application-dev.properties birlikte oldugunda ayni key icin hangisi kazanir?",
+      "choices": [
+        { "id": "A", "text": "Her zaman application.properties" },
+        { "id": "B", "text": "Yukleme sirasina gore profile dosyasi override edebilir" },
+        { "id": "C", "text": "Ikisi birlesmez, startup fail olur" },
+        { "id": "D", "text": "Sadece YAML dosyalari override eder" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "spring.config.import=optional:configserver:http://localhost:8888 ifadesinde optional ne saglar?",
+      "choices": [
+        { "id": "A", "text": "Config Server'a baglanamazsa uygulamanin yine acilabilmesine izin verir" },
+        { "id": "B", "text": "Config Server'i zorunlu hale getirir" },
+        { "id": "C", "text": "Tum propertyleri sifirlar" },
+        { "id": "D", "text": "Sadece test profilinde calisir" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@RefreshScope anotasyonunun tipik amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "Bean'i compile-time'da immutable yapmak" },
+        { "id": "B", "text": "Config degisince ilgili bean'in runtime'da yenilenebilmesini saglamak" },
+        { "id": "C", "text": "Bean'i her request'te prototype yapmak" },
+        { "id": "D", "text": "Sadece Eureka heartbeat ayarlarini guncellemek" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Config degisikligini tum ilgili servislere event tabanli yaymak icin en uygun Spring Cloud bileseni hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Spring Cloud Bus" },
+        { "id": "B", "text": "Spring Retry" },
+        { "id": "C", "text": "Spring Batch" },
+        { "id": "D", "text": "Spring Session" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Gruplanmis propertyleri type-safe sekilde baglamak icin hangi yaklasim daha dogrudur?",
+      "choices": [
+        { "id": "A", "text": "Her alana ayri ayri @Value yazmak" },
+        { "id": "B", "text": "@ConfigurationProperties + gerekirse @Validated kullanmak" },
+        { "id": "C", "text": "Sadece System.getenv() kullanmak" },
+        { "id": "D", "text": "application.properties yerine sadece XML kullanmak" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Config Server ile secret yonetiminde production'da en iyi pratik hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Parolalari plain text olarak Git'e koymak" },
+        { "id": "B", "text": "Secret'lari sifreleme/secret manager ile yonetmek, plain text'ten kacmak" },
+        { "id": "C", "text": "Tum secret'lari source code icine hardcode etmek" },
+        { "id": "D", "text": "Sadece local profile'da secret tutmak" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Config'lerin Git tabanli merkezi yonetiminin onemli avantaji hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Versionlama, degisiklik takibi ve rollback kolayligi saglamasi" },
+        { "id": "B", "text": "Service discovery ihtiyacini ortadan kaldirmasi" },
+        { "id": "C", "text": "HTTP trafiğini tamamen kaldirmasi" },
+        { "id": "D", "text": "Sadece monolith projelerde calismasi" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-cloud",
+  "id": "spring-cloud-interview-2",
+  "title": "Spring Cloud Interview - 2",
+  "description": "Service discovery, Eureka, Spring Cloud LoadBalancer ve mimari trade-off'lar",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Service discovery'nin statik URL'e gore en temel avantaji nedir?",
+      "choices": [
+        { "id": "A", "text": "Servislerin IP/port degisimine ragmen dinamik olarak bulunabilmesi" },
+        { "id": "B", "text": "Tum servisleri tek process'e birlestirmesi" },
+        { "id": "C", "text": "Database migrationlari otomatik yapmasi" },
+        { "id": "D", "text": "Sadece gateway ile calismasi" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Eureka Server ile Eureka Client arasindaki dogru iliski hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Server kendini Client'a kaydeder" },
+        { "id": "B", "text": "Client registry tutar, Server istek atar" },
+        { "id": "C", "text": "Server registry'dir, Client servisi register edip kesif icin kullanir" },
+        { "id": "D", "text": "Ikisi de sadece config dagitir" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Eureka'da heartbeat (lease renewal) mekanizmasinin amaci nedir?",
+      "choices": [
+        { "id": "A", "text": "Config dosyalarini sync etmek" },
+        { "id": "B", "text": "Instance'in hayatta oldugunu registry'ye periyodik bildirmek" },
+        { "id": "C", "text": "JWT token uretmek" },
+        { "id": "D", "text": "Gateway route cache'ini temizlemek" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Client-side discovery + load balancing akisi icin en dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Client hic registry'ye bakmadan rastgele IP secer" },
+        { "id": "B", "text": "Client registry'den instance listesini alir, load balancer bir instance secer" },
+        { "id": "C", "text": "Sadece API Gateway instance secimi yapabilir" },
+        { "id": "D", "text": "Load balancer sadece server startup aninda calisir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@LoadBalanced ile isaretlenmis RestTemplate'in kritik farki nedir?",
+      "choices": [
+        { "id": "A", "text": "Sadece localhost'a istek atabilir" },
+        { "id": "B", "text": "Service name'i registry uzerinden resolve edip instance secimi yapabilir" },
+        { "id": "C", "text": "Sadece JSON parse eder" },
+        { "id": "D", "text": "Tum HTTP timeout'larini devre disi birakir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Server-side discovery/load balancing icin tipik ornek hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Client icinde Spring Cloud LoadBalancer" },
+        { "id": "B", "text": "API Gateway veya Nginx/Envoy katmaninda instance secimi" },
+        { "id": "C", "text": "Sadece JDBC connection pool" },
+        { "id": "D", "text": "Spring Batch partitioning" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Kubernetes ortaminda internal service discovery icin genel olarak en dogru yaklasim hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Her kosulda Eureka zorunludur" },
+        { "id": "B", "text": "Service + DNS mekanizmasi cogu durumda discovery'yi zaten saglar" },
+        { "id": "C", "text": "Sadece static hosts dosyasi kullanilmalidir" },
+        { "id": "D", "text": "Discovery yerine tum servisler monolith olmali" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring Cloud LoadBalancer'in dogru tanimi hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Server-side reverse proxy'dir" },
+        { "id": "B", "text": "Client-side instance secimi yapan load balancing kutuphanesidir" },
+        { "id": "C", "text": "Sadece config sifreleme aracidir" },
+        { "id": "D", "text": "Sadece logging framework'udur" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Bir instance down oldugunda Eureka tarafinda beklenen davranis nedir?",
+      "choices": [
+        { "id": "A", "text": "Heartbeat kesilirse instance bir sure sonra down/evicted olarak isaretlenir" },
+        { "id": "B", "text": "Down instance sonsuza kadar aktif kalir" },
+        { "id": "C", "text": "Sadece manuel SQL ile silinir" },
+        { "id": "D", "text": "Tum servisler restart edilmeden fark edilmez" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Config Server + Discovery yapisini production'da daha guvenli yapmak icin en kritik adimlardan biri hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Retry/timeout, health check ve high availability stratejileri tanimlamak" },
+        { "id": "B", "text": "Tum resilience ayarlarini kaldirmak" },
+        { "id": "C", "text": "Sadece tek node calistirmak" },
+        { "id": "D", "text": "Loglamayi tamamen kapatmak" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

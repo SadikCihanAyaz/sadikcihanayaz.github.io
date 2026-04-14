@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "spring-cloud",
+  "interviews": [
+    {
+      "id": "spring-cloud-interview-1",
+      "title": "Spring Cloud Interview - 1",
+      "description": "Config Server/Client, profile precedence, refresh ve property yonetimi",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/006_spring_cloud/interviews/001_spring-cloud-interview-1.json"
+    },
+    {
+      "id": "spring-cloud-interview-2",
+      "title": "Spring Cloud Interview - 2",
+      "description": "Service discovery, Eureka, client/server side discovery ve load balancing",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/006_spring_cloud/interviews/002_spring-cloud-interview-2.json"
+    }
+  ]
+}
