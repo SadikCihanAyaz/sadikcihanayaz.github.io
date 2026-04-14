@@ -175,6 +175,12 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=mixed-questions&amp;interview=mixed-questions-2</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=spring-cloud&amp;interview=spring-cloud-interview-1</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
