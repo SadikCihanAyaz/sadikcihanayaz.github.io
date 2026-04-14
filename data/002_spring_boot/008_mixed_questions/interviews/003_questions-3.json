@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "mixed-questions",
+  "id": "mixed-questions-3",
+  "title": "Questions-3",
+  "description": "CI/CD, deployment, cloud, cache, messaging ve observability odakli sozlu mulakat soru-cevaplari",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "CI/CD pipelineda bir Spring Boot servisi icin hangi asamalari beklersin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Pipelinei genelde checkout, dependency restore, compile, unit test, static analysis, packaging, integration test, container build, security scan, artifact publish, deploy ve smoke test adimlariyla dusunurum. Her committe tum agir asamalari ayni sekilde kosmam; hizli feedback veren adimlari one, maliyetli adimlari daha kontrollu asamalara koyarim. Senior seviyede kritik denge hizli geri bildirim ile release guvenligidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q2",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Maven lifecycleda clean, test, package, verify, install, deploy farki nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Mavenin clean, default ve site lifecyclelari vardir. Pratikte package artifact uretir, verify ek dogrulamalari calistirdigi icin CI tarafinda daha guvenli bir asamadir. install artifacti local repositoryye koyar, deploy ise remote repositoryye gonderir. Bu nedenle CIda cogu zaman package yerine verify dusunmek daha saglamdir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q3",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "SNAPSHOT ile release artifact farki nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: SNAPSHOT gelistirme surumudur, ayni versiyon etiketi altinda icerigi degisebilir. Release artifact immutable olmalidir. Productiona giden artifactin degisken olmasi reproducibilityyi bozar. Kritik ilke su: ayni commit her zaman ayni artifacti uretmelidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q4",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Multi-module Maven proje neden kullanilir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Multi-module yapi katmanlari veya bounded contextleri ayirmak, ortak kutuphaneleri paylastirmak ve build yonetimini sadelemek icin kullanilir. Ancak her seyi modullere bolmek dogru degildir. Modul sinirlari gercekten anlamliysa fayda saglar; aksi halde build karmasasi ve bakim yuku olusturur.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q5",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Dockerfile yazarken Spring Boot uygulamasinda nelere dikkat edersin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Kucuk, guvenli ve hizli baslayan image hedeflerim. Multi-stage build, non-root user, layer cache kullanimi, gereksiz tool tasimama, configi imagee gommeme gibi prensipleri uygularim. Uygulamanin stdout/stderr loglamasi, health endpointlerinin dogru olmasi ve graceful shutdown destegi de deployment kalitesi icin kritiktir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q6",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Kuberneteste liveness, readiness ve startup probe farki nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Readiness podun trafige hazir olup olmadigini belirler; hazir degilse trafik almaz. Liveness uygulama kitlendi mi sorusunu kontrol eder; basarisiz olursa restart tetiklenebilir. Startup probe yavas acilan uygulamalar icin baslangic korumasidir; startup probe gecmeden liveness/readiness devreye girmez. Spring Boot Actuator liveness ve readiness health group destegi sunar.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q7",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Spring Boot uygulamasini AWSde deploy edeceksen ECS mi EKS mi dusunursun?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Secim ekip yetkinligi ve operasyon beklentisine baglidir. ECS AWS ekosisteminde operasyonel olarak daha basit olabilir; EKS Kubernetes standardi ve tasinabilirlik saglar ama operasyonel karmasikligi daha yuksektir. Karari teknoloji modasiyla degil ekipte K8s operasyon bilgisi, gercek portabilite ihtiyaci ve release/debug yukune bakarak veririm.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q8",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Secret ve config yonetimini nasil ayirirsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Config ile secreti ayni sey gibi yonetmem. Timeout, endpoint, feature toggle gibi degerler configtir; DB password, API key, signing key gibi degerler secrettir. Secretlar source controla dusmemeli, rotate edilebilir olmali ve environment bazli yonetilmelidir. Ayrica secretlarin loglara sizmasini engellemek zorunludur.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q9",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Blue-green ile canary deployment farki nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Blue-green modelinde iki benzer ortam bulunur ve trafik eski ortamdaki versiyondan yeni ortama bir anda kaydirilir; rollback daha nettir. Canary modelinde yeni versiyona once kucuk yuzde trafik verilir, metrikler izlenir ve kademeli artis yapilir. Canary daha kontrollu risk yonetimi sunar ancak gozlemleme ve trafik yonetimi disiplini ister.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q10",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir releasei guvenli acmak icin feature flag kullanir misin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Kullanirim; risky davranisi deploydan ayirmak, kucuk gruba acmak ve hizli kapatmak icin cok etkilidir. Ancak flagler plansiz birikirse teknik borca donusur. Bu nedenle her flag icin sahiplik, izleme ve kaldirma plani olmasini isterim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q11",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Redis kullanirken cache-aside ile write-through farki nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Cache-aside modelde uygulama once cachee bakar, miss olursa DBden okuyup cachei doldurur; read-heavy yukte pratiktir. Write-through modelde yazma aninda cache de senkron guncellenir; tutarliligi artirabilir ama write maliyetini yukseltebilir. Secimde okuma/yazma profili, stale data toleransi ve tutarlilik beklentisi birlikte degerlendirilmelidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q12",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Cache invalidationi nasil dusunursun?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Cache invalidation en zor kisimdir. Once verinin cachee uygun olup olmadigini degerlendiririm. Sık degisen ve stale olmasi tolere edilmeyen veride agresif cache zarar verebilir. TTL tek basina yeterli degildir; event tabanli invalidation, write-through veya hic cache kullanmama da secenek olabilir. Cachei performans ilaci degil, tutarlilik trade-offu olarak gorurum.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q13",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Kafkada idempotent producer ne ise yarar?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Idempotent producer retry durumlarinda duplicate mesaj yazimini azaltmak icin kullanilir. Kafkada producer tarafinda idempotence ve transaction destegi vardir. Ancak bunun tum business akisinda exactly-once garantisi verdigini varsaymak yanlistir; consumer davranisi, DB yazimi ve dis sistem etkileri ayrica tasarlanmalidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q14",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Transactional outbox pattern nedir, ne problemi cozer?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Outbox pattern, ayni istekte hem DB guncellemesi hem event yayinlama gerektiginde dual-write problemini azaltir. Uygulama once business data ile birlikte outbox kaydini DBye yazar; ayri bir publisher outboxi okuyup brokera yollar. Boylece DB commit oldu ama event gitmedi ya da tersi gibi tutarsizliklar daha kontrollu yonetilir. Event-driven microservice mimarisinde cok degerlidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q15",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "API idempotencyyi nasil tasarlarsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: GET dogal olarak idempotenttir; POST cogu zaman degildir. Odeme, rezervasyon, siparis olusturma gibi operasyonlarda retry duplicate isleme yol acabilir. Bu nedenle idempotency key yaklasimi kullanirim; sunucu istegi benzersiz anahtarla esleyip ayni operasyonu ikinci kez uretmez. Ozellikle external retry riski olan kritik islemlerde bu tasarim zorunludur.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q16",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Rate limitingi nerede uygularsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Tek katmanda degil, ihtiyaca gore birden fazla katmanda uygularim. Dis API korumasi icin gateway veya WAF seviyesinde limit mantiklidir. Uygulama icinde ise kullanici, tenant veya is kurali bazli limitler gerekir. Network-level throttling ile business-level throttlingi ayri dusunurum.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q17",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Dagitik sistemde correlation ID ve distributed tracing neden onemli?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Tek serviste log okumak kolaydir, ancak istek birden fazla servisten gecince iz surmek zorlasir. Correlation ID ve tracing bu noktada kritik gorunurluk saglar. OpenTelemetry ile trace/span yapisi, loglarda trace id/span id kullanimi incident cozum suresini ciddi azaltir. Production debugda en yuksek katkiyi veren pratiklerden biridir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q18",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Logs, metrics ve traces arasindaki fark nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Log olay bazli ayrintili kayittir. Metric zaman icindeki sayisal davranisi gosterir. Trace ise bir istegin servisler arasi yolculugunu baglamla ortaya koyar. Ucunu birlikte kullanmak gerekir; metric sorunu fark ettirir, trace sorunlu hoptu gosterir, log da kok nedeni detaylandirir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q19",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Timeout, retry ve circuit breakeri nasil birlikte dusunursun?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Ilk adim timeout koymaktir; sonsuz bekleme sistemi kilitler. Retry sadece gercekten tekrar denenebilir ve tercihen idempotent islemlerde kullanilmalidir; aksi halde yan etkiyi ikiye katlayabilir. Circuit breaker surekli hata veren downstreami korumak icin devreye girer. Bu uc mekanizma ezbere degil, is semantigine gore ayarlanmalidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q20",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Graceful shutdown ve zero-downtime deployment neden onemli?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap: Kapanan pod yeni trafik almamali, devam eden istekleri makul surede tamamlayip sonra kapanmalidir. Aksi halde yarim istekler, tutarsizlik ve kotu kullanici deneyimi olusur. Spring Boot graceful shutdown destegi verir; Kubernetes readiness ve rolling stratejileriyle birlikte kullanildiginda zero-downtime deploya yaklasilir. Ozellikle uzun sureli ve yuksek trafikli islemlerde kritik bir kalitedir.",
+      "answerCode": ""
+    }
+  ]
+}
