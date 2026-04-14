@@ -61,6 +61,16 @@
       "topicFile": "/data/002_spring_boot/006_spring_cloud/topic/001_topic.json",
       "interviewsFile": "/data/002_spring_boot/006_spring_cloud/interviews/index.json",
       "interviewCount": 2
+    },
+    {
+      "id": "test",
+      "title": "Test",
+      "description": "Spring Boot test stratejileri: unit, integration, web slice, data slice, security ve CI",
+      "order": 7,
+      "folder": "007_test",
+      "topicFile": "/data/002_spring_boot/007_test/topic/001_topic.json",
+      "interviewsFile": "/data/002_spring_boot/007_test/interviews/index.json",
+      "interviewCount": 3
     }
   ]
 }

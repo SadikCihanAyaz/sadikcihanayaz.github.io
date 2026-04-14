@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "test",
+  "id": "test-topic",
+  "title": "Spring Boot Test - Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu konu anlatimi henuz hazir degil. Icerik yakinda eklenecek."
+    }
+  ]
+}

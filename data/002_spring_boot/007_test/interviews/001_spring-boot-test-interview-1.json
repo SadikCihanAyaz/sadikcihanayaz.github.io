@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "test",
+  "id": "spring-boot-test-interview-1",
+  "title": "Spring Boot Test Interview - 1",
+  "description": "Unit, integration, web layer ve service/repository test temelleri",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Unit test, integration test ve end-to-end test arasindaki en dogru ayrim hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Unit test tek davranisi izole eder; integration test bilesenlerin birlikte calismasini dogrular; end-to-end test kullanici akisina uctan uca bakar." },
+        { "id": "B", "text": "Unit test tum sistemi test eder; integration test sadece mock ile calisir; end-to-end test repository testi yapar." },
+        { "id": "C", "text": "Unit ve integration aynidir; end-to-end sadece UI testi demektir." },
+        { "id": "D", "text": "Unit test her zaman Spring context acar; end-to-end hic gercek bagimlilik kullanmaz." }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Unit test tek bir sinifi ya da kucuk bir davranisi izole test eder.\n- Integration test birden fazla bilesenin birlikte dogru calistigini dogrular.\n- End-to-end test sistemi kullanici bakis acisindan uctan uca test eder.\n\nGuclu ekleme:\n\"Spring Boot tarafinda service katmanini cogu zaman unit test ederim, controller veya repository davranislarini ise ihtiyaca gore integration test ile dogrularim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spring Boot uygulamasinda en cok hangi katmanlari test etmek en dogru yaklasimdir?",
+      "choices": [
+        { "id": "A", "text": "Business logic iceren service katmani, API davranisi icin controller, kritik query icin repository ve kritik akislar icin integration test" },
+        { "id": "B", "text": "Sadece controller test etmek yeterlidir" },
+        { "id": "C", "text": "Sadece repository test etmek yeterlidir" },
+        { "id": "D", "text": "Sadece e2e test yazmak yeterlidir" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Business logic iceren service katmani\n- API davranisi icin controller\n- Kritik query'ler icin repository\n- Cok kritik akislar icin entegrasyon testleri\n\nGuclu ekleme:\n\"Her repository methodu icin test yazmam ama custom query, pagination, filtering veya transaction kritikse test ederim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JUnit ile Mockito arasindaki temel fark nedir?",
+      "choices": [
+        { "id": "A", "text": "JUnit mock olusturur, Mockito assertion yapar" },
+        { "id": "B", "text": "JUnit test framework'udur; Mockito mock/stub olusturup bagimliliklari izole etmek icin kullanilir" },
+        { "id": "C", "text": "Ikisi de tamamen ayni amaca hizmet eder" },
+        { "id": "D", "text": "Mockito sadece Spring Boot ile calisir, JUnit sadece Java EE ile calisir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- JUnit test framework'udur\n- Mockito mock olusturmak icin kullanilir\n\nGuclu cevap:\n\"JUnit test yasam dongusunu ve assertion tarafini saglar. Mockito ise dependency'leri izole etmek icin sahte nesneler uretir.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Mock, @InjectMocks ve @MockBean icin en dogru aciklama hangisidir?",
+      "choices": [
+        { "id": "A", "text": "@Mock Mockito mock'u olusturur; @InjectMocks bu mock'lari test edilen sinifa enjekte eder; @MockBean Spring context icindeki gercek bean'i mock bean ile degistirir" },
+        { "id": "B", "text": "@MockBean sadece unit testte, @Mock sadece @WebMvcTest'te kullanilir" },
+        { "id": "C", "text": "Uc anotasyon da tamamen ayni isi yapar" },
+        { "id": "D", "text": "@InjectMocks Spring context'te otomatik bean kaydi yapar" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- @Mock: Mockito mock'u olusturur\n- @InjectMocks: mock'lari ilgili sinifa enjekte eder\n- @MockBean: Spring context icindeki gercek bean'i mock bean ile degistirir\n\nKritik nokta:\n\"@Mock saf unit testte kullanilir. @MockBean ise Spring context ile calisan testlerde, ornegin @WebMvcTest icinde daha uygundur.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@SpringBootTest ne yapar ve ne zaman kullanmak daha dogrudur?",
+      "choices": [
+        { "id": "A", "text": "Tum Spring context'i ayaga kaldirir; gercege yakin entegrasyon testi saglar; ancak daha yavas oldugu icin hedefli kullanilmalidir" },
+        { "id": "B", "text": "Sadece controller bean'lerini yukler" },
+        { "id": "C", "text": "Mockito'nun yerine gecer" },
+        { "id": "D", "text": "Sadece unit test icindir ve en hizli yaklasimdir" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Tum Spring context'i ayaga kaldirir\n- Gercege daha yakin entegrasyon testi saglar\n- Ama daha yavastir\n\nGuclu cevap:\n\"Her testte kullanmam. Cunku agirdir. Daha cok gercek bean wiring, config, security chain veya coklu bilesen entegrasyonunu test etmek istedigimde kullanirim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@WebMvcTest ile @SpringBootTest arasindaki temel fark hangisidir?",
+      "choices": [
+        { "id": "A", "text": "@WebMvcTest tum context'i, @SpringBootTest sadece web katmanini yukler" },
+        { "id": "B", "text": "@WebMvcTest sadece web katmanini yukler; @SpringBootTest tum application context'i yukler" },
+        { "id": "C", "text": "Ikisi de birebir aynidir" },
+        { "id": "D", "text": "@WebMvcTest repository testi icin kullanilir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- @WebMvcTest sadece web katmanini yukler\n- @SpringBootTest tum application context'i yukler\n\nGuclu cevap:\n\"Controller testi icin once @WebMvcTest dusunurum. Cunku daha hizlidir ve scope daha nettir. Tum uygulamayi ayaga kaldirmak gerekmiyorsa @SpringBootTest kullanmam.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Controller testlerini yazarken hangisini dogrulamak en dogru yaklasimdir?",
+      "choices": [
+        { "id": "A", "text": "MockMvc ile status, response body, validation, exception mapping ve authorization davranisini kontrol etmek" },
+        { "id": "B", "text": "Sadece 200 dondugunu kontrol etmek" },
+        { "id": "C", "text": "Sadece log ciktilarina bakmak" },
+        { "id": "D", "text": "Controller testinde hic JSON dogrulama yapmamak" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- MockMvc kullanirim\n- HTTP status, response body, validation, exception mapping kontrol ederim\n\nGuclu cevap:\n\"Controller testinde sadece status 200 bakmam. JSON body, validation hatasi, yanlis input, exception handler ciktisi ve authorization davranisini da kontrol ederim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "MockMvc nedir?",
+      "choices": [
+        { "id": "A", "text": "Gercek HTTP server acmadan controller endpoint'lerini request-response seviyesinde test etmeyi saglar" },
+        { "id": "B", "text": "Sadece repository sorgularini calistirir" },
+        { "id": "C", "text": "Sadece UI test aracidir" },
+        { "id": "D", "text": "JUnit yerine gecen bir framework'tur" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Gercek HTTP server acmadan controller endpoint'lerini test etmeyi saglar\n\nIyi cevap:\n\"MockMvc ile request-response akisimi test edebiliyorum. Status code, header, content type ve JSON path dogrulamalarini rahat yapabiliyorum.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Service katmanini test ederken en dogru strateji hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Bagimliliklari mock'layip business logic'i izole test etmek; gereksiz yere Spring context acmamak" },
+        { "id": "B", "text": "Mutlaka tum context'i acip sadece integration test yazmak" },
+        { "id": "C", "text": "Repository ve external client'i gercek cagirmak" },
+        { "id": "D", "text": "Service testi yazmamak" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Dependency'leri mock'larim\n- Business logic'i izole test ederim\n- Gereksiz yere Spring context acmam\n\nGuclu cevap:\n\"Service testinde repository, external client veya publisher gibi bagimliliklari mock'larim. Esas amacim business rule'un dogru calistigini dogrulamaktir.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Repository katmanini test etmek icin en dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Repository testleri hicbir zaman gerekli degildir" },
+        { "id": "B", "text": "Basit CRUD icin her zaman sart olmayabilir; ancak custom query, join, pagination ve filtering varsa test etmek gerekir" },
+        { "id": "C", "text": "Sadece unit test ile tum query davranisi dogrulanir" },
+        { "id": "D", "text": "Repository testleri sadece production ortaminda yapilir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Basit CRUD icin her zaman sart olmayabilir\n- Ama custom query, join, pagination, filtering varsa test ederim\n\nGuclu cevap:\n\"Ozellikle JPQL, native query, specification, pagination ve sorting iceren repository methodlarini test etmeyi onemli buluyorum.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

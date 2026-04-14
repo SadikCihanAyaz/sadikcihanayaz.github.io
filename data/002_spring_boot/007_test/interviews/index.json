@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "test",
+  "interviews": [
+    {
+      "id": "spring-boot-test-interview-1",
+      "title": "Spring Boot Test Interview - 1",
+      "description": "Unit, integration, web layer ve service/repository test temelleri",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/007_test/interviews/001_spring-boot-test-interview-1.json"
+    },
+    {
+      "id": "spring-boot-test-interview-2",
+      "title": "Spring Boot Test Interview - 2",
+      "description": "DataJpaTest, Testcontainers, mocking stratejileri ve test kalite prensipleri",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/007_test/interviews/002_spring-boot-test-interview-2.json"
+    },
+    {
+      "id": "spring-boot-test-interview-3",
+      "title": "Spring Boot Test Interview - 3",
+      "description": "Spy, validation/security testleri, flaky testler, CI ve coverage yorumu",
+      "order": 3,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/007_test/interviews/003_spring-boot-test-interview-3.json"
+    }
+  ]
+}

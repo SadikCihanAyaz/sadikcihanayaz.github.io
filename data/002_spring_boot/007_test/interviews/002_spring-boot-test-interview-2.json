@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "test",
+  "id": "spring-boot-test-interview-2",
+  "title": "Spring Boot Test Interview - 2",
+  "description": "DataJpaTest, Testcontainers, mocking stratejileri ve test kalite prensipleri",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@DataJpaTest ne ise yarar?",
+      "choices": [
+        { "id": "A", "text": "Tum uygulamayi production modda ayaga kaldirir" },
+        { "id": "B", "text": "JPA/repository odakli hafif bir slice test ortamı saglar" },
+        { "id": "C", "text": "Sadece controller testlerinde kullanilir" },
+        { "id": "D", "text": "Mockito yerine gecer" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- JPA bilesenlerini test etmek icin hafif bir slice test saglar\n- Genelde repository odaklidir\n\nGuclu cevap:\n\"@DataJpaTest, repository testlerinde faydali cunku tum application context'i ayaga kaldirmadan veri erisim katmanini test etmeme izin verir.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "H2 ile test etmek mi yoksa gercek veritabani mi? En dogru ifade hangisidir?",
+      "choices": [
+        { "id": "A", "text": "H2 her zaman gercek veritabani davranisini birebir verir" },
+        { "id": "B", "text": "Sadece gercek DB ile test yapilmali, H2 asla kullanilmaz" },
+        { "id": "C", "text": "H2 hizli olabilir ama DB-ozel davranislar icin Testcontainers ile gercek engine tercih edilmelidir" },
+        { "id": "D", "text": "H2 sadece UI testlerinde kullanilir" }
+      ],
+      "correctChoiceIds": ["C"],
+      "answerBody": "Beklenen cevap mantigi:\n- H2 hizlidir ama gercek DB davranisini birebir vermez\n- Ozellikle PostgreSQL, MySQL, Oracle'a ozgu farklar olabilir\n\nGuclu cevap:\n\"H2 bazi testler icin yeterli olabilir ama veritabanina ozgu davranislar varsa Testcontainers ile gercek DB engine kullanmayi tercih ederim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Testcontainers nedir ve neden kullanilir?",
+      "choices": [
+        { "id": "A", "text": "Sadece unit test hizlandirma aracidir" },
+        { "id": "B", "text": "Test sirasinda gercek bagimliliklari (DB/Kafka/Redis gibi) container icinde ayaga kaldirir" },
+        { "id": "C", "text": "Sadece frontend testleri icin kullanilir" },
+        { "id": "D", "text": "Mock olusturmak icin kullanilir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Test sirasinda gercek bagimliliklari container icinde ayaga kaldirir\n- Ozellikle DB, Kafka, Redis gibi servisler icin kullanislidir\n\nGuclu cevap:\n\"Testcontainers sayesinde test ortamim production'a daha yakin olur. Ozellikle PostgreSQL, Redis veya Kafka kullanan integration testlerde guvenilirlik artar.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Mock ile stub arasindaki fark hangisidir?",
+      "choices": [
+        { "id": "A", "text": "Stub davranis verify eder, mock sadece sabit veri doner" },
+        { "id": "B", "text": "Stub sabit cevap odaklidir; mock hem cevap uretebilir hem de cagrilari verify etmeyi saglar" },
+        { "id": "C", "text": "Ikisi aynidir" },
+        { "id": "D", "text": "Sadece Spring'de gecerli kavramlardir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Stub belirli veri dondurur\n- Mock davranis dogrulamasi icin de kullanilir\n\nIyi cevap:\n\"Stub daha cok sabit cevap uretir. Mock ise hem cevap uretebilir hem de bir metodun cagrilip cagrilmadigini verify etmemi saglar.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "verify() ne zaman kullanilir?",
+      "choices": [
+        { "id": "A", "text": "Bir dependency'nin beklenen sekilde cagrilip cagrilmadigini dogrulamak icin" },
+        { "id": "B", "text": "Sadece assert yerine" },
+        { "id": "C", "text": "Sadece exception fırlatmak icin" },
+        { "id": "D", "text": "Sadece @SpringBootTest ile kullanilir" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Bir dependency'nin beklenen sekilde cagrildigini dogrulamak icin\n\nGuclu cevap:\n\"Ozellikle bir side effect varsa kullanirim. Mesela basarili durumda repository.save() cagrilmis mi, basarisiz durumda hic cagrilmamis mi, bunu verify() ile kontrol ederim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Exception firlatan bir metodu test etmenin dogru yolu hangisidir?",
+      "choices": [
+        { "id": "A", "text": "try/catch yazip hic assertion yapmamak" },
+        { "id": "B", "text": "assertThrows kullanmak ve mumkunse type/mesaj/business error code dogrulamak" },
+        { "id": "C", "text": "Sadece log'a bakmak" },
+        { "id": "D", "text": "Testi ignore etmek" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- assertThrows kullanirim\n\nGuclu cevap:\n\"Sadece exception firladi mi diye bakmam. Mumkunse exception type'ini, mesajini veya business error code'unu da dogrularim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Her seyi mock'lamak dogru mudur?",
+      "choices": [
+        { "id": "A", "text": "Evet, tum testler mutlaka mock uzerinden gitmelidir" },
+        { "id": "B", "text": "Hayir; fazla mock testleri kirilgan ve gerceklikten uzak yapabilir, unit-integration dengesi gerekir" },
+        { "id": "C", "text": "Sadece controller testlerinde yanlistir" },
+        { "id": "D", "text": "Sadece repository testlerinde yanlistir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Hayir\n- Fazla mock kullanimi testleri kirilgan ve gerceklikten uzak yapabilir\n\nGuclu cevap:\n\"Unit testte mock faydalidir ama her seyi mock'lamak wiring, config, query ve transaction hatalarini gizleyebilir. Bu yuzden unit ve integration test dengesini kurmak gerekir.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Test pyramid nedir?",
+      "choices": [
+        { "id": "A", "text": "Cok sayida unit test, daha az integration test, en az sayida e2e test" },
+        { "id": "B", "text": "Sadece e2e test yazmak" },
+        { "id": "C", "text": "Unit test yazmamak" },
+        { "id": "D", "text": "Tum testleri ayni sayida tutmak" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Cok sayida unit test\n- Daha az integration test\n- En az sayida e2e test\n\nGuclu cevap:\n\"Amacim hizli geri bildirim almak oldugu icin cogu testi unit seviyesinde tutarim. Kritik entegrasyon noktalarinda integration test, temel kullanici akislarinda ise sinirli sayida e2e test kullanirim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Transactional testlerde tipik davranis nedir?",
+      "choices": [
+        { "id": "A", "text": "Test boyunca transaction acilabilir ve test sonunda rollback olabilir" },
+        { "id": "B", "text": "@Transactional testte transaction hic kullanilmaz" },
+        { "id": "C", "text": "Her zaman kalici commit olur" },
+        { "id": "D", "text": "Sadece unit testte calisir" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Spring testlerde transaction acabilir\n- Test sonunda rollback olabilir\n\nGuclu cevap:\n\"Bu yaklasim test izolasyonu icin faydalidir ama gercek commit sonrasi davranisi test etmek istiyorsam sadece rollback'e guvenmem. Gerekiyorsa veriyi gercekten persist edip sonra dogrularim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Iyi bir testin temel ozellikleri nelerdir?",
+      "choices": [
+        { "id": "A", "text": "Yavas, karmasik, implementation detayina bagimli" },
+        { "id": "B", "text": "Hizli, okunabilir, deterministic, tek davranisi dogrulayan ve implementation detaya asiri bagimli olmayan" },
+        { "id": "C", "text": "Sadece coverage'i arttiran" },
+        { "id": "D", "text": "Sadece happy-path iceren" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Hizli\n- Okunabilir\n- Deterministic\n- Tek bir davranisi dogrulayan\n- Gereksiz implementation detail'e bagimli olmayan\n\nGuclu cevap:\n\"Iyi test sadece coverage artirmaz, davranisi guvence altina alir. Okunabilir olmali, flaky olmamali ve ic implementation degisince degil, davranis bozulunca fail etmelidir.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}

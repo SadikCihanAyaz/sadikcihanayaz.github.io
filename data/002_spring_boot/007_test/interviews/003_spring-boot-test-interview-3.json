@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "test",
+  "id": "spring-boot-test-interview-3",
+  "title": "Spring Boot Test Interview - 3",
+  "description": "Spy, validation/security testleri, flaky testler, CI ve coverage yorumu",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Mock ile @Spy arasindaki temel fark nedir?",
+      "choices": [
+        { "id": "A", "text": "@Mock gercek nesne uzerinden calisir, @Spy tamamen sahtedir" },
+        { "id": "B", "text": "@Mock tamamen sahte nesne olusturur; @Spy gercek nesnenin ustune sarilarak bazi metodlari override etmeye izin verir" },
+        { "id": "C", "text": "Ikisi de sadece Spring context icinde calisir" },
+        { "id": "D", "text": "@Spy sadece integration test icin vardir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- @Mock tamamen sahte bir nesne olusturur\n- @Spy ise gercek nesnenin ustune sarilir, yani gercek metodlari calistirabilir ama bazilarini override edebilirsin\n\nGuclu cevap:\n\"@Mock kullandigimda nesnenin tum davranisi benim tanimladigima bagli olur. @Spy kullandigimda ise gercek nesne davranisi korunur, sadece istedigim metodlari stub'layabilirim. Bu yuzden @Spy, kismi mock gibi dusunulebilir.\"\n\nEk kritik nokta:\n\"Unit testte genelde once @Mock tercih ederim. Cunku daha ongorulebilir ve izole test saglar.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q2",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Spy ne zaman riskli olabilir?",
+      "choices": [
+        { "id": "A", "text": "Gercek metodlar calistigi icin yan etki olusturabilir; testler kirilgan hale gelebilir" },
+        { "id": "B", "text": "Spy her zaman mock'tan daha guvenlidir" },
+        { "id": "C", "text": "Spy ile hicbir zaman external cagrilar olmaz" },
+        { "id": "D", "text": "Spy sadece compile hatasi uretir" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Gercek metodlar calistigi icin yan etki olusturabilir\n- Testler kirilgan olabilir\n- Istemeden DB, network veya dosya sistemi gibi yere gidebilir\n\nGuclu cevap:\n\"@Spy risklidir cunku gercek davranis calisir. Eger sinifin icindeki metodlar agir islem yapiyorsa, external dependency cagiriyorsa veya state degistiriyorsa test beklenmedik sekilde davranabilir. Bu yuzden @Spy'i dikkatli ve sinirli kullanirim.\"\n\nIyi ekleme:\n\"Ozellikle legacy kodda bazen ise yarar ama temiz tasarimda cogu zaman @Mock ile daha guvenli test yazilabilir.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q3",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Parametrized test ne zaman kullanilir?",
+      "choices": [
+        { "id": "A", "text": "Ayni test mantigini farkli input-output kombinasyonlariyla calistirmak istedigimde" },
+        { "id": "B", "text": "Sadece e2e testlerde" },
+        { "id": "C", "text": "Sadece test sayisini azaltmak icin assertion yazmadan" },
+        { "id": "D", "text": "Sadece Spring context acildiginda" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Ayni test mantigini farkli input-output kombinasyonlariyla calistirmak istedigimde kullanirim\n\nGuclu cevap:\n\"Bir metodun farkli input'lara karsi ayni tur davranisini test edecegim zaman parametrized test kullanirim. Boylece ayni test kodunu tekrar tekrar yazmak yerine tek test icinde farkli senaryolari daha temiz yonetebilirim.\"\n\nOrnek kullanim alanlari:\n- validation kurallari\n- string format kontrolleri\n- edge-case input'lar\n- hesaplama fonksiyonlari\n\nEk iyi ifade:\n\"Bu yaklasim testleri hem daha okunabilir hem de daha kolay genisletilebilir yapar.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q4",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Validation testlerini nerede yazmak daha dogrudur?",
+      "choices": [
+        { "id": "A", "text": "Tum validation testleri sadece repository'de yazilir" },
+        { "id": "B", "text": "Request/bean validation'i controller seviyesinde; business validation'i service seviyesinde test etmek gerekir" },
+        { "id": "C", "text": "Validation hic test edilmez" },
+        { "id": "D", "text": "Sadece e2e testte bakmak yeterlidir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Controller seviyesinde request validation test ederim\n- Gerekirse service seviyesinde business validation da ayrica test ederim\n\nGuclu cevap:\n\"Bean validation gibi request dogrulamalarini cogunlukla controller seviyesinde test ederim. Cunku @Valid, request body binding ve hata donusu genelde web katmaninda gerceklesir. Ama business rule tarzi validation'lari service katmaninda ayrica test ederim.\"\n\nGuclu ayrim:\n- Syntactic validation: controller/request level\n- Business validation: service level\n\nOrnek:\n- bos email gonderilirse 400 donmesi controller testidir\n- kullanici ayni siparisi ikinci kez veremez kurali service testidir",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q5",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Security testlerinde hangi senaryolari kapsamak gerekir?",
+      "choices": [
+        { "id": "A", "text": "Sadece basarili (200) senaryo" },
+        { "id": "B", "text": "Yetkisiz, yanlis rol, dogru rol; 401/403 ve basari davranislari" },
+        { "id": "C", "text": "Sadece repository hatalari" },
+        { "id": "D", "text": "Sadece load testi" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Yetkisiz erisim\n- Yetkili erisim\n- Rol bazli erisim\n- Forbidden / unauthorized senaryolari\n\nGuclu cevap:\n\"Security testlerinde sadece basarili senaryoya bakmam. Once token yoksa ne oluyor, yanlis rol varsa ne oluyor, dogru rol varsa erisebiliyor mu buna bakarim. Ozellikle 401 ve 403 davranislarini test etmek onemli.\"\n\nTest edilecek temel senaryolar:\n- authentication yok -> 401\n- authentication var ama yetki yok -> 403\n- dogru kullanici / dogru rol -> 200 veya beklenen basari sonucu\n\nIyi ekleme:\n\"Controller veya web katmani testlerinde security chain'i dahil ederek test etmeyi faydali buluyorum.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q6",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "JWT'li endpoint nasil test edilir?",
+      "choices": [
+        { "id": "A", "text": "Her testte mutlaka gercek JWT uretmek zorunludur" },
+        { "id": "B", "text": "Test seviyesine gore mock auth context veya gercek token ile integration testi secilir" },
+        { "id": "C", "text": "JWT endpointler test edilmez" },
+        { "id": "D", "text": "Sadece unit test yeterlidir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Mock kullanici context'i ile\n- Security test destegi ile\n- Gerekirse gercek JWT uretip dogrulayarak\n\nGuclu cevap:\n\"JWT'li endpoint testinde yaklasim test seviyesine gore degisir. Sadece authorization davranisini test edeceksem cogu zaman security test destegiyle mock authentication kullanirim. Ama token parsing, signature veya claim kontrolunu de test etmek istiyorsam daha gercekci integration test yazarim.\"\n\nPratik yaklasim:\n- web layer testinde mock user/context\n- full security integration testte gercek token uretme\n\nEk netlik:\n\"Her testte gercek JWT uretmeye gerek duymam. Cunku bu bazen testin amacini dagitir. Once neyi dogrulamak istedigime karar veririm.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q7",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "@Sql anotasyonu hangi durumda kullanilir?",
+      "choices": [
+        { "id": "A", "text": "Sadece log seviyesini degistirmek icin" },
+        { "id": "B", "text": "Integration testlerde test oncesi/sonrasi veri hazirlama ve cleanup icin" },
+        { "id": "C", "text": "Sadece unit testlerde mock uretilirken" },
+        { "id": "D", "text": "Security chain'i kapatmak icin" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Evet, test oncesi veya sonrasi veritabanina veri hazirlamak / temizlemek icin kullanilabilir\n\nGuclu cevap:\n\"Evet, ozellikle integration testlerde test datasini kontrollu bicimde hazirlamak icin @Sql kullanilabilir. Testten once insert script calistirmak, testten sonra cleanup yapmak icin faydalidir.\"\n\nNe zaman mantikli olur:\n- repository integration test\n- controller + DB integration test\n- belirli veri senaryolarini garanti altina almak\n\nEk yorum:\n\"Ancak cok fazla SQL script'e bagimli test yapisi bazen bakim maliyeti dogurabilir. Bu yuzden bazi durumlarda test data builder veya fixture yaklasimini da tercih ederim.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q8",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Flaky test nedir?",
+      "choices": [
+        { "id": "A", "text": "Kod degismeden bazen gecip bazen fail olan, guvenilmez test" },
+        { "id": "B", "text": "Sadece yavas calisan test" },
+        { "id": "C", "text": "Sadece e2e testlerin diger adi" },
+        { "id": "D", "text": "Coverage'i dusuk test" }
+      ],
+      "correctChoiceIds": ["A"],
+      "answerBody": "Beklenen cevap mantigi:\n- Kod degismeden bazen gecen bazen kalan testtir\n- Guvenilmezdir\n\nGuclu cevap:\n\"Flaky test, uygulama kodu degismedigi halde bazen gecip bazen fail olan testtir. En tehlikeli test turlerinden biridir cunku ekibin test sonuclarina olan guvenini bozar.\"\n\nYaygin nedenler:\n- timing sorunu\n- race condition\n- gercek zaman bagimliligi\n- paylasilan test verisi\n- dis servise bagimlilik\n- siraya bagli testler\n\nGuclu ekleme:\n\"Flaky testleri normallestirmem. Cunku insanlar bir sure sonra kirmizi pipeline'i ciddiye almamaya baslar.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q9",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "CI pipeline'da testleri nasil ayirmak daha dogrudur?",
+      "choices": [
+        { "id": "A", "text": "Tum testleri tek adimda calistirip sonucu beklemek" },
+        { "id": "B", "text": "Unit testleri erken ve hizli asamada, integration testleri ayri asamada, e2e/smoke testleri daha gec ve sinirli kosmak" },
+        { "id": "C", "text": "Sadece e2e testi calistirmak" },
+        { "id": "D", "text": "Sadece compile asamasi yeterlidir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- hizli unit testler once\n- daha agir integration testler ayri asamada\n- gerekirse e2e testler en sonda\n\nGuclu cevap:\n\"CI pipeline'da testleri hiz ve maliyet acisindan ayiririm. Unit testleri en erken asamada kostururum cunku hizli geri bildirim verir. Integration testleri ayri asamada veya ayri profile ile calistiririm. E2E testleri ise genelde daha sinirli ve daha gec asamada calistiririm.\"\n\nMantikli ayrim ornegi:\n1. compile + static checks\n2. unit tests\n3. integration tests\n4. package/build\n5. e2e/smoke tests\n6. deploy sonrasi smoke\n\nEk guclu nokta:\n\"Her committe tum agir testleri calistirmak yerine, bazilarini PR bazli veya main branch bazli calistirmak da mantikli olabilir.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q10",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Code coverage yuksek olsa bile test kalitesi dusuk olabilir mi?",
+      "choices": [
+        { "id": "A", "text": "Hayir, coverage yuksekse kalite her zaman yuksektir" },
+        { "id": "B", "text": "Evet; coverage sadece kodun calistigini gosterir, davranisin dogru dogrulandigini garanti etmez" },
+        { "id": "C", "text": "Sadece integration testlerde olabilir" },
+        { "id": "D", "text": "Sadece unit testlerde olabilir" }
+      ],
+      "correctChoiceIds": ["B"],
+      "answerBody": "Beklenen cevap mantigi:\n- Evet, kesinlikle olabilir\n- Coverage sadece kodun calistigini gosterir, dogru dogrulandigini degil\n\nGuclu cevap:\n\"Evet, yuksek coverage tek basina kaliteli test anlamina gelmez. Kod satirlarinin calistirilmasi ile davranisin gercekten dogrulanmasi farkli seylerdir. Assertion zayifsa veya test sadece methodu cagirip geciyorsa coverage yuksek olsa bile guven dusuktur.\"\n\nKritik ornekler:\n- assertion yok\n- anlamsiz assertion var\n- sadece happy path test edilmis\n- edge case yok\n- yanlis davranis fail olmuyor\n\nCok iyi ekleme:\n\"Coverage'i faydali bir metrik olarak gorurum ama hedef olarak gormem. Esas odak kritik business behavior'in guvence altina alinmasidir.\"",
+      "optionExplanations": [],
+      "answerCode": ""
+    }
+  ]
+}
