@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "mixed-questions",
+  "id": "mixed-questions-5",
+  "title": "Questions-5",
+  "description": "HR screening, Java core, JPA ve testing odakli sozlu mulakat soru-cevaplari",
+  "questions": [
+    {
+      "id": "i5-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bize kendinden ve son projenden bahset.",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Kendimi backend odakli bir Java developer olarak konumluyorum. Son yillarda ozellikle Spring Boot ile API gelistirme, veri erisimi, production issue cozme ve olceklenebilir servisler uzerinde calistim. Son projemde rolum sadece feature gelistirmek degildi; teknik karar, code review, performans ve release tarafina da katki verdim. Projeyi anlatirken uc seyi net soylerim: sistem ne yapiyordu, benim sorumlulugum neydi, en zor teknik problem neydi. Dikkat: 2-3 dakika, teknoloji listesi okur gibi degil etki odakli anlatim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q2",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Neden mevcut isinden ayrilmak istiyorsun?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Bunu negatif bir durum degil yon degisikligi olarak anlatirim. Daha fazla katki verebilecegim, teknik derinligin ve sahipligin yuksek oldugu bir rol istiyorum. Ozellikle Java Spring backend, production sorumlulugu ve sistem tasarimi tarafinda daha aktif olabilecegim ekipleri hedefliyorum. Onceki sirketi kotulemek yerine yeni rolde ne aradigimi net anlatmayi tercih ederim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q3",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Salary expectation nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Sadece rakama degil rol kapsami, teknik beklenti, sorumluluk seviyesi ve toplam pakete gore degerlendiririm. Piyasayi takip ediyorum ama benim icin onemli olan senior beklentisiyle uyumlu bir teklif. Uygun araligi paylasabilirim ancak once rol kapsamini net anlamayi tercih ederim. Dikkat: ne cok kacamak ne de ilk anda dusukten baglayan cevap.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q4",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Client-facing ortamda calistin mi?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Evet, client-facing ortamlarda calistim ve bunun sadece toplantiya girmek olmadigini dusunuyorum. Teknik konuyu is diline cevirmek, trade-off anlatmak ve beklenti yonetimi yapmak kritik. Bu tur ortamlarda teknik riskleri erken gorunur kilmaya ve cozum seceneklerini anlasilir sekilde sunmaya dikkat ederim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q5",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Ne tur projelerde calistin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Genelde backend agirlikli projelerde calistim ama saf CRUD seviyesinde degil; authentication, integration, messaging, database tasarimi, performans ve release sureclerinin oldugu projelerde yer aldim. Projeyi anlatirken domain adindan cok teknik karakterini anlatirim: monolith mi microservice mi, trafik profili nasil, entegrasyon zorlugu ve production zorluklari neydi.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q6",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "ArrayList ile LinkedList farki nedir, hangisini ne zaman secersin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Cogu gercek senaryoda varsayilan tercihim ArrayList olur cunku bellekte daha kompakt davranir ve random access hizlidir. LinkedList teoride bazi ekleme cikarma durumlarinda avantajli gorunse de pratikte cache locality ve traversal maliyeti nedeniyle cogu kez zayif kalir. Sirf ortadan silme var diye refleks olarak LinkedList secmem.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q7",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "equals() ve hashCode() neden birlikte dusunulmeli?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Hash tabanli koleksiyonlarda bu ikisi kontrat olarak birlikte calisir. Iki nesne equals acisindan esitse hashCode da ayni olmalidir. Aksi durumda HashMap ve HashSet gibi yapilarda beklenmedik davranislar gorulur. Ozellikle entity, value object ve DTO tasariminda bu kontrati dikkatle uygularim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q8",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "volatile ne ise yarar?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: volatile degiskenin threadler arasi gorunurlugunu iyilestirir, bir threadin yazdigi degerin diger thread tarafindan guncel gorulmesini saglar. Ancak her concurrency problemini cozmez. Ozellikle count plus plus gibi atomik olmayan islemlerde tek basina yeterli degildir. Gorunurluk saglar ama tam thread safety garantisi vermez.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q9",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "synchronized ile Lock farki nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: synchronized daha basit ve dil seviyesinde bir mekanizmadir. Lock ise tryLock, timeout, interruptible lock gibi daha esnek kontrol imkanlari sunar. Basit kritik bolgelerde synchronized yeterli olabilir; daha ince kontrol gereken durumlarda Lock tercih ederim. Asil onemli nokta lock kapsamini kucuk tutmaktir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q10",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Thread-safe kod nasil yazarsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Ilk refleksim her yere lock eklemek olmaz. Once shared mutable statei azaltirim. Immutable yapi, stateless service, dogru koleksiyon secimi ve iyi sinirlandirilmis kritik bolgeler thread safety temeli olur. Lock gerekiyorsa kapsamini kucuk tutarim cunku hedef sadece dogruluk degil contention ve performansi da yonetmektir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q11",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Immutability neden onemli?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Immutable nesneler yan etkiyi azaltir, kodu anlamayi kolaylastirir ve concurrency acisindan daha guvenlidir. Ozellikle value object, config nesnesi, DTO ve event payload gibi yerlerde cok faydalidir. Immutabilityyi akademik temizlik degil, bug azaltan pratik bir arac olarak gorurum.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q12",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Entity stateleri nelerdir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: JPA tarafinda temel stateler transient, managed, detached ve removed olarak dusunulur. Transient henuz persistence contexte alinmamis nesnedir. Managed context tarafindan izlenir. Detached bir zamanlar yonetilmis ama artik izlenmeyen nesnedir. Removed silinmek uzere isaretlidir. Bu stateleri bilmek update davranisi, dirty checking ve merge mantigini anlamak icin kritiktir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q13",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Persistence context nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Persistence context JPAnin birinci seviye yonetim alani gibidir. Managed entityler burada tutulur ve degisiklikler izlenir. Ayni transaction icinde ayni entity tekrar istendiginde genellikle ayni managed instance kullanilir; bu hem tutarlilik hem dirty checking acisindan onemlidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q14",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Dirty checking nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Managed entity uzerinde yapilan degisikliklerin JPA tarafindan izlenip transaction sonunda SQL updatee donusturulmesidir. Bu yaklasim manuel save ihtiyacini azaltir. Ancak istemeden fazla veri degistirme veya buyuk object graphlerde maliyet uretme riski vardir. Bu nedenle persistence context siniri bilinmelidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q15",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "flush, clear, detach ne ise yarar?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: flush persistence contextteki degisiklikleri DBye senkronize eder ama transactioni bitirmez. clear contexti bosaltir ve tum managed entityleri detached yapar. detach tek bir entityyi context disina cikarir. Bunlari ozellikle buyuk batch islemlerinde, memory kontrolunde ve senkronizasyonu kontrollu yonetmek istedigimde kullanirim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q16",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Join tipleri nelerdir, pratikte ne zaman kritik olur?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Temel ayrim inner join ve outer joinlerdir. Inner join eslesen kayitlari doner, left join soldaki satirlari korur, right join daha az tercih edilir. Pratikte kritik olan join adini bilmek degil cardinality, row multiplication ve index etkisini anlamaktir. Yanlis join hem yanlis sonuc hem kotu performans uretir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q17",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "SQL query optimize etme mantigini nasil dusunursun?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Optimizasyona SQL yazim guzelliginden degil execution plandan baslarim. Once bottleneck ne bakarim: full table scan, yanlis join, gereksiz secilen alanlar, index eksikligi veya cardinality tahmini sorunu var mi. Yaklasimim tahmine degil olcume dayanir. Query optimizasyonu cogu zaman sadece index eklemek degildir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q18",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Mockitoyu ne zaman kullanirsin?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Dependencyyi izole edip business behavioru tek basina test etmek istedigimde Mockito kullanirim. Ozellikle service unit testlerinde repository, external client veya publisher gibi bagimliliklari mocklamak mantiklidir. Ama her seyi mocklamam; wiring, config, transaction ve query problemleri icin integration test gerekir. Mockito amac degil izolasyon aracidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q19",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Mock ile stub farki nedir?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: Stub daha cok kontrollu veri dondurmek icin kullanilir. Mock ise davranis dogrulamasi da yapar; metod cagrildi mi, kac kere cagrildi gibi etkilesimleri dogrulayabilirim. Araclar bunlari birlikte sunsa da kavramsal ayrimi bilmek onemlidir: biri veri saglar, digeri etkilesimi denetler.",
+      "answerCode": ""
+    },
+    {
+      "id": "i5-q20",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "@SpringBootTest ne zaman agir kacar?",
+      "starterCode": "",
+      "answerBody": "Guclu cevap iskeleti: @SpringBootTest tum contexti ayaga kaldirdigi icin guclu ama pahali bir aracdir. Her testte kullanilsa test seti yavaslar ve bakim maliyeti artar. Gercek entegrasyon ihtiyaci varsa kullanirim. Sadece controller icin @WebMvcTest, sadece JPA icin @DataJpaTest gibi daha dar scope testler cogu durumda daha verimli olur.",
+      "answerCode": ""
+    }
+  ]
+}

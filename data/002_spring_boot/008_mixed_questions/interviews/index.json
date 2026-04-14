@@ -34,6 +34,14 @@
       "order": 4,
       "questionCount": 20,
       "file": "/data/002_spring_boot/008_mixed_questions/interviews/004_questions-4.json"
+    },
+    {
+      "id": "mixed-questions-5",
+      "title": "Questions-5",
+      "description": "Genel teknik ve sozlu mulakat odakli acik-uclu Spring Boot soru-cevaplari",
+      "order": 5,
+      "questionCount": 20,
+      "file": "/data/002_spring_boot/008_mixed_questions/interviews/005_questions-5.json"
     }
   ]
 }
