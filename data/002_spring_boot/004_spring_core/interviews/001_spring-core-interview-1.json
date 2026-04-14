@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "IoC (Inversion of Control) icin en dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Nesne olusturma ve bagimlilik baglama kontrolunun framework/container tarafina gecmesidir." },
-        { "id": "B", "text": "Tum bagimliliklarin static metotlarla olusturulmasidir." },
-        { "id": "C", "text": "Sadece XML ile konfigurasyon yapma zorunlulugudur." },
-        { "id": "D", "text": "Sadece singleton scope kullanilmasidir." }
+        {
+          "id": "A",
+          "text": "Nesne olusturma ve bagimlilik baglama kontrolunun framework/container tarafina gecmesidir."
+        },
+        {
+          "id": "B",
+          "text": "Tum bagimliliklarin static metotlarla olusturulmasidir."
+        },
+        {
+          "id": "C",
+          "text": "Sadece XML ile konfigurasyon yapma zorunlulugudur."
+        },
+        {
+          "id": "D",
+          "text": "Sadece singleton scope kullanilmasidir."
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,12 +44,26 @@
       "singleChoice": true,
       "question": "Dependency Injection'in new kullanimina gore ana avantaji nedir?",
       "choices": [
-        { "id": "A", "text": "Daha siki baglilik olusturmasi" },
-        { "id": "B", "text": "Test edilebilirligi ve gevsek bagliligi artirmasi" },
-        { "id": "C", "text": "Thread-safe olmasi" },
-        { "id": "D", "text": "JVM memory kullanimini sifirlamasi" }
+        {
+          "id": "A",
+          "text": "Daha siki baglilik olusturmasi"
+        },
+        {
+          "id": "B",
+          "text": "Test edilebilirligi ve gevsek bagliligi artirmasi"
+        },
+        {
+          "id": "C",
+          "text": "Thread-safe olmasi"
+        },
+        {
+          "id": "D",
+          "text": "JVM memory kullanimini sifirlamasi"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "Spring projelerinde neden constructor injection genelde field injection'a tercih edilir?",
       "choices": [
-        { "id": "A", "text": "Zorunlu bagimliliklari acik hale getirip immutable tasarima imkan vermesi" },
-        { "id": "B", "text": "Bean'i daha gec olusturmasi" },
-        { "id": "C", "text": "Sadece prototype scope'ta calismasi" },
-        { "id": "D", "text": "@Autowired'u gereksiz kilmasi" }
+        {
+          "id": "A",
+          "text": "Zorunlu bagimliliklari acik hale getirip immutable tasarima imkan vermesi"
+        },
+        {
+          "id": "B",
+          "text": "Bean'i daha gec olusturmasi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece prototype scope'ta calismasi"
+        },
+        {
+          "id": "D",
+          "text": "@Autowired'u gereksiz kilmasi"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Spring projelerinde **Constructor Injection**'ın tercih edilmesinin temel sebebi, senin de seçeneklerinde belirttiğin gibi **zorunlu bağımlılıkları açık hale getirmesi ve değişmez (immutable) tasarımı desteklemesidir.**\n\nDoğru cevap: **Zorunlu bağımlılıkları açık hale getirip immutable tasarıma imkan vermesi.**\n\nNeden bu seçeneğin diğerlerinden daha kritik olduğunu ve teknik avantajlarını aşağıda detaylandıralım:\n\n---\n\n### Neden Constructor Injection?\n\nField injection (doğrudan `@Autowired` kullanımı) başlangıçta kolay görünse de, uzun vadede projenin sürdürülebilirliğini zorlaştırır. Constructor injection ise şu avantajları sağlar:\n\n* **Değişmezlik (Immutability):** Bağımlılıkları `final` olarak tanımlayabilirsin. Bu, nesne bir kez oluşturulduktan sonra bağımlılıklarının değiştirilemeyeceği anlamına gelir ve daha güvenli (thread-safe) bir yapı sunar.\n* **Test Edilebilirlik:** Bir sınıfı test etmek istediğinde (Unit Test), Spring konteynerini ayağa kaldırmadan, sadece `new` anahtar kelimesiyle bağımlılıkları dışarıdan (mock olarak) kolayca verebilirsin. Field injection'da ise genellikle yansıma (reflection) kullanman gerekir.\n* **Zorunlu Bağımlılıklar (Fail-Safe):** Eğer bir bean'in çalışması için `X` servisine ihtiyacı varsa, bunu constructor'da belirterek o bean'in eksik bağımlılıkla oluşturulmasını engellersin. Uygulama ayağa kalkarken hata alırsın (hızlı hata fark etme).\n* **Dairesel Bağımlılık (Circular Dependency) Tespiti:** Constructor injection kullanırken iki sınıf birbirine bağımlıysa, Spring uygulama başlarken seni uyarır. Field injection'da bu durum çalışma anına (runtime) kadar gizli kalabilir.\n\n---\n\n### Diğer Seçeneklerin Durumu\n\n* **Bean'i daha geç oluşturması:** Yanlış. Aksine, constructor injection nesne yaratılırken (instantiation aşamasında) gerçekleşir.\n* **Sadece prototype scope'ta çalışması:** Yanlış. Her türlü scope (Singleton, Prototype vb.) ile çalışabilir.\n* **@Autowired'u gereksiz kılması:** Bu bir yan etkidir, asıl tercih sebebi değildir. Spring 4.3'ten sonra tek constructor varsa `@Autowired` yazma zorunluluğu kalkmıştır; ancak bu sadece sözdizimsel bir sadeleşmedir.\n\n---\n\n**Özetle:** Bir nesne oluşturulurken tüm \"olmazsa olmaz\" parçalarını elinde tutmak, kodun hem daha okunabilir hem de daha sağlam olmasını sağlar.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,13 +106,27 @@
       "singleChoice": true,
       "question": "Spring'te varsayilan bean scope hangisidir?",
       "choices": [
-        { "id": "A", "text": "prototype" },
-        { "id": "B", "text": "request" },
-        { "id": "C", "text": "singleton" },
-        { "id": "D", "text": "session" }
+        {
+          "id": "A",
+          "text": "prototype"
+        },
+        {
+          "id": "B",
+          "text": "request"
+        },
+        {
+          "id": "C",
+          "text": "singleton"
+        },
+        {
+          "id": "D",
+          "text": "session"
+        }
       ],
-      "correctChoiceIds": ["C"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "C"
+      ],
+      "answerBody": "Spring projelerinde varsayılan bean scope **singleton**'dır.\n\nBu, Spring konteyneri (ApplicationContext) tarafından bir bean tanımından yalnızca **bir tane** nesne oluşturulacağı ve bu nesnenin tüm uygulama boyunca (veya konteyner ömrü boyunca) paylaşılacağı anlamına gelir.\n\n---\n\n## Spring Bean Scope Nedir?\n\nSpring'te **Scope**, bir bean'in yaşam döngüsünü ve hangi durumlarda yeni bir örneğinin (instance) oluşturulacağını belirleyen bir kavramdır. Nesnenin ne kadar süre \"yaşayacağını\" ve kimler tarafından paylaşılacağını kontrol eder.\n\n\n\n### 1. Singleton Scope (Varsayılan)\nUygulama genelinde o sınıftan sadece bir tane üretilir. Her `@Autowired` çağrısında aynı nesne referansı döner.\n\n```java\n@Component\n@Scope(\"singleton\") // Yazılmasa da varsayılan budur.\npublic class VeriTabaniBaglantisi {\n    // Uygulama boyunca tek bir bağlantı havuzu kullanılır.\n}\n```\n\n### 2. Prototype Scope\nBean her istendiğinde (her `@Autowired` veya `getBean()` yapıldığında) yeni bir nesne oluşturulur.\n\n```java\n@Component\n@Scope(\"prototype\")\npublic class RaporOlusturucu {\n    // Her kullanıcı rapor istediğinde yeni, temiz bir nesne üretilir.\n}\n```\n\n### 3. Web Scopes (Sadece Web Uygulamalarında)\n* **Request:** Her HTTP isteği için yeni bir instance.\n* **Session:** Her kullanıcı oturumu (session) için bir instance.\n* **Application:** ServletContext ömrü boyunca bir instance.\n\n---\n\n## Kod Üzerinde Farkın Gösterimi\n\nAşağıdaki örnekte, Singleton ve Prototype arasındaki farkı state (durum) değişikliği üzerinden görebilirsin:\n\n### Bean Tanımları\n```java\n@Component\n@Scope(\"singleton\")\nclass SingletonBean {\n    public int sayac = 0;\n}\n\n@Component\n@Scope(\"prototype\")\nclass PrototypeBean {\n    public int sayac = 0;\n}\n```\n\n### Kullanım ve Test\n```java\n@Service\npublic class TestService {\n    @Autowired private SingletonBean s1;\n    @Autowired private SingletonBean s2;\n\n    @Autowired private PrototypeBean p1;\n    @Autowired private PrototypeBean p2;\n\n    public void karsilastir() {\n        // SINGLETON TEST\n        s1.sayac = 10;\n        System.out.println(s2.sayac); // Çıktı: 10 (Çünkü s1 ve s2 aynı nesne!)\n\n        // PROTOTYPE TEST\n        p1.sayac = 20;\n        System.out.println(p2.sayac); // Çıktı: 0 (Çünkü p2 tamamen yeni bir nesne!)\n    }\n}\n```\n\n### Önemli Notlar\n* **Stateless (Durumsuz) Beanler:** Genellikle Singleton yapılır (Service, Repository sınıfları).\n* **Stateful (Durum Tutan) Beanler:** Eğer bir nesne içinde kullanıcıya özel veri tutuyorsa Prototype veya Session scope tercih edilmelidir.\n* **Performans:** Singleton nesneler uygulama başında bir kez üretildiği için bellek ve performans açısından avantajlıdır.\n\nHangi durumlarda Prototype kullanmanın riskli olabileceği hakkında bir detayı merak ediyor musun? (Örneğin Singleton içine Prototype enjekte etmek gibi)\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -81,13 +137,27 @@
       "singleChoice": true,
       "question": "Ayni tipten birden fazla bean varken injection belirsizligini cozmek icin en dogru arac hangisidir?",
       "choices": [
-        { "id": "A", "text": "@Scope" },
-        { "id": "B", "text": "@Qualifier" },
-        { "id": "C", "text": "@Lazy" },
-        { "id": "D", "text": "@Import" }
+        {
+          "id": "A",
+          "text": "@Scope"
+        },
+        {
+          "id": "B",
+          "text": "@Qualifier"
+        },
+        {
+          "id": "C",
+          "text": "@Lazy"
+        },
+        {
+          "id": "D",
+          "text": "@Import"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Aynı tipten birden fazla bean tanımlandığında Spring hangi bean'i enjekte edeceğini bilemez ve `NoUniqueBeanDefinitionException` hatası fırlatır. Bu belirsizliği gidermek için kullanılan en doğru araç **@Qualifier** anotasyonudur.\n\nDoğru cevap: **@Qualifier**\n\n---\n\n### @Qualifier Nasıl Çalışır?\n\n`@Qualifier`, aynı arayüzü (interface) implemente eden veya aynı sınıftan türeyen birden fazla bean arasından \"isim\" belirterek seçim yapmanı sağlar. Genellikle `@Autowired` ile birlikte kullanılır.\n\n### Örnek Senaryo: Bildirim Sistemi\n\nDiyelim ki bir `BildirimServisi` arayüzümüz var ve hem SMS hem de E-posta için iki farklı implementasyon oluşturduk.\n\n#### 1. Bean Tanımları\n```java\npublic interface BildirimServisi {\n    void gonder(String mesaj);\n}\n\n@Component(\"smsServis\") // Bean ismi belirtiyoruz\npublic class SmsServisi implements BildirimServisi {\n    @Override\n    public void gonder(String mesaj) {\n        System.out.println(\"SMS gönderildi: \" + mesaj);\n    }\n}\n\n@Component(\"epostaServis\")\npublic class EpostaServisi implements BildirimServisi {\n    @Override\n    public void gonder(String mesaj) {\n        System.out.println(\"E-posta gönderildi: \" + mesaj);\n    }\n}\n```\n\n#### 2. Belirsizliğin Çözülmesi (@Qualifier Kullanımı)\nSpring'e hangi servisi kullanmak istediğimizi `@Qualifier` ile fısıldıyoruz:\n\n```java\n@Service\npublic class KullaniciBilgilendirme {\n\n    private final BildirimServisi bildirimServisi;\n\n    // Constructor Injection ile @Qualifier kullanımı\n    public KullaniciBilgilendirme(@Qualifier(\"epostaServis\") BildirimServisi bildirimServisi) {\n        this.bildirimServisi = bildirimServisi;\n    }\n\n    public void duyuruYap(String mesaj) {\n        bildirimServisi.gonder(mesaj);\n    }\n}\n```\n\n---\n\n### Alternatif: @Primary Nedir?\nEğer `@Qualifier` ile tek tek isim belirtmek istemiyorsan, bean'lerden birini **@Primary** olarak işaretleyebilirsin. Bu durumda, herhangi bir seçim yapılmadığında Spring \"varsayılan\" olarak o bean'i seçer.\n\n```java\n@Component\n@Primary // Belirsizlik anında ilk tercih edilecek olan budur.\npublic class EpostaServisi implements BildirimServisi { ... }\n```\n\n### Özetle Farklar:\n* **@Qualifier:** \"Spesifik olarak şu isimli bean'i getir\" der. Çok daha kontrollü ve nettir.\n* **@Primary:** \"Bir karışıklık olursa varsayılan olarak beni seç\" der.\n\nPeki, `@Qualifier` kullanırken bean isimlerini elle yazmak yerine kendi özel anotasyonlarını oluşturup daha tip-güvenli (type-safe) bir yapı kurabileceğini biliyor muydun?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,12 +168,26 @@
       "singleChoice": true,
       "question": "@Primary anotasyonunun temel amaci nedir?",
       "choices": [
-        { "id": "A", "text": "Bean'i prototype yapmak" },
-        { "id": "B", "text": "Ayni tipte birden fazla bean oldugunda varsayilan secimi belirlemek" },
-        { "id": "C", "text": "Bean'i profile ozel yapmak" },
-        { "id": "D", "text": "Bean'i transaction disi calistirmak" }
+        {
+          "id": "A",
+          "text": "Bean'i prototype yapmak"
+        },
+        {
+          "id": "B",
+          "text": "Ayni tipte birden fazla bean oldugunda varsayilan secimi belirlemek"
+        },
+        {
+          "id": "C",
+          "text": "Bean'i profile ozel yapmak"
+        },
+        {
+          "id": "D",
+          "text": "Bean'i transaction disi calistirmak"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -115,13 +199,27 @@
       "singleChoice": true,
       "question": "Constructor injection kullanan iki bean birbirine dogrudan bagimliysa tipik sonuc nedir?",
       "choices": [
-        { "id": "A", "text": "Spring otomatik olarak ikisini de static yapar" },
-        { "id": "B", "text": "Circular dependency hatasi olusabilir" },
-        { "id": "C", "text": "Sorunsuz calisir, Spring her zaman cozer" },
-        { "id": "D", "text": "Bean'ler prototype'a donusur" }
+        {
+          "id": "A",
+          "text": "Spring otomatik olarak ikisini de static yapar"
+        },
+        {
+          "id": "B",
+          "text": "Circular dependency hatasi olusabilir"
+        },
+        {
+          "id": "C",
+          "text": "Sorunsuz calisir, Spring her zaman cozer"
+        },
+        {
+          "id": "D",
+          "text": "Bean'ler prototype'a donusur"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Constructor injection kullanan iki bean birbirine doğrudan bağımlıysa (A, B'yi istiyor; B de A'yı istiyor), sonuç **Circular Dependency (Dairesel Bağımlılık)** hatasıdır.\n\nDoğru cevap: **Circular dependency hatasi olusabilir.**\n\nSpring, uygulamayı ayağa kaldırırken bean'leri oluşturmaya çalışır. Ancak iki bean birbirini constructor üzerinden beklediği için, \"yumurta mı tavuktan, tavuk mu yumurtadan\" durumu oluşur ve Spring `BeanCurrentlyInCreationException` hatası vererek durur.\n\n---\n\n### Kod Üzerinde Dairesel Bağımlılık\n\nBu durumu somut bir örnekle görelim:\n\n#### Sınıf A (B'ye bağımlı)\n```java\n@Component\npublic class SınıfA {\n    private final SınıfB sınıfB;\n\n    // Spring, SınıfA'yı oluşturmak için önce SınıfB'yi bulmaya çalışır.\n    public SınıfA(SınıfB sınıfB) {\n        this.sınıfB = sınıfB;\n    }\n}\n```\n\n#### Sınıf B (A'ya bağımlı)\n```java\n@Component\npublic class SınıfB {\n    private final SınıfA sınıfA;\n\n    // Spring, SınıfB'yi oluşturmak için önce SınıfA'yı bulmaya çalışır.\n    public SınıfB(SınıfA sınıfA) {\n        this.sınıfA = sınıfA;\n    }\n}\n```\n\n**Sonuç:** Spring Context yüklenirken şu hata ile karşılaşırız:\n`Requested bean is currently in creation: Is there an unresolvable circular reference?`\n\n---\n\n### Bu Sorun Nasıl Çözülür?\n\nEğer tasarımını değiştiremiyorsan (ki en iyisi tasarımı gözden geçirmektir), Spring'in sunduğu bazı kaçış yolları vardır:\n\n1.  **@Lazy Anotasyonu:** Bağımlılıklardan birini \"tembel\" (lazy) hale getirirsen, Spring o bean'i gerçekten kullanılana kadar oluşturmaz ve döngüyü kırar.\n    ```java\n    public SınıfA(@Lazy SınıfB sınıfB) {\n        this.sınıfB = sınıfB;\n    }\n    ```\n2.  **Setter Injection:** Constructor injection yerine setter injection kullanırsan, Spring önce nesneleri oluşturur, sonra bağımlılıkları enjekte eder. Bu durumda döngü çalışma anında (runtime) çözülür.\n3.  **Mimari Değişiklik:** En sağlıklı yöntemdir. Eğer iki sınıf birbirine bu kadar bağımlıysa, ortak metotları üçüncü bir sınıfa (Service C) taşımak döngüyü ortadan kaldırır.\n\n\n\n**Özetle:** Constructor injection, tasarım hatalarını (dairesel bağımlılık gibi) uygulama başlarken \"yüzüne vurarak\" seni daha temiz bir mimariye zorlar. Bu aslında bir hata değil, bir güvenlik mekanizmasıdır.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -132,13 +230,27 @@
       "singleChoice": true,
       "question": "ApplicationContext ile BeanFactory arasindaki en dogru fark hangisidir?",
       "choices": [
-        { "id": "A", "text": "ApplicationContext, BeanFactory'nin enterprise ozelliklerle genisletilmis halidir" },
-        { "id": "B", "text": "BeanFactory sadece web uygulamalarinda calisir" },
-        { "id": "C", "text": "ApplicationContext injection desteklemez" },
-        { "id": "D", "text": "Ikisi tamamen ayni siniftir" }
+        {
+          "id": "A",
+          "text": "ApplicationContext, BeanFactory'nin enterprise ozelliklerle genisletilmis halidir"
+        },
+        {
+          "id": "B",
+          "text": "BeanFactory sadece web uygulamalarinda calisir"
+        },
+        {
+          "id": "C",
+          "text": "ApplicationContext injection desteklemez"
+        },
+        {
+          "id": "D",
+          "text": "Ikisi tamamen ayni siniftir"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Spring projelerinde bu iki yapı arasındaki ilişkiyi anlamak, framework'ün kalbini anlamak gibidir. Doğru cevap: **ApplicationContext, BeanFactory'nin enterprise ozelliklerle genisletilmis halidir.**\n\nAslında `ApplicationContext`, `BeanFactory` arayüzünü (interface) miras alan bir alt arayüzdür. Yani `BeanFactory`'nin yaptığı her şeyi yapar, üzerine de kurumsal ihtiyaçlar için ek yetenekler koyar.\n\n---\n\n### Temel Farklar Tablosu\n\n| Özellik | BeanFactory | ApplicationContext |\n| :--- | :--- | :--- |\n| **Bean Yükleme** | **Lazy Loading:** Bean'ler sadece çağrıldığında (`getBean`) oluşturulur. | **Eager Loading:** Singleton bean'ler uygulama başlarken hazır edilir. |\n| **AOP Desteği** | Sınırlı. | Tam entegrasyon. |\n| **Uluslararasılaştırma (i18n)** | Desteklemez. | `MessageSource` ile çoklu dil desteği sunar. |\n| **Olay Yayınlama (Event)** | Desteklemez. | `ApplicationEvent` ile olay tabanlı iletişimi yönetir. |\n| **Kullanım Senaryosu** | Çok kısıtlı kaynaklı cihazlar (IoT vb.). | Modern web ve kurumsal uygulamalar. |\n\n---\n\n### Kod Örneği: Hangisi Ne Zaman Oluşturulur?\n\nAşağıdaki basit örnekte, `ApplicationContext` kullanmanın bean oluşturma zamanını nasıl etkilediğini görebilirsin:\n\n```java\n@Component\npublic class MyService {\n    public MyService() {\n        System.out.println(\">> MyService oluşturuldu!\");\n    }\n}\n\n// 1. ApplicationContext Senaryosu\nApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);\n// ÇIKTI: \">> MyService oluşturuldu!\" \n// (Daha getBean demeden uygulama başlarken nesne hazırlandı - Eager Loading)\n\n// 2. BeanFactory Senaryosu (Modern projelerde pek tercih edilmez)\nDefaultListableBeanFactory factory = new DefaultListableBeanFactory();\n// ... tanımlamalar yapıldı varsayalım ...\n// ÇIKTI: (Sessizlik...)\nMyService service = factory.getBean(MyService.class);\n// ÇIKTI: \">> MyService oluşturuldu!\" (Sadece istendiği anda oluşturuldu - Lazy Loading)\n```\n\n### Özetle\n`BeanFactory` temel bir DI (Dependency Injection) konteyneridir ve hafif siklettir. `ApplicationContext` ise onun daha \"akıllı\" ve \"donanımlı\" abisidir. Spring ekibi, özel bir kısıtınız yoksa her zaman **ApplicationContext** kullanmanızı önerir.\n\n\n\nModern Spring Boot projelerinde aslında perde arkasında hangi `ApplicationContext` türünün (örneğin `AnnotationConfigServletWebServerApplicationContext`) çalıştığını merak ediyor musun?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -149,13 +261,27 @@
       "singleChoice": true,
       "question": "Prototype bean'i singleton icine dogrudan inject ettiginizde hangi davranis gorulur?",
       "choices": [
-        { "id": "A", "text": "Her kullanimda yeni prototype olusur" },
-        { "id": "B", "text": "Injection aninda tek bir prototype olusur ve o kullanilir" },
-        { "id": "C", "text": "Spring uygulamayi baslatmaz" },
-        { "id": "D", "text": "Prototype otomatik singleton'a donusur" }
+        {
+          "id": "A",
+          "text": "Her kullanimda yeni prototype olusur"
+        },
+        {
+          "id": "B",
+          "text": "Injection aninda tek bir prototype olusur ve o kullanilir"
+        },
+        {
+          "id": "C",
+          "text": "Spring uygulamayi baslatmaz"
+        },
+        {
+          "id": "D",
+          "text": "Prototype otomatik singleton'a donusur"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Bu senaryo, Spring mülakatlarında en çok sorulan \"trick\" (yanıltıcı) sorulardan biridir. Doğru cevap: **Injection anında tek bir prototype olusur ve o kullanilir.**\n\nPek çok kişi \"Prototype her seferinde yeni oluşur\" diye düşünse de, Singleton bir bean sadece **bir kez** oluşturulduğu için, içine enjekte edilen Prototype bean de sadece o an (bir kereye mahsus) enjekte edilir. Sonrasında Singleton bean her çağrıldığında, içindeki o \"eski\" Prototype bean'i kullanmaya devam eder.\n\n---\n\n### Kod Üzerinde Gösterim\n\nBu duruma **\"Scoped Bean Injection Problem\"** denir.\n\n#### 1. Bean Tanımları\n```java\n@Component\n@Scope(\"prototype\")\npublic class PrototypeBean {\n    public PrototypeBean() {\n        System.out.println(\">> Yeni PrototypeBean oluşturuldu!\");\n    }\n}\n\n@Component\n@Scope(\"singleton\")\npublic class SingletonBean {\n    @Autowired\n    private PrototypeBean prototypeBean; // Sadece Singleton oluşturulurken bir kez enjekte edilir.\n\n    public PrototypeBean getPrototypeBean() {\n        return prototypeBean;\n    }\n}\n```\n\n#### 2. Test Senaryosu\n```java\n@Service\npublic class TestService {\n    @Autowired private SingletonBean singleton;\n\n    public void test() {\n        PrototypeBean p1 = singleton.getPrototypeBean();\n        PrototypeBean p2 = singleton.getPrototypeBean();\n\n        System.out.println(p1 == p2); // ÇIKTI: true\n    }\n}\n```\n**Analiz:** Normalde `p1 == p2` ifadesinin `false` dönmesini bekleriz (çünkü prototype), ancak Singleton içindeki referans hiç değişmediği için ikisi de aynı nesnedir.\n\n---\n\n### Bu Sorun Nasıl Çözülür?\n\nEğer Singleton içinde her seferinde gerçekten **yeni** bir Prototype nesnesi istiyorsanız şu yöntemleri kullanabilirsiniz:\n\n#### Yöntem A: @Lookup Anotasyonu\nSpring'e bu metodu her çağırdığında konteynerden yeni bir bean getirmesini söyler:\n```java\n@Component\npublic class SingletonBean {\n    @Lookup\n    public PrototypeBean getPrototypeBean() {\n        return null; // Spring bu metodun gövdesini çalışma anında doldurur.\n    }\n}\n```\n\n#### Yöntem B: ObjectProvider (Modern Yaklaşım)\n```java\n@Component\npublic class SingletonBean {\n    @Autowired\n    private ObjectProvider<PrototypeBean> prototypeProvider;\n\n    public void islemYap() {\n        PrototypeBean yeniBean = prototypeProvider.getIfAvailable();\n        // Her getIfAvailable() çağrısında yeni bir prototype oluşur.\n    }\n}\n```\n\n\n\n### Özetle\nBir Singleton bean, \"bağımlılıklarını\" sadece doğarken (instantiation) alır. Eğer bağımlılığı Prototype ise, o Prototype artık o Singleton için \"Singleton-laşmış\" olur. Bu döngüyü kırmak için yukarıdaki gibi **Lookup** veya **ObjectProvider** mekanizmaları şarttır.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "Asagidakilerden hangisi gevsek baglilik (loose coupling) icin en iyi pratiktir?",
       "choices": [
-        { "id": "A", "text": "Somut sinif tiplerini constructor'da zorunlu kilmak" },
-        { "id": "B", "text": "Bagimliliklari interface uzerinden enjekte etmek" },
-        { "id": "C", "text": "Tum bean'leri static yapmak" },
-        { "id": "D", "text": "Field injection'i refleksiyonla zorlamak" }
+        {
+          "id": "A",
+          "text": "Somut sinif tiplerini constructor'da zorunlu kilmak"
+        },
+        {
+          "id": "B",
+          "text": "Bagimliliklari interface uzerinden enjekte etmek"
+        },
+        {
+          "id": "C",
+          "text": "Tum bean'leri static yapmak"
+        },
+        {
+          "id": "D",
+          "text": "Field injection'i refleksiyonla zorlamak"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""

@@ -13,13 +13,27 @@
       "singleChoice": true,
       "question": "@Configuration anotasyonunun @Component'e gore kritik farki nedir?",
       "choices": [
-        { "id": "A", "text": "@Configuration sinifi CGLIB proxy ile islenerek @Bean singleton semantigi korunabilir" },
-        { "id": "B", "text": "@Configuration sadece testte calisir" },
-        { "id": "C", "text": "@Configuration injection'i kapatir" },
-        { "id": "D", "text": "@Configuration ile @Bean birlikte kullanilamaz" }
+        {
+          "id": "A",
+          "text": "@Configuration sinifi CGLIB proxy ile islenerek @Bean singleton semantigi korunabilir"
+        },
+        {
+          "id": "B",
+          "text": "@Configuration sadece testte calisir"
+        },
+        {
+          "id": "C",
+          "text": "@Configuration injection'i kapatir"
+        },
+        {
+          "id": "D",
+          "text": "@Configuration ile @Bean birlikte kullanilamaz"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Bu soru, Spring'in iç çalışma mekanizmasına dair en ince ve kritik noktalardan biridir. Doğru cevap: **@Configuration sinifi CGLIB proxy ile islenerek @Bean singleton semantigi korunabilir.**\n\nBirçok geliştirici `@Configuration` ile `@Component` arasındaki farkı sadece \"anlamsal\" sanır, ancak arka planda çok önemli bir **Proxy (Vekil Sunucu)** farkı vardır.\n\n---\n\n### Temel Fark: \"Full\" Mod vs \"Lite\" Mod\n\n* **@Configuration (Full Mode):** Spring bu sınıfı **CGLIB** kullanarak bir proxy nesnesine dönüştürür. Eğer bu sınıf içindeki bir `@Bean` metodunu başka bir `@Bean` metodu içinden çağırırsan, Spring araya girer ve \"Dur, ben bu nesneyi zaten oluşturmuştum, sana eskisini vereyim\" der. Böylece **Singleton** prensibi korunur.\n* **@Component (Lite Mode):** Spring bu sınıfı proxy ile sarmaz. Bir `@Bean` metodunu diğeri içinden çağırdığında, bu sadece normal bir Java metod çağrısı olur ve her seferinde **yeni bir nesne** oluşturulur. Bu da Singleton yapısını bozar.\n\n---\n\n### Kod Örneği ile Farkın Gösterimi\n\nAşağıdaki senaryoda bir veritabanı bağlantısının (`DataSource`) iki farklı servis tarafından kullanıldığını düşünelim.\n\n#### 1. @Configuration Kullanımı (Doğru Yaklaşım)\n```java\n@Configuration\npublic class AppConfig {\n\n    @Bean\n    public DataSource dataSource() {\n        System.out.println(\"DataSource oluşturuluyor...\");\n        return new MyDataSource();\n    }\n\n    @Bean\n    public ServiceA serviceA() {\n        // dataSource() metodunu çağırıyoruz\n        return new ServiceA(dataSource());\n    }\n\n    @Bean\n    public ServiceB serviceB() {\n        // dataSource() metodunu tekrar çağırıyoruz\n        return new ServiceB(dataSource());\n    }\n}\n```\n**Sonuç:** `DataSource oluşturuluyor...` yazısı konsolda **sadece 1 kez** görünür. Spring, proxy sayesinde ikinci çağrıda mevcut bean'i döndürür.\n\n#### 2. @Component Kullanımı (Riskli Yaklaşım)\nEğer sınıfın başına `@Component` yazarsan:\n**Sonuç:** `DataSource oluşturuluyor...` yazısı konsolda **2 kez** görünür! Bu, uygulamanın farklı yerlerinde iki farklı veritabanı bağlantı havuzu oluşmasına neden olur ki bu genellikle istenmeyen bir durumdur.\n\n---\n\n### Neden CGLIB Proxy?\n\nSpring, `@Configuration` sınıflarını miras alarak çalışma anında (runtime) yeni bir alt sınıf oluşturur. Bu mekanizmaya **CGLIB Proxying** denir.\n\n\n\n### Özetle\n* **@Configuration:** Bean'ler arası bağımlılıklar metod çağrısıyla yönetilecekse (Inter-bean references) **şarttır**.\n* **@Component:** Sadece bağımsız bean tanımları yapılacaksa (Lite mode) kullanılabilir ama Singleton güvenliği sağlamaz.\n\nSpring'in bu proxy davranışını kapatmak istersen `@Configuration(proxyBeanMethods = false)` özelliğini kullanabileceğini biliyor muydun? Bu özellik Spring Boot'un bazı iç sınıflarında performans için kullanılır.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -30,12 +44,26 @@
       "singleChoice": true,
       "question": "@Bean kullanimi hangi senaryoda en uygundur?",
       "choices": [
-        { "id": "A", "text": "Kendi yazmadigin 3rd-party class'i Spring bean yapmak" },
-        { "id": "B", "text": "Sadece enum siniflarini inject etmek" },
-        { "id": "C", "text": "Yalnizca request scope bean olusturmak" },
-        { "id": "D", "text": "Autowired zorunlulugunu kaldirmak" }
+        {
+          "id": "A",
+          "text": "Kendi yazmadigin 3rd-party class'i Spring bean yapmak"
+        },
+        {
+          "id": "B",
+          "text": "Sadece enum siniflarini inject etmek"
+        },
+        {
+          "id": "C",
+          "text": "Yalnizca request scope bean olusturmak"
+        },
+        {
+          "id": "D",
+          "text": "Autowired zorunlulugunu kaldirmak"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "@PostConstruct ne zaman calisir?",
       "choices": [
-        { "id": "A", "text": "Bean yok edilmeden hemen once" },
-        { "id": "B", "text": "Bean olusturulup bagimliliklari inject edildikten sonra" },
-        { "id": "C", "text": "ApplicationContext olusmadan once" },
-        { "id": "D", "text": "Sadece prototype bean'lerde" }
+        {
+          "id": "A",
+          "text": "Bean yok edilmeden hemen once"
+        },
+        {
+          "id": "B",
+          "text": "Bean olusturulup bagimliliklari inject edildikten sonra"
+        },
+        {
+          "id": "C",
+          "text": "ApplicationContext olusmadan once"
+        },
+        {
+          "id": "D",
+          "text": "Sadece prototype bean'lerde"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Spring bean yaşam döngüsünde `@PostConstruct` anotasyonunun çalışma zamanı kritik bir öneme sahiptir.\n\nDoğru cevap: **Bean olusturulup bagimliliklari inject edildikten sonra.**\n\nBir bean'in tam olarak \"hazır\" olduğu an budur. Nesne `new` anahtar kelimesiyle oluşturulmuş (instantiation) ve `@Autowired` ile işaretlenen tüm bağımlılıkları Spring tarafından yerine konmuştur (dependency injection).\n\n---\n\n### @PostConstruct Neden Kullanılır?\n\nConstructor (yapıcı metot) içinde henüz bağımlılıklar enjekte edilmediği için, enjekte edilen nesneleri kullanan bir başlangıç mantığı yürütemezsiniz. `@PostConstruct` ise güvenle bu işlemleri yapmanıza olanak tanır.\n\n### Örnek Kod Üzerinden Gösterim\n\nAşağıdaki örnekte, constructor ile `@PostConstruct` arasındaki farkı net bir şekilde görebilirsin:\n\n```java\n@Component\npublic class RaporServisi {\n\n    @Autowired\n    private VeriTabaniBaglantisi dbBaglantisi; // Bağımlılık\n\n    public RaporServisi() {\n        System.out.println(\"1. Constructor Çalıştı.\");\n        // HATA: dbBaglantisi burada hala null'dır! \n        // Burada dbBaglantisi.sorguAt() dersen NullPointerException alırsın.\n    }\n\n    @PostConstruct\n    public void init() {\n        System.out.println(\"2. PostConstruct Çalıştı.\");\n        // GÜVENLİ: Bağımlılıklar enjekte edildi.\n        if (dbBaglantisi != null) {\n            System.out.println(\"Bağlantı hazır, rapor hazırlığı yapılıyor...\");\n            dbBaglantisi.sorguAt(\"SELECT * FROM raporlar\");\n        }\n    }\n}\n```\n\n### Bean Yaşam Döngüsü Akışı\n\n1.  **Bean Instantiation:** Nesne oluşturulur (Constructor).\n2.  **Dependency Injection:** Bağımlılıklar (`@Autowired`) enjekte edilir.\n3.  **PostConstruct:** `@PostConstruct` metodun tetiklenir (Hazırlık aşaması).\n4.  **Bean Ready:** Bean artık kullanılmaya hazırdır.\n5.  **PreDestroy:** Bean yok edilmeden hemen önce çalışır.\n\n\n\n### Dikkat Edilmesi Gerekenler:\n* `@PostConstruct` metodunun geri dönüş tipi **void** olmalıdır.\n* Metot herhangi bir parametre almamalıdır.\n* Sadece bir kez çalışır.\n* Eğer bean `prototype` scope ise, her yeni instance oluşturulduğunda bu metod tekrar çalışır.\n\nBu yaşam döngüsünü tamamlayan zıt anotasyon olan **@PreDestroy**'un (Bean yok edilmeden önce) ne zaman ve hangi durumda (singleton vs prototype) çalışacağını tahmin edebilir misin?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,13 +106,27 @@
       "singleChoice": true,
       "question": "@PreDestroy ile ilgili dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Singleton bean icin context kapanirken yok etme callback'i olarak calisir" },
-        { "id": "B", "text": "Sadece static metotlarda kullanilir" },
-        { "id": "C", "text": "Bean olusmadan once cagrilir" },
-        { "id": "D", "text": "Her HTTP isteginde cagrilir" }
+        {
+          "id": "A",
+          "text": "Singleton bean icin context kapanirken yok etme callback'i olarak calisir"
+        },
+        {
+          "id": "B",
+          "text": "Sadece static metotlarda kullanilir"
+        },
+        {
+          "id": "C",
+          "text": "Bean olusmadan once cagrilir"
+        },
+        {
+          "id": "D",
+          "text": "Her HTTP isteginde cagrilir"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "`@PreDestroy` anotasyonu ile ilgili doğru ifade: **Singleton bean icin context kapanirken yok etme callback'i olarak calisir.**\n\nSpring, yönettiği bean'lerin yaşam döngüsünü sonlandırırken (örneğin uygulama kapatılırken), temizlik işlemlerini (dosya kapatma, veritabanı bağlantısı sonlandırma vb.) yapabilmeniz için bu metodu tetikler.\n\n---\n\n### Kod Örneği: Kaynakları Güvenli Kapatma\n\nAşağıdaki örnekte, uygulama kapatılırken aktif bir dosya akışının nasıl sonlandırıldığını görebilirsin:\n\n```java\n@Component\npublic class LogYazici {\n\n    private FileOutputStream outputStream;\n\n    @PostConstruct\n    public void baslat() {\n        System.out.println(\">> Log dosyası açılıyor...\");\n        // Dosya açma işlemleri\n    }\n\n    @PreDestroy\n    public void temizle() {\n        System.out.println(\">> Uygulama kapatılıyor. Log dosyası güvenli bir şekilde kapatılıyor...\");\n        try {\n            if (outputStream != null) {\n                outputStream.close();\n            }\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }\n}\n```\n\n---\n\n### Kritik Fark: Singleton vs Prototype\n\n`@PreDestroy` kullanımıyla ilgili Spring dünyasındaki en önemli istisna şudur:\n\n1.  **Singleton Beanler:** Spring konteyneri bu bean'lerin tüm yaşam döngüsünü yönettiği için, uygulama kapanırken `@PreDestroy` metodunu **mutlaka çağırır.**\n2.  **Prototype Beanler:** Spring, prototype bean'i oluşturur, bağımlılıklarını enjekte eder ve istemciye teslim eder. Bundan sonra bean'in takibini bırakır. Bu yüzden **prototype bean'lerde `@PreDestroy` metodları otomatik olarak çağrılmaz.** Temizlik işlemini manuel yapman gerekir.\n\n\n\n### Temel Özellikler:\n* **Zamanlama:** Bean, konteynerden çıkarılmadan hemen önce çalışır.\n* **Metot Yapısı:** Parametre almamalı ve `void` dönmelidir.\n* **Kullanım Amacı:** \"Cleanup\" (temizlik) işlemleridir (belleği boşaltma, ağ bağlantılarını kesme).\n\nUygulama aniden çökerse (Kill -9 gibi) bu metodun çalışmama ihtimali olduğunu, bu yüzden kritik verilerin sadece buraya emanet edilmemesi gerektiğini unutmamak gerekir.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -81,12 +137,26 @@
       "singleChoice": true,
       "question": "@Repository anotasyonunun sagladigi teknik avantaj nedir?",
       "choices": [
-        { "id": "A", "text": "Persistence exception'larini Spring DataAccessException hiyerarsisine cevirme destegi" },
-        { "id": "B", "text": "Tum SQL sorgularini cache'leme" },
-        { "id": "C", "text": "Bean'i otomatik prototype yapma" },
-        { "id": "D", "text": "Transaction'i daima rollback etme" }
+        {
+          "id": "A",
+          "text": "Persistence exception'larini Spring DataAccessException hiyerarsisine cevirme destegi"
+        },
+        {
+          "id": "B",
+          "text": "Tum SQL sorgularini cache'leme"
+        },
+        {
+          "id": "C",
+          "text": "Bean'i otomatik prototype yapma"
+        },
+        {
+          "id": "D",
+          "text": "Transaction'i daima rollback etme"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -98,12 +168,26 @@
       "singleChoice": true,
       "question": "@Service anotasyonunun ana rolu nedir?",
       "choices": [
-        { "id": "A", "text": "MVC view render etmek" },
-        { "id": "B", "text": "Business logic katmanini semantik olarak isaretlemek" },
-        { "id": "C", "text": "Sadece JDBC baglantisi acmak" },
-        { "id": "D", "text": "Bean'i lazy yapmayi zorlamak" }
+        {
+          "id": "A",
+          "text": "MVC view render etmek"
+        },
+        {
+          "id": "B",
+          "text": "Business logic katmanini semantik olarak isaretlemek"
+        },
+        {
+          "id": "C",
+          "text": "Sadece JDBC baglantisi acmak"
+        },
+        {
+          "id": "D",
+          "text": "Bean'i lazy yapmayi zorlamak"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -115,12 +199,26 @@
       "singleChoice": true,
       "question": "@ComponentScan'in varsayilan tarama davranisi icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Sadece java.lang paketini tarar" },
-        { "id": "B", "text": "Main config class'in bulundugu paketten baslayip alt paketleri tarar" },
-        { "id": "C", "text": "Tarama yapmaz, tum bean'ler manuel olmali" },
-        { "id": "D", "text": "Sadece @Bean anotasyonlarini tarar" }
+        {
+          "id": "A",
+          "text": "Sadece java.lang paketini tarar"
+        },
+        {
+          "id": "B",
+          "text": "Main config class'in bulundugu paketten baslayip alt paketleri tarar"
+        },
+        {
+          "id": "C",
+          "text": "Tarama yapmaz, tum bean'ler manuel olmali"
+        },
+        {
+          "id": "D",
+          "text": "Sadece @Bean anotasyonlarini tarar"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -132,12 +230,26 @@
       "singleChoice": true,
       "question": "@Lazy anotasyonu bean olusumunu nasil etkiler?",
       "choices": [
-        { "id": "A", "text": "Bean olusumunu uygulama kapanisina erteler" },
-        { "id": "B", "text": "Bean'i ilk ihtiyac anina kadar erteleyebilir" },
-        { "id": "C", "text": "Bean'i otomatik olarak prototype yapar" },
-        { "id": "D", "text": "Dependency injection'i devre disi birakir" }
+        {
+          "id": "A",
+          "text": "Bean olusumunu uygulama kapanisina erteler"
+        },
+        {
+          "id": "B",
+          "text": "Bean'i ilk ihtiyac anina kadar erteleyebilir"
+        },
+        {
+          "id": "C",
+          "text": "Bean'i otomatik olarak prototype yapar"
+        },
+        {
+          "id": "D",
+          "text": "Dependency injection'i devre disi birakir"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -149,13 +261,27 @@
       "singleChoice": true,
       "question": "Bean lifecycle siralamasinda en dogru akisi veren secenek hangisidir?",
       "choices": [
-        { "id": "A", "text": "@PostConstruct -> Constructor -> DI" },
-        { "id": "B", "text": "Constructor -> DI -> @PostConstruct" },
-        { "id": "C", "text": "DI -> Constructor -> @PreDestroy" },
-        { "id": "D", "text": "@PreDestroy -> Constructor -> DI" }
+        {
+          "id": "A",
+          "text": "@PostConstruct -> Constructor -> DI"
+        },
+        {
+          "id": "B",
+          "text": "Constructor -> DI -> @PostConstruct"
+        },
+        {
+          "id": "C",
+          "text": "DI -> Constructor -> @PreDestroy"
+        },
+        {
+          "id": "D",
+          "text": "@PreDestroy -> Constructor -> DI"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Spring Bean yaşam döngüsünde nesnenin hayata gözlerini açmasından işlevsel hale gelmesine kadar geçen süreçte sıralama sabittir. Doğru cevap: **Constructor -> DI -> @PostConstruct**\n\nBu sıralama, bir nesnenin önce fiziksel olarak bellekte oluşması, ardından ihtiyaç duyduğu araçların (bağımlılıkların) ona verilmesi ve son olarak \"hazırım\" diyerek başlangıç ayarlarını yapması mantığına dayanır.\n\n---\n\n### Bean Yaşam Döngüsü Adımları\n\nSpring bir Bean'i yönetirken şu sırayı takip eder:\n\n1.  **Constructor (Yapılandırıcı):** Java kuralları gereği önce nesne bellekte oluşturulmalıdır. Bu aşamada bağımlılıklar henüz enjekte edilmemiştir.\n2.  **Dependency Injection (DI):** Spring, `@Autowired`, `@Value` veya setter metodlarını kullanarak bean'in ihtiyaç duyduğu bağımlılıkları enjekte eder.\n3.  **@PostConstruct:** Bağımlılıklar yerleştirildikten sonra, bean üzerinde ilk çalışma mantığı (initialization) yürütülür.\n\n\n\n---\n\n### Kod Üzerinde Akışın Kanıtı\n\nAşağıdaki kod parçası çalıştırıldığında konsol çıktısı bize bu hiyerarşiyi kanıtlar:\n\n```java\n@Component\npublic class LifecycleDemo {\n\n    @Autowired\n    private DependencyService dependencyService; // 2. Adım: DI\n\n    // 1. Adım: Constructor\n    public LifecycleDemo() {\n        System.out.println(\"1. Adım: Constructor çağrıldı.\");\n        System.out.println(\"Bağımlılık durumu: \" + (dependencyService == null ? \"NULL\" : \"Dolu\"));\n    }\n\n    // 3. Adım: PostConstruct\n    @PostConstruct\n    public void init() {\n        System.out.println(\"3. Adım: @PostConstruct çağrıldı.\");\n        System.out.println(\"Bağımlılık durumu: \" + (dependencyService == null ? \"NULL\" : \"Dolu\"));\n    }\n}\n```\n\n**Konsol Çıktısı:**\n> 1. Adım: Constructor çağrıldı.  \n> Bağımlılık durumu: **NULL** > 2. Adım: (Spring burada DI işlemini sessizce halleder)  \n> 3. Adım: @PostConstruct çağrıldı.  \n> Bağımlılık durumu: **Dolu**\n\n---\n\n### Neden Bu Sıralama Önemli?\n\n* Eğer veritabanı bağlantısı gibi bir bağımlılığı **Constructor** içinde kullanmaya kalkarsan, nesne henüz \"enjekte edilmediği\" için `NullPointerException` alırsın.\n* Bu yüzden, bağımlılıklara dayalı tüm başlangıç işlemleri her zaman **@PostConstruct** metoduna bırakılmalıdır.\n\nSpring dünyasında bu temel bilgileri öğrendikten sonra, daha ileri seviye bir konu olan **BeanPostProcessor**'ların bu döngünün tam olarak neresine (PostConstruct öncesi mi sonrası mı) müdahale ettiğini merak ediyor musun?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "@Configuration sinifinda bir @Bean metodunu ayni sinif icinden cagirmada singleton korunmasi hangi mekanizma ile saglanir?",
       "choices": [
-        { "id": "A", "text": "JDK dynamic proxy" },
-        { "id": "B", "text": "CGLIB tabanli configuration class proxy'si" },
-        { "id": "C", "text": "ClassLoader izolasyonu" },
-        { "id": "D", "text": "ReflectionFactory" }
+        {
+          "id": "A",
+          "text": "JDK dynamic proxy"
+        },
+        {
+          "id": "B",
+          "text": "CGLIB tabanli configuration class proxy'si"
+        },
+        {
+          "id": "C",
+          "text": "ClassLoader izolasyonu"
+        },
+        {
+          "id": "D",
+          "text": "ReflectionFactory"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
