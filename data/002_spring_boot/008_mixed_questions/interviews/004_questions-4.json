@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "mixed-questions",
+  "id": "mixed-questions-4",
+  "title": "Questions-4",
+  "description": "Java 21, build tooling, cloud deployment, security ve messaging odakli sozlu mulakat soru-cevaplari",
+  "questions": [
+    {
+      "id": "i4-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Java 17 ya da 21e gecmenin teknik olarak ne faydasi var?",
+      "starterCode": "",
+      "answerBody": "Sadece LTS oldugu icin degil; yeni Java surumleri dil ve runtime tarafinda daha guclu bir taban verir. Java 21 tarafinda virtual threads gibi yuksek eszamanlilik senaryolari icin onemli yetenekler gelir. Ayrica framework ve tool destegi yeni LTS etrafinda guclenir. Upgrade karari feature listesi kadar runtime uyumlulugu, kutuphane destegi ve operasyonel risk ile birlikte degerlendirilmelidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q2",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Virtual thread ile platform thread farki nedir, ne zaman kullanirsin?",
+      "starterCode": "",
+      "answerBody": "Platform thread OS threadine daha yakin ve daha agir bir modeldir; virtual thread ise cok daha hafiftir ve yuksek sayida concurrent isi yonetmeyi kolaylastirir. Ozellikle request basina thread modelini koruyup I/O agirlikli yukte throughput artirmak istendiginde virtual thread mantiklidir. Ancak CPU-bound isi sihirli sekilde hizlandirmaz; once is yukunun dogasi analiz edilmelidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q3",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "CompletableFuture ne zaman mantikli, ne zaman gereksiz karmasa yaratir?",
+      "starterCode": "",
+      "answerBody": "Bagimsiz birden fazla isi paralel calistirip sonuclari compose etmek gerektiginde CompletableFuture cok faydalidir; dis servis cagri birlestirme, timeout ve fallback gibi durumlarda gucludur. Ancak lineer bir akis sirf modern gorunsun diye future zincirine cevrilirse okunabilirlik duser ve hata yonetimi zorlasir. Once senaryonun gercekten async composition gerektirip gerektirmedigine bakarim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q4",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "record ne zaman kullanirsin?",
+      "starterCode": "",
+      "answerBody": "Immutable ve tasiyici veri yapilari icin record cok uygundur: request DTO, response DTO, event payload, projection gibi. Ancak her domain entity icin otomatik cevap degildir. JPA proxy davranisi veya framework beklentileri olan durumlarda klasik class daha dogru olabilir. Recordu veri tasiyicilarda severim, her yere zorla uygulamam.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q5",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Sealed class ne ise yarar, gercek hayatta nerede kullanirsin?",
+      "starterCode": "",
+      "answerBody": "Sealed class ile bir hiyerarside hangi alt tiplerin mumkun oldugunu sinirlayabilirim. Bu, state machine, kontrollu domain event seti veya sinirli hata modeli gibi senaryolarda gucludur. En buyuk faydasi domain sinirlarini kod seviyesinde acik ve guvenli ifade etmektir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q6",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "ThreadLocal neden riskli olabilir?",
+      "starterCode": "",
+      "answerBody": "Request context veya trace id gibi bilgiler icin pratik gorunse de thread pool ortamlarda lifecycle iyi yonetilmezse veri sizintisi ve yanlis requeste context tasinmasi riski vardir. Ozellikle async gecisler ve thread reuse senaryolarinda sinsi buglar uretebilir. ThreadLocali kolaylik araci olarak degil, dikkatli ve sinirli bir teknik olarak kullanirim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q7",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Maven veya Gradleda BOM ya da merkezi dependency yonetimi neden onemli?",
+      "starterCode": "",
+      "answerBody": "Asil mesele dependency eklemekten cok versiyon tutarliligini korumaktir. Merkezi dependency yonetimi uyumlu versiyon setleriyle calismayi kolaylastirir ve transitive conflict riskini azaltir. Bu da buildin tekrarlanabilir ve yonetilebilir olmasini saglar.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q8",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Gradle version catalog ne ise yarar?",
+      "starterCode": "",
+      "answerBody": "Dependency versiyonlarini dağinik stringler yerine merkezi ve okunabilir bicimde yonetmeyi saglar. Ozellikle multi-module repolarda standardizasyonu artirir ve surum kaosunu azaltir. Bu arac sadece duzen icin degil, surdurulebilir build yonetimi icin de onemlidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q9",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Gradleda incremental build, build cache ve configuration cache farki nedir?",
+      "starterCode": "",
+      "answerBody": "Incremental build, input-output degismediyse taski yeniden calistirmamaya odaklanir. Build cache, onceki buildlerden uretilmis ciktilari yeniden kullanabilir. Configuration cache ise configuration phase sonucunu saklayip sonraki calistirmalarda tekrar kullanir. Build hizini makine buyutmekten cok bu mekanizmalari dogru anlamak iyilestirir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q10",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "CI pipelineda dependency security scan ya da SCA neden koyarsin?",
+      "starterCode": "",
+      "answerBody": "Risk sadece yazdigimiz kodda degil, kullandigimiz kutuphanelerde de vardir. SCA araclari bilinen zafiyetli bagimliliklari erken yakalamaya yardim eder. Supply-chain guvenligi artik sadece security ekibinin degil, backend gelistiricinin de sorumlulugudur.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q11",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "SBOM nedir, neden sorulmaya baslandi?",
+      "starterCode": "",
+      "answerBody": "SBOM, uygulamanin hangi yazilim bilesenlerinden olustugunu gosteren bir envanterdir. Supply-chain security tarafinda onemi buyuk cunku bagimlilik gorunurlugu olmadan risk analizi zorlasir. SBOMu sadece compliance kutucugu degil, etki analizi ve hizli risk yonetimi araci olarak gorurum.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q12",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Spring Securityde resource server yaklasimi nedir?",
+      "starterCode": "",
+      "answerBody": "Bearer token ile korunan API senaryosunda uygulamanin login ekranini yonetmesine gerek yoksa resource server yaklasimi uygundur. Spring Security bu modelde JWT veya opaque token ile endpoint koruma saglar. Tasarim sorusu genelde sudur: tokeni lokal mi dogrulayacagim, yoksa auth server introspectiona mi gidecegim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q13",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "JWT ile opaque token arasinda nasil secim yaparsin?",
+      "starterCode": "",
+      "answerBody": "JWT self-contained oldugu icin lokal validation ve daha az introspection maliyeti sunar. Opaque token merkezi kontrol ve anlik revocation gibi avantajlar getirebilir ama auth server bagimliligini artirir. Secimde performans kadar revocation ihtiyaci, guvenlik modeli ve operasyonel sadelik birlikte degerlendirilmelidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q14",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "401 ile 403 farkini sozlu mulakatta nasil anlatirsin?",
+      "starterCode": "",
+      "answerBody": "401 kullanici kimligini yeterli sekilde kanitlamadiginda veya credential gecersiz oldugunda doner. 403 ise kullanici taninmis olsa bile ilgili kaynaga yetkisi olmadigini anlatir. Authentication ve authorization ayrimini net yapmak API davranisi ve debug sureci icin cok onemlidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q15",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "AWSde uygulamanin S3e erismesi gerekiyorsa neden access key gommek yerine IAM role dusunursun?",
+      "starterCode": "",
+      "answerBody": "Static access key uygulamaya gomulurse sizma riski, rotasyon zorlugu ve operasyonel yuk artar. IAM role ile izinler calisma ortamina bagli ve yonetilebilir hale gelir. Uzun omurlu credentiallari uygulama icine koymamak guvenlik ve operasyon acisindan daha dogrudur.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q16",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "ECSte task role ile task execution role farki nedir?",
+      "starterCode": "",
+      "answerBody": "Task role, container icindeki uygulamanin AWS servislerine erisimi icindir; ornegin uygulamanin S3e gitmesi gibi. Task execution role ise ECS/Fargate platformunun image cekmesi, log yazmasi ve secret cozmesi gibi altyapi operasyonlari icindir. Bu iki rolu karistirmak productionda yetki modelini bozar.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q17",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "S3 presigned URL ne zaman iyi bir cozumdur?",
+      "starterCode": "",
+      "answerBody": "Dosya upload/download isini backend uzerinden stream etmek yerine istemciye sureli ve sinirli erisim vermek istendiginde cok iyi cozumdur. Uygulama sunucusu uzerindeki yuk azalir ve access key paylasmadan kontrollu erisim saglanir. Sure, izin kapsami ve audit gereksinimi dogru tasarlanmalidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q18",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "SQS visibility timeout neden kritik bir ayardir?",
+      "starterCode": "",
+      "answerBody": "Consumer mesaji alip isleyip silene kadar mesajin diger consumerlara gorunmemesini visibility timeout yonetir. Cok kisa olursa ayni mesaj duplicate sekilde erken gorunebilir; cok uzun olursa hata durumunda yeniden deneme gecikir. Degeri islem suresinin ortalama ve worst-case dagilimina gore ayarlarim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q19",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "At-least-once delivery olan bir sistemde consumer tarafinda neye dikkat edersin?",
+      "starterCode": "",
+      "answerBody": "At-least-once duplicate mesaj gorebilecegim anlamina gelir. Bu nedenle consumer tarafinda idempotent davranis, dedup stratejisi veya guvenli state gecisi tasarlamak gerekir. Brokerin teslimat garantisi ile business operasyonun tek sefer etkisini ayri dusunurum.",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q20",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "OpenAPI ile contract-first yaklasimin avantaji nedir?",
+      "starterCode": "",
+      "answerBody": "OpenAPI HTTP API sozlesmesini makine tarafindan islenebilir standartta tanimlar. Contract-first yaklasimda koddan once sozlesmede hizalanildigi icin ekipler arasi iletisim maliyeti duser. Client generation, mock, test ve dokumantasyon surecleri hizlanir; ozellikle birden fazla ekip veya client oldugunda ciddi fayda saglar.",
+      "answerCode": ""
+    }
+  ]
+}
