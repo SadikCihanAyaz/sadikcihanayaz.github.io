@@ -13,13 +13,27 @@
       "singleChoice": true,
       "question": "Service discovery'nin statik URL'e gore en temel avantaji nedir?",
       "choices": [
-        { "id": "A", "text": "Servislerin IP/port degisimine ragmen dinamik olarak bulunabilmesi" },
-        { "id": "B", "text": "Tum servisleri tek process'e birlestirmesi" },
-        { "id": "C", "text": "Database migrationlari otomatik yapmasi" },
-        { "id": "D", "text": "Sadece gateway ile calismasi" }
+        {
+          "id": "A",
+          "text": "Servislerin IP/port degisimine ragmen dinamik olarak bulunabilmesi"
+        },
+        {
+          "id": "B",
+          "text": "Tum servisleri tek process'e birlestirmesi"
+        },
+        {
+          "id": "C",
+          "text": "Database migrationlari otomatik yapmasi"
+        },
+        {
+          "id": "D",
+          "text": "Sadece gateway ile calismasi"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Örnek dünyamız şöyle olsun:\n\t•\tDomain: a.com\n\t•\tDışarıdan gelen endpoint: https://a.com/user-service/...\n\t•\tSistemde:\n\t•\tapi-gateway\n\t•\tuser-service\n\t•\torder-service\n\t•\tHepsi Kubernetes içinde çalışıyor\n\t•\tIngress var\n\t•\tCloud tarafında external load balancer var\n\t•\tİçeride Service, Pod, CoreDNS, kube-proxy, CNI ağı var\n\t•\tGerekli yerde database’e kadar gideceğim\n\nAyrıca şunu da net söyleyeyim: gerçek hayatta küçük farklar olabilir. Mesela TLS bazen cloud load balancer’da biter, bazen ingress’te biter, bazen end-to-end HTTPS yapılır. Ama ben sana enterprise dünyada en sık görülen ve mülakatta seni güçlü gösterecek resmi anlatacağım.\n\n⸻\n\nGenel Mimari Resim\n\nDış dünyadan gelen trafik için zincir genelde şöyledir:\n\nClient → DNS → External Load Balancer → Ingress Controller → API Gateway → ilgili Service → Pod → App Server → Controller → Service Layer → Repository → Database\n\nServisler arası iç trafik için zincir genelde şöyledir:\n\nSource Pod → K8s DNS/CoreDNS → target Service ClusterIP → kube-proxy/ipvs/iptables → target Pod → App → DB veya response\n\nŞimdi bunu iki ayrı senaryo olarak açalım.\n\n⸻\n\nSenaryo 1\n\nDışarıdan request geliyor: kullanıcı a.com/user-service/... adresine istek atıyor\n\nÖrnek request:\n\nGET https://a.com/user-service/api/profile\n\nKullanıcı mobil uygulamada “Profilim” ekranına bastı diyelim.\n\n⸻\n\n1. Kullanıcı tarafında request oluşur\n\nMobil uygulama ya da browser bir HTTP request hazırlamaya başlar.\n\nBu request içinde şunlar vardır:\n\t•\tHTTP method: GET\n\t•\tURL: https://a.com/user-service/api/profile\n\t•\tHeader’lar:\n\t•\tHost: a.com\n\t•\tAuthorization: Bearer eyJ...\n\t•\tAccept: application/json\n\t•\tUser-Agent: ...\n\t•\tGerekirse cookie, correlation id, locale bilgisi vs.\n\nBurada ilk önemli şey şudur:\nKullanıcı https kullandığı için düz bir TCP bağlantısı yetmez. Önce hedef sunucuya nasıl ulaşacağını bulması, sonra TLS/SSL güvenli oturumu kurması gerekir.\n\n⸻\n\n2. DNS çözümleme başlar\n\nClient cihaz önce a.com’un IP’sini bulmak ister.\n\nİşleyiş kabaca şöyledir:\n\t1.\tCihaz önce kendi DNS cache’ine bakar.\n\t2.\tİşletim sistemi cache’ine bakar.\n\t3.\tGerekirse modem/router veya configured DNS resolver’a gider.\n\t4.\tResolver gerekiyorsa recursive şekilde internet DNS hiyerarşisinden bilgiyi toplar.\n\nBu zincirde şu mantık işler:\n\t•\tRoot DNS: “.com domainleri için şuraya git”\n\t•\t.com TLD sunucusu: “a.com için authoritative nameserver şu”\n\t•\tAuthoritative DNS: “a.com şu IP’ye çözülür”\n\nGenelde sonuç olarak client bir A record ya da CNAME → A record zinciri üzerinden şu bilgiyi alır:\n\t•\ta.com -> 34.x.x.x\n\nBu IP çoğu zaman doğrudan uygulama pod’unun IP’si değildir.\nBu, büyük ihtimalle cloud external load balancer’ın IP’sidir.\n\nYani kullanıcı aslında doğrudan Kubernetes pod’una değil, cluster’ın önündeki resmi giriş kapısına gidiyor.\n\n⸻\n\n3. Client hedef IP’ye TCP bağlantısı başlatır\n\nhttps olduğu için tipik olarak port 443 kullanılır.\n\nClient tarafı TCP three-way handshake yapar:\n\t1.\tSYN\n\t2.\tSYN-ACK\n\t3.\tACK\n\nBu noktada artık ağ seviyesinde bağlantı kurulmuştur. Ama henüz HTTP request gönderilmemiştir çünkü önce TLS kurulmalıdır.\n\n⸻\n\n4. TLS/SSL handshake başlar\n\nBurası çok kritik. Senior seviyede burada gevelememek lazım.\n\nClient şunu ister:\n“Ben gerçekten a.com ile mi konuşuyorum, yoksa araya bir sahte sunucu mu girdi?”\n\n4.1 ClientHello\n\nClient bir ClientHello mesajı gönderir. İçinde:\n\t•\tdesteklediği TLS sürümleri\n\t•\tdesteklediği cipher suite’ler\n\t•\trandom data\n\t•\tSNI bilgisi\n\nSNI çok önemli. Çünkü aynı IP üzerinde birden fazla domain host edilebilir. Client burada açıkça der ki:\n\t•\t“Ben a.com için geldim.”\n\n⸻\n\n4.2 ServerHello ve sertifika gönderimi\n\nKarşı taraf yani genelde:\n\t•\texternal load balancer\n\t•\tveya ingress controller\n\nhangi katmanda TLS terminate ediliyorsa, o katman cevap verir.\n\nSunucu şunları döner:\n\t•\tseçilen TLS sürümü\n\t•\tseçilen cipher suite\n\t•\tserver certificate\n\t•\tbazen certificate chain\n\t•\tkey exchange ile ilgili bilgiler\n\n⸻\n\n4.3 Client sertifikayı doğrular\n\nClient şu kontrolleri yapar:\n\na) Sertifika süresi geçerli mi?\n\t•\tNot Before\n\t•\tNot After\n\nTarihi geçmiş sertifika varsa bağlantı güvensiz sayılır.\n\nb) Domain eşleşiyor mu?\nSertifikadaki CN ya da daha doğrusu SAN alanında a.com var mı?\n\nYoksa bu sertifika başka domain’e ait olabilir.\n\nc) Sertifikayı imzalayan CA güvenilir mi?\nClient cihazın trust store’unda bulunan güvenilir Certificate Authority listesine bakılır.\n\nd) Certificate chain doğru mu?\nServer cert → intermediate cert → root CA zinciri düzgün mü?\n\ne) Sertifika iptal edilmiş mi?\nBazı durumlarda CRL veya OCSP kontrolü yapılır.\n\nBu kontroller geçerse client der ki:\n\t•\t“Tamam, karşımdaki taraf büyük ihtimalle gerçekten a.com”\n\nBu “büyük ihtimalle” lafı önemli, çünkü güven modeli CA ekosistemine dayanıyor. İnsanlık yine her şeyi birkaç imzaya bırakmış durumda.\n\n⸻\n\n4.4 Session key anlaşması\n\nTLS handshake sırasında asimetrik kriptografi kullanılarak ortak bir session key oluşturulur.\n\nSonrasında veri akışı simetrik şifreleme ile yapılır çünkü daha hızlıdır.\n\nBu noktadan sonra artık HTTP request TLS tüneli içinde güvenli şekilde taşınır.\n\n⸻\n\n5. Request external load balancer’a ulaşır\n\nClient artık gerçek HTTP request’ini gönderir.\n\nBu istek önce cloud sağlayıcısının external load balancer’ına gelir.\n\nMesela:\n\t•\tAWS ALB / NLB\n\t•\tAzure Application Gateway / Load Balancer\n\t•\tGCP Load Balancer\n\nBu katmanda neler olabilir?\n\n5.1 Listener kontrolü\n\nLB port 443’te gelen isteği kabul eder.\n\n5.2 TLS termination burada olabilir\n\nEğer sertifika LB’ye bağlıysa, TLS burada sonlanır.\nYani dışarıdan gelen şifreli trafik burada açılır ve içeride HTTP olarak ilerleyebilir.\n\nAlternatif:\n\t•\tTLS LB’de bitmez, ingress’e kadar pass-through yapılır\n\t•\tveya re-encrypt yapılır\n\nAma yaygın pattern:\n\t•\tdış TLS LB veya Ingress’te terminate edilir\n\n5.3 Health check bilgisine göre target seçimi\n\nLB backend olarak hangi node’lara ya da ingress pod’larına trafik göndereceğini health check sonuçlarına göre bilir.\n\nÖrneğin:\n\t•\t3 ingress pod var\n\t•\t1 tanesi unhealthy\n\t•\tLB diğer 2’sine dağıtır\n\n⸻\n\n6. Trafik Kubernetes cluster’a girer\n\nLB request’i cluster içindeki ingress controller’a yönlendirir.\n\nBunun birkaç deployment modeli vardır:\n\t•\tIngress Controller bir LoadBalancer service ile expose edilmiştir\n\t•\tya da NodePort üzerinden node’lara gidiliyordur\n\t•\tcloud provider controller LB’yi otomatik map ediyordur\n\nAma mantık şu:\n\nExternal LB → Ingress Controller\n\nIngress Controller örnekleri:\n\t•\tNGINX Ingress\n\t•\tTraefik\n\t•\tHAProxy Ingress\n\t•\tKong Ingress\n\n⸻\n\n7. Ingress Controller request’i karşılar\n\nIngress Controller artık L7 seviyede HTTP isteğini görür.\n\nİlgilendiği şeyler:\n\t•\tHost: a.com\n\t•\tPath: /user-service/api/profile\n\t•\tMethod\n\t•\tHeader’lar\n\nIngress resource kurallarına bakar.\n\nÖrnek mantık:\n\t•\tHost a.com\n\t•\tPath /user-service\n\t•\tbackend service: api-gateway\n\nYani istek doğrudan user-service’e gitmeyebilir. Çok yaygın enterprise pattern’de dış dünyadan gelen tüm trafik önce gateway’e gider.\n\n⸻\n\n8. Ingress seviyesinde yapılabilecek işlemler\n\nBu katmanda sadece yönlendirme olmaz. Şunlar da olabilir:\n\n8.1 TLS termination\n\nEğer TLS burada bitiyorsa ingress sertifikayı taşır ve HTTPS burada çözülür.\n\n8.2 Path rewrite\n\nÖrneğin dışarıdan gelen /user-service/api/profile içeride /api/profile şeklinde gateway’e iletilebilir.\n\n8.3 Rate limiting\n\nTek IP’den aşırı istek varsa kesilebilir.\n\n8.4 WAF entegrasyonu\n\nSQL injection, XSS pattern’leri, kötü botlar engellenebilir.\n\n8.5 Header ekleme\n\nX-Forwarded-For, X-Forwarded-Proto, X-Request-Id gibi bilgiler eklenebilir.\n\nÖzellikle X-Forwarded-For önemli çünkü gerçek client IP’si uygulamaya bu şekilde taşınır.\n\n⸻\n\n9. Ingress’ten API Gateway Service’ine geçiş\n\nIngress backend olarak api-gateway adlı Kubernetes Service’e route eder.\n\nBurada ilk kez Kubernetes Service kavramı devreye girer.\n\napi-gateway bir Service’tir, yani bir isim ve sabit sanal IP sağlar.\n\nService doğrudan uygulama değildir.\nService, arkasındaki pod’lara giden sabit giriş noktasıdır.\n\n⸻\n\n10. API Gateway service çözümleme ve pod seçimi\n\nIngress Controller api-gateway Service’ine trafik yollarken K8s’in service discovery ve load balancing mekanizmasını kullanır.\n\nİşleyiş:\n\t1.\tService’in bir ClusterIP’si vardır\n\t2.\tkube-proxy bu ClusterIP’ye gelen trafiği yakalar\n\t3.\to servisin arkasındaki endpoint listesinden uygun bir pod seçer\n\t4.\trequest gateway pod’una iletilir\n\nBuradaki endpoint listesi şunu tutar:\n\t•\tapi-gateway-abc123 pod IP’si\n\t•\tapi-gateway-def456 pod IP’si\n\t•\tapi-gateway-ghi789 pod IP’si\n\nSadece Ready durumda olan pod’lar target alınır.\n\n⸻\n\n11. Gateway Pod içine giriş\n\nRequest artık gerçek anlamda senin uygulamana gelmiştir.\n\nGateway içinde örneğin Spring Cloud Gateway çalışıyor olabilir.\n\nAkış:\n\t•\tContainer network namespace request’i alır\n\t•\tprocess portu örneğin 8080\n\t•\tNetty/Tomcat/Undertow gibi server request’i kabul eder\n\t•\tFilter chain başlar\n\n⸻\n\n12. API Gateway içindeki işlem adımları\n\nGateway tarafında enterprise dünyada şunlar olur:\n\n12.1 Logging / tracing başlangıcı\n\nGateway request için bir trace id üretir veya gelen trace id’yi devam ettirir.\n\nÖrneğin:\n\t•\tX-Request-Id\n\t•\ttraceparent\n\t•\tcorrelation id\n\nBu bilgi sonraki servislerin log’larına taşınır.\n\n12.2 Authentication kontrolü\n\nAuthorization: Bearer ... header’ı varsa gateway token’ı inceler.\n\nOlası modeller:\n\nModel A: JWT local validate\nGateway JWT’nin:\n\t•\tsignature’ını\n\t•\texpiration’ını\n\t•\tissuer’ını\n\t•\taudience’ını\n\nkendisi kontrol eder.\n\nBunun için Auth server’ın public key’ini veya JWK set’ini bilir.\n\nModel B: Introspection / auth-service call\nGateway auth service’e gidip:\n\t•\t“Bu token geçerli mi?”\n\t•\t“Rolü ne?”\n\t•\t“User id nedir?”\n\ndiye sorar.\n\nPerformans için genelde local validation daha yaygındır, introspection daha kontrollü ama daha pahalıdır.\n\n12.3 Authorization’ın ilk katmanı\n\nGateway bazı rotaları role göre engelleyebilir.\n\nÖrneğin:\n\t•\t/admin/** sadece admin\n\t•\t/user-service/** authenticated user\n\n12.4 Rate limit / quota\n\nKullanıcı dakikada 1000 istek atıyorsa kapatılabilir.\n\n12.5 Routing\n\nGateway route tanımına bakar:\n\t•\t/user-service/** -> user-service\n\t•\t/order-service/** -> order-service\n\nBizim örnekte request user-service’e gidecek.\n\n⸻\n\n13. Gateway, user-service’e gitmek ister\n\nGateway içinde route target örneğin şöyle olabilir:\n\t•\tlb://user-service\n\t•\tya da http://user-service\n\nBurada service discovery başlar.\n\nGateway şunu çözmek zorunda:\n\t•\tuser-service hangi IP’ye karşılık geliyor?\n\n⸻\n\n14. CoreDNS devreye girer\n\nGateway pod içindeki işletim sistemi DNS resolver üzerinden K8s DNS’e gider.\n\nSorduğu isim aslında şuna genişleyebilir:\n\t•\tuser-service.default.svc.cluster.local\n\nCoreDNS cevap verir:\n\t•\t“Bu service’in ClusterIP’si 10.96.0.45”\n\nYani gateway artık doğrudan bir pod IP’sine değil, service sanal IP’sine gideceğini bilir.\n\n⸻\n\n15. kube-proxy / iptables / IPVS yönlendirmesi\n\nGateway request’i 10.96.0.45:8080 gibi bir adrese yolladığında bu gerçek bir makine değildir.\n\nBu bir virtual IP’dir.\n\nNode üzerindeki kube-proxy kuralları devreye girer:\n\t•\t“Bu IP user-service service’ine ait.”\n\t•\t“Arkasında şu pod’lar var.”\n\t•\t172.17.1.10\n\t•\t172.17.2.14\n\t•\t172.17.3.22\n\nArdından bir pod seçilir.\n\nSeçim algoritması:\n\t•\tround robin\n\t•\tiptables based pseudo-random\n\t•\tIPVS scheduling\n\nArtık hedef DNAT ile gerçek pod IP’sine çevrilir.\n\n⸻\n\n16. CNI ağı üzerinden target pod’a ulaşım\n\nPaket artık cluster network içinde hareket eder.\n\nBunu sağlayan şey CNI plugin’idir:\n\t•\tCalico\n\t•\tFlannel\n\t•\tCilium\n\t•\tWeave\nvs.\n\nCNI şunu mümkün kılar:\n\t•\tPod’ların routable IP’leri olsun\n\t•\tfarklı node’lardaki pod’lar birbirine ulaşabilsin\n\t•\tağ policy’leri uygulansın\n\nEğer NetworkPolicy varsa burada kontrol de olabilir:\n\t•\tgateway pod’u user-service’e konuşabilir mi?\n\t•\tnamespace bazlı kısıt var mı?\n\nİzin varsa paket hedef pod’a gider.\n\n⸻\n\n17. User-service pod request’i alır\n\nŞimdi request user-service container’ına ulaşır.\n\nİçeride tipik Spring Boot akışı:\n\t1.\tEmbedded server request’i alır\n\t2.\tFilter chain çalışır\n\t3.\tSecurity chain çalışır\n\t4.\tDispatcherServlet request’i uygun controller’a yollar\n\n⸻\n\n18. Application katmanında işlem\n\nÖrnek akış:\n\t•\tUserController.getProfile()\n\t•\tUserApplicationService.getProfile(userId)\n\t•\tUserRepository.findById(userId)\n\nBurada business rule’lar çalışır.\n\nÖrneğin:\n\t•\tkullanıcı pasif mi?\n\t•\ttoken’daki user id ile istenen profil aynı mı?\n\t•\tcache var mı?\n\n⸻\n\n19. Database’e gidiş\n\nEğer veri cache’te yoksa uygulama DB’ye gider.\n\nBurada tipik zincir:\n\t•\tJPA Repository / MyBatis / JDBC\n\t•\tConnection pool’dan connection alınır\n\t•\tSQL hazırlanır\n\t•\tDB bağlantısı açılmaz, genelde pool’dan reuse edilir\n\t•\tQuery database’e gider\n\nDB ayrı bir pod olabilir, managed database olabilir, dış VPC içinde olabilir.\n\nÖrnek:\n\t•\tAurora / RDS / Cloud SQL / Azure SQL / PostgreSQL VM\n\n⸻\n\n20. DB response döner\n\nDatabase:\n\t•\tauth yapar\n\t•\tSQL parse eder\n\t•\texecution plan kullanır\n\t•\tindex arar\n\t•\trow’ları döner\n\nResponse uygulamaya gelir.\n\nUygulama entity’yi DTO’ya çevirir.\n\nÖrnek:\n\n{\n  \"id\": 123,\n  \"name\": \"Cino\",\n  \"membershipType\": \"PREMIUM\"\n}\n\n\n⸻\n\n21. Response geri dönüş yolculuğu\n\nŞimdi response ters yönden geri gider:\n\nuser-service pod → kube-proxy/CNI → gateway pod → ingress → external LB → client\n\nAma burada önemli detay şu:\nDönüşte çoğu zaman DNS tekrar yapılmaz. Çünkü bağlantı zaten kurulmuştur ve response mevcut TCP/TLS oturumu üzerinden geri akar.\n\n⸻\n\n22. Gateway dönüşte ne yapabilir\n\nGateway response’a da dokunabilir:\n\t•\theader ekleyebilir\n\t•\tresponse code map edebilir\n\t•\terror format standardize edebilir\n\t•\tlogging/tracing tamamlayabilir\n\t•\tmetrics üretebilir\n\nÖrneğin:\n\t•\tX-Trace-Id\n\t•\tX-Response-Time\n\n⸻\n\n23. Ingress ve LB üzerinden client’a dönüş\n\nEğer TLS termination ingress’te veya LB’deyse, dış dünyaya dönerken response tekrar TLS ile client’a güvenli biçimde iletilir.\n\nClient bu veriyi çözer ve uygulama ekranda sonucu gösterir.\n\nKullanıcı sadece “profil sayfası açıldı” der.\nArka tarafta yarım memleket çalıştı, ama tabii kimse bunu düşünmez.\n\n⸻\n\nSenaryo 1’i tek satır zincir halinde özetleyelim\n\nClient app → DNS → external LB → TCP handshake → TLS handshake + cert validation → ingress → api-gateway service → api-gateway pod → auth/filter/routing → CoreDNS → user-service ClusterIP → kube-proxy → user-service pod → controller/service/repository → DB → response → gateway → ingress/LB → client\n\n⸻\n\nSenaryo 2\n\norder-service, user-service’e içerden istek atıyor\n\nŞimdi dış dünya yok. Bu East-West trafik.\n\nSenaryo:\n\norder-service, bir sipariş oluştururken kullanıcının indirim hakkı var mı diye user-service’i çağırıyor.\n\nÖrnek kod:\n\nrestTemplate.getForObject(\n    \"http://user-service/api/users/check-discount/123\",\n    DiscountResponse.class\n);\n\nBurada request dışarı çıkmaz. Ingress’e de gitmez. External LB’ye de gitmez.\nBu cluster içi iletişimdir.\n\n⸻\n\n1. order-service içinde business logic başlar\n\nÖrnek akış:\n\t•\tOrderController.createOrder()\n\t•\tOrderService.createOrder()\n\t•\tsipariş hesaplanırken kullanıcı indirimi lazım\n\t•\tuserClient.checkDiscount(userId) çağrılır\n\nBurada bu client:\n\t•\tRestTemplate\n\t•\tWebClient\n\t•\tOpenFeign\n\t•\tgRPC client\n\nolabilir.\n\n⸻\n\n2. order-service hedef hostname’i çözmek ister\n\nhttp://user-service/... denildiğinde uygulama önce user-service adını çözmelidir.\n\nPod içindeki resolver devreye girer.\n\nKubernetes pod’larında /etc/resolv.conf tipik olarak cluster DNS’i gösterecek şekilde ayarlanır.\n\nResolver şu sırayla deneyebilir:\n\t•\tuser-service\n\t•\tuser-service.default\n\t•\tuser-service.default.svc\n\t•\tuser-service.default.svc.cluster.local\n\nsearch domain ayarları sayesinde kısa isim genelde yeterlidir.\n\n⸻\n\n3. CoreDNS cevabı döner\n\nCoreDNS der ki:\n\t•\tuser-service.default.svc.cluster.local -> 10.96.0.45\n\nBu IP yine bir ClusterIP’dir.\nYani gerçek hedef pod değil, service sanal IP’sidir.\n\n⸻\n\n4. order-service pod paketi oluşturur\n\nOrder-service artık HTTP request’i hedef olarak 10.96.0.45 IP’sine yollar.\n\nBu istek genelde:\n\t•\tHTTP/1.1\n\t•\tbazen HTTP/2\n\t•\tiçeride plain HTTP olabilir\n\nİçeride HTTPS olur mu?\n\nOlabilir. Ama klasik K8s servisler arası iletişimde çoğu zaman plain HTTP kullanılır.\nDaha güvenli enterprise kurulumlarda:\n\t•\tmTLS service mesh ile yapılır\n\t•\tveya servisler arası HTTPS yapılır\n\nAma standart anlatımda çoğunlukla iç trafik HTTP’dir.\n\n⸻\n\n5. Node üzerindeki kube-proxy devreye girer\n\n10.96.0.45 gerçek bir host olmadığı için node network stack’i bu hedefi service VIP olarak tanır.\n\nkube-proxy’nin tuttuğu kurallar der ki:\n\t•\t“Bu IP user-service service’ine ait”\n\t•\t“Arkasında şu endpoint’ler var:\n\t•\t172.17.1.10:8080\n\t•\t172.17.2.14:8080\n\t•\t172.17.3.22:8080”\n\nKube-proxy bu endpoint’lerden birini seçer ve hedef IP’yi gerçek pod IP’sine çevirir.\n\nBu NAT işlemi yüzünden uygulama user-service diye çağırır ama paket aslında bir pod’a gider.\n\n⸻\n\n6. Endpoint listesi nasıl oluşuyor\n\nBu da önemli.\n\nKubernetes control plane sürekli şunu takip eder:\n\t•\thangi pod’lar bu service’in selector’ına uyuyor?\n\t•\thangileri Ready durumda?\n\t•\thangilerinin IP’si nedir?\n\nBuna göre Endpoints veya yeni yapıda EndpointSlice objeleri oluşturulur.\n\nYani service arkasındaki canlı pod listesi dinamik tutulur.\n\nBir pod ölürse:\n\t•\tendpoint listesinden çıkar\n\nYeni pod ayağa kalkarsa:\n\t•\tendpoint listesine eklenir\n\nBu yüzden order-service’in user-service’in kaç instance’ı olduğunu bilmesine gerek yoktur.\n\n⸻\n\n7. Paket doğrudan target pod’a gider\n\nBurada çok kritik nokta:\n\nBu trafik normalde tekrar ingress’e uğramaz.\nTekrar gateway’e de uğramaz.\n\nYol şu olur:\n\norder-service pod → service VIP → kube-proxy → user-service pod\n\nBu doğrudan pod-to-pod iletişimdir.\n\nSadece bazı şirketler tüm iç trafiği de gateway’den geçirmek ister ama bu normal pattern değildir.\nGenelde servisler kendi aralarında doğrudan konuşur.\n\n⸻\n\n8. Ağ güvenliği kontrolleri\n\nBurada şu katmanlar devreye girebilir:\n\n8.1 NetworkPolicy\n\nK8s network policy der ki:\n\t•\torder-service namespace’i user-service’e konuşabilir mi?\n\t•\tsadece belli portlara mı konuşabilir?\n\n8.2 Service mesh policy\n\nEğer Istio/Linkerd varsa:\n\t•\tsource identity\n\t•\tdestination identity\n\t•\tmTLS\n\t•\tauthorization policy\n\nkontrol edilir.\n\n8.3 Pod security değil, network security\n\nPod security context başka konu. Bu trafik konusu network plane’de yönetilir.\n\n⸻\n\n9. user-service request’i alır\n\nuser-service pod içindeki uygulama request’i alır.\n\nÖrneğin endpoint:\n\nGET /api/users/check-discount/123\n\nSpring Boot içinde akış:\n\t•\tSecurity filter\n\t•\tController\n\t•\tApplication service\n\t•\tgerekiyorsa DB\n\n⸻\n\n10. İç request’te authentication nasıl olur\n\nBu kısım mülakatta güzel puan getirir çünkü birçok kişi sadece dış JWT’yi bilir.\n\nServisler arası auth için birkaç model vardır:\n\nModel A: Forwarded user token\n\norder-service, dışarıdan gelen kullanıcı JWT’sini user-service’e de forward eder.\n\nArtısı:\n\t•\tuser-service son kullanıcı kimliğini bilir\n\nEksisi:\n\t•\tservisler kullanıcı token’ına bağımlı olur\n\nModel B: Service-to-service token\n\norder-service kendi servis kimliğiyle bir token gönderir.\n\nMesela:\n\t•\t“Ben order-service’im, şu user için bilgi istiyorum”\n\nBu daha temiz olabilir.\n\nModel C: İkisi birlikte\n\nHem user context hem service identity taşınır.\n\nEnterprise tarafta en sağlam yaklaşım çoğu zaman budur.\n\nEk header’lar olabilir:\n\t•\tAuthorization\n\t•\tX-User-Id\n\t•\tX-Service-Name\n\t•\ttrace header’ları\n\n⸻\n\n11. user-service iş mantığını çalıştırır\n\nÖrneğin:\n\t•\tkullanıcı aktif mi?\n\t•\tpremium üye mi?\n\t•\tgeçmiş sipariş sayısı kaç?\n\t•\tözel kampanya var mı?\n\nGerekirse repository ile DB’ye gider.\n\nÖrnek SQL:\n\t•\tuser tablosu\n\t•\tmembership tablosu\n\t•\tdiscount rule tablosu\n\nSonuç:\n\n{\n  \"userId\": 123,\n  \"discountEligible\": true,\n  \"discountRate\": 10\n}\n\n\n⸻\n\n12. Response order-service’e döner\n\nResponse aynı TCP bağlantısı üzerinden geri döner.\n\nBurada genelde:\n\t•\tyeni DNS çözümü yapılmaz\n\t•\tyeni service discovery yapılmaz\n\nÇünkü mevcut connection açık olabilir.\n\nAma eğer her request için yeni connection açılıyorsa yeni TCP kurulabilir.\nGerçekte çoğu client connection pooling kullanır:\n\t•\tRestTemplate altında Apache HttpClient/OkHttp\n\t•\tWebClient altında Reactor Netty\n\t•\tHTTP keep-alive\n\nBu sayede performans artar.\n\n⸻\n\n13. order-service sonucu işler\n\norder-service gelen sonucu alır:\n\t•\tindirim varsa fiyatı düşer\n\t•\tsipariş toplamını hesaplar\n\t•\tsiparişi DB’ye yazar\n\t•\tevent publish edebilir\n\t•\tresponse DTO üretir\n\nSonra dışarıya kendi cevabını döner.\n\nEğer bu çağrı dış request zincirinin parçasıysa, bu response önce order-service’e gelen caller’a döner.\nEğer caller dış dünya ise zincir sonunda kullanıcıya kadar çıkar.\n\n⸻\n\nSenaryo 2’yi daha da içten, paket mantığıyla anlatalım\n\nŞimdi olayı ağ katmanı gözüyle tek sıra anlatalım.\n\t1.\torder-service içinde kod http://user-service/... çağırır\n\t2.\tPod DNS çözümü ister\n\t3.\tCoreDNS user-service -> ClusterIP döner\n\t4.\torder-service pod paketi o ClusterIP’ye yollar\n\t5.\tNode’daki kube-proxy bu ClusterIP’nin service olduğunu anlar\n\t6.\tEndpoint listesinden gerçek bir user-service pod seçer\n\t7.\tHedef IP DNAT ile pod IP’sine çevrilir\n\t8.\tCNI ağı üzerinden paket hedef node’a ve oradan pod’a gider\n\t9.\tuser-service container request’i alır\n\t10.\tapp logic çalışır\n\t11.\tgerekiyorsa DB’ye gider\n\t12.\tresponse geri order-service’e döner\n\t13.\torder-service business işlemine devam eder\n\n⸻\n\nNorth-South ile East-West arasındaki fark\n\nŞimdi bunları çok net ayıralım.\n\nNorth-South trafik\n\nDış dünya ile cluster arasındaki trafiktir.\n\nÖrnek:\n\t•\ttelefon uygulaması → a.com\n\t•\tbrowser → a.com\n\nBurada tipik katmanlar:\n\t•\tpublic DNS\n\t•\texternal load balancer\n\t•\tingress\n\t•\tgateway\n\t•\tinternal service\n\nEast-West trafik\n\nCluster içindeki servislerin birbirleriyle konuşmasıdır.\n\nÖrnek:\n\t•\torder-service → user-service\n\t•\tpayment-service → notification-service\n\nBurada tipik katmanlar:\n\t•\tCoreDNS\n\t•\tService ClusterIP\n\t•\tkube-proxy\n\t•\tpod-to-pod network\n\n⸻\n\nSertifika doğrulama tam olarak nerede var, nerede yok?\n\nBu da kritik.\n\nDış dünyadan gelen istek\n\nEğer https://a.com ise client sertifika doğrular.\nYani:\n\t•\tdomain match\n\t•\tCA trust\n\t•\texpiry\n\t•\tchain\n\nBurada TLS handshake gerçektir.\n\nServisler arası iç trafik\n\nEğer plain HTTP ise sertifika yoktur.\n\nEğer içerde HTTPS veya mTLS varsa:\n\t•\tsource service target service’in sertifikasını doğrular\n\t•\thatta mutual TLS’de iki taraf da birbirini doğrular\n\nService mesh varsa bu iş çok daha profesyonel şekilde yapılır:\n\t•\tsidecar proxy’ler arasında mTLS\n\t•\tworkload identity\n\t•\totomatik cert rotation\n\nAma mesh yoksa klasik cluster içi HTTP gayet yaygındır.\n\n⸻\n\nAPI Gateway her iç çağrıda devreye girer mi?\n\nHayır.\nBu çok sık karıştırılıyor.\n\nGateway genelde dış dünyadan gelen trafiğin giriş kapısıdır.\n\nYani:\n\t•\tclient → gateway → service\n\nAma:\n\t•\torder-service → user-service\n\nçağrısı çoğu zaman gateway’den geçmez.\n\nÇünkü geçerse:\n\t•\tgereksiz latency olur\n\t•\tekstra hop olur\n\t•\tsingle bottleneck oluşur\n\t•\tiç trafik gereksiz merkezileşir\n\nBu yüzden servisler arası çağrılar çoğunlukla doğrudan service discovery ile yapılır.\n\n⸻\n\nIngress ile Gateway aynı şey mi?\n\nHayır, ama insanların bunları birbirine katması neredeyse doğal afet seviyesinde yaygın.\n\nIngress\n\nKubernetes objesi ve onun arkasındaki controller mantığıdır.\n\nGörevi:\n\t•\tdış HTTP/HTTPS trafiğini cluster içine almak\n\t•\thost/path bazlı yönlendirmek\n\nAPI Gateway\n\nUygulama seviyesinde bir gateway’dir.\n\nGörevi:\n\t•\tauth\n\t•\trate limiting\n\t•\trouting\n\t•\taggregation\n\t•\trequest/response manipulation\n\t•\tmerkezi politika uygulama\n\nKısaca:\n\t•\tIngress daha çok K8s giriş kapısı\n\t•\tGateway daha çok uygulama resepsiyonu\n\nBazı ürünler bu iki rolü kısmen birleştirebilir ama kavramsal olarak farklıdır.\n\n⸻\n\nCevabın geri dönüşünde tam olarak ne olur?\n\nBunu da netleştirelim.\n\nMesela user-service response üretti.\n\t1.\tApp response body’yi serialize eder\n\t2.\tHTTP response oluşturur\n\t3.\tsocket üzerinden geri yollar\n\t4.\tpod network stack bunu çıkarır\n\t5.\tCNI / node routing ile source’a döner\n\t6.\teğer çağrı gateway üzerinden geldiyse gateway response’u alır\n\t7.\tgateway gerekirse header ekler\n\t8.\tingress/LB üzerinden dışarı çıkar\n\t9.\tTLS varsa client’a şifreli döner\n\t10.\tclient deserialize edip UI’da gösterir\n\nBurada request path’i ile response path’i simetrik görünür ama teknik olarak response mevcut connection üzerinden geri akar. Her katmanda baştan “hangi route’a gideyim” diye yeniden işlenmez.\n\n⸻\n\nGerçek hayatta eklenen enterprise bileşenler\n\nSen bunu mülakatta daha da parlatmak istersen şu katmanları da anarsın:\n\nObservability\n\nHer hop’ta:\n\t•\tlog\n\t•\tmetrics\n\t•\tdistributed tracing\n\nÖrneğin:\n\t•\tPrometheus\n\t•\tGrafana\n\t•\tELK / OpenSearch\n\t•\tJaeger / Zipkin / OpenTelemetry\n\nResilience\n\nServis çağrısında:\n\t•\ttimeout\n\t•\tretry\n\t•\tcircuit breaker\n\t•\tbulkhead\n\nÖrneğin order-service user-service’i çağırırken:\n\t•\t200 ms timeout\n\t•\t2 retry\n\t•\tsonra fallback\n\nSecurity\n\t•\tJWT validation\n\t•\tmTLS\n\t•\tWAF\n\t•\tnetwork policies\n\t•\tsecrets management\n\t•\tpod identity / workload identity\n\nScalability\n\t•\tHPA ile pod sayısı artar\n\t•\tservice endpoint listesi dinamik güncellenir\n\t•\tLB ve kube-proxy yeni pod’lara trafik vermeye başlar\n\n⸻\n\nMülakatta söyleyebileceğin düzgün kısa özet\n\nŞöyle toparlarsan gayet güçlü durur:\n\n“Dışarıdan gelen North-South trafikte client önce DNS üzerinden domain’i external load balancer IP’sine çözer, sonra TLS handshake yaparak sertifikayı doğrular. Trafik load balancer üzerinden ingress controller’a, oradan API gateway’e gelir. Gateway authentication, authorization ve routing yaptıktan sonra Kubernetes service discovery ile hedef servisin ClusterIP’sini bulur. kube-proxy veya IPVS bu sanal IP’yi canlı pod’lardan birine çevirir ve request hedef pod’a ulaşır. Uygulama katmanı business logic ve veri erişimini çalıştırır, response da aynı zincir üzerinden geri döner.\n\nServisler arası East-West trafikte ise çağrı dışarı çıkmaz; source pod CoreDNS üzerinden hedef service’i çözer, hedef service’in ClusterIP’sine istek atar, kube-proxy bunu gerçek pod IP’sine çevirir ve trafik doğrudan pod-to-pod gider. Bu akışta ingress ve external load balancer genelde devrede olmaz. Güvenlik için network policy, service-to-service auth ve gerekiyorsa mTLS kullanılabilir.”\n\n⸻\n\nSon net resim\n\nSenaryo 1\n\nClient → DNS → TCP → TLS cert validation → External LB → Ingress → API Gateway → CoreDNS → user-service Service → kube-proxy → user-service Pod → App → DB → response geri\n\nSenaryo 2\n\norder-service Pod → CoreDNS → user-service Service ClusterIP → kube-proxy → user-service Pod → App/DB → response order-service’e geri\n\n⸻\n\nİstersen bir sonraki adımda bunu sana üç farklı seviyede de çıkarırım:\n\t•\tjunior için basit versiyon\n\t•\tsenior interview answer versiyonu\n\t•\t“whiteboard çizimi” şeklinde oklarla mimari diyagram anlatımı\n\nVe istersen bunun üstüne bir de Service Mesh girince aynı iki senaryo nasıl değişir kısmını açarım. Orada sidecar, mTLS, envoy, traffic policy, retries, circuit breaking devreye girer. Orası zaten insanların “bir request attık” masalının tamamen dağıldığı nokta.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -30,12 +44,26 @@
       "singleChoice": true,
       "question": "Eureka Server ile Eureka Client arasindaki dogru iliski hangisidir?",
       "choices": [
-        { "id": "A", "text": "Server kendini Client'a kaydeder" },
-        { "id": "B", "text": "Client registry tutar, Server istek atar" },
-        { "id": "C", "text": "Server registry'dir, Client servisi register edip kesif icin kullanir" },
-        { "id": "D", "text": "Ikisi de sadece config dagitir" }
+        {
+          "id": "A",
+          "text": "Server kendini Client'a kaydeder"
+        },
+        {
+          "id": "B",
+          "text": "Client registry tutar, Server istek atar"
+        },
+        {
+          "id": "C",
+          "text": "Server registry'dir, Client servisi register edip kesif icin kullanir"
+        },
+        {
+          "id": "D",
+          "text": "Ikisi de sadece config dagitir"
+        }
       ],
-      "correctChoiceIds": ["C"],
+      "correctChoiceIds": [
+        "C"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -47,12 +75,26 @@
       "singleChoice": true,
       "question": "Eureka'da heartbeat (lease renewal) mekanizmasinin amaci nedir?",
       "choices": [
-        { "id": "A", "text": "Config dosyalarini sync etmek" },
-        { "id": "B", "text": "Instance'in hayatta oldugunu registry'ye periyodik bildirmek" },
-        { "id": "C", "text": "JWT token uretmek" },
-        { "id": "D", "text": "Gateway route cache'ini temizlemek" }
+        {
+          "id": "A",
+          "text": "Config dosyalarini sync etmek"
+        },
+        {
+          "id": "B",
+          "text": "Instance'in hayatta oldugunu registry'ye periyodik bildirmek"
+        },
+        {
+          "id": "C",
+          "text": "JWT token uretmek"
+        },
+        {
+          "id": "D",
+          "text": "Gateway route cache'ini temizlemek"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -64,12 +106,26 @@
       "singleChoice": true,
       "question": "Client-side discovery + load balancing akisi icin en dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Client hic registry'ye bakmadan rastgele IP secer" },
-        { "id": "B", "text": "Client registry'den instance listesini alir, load balancer bir instance secer" },
-        { "id": "C", "text": "Sadece API Gateway instance secimi yapabilir" },
-        { "id": "D", "text": "Load balancer sadece server startup aninda calisir" }
+        {
+          "id": "A",
+          "text": "Client hic registry'ye bakmadan rastgele IP secer"
+        },
+        {
+          "id": "B",
+          "text": "Client registry'den instance listesini alir, load balancer bir instance secer"
+        },
+        {
+          "id": "C",
+          "text": "Sadece API Gateway instance secimi yapabilir"
+        },
+        {
+          "id": "D",
+          "text": "Load balancer sadece server startup aninda calisir"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -81,12 +137,26 @@
       "singleChoice": true,
       "question": "@LoadBalanced ile isaretlenmis RestTemplate'in kritik farki nedir?",
       "choices": [
-        { "id": "A", "text": "Sadece localhost'a istek atabilir" },
-        { "id": "B", "text": "Service name'i registry uzerinden resolve edip instance secimi yapabilir" },
-        { "id": "C", "text": "Sadece JSON parse eder" },
-        { "id": "D", "text": "Tum HTTP timeout'larini devre disi birakir" }
+        {
+          "id": "A",
+          "text": "Sadece localhost'a istek atabilir"
+        },
+        {
+          "id": "B",
+          "text": "Service name'i registry uzerinden resolve edip instance secimi yapabilir"
+        },
+        {
+          "id": "C",
+          "text": "Sadece JSON parse eder"
+        },
+        {
+          "id": "D",
+          "text": "Tum HTTP timeout'larini devre disi birakir"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -98,12 +168,26 @@
       "singleChoice": true,
       "question": "Server-side discovery/load balancing icin tipik ornek hangisidir?",
       "choices": [
-        { "id": "A", "text": "Client icinde Spring Cloud LoadBalancer" },
-        { "id": "B", "text": "API Gateway veya Nginx/Envoy katmaninda instance secimi" },
-        { "id": "C", "text": "Sadece JDBC connection pool" },
-        { "id": "D", "text": "Spring Batch partitioning" }
+        {
+          "id": "A",
+          "text": "Client icinde Spring Cloud LoadBalancer"
+        },
+        {
+          "id": "B",
+          "text": "API Gateway veya Nginx/Envoy katmaninda instance secimi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece JDBC connection pool"
+        },
+        {
+          "id": "D",
+          "text": "Spring Batch partitioning"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -115,12 +199,26 @@
       "singleChoice": true,
       "question": "Kubernetes ortaminda internal service discovery icin genel olarak en dogru yaklasim hangisidir?",
       "choices": [
-        { "id": "A", "text": "Her kosulda Eureka zorunludur" },
-        { "id": "B", "text": "Service + DNS mekanizmasi cogu durumda discovery'yi zaten saglar" },
-        { "id": "C", "text": "Sadece static hosts dosyasi kullanilmalidir" },
-        { "id": "D", "text": "Discovery yerine tum servisler monolith olmali" }
+        {
+          "id": "A",
+          "text": "Her kosulda Eureka zorunludur"
+        },
+        {
+          "id": "B",
+          "text": "Service + DNS mekanizmasi cogu durumda discovery'yi zaten saglar"
+        },
+        {
+          "id": "C",
+          "text": "Sadece static hosts dosyasi kullanilmalidir"
+        },
+        {
+          "id": "D",
+          "text": "Discovery yerine tum servisler monolith olmali"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -132,12 +230,26 @@
       "singleChoice": true,
       "question": "Spring Cloud LoadBalancer'in dogru tanimi hangisidir?",
       "choices": [
-        { "id": "A", "text": "Server-side reverse proxy'dir" },
-        { "id": "B", "text": "Client-side instance secimi yapan load balancing kutuphanesidir" },
-        { "id": "C", "text": "Sadece config sifreleme aracidir" },
-        { "id": "D", "text": "Sadece logging framework'udur" }
+        {
+          "id": "A",
+          "text": "Server-side reverse proxy'dir"
+        },
+        {
+          "id": "B",
+          "text": "Client-side instance secimi yapan load balancing kutuphanesidir"
+        },
+        {
+          "id": "C",
+          "text": "Sadece config sifreleme aracidir"
+        },
+        {
+          "id": "D",
+          "text": "Sadece logging framework'udur"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -149,12 +261,26 @@
       "singleChoice": true,
       "question": "Bir instance down oldugunda Eureka tarafinda beklenen davranis nedir?",
       "choices": [
-        { "id": "A", "text": "Heartbeat kesilirse instance bir sure sonra down/evicted olarak isaretlenir" },
-        { "id": "B", "text": "Down instance sonsuza kadar aktif kalir" },
-        { "id": "C", "text": "Sadece manuel SQL ile silinir" },
-        { "id": "D", "text": "Tum servisler restart edilmeden fark edilmez" }
+        {
+          "id": "A",
+          "text": "Heartbeat kesilirse instance bir sure sonra down/evicted olarak isaretlenir"
+        },
+        {
+          "id": "B",
+          "text": "Down instance sonsuza kadar aktif kalir"
+        },
+        {
+          "id": "C",
+          "text": "Sadece manuel SQL ile silinir"
+        },
+        {
+          "id": "D",
+          "text": "Tum servisler restart edilmeden fark edilmez"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "Config Server + Discovery yapisini production'da daha guvenli yapmak icin en kritik adimlardan biri hangisidir?",
       "choices": [
-        { "id": "A", "text": "Retry/timeout, health check ve high availability stratejileri tanimlamak" },
-        { "id": "B", "text": "Tum resilience ayarlarini kaldirmak" },
-        { "id": "C", "text": "Sadece tek node calistirmak" },
-        { "id": "D", "text": "Loglamayi tamamen kapatmak" }
+        {
+          "id": "A",
+          "text": "Retry/timeout, health check ve high availability stratejileri tanimlamak"
+        },
+        {
+          "id": "B",
+          "text": "Tum resilience ayarlarini kaldirmak"
+        },
+        {
+          "id": "C",
+          "text": "Sadece tek node calistirmak"
+        },
+        {
+          "id": "D",
+          "text": "Loglamayi tamamen kapatmak"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""

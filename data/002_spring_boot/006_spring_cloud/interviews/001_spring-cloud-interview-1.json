@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "Spring Cloud Config'in temel amaci nedir?",
       "choices": [
-        { "id": "A", "text": "Tum servislerin log seviyesini kodla sabitlemek" },
-        { "id": "B", "text": "Konfigurasyonu merkezi olarak yonetmek ve servislere dagitmak" },
-        { "id": "C", "text": "Sadece database migration calistirmak" },
-        { "id": "D", "text": "Sadece API Gateway routing yapmak" }
+        {
+          "id": "A",
+          "text": "Tum servislerin log seviyesini kodla sabitlemek"
+        },
+        {
+          "id": "B",
+          "text": "Konfigurasyonu merkezi olarak yonetmek ve servislere dagitmak"
+        },
+        {
+          "id": "C",
+          "text": "Sadece database migration calistirmak"
+        },
+        {
+          "id": "D",
+          "text": "Sadece API Gateway routing yapmak"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,13 +44,27 @@
       "singleChoice": true,
       "question": "Config Server ile Config Client arasindaki dogru sorumluluk dagilimi hangisidir?",
       "choices": [
-        { "id": "A", "text": "Config Server config'i kullanir, Client config'i saklar" },
-        { "id": "B", "text": "Config Server config'i sunar, Client startup'ta alip uygular" },
-        { "id": "C", "text": "Ikisi de sadece service registry isidir" },
-        { "id": "D", "text": "Sadece Client Git repository okur" }
+        {
+          "id": "A",
+          "text": "Config Server config'i kullanir, Client config'i saklar"
+        },
+        {
+          "id": "B",
+          "text": "Config Server config'i sunar, Client startup'ta alip uygular"
+        },
+        {
+          "id": "C",
+          "text": "Ikisi de sadece service registry isidir"
+        },
+        {
+          "id": "D",
+          "text": "Sadece Client Git repository okur"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Microservis mimarilerinde konfigürasyonun merkezileştirilmesi için kullanılan Spring Cloud Config yapısında doğru cevap: **Config Server config'i sunar, Client startup'ta alip uygular.**\n\nBu mimaride **Config Server**, konfigürasyon dosyalarının (Git, File System, SVN vb.) yer aldığı depoya erişen tek yetkili mercidir. **Config Client** ise uygulama ayağa kalkarken Server'a \"Benim adım X, profilim Y; bana ayarlarımı ver\" der.\n\n---\n\n### 1. Config Server Tarafı\n\nServer tarafı genellikle çok sadedir. Tek amacı ayarları depo üzerinden okuyup HTTP üzerinden sunmaktır.\n\n**Bağımlılık (pom.xml):**\n```xml\n<dependency>\n    <groupId>org.springframework.cloud</groupId>\n    <artifactId>spring-cloud-config-server</artifactId>\n</dependency>\n```\n\n**Ana Sınıf:**\n```java\n@SpringBootApplication\n@EnableConfigServer // Sunucu özelliğini aktif eder\npublic class ConfigServerApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(ConfigServerApplication.class, args);\n    }\n}\n```\n\n**Yapılandırma (application.properties):**\n```properties\nserver.port=8888\n# Konfigürasyon dosyalarının durduğu Git adresi\nspring.cloud.config.server.git.uri=https://github.com/kullanici/config-repo\n```\n\n---\n\n### 2. Config Client Tarafı\n\nClient tarafı, kendi ayarlarını yerelde tutmak yerine Server'dan talep eder.\n\n**Bağımlılık (pom.xml):**\n```xml\n<dependency>\n    <groupId>org.springframework.cloud</groupId>\n    <artifactId>spring-cloud-starter-config</artifactId>\n</dependency>\n```\n\n**Yapılandırma (application.properties veya bootstrap.properties):**\n> **Not:** Spring Boot 2.4+ sürümlerinde `bootstrap.properties` yerine doğrudan `application.properties` kullanılabilir.\n\n```properties\nspring.application.name=siparis-servisi\nspring.profiles.active=dev\n\n# Config Server'ın adresi\nspring.config.import=optional:configserver:http://localhost:8888\n```\n\n**Kod İçinde Kullanım:**\n```java\n@RestController\n@RefreshScope // Ayarlar değiştiğinde uygulamanın baştan başlamadan güncellenmesini sağlar\npublic class MesajController {\n\n    @Value(\"${app.hosgeldin-mesaji:Varsayılan Merhaba}\")\n    private String mesaj;\n\n    @GetMapping(\"/mesaj\")\n    public String getMesaj() {\n        return mesaj;\n    }\n}\n```\n\n---\n\n### Çalışma Akışı\n\n1.  **Depo:** Git üzerinde `siparis-servisi-dev.properties` adında bir dosya oluşturulur ve içine `app.hosgeldin-mesaji=Selam Java!` yazılır.\n2.  **Server:** Git'teki bu dosyayı okur ve `http://localhost:8888/siparis-servisi/dev` adresinden JSON formatında sunar.\n3.  **Client:** Ayağa kalkarken bu JSON'u çeker, içindeki değerleri `@Value` alanlarına enjekte eder.\n\n\n\n### Kritik Bilgi: @RefreshScope\nConfig Server'da bir dosyanın içeriğini değiştirdiğinizde, Client'ın bunu hemen algılaması için Client'a bir \"dürtme\" (actuator/refresh) yapılması gerekir. `@RefreshScope` anotasyonu, bu dürtme geldiğinde ilgili bean'i yeni değerlerle baştan oluşturur.\n\nConfig Server'ı Git yerine yerel dosya sisteminden (native profile) okutarak denemek ister misin? Kurulumu çok daha hızlıdır.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -47,12 +75,26 @@
       "singleChoice": true,
       "question": "Spring Boot 2.4+ sonrasinda Config Server import etmek icin tipik ayar hangisidir?",
       "choices": [
-        { "id": "A", "text": "spring.cloud.config.import=configserver:" },
-        { "id": "B", "text": "spring.config.import=configserver:" },
-        { "id": "C", "text": "spring.config.location=eureka:" },
-        { "id": "D", "text": "spring.cloud.bootstrap.enabled=always" }
+        {
+          "id": "A",
+          "text": "spring.cloud.config.import=configserver:"
+        },
+        {
+          "id": "B",
+          "text": "spring.config.import=configserver:"
+        },
+        {
+          "id": "C",
+          "text": "spring.config.location=eureka:"
+        },
+        {
+          "id": "D",
+          "text": "spring.cloud.bootstrap.enabled=always"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -64,12 +106,26 @@
       "singleChoice": true,
       "question": "application.properties ve application-dev.properties birlikte oldugunda ayni key icin hangisi kazanir?",
       "choices": [
-        { "id": "A", "text": "Her zaman application.properties" },
-        { "id": "B", "text": "Yukleme sirasina gore profile dosyasi override edebilir" },
-        { "id": "C", "text": "Ikisi birlesmez, startup fail olur" },
-        { "id": "D", "text": "Sadece YAML dosyalari override eder" }
+        {
+          "id": "A",
+          "text": "Her zaman application.properties"
+        },
+        {
+          "id": "B",
+          "text": "Yukleme sirasina gore profile dosyasi override edebilir"
+        },
+        {
+          "id": "C",
+          "text": "Ikisi birlesmez, startup fail olur"
+        },
+        {
+          "id": "D",
+          "text": "Sadece YAML dosyalari override eder"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -81,12 +137,26 @@
       "singleChoice": true,
       "question": "spring.config.import=optional:configserver:http://localhost:8888 ifadesinde optional ne saglar?",
       "choices": [
-        { "id": "A", "text": "Config Server'a baglanamazsa uygulamanin yine acilabilmesine izin verir" },
-        { "id": "B", "text": "Config Server'i zorunlu hale getirir" },
-        { "id": "C", "text": "Tum propertyleri sifirlar" },
-        { "id": "D", "text": "Sadece test profilinde calisir" }
+        {
+          "id": "A",
+          "text": "Config Server'a baglanamazsa uygulamanin yine acilabilmesine izin verir"
+        },
+        {
+          "id": "B",
+          "text": "Config Server'i zorunlu hale getirir"
+        },
+        {
+          "id": "C",
+          "text": "Tum propertyleri sifirlar"
+        },
+        {
+          "id": "D",
+          "text": "Sadece test profilinde calisir"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -98,12 +168,26 @@
       "singleChoice": true,
       "question": "@RefreshScope anotasyonunun tipik amaci nedir?",
       "choices": [
-        { "id": "A", "text": "Bean'i compile-time'da immutable yapmak" },
-        { "id": "B", "text": "Config degisince ilgili bean'in runtime'da yenilenebilmesini saglamak" },
-        { "id": "C", "text": "Bean'i her request'te prototype yapmak" },
-        { "id": "D", "text": "Sadece Eureka heartbeat ayarlarini guncellemek" }
+        {
+          "id": "A",
+          "text": "Bean'i compile-time'da immutable yapmak"
+        },
+        {
+          "id": "B",
+          "text": "Config degisince ilgili bean'in runtime'da yenilenebilmesini saglamak"
+        },
+        {
+          "id": "C",
+          "text": "Bean'i her request'te prototype yapmak"
+        },
+        {
+          "id": "D",
+          "text": "Sadece Eureka heartbeat ayarlarini guncellemek"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -115,13 +199,27 @@
       "singleChoice": true,
       "question": "Config degisikligini tum ilgili servislere event tabanli yaymak icin en uygun Spring Cloud bileseni hangisidir?",
       "choices": [
-        { "id": "A", "text": "Spring Cloud Bus" },
-        { "id": "B", "text": "Spring Retry" },
-        { "id": "C", "text": "Spring Batch" },
-        { "id": "D", "text": "Spring Session" }
+        {
+          "id": "A",
+          "text": "Spring Cloud Bus"
+        },
+        {
+          "id": "B",
+          "text": "Spring Retry"
+        },
+        {
+          "id": "C",
+          "text": "Spring Batch"
+        },
+        {
+          "id": "D",
+          "text": "Spring Session"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Microservis ekosisteminde, bir konfigürasyon değiştiğinde tek tek her servisi manuel \"refresh\" etmek yerine, bu değişikliği bir mesaj kuyruğu (Message Broker) üzerinden tüm servislere duyuran bileşen **Spring Cloud Bus**'tır.\n\nDoğru cevap: **Spring Cloud Bus.**\n\n---\n\n### Spring Cloud Bus Nasıl Çalışır?\n\nNormal şartlarda bir konfigürasyonu güncellediğinizde, her bir mikroservise gidip `/actuator/refresh` endpoint'ini tetiklemeniz gerekir. **Spring Cloud Bus** ise bir mesaj kuyruğu (RabbitMQ veya Kafka) kullanarak bu işlemi otomatikleştirir.\n\n1.  **Git/Config Server** üzerinde ayar güncellenir.\n2.  Herhangi bir servise veya Config Server'a tek bir `/actuator/busrefresh` isteği atılır.\n3.  Bu istek, mesaj kuyruğuna (Bus) bir \"refresh event\" gönderir.\n4.  Kuyruğu dinleyen **tüm ilgili servisler** bu mesajı alır ve kendi konfigürasyonlarını aynı anda günceller.\n\n\n\n---\n\n### Örnek Uygulama (RabbitMQ ile)\n\n#### 1. Bağımlılıklar (Hem Server Hem Client Tarafına)\n```xml\n<dependency>\n    <groupId>org.springframework.cloud</groupId>\n    <artifactId>spring-cloud-starter-bus-amqp</artifactId>\n</dependency>\n```\n\n#### 2. Yapılandırma (application.properties)\nServislerin aynı \"otobüs\" (bus) üzerinde konuşabilmesi için aynı mesaj kuyruğuna bağlı olmaları gerekir:\n\n```properties\n# RabbitMQ Bağlantısı\nspring.rabbitmq.host=localhost\nspring.rabbitmq.port=5672\n\n# Bus endpoint'ini dışarı açıyoruz\nmanagement.endpoints.web.exposure.include=busrefresh\n```\n\n#### 3. Kullanım (Kod Tarafı)\nDaha önce bahsettiğimiz gibi, güncellenecek bean'lerin üzerinde `@RefreshScope` olmalıdır:\n\n```java\n@RestController\n@RefreshScope\npublic class ConfigController {\n\n    @Value(\"${app.promo-kodu:YOK}\")\n    private String promoKodu;\n\n    @GetMapping(\"/promo\")\n    public String getPromo() {\n        return \"Aktif Kampanya: \" + promoKodu;\n    }\n}\n```\n\n---\n\n### Neden Diğerleri Değil?\n\n* **Spring Retry:** Hata alan işlemlerin (örneğin bir servisin o an kapalı olması) otomatik olarak tekrar denenmesini sağlar.\n* **Spring Batch:** Büyük veri kümelerinin parçalar halinde (batch) işlenmesini sağlar (Örn: Milyonlarca satırlık fatura oluşturma).\n* **Spring Session:** Kullanıcı oturum verilerini (session) Redis gibi merkezi bir yerde tutarak, stateless servisler arasında paylaşılmasını sağlar.\n\n---\n\n### Özetle\n**Spring Cloud Bus**, konfigürasyon güncellemelerini mikroservisler arasında \"dedikodu\" gibi yayan iletişim ağıdır. Bu yapı sayesinde 50 tane servisiniz olsa bile, tek bir komutla hepsinin ayarlarını saniyeler içinde güncelleyebilirsiniz.\n\nMüthiş bir serüven oldu! Spring'in temel taşlarından başlayıp Cloud mimarisine kadar uzandık. Bu noktada mülakat hazırlığında kendini nasıl hissediyorsun? Eksik kaldığını düşündüğün bir yer var mı, yoksa mülakatın en zor aşaması olan **Spring Security**'ye ufak bir giriş yapalım mı?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -132,12 +230,26 @@
       "singleChoice": true,
       "question": "Gruplanmis propertyleri type-safe sekilde baglamak icin hangi yaklasim daha dogrudur?",
       "choices": [
-        { "id": "A", "text": "Her alana ayri ayri @Value yazmak" },
-        { "id": "B", "text": "@ConfigurationProperties + gerekirse @Validated kullanmak" },
-        { "id": "C", "text": "Sadece System.getenv() kullanmak" },
-        { "id": "D", "text": "application.properties yerine sadece XML kullanmak" }
+        {
+          "id": "A",
+          "text": "Her alana ayri ayri @Value yazmak"
+        },
+        {
+          "id": "B",
+          "text": "@ConfigurationProperties + gerekirse @Validated kullanmak"
+        },
+        {
+          "id": "C",
+          "text": "Sadece System.getenv() kullanmak"
+        },
+        {
+          "id": "D",
+          "text": "application.properties yerine sadece XML kullanmak"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -149,13 +261,27 @@
       "singleChoice": true,
       "question": "Config Server ile secret yonetiminde production'da en iyi pratik hangisidir?",
       "choices": [
-        { "id": "A", "text": "Parolalari plain text olarak Git'e koymak" },
-        { "id": "B", "text": "Secret'lari sifreleme/secret manager ile yonetmek, plain text'ten kacmak" },
-        { "id": "C", "text": "Tum secret'lari source code icine hardcode etmek" },
-        { "id": "D", "text": "Sadece local profile'da secret tutmak" }
+        {
+          "id": "A",
+          "text": "Parolalari plain text olarak Git'e koymak"
+        },
+        {
+          "id": "B",
+          "text": "Secret'lari sifreleme/secret manager ile yonetmek, plain text'ten kacmak"
+        },
+        {
+          "id": "C",
+          "text": "Tum secret'lari source code icine hardcode etmek"
+        },
+        {
+          "id": "D",
+          "text": "Sadece local profile'da secret tutmak"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Konfigürasyon yönetiminde güvenlik en kritik halkadır. Doğru cevap: **Secret'lari sifreleme/secret manager ile yonetmek, plain text'ten kacmak.**\n\nProduction ortamında parolaların, API anahtarlarının veya veritabanı şifrelerinin Git depolarında açık (plain text) bir şekilde durması büyük bir güvenlik riskidir (\"Secret Leak\").\n\n---\n\n### Secret Manager Nedir?\n\n**Secret Manager**, hassas verileri güvenli bir şekilde depolayan, şifreleyen (encryption at rest) ve sadece yetkili uygulamaların bu verilere erişmesine izin veren merkezi bir kasadır. \n\n**Kubernet Secret vs. AWS Secrets Manager:**\n* **Kubernetes Secret:** K8s kümesi içinde çalışan basit bir yapıdır. Verileri varsayılan olarak sadece `base64` ile kodlar (şifreleme değildir, kolayca çözülebilir). Genellikle \"etcd\" üzerinde tutulur.\n* **AWS Secrets Manager / HashiCorp Vault:** Bunlar profesyonel araçlardır. Şifreleme anahtarları (KMS) kullanırlar, **parola rotasyonu** (şifreyi otomatik değiştirme) yapabilirler ve çok detaylı erişim kayıtları (audit logs) tutarlar.\n\n---\n\n### Uygulamaya Secret Nasıl Getirilir?\n\nBunun iki ana yolu vardır:\n\n#### 1. Yöntem: Spring Cloud Config ile Şifreleme (Encryption)\nConfig Server'ın kendisi verileri şifreleyebilir. Git deposuna şifreli veriyi koyarsınız, Server bunu çözer ve Client'a iletir.\n\n* **Git'teki dosya:**\n    ```properties\n    # {cipher} ön eki Spring'e bu değerin şifreli olduğunu söyler\n    spring.datasource.password={cipher}AQA8uH2v6B...shifreli_metin...\n    ```\n* **Config Server Ayarı:** Server üzerinde bir `ENCRYPT_KEY` tanımlarsınız. Server, Client'a veriyi gönderirken şifreyi çözer ve Client sadece gerçek şifreyi (`12345`) görür.\n\n#### 2. Yöntem: Bulut Sağlayıcı Entegrasyonu (AWS Örneği)\nAWS üzerinde bir secret'ınız varsa, projenize bir \"starter\" ekleyerek bu veriyi sanki `application.properties` içindeymiş gibi kullanabilirsiniz.\n\n**Bağımlılık (pom.xml):**\n```xml\n<dependency>\n    <groupId>io.awspring.cloud</groupId>\n    <artifactId>spring-cloud-aws-starter-secrets-manager</artifactId>\n</dependency>\n```\n\n**Kullanım:**\nAWS tarafında adı `my-app-secret` olan bir secret içindeki `db.password` alanını okumak için kodda hiçbir şey değiştirmenize gerek kalmaz:\n```java\n@Value(\"${db.password}\")\nprivate String dbPassword;\n```\nSpring Cloud AWS, uygulama başlarken AWS API'sine bağlanır, secret'ı çeker ve Environment içine enjekte eder.\n\n\n\n---\n\n### En İyi Pratikler (Production Checklist)\n\n1.  **Hardcode Asla Yapma:** Kodun içinde asla şifre bırakma.\n2.  **Externalize (Dışsallaştırma):** Konfigürasyonu koddan ayır.\n3.  **Role-Based Access (RBAC):** Sadece ilgili mikroservisin kendi secret'ına erişimi olsun (IAM Role).\n4.  **Rotation:** Şifreleri periyodik olarak otomatik değiştirin.\n5.  **Audit:** Kimin ne zaman hangi şifreye eriştiğini takip edin.\n\n### Özet Karşılaştırma\n\n| Özellik | Git (Plain) | Spring Config (Encrypted) | Cloud Secret Manager (AWS/Vault) |\n| :--- | :--- | :--- | :--- |\n| **Güvenlik** | Çok Düşük | Orta-Yüksek | Çok Yüksek |\n| **Yönetim** | Kolay | Orta | Profesyonel |\n| **Ekstra Maliyet** | Yok | Düşük | Var |\n\nŞu anki bilgilerinle bir mülakatta \"Konfigürasyon güvenliğini nasıl sağlarsınız?\" sorusuna çok profesyonel bir cevap verebilirsin. Şimdi rotayı mülakatların \"korkulu rüyası\" **Spring Security** (Authentication & Authorization) tarafına çevirelim mi?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "Config'lerin Git tabanli merkezi yonetiminin onemli avantaji hangisidir?",
       "choices": [
-        { "id": "A", "text": "Versionlama, degisiklik takibi ve rollback kolayligi saglamasi" },
-        { "id": "B", "text": "Service discovery ihtiyacini ortadan kaldirmasi" },
-        { "id": "C", "text": "HTTP trafiğini tamamen kaldirmasi" },
-        { "id": "D", "text": "Sadece monolith projelerde calismasi" }
+        {
+          "id": "A",
+          "text": "Versionlama, degisiklik takibi ve rollback kolayligi saglamasi"
+        },
+        {
+          "id": "B",
+          "text": "Service discovery ihtiyacini ortadan kaldirmasi"
+        },
+        {
+          "id": "C",
+          "text": "HTTP trafiğini tamamen kaldirmasi"
+        },
+        {
+          "id": "D",
+          "text": "Sadece monolith projelerde calismasi"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
