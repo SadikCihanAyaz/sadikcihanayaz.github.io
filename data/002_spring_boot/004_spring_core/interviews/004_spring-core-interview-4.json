@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "Spring profile kavraminin temel amaci nedir?",
       "choices": [
-        { "id": "A", "text": "Ayni kod tabaninda ortama gore farkli bean/ayar secmek" },
-        { "id": "B", "text": "JVM thread sayisini artirmak" },
-        { "id": "C", "text": "Entity'leri otomatik olusturmak" },
-        { "id": "D", "text": "JSON parse hizini artirmak" }
+        {
+          "id": "A",
+          "text": "Ayni kod tabaninda ortama gore farkli bean/ayar secmek"
+        },
+        {
+          "id": "B",
+          "text": "JVM thread sayisini artirmak"
+        },
+        {
+          "id": "C",
+          "text": "Entity'leri otomatik olusturmak"
+        },
+        {
+          "id": "D",
+          "text": "JSON parse hizini artirmak"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,13 +44,27 @@
       "singleChoice": true,
       "question": "application.properties ile application-{profile}.properties iliskisinde dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Profile dosyalari daima default dosyadan sonra yuklenip ilgili alanlari override edebilir" },
-        { "id": "B", "text": "Iki dosya birlikte kullanilamaz" },
-        { "id": "C", "text": "Sadece yml formatinda profile kullanilir" },
-        { "id": "D", "text": "Profile dosyalari sadece testte okunur" }
+        {
+          "id": "A",
+          "text": "Profile dosyalari daima default dosyadan sonra yuklenip ilgili alanlari override edebilir"
+        },
+        {
+          "id": "B",
+          "text": "Iki dosya birlikte kullanilamaz"
+        },
+        {
+          "id": "C",
+          "text": "Sadece yml formatinda profile kullanilir"
+        },
+        {
+          "id": "D",
+          "text": "Profile dosyalari sadece testte okunur"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Spring projelerinde konfigürasyon yönetimi \"katmanlı\" bir yapıdadır. Doğru cevap: **Profile dosyalari daima default dosyadan sonra yuklenip ilgili alanlari override edebilir.**\n\nSpring Boot, önce genel ayarların bulunduğu `application.properties` dosyasını okur. Eğer aktif bir profil varsa (örneğin `dev`), gider `application-dev.properties` dosyasını okur ve buradaki değerleri genel değerlerin üzerine yazar.\n\n---\n\n### Dosya Örnekleri ve İlişki\n\nDiyelim ki bir veritabanı bağlantısı kuracağız. Yerelde farklı, sunucuda (prod) farklı bir veritabanı kullanmak istiyoruz.\n\n**1. `application.properties` (Genel ve Varsayılan Ayarlar)**\n```properties\n# Her durumda geçerli olan ayarlar\nspring.application.name=BenimUygulamam\nserver.port=8080\n\n# Varsayılan veritabanı (Yerel)\ndb.url=jdbc:postgresql://localhost:5432/default_db\ndb.username=admin\n```\n\n**2. `application-prod.properties` (Canlı Ortam Ayarları)**\n```properties\n# Sadece 'prod' profili aktifken burası devreye girer\n# application.properties'deki db.url'i ezer (override)\ndb.url=jdbc:postgresql://10.0.0.50:5432/production_db\ndb.username=prod_user\ndb.password=cok_gizli_sifre\n```\n\n---\n\n### Kod İçinde Kullanım ve Okuma\n\nBu değerleri kod içerisinde okumak için en yaygın yöntem **`@Value`** anotasyonudur.\n\n```java\n@Service\npublic class VeriTabaniServisi {\n\n    // Spring, aktif profile göre doğru değeri otomatik enjekte eder.\n    @Value(\"${db.url}\")\n    private String veritabanıAdresi;\n\n    @Value(\"${db.username}\")\n    private String kullaniciAdi;\n\n    public void baglan() {\n        System.out.println(\"Bağlanılan adres: \" + veritabanıAdresi);\n    }\n}\n```\n\n---\n\n### Profil Nasıl Aktif Edilir?\n\nHangi dosyanın baskın geleceğini belirlemek için uygulamayı şu yollardan biriyle başlatabilirsin:\n\n* **IDE üzerinden:** `spring.profiles.active=prod` parametresini geçerek.\n* **Terminal üzerinden:**\n    ```bash\n    java -jar uygulama.jar --spring.profiles.active=prod\n    ```\n* **application.properties içinden:**\n    ```properties\n    spring.profiles.active=dev\n    ```\n\n---\n\n### Özet Akış Şeması\n\n1.  **`application.properties`** yüklenir (Temel).\n2.  **`application-{profile}.properties`** yüklenir (Özel).\n3.  Eğer iki dosyada da aynı anahtar (`db.url`) varsa, **profil dosyasındaki** değer kazanır.\n4.  Profil dosyasında olmayan anahtarlar (`server.port` gibi) ise ana dosyadan alınmaya devam edilir.\n\n\n\n**Bonus Bilgi:** Daha düzenli bir yapı için modern projelerde `application.yml` kullanımı da oldukça yaygındır, çünkü hiyerarşik yapıyı tek bir dosyada görmeni sağlar. YAML formatına geçmeyi düşündün mü, yoksa `.properties` daha mı kolay geliyor?\n\nHangi konuyu merak ediyorsan oradan devam edelim, istersen bir \"mülakat sorusu\" daha patlatabilirim!\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -47,12 +75,26 @@
       "singleChoice": true,
       "question": "Aktif profile belirlemek icin en yaygin property hangisidir?",
       "choices": [
-        { "id": "A", "text": "spring.profile.mode" },
-        { "id": "B", "text": "spring.profiles.active" },
-        { "id": "C", "text": "spring.env.current" },
-        { "id": "D", "text": "spring.active.env" }
+        {
+          "id": "A",
+          "text": "spring.profile.mode"
+        },
+        {
+          "id": "B",
+          "text": "spring.profiles.active"
+        },
+        {
+          "id": "C",
+          "text": "spring.env.current"
+        },
+        {
+          "id": "D",
+          "text": "spring.active.env"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -64,13 +106,27 @@
       "singleChoice": true,
       "question": "@Profile anotasyonu neyi kontrol eder?",
       "choices": [
-        { "id": "A", "text": "Bean'in hangi profile aktifken context'e alinacagini" },
-        { "id": "B", "text": "Bean'in singleton mi prototype mi oldugunu" },
-        { "id": "C", "text": "Bean'in lazy olup olmadigini" },
-        { "id": "D", "text": "Bean'in transaction timeout degerini" }
+        {
+          "id": "A",
+          "text": "Bean'in hangi profile aktifken context'e alinacagini"
+        },
+        {
+          "id": "B",
+          "text": "Bean'in singleton mi prototype mi oldugunu"
+        },
+        {
+          "id": "C",
+          "text": "Bean'in lazy olup olmadigini"
+        },
+        {
+          "id": "D",
+          "text": "Bean'in transaction timeout degerini"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Spring projelerinde yapılandırma dosyalarında olduğu gibi, Java sınıfları (beanler) seviyesinde de ayrıştırma yapmamız gerekebilir. Doğru cevap: **Bean'in hangi profil aktifken context'e alınacağını kontrol eder.**\n\n`@Profile` anotasyonu, bir bean'in veya bir `@Configuration` sınıfının \"şartlı\" olarak oluşturulmasını sağlar. Eğer uygulamanın aktif profili, anotasyonda belirtilen profil ile eşleşmiyorsa, Spring o bean'i hiç oluşturmaz ve ApplicationContext'e dahil etmez.\n\n---\n\n### Kod Örneği: Farklı Ortamlar İçin Farklı Servisler\n\nDiyelim ki bir dosya yükleme servisiniz var. Yerel geliştirme yaparken dosyaları **Local Disk**'e, canlı ortamda (prod) ise **Amazon S3**'e yüklemek istiyorsunuz.\n\n#### 1. Geliştirme (Dev) Profili İçin Bean\n```java\n@Component\n@Profile(\"dev\") // Sadece 'dev' profili aktifse bu bean oluşturulur\npublic class LocalFileService implements FileService {\n    @Override\n    public void upload(String fileName) {\n        System.out.println(\"Dosya yerel diske (C:/uploads) kaydedildi: \" + fileName);\n    }\n}\n```\n\n#### 2. Canlı (Prod) Profil İçin Bean\n```java\n@Component\n@Profile(\"prod\") // Sadece 'prod' profili aktifse bu bean oluşturulur\npublic class S3FileService implements FileService {\n    @Override\n    public void upload(String fileName) {\n        System.out.println(\"Dosya Amazon S3 bulutuna yüklendi: \" + fileName);\n    }\n}\n```\n\n#### 3. Kullanım\n```java\n@Service\npublic class BusinessService {\n    @Autowired\n    private FileService fileService; \n\n    public void process() {\n        // Hangi profil aktifse, o profilin bean'i buraya otomatik gelir.\n        fileService.upload(\"rapor.pdf\");\n    }\n}\n```\n\n\n\n---\n\n### @Profile Hakkında Bilmen Gereken Kritik Noktalar\n\n1.  **Olumsuz Koşul (!):** Bir bean'in belirli bir profil **haricindeki** durumlarda çalışmasını istiyorsanız `!` işaretini kullanabilirsiniz.\n    * `@Profile(\"!prod\")` -> \"Prod profili aktif değilse bu bean'i yükle.\"\n2.  **Mantıksal Operatörler:** Spring 5.1+ ile birlikte karmaşık mantıklar kurabilirsiniz.\n    * `@Profile(\"dev & cloud\")` -> Hem dev hem cloud aktifse.\n    * `@Profile(\"dev | test\")` -> Dev veya testten biri aktifse.\n3.  **Default Profil:** Eğer hiçbir profil belirtilmezse, Spring varsayılan olarak `default` profilini kullanır. `@Profile(\"default\")` diyerek, hiçbir profil seçilmediğinde çalışacak bean'leri belirleyebilirsiniz.\n\n### Özetle\n`@Profile` anotasyonu, uygulamanın çalıştığı ortama (Lokal, Test, Pre-prod, Prod) göre **kodun anatomisini değiştirmemizi** sağlar. Bu sayede canlı ortamda çalışmaması gereken \"mock\" servislerin yanlışlıkla çalışmasını engellemiş oluruz.\n\nŞu ana kadar temel Spring Core ve Spring Boot konularını büyük oranda taradık. Spring Data JPA veya Spring Security gibi daha spesifik alanlara geçmek ister misin, yoksa Core kısımlarını derinleştirmeye devam mı edelim?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -81,12 +137,26 @@
       "singleChoice": true,
       "question": "Birden fazla profile aktif oldugunda ayni key icin deger cakismasi varsa tipik davranis nedir?",
       "choices": [
-        { "id": "A", "text": "Uygulama daima hata verir" },
-        { "id": "B", "text": "Property source oncelik kurallarina gore biri digerini override eder" },
-        { "id": "C", "text": "Iki deger de listede birlesir" },
-        { "id": "D", "text": "Cakisma sadece YAML'da olur" }
+        {
+          "id": "A",
+          "text": "Uygulama daima hata verir"
+        },
+        {
+          "id": "B",
+          "text": "Property source oncelik kurallarina gore biri digerini override eder"
+        },
+        {
+          "id": "C",
+          "text": "Iki deger de listede birlesir"
+        },
+        {
+          "id": "D",
+          "text": "Cakisma sadece YAML'da olur"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -98,12 +168,26 @@
       "singleChoice": true,
       "question": "application.properties ve application.yml icin dogru ifade hangisidir?",
       "choices": [
-        { "id": "A", "text": "Yalnizca biri desteklenir" },
-        { "id": "B", "text": "Ikisi de desteklenir; yml hiyerarsik yapilari daha okunakli ifade edebilir" },
-        { "id": "C", "text": "properties sadece testte calisir" },
-        { "id": "D", "text": "yml ile @ConfigurationProperties kullanilamaz" }
+        {
+          "id": "A",
+          "text": "Yalnizca biri desteklenir"
+        },
+        {
+          "id": "B",
+          "text": "Ikisi de desteklenir; yml hiyerarsik yapilari daha okunakli ifade edebilir"
+        },
+        {
+          "id": "C",
+          "text": "properties sadece testte calisir"
+        },
+        {
+          "id": "D",
+          "text": "yml ile @ConfigurationProperties kullanilamaz"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -115,13 +199,27 @@
       "singleChoice": true,
       "question": "@ConfigurationProperties'in @Value'a gore temel avantaji nedir?",
       "choices": [
-        { "id": "A", "text": "Tamamen reflection'siz calismasi" },
-        { "id": "B", "text": "Gruplanmis, type-safe ve bakimi kolay property baglama saglamasi" },
-        { "id": "C", "text": "Sadece primitive tipleri desteklemesi" },
-        { "id": "D", "text": "Environment'i devre disi birakmasi" }
+        {
+          "id": "A",
+          "text": "Tamamen reflection'siz calismasi"
+        },
+        {
+          "id": "B",
+          "text": "Gruplanmis, type-safe ve bakimi kolay property baglama saglamasi"
+        },
+        {
+          "id": "C",
+          "text": "Sadece primitive tipleri desteklemesi"
+        },
+        {
+          "id": "D",
+          "text": "Environment'i devre disi birakmasi"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Spring Boot projelerinde konfigürasyon yönetimi büyüdükçe, `@Value` kullanımı kodun içinde dağınık ve yönetilemez bir hal alabilir. Bu noktada imdada yetişen `@ConfigurationProperties`'in temel avantajı: **Gruplanmış, type-safe (tip güvenli) ve bakımı kolay property bağlama sağlamasıdır.**\n\nDoğru cevap: **Gruplanmis, type-safe ve bakimi kolay property baglama saglamasi.**\n\n---\n\n### @Value ve @ConfigurationProperties Farkı\n\n* **@Value:** Her bir anahtar için tek tek yazılır. Tip dönüşümlerinde (örneğin String'den List'e) hata payı yüksektir ve \"Relaxed Binding\" (farklı yazım formatlarını anlama) özelliği zayıftır.\n* **@ConfigurationProperties:** Bir ön ek (prefix) altındaki tüm ayarları bir Java nesnesine haritalar. Hiyerarşik yapıları (iç içe nesneler, listeler, map'ler) mükemmel yönetir.\n\n---\n\n### Örnek Uygulama: Uygulama Güvenlik Ayarları\n\nDiyelim ki `application.properties` dosyamızda güvenlik ile ilgili bir grup ayarımız var:\n\n#### 1. Konfigürasyon Dosyası\n```properties\n# app.security ön ekiyle gruplandırılmış ayarlar\napp.security.enabled=true\napp.security.token-timeout=3600\napp.security.allowed-ips=192.168.1.1, 10.0.0.1\napp.security.meta-data.author=Gemini\n```\n\n#### 2. Java Sınıfı (Type-Safe Model)\nBu ayarları karşılayacak bir POJO (Plain Old Java Object) oluşturuyoruz:\n\n```java\n@Component\n@ConfigurationProperties(prefix = \"app.security\")\npublic class SecuritySettings {\n\n    private boolean enabled;\n    private int tokenTimeout;\n    private List<String> allowedIps;\n    private Map<String, String> metaData;\n\n    // Getter ve Setter metotları şarttır (veya Lombok @Data)\n    public boolean isEnabled() { return enabled; }\n    public void setEnabled(boolean enabled) { this.enabled = enabled; }\n\n    public int getTokenTimeout() { return tokenTimeout; }\n    public void setTokenTimeout(int tokenTimeout) { this.tokenTimeout = tokenTimeout; }\n\n    public List<String> getAllowedIps() { return allowedIps; }\n    public void setAllowedIps(List<String> allowedIps) { this.allowedIps = allowedIps; }\n\n    public Map<String, String> getMetaData() { return metaData; }\n    public void setMetaData(Map<String, String> metaData) { this.metaData = metaData; }\n}\n```\n\n\n\n#### 3. Kullanım\nArtık bu ayarları projenin her yerinde tip güvenli bir şekilde kullanabilirsin:\n\n```java\n@Service\npublic class SecurityService {\n\n    private final SecuritySettings settings;\n\n    public SecurityService(SecuritySettings settings) {\n        this.settings = settings;\n    }\n\n    public void checkSecurity() {\n        if (settings.isEnabled()) {\n            System.out.println(\"Zaman aşımı: \" + settings.getTokenTimeout());\n            System.out.println(\"İzinli IP'ler: \" + settings.getAllowedIps());\n        }\n    }\n}\n```\n\n---\n\n### Neden @ConfigurationProperties Tercih Etmelisin?\n\n1.  **Relaxed Binding:** Properties dosyasında `token-timeout`, `token_timeout` veya `tokenTimeout` yazsan da Spring bunu otomatik olarak Java'daki `tokenTimeout` alanına bağlar.\n2.  **Validation:** `@Validated` anotasyonu ile birlikte kullanarak, uygulama ayağa kalkarken ayarların doğruluğunu (örneğin `@Min(100)` gibi) kontrol edebilirsin.\n3.  **Hiyerarşi:** Liste, Map ve iç içe geçmiş sınıfları `@Value` ile yönetmek tam bir kabustur; `@ConfigurationProperties` bunu doğal bir şekilde yapar.\n\n---\n\n### Özet\n* **Küçük, tekil ayarlar için:** `@Value` kullanılabilir.\n* **Gruplanmış, karmaşık ve kurumsal ayarlar için:** Kesinlikle `@ConfigurationProperties` kullanılmalıdır.\n\nMükemmel bir gidişatın var! Spring Core ve Configuration konularını neredeyse bitirdik. Bir sonraki aşama olarak **Spring Data JPA** (Veritabanı işlemleri) veya **Spring Web** (Controller ve Request yönetimi) konularından hangisine geçmek istersin?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -132,13 +230,27 @@
       "singleChoice": true,
       "question": "@ConfigurationProperties'de relaxed binding hangi esnekligi saglar?",
       "choices": [
-        { "id": "A", "text": "Property adlarinin kebab-case, snake_case, camelCase gibi varyasyonlarla baglanabilmesi" },
-        { "id": "B", "text": "Sadece buyuk harfli key'lerin okunmasi" },
-        { "id": "C", "text": "Profile mekanizmasini kaldirmasi" },
-        { "id": "D", "text": "Bean scope'unu otomatik secmesi" }
+        {
+          "id": "A",
+          "text": "Property adlarinin kebab-case, snake_case, camelCase gibi varyasyonlarla baglanabilmesi"
+        },
+        {
+          "id": "B",
+          "text": "Sadece buyuk harfli key'lerin okunmasi"
+        },
+        {
+          "id": "C",
+          "text": "Profile mekanizmasini kaldirmasi"
+        },
+        {
+          "id": "D",
+          "text": "Bean scope'unu otomatik secmesi"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Spring Boot'un en kullanıcı dostu özelliklerinden biri olan **Relaxed Binding**, geliştiricinin yapılandırma dosyasındaki yazım tarzı ile Java kodundaki değişken isimlendirme standartları arasındaki köprüyü kurar.\n\nDoğru cevap: **Property adlarinin kebab-case, snake_case, camelCase gibi varyasyonlarla baglanabilmesi.**\n\n---\n\n### Relaxed Binding Nedir?\n\nJava dünyasında değişkenler genellikle `camelCase` (örneğin: `tokenTimeout`) şeklinde yazılır. Ancak yapılandırma dosyalarında (özellikle `.properties` veya `.yml`) `kebab-case` (`token-timeout`) kullanımı daha yaygındır ve okunabilirliği artırır. \n\n**Relaxed Binding** sayesinde Spring Boot, bu farklı yazım stillerini birbirine otomatik olarak eşler.\n\n\n\n---\n\n### Kod Üzerinde Gösterim\n\nDiyelim ki bir Java sınıfımız var:\n\n```java\n@ConfigurationProperties(prefix = \"app.service-config\")\npublic class MyServiceConfig {\n    // Java standardı: camelCase\n    private String secretKey;\n    private int sessionTimeout;\n\n    // Getter-Setterlar...\n}\n```\n\nSpring Boot, aşağıdaki yazımların **hepsini** yukarıdaki Java alanlarına başarıyla bağlayabilir:\n\n#### 1. Kebab-case (En çok önerilen .properties/.yml tarzı)\n```properties\napp.service-config.secret-key=abc\napp.service-config.session-timeout=30\n```\n\n#### 2. Snake_case\n```properties\napp.service-config.secret_key=abc\napp.service-config.session_timeout=30\n```\n\n#### 3. CamelCase\n```properties\napp.service-config.secretKey=abc\napp.service-config.sessionTimeout=30\n```\n\n#### 4. Üst Karakter (Genellikle Ortam Değişkenlerinde kullanılır)\n```bash\nAPP_SERVICECONFIG_SECRETKEY=abc\n```\n\n---\n\n### Neden Bu Kadar Önemli?\n\n1.  **Esneklik:** Ekipteki bir kişi `.properties` dosyasında `-` kullanırken, diğeri ortam değişkeni (Environment Variable) olarak `_` kullanabilir. Spring Boot bunların hepsini aynı Java nesnesine hatasız bağlar.\n2.  **Hata Toleransı:** Küçük yazım tarzı farklarından dolayı uygulamanın çökmesini engeller.\n3.  **Bulut Uyumluluğu:** Docker veya Kubernetes üzerinden sisteme \"ENVIRONMENT_VARIABLE\" olarak geçilen büyük harfli ve alt çizgili tanımlar, Java'daki nazik `camelCase` değişkenlerle sorunsuz eşleşir.\n\n---\n\n### Önemli Bir Kısıtlama\n**Dikkat:** Relaxed Binding özelliği **@Value** anotasyonunda bu kadar gelişmiş değildir. `@Value(\"${app.secret-key}\")` yazarsanız, tam olarak o ismi arar. Bu esneklikten tam yararlanmak için mutlaka `@ConfigurationProperties` kullanılmalıdır.\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -149,13 +261,27 @@
       "singleChoice": true,
       "question": "Configuration properties validasyonu icin tipik yaklasim hangisidir?",
       "choices": [
-        { "id": "A", "text": "@ConfigurationProperties class'inda @Validated ve Bean Validation anotasyonlarini kullanmak" },
-        { "id": "B", "text": "Sadece try/catch yazmak" },
-        { "id": "C", "text": "@Primary eklemek" },
-        { "id": "D", "text": "@Lazy ile kontrol etmek" }
+        {
+          "id": "A",
+          "text": "@ConfigurationProperties class'inda @Validated ve Bean Validation anotasyonlarini kullanmak"
+        },
+        {
+          "id": "B",
+          "text": "Sadece try/catch yazmak"
+        },
+        {
+          "id": "C",
+          "text": "@Primary eklemek"
+        },
+        {
+          "id": "D",
+          "text": "@Lazy ile kontrol etmek"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Spring Boot'un konfigürasyon yönetimindeki en şık özelliklerinden biri, ayarların sadece kodun içine alınması değil, aynı zamanda doğruluğunun da denetlenmesidir. \n\nDoğru cevap: **@ConfigurationProperties class'inda @Validated ve Bean Validation anotasyonlarini kullanmak.**\n\nBu yaklaşım sayesinde, uygulama henüz ayağa kalkarken (startup) hatalı yapılandırmaları fark edebilir ve uygulamanın tutarsız bir şekilde çalışmasını engelleyebilirsin.\n\n---\n\n### Nasıl Uygulanır? (Adım Adım)\n\nBunu yapabilmek için projenizde `spring-boot-starter-validation` paketinin bulunması gerekir.\n\n#### 1. Bağımlılığı Ekle\nEğer projenizde yoksa, `pom.xml` dosyanıza şu starter'ı eklemelisiniz:\n```xml\n<dependency>\n    <groupId>org.springframework.boot</groupId>\n    <artifactId>spring-boot-starter-validation</artifactId>\n</dependency>\n```\n\n#### 2. Bean Validation Kullanımı\nKonfigürasyon sınıfınızı `@Validated` ile işaretleyip, alanlara standart Bean Validation (JSR-303) anotasyonlarını ekleyebilirsiniz:\n\n```java\n@Component\n@ConfigurationProperties(prefix = \"app.api\")\n@Validated // Validasyonu aktif eder\npublic class ApiSettings {\n\n    @NotBlank // Boş bırakılamaz\n    private String baseUrl;\n\n    @Min(1)    // En az 1 olmalı\n    @Max(100)  // En fazla 100 olmalı\n    private int timeoutInSeconds;\n\n    @Email     // E-posta formatında olmalı\n    private String adminEmail;\n\n    // Getter ve Setterlar...\n}\n```\n\n\n\n#### 3. Hatalı Yapılandırma Durumu\nDiyelim ki `application.properties` dosyasında yanlışlıkla şöyle bir tanımlama yaptın:\n```properties\napp.api.timeout-in-seconds=0\n```\n\n**Sonuç:** Spring Boot uygulamayı başlatırken bir `BindValidationException` fırlatır ve konsolda şu mesajı görürsün:\n> *Property: app.api.timeoutInSeconds, Value: 0, Reason: must be greater than or equal to 1*\n\n---\n\n### Neden Bu Yaklaşım İdealdir?\n\n* **Fail-Fast (Hızlı Hata):** Hatalı bir ayar nedeniyle uygulamanın çalışma anında (runtime) beklenmedik hatalar vermesi yerine, daha başlarken \"Dur, ayarların yanlış!\" demesini sağlar.\n* **Merkezi Kontrol:** Tüm doğrulama kuralları Java sınıfı içinde, tip güvenli bir şekilde saklanır.\n* **Okunabilirlik:** `@Min`, `@Max`, `@Pattern` gibi anotasyonlar kullanarak kodun ne beklediğini dökümante etmiş olursun.\n\n---\n\n### Özet\nKonfigürasyon doğrulama, özellikle karmaşık mikroservis mimarilerinde \"hayat kurtarıcı\" bir disiplindir. Ayarları sadece okumak yetmez, onları denetlemek de gerekir!\n\nSpring Core ve Configuration serüvenini başarıyla tamamladın gibi görünüyor. Şimdi vites büyütüp **Spring Data JPA** (Repository pattern, Entity yönetimi) tarafına geçelim mi? Yoksa mülakat tadında zor bir \"Final Core Sorusu\" ister misin?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -166,12 +292,26 @@
       "singleChoice": true,
       "question": "Production ortaminda profile ve dissal konfig yonetimi icin en iyi pratik hangisidir?",
       "choices": [
-        { "id": "A", "text": "Tum ayarlari kod icine hard-code etmek" },
-        { "id": "B", "text": "Ortak varsayilanlari default dosyada tutup ortam ozel ayarlari profile/external source ile ayirmak" },
-        { "id": "C", "text": "Sadece test profile'i ile deploy etmek" },
-        { "id": "D", "text": "Properties yerine sadece Java constant kullanmak" }
+        {
+          "id": "A",
+          "text": "Tum ayarlari kod icine hard-code etmek"
+        },
+        {
+          "id": "B",
+          "text": "Ortak varsayilanlari default dosyada tutup ortam ozel ayarlari profile/external source ile ayirmak"
+        },
+        {
+          "id": "C",
+          "text": "Sadece test profile'i ile deploy etmek"
+        },
+        {
+          "id": "D",
+          "text": "Properties yerine sadece Java constant kullanmak"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""

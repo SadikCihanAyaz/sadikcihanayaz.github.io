@@ -13,12 +13,26 @@
       "singleChoice": true,
       "question": "@SpringBootApplication hangi uc anotasyonun bilesimidir?",
       "choices": [
-        { "id": "A", "text": "@Configuration, @EnableAutoConfiguration, @ComponentScan" },
-        { "id": "B", "text": "@Controller, @Service, @Repository" },
-        { "id": "C", "text": "@Bean, @Import, @Profile" },
-        { "id": "D", "text": "@Entity, @Table, @Id" }
+        {
+          "id": "A",
+          "text": "@Configuration, @EnableAutoConfiguration, @ComponentScan"
+        },
+        {
+          "id": "B",
+          "text": "@Controller, @Service, @Repository"
+        },
+        {
+          "id": "C",
+          "text": "@Bean, @Import, @Profile"
+        },
+        {
+          "id": "D",
+          "text": "@Entity, @Table, @Id"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -30,13 +44,27 @@
       "singleChoice": true,
       "question": "Spring Boot starter paketlerinin temel amaci nedir?",
       "choices": [
-        { "id": "A", "text": "JVM garbage collector'u degistirmek" },
-        { "id": "B", "text": "Belirli bir ozellik icin uyumlu bagimliliklari tek paketle kolayca saglamak" },
-        { "id": "C", "text": "Tum bean'leri prototype yapmak" },
-        { "id": "D", "text": "Sadece test ortamina ozel class yuklemek" }
+        {
+          "id": "A",
+          "text": "JVM garbage collector'u degistirmek"
+        },
+        {
+          "id": "B",
+          "text": "Belirli bir ozellik icin uyumlu bagimliliklari tek paketle kolayca saglamak"
+        },
+        {
+          "id": "C",
+          "text": "Tum bean'leri prototype yapmak"
+        },
+        {
+          "id": "D",
+          "text": "Sadece test ortamina ozel class yuklemek"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Spring Boot projelerinin bel kemiği olan Starter paketlerinin temel amacı: **Belirli bir özellik için uyumlu bağımlılıkları tek paketle kolayca sağlamaktır.**\n\nSpring Boot'tan önce, projenize bir kütüphane eklediğinizde onun hangi versiyonunun diğer kütüphanelerle çakışmayacağını manuel olarak bulmanız gerekiyordu (buna \"Dependency Hell\" denir). Starter paketleri, **\"Bana web lazım\"** dediğinizde sizin yerinize tüm doğru versiyonları ve gerekli yan kütüphaneleri otomatik olarak getirir.\n\n---\n\n### En Önemli Starter Paketleri\n\nİşte bir Spring projesinde en sık karşılaşacağın \"yol arkadaşları\":\n\n* **`spring-boot-starter-web`:** RESTful uygulamalar ve Spring MVC için kullanılır. İçinde gömülü olarak **Tomcat** ve **Jackson** (JSON işlemleri için) ile birlikte gelir.\n* **`spring-boot-starter-data-jpa`:** Veritabanı işlemleri (ORM) için kullanılır. İçinde **Hibernate** ve **HikariCP** (bağlantı havuzu) barındırır.\n* **`spring-boot-starter-security`:** Uygulamanıza kimlik doğrulama (Auth) ve yetkilendirme ekler.\n* **`spring-boot-starter-test`:** JUnit, Mockito ve Hamcrest gibi test araçlarını tek pakette sunar.\n* **`spring-boot-starter-validation`:** Bean validation (Hibernate Validator) işlemlerini sağlar.\n\n---\n\n### Pratik Örnek: PostgreSQL Kullanmak İstiyorum\n\nDiyelim ki bir PostgreSQL veritabanına bağlanacak bir uygulama yazıyorsun. [start.spring.io](https://start.spring.io/) adresine girdiğinde şu iki temel şeyi seçmen gerekir:\n\n1.  **Spring Data JPA (Starter):** \"Ben veritabanı ile konuşmak istiyorum ve Hibernate kullanacağım\" demiş olursun.\n2.  **PostgreSQL Driver:** \"Kullanacağım veritabanının dili budur\" demiş olursun.\n\n**Maven (pom.xml) görünümü şöyle olurdu:**\n\n```xml\n<dependency>\n    <groupId>org.springframework.boot</groupId>\n    <artifactId>spring-boot-starter-data-jpa</artifactId>\n</dependency>\n\n<dependency>\n    <groupId>org.postgresql</groupId>\n    <artifactId>postgresql</artifactId>\n    <scope>runtime</scope>\n</dependency>\n```\n\n---\n\n### start.spring.io (Spring Initializr) Mantığı\n\nBu site aslında bir \"Starter Seçme Ekranı\"dır. Sen oradan **\"Web\"**, **\"JPA\"**, **\"Postgres\"** seçtiğinde, site senin için bu karmaşık bağımlılık hiyerarşisini tek bir `pom.xml` veya `build.gradle` dosyasına dönüştürür.\n\n\n\n### Özetle\nStarter paketleri sayesinde sadece **\"ne yapmak istediğini\"** (Web, Security, Data) söylersin; **\"hangi versiyon hangi kütüphane lazım\"** detayıyla Spring Boot ilgilenir.\n\nPostgreSQL örneğinde olduğu gibi, bir starter paketinin yanına sadece ilgili veritabanının \"Driver\"ını eklemek projenin ayağa kalkması için yeterlidir. Sence de eskiden manuel versiyon yönetmek çok daha sancılı değil miydi?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -47,13 +75,27 @@
       "singleChoice": true,
       "question": "Auto-configuration sinifi, kullanici kendi bean'ini tanimladiginda nasil davranir?",
       "choices": [
-        { "id": "A", "text": "Her zaman kullanici bean'ini ezer" },
-        { "id": "B", "text": "@ConditionalOnMissingBean gibi kosullarla geri cekilebilir" },
-        { "id": "C", "text": "Uygulamayi baslatmaz" },
-        { "id": "D", "text": "Tum bean'leri @Primary yapar" }
+        {
+          "id": "A",
+          "text": "Her zaman kullanici bean'ini ezer"
+        },
+        {
+          "id": "B",
+          "text": "@ConditionalOnMissingBean gibi kosullarla geri cekilebilir"
+        },
+        {
+          "id": "C",
+          "text": "Uygulamayi baslatmaz"
+        },
+        {
+          "id": "D",
+          "text": "Tum bean'leri @Primary yapar"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Spring Boot'un en \"akıllı\" özelliklerinden biri olan **Auto-configuration**, senin de belirttiğin gibi **@ConditionalOnMissingBean** gibi koşullarla çalışır. \n\nDoğru cevap: **@ConditionalOnMissingBean gibi kosullarla geri cekilebilir.**\n\nSpring Boot'un felsefesi şudur: \"Eğer kullanıcı kendi özelleştirmesini yapmadıysa, ben varsayılan bir yapı sunayım; ama kullanıcı kendi bean'ini tanımlarsa, ben nazikçe geri çekileyim.\"\n\n---\n\n### Kod Üzerinden Örnek: Kendi Veritabanı Yapılandırman\n\nSpring Boot, projenin içine `spring-boot-starter-data-jpa` eklediğinde, arka planda otomatik olarak bir `DataSource` (veritabanı bağlantısı) oluşturmaya çalışır. Ancak sen kendi özel bağlantı havuzunu tanımlarsan, Spring kendi oluşturacağını iptal eder.\n\n#### 1. Spring Boot'un Arka Plandaki Otomatik Kodu (Temsili)\nSpring Boot'un içinde buna benzer binlerce satır kod vardır:\n\n```java\n@Configuration\npublic class DataSourceAutoConfiguration {\n\n    @Bean\n    @ConditionalOnMissingBean // EĞER kullanıcı bir DataSource bean'i tanımlamadıysa...\n    public DataSource dataSource() {\n        return new GenericDataSource(); // ...bu varsayılanı oluştur.\n    }\n}\n```\n\n#### 2. Senin Yazdığın Kod (Özelleştirme)\nSen projenin herhangi bir yerinde kendi bean'ini tanımladığın an:\n\n```java\n@Configuration\npublic class MyCustomConfig {\n\n    @Bean\n    public DataSource dataSource() {\n        // Ben burada özel bir HikariDataSource veya farklı bir yapı istiyorum.\n        return new HikariDataSource(); \n    }\n}\n```\n\n**Sonuç:** Spring Boot uygulamayı başlatırken `MyCustomConfig` içindeki bean'i görür. Ardından kendi oto-konfigürasyonuna bakar, `@ConditionalOnMissingBean` şartının sağlanmadığını (çünkü bir tane bulduğunu) anlar ve kendi metodunu çalıştırmaz.\n\n---\n\n### Sık Kullanılan Diğer Koşul Anotasyonları\n\nAuto-configuration sadece bean'in varlığına bakmaz, birçok farklı şartı kontrol edebilir:\n\n* **@ConditionalOnClass:** Sınıf yolunda (classpath) belirli bir kütüphane (.jar) varsa çalışır.\n* **@ConditionalOnProperty:** `application.properties` dosyasında belirli bir ayar yapılmışsa aktif olur.\n* **@ConditionalOnWebApplication:** Sadece uygulama bir web uygulamasıysa çalışır.\n\n\n\n### Özetle\nSpring Boot \"inatçı\" değildir. Önceliği her zaman geliştiriciye (sana) verir. Eğer sen bir şey söylemezsen \"varsayılan\" olanı yapar, sen elini taşın altına koyarsan hemen senin tanımını kabul eder.\n\nBu \"geri çekilme\" mekanizması sayesinde Spring Boot hem çok hızlı ayağa kalkar hem de son derece esnektir. Kendi yazdığın bir kütüphane için böyle bir oto-konfigürasyon yazmayı hiç düşündün mü?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -64,12 +106,26 @@
       "singleChoice": true,
       "question": "Belirli bir auto-configuration'i devre disi birakmak icin hangi yaklasim dogrudur?",
       "choices": [
-        { "id": "A", "text": "@EnableAutoConfiguration(exclude = ...) veya spring.autoconfigure.exclude kullanmak" },
-        { "id": "B", "text": "@ComponentScan'i kapatmak" },
-        { "id": "C", "text": "Sadece @Primary eklemek" },
-        { "id": "D", "text": "Bean isimlerini buyuk harf yapmak" }
+        {
+          "id": "A",
+          "text": "@EnableAutoConfiguration(exclude = ...) veya spring.autoconfigure.exclude kullanmak"
+        },
+        {
+          "id": "B",
+          "text": "@ComponentScan'i kapatmak"
+        },
+        {
+          "id": "C",
+          "text": "Sadece @Primary eklemek"
+        },
+        {
+          "id": "D",
+          "text": "Bean isimlerini buyuk harf yapmak"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -81,13 +137,27 @@
       "singleChoice": true,
       "question": "Asagidakilerden hangisi tipik bir auto-config kosul anotasyonudur?",
       "choices": [
-        { "id": "A", "text": "@ConditionalOnClass" },
-        { "id": "B", "text": "@OnlyInTest" },
-        { "id": "C", "text": "@NoAutoBean" },
-        { "id": "D", "text": "@EnableScopeAuto" }
+        {
+          "id": "A",
+          "text": "@ConditionalOnClass"
+        },
+        {
+          "id": "B",
+          "text": "@OnlyInTest"
+        },
+        {
+          "id": "C",
+          "text": "@NoAutoBean"
+        },
+        {
+          "id": "D",
+          "text": "@EnableScopeAuto"
+        }
       ],
-      "correctChoiceIds": ["A"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "A"
+      ],
+      "answerBody": "Spring Boot'un o meşhur \"sihirli\" dokunuşunu yapan araçların başında **@ConditionalOnClass** gelir.\n\nDoğru cevap: **@ConditionalOnClass**\n\nBu anotasyon, \"Eğer projenin kütüphaneleri (classpath) arasında şu sınıf varsa, bu konfigürasyonu çalıştır\" demektir. Spring Boot'un esnekliği tam olarak buradan gelir.\n\n---\n\n### @ConditionalOnClass Nasıl Çalışır?\n\nDiyelim ki Spring Boot, projenizde **MongoDB** kullanıp kullanmadığınızı anlamak istiyor. Projenize MongoDB sürücüsünü (driver) eklediğiniz an, o kütüphaneye ait sınıflar projenin \"classpath\"ine dahil olur.\n\n#### Örnek Senaryo: MongoDB Oto-Konfigürasyonu\n\nSpring Boot'un içindeki (temsili) yapı şöyledir:\n\n```java\n@Configuration\n// SADECE 'MongoClient' sınıfı projedeki kütüphanelerde mevcutsa bu sınıfı oku\n@ConditionalOnClass(name = \"com.mongodb.client.MongoClient\") \npublic class MongoAutoConfiguration {\n\n    @Bean\n    public MongoTemplate mongoTemplate() {\n        System.out.println(\">> MongoDB kütüphanesini gördüm, bean'leri hazırlıyorum...\");\n        return new MongoTemplate(...);\n    }\n}\n```\n\n* **Eğer kütüphaneyi eklediysen:** `MongoClient` sınıfı bulunur, `@ConditionalOnClass` geçerli (true) olur ve MongoDB bean'leri otomatik oluşur.\n* **Eğer kütüphaneyi eklemediysen:** Spring Boot bu konfigürasyon sınıfını tamamen görmezden gelir. Hata vermez, sistemi yormaz.\n\n\n\n---\n\n### Diğer Seçenekler Neden Yanlış?\n\n* **@OnlyInTest:** Spring'de böyle bir standart auto-config anotasyonu yoktur (testler için `@TestConfiguration` veya `@Profile(\"test\")` kullanılır).\n* **@NoAutoBean:** Uydurma bir isimdir. Oto-konfigürasyonu kapatmak için `@EnableAutoConfiguration(exclude = ...)` kullanılır.\n* **@EnableScopeAuto:** Yine standart dışı bir isimdir.\n\n---\n\n### Sıkça Kullanılan Diğer \"Gerçek\" Koşullar\n\n| Anotasyon | Ne Zaman Çalışır? |\n| :--- | :--- |\n| **@ConditionalOnMissingBean** | Eğer kullanıcı o tipte bir bean tanımlamamışsa çalışır. |\n| **@ConditionalOnProperty** | `application.properties` içinde belirli bir ayar varsa çalışır. |\n| **@ConditionalOnResource** | Belirli bir dosya (örn: `config.xml`) mevcutsa çalışır. |\n\n**Özetle:** `@ConditionalOnClass`, Spring Boot'un \"akıllı dedektifidir\". Projende hangi kütüphanenin olduğunu sınıflara bakarak anlar ve ona göre vites artırır.\n\nSpring Boot projelerinde bazen bir özelliğin neden aktif olmadığını anlamak için bu koşulları raporlayan **\"Condition Evaluation Report\"** (debug=true) özelliğini hiç kullandın mı?\n",
       "optionExplanations": [],
       "answerCode": ""
     },
@@ -98,12 +168,26 @@
       "singleChoice": true,
       "question": "Auto-configuration'in neden \"kosullu\" olmasi gerekir?",
       "choices": [
-        { "id": "A", "text": "Cunku tum uygulamalarda ayni classpath ve ayni ihtiyaclar yoktur" },
-        { "id": "B", "text": "Cunku kosulsuz konfigurasyon daha yavas derlenir" },
-        { "id": "C", "text": "Cunku sadece XML projelerinde calisir" },
-        { "id": "D", "text": "Cunku @Bean anotasyonu bunu zorunlu kilar" }
+        {
+          "id": "A",
+          "text": "Cunku tum uygulamalarda ayni classpath ve ayni ihtiyaclar yoktur"
+        },
+        {
+          "id": "B",
+          "text": "Cunku kosulsuz konfigurasyon daha yavas derlenir"
+        },
+        {
+          "id": "C",
+          "text": "Cunku sadece XML projelerinde calisir"
+        },
+        {
+          "id": "D",
+          "text": "Cunku @Bean anotasyonu bunu zorunlu kilar"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -115,12 +199,26 @@
       "singleChoice": true,
       "question": "Spring Boot'ta hangi arguman auto-configuration raporunu konsolda daha detayli gormeye yardimci olur?",
       "choices": [
-        { "id": "A", "text": "--debug" },
-        { "id": "B", "text": "--safe" },
-        { "id": "C", "text": "--minimal" },
-        { "id": "D", "text": "--strict-di" }
+        {
+          "id": "A",
+          "text": "--debug"
+        },
+        {
+          "id": "B",
+          "text": "--safe"
+        },
+        {
+          "id": "C",
+          "text": "--minimal"
+        },
+        {
+          "id": "D",
+          "text": "--strict-di"
+        }
       ],
-      "correctChoiceIds": ["A"],
+      "correctChoiceIds": [
+        "A"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -132,12 +230,26 @@
       "singleChoice": true,
       "question": "@EnableAutoConfiguration tek basina kullanildiginda hangi ozelligi vermez?",
       "choices": [
-        { "id": "A", "text": "Auto-configuration aktivasyonu" },
-        { "id": "B", "text": "Component scan'in varsayilan konforu" },
-        { "id": "C", "text": "Kosullu bean kaydi" },
-        { "id": "D", "text": "Classpath'e bagli konfigurasyon" }
+        {
+          "id": "A",
+          "text": "Auto-configuration aktivasyonu"
+        },
+        {
+          "id": "B",
+          "text": "Component scan'in varsayilan konforu"
+        },
+        {
+          "id": "C",
+          "text": "Kosullu bean kaydi"
+        },
+        {
+          "id": "D",
+          "text": "Classpath'e bagli konfigurasyon"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -149,12 +261,26 @@
       "singleChoice": true,
       "question": "spring-boot-starter-web tipik olarak ne saglar?",
       "choices": [
-        { "id": "A", "text": "Sadece JPA bagimliligini" },
-        { "id": "B", "text": "Web uygulamasi icin gerekli temel bagimliliklarin uyumlu setini" },
-        { "id": "C", "text": "Sadece Tomcat'i tek basina" },
-        { "id": "D", "text": "Profil aktivasyonunu" }
+        {
+          "id": "A",
+          "text": "Sadece JPA bagimliligini"
+        },
+        {
+          "id": "B",
+          "text": "Web uygulamasi icin gerekli temel bagimliliklarin uyumlu setini"
+        },
+        {
+          "id": "C",
+          "text": "Sadece Tomcat'i tek basina"
+        },
+        {
+          "id": "D",
+          "text": "Profil aktivasyonunu"
+        }
       ],
-      "correctChoiceIds": ["B"],
+      "correctChoiceIds": [
+        "B"
+      ],
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
@@ -166,13 +292,27 @@
       "singleChoice": true,
       "question": "Auto-configuration ile manuel @Configuration siniflari birlikte kullanildiginda ideal yaklasim nedir?",
       "choices": [
-        { "id": "A", "text": "Tum manuel konfigurasyonlari kaldirmak" },
-        { "id": "B", "text": "Auto-config'i varsayilan kabul edip proje ihtiyacina gore manuel bean'lerle override/ozellestirme yapmak" },
-        { "id": "C", "text": "Her zaman tum auto-config'i kapatmak" },
-        { "id": "D", "text": "Yalnizca XML config kullanmak" }
+        {
+          "id": "A",
+          "text": "Tum manuel konfigurasyonlari kaldirmak"
+        },
+        {
+          "id": "B",
+          "text": "Auto-config'i varsayilan kabul edip proje ihtiyacina gore manuel bean'lerle override/ozellestirme yapmak"
+        },
+        {
+          "id": "C",
+          "text": "Her zaman tum auto-config'i kapatmak"
+        },
+        {
+          "id": "D",
+          "text": "Yalnizca XML config kullanmak"
+        }
       ],
-      "correctChoiceIds": ["B"],
-      "answerBody": "",
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "Spring Boot dünyasında en sağlıklı ve \"Spring-way\" (Spring usulü) yaklaşım: **Auto-config'i varsayılan kabul edip proje ihtiyacına göre manuel bean'lerle override/özelleştirme yapmaktır.**\n\nSpring Boot'un tüm felsefesi \"Opinionated Defaults\" (Fikir Sahibi Varsayılanlar) üzerine kuruludur. Size çalışan bir sistem verir, ama \"Ben bunu daha iyi/farklı biliyorum\" dediğiniz an size yol açar.\n\n---\n\n### Manuel Bean ile Override (Ezme) İşlemi\n\nBu işlem genellikle `@ConditionalOnMissingBean` anotasyonu sayesinde gerçekleşir. Spring Boot bir bean'i oluşturmadan önce \"Acaba kullanıcı bunu zaten oluşturmuş mu?\" diye bakar.\n\n#### Senaryo: Özel bir `RestTemplate` Tanımlama\nSpring Boot varsayılan olarak bir `RestTemplateBuilder` sunar ancak bazen özel zaman aşımı (timeout) ayarları olan bir `RestTemplate` bean'ine ihtiyaç duyarsınız.\n\n\n\n**1. Kendi Konfigürasyon Sınıfınızı Yazın:**\n```java\n@Configuration\npublic class MyNetworkConfig {\n\n    @Bean\n    public RestTemplate restTemplate(RestTemplateBuilder builder) {\n        // Varsayılan RestTemplate yerine 5 saniye timeout'lu özel bir tane oluşturuyoruz.\n        return builder\n                .setConnectTimeout(Duration.ofSeconds(5))\n                .setReadTimeout(Duration.ofSeconds(5))\n                .build();\n    }\n}\n```\n\n**2. Arka Planda Ne Oluyor?**\nSpring Boot'un kendi içindeki oto-konfigürasyon sınıfları (örneğin `RestTemplateAutoConfiguration`) şu şekilde işaretlenmiştir:\n\n```java\n@Bean\n@ConditionalOnMissingBean // EĞER kullanıcı yukarıdaki gibi bir bean yazmadıysa çalışır!\npublic RestTemplate restTemplate(RestTemplateBuilder builder) {\n    return builder.build();\n}\n```\n\n**Sonuç:** Sizin `@Bean` tanımınız Context'e önceden girdiği için, Spring Boot kendi metodunu pas geçer. Sizin \"manuel\" bean'iniz \"otomatik\" olanın yerini almış olur.\n\n---\n\n### İdeal Yaklaşım İçin İpuçları\n\n* **Gereksiz Yere Kapatmayın:** `@EnableAutoConfiguration(exclude = ...)` diyerek oto-konfigürasyonu tamamen kapatmak yerine, sadece çakışan bean'i override etmek daha az efor gerektirir.\n* **Property Önceliği:** Bazen bir bean'i override etmek yerine `application.properties` üzerinden bir ayarı değiştirmek (örneğin `server.port=8081`) oto-konfigürasyonun davranışını değiştirmeniz için yeterlidir.\n* **@Primary Kullanımı:** Eğer aynı tipten hem otomatik hem manuel bean varsa ve bir çakışma yaşıyorsanız, kendi bean'inize `@Primary` ekleyerek öncelik kazandırabilirsiniz.\n\n---\n\n### Özetle\nİdeal yaklaşım, Spring Boot'un sunduğu kolaylıklardan (starterlar, otomatik veritabanı bağlama vb.) faydalanıp, sadece **işinize özel (domain-specific)** kısımlarda direksiyona geçmektir.\n\nSpring projelerinde \"Ben her şeyi kendim yazacağım, oto-konfigürasyon istemiyorum\" demek, modern bir otomobili iterek götürmeye benzer. Kolaylığı kullanın, gerektiğinde müdahale edin!\n\nBuraya kadar tartıştığımız konulardan (Injection, Scopes, Lifecycle, Auto-config) en çok hangisi kafanı kurcalıyor? Bir mülakat simülasyonu yapalım mı?\n",
       "optionExplanations": [],
       "answerCode": ""
     }
