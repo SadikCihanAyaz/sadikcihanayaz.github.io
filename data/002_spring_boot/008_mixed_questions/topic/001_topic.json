@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "mixed-questions",
+  "id": "mixed-questions-topic",
+  "title": "Karisik Sorular",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu kategori icin konu anlatimi bulunmuyor."
+    }
+  ]
+}

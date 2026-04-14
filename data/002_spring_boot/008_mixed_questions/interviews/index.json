@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "mixed-questions",
+  "interviews": [
+    {
+      "id": "mixed-questions-1",
+      "title": "Questions-1",
+      "description": "Spring Boot backend odakli sozlu mulakat sorulari",
+      "order": 1,
+      "questionCount": 20,
+      "file": "/data/002_spring_boot/008_mixed_questions/interviews/001_questions-1.json"
+    }
+  ]
+}

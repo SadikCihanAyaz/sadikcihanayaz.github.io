@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "mixed-questions",
+  "id": "mixed-questions-1",
+  "title": "Questions-1",
+  "description": "Spring Boot ve backend odakli sozlu mulakat soru-cevaplari",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "@Transactional nasil calisir?",
+      "starterCode": "",
+      "answerBody": "@Transactional bir metodun transaction siniri icinde calismasini saglar. Spring bunu genelde AOP proxy ile uygular; metoda disaridan cagrida transaction acilir, basariliysa commit edilir, rollback kosulu varsa rollback yapilir. Varsayilan rollback genelde unchecked exceptionlarda olur; checked exceptionlar icin rollbackFor tanimlamak gerekebilir. Transaction yalnizca DB islemi degil persistence context yonetimi acisindan da kritiktir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q2",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "AOP proxy nedir, self-invocation neden bozuyor?",
+      "starterCode": "",
+      "answerBody": "Spring @Transactional, @Async, @Cacheable gibi cross-cutting davranislari proxy uzerinden uygular. Disaridan bean cagrildiginda proxy araya girer ve ilgili davranisi calistirir. Ancak ayni sinif icinden this.method() ile cagrida proxy bypass edilir; bu nedenle annotation beklenen etkisini gostermez. Cozum olarak metodu baska bean'e tasimak, proxy uzerinden cagirmak veya tasarimi ayirmak tercih edilir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q3",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Isolation level farklari nedir?",
+      "starterCode": "",
+      "answerBody": "Isolation level eszamanli transactionlarin birbirinin verisini ne kadar gorecegini belirler. Read Uncommitted, Read Committed, Repeatable Read ve Serializable seviyeleri vardir. Read Committed dirty readi engeller ama non-repeatable read olabilir; Repeatable Read ayni satir okumalarini daha tutarli yapar; Serializable en guvenli ama en maliyetli seviyedir. Secim her zaman tutarlilik ihtiyaci ile performans dengesi uzerinden yapilir; dirty read, non-repeatable read ve phantom read riskleri birlikte degerlendirilir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q4",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Optimistic ve pessimistic locking farki nedir?",
+      "starterCode": "",
+      "answerBody": "Optimistic locking catismanin nadir oldugunu varsayar; genelde @Version ile save aninda conflict yakalanir. Daha olceklenebilir bir yaklasimdir ama retry veya conflict yonetimi ister. Pessimistic locking ise veriyi bastan kilitler; tutarliligi artirir ama lock contention, bekleme ve deadlock riskini yukseltebilir. Catismanin sik oldugu ve finansal tutarliligin kritik oldugu senaryolarda daha uygun olabilir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q5",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "N+1 problemi nedir, nasil cozersin?",
+      "starterCode": "",
+      "answerBody": "N+1 problemi bir ana liste sorgusundan sonra her eleman icin ek sorgu atilmasi nedeniyle olusur. Tipik olarak lazy iliskiler okunurken 1 ana query artı N ek query ortaya cikar ve performans duser. Cozumde use-case'e gore join fetch, entity graph, DTO projection veya toplu veri cekme yaklasimi kullanilir. Her iliskiyi eager yapmak dogru cozum degildir; senaryoya gore veri erisim tasarlanmalidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q6",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Lazy vs eager ne zaman problem olur?",
+      "starterCode": "",
+      "answerBody": "Lazy loading ihtiyac oldugunda veri ceker ve gereksiz yuklemeyi azaltir; ancak transaction disinda erisimde LazyInitializationException veya N+1 riski yaratabilir. Eager loading ise kolay gorunur ama her cagriyla gereksiz buyuk object graph cekip performansi bozabilir. Bu nedenle iliski fetch stratejisi ezbere degil, kullanim senaryosuna gore belirlenmelidir. Hedef hem tutarlilik hem maliyeti dengeli yonetmektir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q7",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "findById ile getReferenceById farki nedir?",
+      "starterCode": "",
+      "answerBody": "findById veriyi gercekten okumak istendiginde uygundur ve Optional doner. getReferenceById ise hemen full select yapmak yerine proxy referans dondurebilir; alanlara erisildiginde veri cekilir. Entity yoksa hata daha gec asamada alinabilir. Sadece iliski kurmak gibi durumlarda reference almak daha verimli olabilir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q8",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "HashMap vs ConcurrentHashMap",
+      "starterCode": "",
+      "answerBody": "HashMap thread-safe degildir ve tek thread ya da disardan senkronizasyonlu kullanimlar icin uygundur. ConcurrentHashMap coklu thread altinda daha guvenli ve daha verimli erisim saglar. Ancak tek basina tum concurrency problemlerini cozmeye yetmez; map icindeki nesnelerin mutable olmasi ve atomik operasyon gereksinimi ayrica degerlendirilmelidir. Veri yarisi ve tutarlilik riskleri tasarim seviyesinde ele alinmalidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q9",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "SOLID'i gercek ornekle anlat",
+      "starterCode": "",
+      "answerBody": "SOLID pratikte degisiklik maliyetini dusurmek ve bagliligi azaltmak icin kullanilir. Ornegin tek bir service icinde validation, hesaplama, persistence ve notification oldugunda SRP ihlal edilir; sorumluluklari ayirinca test ve bakim kolaylasir. Yeni odeme tipi ekleme senaryosunda strategy gibi bir yapiyla OCP korunabilir ve mevcut akisa dokunmadan gelisim saglanir. SOLID'i teori degil, uretimde degisiklik guvenligini artiran bir tasarim araci olarak konumlarim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q10",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Exception handling'i nasil yaparsin?",
+      "starterCode": "",
+      "answerBody": "Exceptionlari yutmam ve katmanlara gore anlamli yonetirim. Controller seviyesinde genelde @ControllerAdvice ile merkezi bir hata yonetimi kurar, business exception ile beklenmeyen sistem hatalarini ayiririm. Kullaniciya teknik detay sizdirmayan ama anlasilir hata cevabi dondurur, logda ise gerekli contexti korurum. Her yerde try-catch ile hatayi gizlemek yerine dogru yerde yakalayip izlenebilirlik saglamak esastir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q11",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Unit test vs integration test",
+      "starterCode": "",
+      "answerBody": "Unit test kucuk ve izole davranislari hizli dogrular; dependencyler cogu zaman mocklanir. Integration test ise bilesenlerin birlikte calismasini, wiring, config, serialization, transaction ve DB etkilerini gercege yakin sekilde test eder. Her seyi integration test yapmak da her seyi mocklamak da yanlistir; amaca gore dengeli bir test dagilimi kurmak gerekir. Kritik entegrasyon noktalarini gercek ortam kosullarina yakin dogrulamak onemlidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q12",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "SQL'de index ne zaman eklenir?",
+      "starterCode": "",
+      "answerBody": "Index where, join, order by ve sik lookup patternlerinde okuma performansini artirmak icin eklenir. Ancak indexin write ve storage maliyeti vardir; insert update delete maliyetini yukseltebilir. Bu nedenle ezbere index eklemem, once query plan ve gercek bottleneck analizi yaparim. Dusuk cardinality ve nadir kullanilan kolonlarda index faydasi sinirli olabilir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q13",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Deadlock nasil olusur?",
+      "starterCode": "",
+      "answerBody": "Deadlock iki veya daha fazla transactionin birbirinin tuttugu locku beklemesiyle dongusel bir bekleme olustugunda ortaya cikar. Tipik ornekte T1 once A sonra B'yi, T2 once B sonra A'yi kilitlerse karsilikli bekleme olusur. Riski azaltmak icin kaynaklara tutarli sirayla erismek, transactionlari kisa tutmak ve gereksiz lock kapsamindan kacinmak gerekir. Lock stratejisi ve timeout ayarlari da onleyici etkidedir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q14",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Connection pool neden tukenir?",
+      "starterCode": "",
+      "answerBody": "Pool tukenmesi genelde yavas query, uzun transaction, connection leak veya ani trafik artisi nedeniyle olur. Bos baglanti kalmadiginda threadler beklemeye baslar ve response time hizla yukselir. Teshiste pool metrikleri, slow queryler, timeout ve leak sinyallerine bakarim. Sadece pool boyutunu artirmak gecici rahatlatir, kok neden cozulmezse problem tekrar eder.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q15",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "High-load serviste neye bakarsin?",
+      "starterCode": "",
+      "answerBody": "Ilk adim darboğazi bulmaktir: CPU, memory, GC, DB, network, thread pool veya connection pool kaynakli mi bakarim. Sonra latency, throughput, error rate ve saturation metrikleri ile resmi netlestiririm. Cozum tarafinda cache, batching, async processing, query optimizasyonu, horizontal scaling veya backpressure gibi yaklasimlari ihtiyaca gore degerlendiririm. Yani once olcer, sonra optimize ederim.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q16",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Neden bu sirket veya neden bu rol?",
+      "starterCode": "",
+      "answerBody": "Bu soruda genel motivasyon yerine teknik ve profesyonel uyum anlatilmalidir. Java Spring Boot backend, olceklenebilir servisler, production sorumlulugu ve takima teknik katki gibi alanlarda deneyim ile rolun kesisimi net gosterilir. Teknoloji listesi kadar ekip kalitesi, muhendislik disiplini ve gercek problem alani da onemli oldugu belirtilir. Kisa ama somut bir gerekce en guclu etkidir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q17",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Agile ortamda rolun neydi?",
+      "starterCode": "",
+      "answerBody": "Agile deneyimi sadece meeting isimleriyle degil, uretilen katki ile anlatilir. Refinementlarda teknik riskleri gorunur kilmak, tahmine katkı vermek, sprintte blockerlarin erken yonetimi ve code review test kalitesi production readiness tarafinda aktif rol almak vurgulanir. Yani agile bir seremoni listesi degil, hizli geri bildirimle kaliteli teslimat seklidir. Rolunu net sorumluluklar ve orneklerle anlatmak gerekir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q18",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Musteriyle teknik tartisma yasadin mi?",
+      "starterCode": "",
+      "answerBody": "Bu soruda amac catismayi degil iletisim kalitesini gostermektir. Teknik olarak hakli olmak tek basina yetmez; hizli kisa vadeli cozum ile surdurulebilir cozum arasindaki trade-offlari maliyet, risk, delivery etkisi ve bakim yukuyla aciklamak gerekir. Karar surecinde hedef ben kazandim degil, dogru karari ortak zeminde almak olmalidir. Net ve sakin iletisim bu baslikta kritik fark yaratir.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q19",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Prod hatasini nasil debug ettin?",
+      "starterCode": "",
+      "answerBody": "Production issue debugunda once etki alanini daraltirim. Log metric trace, deploy farki, config degisikligi, DB durumu, external dependency ve son release degisikliklerine bakarim. Hangi kosulda oldugu, ne zamandir oldugu, herkesi mi etkiledigi gibi sorularla sorunu sinirlarim. Gerekirse kontrollu hotfix uygular, sonrasinda kalici cozum icin root cause analizi cikaririm.",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q20",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Son projenin mimarisini anlat",
+      "starterCode": "",
+      "answerBody": "Iyi bir cevapta controller service repository akisi, auth yaklasimi, DB tipi, cache ve dis servis entegrasyonlari birlikte anlatilir. Performans tarafinda pooling, caching ve query optimizasyonu; gozlemlenebilirlikte log ve metric; deploymentta CI CD otomasyonu belirtilir. Monolith mi microservice mi secildigi ve bunun trade-offlari net ifade edilmelidir. Son olarak en buyuk teknik zorluk ve nasil yonetildigi somut bir ornekle kapanir.",
+      "answerCode": ""
+    }
+  ]
+}
