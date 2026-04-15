@@ -10,6 +10,14 @@
       "order": 1,
       "questionCount": 1,
       "file": "/data/002_spring_boot/005_coding/interviews/001_spring-boot-coding-1.json"
+    },
+    {
+      "id": "java-temel-problem-solving-1",
+      "title": "Java Temel Problem-Solving",
+      "description": "Java temel algoritma ve problem-solving odakli coding sorulari",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/005_coding/interviews/002_java-temel-problem-solving-1.json"
     }
   ]
 }

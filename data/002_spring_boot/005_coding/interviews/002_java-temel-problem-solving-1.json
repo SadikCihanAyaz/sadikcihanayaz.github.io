@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "interviewId": "java-temel-problem-solving-1",
+  "title": "Java Temel Problem-Solving",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nCharacter firstNonRepeatingChar(String input)\n\nBu metod, verilen string icinde yalnizca bir kez gecen ilk karakteri dondurmelidir.\nEger boyle bir karakter yoksa null donmelidir.\n\nBeklenen davranis:\n- Karakterler soldan saga degerlendirilmelidir.\n- Buyuk-kucuk harf farkli kabul edilir.\n- Bosluk da karakter olarak sayilabilir.\n- null veya bos string icin null donebilirsin.\n\nOrnekler:\n- Input: \"swiss\" -> Output: 'w'\n- Input: \"aabbcc\" -> Output: null\n- Input: \"Java\" -> Output: 'J'\n\nEk test caseler:\n- Input: \"\" -> Output: null\n- Input: \"a\" -> Output: 'a'\n- Input: \"aabbccd\" -> Output: 'd'\n- Input: \"aAbBABac\" -> Output: 'b'\n\nInterview follow-up:\n- Time complexity nedir?\n- Bunu LinkedHashMap olmadan nasil yaparsin?\n- Unicode karakterler icin bir sey degisir mi?",
+      "starterCode": "public Character firstNonRepeatingChar(String input) {\n    // TODO\n    return null;\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q2",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nboolean containsDuplicate(int[] nums)\n\nBu metod, dizide herhangi bir sayi birden fazla kez geciyorsa true, aksi halde false dondurmelidir.\n\nBeklenen davranis:\n- Dizi sirali olmak zorunda degildir.\n- Negatif sayilar olabilir.\n- Bos dizi icin false donebilirsin.\n\nOrnekler:\n- Input: [1, 2, 3, 4] -> Output: false\n- Input: [1, 2, 3, 1] -> Output: true\n- Input: [5, 5, 5, 5] -> Output: true\n\nEk test caseler:\n- Input: [] -> Output: false\n- Input: [0] -> Output: false\n- Input: [-1, -2, -3, -1] -> Output: true\n- Input: [1000000, 2, 3, 4, 1000000] -> Output: true\n\nInterview follow-up:\n- Sorting ile cozersen complexity ne olur?\n- HashSet ile cozersen complexity ne olur?\n- Memory kullanmadan cozmek istersek ne kaybederiz?",
+      "starterCode": "public boolean containsDuplicate(int[] nums) {\n    // TODO\n    return false;\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q3",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nboolean isAnagram(String s1, String s2)\n\nBu metod, iki string birbiriyle anagram ise true, degilse false dondurmelidir.\n\nBeklenen davranis:\n- Harf sayisi ve frekansi ayni olmali.\n- Buyuk-kucuk harf duyarli kabul edebilirsin, ama bunu belirt.\n- Istersen bosluklari yok sayan versiyonunu da soyleyebilirsin. Once temel versiyonu coz.\n\nOrnekler:\n- Input: \"listen\", \"silent\" -> Output: true\n- Input: \"triangle\", \"integral\" -> Output: true\n- Input: \"apple\", \"papel\" -> Output: true\n- Input: \"rat\", \"car\" -> Output: false\n\nEk test caseler:\n- Input: \"\", \"\" -> Output: true\n- Input: \"a\", \"A\" -> Output: false (case-sensitive varsayimda)\n- Input: \"ab\", \"a\" -> Output: false\n- Input: \"Dormitory\", \"Dirtyroom\" -> Output: false (case-sensitive ve bosluk normalize etmeden)\n\nInterview follow-up:\n- Sorting yerine frequency count kullanmanin avantaji ne?\n- Unicode veya Turkce karakter olsa ne degisir?\n- Space ve punctuation ignore etmek istesek ne yaparsin?",
+      "starterCode": "public boolean isAnagram(String s1, String s2) {\n    // TODO\n    return false;\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q4",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nboolean isValidParentheses(String input)\n\nBu metod, sadece (, ), [, ], {, } karakterlerinden olusan stringin gecerli olup olmadigini kontrol etmelidir.\n\nGecerli olmasi icin:\n- Her acilan parantez dogru tipte kapanmali\n- Kapanis sirasi dogru olmali\n- Acik parantez artmamali\n\nOrnekler:\n- Input: \"()\" -> Output: true\n- Input: \"()[]{}\" -> Output: true\n- Input: \"(]\" -> Output: false\n- Input: \"([)]\" -> Output: false\n- Input: \"{[]}\" -> Output: true\n\nEk test caseler:\n- Input: \"\" -> Output: true\n- Input: \"(((\" -> Output: false\n- Input: \"))\" -> Output: false\n- Input: \"[{()}]\" -> Output: true\n\nInterview follow-up:\n- Neden stack uygun veri yapisi?\n- Input icinde baska karakterler de olsaydi ne yapardin?\n- Streaming input olsaydi cozum degisir miydi?",
+      "starterCode": "public boolean isValidParentheses(String input) {\n    // TODO\n    return false;\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q5",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nint mostFrequentElement(int[] nums)\n\nBu metod, dizide en sik gecen elemani dondurmelidir. Ayrica istersen frekans tablosunu ayri bir Map<Integer, Integer> olarak da uretebilirsin.\n\nBeklenen davranis:\n- Eger birden fazla sayi ayni en yuksek frekansa sahipse, ilk goruleni dondur.\n- Bos dizi gelirse ne yapacagini acikca belirt. Exception atabilir veya ozel deger donebilirsin.\n\nOrnekler:\n- Input: [1, 2, 2, 3, 3, 3] -> Output: 3\n- Input: [4, 4, 5, 5] -> Output: 4 (ilk gorulen tercih edilir)\n- Input: [7] -> Output: 7\n\nEk test caseler:\n- Input: [9, 1, 9, 2, 2] -> Output: 9\n- Input: [-1, -1, -2, -2, -2] -> Output: -2\n- Input: [0, 0, 0, 0] -> Output: 0\n\nInterview follow-up:\n- Tie-break kuralini nasil uyguluyorsun?\n- Sadece en sik gecen eleman isteniyorsa tum mapi tutmak sart mi?\n- Large inputta neye dikkat edersin?",
+      "starterCode": "public int mostFrequentElement(int[] nums) {\n    // TODO\n    return 0;\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q6",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nint[] mergeSortedArrays(int[] a, int[] b)\n\nIki sirali integer dizisini alip tek bir sirali dizi halinde dondur.\n\nBeklenen davranis:\n- Her iki input da artan sirada olacak.\n- Negatif sayilar olabilir.\n- Duplicate degerler korunmali.\n\nOrnekler:\n- Input: [1, 3, 5], [2, 4, 6] -> Output: [1, 2, 3, 4, 5, 6]\n- Input: [1, 2, 2], [2, 3] -> Output: [1, 2, 2, 2, 3]\n- Input: [], [1, 2] -> Output: [1, 2]\n\nEk test caseler:\n- Input: [], [] -> Output: []\n- Input: [-5, -1, 3], [-2, 4] -> Output: [-5, -2, -1, 3, 4]\n- Input: [1], [] -> Output: [1]\n\nInterview follow-up:\n- Neden two-pointer mantigi uygun?\n- In-place merge istanse ne degisirdi?\n- Inputlar sirali olmasaydi nasil yaklasirdin?",
+      "starterCode": "public int[] mergeSortedArrays(int[] a, int[] b) {\n    // TODO\n    return new int[0];\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q7",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nboolean isPalindrome(String input)\n\nBu metod, verilen string palindrome ise true, degilse false dondurmelidir.\n\nBeklenen davranis:\n- Buyuk-kucuk harf farki yok sayilmali\n- Bosluklar yok sayilmali\n- Noktalama isaretlerini de yok saymak istiyorsan bunu belirt. Tercihen onlari da ignore et.\n\nOrnekler:\n- Input: \"racecar\" -> Output: true\n- Input: \"A man a plan a canal Panama\" -> Output: true\n- Input: \"hello\" -> Output: false\n\nEk test caseler:\n- Input: \"\" -> Output: true\n- Input: \"a\" -> Output: true\n- Input: \"No lemon, no melon\" -> Output: true\n- Input: \"Java\" -> Output: false\n\nInterview follow-up:\n- Stringi normalize etmek ile two-pointer kullanmak arasinda ne fark var?\n- Unicode normalization gerekir mi?\n- Memory usage nasil azaltilir?",
+      "starterCode": "public boolean isPalindrome(String input) {\n    // TODO\n    return false;\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q8",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nint findSingleNumber(int[] nums)\n\nDizideki her sayi iki kez, sadece bir sayi bir kez geciyor. Tek gecen sayiyi bul.\n\nBeklenen davranis:\n- Input gecerli kabul edilebilir\n- Tam olarak bir tane tekil sayi vardir\n\nOrnekler:\n- Input: [2, 2, 1] -> Output: 1\n- Input: [4, 1, 2, 1, 2] -> Output: 4\n- Input: [7] -> Output: 7\n\nEk test caseler:\n- Input: [0, 1, 0] -> Output: 1\n- Input: [-1, 2, 2] -> Output: -1\n- Input: [10, 20, 10, 30, 20] -> Output: 30\n\nInterview follow-up:\n- HashMap ile cozum ve XOR ile cozum farki ne?\n- Neden XOR burada calisiyor?\n- Her sayi uc kez gecseydi ne yapardin?",
+      "starterCode": "public int findSingleNumber(int[] nums) {\n    // TODO\n    return 0;\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q9",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nString longestWord(String sentence)\n\nVerilen cumledeki kelimeleri ayir ve en uzun kelimeyi dondur. Ayrica toplam kelime sayisini da istersen ayri bir metod ile hesaplayabilirsin.\n\nBeklenen davranis:\n- Kelimeler boslukla ayrilmis kabul edilebilir\n- Noktalama isaretlerini nasil ele aldigini belirt\n- Tie durumunda ilk gecen en uzun kelimeyi dondur\n\nOrnekler:\n- Input: \"Java is a powerful language\" -> Output: \"powerful\"\n- Input: \"I love backend development\" -> Output: \"development\"\n- Input: \"one two six\" -> Output: \"one\" (ayni uzunlukta ilk gelen)\n\nEk test caseler:\n- Input: \"\" -> Output: \"\" veya null (yaklasimini belirt)\n- Input: \"hello\" -> Output: \"hello\"\n- Input: \"test-case with punctuation!\" -> normalize yaklasimina gore aciklanmali\n\nInterview follow-up:\n- Birden fazla bosluk varsa ne yaparsin?\n- Regex mi split mi kullanirsin?\n- Internationalization olsa kelime ayirma zorlasir mi?",
+      "starterCode": "public String longestWord(String sentence) {\n    // TODO\n    return \"\";\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q10",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "Bir metod yaz:\nint[] twoSum(int[] nums, int target)\n\nDizide target toplamini veren iki farkli elemanin indekslerini dondur.\nAyni elemani iki kez kullanamazsin.\n\nBeklenen davranis:\n- Cozum oldugu varsayilabilir\n- Indeksler herhangi bir sirada donebilir\n\nOrnekler:\n- Input: nums = [2, 7, 11, 15], target = 9 -> Output: [0, 1]\n- Input: nums = [3, 2, 4], target = 6 -> Output: [1, 2]\n- Input: nums = [3, 3], target = 6 -> Output: [0, 1]\n\nEk test caseler:\n- Input: nums = [-1, -2, -3, -4, -5], target = -8 -> Output: [2, 4]\n- Input: nums = [1, 5, 1, 5], target = 10 -> Output: [1, 3]\n- Input: nums = [0, 4, 3, 0], target = 0 -> Output: [0, 3]\n\nInterview follow-up:\n- Brute force ve optimized cozum farki ne?\n- HashMap yaklasiminda neden once kontrol sonra insert onemli olabilir?\n- Tum ciftleri bul deseydim ne degisirdi?",
+      "starterCode": "public int[] twoSum(int[] nums, int target) {\n    // TODO\n    return new int[] {-1, -1};\n}",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}
