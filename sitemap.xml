@@ -121,6 +121,12 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=coding&amp;interview=spring-boot-coding-1-user-address</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://sadikcihanayaz.github.io/interview.html?category=spring-boot&amp;subcategory=coding&amp;interview=sql-coding-1</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
