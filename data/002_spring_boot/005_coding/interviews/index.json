@@ -42,6 +42,14 @@
       "order": 5,
       "questionCount": 1,
       "file": "/data/002_spring_boot/005_coding/interviews/005_spring-boot-coding-1-user-address.json"
+    },
+    {
+      "id": "spring-boot-coding-3-external-api-integration",
+      "title": "Spring Boot Coding - 3",
+      "description": "External API integration, filtering ve sorting taski",
+      "order": 6,
+      "questionCount": 1,
+      "file": "/data/002_spring_boot/005_coding/interviews/006_spring-boot-coding-3-external-api-integration.json"
     }
   ]
 }
