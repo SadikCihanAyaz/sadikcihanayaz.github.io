@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "interviewId": "sql-coding-1",
+  "title": "SQL Coding - 1",
+  "questions": [
+    {
+      "id": "i4-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "1) Her musterinin toplam siparis tutarini getir\n\nTablolar:\ncustomers(id, full_name, email, created_at)\norders(id, customer_id, order_date, total_amount, status)\n\nGorev:\nHer musteri icin toplam siparis tutarini getiren bir SQL query yaz.\n\nBeklenen cikti kolonlari:\n- customer_id\n- full_name\n- total_order_amount\n\nKurallar:\n- Siparisi olmayan musteriler de sonucta gorunmeli\n- Siparisi olmayan musteriler icin toplam tutar 0 donmeli\n- Sonuclar customer_id'ye gore artan siralanmali\n\nOrnek veri:\ncustomers:\n(1, \"Ali Yilmaz\", \"ali@test.com\")\n(2, \"Ayse Demir\", \"ayse@test.com\")\n(3, \"Mehmet Kaya\", \"mehmet@test.com\")\n\norders:\n(1, 1, '2026-04-01', 100.00, 'PAID')\n(2, 1, '2026-04-02', 200.00, 'PAID')\n(3, 2, '2026-04-03', 150.00, 'CREATED')\n\nBeklenen ornek cikti:\n(1, \"Ali Yilmaz\", 300.00)\n(2, \"Ayse Demir\", 150.00)\n(3, \"Mehmet Kaya\", 0.00)\n\nInterview follow-up:\n- LEFT JOIN neden gerekir?\n- COALESCE neden kullanilabilir?\n- Sadece PAID siparisleri toplamak isteseydik ne degisirdi?",
+      "starterCode": "-- Q1: Her musterinin toplam siparis tutari\nSELECT\n    c.id AS customer_id,\n    c.full_name,\n    /* TODO: toplam siparis tutari */\n    0 AS total_order_amount\nFROM customers c\n/* TODO: uygun join ve aggregation */\nORDER BY c.id;",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q2",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "2) Hic siparisi olmayan musterileri listele\n\nAyni customers ve orders tablolarini kullan.\n\nGorev:\nHic siparisi olmayan musterileri listeleyen bir SQL query yaz.\n\nBeklenen cikti kolonlari:\n- customer_id\n- full_name\n- email\n\nKurallar:\n- Bir musterinin orders tablosunda hic kaydi yoksa sonucta gorunmeli\n- Sonuclar customer_id'ye gore artan siralanmali\n\nOrnek veri:\ncustomers:\n(1, \"Ali Yilmaz\", \"ali@test.com\")\n(2, \"Ayse Demir\", \"ayse@test.com\")\n(3, \"Mehmet Kaya\", \"mehmet@test.com\")\n(4, \"Zeynep Aras\", \"zeynep@test.com\")\n\norders:\n(1, 1, '2026-04-01', 100.00)\n(2, 2, '2026-04-02', 200.00)\n\nBeklenen ornek cikti:\n(3, \"Mehmet Kaya\", \"mehmet@test.com\")\n(4, \"Zeynep Aras\", \"zeynep@test.com\")\n\nInterview follow-up:\n- Bunu LEFT JOIN ... IS NULL ile mi yoksa NOT EXISTS ile mi yazarsin?\n- Hangisi daha okunakli?\n- Buyuk tabloda performans icin neye dikkat edersin?",
+      "starterCode": "-- Q2: Hic siparisi olmayan musteriler\nSELECT\n    c.id AS customer_id,\n    c.full_name,\n    c.email\nFROM customers c\n/* TODO: LEFT JOIN veya NOT EXISTS */\nORDER BY c.id;",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q3",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "3) Her departmandaki en yuksek maas alan calisani getir\n\nTablo:\nemployees(id, full_name, department, salary, hire_date)\n\nGorev:\nHer departmandaki en yuksek maas alan calisani getiren bir SQL query yaz.\n\nBeklenen cikti kolonlari:\n- department\n- employee_id\n- full_name\n- salary\n\nKurallar:\n- Ayni departmanda en yuksek maasa sahip birden fazla kisi varsa hepsi donmeli\n- Sonuclar once department, sonra employee_id'ye gore siralanmali\n\nOrnek veri:\n(1, \"Ali Yilmaz\", \"IT\", 7000.00)\n(2, \"Ayse Demir\", \"IT\", 8500.00)\n(3, \"Mehmet Kaya\", \"HR\", 5000.00)\n(4, \"Zeynep Aras\", \"HR\", 5000.00)\n(5, \"Can Polat\", \"Finance\", 9000.00)\n\nBeklenen ornek cikti:\n(\"Finance\", 5, \"Can Polat\", 9000.00)\n(\"HR\", 3, \"Mehmet Kaya\", 5000.00)\n(\"HR\", 4, \"Zeynep Aras\", 5000.00)\n(\"IT\", 2, \"Ayse Demir\", 8500.00)\n\nInterview follow-up:\n- Bunu subquery ile mi, window function ile mi cozersin?\n- ROW_NUMBER() ile RANK() farki burada neden onemlidir?\n- Sadece tek kisi donmesi istanse ne degisirdi?",
+      "starterCode": "-- Q3: Her departmandaki en yuksek maas alan calisan(lar)\nSELECT\n    e.department,\n    e.id AS employee_id,\n    e.full_name,\n    e.salary\nFROM employees e\n/* TODO: subquery veya window function */\nORDER BY e.department, e.id;",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q4",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "4) Duplicate email kayitlarini bul\n\nTablo:\nusers(id, full_name, email, created_at)\n\nGorev:\nTabloda birden fazla kez gecen email adreslerini bulan bir SQL query yaz.\n\nBeklenen cikti kolonlari:\n- email\n- duplicate_count\n\nKurallar:\n- Sadece birden fazla gecen emailler donmeli\n- Sonuclar duplicate_count azalan sekilde siralanmali\n\nOrnek veri:\n(1, \"Ali Yilmaz\", \"ali@test.com\")\n(2, \"Ayse Demir\", \"ayse@test.com\")\n(3, \"Mehmet Kaya\", \"ali@test.com\")\n(4, \"Zeynep Aras\", \"zeynep@test.com\")\n(5, \"Can Polat\", \"ayse@test.com\")\n\nBeklenen ornek cikti:\n(\"ali@test.com\", 2)\n(\"ayse@test.com\", 2)\n\nInterview follow-up:\n- Duplicate kayitlarin tum satirlarini da getirmek isteseydik ne yapardin?\n- Email'de case-insensitive duplicate aranacaksa ne degisirdi?\n- Boyle bir problemi uygulama katmaninda degil DB tarafinda nasil onlerdin?",
+      "starterCode": "-- Q4: Duplicate email'leri bul\nSELECT\n    u.email,\n    COUNT(*) AS duplicate_count\nFROM users u\n/* TODO: grouping + having */\nGROUP BY u.email\n/* TODO: sadece duplicate olanlar */\nORDER BY duplicate_count DESC;",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q5",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "5) Son 30 gunde siparis veren kullanicilari getir\n\nTablolar:\ncustomers(id, full_name, email)\norders(id, customer_id, order_date, total_amount)\n\nGorev:\nSon 30 gun icinde en az bir siparis vermis musterileri getiren bir SQL query yaz.\n\nBeklenen cikti kolonlari:\n- customer_id\n- full_name\n- email\n\nKurallar:\n- Ayni musteri birden fazla siparis verse bile sonucta yalnizca bir kez gorunmeli\n- Bugunun tarihini sistem tarihi kabul edebilirsin\n- Sonuclar customer_id'ye gore siralanmali\n\nOrnek veri (bugun: 2026-04-15):\ncustomers:\n(1, \"Ali Yilmaz\", \"ali@test.com\")\n(2, \"Ayse Demir\", \"ayse@test.com\")\n(3, \"Mehmet Kaya\", \"mehmet@test.com\")\n\norders:\n(1, 1, '2026-04-10', 100.00)\n(2, 1, '2026-03-20', 150.00)\n(3, 2, '2026-02-01', 200.00)\n\nBeklenen ornek cikti:\n(1, \"Ali Yilmaz\", \"ali@test.com\")\n\nInterview follow-up:\n- DISTINCT gerekir mi?\n- Eger son 30 gun icinde toplam siparis tutari da isteseydik ne yapardin?\n- order_date uzerinde index neden onemli olabilir?",
+      "starterCode": "-- Q5: Son 30 gunde siparis veren musteriler\nSELECT DISTINCT\n    c.id AS customer_id,\n    c.full_name,\n    c.email\nFROM customers c\nJOIN orders o ON o.customer_id = c.id\n/* TODO: son 30 gun filtresi */\nORDER BY c.id;",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q6",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "6) LEFT JOIN ile INNER JOIN farkini gosterecek query yaz\n\nTablolar:\ncustomers(id, full_name)\norders(id, customer_id, total_amount)\n\nGorev:\nAyni veri seti uzerinde:\n1. INNER JOIN kullanan bir query\n2. LEFT JOIN kullanan bir query\nyaz ve iki query arasindaki farki gosterecek sonucu uret.\n\nBeklenen cikti kolonlari:\n- customer_id\n- full_name\n- order_id\n- total_amount\n\nOrnek veri:\ncustomers:\n(1, \"Ali Yilmaz\")\n(2, \"Ayse Demir\")\n(3, \"Mehmet Kaya\")\n\norders:\n(1, 1, 100.00)\n(2, 2, 200.00)\n\nBeklenen gozlem:\n- INNER JOIN sonucunda sadece siparisi olan musteriler gorunur\n- LEFT JOIN sonucunda tum musteriler gorunur, siparisi olmayan musteri icin order alanlari NULL olur\n\nInterview follow-up:\n- LEFT JOIN sonucunda sadece eslesmeyen musterileri nasil filtrelersin?\n- RIGHT JOIN gerekli mi?\n- Join yonu ve tablo sirasi sonucu nasil etkiler?",
+      "starterCode": "-- Q6a: INNER JOIN\nSELECT\n    c.id AS customer_id,\n    c.full_name,\n    o.id AS order_id,\n    o.total_amount\nFROM customers c\nINNER JOIN orders o ON o.customer_id = c.id\nORDER BY c.id, o.id;\n\n-- Q6b: LEFT JOIN\nSELECT\n    c.id AS customer_id,\n    c.full_name,\n    o.id AS order_id,\n    o.total_amount\nFROM customers c\nLEFT JOIN orders o ON o.customer_id = c.id\nORDER BY c.id, o.id;",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

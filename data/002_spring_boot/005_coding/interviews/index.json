@@ -26,6 +26,14 @@
       "order": 3,
       "questionCount": 7,
       "file": "/data/002_spring_boot/005_coding/interviews/003_java-collections-streams-1.json"
+    },
+    {
+      "id": "sql-coding-1",
+      "title": "SQL Coding - 1",
+      "description": "Customers, orders, employees odakli SQL coding sorulari",
+      "order": 4,
+      "questionCount": 6,
+      "file": "/data/002_spring_boot/005_coding/interviews/004_sql-coding-1.json"
     }
   ]
 }
