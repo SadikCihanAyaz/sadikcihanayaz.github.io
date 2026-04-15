@@ -18,6 +18,14 @@
       "order": 2,
       "questionCount": 10,
       "file": "/data/002_spring_boot/005_coding/interviews/002_java-temel-problem-solving-1.json"
+    },
+    {
+      "id": "java-collections-streams-1",
+      "title": "Java Collections / Streams - 1",
+      "description": "Java Collections ve Stream API odakli problem-solving sorulari",
+      "order": 3,
+      "questionCount": 7,
+      "file": "/data/002_spring_boot/005_coding/interviews/003_java-collections-streams-1.json"
     }
   ]
 }

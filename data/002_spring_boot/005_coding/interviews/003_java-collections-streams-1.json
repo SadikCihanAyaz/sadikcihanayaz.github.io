@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "interviewId": "java-collections-streams-1",
+  "title": "Java Collections / Streams - 1",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "1) Group employees by department\n\nAsagidaki Employee sinifi veriliyor:\n\nclass Employee {\n    private Long id;\n    private String name;\n    private String department;\n    private String city;\n    private double salary;\n\n    // getters, setters, constructor\n}\n\nBir metod yaz:\nMap<String, List<Employee>> groupEmployeesByDepartment(List<Employee> employees)\n\nBu metod, calisanlari department alanina gore gruplamali ve sonucu Map<String, List<Employee>> olarak dondurmelidir.\n\nBeklenen davranis:\n- Map anahtari department adi olacak\n- Ayni departmenta ait calisanlar ayni listede toplanacak\n- null veya bos liste gelirse bos map donebilirsin\n- Department alani null ise nasil davranacagini belirt\n\nOrnek input:\n[\n  (1, \"Ali\", \"IT\", \"Bucharest\", 5000),\n  (2, \"Ayse\", \"HR\", \"Cluj\", 4000),\n  (3, \"Mehmet\", \"IT\", \"Iasi\", 5500),\n  (4, \"Zeynep\", \"Finance\", \"Bucharest\", 6000)\n]\n\nBeklenen output:\n{\n  \"IT\" -> [Ali, Mehmet],\n  \"HR\" -> [Ayse],\n  \"Finance\" -> [Zeynep]\n}\n\nEk test caseler:\n- Input: [] -> Output: {}\n- Input: yalnizca tek department olan liste -> Output: tek keyli map\n- Input: department degeri null olan kayitlar -> beklentiyi acikca belirt\n\nInterview follow-up:\n- Bunu Stream API ile nasil yazarsin?\n- Department bazinda calisan sayisini isteseydim ne degisirdi?\n- Liste yerine sadece employee namelerini donmek isteseydim ne yapardin?",
+      "starterCode": "class Employee {\n    private Long id;\n    private String name;\n    private String department;\n    private String city;\n    private double salary;\n}\n\npublic Map<String, List<Employee>> groupEmployeesByDepartment(List<Employee> employees) {\n    // TODO\n    return Map.of();\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q2",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "2) Sort products by price, then name\n\nAsagidaki Product sinifi veriliyor:\n\nclass Product {\n    private Long id;\n    private String name;\n    private double price;\n\n    // getters, setters, constructor\n}\n\nBir metod yaz:\nList<Product> sortProducts(List<Product> products)\n\nBu metod urunleri:\n1. once pricea gore artan,\n2. price esitse namee gore alfabetik\nsekilde siralamalidir.\n\nBeklenen davranis:\n- Orijinal listeyi degistirmek istemiyorsan yeni liste donebilirsin\n- null veya bos input icin nasil davranacagini belirt\n- name alani null olabilir mi, varsayimini acikla\n\nOrnek input:\n[\n  (1, \"Keyboard\", 100),\n  (2, \"Mouse\", 50),\n  (3, \"Monitor\", 100),\n  (4, \"Cable\", 20)\n]\n\nBeklenen output:\n[\n  (4, \"Cable\", 20),\n  (2, \"Mouse\", 50),\n  (1, \"Keyboard\", 100),\n  (3, \"Monitor\", 100)\n]\n\nEk test caseler:\n- Input: [] -> Output: []\n- Input: ayni fiyat ve ayni isimde urunler -> stabil siralama veya mevcut sirayi koruma yorumu\n- Input: tek elemanli liste -> Output: ayni liste\n\nInterview follow-up:\n- Comparable yerine neden Comparator kullanirsin?\n- Bunu Stream API ile nasil yazarsin?\n- Price descending, name ascending istanse ne degisirdi?",
+      "starterCode": "class Product {\n    private Long id;\n    private String name;\n    private double price;\n}\n\npublic List<Product> sortProducts(List<Product> products) {\n    // TODO\n    return List.of();\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q3",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "3) Remove duplicates but preserve first-seen order\n\nBir metod yaz:\nList<String> removeDuplicatesPreserveOrder(List<String> items)\n\nBu metod listedeki duplicate kayitlari kaldirmali ancak ilk gorulen sirayi korumalidir.\n\nBeklenen davranis:\n- Ayni eleman birden fazla kez geciyorsa sadece ilki kalmali\n- Input sirasindaki ilk gorunum korunmali\n- null veya bos input icin nasil davranacagini belirt\n- null elemanlar gelebilir mi, varsayimini soyle\n\nOrnek input:\n[\"apple\", \"banana\", \"apple\", \"orange\", \"banana\", \"grape\"]\n\nBeklenen output:\n[\"apple\", \"banana\", \"orange\", \"grape\"]\n\nEk test caseler:\n- Input: [] -> Output: []\n- Input: [\"a\", \"a\", \"a\"] -> Output: [\"a\"]\n- Input: [\"x\", \"y\", \"z\"] -> Output: [\"x\", \"y\", \"z\"]\n- Input: [null, \"a\", null, \"b\"] -> null icin yaklasimini acikla\n\nInterview follow-up:\n- Neden LinkedHashSet uygun olabilir?\n- HashSet kullansan ne kaybederdin?\n- Ayni islemi List<Employee> icin yapacaksan neye dikkat edersin?",
+      "starterCode": "public List<String> removeDuplicatesPreserveOrder(List<String> items) {\n    // TODO\n    return List.of();\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q4",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "4) Sum amounts of active orders using loop and Stream API\n\nAsagidaki Order sinifi veriliyor:\n\nclass Order {\n    private Long id;\n    private String status; // \"ACTIVE\", \"CANCELLED\", \"PENDING\"\n    private double amount;\n\n    // getters, setters, constructor\n}\n\nIki ayri cozum yaz:\n- double calculateActiveOrderTotalWithLoop(List<Order> orders)\n- double calculateActiveOrderTotalWithStream(List<Order> orders)\n\nBu metodlar yalnizca status = \"ACTIVE\" olan siparislerin toplam tutarini dondurmelidir.\n\nBeklenen davranis:\n- Sadece ACTIVE olanlar toplanmali\n- Bos liste gelirse 0 donebilirsin\n- null input veya null status icin nasil davranacagini belirt\n\nOrnek input:\n[\n  (1, \"ACTIVE\", 100),\n  (2, \"CANCELLED\", 50),\n  (3, \"ACTIVE\", 200),\n  (4, \"PENDING\", 70)\n]\n\nBeklenen output:\n300\n\nEk test caseler:\n- Input: [] -> Output: 0\n- Input: yalnizca CANCELLED siparisler -> Output: 0\n- Input: tek ACTIVE siparis -> Output: o siparisin amountu\n- Input: amount degeri 0 olan ACTIVE siparis -> hesaba dahil edilmeli\n\nInterview follow-up:\n- BigDecimal kullanmak gerekir miydi?\n- Stream ile yazdiginda okunurluk gercekten artiyor mu?\n- ACTIVE yerine bir enum kullansaydin daha iyi olur muydu?",
+      "starterCode": "class Order {\n    private Long id;\n    private String status;\n    private double amount;\n}\n\npublic double calculateActiveOrderTotalWithLoop(List<Order> orders) {\n    // TODO\n    return 0;\n}\n\npublic double calculateActiveOrderTotalWithStream(List<Order> orders) {\n    // TODO\n    return 0;\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q5",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "5) Group employees by city\n\nAyni Employee sinifini kullanarak bir metod yaz:\nMap<String, List<Employee>> groupEmployeesByCity(List<Employee> employees)\n\nBu metod calisanlari city alanina gore gruplayip Map<String, List<Employee>> dondurmelidir.\n\nBeklenen davranis:\n- Map anahtari sehir adi olacak\n- Ayni sehirdeki calisanlar ayni listede toplanacak\n- null veya bos input icin bos map donebilirsin\n- city alani null olabilir mi, yaklasimini belirt\n\nOrnek input:\n[\n  (1, \"Ali\", \"IT\", \"Bucharest\", 5000),\n  (2, \"Ayse\", \"HR\", \"Cluj\", 4000),\n  (3, \"Mehmet\", \"IT\", \"Bucharest\", 5500),\n  (4, \"Zeynep\", \"Finance\", \"Iasi\", 6000)\n]\n\nBeklenen output:\n{\n  \"Bucharest\" -> [Ali, Mehmet],\n  \"Cluj\" -> [Ayse],\n  \"Iasi\" -> [Zeynep]\n}\n\nEk test caseler:\n- Input: [] -> Output: {}\n- Input: tum calisanlar ayni sehirde -> Output: tek keyli map\n- Input: city = null olan kayitlar -> nasil ele aldigini acikla\n\nInterview follow-up:\n- Sehre gore gruplayip sadece isim listesini donmek isteseydik?\n- Her sehir icin calisan sayisi isteseydik?\n- Sonuc mapi alfabetik key sirasiyla istanse ne yapardin?",
+      "starterCode": "class Employee {\n    private Long id;\n    private String name;\n    private String department;\n    private String city;\n    private double salary;\n}\n\npublic Map<String, List<Employee>> groupEmployeesByCity(List<Employee> employees) {\n    // TODO\n    return Map.of();\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q6",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "6) Make a list immutable and explain why\n\nAsagidaki input veriliyor:\nList<String> names = Arrays.asList(\"Ali\", \"Ayse\", \"Mehmet\");\n\nBu listeyi immutable hale getiren bir yontem yaz veya mevcut koleksiyonu immutable olarak dondur.\n\nBeklenen davranis:\n- Sonuc liste disaridan degistirilememeli\n- add, remove, set gibi islemler basarisiz olmali\n- Sadece immutable liste uretmek yetmez, neden gerekli oldugunu da aciklamalisin\n\nOrnek beklenti:\n- Input liste immutable versiyona cevrildikten sonra result.add(\"Zeynep\") cagrisi calismamali\n- Mevcut elemanlar korunmali\n\nEk test caseler:\n- Input: [] -> Output: immutable bos liste\n- Input: null -> nasil davranacagini belirt\n\nInterview follow-up:\n- Collections.unmodifiableList(...) ile gercekten immutable liste mi elde ediyoruz?\n- Defensive copy neden onemli?\n- Mutable elemanlar iceren immutable liste gercekten guvenli midir?",
+      "starterCode": "List<String> names = Arrays.asList(\"Ali\", \"Ayse\", \"Mehmet\");\n\npublic List<String> makeImmutable(List<String> names) {\n    // TODO\n    return List.of();\n}",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q7",
+      "type": "code",
+      "questionKind": "direct",
+      "question": "7) Fix equals() and hashCode()\n\nAsagidaki sinif veriliyor:\n\nclass Employee {\n    private Long id;\n    private String name;\n    private String department;\n\n    // constructor, getters, setters\n}\n\nBu sinif HashSet icinde kullaniliyor ama duplicate kayitlar duzgun calismiyor.\nequals() ve hashCode() metodlarinin eksik veya yanlis yazildigini dusun.\n\nGorev:\nBu sinif icin equals() ve hashCode() metodlarini duzelt.\n\nBeklenen davranis:\n- Iki Employee nesnesi mantiksal olarak esitse HashSet icinde duplicate davranmamali\n- Equality icin hangi alanlari kullanacagini aciklamalisin\n- id uzerinden mi, tum alanlar uzerinden mi equality kuracagini savunmalisin\n\nOrnek senaryo:\nEmployee e1 = new Employee(1L, \"Ali\", \"IT\");\nEmployee e2 = new Employee(1L, \"Ali\", \"IT\");\n\nBeklenti:\n- Eger equality id bazliysa bunlar esit kabul edilmeli\n- HashSet icine ikisi de eklendiginde tek kayit kalmali\n\nEk test caseler:\n- e1 = (1, \"Ali\", \"IT\")\n- e2 = (1, \"Ali\", \"HR\")\nBu durumda equality kriterine gore sonucu aciklamalisin.\n\nInterview follow-up:\n- equals() true ise hashCode() icin ne garanti verilmelidir?\n- JPA entitylerde equals/hashCode neden dikkatli yazilmali?\n- Mutable fieldlari hashCode icine koyarsan ne risk olusur?",
+      "starterCode": "class Employee {\n    private Long id;\n    private String name;\n    private String department;\n\n    // TODO: equals() ve hashCode() metodlarini yaz\n}",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}
