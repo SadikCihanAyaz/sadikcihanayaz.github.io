@@ -19,7 +19,7 @@
       "question": "Bir metod yaz:\nboolean containsDuplicate(int[] nums)\n\nBu metod, dizide herhangi bir sayi birden fazla kez geciyorsa true, aksi halde false dondurmelidir.\n\nBeklenen davranis:\n- Dizi sirali olmak zorunda degildir.\n- Negatif sayilar olabilir.\n- Bos dizi icin false donebilirsin.\n\nOrnekler:\n- Input: [1, 2, 3, 4] -> Output: false\n- Input: [1, 2, 3, 1] -> Output: true\n- Input: [5, 5, 5, 5] -> Output: true\n\nEk test caseler:\n- Input: [] -> Output: false\n- Input: [0] -> Output: false\n- Input: [-1, -2, -3, -1] -> Output: true\n- Input: [1000000, 2, 3, 4, 1000000] -> Output: true\n\nInterview follow-up:\n- Sorting ile cozersen complexity ne olur?\n- HashSet ile cozersen complexity ne olur?\n- Memory kullanmadan cozmek istersek ne kaybederiz?",
       "starterCode": "public boolean containsDuplicate(int[] nums) {\n    // TODO\n    return false;\n}",
       "answerBody": "",
-      "answerCode": ""
+      "answerCode": "import java.util.HashMap;\nimport java.util.Map;\n\npublic class Main{\n    public static void main(String[] args) {\n\n        int [] arr = {1, 2, 3, 5};\n        boolean val = containsDuplicate(arr);\n        System.out.println(val);\n        \n    }\n    static boolean containsDuplicate(int[] nums){\n\n        Map<Integer, Integer> fq = new HashMap<>();\n\n        for(int number: nums)\n        {\n            fq.put(number, fq.getOrDefault(number, 0) + 1);\n            if(fq.get(number) > 1)\n            {\n                return true;\n            }\n        }\n     \n        return false;\n    }\n}"
     },
     {
       "id": "i2-q3",
