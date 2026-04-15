@@ -34,6 +34,14 @@
       "order": 4,
       "questionCount": 6,
       "file": "/data/002_spring_boot/005_coding/interviews/004_sql-coding-1.json"
+    },
+    {
+      "id": "spring-boot-coding-1-user-address",
+      "title": "Spring Boot Coding - 1",
+      "description": "User-Address JPA tasarimi, projection, optimistic locking ve katmanli mimari taski",
+      "order": 5,
+      "questionCount": 1,
+      "file": "/data/002_spring_boot/005_coding/interviews/005_spring-boot-coding-1-user-address.json"
     }
   ]
 }
