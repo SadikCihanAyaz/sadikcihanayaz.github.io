@@ -37,7 +37,7 @@
     },
     {
       "id": "spring-boot-coding-1-user-address",
-      "title": "Spring Boot Coding - 1",
+      "title": "Spring Boot Coding - 2",
       "description": "User-Address JPA tasarimi, projection, optimistic locking ve katmanli mimari taski",
       "order": 5,
       "questionCount": 1,
