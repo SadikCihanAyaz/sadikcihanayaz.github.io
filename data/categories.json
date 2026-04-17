@@ -25,7 +25,7 @@
       "description": "Coding ve karisik soru setleri",
       "order": 3,
       "folder": "003_questions",
-      "subcategoryCount": 2,
+      "subcategoryCount": 3,
       "subcategoriesFile": "/data/003_questions/subcategories.json"
     }
   ]

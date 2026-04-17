@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "categoryId": "questions",
+  "subcategoryId": "java-type-conversion-casting-parsing",
+  "id": "java-type-conversion-casting-parsing-topic",
+  "title": "Java Type Conversion / Casting / Parsing",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu kategori Java'da type conversion, casting ve parsing odakli sorulari icerir."
+    }
+  ]
+}

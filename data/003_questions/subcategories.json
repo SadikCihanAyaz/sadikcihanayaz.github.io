@@ -21,6 +21,16 @@
       "topicFile": "/data/002_spring_boot/008_mixed_questions/topic/001_topic.json",
       "interviewsFile": "/data/002_spring_boot/008_mixed_questions/interviews/index.json",
       "interviewCount": 6
+    },
+    {
+      "id": "java-type-conversion-casting-parsing",
+      "title": "Java Type Conversion / Casting / Parsing",
+      "description": "Java'da tip donusumu, casting ve parsing odakli onemli sorular",
+      "order": 3,
+      "folder": "003_java_type_conversion_casting_parsing",
+      "topicFile": "/data/003_questions/003_java_type_conversion_casting_parsing/topic/001_topic.json",
+      "interviewsFile": "/data/003_questions/003_java_type_conversion_casting_parsing/interviews/index.json",
+      "interviewCount": 1
     }
   ]
 }
