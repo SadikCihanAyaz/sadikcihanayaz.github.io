@@ -176,10 +176,11 @@ function collectLearningRoutes() {
 
     for (const subcategory of subcategories) {
       const subcategoryId = subcategory.id;
-      const topicFile = resolveWebPath(subcategory.topicFile);
+      const hasTopic = categoryId !== 'questions';
+      const topicFile = hasTopic ? resolveWebPath(subcategory.topicFile) : null;
       const interviewsIndexFile = resolveWebPath(subcategory.interviewsFile);
 
-      if (!fs.existsSync(topicFile)) {
+      if (hasTopic && !fs.existsSync(topicFile)) {
         throw new Error(`Topic dosyasi bulunamadi: ${subcategory.topicFile}`);
       }
       if (!fs.existsSync(interviewsIndexFile)) {
@@ -190,14 +191,18 @@ function collectLearningRoutes() {
       addEntry(subcategoryBase, {
         priority: '0.80',
         changefreq: 'weekly',
-        sourceFiles: [subcategoriesFile, topicFile, interviewsIndexFile]
+        sourceFiles: hasTopic
+          ? [subcategoriesFile, topicFile, interviewsIndexFile]
+          : [subcategoriesFile, interviewsIndexFile]
       });
 
-      addEntry(`${subcategoryBase}&view=topic`, {
-        priority: '0.78',
-        changefreq: 'monthly',
-        sourceFiles: [topicFile]
-      });
+      if (hasTopic) {
+        addEntry(`${subcategoryBase}&view=topic`, {
+          priority: '0.78',
+          changefreq: 'monthly',
+          sourceFiles: [topicFile]
+        });
+      }
 
       const interviewsData = readJson(interviewsIndexFile);
       const interviews = interviewsData.interviews || [];

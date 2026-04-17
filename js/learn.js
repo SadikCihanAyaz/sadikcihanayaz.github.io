@@ -154,6 +154,10 @@
     return sortByOrder(data.interviews || []);
   }
 
+  function categoryHasTopic(category) {
+    return String(category?.id || '') !== 'questions';
+  }
+
   function renderCategoryList(categories) {
     setBreadcrumb([link('Ana Sayfa', '/learn.html')]);
     setTitle('Kategoriler', 'Bir kategori secerek devam et.');
@@ -195,15 +199,19 @@
       path: `/learn.html?${makeQuery({ category: category.id })}`
     });
 
+    const hasTopic = categoryHasTopic(category);
     const cards = subcategories.map((sub) => {
       const href = `/learn.html?${makeQuery({ category: category.id, subcategory: sub.id })}`;
       const interviewCount = sub.interviewCount ?? 0;
+      const metaText = hasTopic
+        ? `1 Konu anlatimi + ${esc(interviewCount)} interview`
+        : `${esc(interviewCount)} interview`;
 
       return `
         <article class="card">
           <h3>${esc(sub.title)}</h3>
           <p>${esc(sub.description || '')}</p>
-          <div class="meta">1 Konu anlatimi + ${esc(interviewCount)} interview</div>
+          <div class="meta">${metaText}</div>
           <div class="actions">
             <a class="btn btn-primary" href="${href}">Gir</a>
           </div>
@@ -215,35 +223,54 @@
   }
 
   function renderSubcategoryHome(category, subcategory, topic, interviews) {
+    const hasTopic = categoryHasTopic(category);
+
     setBreadcrumb([
       link('Ana Sayfa', '/learn.html'),
       link(category.title, `/learn.html?${makeQuery({ category: category.id })}`),
       esc(subcategory.title)
     ]);
 
-    setTitle(`${subcategory.title}`, 'Bu alt kategoride once konu anlatimi, sonra interview listesi gelir.');
+    setTitle(
+      `${subcategory.title}`,
+      hasTopic
+        ? 'Bu alt kategoride once konu anlatimi, sonra interview listesi gelir.'
+        : 'Bu alt kategoride interview listesi yer alir.'
+    );
     setSeo({
       title: `${subcategory.title} | Learning Hub`,
-      description: `${subcategory.title} icin konu anlatimi ve interview listesi.`,
+      description: hasTopic
+        ? `${subcategory.title} icin konu anlatimi ve interview listesi.`
+        : `${subcategory.title} icin interview listesi.`,
       path: `/learn.html?${makeQuery({ category: category.id, subcategory: subcategory.id })}`
     });
 
-    const topicHref = `/learn.html?${makeQuery({
-      category: category.id,
-      subcategory: subcategory.id,
-      view: 'topic'
-    })}`;
+    let topicSection = '';
+    if (hasTopic) {
+      const topicHref = `/learn.html?${makeQuery({
+        category: category.id,
+        subcategory: subcategory.id,
+        view: 'topic'
+      })}`;
 
-    const topicCard = `
-      <article class="card">
-        <span class="badge">Konu Anlatimi</span>
-        <h3>${esc(topic?.title || 'Konu Anlatimi')}</h3>
-        <p>${esc(subcategory.description || '')}</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="${topicHref}">Konuya Gir</a>
-        </div>
-      </article>
-    `;
+      const topicCard = `
+        <article class="card">
+          <span class="badge">Konu Anlatimi</span>
+          <h3>${esc(topic?.title || 'Konu Anlatimi')}</h3>
+          <p>${esc(subcategory.description || '')}</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="${topicHref}">Konuya Gir</a>
+          </div>
+        </article>
+      `;
+
+      topicSection = `
+        <section class="section">
+          <h2>1) Konu</h2>
+          <div class="grid">${topicCard}</div>
+        </section>
+      `;
+    }
 
     const interviewCards = interviews.map((interview, index) => {
       const href = `/interview.html?${makeQuery({
@@ -266,12 +293,9 @@
     }).join('');
 
     els.app.innerHTML = `
+      ${topicSection}
       <section class="section">
-        <h2>1) Konu</h2>
-        <div class="grid">${topicCard}</div>
-      </section>
-      <section class="section">
-        <h2>2) Interview'ler</h2>
+        <h2>${hasTopic ? "2) Interview'ler" : "Interview'ler"}</h2>
         <div class="grid">${interviewCards || '<p>Interview bulunamadi.</p>'}</div>
       </section>
     `;
@@ -406,17 +430,29 @@
         return;
       }
 
+      const hasTopic = categoryHasTopic(category);
+
       if (view === 'topic') {
+        if (!hasTopic) {
+          renderError('Bu kategoride konu anlatimi bulunmuyor.');
+          return;
+        }
         const article = await loadTopic(subcategory);
         renderTopic(category, subcategory, article);
         return;
       }
 
-      const [topic, interviews] = await Promise.all([
-        loadTopic(subcategory),
-        loadInterviews(subcategory)
-      ]);
-      renderSubcategoryHome(category, subcategory, topic, interviews);
+      if (hasTopic) {
+        const [topic, interviews] = await Promise.all([
+          loadTopic(subcategory),
+          loadInterviews(subcategory)
+        ]);
+        renderSubcategoryHome(category, subcategory, topic, interviews);
+        return;
+      }
+
+      const interviews = await loadInterviews(subcategory);
+      renderSubcategoryHome(category, subcategory, null, interviews);
     } catch (error) {
       renderError(error.message || 'Beklenmeyen bir hata olustu.');
     }
