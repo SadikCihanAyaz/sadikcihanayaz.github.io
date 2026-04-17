@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "categoryId": "questions",
+  "subcategories": [
+    {
+      "id": "coding",
+      "title": "Coding",
+      "description": "REST endpoint yaz ve listeyi filter/sort et",
+      "order": 1,
+      "folder": "005_coding",
+      "topicFile": "/data/002_spring_boot/005_coding/topic/001_topic.json",
+      "interviewsFile": "/data/002_spring_boot/005_coding/interviews/index.json",
+      "interviewCount": 6
+    },
+    {
+      "id": "mixed-questions",
+      "title": "Karisik Sorular",
+      "description": "Sadece sozlu mulakat odakli acik-uclu Spring Boot soru-cevaplari",
+      "order": 2,
+      "folder": "008_mixed_questions",
+      "topicFile": "/data/002_spring_boot/008_mixed_questions/topic/001_topic.json",
+      "interviewsFile": "/data/002_spring_boot/008_mixed_questions/interviews/index.json",
+      "interviewCount": 6
+    }
+  ]
+}

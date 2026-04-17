@@ -43,20 +43,10 @@
       "interviewCount": 4
     },
     {
-      "id": "coding",
-      "title": "Coding",
-      "description": "REST endpoint yaz ve listeyi filter/sort et",
-      "order": 5,
-      "folder": "005_coding",
-      "topicFile": "/data/002_spring_boot/005_coding/topic/001_topic.json",
-      "interviewsFile": "/data/002_spring_boot/005_coding/interviews/index.json",
-      "interviewCount": 6
-    },
-    {
       "id": "spring-cloud",
       "title": "Spring Cloud",
       "description": "Spring Cloud Config, service discovery, Eureka ve load balancing temelleri",
-      "order": 6,
+      "order": 5,
       "folder": "006_spring_cloud",
       "topicFile": "/data/002_spring_boot/006_spring_cloud/topic/001_topic.json",
       "interviewsFile": "/data/002_spring_boot/006_spring_cloud/interviews/index.json",
@@ -66,21 +56,11 @@
       "id": "test",
       "title": "Test",
       "description": "Spring Boot test stratejileri: unit, integration, web slice, data slice, security ve CI",
-      "order": 7,
+      "order": 6,
       "folder": "007_test",
       "topicFile": "/data/002_spring_boot/007_test/topic/001_topic.json",
       "interviewsFile": "/data/002_spring_boot/007_test/interviews/index.json",
       "interviewCount": 3
-    },
-    {
-      "id": "mixed-questions",
-      "title": "Karisik Sorular",
-      "description": "Sadece sozlu mulakat odakli acik-uclu Spring Boot soru-cevaplari",
-      "order": 8,
-      "folder": "008_mixed_questions",
-      "topicFile": "/data/002_spring_boot/008_mixed_questions/topic/001_topic.json",
-      "interviewsFile": "/data/002_spring_boot/008_mixed_questions/interviews/index.json",
-      "interviewCount": 6
     }
   ]
 }

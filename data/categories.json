@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "categories": [
     {
       "id": "java",
@@ -16,8 +16,17 @@
       "description": "Spring Boot guvenlik ve veri katmani: Spring Security, JWT, OAuth2, RBAC, Hibernate, JPA",
       "order": 2,
       "folder": "002_spring_boot",
-      "subcategoryCount": 8,
+      "subcategoryCount": 6,
       "subcategoriesFile": "/data/002_spring_boot/subcategories.json"
+    },
+    {
+      "id": "questions",
+      "title": "Questions",
+      "description": "Coding ve karisik soru setleri",
+      "order": 3,
+      "folder": "003_questions",
+      "subcategoryCount": 2,
+      "subcategoriesFile": "/data/003_questions/subcategories.json"
     }
   ]
 }
