@@ -408,9 +408,12 @@
 
     const entry = getSavedQuestionEntry(question);
     const saved = window.SavedQuestionList.isSaved(entry);
+    const label = saved ? 'Listeden Kaldir' : 'Listeye Ekle';
 
-    els.bookmarkQuestionBtn.textContent = saved ? 'Listeden Kaldir' : 'Listeye Ekle';
-    els.bookmarkQuestionBtn.classList.toggle('btn-saved-active', saved);
+    els.bookmarkQuestionBtn.classList.toggle('is-saved', saved);
+    els.bookmarkQuestionBtn.setAttribute('title', label);
+    els.bookmarkQuestionBtn.setAttribute('aria-label', label);
+    els.bookmarkQuestionBtn.setAttribute('aria-pressed', saved ? 'true' : 'false');
   }
 
   function setupSavedListModal() {

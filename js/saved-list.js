@@ -139,6 +139,50 @@
     return `/interview.html?${params.toString()}`;
   }
 
+  function buildSubcategoryKey(item) {
+    return [
+      normalizeId(item?.categoryId),
+      normalizeId(item?.subcategoryId)
+    ].join('::');
+  }
+
+  function groupBySubcategory(items) {
+    const map = new Map();
+
+    for (const item of items) {
+      const key = buildSubcategoryKey(item);
+      if (!key || key === '::') {
+        continue;
+      }
+
+      if (!map.has(key)) {
+        map.set(key, {
+          key,
+          categoryId: normalizeId(item.categoryId),
+          categoryTitle: String(item.categoryTitle || item.categoryId || ''),
+          subcategoryId: normalizeId(item.subcategoryId),
+          subcategoryTitle: String(item.subcategoryTitle || item.subcategoryId || ''),
+          items: []
+        });
+      }
+
+      map.get(key).items.push(item);
+    }
+
+    return [...map.values()]
+      .map((group) => ({
+        ...group,
+        count: group.items.length,
+        label: `${group.categoryTitle} - ${group.subcategoryTitle}`
+      }))
+      .sort((a, b) => {
+        if (b.count !== a.count) {
+          return b.count - a.count;
+        }
+        return a.label.localeCompare(b.label);
+      });
+  }
+
   function attachModal(options) {
     const openBtn = options?.openBtn;
     const modal = options?.modal;
@@ -156,29 +200,36 @@
       };
     }
 
+    const viewState = {
+      mode: 'groups',
+      selectedGroupKey: ''
+    };
+
+    function resetViewState() {
+      viewState.mode = 'groups';
+      viewState.selectedGroupKey = '';
+    }
+
     function closeModal() {
+      resetViewState();
       modal.classList.add('hidden');
       modal.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('no-scroll');
     }
 
-    function renderList() {
-      const list = getAll();
-      if (clearBtn) {
-        clearBtn.disabled = list.length === 0;
-      }
-
-      if (list.length === 0) {
+    function renderGroupList(list) {
+      const groups = groupBySubcategory(list);
+      if (groups.length === 0) {
         contentEl.innerHTML = '<p class="saved-empty">Listede soru yok.</p>';
         return;
       }
 
-      const rows = list.map((item) => `
+      const rows = groups.map((group) => `
         <li>
-          <button type="button" class="saved-item" data-key="${esc(item.key)}">
-            <div class="saved-item-title">${esc(item.questionText || item.questionId)}</div>
-            <div class="saved-item-meta">
-              ${esc(item.categoryTitle)} / ${esc(item.subcategoryTitle)} / ${esc(item.interviewTitle)} - ${esc(item.questionId)}
+          <button type="button" class="saved-item saved-group-item" data-group-key="${esc(group.key)}">
+            <div class="saved-item-title">
+              ${esc(group.categoryTitle)} - ${esc(group.subcategoryTitle)}
+              <span class="saved-group-count">(${esc(group.count)})</span>
             </div>
           </button>
         </li>
@@ -186,14 +237,62 @@
 
       contentEl.innerHTML = `<ul class="saved-list">${rows}</ul>`;
 
-      Array.from(contentEl.querySelectorAll('.saved-item')).forEach((button) => {
+      Array.from(contentEl.querySelectorAll('.saved-group-item')).forEach((button) => {
+        button.addEventListener('click', () => {
+          const groupKey = String(button.getAttribute('data-group-key') || '');
+          if (!groupKey) {
+            return;
+          }
+          viewState.mode = 'items';
+          viewState.selectedGroupKey = groupKey;
+          renderList();
+        });
+      });
+    }
+
+    function renderGroupItems(list) {
+      const groups = groupBySubcategory(list);
+      const group = groups.find((item) => item.key === viewState.selectedGroupKey);
+      if (!group) {
+        resetViewState();
+        renderList();
+        return;
+      }
+
+      const rows = group.items.map((item) => `
+        <li>
+          <button type="button" class="saved-item saved-question-item" data-key="${esc(item.key)}">
+            <div class="saved-item-title">${esc(item.questionText || item.questionId)}</div>
+            <div class="saved-item-meta">
+              ${esc(item.interviewTitle)} - ${esc(item.questionId)}
+            </div>
+          </button>
+        </li>
+      `).join('');
+
+      contentEl.innerHTML = `
+        <div class="saved-subheader">
+          <button type="button" class="btn saved-back-btn" id="savedListBackBtn">Geri</button>
+          <div class="saved-subtitle">${esc(group.categoryTitle)} - ${esc(group.subcategoryTitle)} (${esc(group.count)})</div>
+        </div>
+        <ul class="saved-list">${rows}</ul>
+      `;
+
+      const backBtn = document.getElementById('savedListBackBtn');
+      if (backBtn) {
+        backBtn.addEventListener('click', () => {
+          resetViewState();
+          renderList();
+        });
+      }
+
+      Array.from(contentEl.querySelectorAll('.saved-question-item')).forEach((button) => {
         button.addEventListener('click', () => {
           const key = button.getAttribute('data-key');
-          const entry = list.find((item) => item.key === key);
+          const entry = group.items.find((item) => item.key === key);
           if (!entry) {
             return;
           }
-
           const handled = typeof onNavigate === 'function' ? Boolean(onNavigate(entry)) : false;
           if (!handled) {
             window.location.href = buildQuestionUrl(entry);
@@ -205,7 +304,28 @@
       });
     }
 
+    function renderList() {
+      const list = getAll();
+      if (clearBtn) {
+        clearBtn.disabled = list.length === 0;
+      }
+
+      if (list.length === 0) {
+        resetViewState();
+        contentEl.innerHTML = '<p class="saved-empty">Listede soru yok.</p>';
+        return;
+      }
+
+      if (viewState.mode === 'items') {
+        renderGroupItems(list);
+        return;
+      }
+
+      renderGroupList(list);
+    }
+
     function openModal() {
+      resetViewState();
       renderList();
       modal.classList.remove('hidden');
       modal.setAttribute('aria-hidden', 'false');
@@ -243,6 +363,7 @@
         }
 
         clear();
+        resetViewState();
         renderList();
         if (typeof onAfterClear === 'function') {
           onAfterClear();

@@ -306,9 +306,54 @@ pre.code {
 }
 
 .question-text {
-  margin-top: 12px;
+  margin: 0;
   line-height: 1.55;
   white-space: pre-wrap;
+}
+
+.question-row {
+  margin-top: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.question-row .question-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.star-bookmark-btn {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border: 2px solid #e2b216;
+  border-radius: 999px;
+  background: #fff;
+  color: #e2b216;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.star-bookmark-btn::before {
+  content: '☆';
+  font-size: 22px;
+}
+
+.star-bookmark-btn:hover {
+  background: #fff9df;
+}
+
+.star-bookmark-btn.is-saved {
+  background: #fff3bc;
+}
+
+.star-bookmark-btn.is-saved::before {
+  content: '★';
+  color: #e2b216;
 }
 
 .choice-list {
@@ -529,6 +574,27 @@ textarea.code-input {
   line-height: 1.35;
 }
 
+.saved-group-count {
+  color: #6c7a88;
+  font-weight: 700;
+}
+
+.saved-subheader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.saved-subtitle {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.saved-back-btn {
+  min-width: 76px;
+}
+
 .saved-empty {
   margin: 4px 0;
   color: var(--muted);
@@ -556,5 +622,14 @@ body.no-scroll {
 
   .question-title {
     font-size: 20px;
+  }
+
+  .question-row {
+    gap: 10px;
+  }
+
+  .star-bookmark-btn {
+    width: 36px;
+    height: 36px;
   }
 }

@@ -45,14 +45,23 @@
     <section id="questionShell" class="question-shell hidden">
       <div id="progress" class="progress"></div>
       <h2 id="questionTitle" class="question-title"></h2>
-      <p id="questionText" class="question-text"></p>
+      <div class="question-row">
+        <p id="questionText" class="question-text"></p>
+        <button
+          id="bookmarkQuestionBtn"
+          type="button"
+          class="star-bookmark-btn"
+          aria-label="Listeye Ekle"
+          title="Listeye Ekle"
+          aria-pressed="false"
+        ></button>
+      </div>
 
       <div id="questionBody"></div>
 
       <div class="actions">
         <button id="checkBtn" class="btn">Yanitimi Kontrol Et</button>
         <button id="toggleAnswerBtn" class="btn">Cevabi Goster</button>
-        <button id="bookmarkQuestionBtn" class="btn">Listeye Ekle</button>
       </div>
 
       <div id="checkResult" class="article-block"></div>
