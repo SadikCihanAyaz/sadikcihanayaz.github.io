@@ -8,7 +8,7 @@
   "questions": [
     {
       "id": "i1-q1",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "@Transactional nasil calisir?",
       "starterCode": "",
@@ -17,7 +17,7 @@
     },
     {
       "id": "i1-q2",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "AOP proxy nedir, self-invocation neden bozuyor?",
       "starterCode": "",
@@ -26,7 +26,7 @@
     },
     {
       "id": "i1-q3",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Isolation level farklari nedir?",
       "starterCode": "",
@@ -35,7 +35,7 @@
     },
     {
       "id": "i1-q4",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Optimistic ve pessimistic locking farki nedir?",
       "starterCode": "",
@@ -44,7 +44,7 @@
     },
     {
       "id": "i1-q5",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "N+1 problemi nedir, nasil cozersin?",
       "starterCode": "",
@@ -53,7 +53,7 @@
     },
     {
       "id": "i1-q6",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Lazy vs eager ne zaman problem olur?",
       "starterCode": "",
@@ -62,7 +62,7 @@
     },
     {
       "id": "i1-q7",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "findById ile getReferenceById farki nedir?",
       "starterCode": "",
@@ -71,7 +71,7 @@
     },
     {
       "id": "i1-q8",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "HashMap vs ConcurrentHashMap",
       "starterCode": "",
@@ -80,7 +80,7 @@
     },
     {
       "id": "i1-q9",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "SOLID'i gercek ornekle anlat",
       "starterCode": "",
@@ -89,7 +89,7 @@
     },
     {
       "id": "i1-q10",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Exception handling'i nasil yaparsin?",
       "starterCode": "",
@@ -98,7 +98,7 @@
     },
     {
       "id": "i1-q11",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Unit test vs integration test",
       "starterCode": "",
@@ -107,7 +107,7 @@
     },
     {
       "id": "i1-q12",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "SQL'de index ne zaman eklenir?",
       "starterCode": "",
@@ -116,7 +116,7 @@
     },
     {
       "id": "i1-q13",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Deadlock nasil olusur?",
       "starterCode": "",
@@ -125,7 +125,7 @@
     },
     {
       "id": "i1-q14",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Connection pool neden tukenir?",
       "starterCode": "",
@@ -134,7 +134,7 @@
     },
     {
       "id": "i1-q15",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "High-load serviste neye bakarsin?",
       "starterCode": "",
@@ -143,7 +143,7 @@
     },
     {
       "id": "i1-q16",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Neden bu sirket veya neden bu rol?",
       "starterCode": "",
@@ -152,7 +152,7 @@
     },
     {
       "id": "i1-q17",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Agile ortamda rolun neydi?",
       "starterCode": "",
@@ -161,7 +161,7 @@
     },
     {
       "id": "i1-q18",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Musteriyle teknik tartisma yasadin mi?",
       "starterCode": "",
@@ -170,7 +170,7 @@
     },
     {
       "id": "i1-q19",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Prod hatasini nasil debug ettin?",
       "starterCode": "",
@@ -179,7 +179,7 @@
     },
     {
       "id": "i1-q20",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Son projenin mimarisini anlat",
       "starterCode": "",

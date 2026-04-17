@@ -8,7 +8,7 @@
   "questions": [
     {
       "id": "i5-q1",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Bize kendinden ve son projenden bahset.",
       "starterCode": "",
@@ -17,7 +17,7 @@
     },
     {
       "id": "i5-q2",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Neden mevcut isinden ayrilmak istiyorsun?",
       "starterCode": "",
@@ -26,7 +26,7 @@
     },
     {
       "id": "i5-q3",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Salary expectation nedir?",
       "starterCode": "",
@@ -35,7 +35,7 @@
     },
     {
       "id": "i5-q4",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Client-facing ortamda calistin mi?",
       "starterCode": "",
@@ -44,7 +44,7 @@
     },
     {
       "id": "i5-q5",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Ne tur projelerde calistin?",
       "starterCode": "",
@@ -53,7 +53,7 @@
     },
     {
       "id": "i5-q6",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "ArrayList ile LinkedList farki nedir, hangisini ne zaman secersin?",
       "starterCode": "",
@@ -62,7 +62,7 @@
     },
     {
       "id": "i5-q7",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "equals() ve hashCode() neden birlikte dusunulmeli?",
       "starterCode": "",
@@ -71,7 +71,7 @@
     },
     {
       "id": "i5-q8",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "volatile ne ise yarar?",
       "starterCode": "",
@@ -80,7 +80,7 @@
     },
     {
       "id": "i5-q9",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "synchronized ile Lock farki nedir?",
       "starterCode": "",
@@ -89,7 +89,7 @@
     },
     {
       "id": "i5-q10",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Thread-safe kod nasil yazarsin?",
       "starterCode": "",
@@ -98,7 +98,7 @@
     },
     {
       "id": "i5-q11",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Immutability neden onemli?",
       "starterCode": "",
@@ -107,7 +107,7 @@
     },
     {
       "id": "i5-q12",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Entity stateleri nelerdir?",
       "starterCode": "",
@@ -116,7 +116,7 @@
     },
     {
       "id": "i5-q13",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Persistence context nedir?",
       "starterCode": "",
@@ -125,7 +125,7 @@
     },
     {
       "id": "i5-q14",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Dirty checking nedir?",
       "starterCode": "",
@@ -134,7 +134,7 @@
     },
     {
       "id": "i5-q15",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "flush, clear, detach ne ise yarar?",
       "starterCode": "",
@@ -143,7 +143,7 @@
     },
     {
       "id": "i5-q16",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Join tipleri nelerdir, pratikte ne zaman kritik olur?",
       "starterCode": "",
@@ -152,7 +152,7 @@
     },
     {
       "id": "i5-q17",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "SQL query optimize etme mantigini nasil dusunursun?",
       "starterCode": "",
@@ -161,7 +161,7 @@
     },
     {
       "id": "i5-q18",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Mockitoyu ne zaman kullanirsin?",
       "starterCode": "",
@@ -170,7 +170,7 @@
     },
     {
       "id": "i5-q19",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Mock ile stub farki nedir?",
       "starterCode": "",
@@ -179,7 +179,7 @@
     },
     {
       "id": "i5-q20",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "@SpringBootTest ne zaman agir kacar?",
       "starterCode": "",

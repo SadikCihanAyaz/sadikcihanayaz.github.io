@@ -8,7 +8,7 @@
   "questions": [
     {
       "id": "i6-q1",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Basvurdugun sirket hakkinda ne biliyorsun?",
       "starterCode": "",
@@ -17,7 +17,7 @@
     },
     {
       "id": "i6-q2",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Agile ortamda calistin mi?",
       "starterCode": "",
@@ -26,7 +26,7 @@
     },
     {
       "id": "i6-q3",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "OOP prensiplerini say ve ornek ver.",
       "starterCode": "",
@@ -35,7 +35,7 @@
     },
     {
       "id": "i6-q4",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Collections ve Stream APIyi nerede kullanirsin?",
       "starterCode": "",
@@ -44,7 +44,7 @@
     },
     {
       "id": "i6-q5",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Spring IoC ve Dependency Injection nedir?",
       "starterCode": "",
@@ -53,7 +53,7 @@
     },
     {
       "id": "i6-q6",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Validationi nasil kurarsin?",
       "starterCode": "",
@@ -62,7 +62,7 @@
     },
     {
       "id": "i6-q7",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Microservice yazarken config ve profilelari nasil yonetirsin?",
       "starterCode": "",
@@ -71,7 +71,7 @@
     },
     {
       "id": "i6-q8",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Lazy loading neden patlar?",
       "starterCode": "",
@@ -80,7 +80,7 @@
     },
     {
       "id": "i6-q9",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "@Transactional ile persistence context iliskisi nedir?",
       "starterCode": "",
@@ -89,7 +89,7 @@
     },
     {
       "id": "i6-q10",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Cucumber nedir, ne zaman kullanilir?",
       "starterCode": "",
@@ -98,7 +98,7 @@
     },
     {
       "id": "i6-q11",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Test pyramid nedir?",
       "starterCode": "",
@@ -107,7 +107,7 @@
     },
     {
       "id": "i6-q12",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Neyi unit test, neyi integration test yaparsin?",
       "starterCode": "",
@@ -116,7 +116,7 @@
     },
     {
       "id": "i6-q13",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Controller, service, repository testi nasil ayrilir?",
       "starterCode": "",
@@ -125,7 +125,7 @@
     },
     {
       "id": "i6-q14",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Yuksek trafikte bir servisi nasil scale edersin?",
       "starterCode": "",
@@ -134,7 +134,7 @@
     },
     {
       "id": "i6-q15",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Monolith vs microservice",
       "starterCode": "",
@@ -143,7 +143,7 @@
     },
     {
       "id": "i6-q16",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Cachei nereye koyarsin?",
       "starterCode": "",
@@ -152,7 +152,7 @@
     },
     {
       "id": "i6-q17",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Logging ve monitoring nasil kurulur?",
       "starterCode": "",
@@ -161,7 +161,7 @@
     },
     {
       "id": "i6-q18",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Connection pooling neden onemli?",
       "starterCode": "",
@@ -170,7 +170,7 @@
     },
     {
       "id": "i6-q19",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Neden long transaction kotu?",
       "starterCode": "",
@@ -179,7 +179,7 @@
     },
     {
       "id": "i6-q20",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "En zor bug neydi, nasil cozdun?",
       "starterCode": "",
@@ -188,7 +188,7 @@
     },
     {
       "id": "i6-q21",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Prod incident yasadin mi?",
       "starterCode": "",
@@ -197,7 +197,7 @@
     },
     {
       "id": "i6-q22",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Bir query performans sorununu nasil cozdun?",
       "starterCode": "",
@@ -206,7 +206,7 @@
     },
     {
       "id": "i6-q23",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Legacy kodda neyi iyilestirdin?",
       "starterCode": "",
@@ -215,7 +215,7 @@
     },
     {
       "id": "i6-q24",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Takim icinde anlasmazlik yasadin mi?",
       "starterCode": "",
@@ -224,7 +224,7 @@
     },
     {
       "id": "i6-q25",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Bir featurei bastan tasarlasaydin neyi farkli yapardin?",
       "starterCode": "",
@@ -233,7 +233,7 @@
     },
     {
       "id": "i6-q26",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Bir juniora transaction konusunu nasil anlatirsin?",
       "starterCode": "",
@@ -242,7 +242,7 @@
     },
     {
       "id": "i6-q27",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Neden bu teknolojiyi sectin, alternatif neydi?",
       "starterCode": "",

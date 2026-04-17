@@ -8,7 +8,7 @@
   "questions": [
     {
       "id": "i4-q1",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Java 17 ya da 21e gecmenin teknik olarak ne faydasi var?",
       "starterCode": "",
@@ -17,7 +17,7 @@
     },
     {
       "id": "i4-q2",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Virtual thread ile platform thread farki nedir, ne zaman kullanirsin?",
       "starterCode": "",
@@ -26,7 +26,7 @@
     },
     {
       "id": "i4-q3",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "CompletableFuture ne zaman mantikli, ne zaman gereksiz karmasa yaratir?",
       "starterCode": "",
@@ -35,7 +35,7 @@
     },
     {
       "id": "i4-q4",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "record ne zaman kullanirsin?",
       "starterCode": "",
@@ -44,7 +44,7 @@
     },
     {
       "id": "i4-q5",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Sealed class ne ise yarar, gercek hayatta nerede kullanirsin?",
       "starterCode": "",
@@ -53,7 +53,7 @@
     },
     {
       "id": "i4-q6",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "ThreadLocal neden riskli olabilir?",
       "starterCode": "",
@@ -62,7 +62,7 @@
     },
     {
       "id": "i4-q7",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Maven veya Gradleda BOM ya da merkezi dependency yonetimi neden onemli?",
       "starterCode": "",
@@ -71,7 +71,7 @@
     },
     {
       "id": "i4-q8",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Gradle version catalog ne ise yarar?",
       "starterCode": "",
@@ -80,7 +80,7 @@
     },
     {
       "id": "i4-q9",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Gradleda incremental build, build cache ve configuration cache farki nedir?",
       "starterCode": "",
@@ -89,7 +89,7 @@
     },
     {
       "id": "i4-q10",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "CI pipelineda dependency security scan ya da SCA neden koyarsin?",
       "starterCode": "",
@@ -98,7 +98,7 @@
     },
     {
       "id": "i4-q11",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "SBOM nedir, neden sorulmaya baslandi?",
       "starterCode": "",
@@ -107,7 +107,7 @@
     },
     {
       "id": "i4-q12",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Spring Securityde resource server yaklasimi nedir?",
       "starterCode": "",
@@ -116,7 +116,7 @@
     },
     {
       "id": "i4-q13",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "JWT ile opaque token arasinda nasil secim yaparsin?",
       "starterCode": "",
@@ -125,7 +125,7 @@
     },
     {
       "id": "i4-q14",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "401 ile 403 farkini sozlu mulakatta nasil anlatirsin?",
       "starterCode": "",
@@ -134,7 +134,7 @@
     },
     {
       "id": "i4-q15",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "AWSde uygulamanin S3e erismesi gerekiyorsa neden access key gommek yerine IAM role dusunursun?",
       "starterCode": "",
@@ -143,7 +143,7 @@
     },
     {
       "id": "i4-q16",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "ECSte task role ile task execution role farki nedir?",
       "starterCode": "",
@@ -152,7 +152,7 @@
     },
     {
       "id": "i4-q17",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "S3 presigned URL ne zaman iyi bir cozumdur?",
       "starterCode": "",
@@ -161,7 +161,7 @@
     },
     {
       "id": "i4-q18",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "SQS visibility timeout neden kritik bir ayardir?",
       "starterCode": "",
@@ -170,7 +170,7 @@
     },
     {
       "id": "i4-q19",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "At-least-once delivery olan bir sistemde consumer tarafinda neye dikkat edersin?",
       "starterCode": "",
@@ -179,7 +179,7 @@
     },
     {
       "id": "i4-q20",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "OpenAPI ile contract-first yaklasimin avantaji nedir?",
       "starterCode": "",

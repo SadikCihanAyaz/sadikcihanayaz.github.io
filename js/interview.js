@@ -521,6 +521,32 @@
     });
   }
 
+  function isDirectQuestion(question) {
+    if (question?.type === 'direct') {
+      return true;
+    }
+
+    // Backward compatibility:
+    // historical "acik-uclu" sorular type=code olarak tutuluyordu.
+    if (question?.type !== 'code') {
+      return false;
+    }
+
+    const questionKind = String(question?.questionKind || '').toLowerCase();
+    const hasStarterCode = String(question?.starterCode || '').trim().length > 0;
+    const hasAnswerCode = String(question?.answerCode || '').trim().length > 0;
+
+    return questionKind === 'direct' && !hasStarterCode && !hasAnswerCode;
+  }
+
+  function renderDirectQuestion() {
+    els.questionBody.innerHTML = `
+      <div class="callout callout-debug">
+        <p>Bu acik-uclu bir mulakat sorusu. Otomatik kontrol yok; cevabini not alarak veya sozlu calisarak ilerleyebilirsin.</p>
+      </div>
+    `;
+  }
+
   function renderAnswer(question) {
     const revealed = Boolean(state.revealed[question.id]);
 
@@ -592,7 +618,9 @@
   function checkCurrentAnswer(question) {
     if (question.type !== 'mcq') {
       state.checks[question.id] = {
-        text: 'Kod sorularinda otomatik kontrol yok. Cevabi gostere basabilirsin.',
+        text: isDirectQuestion(question)
+          ? 'Bu acik-uclu soruda otomatik kontrol yok. Cevabi gostere basabilirsin.'
+          : 'Kod sorularinda otomatik kontrol yok. Cevabi gostere basabilirsin.',
         ok: true
       };
       return;
@@ -629,6 +657,9 @@
   }
 
   function getQuestionTitle(question) {
+    if (isDirectQuestion(question)) {
+      return 'Direkt Mulakat Sorusu';
+    }
     if (question.type === 'code') {
       return 'Kod Yazma Sorusu';
     }
@@ -661,6 +692,9 @@
     if (question.type === 'mcq') {
       els.checkBtn.classList.remove('hidden');
       renderMcq(question);
+    } else if (isDirectQuestion(question)) {
+      els.checkBtn.classList.add('hidden');
+      renderDirectQuestion(question);
     } else {
       els.checkBtn.classList.remove('hidden');
       renderCode(question);

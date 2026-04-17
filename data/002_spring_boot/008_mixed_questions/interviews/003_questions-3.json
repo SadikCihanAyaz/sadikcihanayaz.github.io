@@ -8,7 +8,7 @@
   "questions": [
     {
       "id": "i3-q1",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "CI/CD pipelineda bir Spring Boot servisi icin hangi asamalari beklersin?",
       "starterCode": "",
@@ -17,7 +17,7 @@
     },
     {
       "id": "i3-q2",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Maven lifecycleda clean, test, package, verify, install, deploy farki nedir?",
       "starterCode": "",
@@ -26,7 +26,7 @@
     },
     {
       "id": "i3-q3",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "SNAPSHOT ile release artifact farki nedir?",
       "starterCode": "",
@@ -35,7 +35,7 @@
     },
     {
       "id": "i3-q4",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Multi-module Maven proje neden kullanilir?",
       "starterCode": "",
@@ -44,7 +44,7 @@
     },
     {
       "id": "i3-q5",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Dockerfile yazarken Spring Boot uygulamasinda nelere dikkat edersin?",
       "starterCode": "",
@@ -53,7 +53,7 @@
     },
     {
       "id": "i3-q6",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Kuberneteste liveness, readiness ve startup probe farki nedir?",
       "starterCode": "",
@@ -62,7 +62,7 @@
     },
     {
       "id": "i3-q7",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Spring Boot uygulamasini AWSde deploy edeceksen ECS mi EKS mi dusunursun?",
       "starterCode": "",
@@ -71,7 +71,7 @@
     },
     {
       "id": "i3-q8",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Secret ve config yonetimini nasil ayirirsin?",
       "starterCode": "",
@@ -80,7 +80,7 @@
     },
     {
       "id": "i3-q9",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Blue-green ile canary deployment farki nedir?",
       "starterCode": "",
@@ -89,7 +89,7 @@
     },
     {
       "id": "i3-q10",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Bir releasei guvenli acmak icin feature flag kullanir misin?",
       "starterCode": "",
@@ -98,7 +98,7 @@
     },
     {
       "id": "i3-q11",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Redis kullanirken cache-aside ile write-through farki nedir?",
       "starterCode": "",
@@ -107,7 +107,7 @@
     },
     {
       "id": "i3-q12",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Cache invalidationi nasil dusunursun?",
       "starterCode": "",
@@ -116,7 +116,7 @@
     },
     {
       "id": "i3-q13",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Kafkada idempotent producer ne ise yarar?",
       "starterCode": "",
@@ -125,7 +125,7 @@
     },
     {
       "id": "i3-q14",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Transactional outbox pattern nedir, ne problemi cozer?",
       "starterCode": "",
@@ -134,7 +134,7 @@
     },
     {
       "id": "i3-q15",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "API idempotencyyi nasil tasarlarsin?",
       "starterCode": "",
@@ -143,7 +143,7 @@
     },
     {
       "id": "i3-q16",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Rate limitingi nerede uygularsin?",
       "starterCode": "",
@@ -152,7 +152,7 @@
     },
     {
       "id": "i3-q17",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Dagitik sistemde correlation ID ve distributed tracing neden onemli?",
       "starterCode": "",
@@ -161,7 +161,7 @@
     },
     {
       "id": "i3-q18",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Logs, metrics ve traces arasindaki fark nedir?",
       "starterCode": "",
@@ -170,7 +170,7 @@
     },
     {
       "id": "i3-q19",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Timeout, retry ve circuit breakeri nasil birlikte dusunursun?",
       "starterCode": "",
@@ -179,7 +179,7 @@
     },
     {
       "id": "i3-q20",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Graceful shutdown ve zero-downtime deployment neden onemli?",
       "starterCode": "",

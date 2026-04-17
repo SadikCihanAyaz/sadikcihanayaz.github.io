@@ -64,6 +64,12 @@ data/
 - `answerBody`
 - `publicSolutionUrl` (opsiyonel)
 
+3. `direct`
+- Acik-uclu mulakat sorulari icin kullanilir
+- `question`
+- `answerBody` (opsiyonel)
+- `answerCode` (opsiyonel)
+
 ## Yeni icerik ekleme akisi
 
 1. Yeni ana kategori ise `categories.json` icine kategori ekle.

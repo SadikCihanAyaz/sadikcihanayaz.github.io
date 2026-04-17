@@ -8,7 +8,7 @@
   "questions": [
     {
       "id": "i1-q1",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Java'da type conversion nedir?",
       "starterCode": "",
@@ -17,7 +17,7 @@
     },
     {
       "id": "i1-q2",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Implicit (widening) conversion nedir ve hangi tipler arasinda otomatik yapilir?",
       "starterCode": "",
@@ -26,7 +26,7 @@
     },
     {
       "id": "i1-q3",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "byte -> short -> int -> long -> float -> double donusum zincirini aciklar misin?",
       "starterCode": "",
@@ -35,7 +35,7 @@
     },
     {
       "id": "i1-q4",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "char tipinin int'e donusumunde hangi deger kullanilir?",
       "starterCode": "",
@@ -44,7 +44,7 @@
     },
     {
       "id": "i1-q5",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Neden boolean ile sayisal tipler arasinda casting yapilamaz?",
       "starterCode": "",
@@ -53,7 +53,7 @@
     },
     {
       "id": "i1-q6",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Explicit casting (narrowing) nedir, neden gerekir?",
       "starterCode": "",
@@ -62,7 +62,7 @@
     },
     {
       "id": "i1-q7",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Narrowing casting hangi durumlarda veri kaybina yol acar?",
       "starterCode": "",
@@ -71,7 +71,7 @@
     },
     {
       "id": "i1-q8",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "int degerini byte'a cast ettiginde overflow nasil gorunur?",
       "starterCode": "",
@@ -80,7 +80,7 @@
     },
     {
       "id": "i1-q9",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "long -> int cast'inde veri kaybi riskini nasil tespit edersin?",
       "starterCode": "",
@@ -89,7 +89,7 @@
     },
     {
       "id": "i1-q10",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "float veya double degeri int'e cast edince ondalik kisim ne olur?",
       "starterCode": "",
@@ -98,7 +98,7 @@
     },
     {
       "id": "i1-q11",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "double degerinden BigDecimal olustururken neden new BigDecimal(double) dikkat ister?",
       "starterCode": "",
@@ -107,7 +107,7 @@
     },
     {
       "id": "i1-q12",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Upcasting ve downcasting arasindaki fark nedir?",
       "starterCode": "",
@@ -116,7 +116,7 @@
     },
     {
       "id": "i1-q13",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Downcasting yaparken hangi durumda ClassCastException alirsin?",
       "starterCode": "",
@@ -125,7 +125,7 @@
     },
     {
       "id": "i1-q14",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "instanceof ile casting guvenli hale nasil getirilir?",
       "starterCode": "",
@@ -134,7 +134,7 @@
     },
     {
       "id": "i1-q15",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Autoboxing ve unboxing nedir, tip donusumuyle iliskisi nedir?",
       "starterCode": "",
@@ -143,7 +143,7 @@
     },
     {
       "id": "i1-q16",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "null bir wrapper degeri primitive'e unbox edilirse ne olur?",
       "starterCode": "",
@@ -152,7 +152,7 @@
     },
     {
       "id": "i1-q17",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Integer cache mekanizmasi neden == ve equals sonucunu farkli gosterebilir?",
       "starterCode": "",
@@ -161,7 +161,7 @@
     },
     {
       "id": "i1-q18",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Integer.parseInt ve Integer.valueOf arasindaki fark nedir?",
       "starterCode": "",
@@ -170,7 +170,7 @@
     },
     {
       "id": "i1-q19",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Integer.decode ne zaman parseInt'e gore daha uygun olur?",
       "starterCode": "",
@@ -179,7 +179,7 @@
     },
     {
       "id": "i1-q20",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Radix parametresi ile parseInt nasil calisir? Ornek verir misin?",
       "starterCode": "",
@@ -188,7 +188,7 @@
     },
     {
       "id": "i1-q21",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Unsigned parse metodlari (parseUnsignedInt gibi) ne zaman gerekir?",
       "starterCode": "",
@@ -197,7 +197,7 @@
     },
     {
       "id": "i1-q22",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "NumberFormatException hangi parsing senaryolarinda olusur?",
       "starterCode": "",
@@ -206,7 +206,7 @@
     },
     {
       "id": "i1-q23",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Bastaki/sondaki bosluklar parse islemini nasil etkiler?",
       "starterCode": "",
@@ -215,7 +215,7 @@
     },
     {
       "id": "i1-q24",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Virgul ve nokta farki olan locale ortamlarda sayi parsing nasil yonetilir?",
       "starterCode": "",
@@ -224,7 +224,7 @@
     },
     {
       "id": "i1-q25",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "BigInteger parsing yaparken hangi sinir ve formatlara dikkat edersin?",
       "starterCode": "",
@@ -233,7 +233,7 @@
     },
     {
       "id": "i1-q26",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "BigDecimal parsing ile ondalik hassasiyeti nasil korunur?",
       "starterCode": "",
@@ -242,7 +242,7 @@
     },
     {
       "id": "i1-q27",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Bilimsel gosterim (1.2E3) parsing'i hangi tiplerde dogrudan desteklenir?",
       "starterCode": "",
@@ -251,7 +251,7 @@
     },
     {
       "id": "i1-q28",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "String'deki bir karakteri sayiya cevirmek icin Character.getNumericValue ne zaman kullanilir?",
       "starterCode": "",
@@ -260,7 +260,7 @@
     },
     {
       "id": "i1-q29",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "char <-> int donusumunde ASCII/Unicode kod noktasi farkini nasil aciklarsin?",
       "starterCode": "",
@@ -269,7 +269,7 @@
     },
     {
       "id": "i1-q30",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Aritmetik ifadelerde numeric promotion kurallari sonucu tipi nasil belirler?",
       "starterCode": "",
@@ -278,7 +278,7 @@
     },
     {
       "id": "i1-q31",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Neden byte/short ile toplama yapinca sonuc int olur?",
       "starterCode": "",
@@ -287,7 +287,7 @@
     },
     {
       "id": "i1-q32",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Compound assignment (+=) neden bazen gizli casting davranisi gosterir?",
       "starterCode": "",
@@ -296,7 +296,7 @@
     },
     {
       "id": "i1-q33",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "int carpimindan sonra long'a cast etmek ile once cast edip carpmanin farki nedir?",
       "starterCode": "",
@@ -305,7 +305,7 @@
     },
     {
       "id": "i1-q34",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Switch ifadelerinde byte/short/char ile int sabitler nasil degerlendirilir?",
       "starterCode": "",
@@ -314,7 +314,7 @@
     },
     {
       "id": "i1-q35",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Interface referansindan concrete tipe cast ederken runtime kontrol neden zorunludur?",
       "starterCode": "",
@@ -323,7 +323,7 @@
     },
     {
       "id": "i1-q36",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Generic koleksiyonlarda unchecked cast uyarisi neden olusur?",
       "starterCode": "",
@@ -332,7 +332,7 @@
     },
     {
       "id": "i1-q37",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Type erasure generic casting senaryolarini nasil etkiler?",
       "starterCode": "",
@@ -341,7 +341,7 @@
     },
     {
       "id": "i1-q38",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "@SuppressWarnings(\"unchecked\") kullanimi hangi riskleri gizleyebilir?",
       "starterCode": "",
@@ -350,7 +350,7 @@
     },
     {
       "id": "i1-q39",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Guvenli parsing icin Optional donen bir yardimci metod nasil tasarlanir?",
       "starterCode": "",
@@ -359,7 +359,7 @@
     },
     {
       "id": "i1-q40",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Try-catch ile default deger donen parse yaklasiminin artisi/eksisi nedir?",
       "starterCode": "",
@@ -368,7 +368,7 @@
     },
     {
       "id": "i1-q41",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "LocalDate.parse kullanirken DateTimeFormatter neden onemlidir?",
       "starterCode": "",
@@ -377,7 +377,7 @@
     },
     {
       "id": "i1-q42",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Enum.valueOf parsing'inde hata yonetimini nasil yaparsin?",
       "starterCode": "",
@@ -386,7 +386,7 @@
     },
     {
       "id": "i1-q43",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "JSON -> Java tip donusumlerinde en sik gorulen casting hatalari nelerdir?",
       "starterCode": "",
@@ -395,7 +395,7 @@
     },
     {
       "id": "i1-q44",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "JDBC'de getInt ile getObject kullaniminda null deger donusumu nasil farklilasir?",
       "starterCode": "",
@@ -404,7 +404,7 @@
     },
     {
       "id": "i1-q45",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Spring'de request parametrelerinin otomatik type conversion mekanizmasi nasil calisir?",
       "starterCode": "",
@@ -413,7 +413,7 @@
     },
     {
       "id": "i1-q46",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Map<String, Object> uzerinden zincirli casting yaparken nasil daha guvenli ilerlersin?",
       "starterCode": "",
@@ -422,7 +422,7 @@
     },
     {
       "id": "i1-q47",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Stream API icinde String -> int parsing yaparken hata yonetimini nasil kurgularsin?",
       "starterCode": "",
@@ -431,7 +431,7 @@
     },
     {
       "id": "i1-q48",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Cok buyuk listelerde parse islemi performansini etkileyen temel faktorler nelerdir?",
       "starterCode": "",
@@ -440,7 +440,7 @@
     },
     {
       "id": "i1-q49",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Parse oncesi regex ile validasyon yapmak hangi durumlarda faydali, hangi durumlarda gereksizdir?",
       "starterCode": "",
@@ -449,7 +449,7 @@
     },
     {
       "id": "i1-q50",
-      "type": "code",
+      "type": "direct",
       "questionKind": "direct",
       "question": "Java'da conversion/casting/parsing konulari icin production'da takip ettigin en iyi pratikler nelerdir?",
       "starterCode": "",
