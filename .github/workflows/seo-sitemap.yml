@@ -8,6 +8,7 @@ on:
     paths:
       - 'data/**'
       - 'scripts/generate-seo.mjs'
+      - 'scripts/generate-search-index.mjs'
       - '.github/workflows/seo-sitemap.yml'
       - '*.html'
       - '*.htm'
@@ -36,14 +37,17 @@ jobs:
       - name: Generate sitemap and robots
         run: node scripts/generate-seo.mjs
 
+      - name: Generate search index
+        run: node scripts/generate-search-index.mjs
+
       - name: Commit and push changes
         run: |
-          if [[ -n "$(git status --porcelain -- sitemap.xml robots.txt)" ]]; then
+          if [[ -n "$(git status --porcelain -- sitemap.xml robots.txt data/search-index.json)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add sitemap.xml robots.txt
-            git commit -m "chore(seo): regenerate sitemap and robots [skip ci]"
+            git add sitemap.xml robots.txt data/search-index.json
+            git commit -m "chore(seo): regenerate sitemap, robots and search index [skip ci]"
             git push
           else
-            echo "No sitemap/robots changes."
+            echo "No sitemap/robots/search-index changes."
           fi
