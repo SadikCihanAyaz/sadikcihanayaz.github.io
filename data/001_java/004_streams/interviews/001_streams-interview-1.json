@@ -315,6 +315,37 @@
       "answerBody": "",
       "optionExplanations": [],
       "answerCode": ""
+    },
+    {
+      "id": "i1-q11",
+      "type": "mcq",
+      "questionKind": "direct",
+      "singleChoice": true,
+      "question": "Java Stream API’de toMap ve groupingBy arasindaki farklar nelerdir? groupingBy ile value nasil ozellestirilir?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "toMap duplicate key durumunda otomatik olarak List olusturur; groupingBy daima tek bir deger doner."
+        },
+        {
+          "id": "B",
+          "text": "toMap 1:1 mapleme yapar ve duplicate key durumunda merge gerekir; groupingBy 1:N gruplar, mapping ile value rafine edilir."
+        },
+        {
+          "id": "C",
+          "text": "toMap ve groupingBy tamamen aynidir; sadece syntax farki vardir."
+        },
+        {
+          "id": "D",
+          "text": "groupingBy sadece Boolean key ile calisir, partitioningBy ise her turlu key alir."
+        }
+      ],
+      "correctChoiceIds": [
+        "B"
+      ],
+      "answerBody": "### Java Stream: toMap vs groupingBy\n\n#### Soru\nJava Stream API'de `toMap` ve `groupingBy` arasindaki farklar nelerdir? `groupingBy` ile degerler (value) nasil ozellestirilir?\n\n#### Cevap\n\n##### 1. Iliski tipi ve davranis\n- **toMap:** **Bire bir (1:1)** iliski kurar. Her key tek bir value ile eslesir. Ayni key ikinci kez gelirse merge function yoksa **IllegalStateException** firlatir.\n- **groupingBy:** **Bire cok (1:N)** iliski kurar. Ayni key'e dusen elemanlari otomatik olarak gruplar (genelde `List`). Hata firlatmaz, gruplandirir.\n\n##### 2. Donus tipleri\n- `toMap` -> `Map<K, V>` (Orn: `Map<Integer, User>`)\n- `groupingBy` -> `Map<K, List<V>>` (Orn: `Map<String, List<User>>`)\n\n---\n\n### Kod Ornekleri\n\n#### A) toMap ornegi (ID uzerinden erisim)\n```java\nMap<Integer, User> userMap = users.stream()\n    .collect(Collectors.toMap(\n        User::id,\n        u -> u\n    ));\n```\n\n#### B) groupingBy - standart ornek (nesne gruplama)\n```java\nMap<String, List<User>> usersByDept = users.stream()\n    .collect(Collectors.groupingBy(User::department));\n```\n\n#### C) groupingBy + mapping (sadece gerekli alani alma)\n```java\nMap<String, List<String>> namesByDept = users.stream()\n    .collect(Collectors.groupingBy(\n        User::department,\n        Collectors.mapping(\n            User::name,\n            Collectors.toList()\n        )\n    ));\n```\n\n---\n\n### Ozet Not\n`groupingBy` ile `Collectors.mapping` kullanmak, value tarafini ihtiyaca gore sadeleştirmeni saglar. Tum nesneyi tutmak yerine sadece gereken alanlari (ornegin sadece isimleri) saklayarak hem okunabilirlik hem de bellek kullanimi acisindan daha iyi bir sonuc elde edersin.",
+      "optionExplanations": [],
+      "answerCode": ""
     }
   ]
 }

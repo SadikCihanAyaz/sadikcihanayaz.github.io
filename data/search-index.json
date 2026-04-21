@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-04-21T18:22:29.633Z",
+  "generatedAt": "2026-04-21T19:52:37.071Z",
   "minChars": 4,
   "maxResults": 30,
-  "totalItems": 719,
+  "totalItems": 720,
   "items": [
     {
       "id": "topic:java:threads",
@@ -996,6 +996,14 @@
       "meta": "Java / Streams / Streams Interview - 1 / Soru 10",
       "url": "/interview.html?category=java&subcategory=streams&interview=streams-interview-1&question=i1-q10",
       "search": "java streams streams interview 1 soru 10 asagidaki tomap kullanimlarindan hangisi guvenli bir yaklasimdir asagidaki tomap kullanimlarindan hangisi guvenli bir yaklasimdir ayni key olusma ihtimali varsa merge fonksiyonu vermeden tomap kullanmak duplicate key olasiliginda tomap e uygun bir merge fonksiyonu saglamak tomap in duplicate key durumunda her zaman son degeri sessizce yazdigini varsaymak tomap in duplicate key oldugunda otomatik olarak groupingby a donustugunu varsaymak"
+    },
+    {
+      "id": "question:java:streams:streams-interview-1:i1-q11",
+      "kind": "question",
+      "title": "Java Stream API’de toMap ve groupingBy arasindaki farklar nelerdir? groupingBy ile value nasil ozellestirilir?",
+      "meta": "Java / Streams / Streams Interview - 1 / Soru 11",
+      "url": "/interview.html?category=java&subcategory=streams&interview=streams-interview-1&question=i1-q11",
+      "search": "java streams streams interview 1 soru 11 java stream api de tomap ve groupingby arasindaki farklar nelerdir groupingby ile value nasil ozellestirilir java stream api de tomap ve groupingby arasindaki farklar nelerdir groupingby ile value nasil ozellestirilir java stream tomap vs groupingby soru java stream api de tomap ve groupingby arasindaki farklar nelerdir groupingby ile degerler value nasil ozellestirilir cevap 1 iliski tipi ve davranis tomap bire bir 1 1 iliski kurar her key tek bir value ile eslesir ayni key ikinci kez gelirse merge function yoksa illegalstateexception firlatir groupingby bire cok 1 n iliski kurar ayni key e dusen elemanlari otomatik olarak gruplar genelde list hata firlatmaz gruplandirir 2 donus tipleri tomap map k v orn map integer user groupingby map k list v orn map string list user kod ornekleri a tomap ornegi id uzerinden erisim java map integer user usermap users stream collect collectors tomap user id u u b groupingby standart ornek nesne gruplama java map string list user usersbydept users stream collect collectors groupingby user department c groupingby mapping sadece gerekli alani alma java map string list string namesbydept users stream collect collectors groupingby user department collectors mapping user name collectors tolist ozet not groupingby ile collectors mapping kullanmak value tarafini ihtiyaca gore sadelestirmeni saglar tum nesneyi tutmak yerine sadece gereken alanlari ornegin sadece isimleri saklayarak hem okunabilirlik hem de bellek kullanimi acisindan daha iyi bir sonuc elde edersin tomap duplicate key durumunda otomatik olarak list olusturur groupingby daima tek bir deger doner tomap 1 1 mapleme yapar ve duplicate key durumunda merge gerekir groupingby 1 n gruplar mapping ile value rafine edilir tomap ve groupingby tamamen aynidir sadece syntax farki vardir groupingby sadece boolean key ile calisir partitioningby ise her turlu key alir"
     },
     {
       "id": "topic:spring-boot:hibernate-jpa-jparepository",
