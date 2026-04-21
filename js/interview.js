@@ -256,6 +256,79 @@
     return html;
   }
 
+  async function copyText(value) {
+    const text = String(value ?? '');
+    if (!text) {
+      return false;
+    }
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (error) {
+      // fallback below
+    }
+
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', 'readonly');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      const copied = document.execCommand('copy');
+      document.body.removeChild(textarea);
+      return copied;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function attachCopyButtons(container) {
+    if (!container) {
+      return;
+    }
+
+    const blocks = Array.from(container.querySelectorAll('pre.code'));
+    blocks.forEach((pre) => {
+      if (pre.closest('.code-with-copy')) {
+        return;
+      }
+
+      const codeEl = pre.querySelector('code');
+      const rawText = codeEl ? codeEl.textContent : pre.textContent;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-with-copy';
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-copy-btn';
+      button.title = 'Kodu Kopyala';
+      button.setAttribute('aria-label', 'Kodu Kopyala');
+      button.innerHTML = '<span aria-hidden="true">📋</span>';
+
+      button.addEventListener('click', async () => {
+        const ok = await copyText(rawText || '');
+        button.innerHTML = `<span aria-hidden="true">${ok ? '✅' : '⚠️'}</span>`;
+        window.setTimeout(() => {
+          button.innerHTML = '<span aria-hidden="true">📋</span>';
+        }, 1200);
+      });
+
+      const parent = pre.parentNode;
+      if (!parent) {
+        return;
+      }
+
+      parent.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      wrapper.appendChild(button);
+    });
+  }
+
   function setSeo({ title, description, path, robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }) {
     const canonicalUrl = new URL(path, window.location.origin).href;
 
@@ -500,6 +573,7 @@
       ${codeBlock}
       <div class="choice-list">${choices}</div>
     `;
+    attachCopyButtons(els.questionBody);
 
     Array.from(els.questionBody.querySelectorAll('input[data-choice-id]')).forEach((input) => {
       input.addEventListener('change', () => {
@@ -542,12 +616,16 @@
     return questionKind === 'direct' && !hasStarterCode && !hasAnswerCode;
   }
 
-  function renderDirectQuestion() {
+  function renderDirectQuestion(question) {
     els.questionBody.innerHTML = `
+      <div class="article-block answer-rich direct-question-rich">
+        ${renderMarkdown(question.question || '')}
+      </div>
       <div class="callout callout-debug">
         <p>Bu acik-uclu bir mulakat sorusu. Otomatik kontrol yok; cevabini not alarak veya sozlu calisarak ilerleyebilirsin.</p>
       </div>
     `;
+    attachCopyButtons(els.questionBody);
   }
 
   function renderAnswer(question) {
@@ -614,6 +692,7 @@
     }
 
     els.answerBox.innerHTML = html || '<p>Cevap icerigi yok.</p>';
+    attachCopyButtons(els.answerBox);
     els.answerBox.classList.remove('hidden');
     els.toggleAnswerBtn.textContent = 'Cevabi Gizle';
   }
@@ -689,13 +768,20 @@
     } else {
       els.questionTitle.textContent = title;
     }
-    els.questionText.textContent = question.question || '';
+    const directQuestion = isDirectQuestion(question);
+    els.questionText.classList.remove('hidden');
+    if (directQuestion) {
+      els.questionText.textContent = '';
+      els.questionText.classList.add('hidden');
+    } else {
+      els.questionText.textContent = question.question || '';
+    }
     els.checkResult.innerHTML = '';
 
     if (question.type === 'mcq') {
       els.checkBtn.classList.remove('hidden');
       renderMcq(question);
-    } else if (isDirectQuestion(question)) {
+    } else if (directQuestion) {
       els.checkBtn.classList.add('hidden');
       renderDirectQuestion(question);
     } else {
