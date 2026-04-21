@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-04-21T17:07:59.656Z",
+  "generatedAt": "2026-04-21T17:09:31.956Z",
   "minChars": 4,
   "maxResults": 30,
   "totalItems": 719,
@@ -171,7 +171,7 @@
       "title": "BlockingQueue'nin producer-consumer desenindeki kilit faydasi nedir?",
       "meta": "Java / Threads / Thread Interview - 2 / Soru 10",
       "url": "/interview.html?category=java&subcategory=threads&interview=thread-interview-2&question=i2-q10",
-      "search": "java threads thread interview 2 soru 10 blockingqueue nin producer consumer desenindeki kilit faydasi nedir blockingqueue nin producer consumer desenindeki kilit faydasi nedir her durumda busy wait zorunlu kilmasi bos dolu durumda threadleri otomatik bekletip uyandirmasi sadece single thread calismasi iteratori tamamen kaldirmasi"
+      "search": "java threads thread interview 2 soru 10 blockingqueue nin producer consumer desenindeki kilit faydasi nedir blockingqueue nin producer consumer desenindeki kilit faydasi nedir dogru cevap bos dolu durumda thread leri otomatik bekletip uyandirmasi blockingqueue producer consumer deseninde iki kritik problemi tek basina cozer 1 busy wait ihtiyacini kaldirir consumer kuyruk bosken surekli donup cpu yakmaz take ile veri gelene kadar bekler 2 back pressure saglar kuyruk doldugunda producer put noktasinda bekler tuketim hizina gore dogal bir akis kontrolu olur 3 wait notify karmasini azaltir manuel kilit wait notifyall yazmadan thread safe bir producer consumer akisi kurarsin kisa ornek bloklayici davranis java blockingqueue integer queue new arrayblockingqueue 2 producer kuyruk doluysa put bekler queue put 1 queue put 2 queue put 3 yer acilana kadar block consumer kuyruk bossa take bekler integer item queue take timeout lu alternatif sonsuza kadar beklemek istemediginde offer poll timeout ile kullanilir java boolean enqueued queue offer 10 200 timeunit milliseconds integer value queue poll 200 timeunit milliseconds bu nedenle producer consumer deseni icin kilit fayda dogru senkronizasyon akis kontrolu daha az bug riski import java util concurrent arrayblockingqueue import java util concurrent blockingqueue import java util concurrent timeunit public class blockingqueueproducerconsumerexample public static void main string args throws interruptedexception blockingqueue integer queue new arrayblockingqueue 2 thread producer new thread try for int i 1 i 5 i queue put i doluysa bekler system out println produced i size queue size catch interruptedexception e thread currentthread interrupt thread consumer new thread try while true integer value queue take bossa bekler system out println consumed value size queue size if value 5 break thread sleep 300 catch interruptedexception e thread currentthread interrupt producer start consumer start producer join consumer join timeout lu api ornegi boolean accepted queue offer 99 200 timeunit milliseconds integer polled queue poll 200 timeunit milliseconds system out println offer accepted accepted polled polled her durumda busy wait zorunlu kilmasi bos dolu durumda threadleri otomatik bekletip uyandirmasi sadece single thread calismasi iteratori tamamen kaldirmasi"
     },
     {
       "id": "question:java:threads:thread-interview-3:i3-q1",
