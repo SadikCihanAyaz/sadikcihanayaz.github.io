@@ -50,6 +50,14 @@
       "order": 6,
       "questionCount": 1,
       "file": "/data/002_spring_boot/005_coding/interviews/006_spring-boot-coding-3-external-api-integration.json"
+    },
+    {
+      "id": "test-coding",
+      "title": "Test Coding",
+      "description": "Pure unit testing odakli interview coding sorulari",
+      "order": 7,
+      "questionCount": 1,
+      "file": "/data/002_spring_boot/005_coding/interviews/007_test-coding.json"
     }
   ]
 }
