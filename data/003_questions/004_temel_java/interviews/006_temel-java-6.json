@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "categoryId": "questions",
+  "subcategoryId": "temel-java",
+  "id": "temel-java-6",
+  "title": "Temel Java - 6",
+  "description": "Temel design pattern karsilastirmalari ve kullanim karar mantigi",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Singleton pattern nedir? Avantajlari, dezavantajlari ve ozellikle test edilebilirlik acisindan riskleri nelerdir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q2",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Factory, Builder, Strategy, Observer, Decorator, Adapter, Template Method ve Proxy pattern'lerinden birkacini karsilastirarak anlatir misin: hangi problemde hangisi daha uygundur ve neden?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

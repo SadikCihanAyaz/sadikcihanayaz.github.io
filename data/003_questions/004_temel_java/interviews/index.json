@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "categoryId": "questions",
+  "subcategoryId": "temel-java",
+  "interviews": [
+    {
+      "id": "temel-java-1",
+      "title": "Temel Java - 1",
+      "description": "Primitive, wrapper, String, casting, static ve temel dil davranislari",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/003_questions/004_temel_java/interviews/001_temel-java-1.json"
+    },
+    {
+      "id": "temel-java-2",
+      "title": "Temel Java - 2",
+      "description": "OOP prensipleri, polymorphism, composition ve tasarim kararlarina dair sozlu sorular",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/003_questions/004_temel_java/interviews/002_temel-java-2.json"
+    },
+    {
+      "id": "temel-java-3",
+      "title": "Temel Java - 3",
+      "description": "Interface, abstract class, record, sealed class ve API tasarim secimleri",
+      "order": 3,
+      "questionCount": 10,
+      "file": "/data/003_questions/004_temel_java/interviews/003_temel-java-3.json"
+    },
+    {
+      "id": "temel-java-4",
+      "title": "Temel Java - 4",
+      "description": "JVM memory modeli, GC, leak, OOM ve runtime hata dinamikleri",
+      "order": 4,
+      "questionCount": 10,
+      "file": "/data/003_questions/004_temel_java/interviews/004_temel-java-4.json"
+    },
+    {
+      "id": "temel-java-5",
+      "title": "Temel Java - 5",
+      "description": "SOLID, DRY/KISS/YAGNI, cohesion/coupling ve tasarim prensipleri",
+      "order": 5,
+      "questionCount": 8,
+      "file": "/data/003_questions/004_temel_java/interviews/005_temel-java-5.json"
+    },
+    {
+      "id": "temel-java-6",
+      "title": "Temel Java - 6",
+      "description": "Temel design pattern karsilastirmalari ve kullanim karar mantigi",
+      "order": 6,
+      "questionCount": 2,
+      "file": "/data/003_questions/004_temel_java/interviews/006_temel-java-6.json"
+    }
+  ]
+}

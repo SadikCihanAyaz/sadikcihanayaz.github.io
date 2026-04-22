@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "categoryId": "questions",
+  "subcategoryId": "temel-java",
+  "id": "temel-java-topic",
+  "title": "Temel Java - Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu konu anlatimi henuz hazir degil. Icerik yakinda eklenecek."
+    }
+  ]
+}

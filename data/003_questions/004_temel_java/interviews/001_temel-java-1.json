@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "categoryId": "questions",
+  "subcategoryId": "temel-java",
+  "id": "temel-java-1",
+  "title": "Temel Java - 1",
+  "description": "Primitive, wrapper, String, casting, static ve temel dil davranislari",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Primitive type ile wrapper class arasindaki farklar nelerdir? Performans, null alabilme ve koleksiyon kullanimi acisindan anlatir misin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q2",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Java neden tamamen pass-by-value'dur? Bir object reference metoda gonderildiginde neden bazen sanki pass-by-reference gibi gorunur?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q3",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "== ile equals() arasindaki fark nedir? String, wrapper ve normal object ornekleri uzerinden aciklar misin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q4",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "String, StringBuilder ve StringBuffer arasindaki farklar nelerdir? Hangi durumda hangisini tercih edersin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q5",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Autoboxing ve unboxing nedir? Bunlarin performans veya NullPointerException acisindan dogurabilecegi riskler nelerdir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q6",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Type casting nedir? Implicit ve explicit casting arasinda ne fark vardir? Primitive donusumlerde veri kaybi hangi durumlarda olur?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q7",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "final, finally ve finalize kavramlarini birbirinden ayirir misin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q8",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "static keyword'u Java'da ne anlama gelir? Static variable, static method, static block ve instance member arasindaki farklari anlatir misin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q9",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "var ne yapar? Gercekten dynamic typing mi saglar, yoksa baska bir sey mi yapar?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q10",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Bir degiskenin scope'u ve lifetime'i neye gore belirlenir? Local variable, instance variable ve static variable icin aciklar misin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

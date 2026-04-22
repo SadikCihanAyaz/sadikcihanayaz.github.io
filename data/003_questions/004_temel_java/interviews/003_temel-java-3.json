@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "categoryId": "questions",
+  "subcategoryId": "temel-java",
+  "id": "temel-java-3",
+  "title": "Temel Java - 3",
+  "description": "Interface, abstract class, record, sealed class ve API tasarim secimleri",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Interface ile abstract class arasindaki temel farklar nelerdir? Hangi durumda interface, hangi durumda abstract class tercih edersin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q2",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Interface icindeki field'lar neden public static final olur? Bunun pratik sonucu nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q3",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Interface icindeki normal method imzalari varsayilan olarak nasil kabul edilir? default, static ve private methodlarla farklari nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q4",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Java interface'lerde default method neden eklendi? Hangi problemi cozmek icin geldi?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q5",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Bir class birden fazla interface implement edebilirken neden birden fazla class'i extend edemez? Java'daki multiple inheritance problemi nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q6",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Abstract class ile interface'i birlikte kullanmak mantikli olabilir mi? Boyle bir tasarimin iyi oldugu bir senaryo anlatir misin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q7",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Marker interface nedir? Annotation ile karsilastirinca ne gibi avantaj ve dezavantajlari vardir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q8",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Sealed class nedir ve ne ise yarar? Normal inheritance modeline gore nasil bir kontrol saglar?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q9",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Record nedir? Normal POJO/class'a gore ne avantaj saglar, ne zaman uygun degildir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q10",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Bir API tasarlarken bunu interface mi yapayim, abstract class mi, yoksa concrete class yeterli mi sorusunu nasil dusunursun?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

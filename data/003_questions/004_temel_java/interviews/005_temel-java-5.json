@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "categoryId": "questions",
+  "subcategoryId": "temel-java",
+  "id": "temel-java-5",
+  "title": "Temel Java - 5",
+  "description": "SOLID, DRY/KISS/YAGNI, cohesion/coupling ve tasarim prensipleri",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "SOLID prensiplerini tek tek isim saymadan, gercek bir kod tabaninda neyi iyilestirmek icin kullanildiklarini anlatarak aciklar misin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q2",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Single Responsibility Principle sence pratikte nasil anlasilir? Bir class'in fazla sorumluluk aldigina nasil karar verirsin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q3",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Open/Closed Principle ne demektir? Gercek bir ornek uzerinden mevcut kodu bozmadan genisletmek ne anlama gelir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q4",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Interface Segregation Principle neden onemlidir? Fat interface problemi neye yol acar?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q5",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Dependency Inversion Principle ne demektir? High-level ve low-level module iliskisini nasil dusunmek gerekir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q6",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "DRY, KISS ve YAGNI prensipleri bazen birbiriyle celisiyor gibi gorunur. Bunlari dengeli kullanmak ne demektir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q7",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Cohesion ve coupling nedir? Yuksek cohesion ve dusuk coupling neden istenir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q8",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Composition over inheritance prensibi ile SOLID arasinda nasil bir iliski goruyorsun?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

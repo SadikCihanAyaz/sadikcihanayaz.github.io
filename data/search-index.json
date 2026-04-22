@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-04-22T09:58:36.410Z",
+  "generatedAt": "2026-04-22T14:08:00.830Z",
   "minChars": 4,
   "maxResults": 30,
-  "totalItems": 771,
+  "totalItems": 821,
   "items": [
     {
       "id": "topic:java:threads",
@@ -6172,6 +6172,406 @@
       "meta": "Questions / Java Type Conversion / Casting / Parsing / Onemli 50 Soru / Soru 45",
       "url": "/interview.html?category=questions&subcategory=java-type-conversion-casting-parsing&interview=onemli-50-soru&question=q45",
       "search": "questions java type conversion casting parsing onemli 50 soru soru 45 char i string e cevirmenin yollari nelerdir char i string e cevirmenin yollari nelerdir string valueof null ile null tostring arasindaki fark nedir object value 1 long x long value neden patlar parametre olarak 0000000000000000000001 gelirse hangi tipi secersin java da veri tipi donusumleri bazen gorundugunden daha karmasiktir ozellikle null yonetimi ve nesne hiyerarsisi isin icine girdiginde sinsi hatalar ortaya cikabilir sorularini sirasiyla inceleyelim 1 char i string e cevirmenin yollari bir karakteri char metne string donusturmek icin en sik kullanilan yontemler sunlardir string valueof c en standart ve okunabilir yontemdir character tostring c string valueof ile ayni isi yapar c en kisa yoldur ancak arka planda bir stringbuilder olusturdugu icin performans acisindan dongu icindeyse string valueof kadar verimli degildir new string new char c gereksiz yere bir array olusturdugu icin pek tercih edilmez 2 string valueof null vs null tostring bu iki kullanim arasindaki fark uygulamanin calismaya devam edip etmeyecegini belirler null tostring bir null referansi uzerinden metot cagirmaya calistiginiz icin aninda nullpointerexception npe firlatir string valueof object obj bu metot null safe null guvenli tasarlanmistir iceride su kontrolu yapar obj null null obj tostring dikkat eger null verirseniz size null metin olarak n u l l doner bu uygulamanin cokmesini engeller ama is mantiginda null kelimesiyle karsilasmaniza neden olabilir 3 object value 1 long x long value neden patlar bu durum java daki autoboxing ve casting kurallarinin birlesimiyle ilgilidir ve classcastexception firlatir 1 object value 1 satirinda 1 bir int tir java bunu otomatik olarak bir integer nesnesine cevirir autoboxing 2 bellekte artik bir integer nesnesi var 3 long x long value dediginizde java dan bir integer i long a cevirmesini istiyorsunuz 4 kural java da bir wrapper tipi integer baska bir wrapper tipine long cast edilemez cunku aralarinda bir kalitim iliskisi yoktur ikisi de kardestir ikisi de number sinifindan turemistir dogru cozum java long x number value longvalue once number a bak sonra long degerini al 4 parametre olarak 0000000000000000000001 gelirse bu veri cok uzun bir sayi dizisidir ancak basindaki sifirlar ve uzunlugu nedeniyle kritik bir karar vermen gerekir biginteger eger bu veriyi matematiksel bir sayi olarak orn bir hesap bakiyesi veya devasa bir id kullanacaksan ve basindaki sifirlar senin icin degersizse biginteger en iyisidir string genellikle en guvenli secenektir eger bu bir barkod kredi karti numarasi seri numarasi veya ozel bir kod ise basindaki sifirlar padding anlam tasiyor olabilir sayiya cevirdigin an o sifirlari kaybedersin long veya integer bunlari asla kullanmamalisin cunku 22 karakterlik bir sayi long sinirlarini long max value 19 hanelidir asar ve numberformatexception alirsin ozet karar rehberi problem hata turu cozum yaklasim null tostring nullpointerexception string valueof obj kullan integer long cast classcastexception longvalue metodunu kullan cok uzun sayi string overflow riski string olarak tut veya biginteger kullan bilimsel gosterim 1e3 format riski bigdecimal veya double ile parse et ozellikle id ler soz konusu oldugunda sayi gibi gorunseler bile matematiksel islem yapilmayacaksa onlari her zaman string olarak karsilamak seni bircok tasma overflow ve format hatasindan kurtarir sen projelerinde sayisal gorunumlu id leri hangi tipte tutmayi tercih ediyorsun"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q1",
+      "kind": "question",
+      "title": "Primitive type ile wrapper class arasindaki farklar nelerdir? Performans, null alabilme ve koleksiyon kullanimi acisindan anlatir misin?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 1",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q1",
+      "search": "questions temel java temel java 1 soru 1 primitive type ile wrapper class arasindaki farklar nelerdir performans null alabilme ve koleksiyon kullanimi acisindan anlatir misin primitive type ile wrapper class arasindaki farklar nelerdir performans null alabilme ve koleksiyon kullanimi acisindan anlatir misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q2",
+      "kind": "question",
+      "title": "Java neden tamamen pass-by-value'dur? Bir object reference metoda gonderildiginde neden bazen sanki pass-by-reference gibi gorunur?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 2",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q2",
+      "search": "questions temel java temel java 1 soru 2 java neden tamamen pass by value dur bir object reference metoda gonderildiginde neden bazen sanki pass by reference gibi gorunur java neden tamamen pass by value dur bir object reference metoda gonderildiginde neden bazen sanki pass by reference gibi gorunur"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q3",
+      "kind": "question",
+      "title": "== ile equals() arasindaki fark nedir? String, wrapper ve normal object ornekleri uzerinden aciklar misin?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 3",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q3",
+      "search": "questions temel java temel java 1 soru 3 ile equals arasindaki fark nedir string wrapper ve normal object ornekleri uzerinden aciklar misin ile equals arasindaki fark nedir string wrapper ve normal object ornekleri uzerinden aciklar misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q4",
+      "kind": "question",
+      "title": "String, StringBuilder ve StringBuffer arasindaki farklar nelerdir? Hangi durumda hangisini tercih edersin?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 4",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q4",
+      "search": "questions temel java temel java 1 soru 4 string stringbuilder ve stringbuffer arasindaki farklar nelerdir hangi durumda hangisini tercih edersin string stringbuilder ve stringbuffer arasindaki farklar nelerdir hangi durumda hangisini tercih edersin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q5",
+      "kind": "question",
+      "title": "Autoboxing ve unboxing nedir? Bunlarin performans veya NullPointerException acisindan dogurabilecegi riskler nelerdir?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 5",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q5",
+      "search": "questions temel java temel java 1 soru 5 autoboxing ve unboxing nedir bunlarin performans veya nullpointerexception acisindan dogurabilecegi riskler nelerdir autoboxing ve unboxing nedir bunlarin performans veya nullpointerexception acisindan dogurabilecegi riskler nelerdir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q6",
+      "kind": "question",
+      "title": "Type casting nedir? Implicit ve explicit casting arasinda ne fark vardir? Primitive donusumlerde veri kaybi hangi durumlarda olur?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 6",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q6",
+      "search": "questions temel java temel java 1 soru 6 type casting nedir implicit ve explicit casting arasinda ne fark vardir primitive donusumlerde veri kaybi hangi durumlarda olur type casting nedir implicit ve explicit casting arasinda ne fark vardir primitive donusumlerde veri kaybi hangi durumlarda olur"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q7",
+      "kind": "question",
+      "title": "final, finally ve finalize kavramlarini birbirinden ayirir misin?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 7",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q7",
+      "search": "questions temel java temel java 1 soru 7 final finally ve finalize kavramlarini birbirinden ayirir misin final finally ve finalize kavramlarini birbirinden ayirir misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q8",
+      "kind": "question",
+      "title": "static keyword'u Java'da ne anlama gelir? Static variable, static method, static block ve instance member arasindaki farklari anlatir misin?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 8",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q8",
+      "search": "questions temel java temel java 1 soru 8 static keyword u java da ne anlama gelir static variable static method static block ve instance member arasindaki farklari anlatir misin static keyword u java da ne anlama gelir static variable static method static block ve instance member arasindaki farklari anlatir misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q9",
+      "kind": "question",
+      "title": "var ne yapar? Gercekten dynamic typing mi saglar, yoksa baska bir sey mi yapar?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 9",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q9",
+      "search": "questions temel java temel java 1 soru 9 var ne yapar gercekten dynamic typing mi saglar yoksa baska bir sey mi yapar var ne yapar gercekten dynamic typing mi saglar yoksa baska bir sey mi yapar"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-1:q10",
+      "kind": "question",
+      "title": "Bir degiskenin scope'u ve lifetime'i neye gore belirlenir? Local variable, instance variable ve static variable icin aciklar misin?",
+      "meta": "Questions / Temel Java / Temel Java - 1 / Soru 10",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-1&question=q10",
+      "search": "questions temel java temel java 1 soru 10 bir degiskenin scope u ve lifetime i neye gore belirlenir local variable instance variable ve static variable icin aciklar misin bir degiskenin scope u ve lifetime i neye gore belirlenir local variable instance variable ve static variable icin aciklar misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q1",
+      "kind": "question",
+      "title": "Encapsulation nedir? Sadece field'lari private yapmak yeterli midir, yoksa daha genis bir tasarim prensibi midir?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 1",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q1",
+      "search": "questions temel java temel java 2 soru 1 encapsulation nedir sadece field lari private yapmak yeterli midir yoksa daha genis bir tasarim prensibi midir encapsulation nedir sadece field lari private yapmak yeterli midir yoksa daha genis bir tasarim prensibi midir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q2",
+      "kind": "question",
+      "title": "Inheritance ne zaman faydalidir, ne zaman yanlis kullanilir? Somut bir ornekle anlatir misin?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 2",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q2",
+      "search": "questions temel java temel java 2 soru 2 inheritance ne zaman faydalidir ne zaman yanlis kullanilir somut bir ornekle anlatir misin inheritance ne zaman faydalidir ne zaman yanlis kullanilir somut bir ornekle anlatir misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q3",
+      "kind": "question",
+      "title": "Polymorphism nedir? Compile-time ve runtime polymorphism farkini aciklar misin?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 3",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q3",
+      "search": "questions temel java temel java 2 soru 3 polymorphism nedir compile time ve runtime polymorphism farkini aciklar misin polymorphism nedir compile time ve runtime polymorphism farkini aciklar misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q4",
+      "kind": "question",
+      "title": "Overloading ile overriding arasindaki fark nedir? Return type, parameter list ve access modifier acisindan anlatir misin?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 4",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q4",
+      "search": "questions temel java temel java 2 soru 4 overloading ile overriding arasindaki fark nedir return type parameter list ve access modifier acisindan anlatir misin overloading ile overriding arasindaki fark nedir return type parameter list ve access modifier acisindan anlatir misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q5",
+      "kind": "question",
+      "title": "Abstraction nedir? Gercek hayattaki bir domain uzerinden abstract dusunmenin tasarima nasil katki sagladigini aciklar misin?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 5",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q5",
+      "search": "questions temel java temel java 2 soru 5 abstraction nedir gercek hayattaki bir domain uzerinden abstract dusunmenin tasarima nasil katki sagladigini aciklar misin abstraction nedir gercek hayattaki bir domain uzerinden abstract dusunmenin tasarima nasil katki sagladigini aciklar misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q6",
+      "kind": "question",
+      "title": "Composition over inheritance ne demektir? Neden cogu durumda inheritance yerine composition onerilir?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 6",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q6",
+      "search": "questions temel java temel java 2 soru 6 composition over inheritance ne demektir neden cogu durumda inheritance yerine composition onerilir composition over inheritance ne demektir neden cogu durumda inheritance yerine composition onerilir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q7",
+      "kind": "question",
+      "title": "this ve super ne ise yarar? Constructor chaining ve field/method erisimi acisindan farklarini anlatir misin?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 7",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q7",
+      "search": "questions temel java temel java 2 soru 7 this ve super ne ise yarar constructor chaining ve field method erisimi acisindan farklarini anlatir misin this ve super ne ise yarar constructor chaining ve field method erisimi acisindan farklarini anlatir misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q8",
+      "kind": "question",
+      "title": "Access modifier'lar (private, default, protected, public) nasil calisir? Package ve inheritance acisindan ornekleyebilir misin?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 8",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q8",
+      "search": "questions temel java temel java 2 soru 8 access modifier lar private default protected public nasil calisir package ve inheritance acisindan ornekleyebilir misin access modifier lar private default protected public nasil calisir package ve inheritance acisindan ornekleyebilir misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q9",
+      "kind": "question",
+      "title": "Immutable class nedir? Java'da gercekten immutable bir class tasarlamak icin nelere dikkat etmek gerekir?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 9",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q9",
+      "search": "questions temel java temel java 2 soru 9 immutable class nedir java da gercekten immutable bir class tasarlamak icin nelere dikkat etmek gerekir immutable class nedir java da gercekten immutable bir class tasarlamak icin nelere dikkat etmek gerekir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-2:q10",
+      "kind": "question",
+      "title": "Bir class hem guclu encapsulation'a sahip olup hem de test edilebilir nasil tasarlanir? Cok fazla getter/setter kullanmak her zaman iyi midir?",
+      "meta": "Questions / Temel Java / Temel Java - 2 / Soru 10",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-2&question=q10",
+      "search": "questions temel java temel java 2 soru 10 bir class hem guclu encapsulation a sahip olup hem de test edilebilir nasil tasarlanir cok fazla getter setter kullanmak her zaman iyi midir bir class hem guclu encapsulation a sahip olup hem de test edilebilir nasil tasarlanir cok fazla getter setter kullanmak her zaman iyi midir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q1",
+      "kind": "question",
+      "title": "Interface ile abstract class arasindaki temel farklar nelerdir? Hangi durumda interface, hangi durumda abstract class tercih edersin?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 1",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q1",
+      "search": "questions temel java temel java 3 soru 1 interface ile abstract class arasindaki temel farklar nelerdir hangi durumda interface hangi durumda abstract class tercih edersin interface ile abstract class arasindaki temel farklar nelerdir hangi durumda interface hangi durumda abstract class tercih edersin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q2",
+      "kind": "question",
+      "title": "Interface icindeki field'lar neden public static final olur? Bunun pratik sonucu nedir?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 2",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q2",
+      "search": "questions temel java temel java 3 soru 2 interface icindeki field lar neden public static final olur bunun pratik sonucu nedir interface icindeki field lar neden public static final olur bunun pratik sonucu nedir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q3",
+      "kind": "question",
+      "title": "Interface icindeki normal method imzalari varsayilan olarak nasil kabul edilir? default, static ve private methodlarla farklari nedir?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 3",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q3",
+      "search": "questions temel java temel java 3 soru 3 interface icindeki normal method imzalari varsayilan olarak nasil kabul edilir default static ve private methodlarla farklari nedir interface icindeki normal method imzalari varsayilan olarak nasil kabul edilir default static ve private methodlarla farklari nedir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q4",
+      "kind": "question",
+      "title": "Java interface'lerde default method neden eklendi? Hangi problemi cozmek icin geldi?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 4",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q4",
+      "search": "questions temel java temel java 3 soru 4 java interface lerde default method neden eklendi hangi problemi cozmek icin geldi java interface lerde default method neden eklendi hangi problemi cozmek icin geldi"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q5",
+      "kind": "question",
+      "title": "Bir class birden fazla interface implement edebilirken neden birden fazla class'i extend edemez? Java'daki multiple inheritance problemi nedir?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 5",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q5",
+      "search": "questions temel java temel java 3 soru 5 bir class birden fazla interface implement edebilirken neden birden fazla class i extend edemez java daki multiple inheritance problemi nedir bir class birden fazla interface implement edebilirken neden birden fazla class i extend edemez java daki multiple inheritance problemi nedir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q6",
+      "kind": "question",
+      "title": "Abstract class ile interface'i birlikte kullanmak mantikli olabilir mi? Boyle bir tasarimin iyi oldugu bir senaryo anlatir misin?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 6",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q6",
+      "search": "questions temel java temel java 3 soru 6 abstract class ile interface i birlikte kullanmak mantikli olabilir mi boyle bir tasarimin iyi oldugu bir senaryo anlatir misin abstract class ile interface i birlikte kullanmak mantikli olabilir mi boyle bir tasarimin iyi oldugu bir senaryo anlatir misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q7",
+      "kind": "question",
+      "title": "Marker interface nedir? Annotation ile karsilastirinca ne gibi avantaj ve dezavantajlari vardir?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 7",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q7",
+      "search": "questions temel java temel java 3 soru 7 marker interface nedir annotation ile karsilastirinca ne gibi avantaj ve dezavantajlari vardir marker interface nedir annotation ile karsilastirinca ne gibi avantaj ve dezavantajlari vardir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q8",
+      "kind": "question",
+      "title": "Sealed class nedir ve ne ise yarar? Normal inheritance modeline gore nasil bir kontrol saglar?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 8",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q8",
+      "search": "questions temel java temel java 3 soru 8 sealed class nedir ve ne ise yarar normal inheritance modeline gore nasil bir kontrol saglar sealed class nedir ve ne ise yarar normal inheritance modeline gore nasil bir kontrol saglar"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q9",
+      "kind": "question",
+      "title": "Record nedir? Normal POJO/class'a gore ne avantaj saglar, ne zaman uygun degildir?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 9",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q9",
+      "search": "questions temel java temel java 3 soru 9 record nedir normal pojo class a gore ne avantaj saglar ne zaman uygun degildir record nedir normal pojo class a gore ne avantaj saglar ne zaman uygun degildir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-3:q10",
+      "kind": "question",
+      "title": "Bir API tasarlarken bunu interface mi yapayim, abstract class mi, yoksa concrete class yeterli mi sorusunu nasil dusunursun?",
+      "meta": "Questions / Temel Java / Temel Java - 3 / Soru 10",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-3&question=q10",
+      "search": "questions temel java temel java 3 soru 10 bir api tasarlarken bunu interface mi yapayim abstract class mi yoksa concrete class yeterli mi sorusunu nasil dusunursun bir api tasarlarken bunu interface mi yapayim abstract class mi yoksa concrete class yeterli mi sorusunu nasil dusunursun"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q1",
+      "kind": "question",
+      "title": "JVM memory yapisinda stack ve heap arasindaki fark nedir? Hangi tip veriler nerede tutulur?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 1",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q1",
+      "search": "questions temel java temel java 4 soru 1 jvm memory yapisinda stack ve heap arasindaki fark nedir hangi tip veriler nerede tutulur jvm memory yapisinda stack ve heap arasindaki fark nedir hangi tip veriler nerede tutulur"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q2",
+      "kind": "question",
+      "title": "Method area / metaspace nedir? Heap'ten farki nedir?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 2",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q2",
+      "search": "questions temel java temel java 4 soru 2 method area metaspace nedir heap ten farki nedir method area metaspace nedir heap ten farki nedir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q3",
+      "kind": "question",
+      "title": "Bir object olusturuldugunda yasam dongusu nasil ilerler? Olusmasi, referanslanmasi, erisilemez hale gelmesi ve toplanmasi surecini anlatir misin?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 3",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q3",
+      "search": "questions temel java temel java 4 soru 3 bir object olusturuldugunda yasam dongusu nasil ilerler olusmasi referanslanmasi erisilemez hale gelmesi ve toplanmasi surecini anlatir misin bir object olusturuldugunda yasam dongusu nasil ilerler olusmasi referanslanmasi erisilemez hale gelmesi ve toplanmasi surecini anlatir misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q4",
+      "kind": "question",
+      "title": "Garbage collection'in temel mantigi nedir? JVM hangi nesneleri toplayabilecegine nasil karar verir?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 4",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q4",
+      "search": "questions temel java temel java 4 soru 4 garbage collection in temel mantigi nedir jvm hangi nesneleri toplayabilecegine nasil karar verir garbage collection in temel mantigi nedir jvm hangi nesneleri toplayabilecegine nasil karar verir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q5",
+      "kind": "question",
+      "title": "GC roots nedir? Bir object'in collectable olup olmamasinda nasil rol oynar?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 5",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q5",
+      "search": "questions temel java temel java 4 soru 5 gc roots nedir bir object in collectable olup olmamasinda nasil rol oynar gc roots nedir bir object in collectable olup olmamasinda nasil rol oynar"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q6",
+      "kind": "question",
+      "title": "Java'da memory leak nasil olusur? Garbage collector varken memory leak yasanmasi nasil mumkun olur?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 6",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q6",
+      "search": "questions temel java temel java 4 soru 6 java da memory leak nasil olusur garbage collector varken memory leak yasanmasi nasil mumkun olur java da memory leak nasil olusur garbage collector varken memory leak yasanmasi nasil mumkun olur"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q7",
+      "kind": "question",
+      "title": "OutOfMemoryError ile StackOverflowError arasindaki fark nedir? Tipik sebepleri nelerdir?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 7",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q7",
+      "search": "questions temel java temel java 4 soru 7 outofmemoryerror ile stackoverflowerror arasindaki fark nedir tipik sebepleri nelerdir outofmemoryerror ile stackoverflowerror arasindaki fark nedir tipik sebepleri nelerdir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q8",
+      "kind": "question",
+      "title": "Strong, weak ve soft reference nedir? Temel seviyede aralarindaki farki ve kullanim amacini aciklar misin?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 8",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q8",
+      "search": "questions temel java temel java 4 soru 8 strong weak ve soft reference nedir temel seviyede aralarindaki farki ve kullanim amacini aciklar misin strong weak ve soft reference nedir temel seviyede aralarindaki farki ve kullanim amacini aciklar misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q9",
+      "kind": "question",
+      "title": "finalize() neden kotu bir yaklasim olarak gorulur? Modern Java'da neden onerilmez?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 9",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q9",
+      "search": "questions temel java temel java 4 soru 9 finalize neden kotu bir yaklasim olarak gorulur modern java da neden onerilmez finalize neden kotu bir yaklasim olarak gorulur modern java da neden onerilmez"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-4:q10",
+      "kind": "question",
+      "title": "Object null'a set edilirse hemen memory'den silinir diyen birine nasil cevap verirsin?",
+      "meta": "Questions / Temel Java / Temel Java - 4 / Soru 10",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-4&question=q10",
+      "search": "questions temel java temel java 4 soru 10 object null a set edilirse hemen memory den silinir diyen birine nasil cevap verirsin object null a set edilirse hemen memory den silinir diyen birine nasil cevap verirsin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-5:q1",
+      "kind": "question",
+      "title": "SOLID prensiplerini tek tek isim saymadan, gercek bir kod tabaninda neyi iyilestirmek icin kullanildiklarini anlatarak aciklar misin?",
+      "meta": "Questions / Temel Java / Temel Java - 5 / Soru 1",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-5&question=q1",
+      "search": "questions temel java temel java 5 soru 1 solid prensiplerini tek tek isim saymadan gercek bir kod tabaninda neyi iyilestirmek icin kullanildiklarini anlatarak aciklar misin solid prensiplerini tek tek isim saymadan gercek bir kod tabaninda neyi iyilestirmek icin kullanildiklarini anlatarak aciklar misin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-5:q2",
+      "kind": "question",
+      "title": "Single Responsibility Principle sence pratikte nasil anlasilir? Bir class'in fazla sorumluluk aldigina nasil karar verirsin?",
+      "meta": "Questions / Temel Java / Temel Java - 5 / Soru 2",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-5&question=q2",
+      "search": "questions temel java temel java 5 soru 2 single responsibility principle sence pratikte nasil anlasilir bir class in fazla sorumluluk aldigina nasil karar verirsin single responsibility principle sence pratikte nasil anlasilir bir class in fazla sorumluluk aldigina nasil karar verirsin"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-5:q3",
+      "kind": "question",
+      "title": "Open/Closed Principle ne demektir? Gercek bir ornek uzerinden mevcut kodu bozmadan genisletmek ne anlama gelir?",
+      "meta": "Questions / Temel Java / Temel Java - 5 / Soru 3",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-5&question=q3",
+      "search": "questions temel java temel java 5 soru 3 open closed principle ne demektir gercek bir ornek uzerinden mevcut kodu bozmadan genisletmek ne anlama gelir open closed principle ne demektir gercek bir ornek uzerinden mevcut kodu bozmadan genisletmek ne anlama gelir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-5:q4",
+      "kind": "question",
+      "title": "Interface Segregation Principle neden onemlidir? Fat interface problemi neye yol acar?",
+      "meta": "Questions / Temel Java / Temel Java - 5 / Soru 4",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-5&question=q4",
+      "search": "questions temel java temel java 5 soru 4 interface segregation principle neden onemlidir fat interface problemi neye yol acar interface segregation principle neden onemlidir fat interface problemi neye yol acar"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-5:q5",
+      "kind": "question",
+      "title": "Dependency Inversion Principle ne demektir? High-level ve low-level module iliskisini nasil dusunmek gerekir?",
+      "meta": "Questions / Temel Java / Temel Java - 5 / Soru 5",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-5&question=q5",
+      "search": "questions temel java temel java 5 soru 5 dependency inversion principle ne demektir high level ve low level module iliskisini nasil dusunmek gerekir dependency inversion principle ne demektir high level ve low level module iliskisini nasil dusunmek gerekir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-5:q6",
+      "kind": "question",
+      "title": "DRY, KISS ve YAGNI prensipleri bazen birbiriyle celisiyor gibi gorunur. Bunlari dengeli kullanmak ne demektir?",
+      "meta": "Questions / Temel Java / Temel Java - 5 / Soru 6",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-5&question=q6",
+      "search": "questions temel java temel java 5 soru 6 dry kiss ve yagni prensipleri bazen birbiriyle celisiyor gibi gorunur bunlari dengeli kullanmak ne demektir dry kiss ve yagni prensipleri bazen birbiriyle celisiyor gibi gorunur bunlari dengeli kullanmak ne demektir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-5:q7",
+      "kind": "question",
+      "title": "Cohesion ve coupling nedir? Yuksek cohesion ve dusuk coupling neden istenir?",
+      "meta": "Questions / Temel Java / Temel Java - 5 / Soru 7",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-5&question=q7",
+      "search": "questions temel java temel java 5 soru 7 cohesion ve coupling nedir yuksek cohesion ve dusuk coupling neden istenir cohesion ve coupling nedir yuksek cohesion ve dusuk coupling neden istenir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-5:q8",
+      "kind": "question",
+      "title": "Composition over inheritance prensibi ile SOLID arasinda nasil bir iliski goruyorsun?",
+      "meta": "Questions / Temel Java / Temel Java - 5 / Soru 8",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-5&question=q8",
+      "search": "questions temel java temel java 5 soru 8 composition over inheritance prensibi ile solid arasinda nasil bir iliski goruyorsun composition over inheritance prensibi ile solid arasinda nasil bir iliski goruyorsun"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-6:q1",
+      "kind": "question",
+      "title": "Singleton pattern nedir? Avantajlari, dezavantajlari ve ozellikle test edilebilirlik acisindan riskleri nelerdir?",
+      "meta": "Questions / Temel Java / Temel Java - 6 / Soru 1",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-6&question=q1",
+      "search": "questions temel java temel java 6 soru 1 singleton pattern nedir avantajlari dezavantajlari ve ozellikle test edilebilirlik acisindan riskleri nelerdir singleton pattern nedir avantajlari dezavantajlari ve ozellikle test edilebilirlik acisindan riskleri nelerdir"
+    },
+    {
+      "id": "question:questions:temel-java:temel-java-6:q2",
+      "kind": "question",
+      "title": "Factory, Builder, Strategy, Observer, Decorator, Adapter, Template Method ve Proxy pattern'lerinden birkacini karsilastirarak anlatir misin: hangi problemde hangisi daha uygundur ve neden?",
+      "meta": "Questions / Temel Java / Temel Java - 6 / Soru 2",
+      "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-6&question=q2",
+      "search": "questions temel java temel java 6 soru 2 factory builder strategy observer decorator adapter template method ve proxy pattern lerinden birkacini karsilastirarak anlatir misin hangi problemde hangisi daha uygundur ve neden factory builder strategy observer decorator adapter template method ve proxy pattern lerinden birkacini karsilastirarak anlatir misin hangi problemde hangisi daha uygundur ve neden"
     }
   ]
 }

@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "categoryId": "questions",
+  "subcategoryId": "temel-java",
+  "id": "temel-java-4",
+  "title": "Temel Java - 4",
+  "description": "JVM memory modeli, GC, leak, OOM ve runtime hata dinamikleri",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "JVM memory yapisinda stack ve heap arasindaki fark nedir? Hangi tip veriler nerede tutulur?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q2",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Method area / metaspace nedir? Heap'ten farki nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q3",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Bir object olusturuldugunda yasam dongusu nasil ilerler? Olusmasi, referanslanmasi, erisilemez hale gelmesi ve toplanmasi surecini anlatir misin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q4",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Garbage collection'in temel mantigi nedir? JVM hangi nesneleri toplayabilecegine nasil karar verir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q5",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "GC roots nedir? Bir object'in collectable olup olmamasinda nasil rol oynar?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q6",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Java'da memory leak nasil olusur? Garbage collector varken memory leak yasanmasi nasil mumkun olur?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q7",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "OutOfMemoryError ile StackOverflowError arasindaki fark nedir? Tipik sebepleri nelerdir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q8",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Strong, weak ve soft reference nedir? Temel seviyede aralarindaki farki ve kullanim amacini aciklar misin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q9",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "finalize() neden kotu bir yaklasim olarak gorulur? Modern Java'da neden onerilmez?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "q10",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Object null'a set edilirse hemen memory'den silinir diyen birine nasil cevap verirsin?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

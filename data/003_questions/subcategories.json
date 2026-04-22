@@ -31,6 +31,16 @@
       "topicFile": "/data/003_questions/003_java_type_conversion_casting_parsing/topic/001_topic.json",
       "interviewsFile": "/data/003_questions/003_java_type_conversion_casting_parsing/interviews/index.json",
       "interviewCount": 1
+    },
+    {
+      "id": "temel-java",
+      "title": "Temel Java",
+      "description": "Temel Java, OOP, interface/abstract class, JVM, design principles ve design patterns odakli sozlu mulakat sorulari",
+      "order": 4,
+      "folder": "004_temel_java",
+      "topicFile": "/data/003_questions/004_temel_java/topic/001_topic.json",
+      "interviewsFile": "/data/003_questions/004_temel_java/interviews/index.json",
+      "interviewCount": 6
     }
   ]
 }
