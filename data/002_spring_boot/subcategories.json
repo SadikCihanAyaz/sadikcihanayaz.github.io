@@ -61,6 +61,16 @@
       "topicFile": "/data/002_spring_boot/007_test/topic/001_topic.json",
       "interviewsFile": "/data/002_spring_boot/007_test/interviews/index.json",
       "interviewCount": 3
+    },
+    {
+      "id": "api-gateway",
+      "title": "API Gateway",
+      "description": "API Gateway, BFF, routing, security, resiliency, observability ve platform secimi odakli sozlu mulakat sorulari",
+      "order": 7,
+      "folder": "009_api_gateway",
+      "topicFile": "/data/002_spring_boot/009_api_gateway/topic/001_topic.json",
+      "interviewsFile": "/data/002_spring_boot/009_api_gateway/interviews/index.json",
+      "interviewCount": 5
     }
   ]
 }

@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "api-gateway",
+  "id": "api-gateway-interview-1",
+  "title": "API Gateway Interview - 1",
+  "description": "Temel kavramlar, mimari rol ve guvenlik girisi",
+  "questions": [
+    {
+      "id": "i1-q1",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway nedir, bir sistemde neden kullanilir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q2",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Reverse proxy ile API Gateway arasindaki fark nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q3",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Load balancer ile API Gateway ayni sey midir, degilse farklari nelerdir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q4",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Microservice mimarisinde API Gateway'in temel sorumluluklari nelerdir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q5",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Monolith bir sistemde de API Gateway kullanilabilir mi? Hangi durumlarda mantikli olur?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q6",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway kullanmanin avantajlari nelerdir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q7",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway kullanmanin dezavantajlari nelerdir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q8",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway'in sistemde single point of failure olmasini nasil engellersiniz?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q9",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway uzerinden authentication nasil yapilir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i1-q10",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway authorization surecinde nasil rol oynar?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

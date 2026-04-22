@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "api-gateway",
+  "id": "api-gateway-interview-4",
+  "title": "API Gateway Interview - 4",
+  "description": "Circuit breaker, BFF, CORS, limitler ve saldiri korumalari",
+  "questions": [
+    {
+      "id": "i4-q1",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway retry mekanizmasini ne zaman uygulamalidir, ne zaman uygulamamalidir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q2",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Retry mekanizmasinin tehlikeli olabilecegi senaryolar nelerdir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q3",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Circuit breaker nedir ve API Gateway seviyesinde uygulanmali midir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q4",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway'de fallback mekanizmalari hangi senaryolarda kullanilir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q5",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway request aggregation nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q6",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Backend for Frontend (BFF) ile generic API Gateway arasindaki fark nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q7",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Neden bazen tek bir API Gateway yerine farkli client tipleri icin farkli BFF'ler tercih edilir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q8",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway uzerinden CORS yonetimi yapmak mantikli mi? Neden?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q9",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway'de request body size limit koymak neden onemlidir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i4-q10",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway DDoS veya abuse saldirilarina karsi nasil korunabilir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "api-gateway",
+  "id": "api-gateway-topic",
+  "title": "API Gateway - Konu Anlatimi",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Bu konu anlatimi henuz hazir degil. Icerik yakinda eklenecek."
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "api-gateway",
+  "id": "api-gateway-interview-3",
+  "title": "API Gateway Interview - 3",
+  "description": "Versioning, protocol translation, observability ve timeout/retry",
+  "questions": [
+    {
+      "id": "i3-q1",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway response transformation ne demektir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q2",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway versiyonlama stratejilerinde nasil yardimci olabilir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q3",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "/v1, /v2 gibi versioning yaklasimlarinin avantaj ve dezavantajlari nelerdir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q4",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway ile protocol translation ne demektir? Ornek verir misiniz?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q5",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "REST to gRPC veya HTTP to WebSocket gibi donusumlerde API Gateway'in rolu ne olabilir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q6",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway observability acisindan hangi bilgileri toplamalidir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q7",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway'de centralized logging neden onemlidir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q8",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Distributed tracing API Gateway katmaninda nasil baslatilir veya tasinir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q9",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Correlation ID nedir, API Gateway'de neden onemlidir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i3-q10",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway timeout yonetimini nasil yapmalidir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}

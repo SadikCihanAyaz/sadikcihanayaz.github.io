@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-04-21T19:53:23.434Z",
+  "generatedAt": "2026-04-22T06:43:06.168Z",
   "minChars": 4,
   "maxResults": 30,
-  "totalItems": 720,
+  "totalItems": 771,
   "items": [
     {
       "id": "topic:java:threads",
@@ -4172,6 +4172,414 @@
       "meta": "Spring Boot / Test / Spring Boot Test Interview - 3 / Soru 10",
       "url": "/interview.html?category=spring-boot&subcategory=test&interview=spring-boot-test-interview-3&question=i3-q10",
       "search": "spring boot test spring boot test interview 3 soru 10 code coverage yuksek olsa bile test kalitesi dusuk olabilir mi code coverage yuksek olsa bile test kalitesi dusuk olabilir mi beklenen cevap mantigi evet kesinlikle olabilir coverage sadece kodun calistigini gosterir dogru dogrulandigini degil guclu cevap evet yuksek coverage tek basina kaliteli test anlamina gelmez kod satirlarinin calistirilmasi ile davranisin gercekten dogrulanmasi farkli seylerdir assertion zayifsa veya test sadece methodu cagirip geciyorsa coverage yuksek olsa bile guven dusuktur kritik ornekler assertion yok anlamsiz assertion var sadece happy path test edilmis edge case yok yanlis davranis fail olmuyor cok iyi ekleme coverage i faydali bir metrik olarak gorurum ama hedef olarak gormem esas odak kritik business behavior in guvence altina alinmasidir hayir coverage yuksekse kalite her zaman yuksektir evet coverage sadece kodun calistigini gosterir davranisin dogru dogrulandigini garanti etmez sadece integration testlerde olabilir sadece unit testlerde olabilir"
+    },
+    {
+      "id": "topic:spring-boot:api-gateway",
+      "kind": "topic",
+      "title": "API Gateway - Konu Anlatimi",
+      "meta": "Spring Boot / API Gateway / Konu",
+      "url": "/learn.html?category=spring-boot&subcategory=api-gateway&view=topic",
+      "search": "spring boot api gateway api gateway bff routing security resiliency observability ve platform secimi odakli sozlu mulakat sorulari api gateway konu anlatimi api gateway konu anlatimi bu konu anlatimi henuz hazir degil icerik yakinda eklenecek"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q1",
+      "kind": "question",
+      "title": "API Gateway nedir, bir sistemde neden kullanilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 1",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q1",
+      "search": "spring boot api gateway api gateway interview 1 soru 1 api gateway nedir bir sistemde neden kullanilir api gateway nedir bir sistemde neden kullanilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q2",
+      "kind": "question",
+      "title": "Reverse proxy ile API Gateway arasindaki fark nedir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 2",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q2",
+      "search": "spring boot api gateway api gateway interview 1 soru 2 reverse proxy ile api gateway arasindaki fark nedir reverse proxy ile api gateway arasindaki fark nedir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q3",
+      "kind": "question",
+      "title": "Load balancer ile API Gateway ayni sey midir, degilse farklari nelerdir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 3",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q3",
+      "search": "spring boot api gateway api gateway interview 1 soru 3 load balancer ile api gateway ayni sey midir degilse farklari nelerdir load balancer ile api gateway ayni sey midir degilse farklari nelerdir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q4",
+      "kind": "question",
+      "title": "Microservice mimarisinde API Gateway'in temel sorumluluklari nelerdir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 4",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q4",
+      "search": "spring boot api gateway api gateway interview 1 soru 4 microservice mimarisinde api gateway in temel sorumluluklari nelerdir microservice mimarisinde api gateway in temel sorumluluklari nelerdir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q5",
+      "kind": "question",
+      "title": "Monolith bir sistemde de API Gateway kullanilabilir mi? Hangi durumlarda mantikli olur?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 5",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q5",
+      "search": "spring boot api gateway api gateway interview 1 soru 5 monolith bir sistemde de api gateway kullanilabilir mi hangi durumlarda mantikli olur monolith bir sistemde de api gateway kullanilabilir mi hangi durumlarda mantikli olur"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q6",
+      "kind": "question",
+      "title": "API Gateway kullanmanin avantajlari nelerdir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 6",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q6",
+      "search": "spring boot api gateway api gateway interview 1 soru 6 api gateway kullanmanin avantajlari nelerdir api gateway kullanmanin avantajlari nelerdir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q7",
+      "kind": "question",
+      "title": "API Gateway kullanmanin dezavantajlari nelerdir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 7",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q7",
+      "search": "spring boot api gateway api gateway interview 1 soru 7 api gateway kullanmanin dezavantajlari nelerdir api gateway kullanmanin dezavantajlari nelerdir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q8",
+      "kind": "question",
+      "title": "API Gateway'in sistemde single point of failure olmasini nasil engellersiniz?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 8",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q8",
+      "search": "spring boot api gateway api gateway interview 1 soru 8 api gateway in sistemde single point of failure olmasini nasil engellersiniz api gateway in sistemde single point of failure olmasini nasil engellersiniz"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q9",
+      "kind": "question",
+      "title": "API Gateway uzerinden authentication nasil yapilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 9",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q9",
+      "search": "spring boot api gateway api gateway interview 1 soru 9 api gateway uzerinden authentication nasil yapilir api gateway uzerinden authentication nasil yapilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-1:i1-q10",
+      "kind": "question",
+      "title": "API Gateway authorization surecinde nasil rol oynar?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 1 / Soru 10",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-1&question=i1-q10",
+      "search": "spring boot api gateway api gateway interview 1 soru 10 api gateway authorization surecinde nasil rol oynar api gateway authorization surecinde nasil rol oynar"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q1",
+      "kind": "question",
+      "title": "JWT token dogrulamasini API Gateway'de yapmak mantikli mi? Neden?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 1",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q1",
+      "search": "spring boot api gateway api gateway interview 2 soru 1 jwt token dogrulamasini api gateway de yapmak mantikli mi neden jwt token dogrulamasini api gateway de yapmak mantikli mi neden"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q2",
+      "kind": "question",
+      "title": "API Gateway'de token validation yapmak ile downstream servislerde yapmak arasindaki trade-off nedir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 2",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q2",
+      "search": "spring boot api gateway api gateway interview 2 soru 2 api gateway de token validation yapmak ile downstream servislerde yapmak arasindaki trade off nedir api gateway de token validation yapmak ile downstream servislerde yapmak arasindaki trade off nedir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q3",
+      "kind": "question",
+      "title": "API Gateway rate limiting nasil uygular?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 3",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q3",
+      "search": "spring boot api gateway api gateway interview 2 soru 3 api gateway rate limiting nasil uygular api gateway rate limiting nasil uygular"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q4",
+      "kind": "question",
+      "title": "Rate limiting algoritmalarindan hangilerini biliyorsunuz? Token bucket, leaky bucket gibi yontemleri ne zaman tercih edersiniz?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 4",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q4",
+      "search": "spring boot api gateway api gateway interview 2 soru 4 rate limiting algoritmalarindan hangilerini biliyorsunuz token bucket leaky bucket gibi yontemleri ne zaman tercih edersiniz rate limiting algoritmalarindan hangilerini biliyorsunuz token bucket leaky bucket gibi yontemleri ne zaman tercih edersiniz"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q5",
+      "kind": "question",
+      "title": "API Gateway'de throttling ile rate limiting arasindaki fark nedir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 5",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q5",
+      "search": "spring boot api gateway api gateway interview 2 soru 5 api gateway de throttling ile rate limiting arasindaki fark nedir api gateway de throttling ile rate limiting arasindaki fark nedir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q6",
+      "kind": "question",
+      "title": "API Gateway caching nasil calisir ve hangi senaryolarda faydalidir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 6",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q6",
+      "search": "spring boot api gateway api gateway interview 2 soru 6 api gateway caching nasil calisir ve hangi senaryolarda faydalidir api gateway caching nasil calisir ve hangi senaryolarda faydalidir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q7",
+      "kind": "question",
+      "title": "API Gateway'de response caching yaparken hangi riskleri goz onunde bulundurursunuz?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 7",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q7",
+      "search": "spring boot api gateway api gateway interview 2 soru 7 api gateway de response caching yaparken hangi riskleri goz onunde bulundurursunuz api gateway de response caching yaparken hangi riskleri goz onunde bulundurursunuz"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q8",
+      "kind": "question",
+      "title": "API Gateway request routing nasil yapar?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 8",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q8",
+      "search": "spring boot api gateway api gateway interview 2 soru 8 api gateway request routing nasil yapar api gateway request routing nasil yapar"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q9",
+      "kind": "question",
+      "title": "Path-based routing ile host-based routing arasindaki fark nedir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 9",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q9",
+      "search": "spring boot api gateway api gateway interview 2 soru 9 path based routing ile host based routing arasindaki fark nedir path based routing ile host based routing arasindaki fark nedir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-2:i2-q10",
+      "kind": "question",
+      "title": "API Gateway request transformation ne demektir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 2 / Soru 10",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-2&question=i2-q10",
+      "search": "spring boot api gateway api gateway interview 2 soru 10 api gateway request transformation ne demektir api gateway request transformation ne demektir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q1",
+      "kind": "question",
+      "title": "API Gateway response transformation ne demektir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 1",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q1",
+      "search": "spring boot api gateway api gateway interview 3 soru 1 api gateway response transformation ne demektir api gateway response transformation ne demektir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q2",
+      "kind": "question",
+      "title": "API Gateway versiyonlama stratejilerinde nasil yardimci olabilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 2",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q2",
+      "search": "spring boot api gateway api gateway interview 3 soru 2 api gateway versiyonlama stratejilerinde nasil yardimci olabilir api gateway versiyonlama stratejilerinde nasil yardimci olabilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q3",
+      "kind": "question",
+      "title": "/v1, /v2 gibi versioning yaklasimlarinin avantaj ve dezavantajlari nelerdir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 3",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q3",
+      "search": "spring boot api gateway api gateway interview 3 soru 3 v1 v2 gibi versioning yaklasimlarinin avantaj ve dezavantajlari nelerdir v1 v2 gibi versioning yaklasimlarinin avantaj ve dezavantajlari nelerdir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q4",
+      "kind": "question",
+      "title": "API Gateway ile protocol translation ne demektir? Ornek verir misiniz?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 4",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q4",
+      "search": "spring boot api gateway api gateway interview 3 soru 4 api gateway ile protocol translation ne demektir ornek verir misiniz api gateway ile protocol translation ne demektir ornek verir misiniz"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q5",
+      "kind": "question",
+      "title": "REST to gRPC veya HTTP to WebSocket gibi donusumlerde API Gateway'in rolu ne olabilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 5",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q5",
+      "search": "spring boot api gateway api gateway interview 3 soru 5 rest to grpc veya http to websocket gibi donusumlerde api gateway in rolu ne olabilir rest to grpc veya http to websocket gibi donusumlerde api gateway in rolu ne olabilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q6",
+      "kind": "question",
+      "title": "API Gateway observability acisindan hangi bilgileri toplamalidir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 6",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q6",
+      "search": "spring boot api gateway api gateway interview 3 soru 6 api gateway observability acisindan hangi bilgileri toplamalidir api gateway observability acisindan hangi bilgileri toplamalidir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q7",
+      "kind": "question",
+      "title": "API Gateway'de centralized logging neden onemlidir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 7",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q7",
+      "search": "spring boot api gateway api gateway interview 3 soru 7 api gateway de centralized logging neden onemlidir api gateway de centralized logging neden onemlidir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q8",
+      "kind": "question",
+      "title": "Distributed tracing API Gateway katmaninda nasil baslatilir veya tasinir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 8",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q8",
+      "search": "spring boot api gateway api gateway interview 3 soru 8 distributed tracing api gateway katmaninda nasil baslatilir veya tasinir distributed tracing api gateway katmaninda nasil baslatilir veya tasinir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q9",
+      "kind": "question",
+      "title": "Correlation ID nedir, API Gateway'de neden onemlidir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 9",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q9",
+      "search": "spring boot api gateway api gateway interview 3 soru 9 correlation id nedir api gateway de neden onemlidir correlation id nedir api gateway de neden onemlidir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-3:i3-q10",
+      "kind": "question",
+      "title": "API Gateway timeout yonetimini nasil yapmalidir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 3 / Soru 10",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-3&question=i3-q10",
+      "search": "spring boot api gateway api gateway interview 3 soru 10 api gateway timeout yonetimini nasil yapmalidir api gateway timeout yonetimini nasil yapmalidir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q1",
+      "kind": "question",
+      "title": "API Gateway retry mekanizmasini ne zaman uygulamalidir, ne zaman uygulamamalidir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 1",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q1",
+      "search": "spring boot api gateway api gateway interview 4 soru 1 api gateway retry mekanizmasini ne zaman uygulamalidir ne zaman uygulamamalidir api gateway retry mekanizmasini ne zaman uygulamalidir ne zaman uygulamamalidir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q2",
+      "kind": "question",
+      "title": "Retry mekanizmasinin tehlikeli olabilecegi senaryolar nelerdir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 2",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q2",
+      "search": "spring boot api gateway api gateway interview 4 soru 2 retry mekanizmasinin tehlikeli olabilecegi senaryolar nelerdir retry mekanizmasinin tehlikeli olabilecegi senaryolar nelerdir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q3",
+      "kind": "question",
+      "title": "Circuit breaker nedir ve API Gateway seviyesinde uygulanmali midir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 3",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q3",
+      "search": "spring boot api gateway api gateway interview 4 soru 3 circuit breaker nedir ve api gateway seviyesinde uygulanmali midir circuit breaker nedir ve api gateway seviyesinde uygulanmali midir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q4",
+      "kind": "question",
+      "title": "API Gateway'de fallback mekanizmalari hangi senaryolarda kullanilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 4",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q4",
+      "search": "spring boot api gateway api gateway interview 4 soru 4 api gateway de fallback mekanizmalari hangi senaryolarda kullanilir api gateway de fallback mekanizmalari hangi senaryolarda kullanilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q5",
+      "kind": "question",
+      "title": "API Gateway request aggregation nedir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 5",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q5",
+      "search": "spring boot api gateway api gateway interview 4 soru 5 api gateway request aggregation nedir api gateway request aggregation nedir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q6",
+      "kind": "question",
+      "title": "Backend for Frontend (BFF) ile generic API Gateway arasindaki fark nedir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 6",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q6",
+      "search": "spring boot api gateway api gateway interview 4 soru 6 backend for frontend bff ile generic api gateway arasindaki fark nedir backend for frontend bff ile generic api gateway arasindaki fark nedir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q7",
+      "kind": "question",
+      "title": "Neden bazen tek bir API Gateway yerine farkli client tipleri icin farkli BFF'ler tercih edilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 7",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q7",
+      "search": "spring boot api gateway api gateway interview 4 soru 7 neden bazen tek bir api gateway yerine farkli client tipleri icin farkli bff ler tercih edilir neden bazen tek bir api gateway yerine farkli client tipleri icin farkli bff ler tercih edilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q8",
+      "kind": "question",
+      "title": "API Gateway uzerinden CORS yonetimi yapmak mantikli mi? Neden?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 8",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q8",
+      "search": "spring boot api gateway api gateway interview 4 soru 8 api gateway uzerinden cors yonetimi yapmak mantikli mi neden api gateway uzerinden cors yonetimi yapmak mantikli mi neden"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q9",
+      "kind": "question",
+      "title": "API Gateway'de request body size limit koymak neden onemlidir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 9",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q9",
+      "search": "spring boot api gateway api gateway interview 4 soru 9 api gateway de request body size limit koymak neden onemlidir api gateway de request body size limit koymak neden onemlidir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-4:i4-q10",
+      "kind": "question",
+      "title": "API Gateway DDoS veya abuse saldirilarina karsi nasil korunabilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 4 / Soru 10",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-4&question=i4-q10",
+      "search": "spring boot api gateway api gateway interview 4 soru 10 api gateway ddos veya abuse saldirilarina karsi nasil korunabilir api gateway ddos veya abuse saldirilarina karsi nasil korunabilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q1",
+      "kind": "question",
+      "title": "API Gateway'de IP whitelisting ve blacklisting nasil uygulanir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 1",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q1",
+      "search": "spring boot api gateway api gateway interview 5 soru 1 api gateway de ip whitelisting ve blacklisting nasil uygulanir api gateway de ip whitelisting ve blacklisting nasil uygulanir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q2",
+      "kind": "question",
+      "title": "API Gateway ile service discovery entegrasyonu nasil calisir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 2",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q2",
+      "search": "spring boot api gateway api gateway interview 5 soru 2 api gateway ile service discovery entegrasyonu nasil calisir api gateway ile service discovery entegrasyonu nasil calisir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q3",
+      "kind": "question",
+      "title": "Static routing ile dynamic routing arasindaki fark nedir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 3",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q3",
+      "search": "spring boot api gateway api gateway interview 5 soru 3 static routing ile dynamic routing arasindaki fark nedir static routing ile dynamic routing arasindaki fark nedir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q4",
+      "kind": "question",
+      "title": "API Gateway config degisikliklerini downtime olmadan nasil yonetirsiniz?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 4",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q4",
+      "search": "spring boot api gateway api gateway interview 5 soru 4 api gateway config degisikliklerini downtime olmadan nasil yonetirsiniz api gateway config degisikliklerini downtime olmadan nasil yonetirsiniz"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q5",
+      "kind": "question",
+      "title": "API Gateway'de canary release veya blue-green deployment nasil desteklenebilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 5",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q5",
+      "search": "spring boot api gateway api gateway interview 5 soru 5 api gateway de canary release veya blue green deployment nasil desteklenebilir api gateway de canary release veya blue green deployment nasil desteklenebilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q6",
+      "kind": "question",
+      "title": "API Gateway uzerinden tenant-based routing nasil yapilabilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 6",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q6",
+      "search": "spring boot api gateway api gateway interview 5 soru 6 api gateway uzerinden tenant based routing nasil yapilabilir api gateway uzerinden tenant based routing nasil yapilabilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q7",
+      "kind": "question",
+      "title": "API Gateway multi-tenant sistemlerde hangi guvenlik risklerini dogurabilir?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 7",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q7",
+      "search": "spring boot api gateway api gateway interview 5 soru 7 api gateway multi tenant sistemlerde hangi guvenlik risklerini dogurabilir api gateway multi tenant sistemlerde hangi guvenlik risklerini dogurabilir"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q8",
+      "kind": "question",
+      "title": "API Gateway secerken nelere dikkat edersiniz? Performans, extensibility, security, observability gibi basliklarda nasil degerlendirirsiniz?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 8",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q8",
+      "search": "spring boot api gateway api gateway interview 5 soru 8 api gateway secerken nelere dikkat edersiniz performans extensibility security observability gibi basliklarda nasil degerlendirirsiniz api gateway secerken nelere dikkat edersiniz performans extensibility security observability gibi basliklarda nasil degerlendirirsiniz"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q9",
+      "kind": "question",
+      "title": "Kong, NGINX, Spring Cloud Gateway, Apigee, AWS API Gateway gibi cozumler arasinda nasil secim yaparsiniz?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 9",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q9",
+      "search": "spring boot api gateway api gateway interview 5 soru 9 kong nginx spring cloud gateway apigee aws api gateway gibi cozumler arasinda nasil secim yaparsiniz kong nginx spring cloud gateway apigee aws api gateway gibi cozumler arasinda nasil secim yaparsiniz"
+    },
+    {
+      "id": "question:spring-boot:api-gateway:api-gateway-interview-5:i5-q10",
+      "kind": "question",
+      "title": "Hangi durumda bu sisteme API Gateway koymayalim, gereksiz karmasiklik olur dersiniz?",
+      "meta": "Spring Boot / API Gateway / API Gateway Interview - 5 / Soru 10",
+      "url": "/interview.html?category=spring-boot&subcategory=api-gateway&interview=api-gateway-interview-5&question=i5-q10",
+      "search": "spring boot api gateway api gateway interview 5 soru 10 hangi durumda bu sisteme api gateway koymayalim gereksiz karmasiklik olur dersiniz hangi durumda bu sisteme api gateway koymayalim gereksiz karmasiklik olur dersiniz"
     },
     {
       "id": "question:questions:coding:spring-boot-coding-1:i1-q1",

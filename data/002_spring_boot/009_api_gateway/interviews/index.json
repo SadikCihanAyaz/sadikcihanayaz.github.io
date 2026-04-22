@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "api-gateway",
+  "interviews": [
+    {
+      "id": "api-gateway-interview-1",
+      "title": "API Gateway Interview - 1",
+      "description": "Temel kavramlar, mimari rol ve guvenlik girisi",
+      "order": 1,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/009_api_gateway/interviews/001_api-gateway-interview-1.json"
+    },
+    {
+      "id": "api-gateway-interview-2",
+      "title": "API Gateway Interview - 2",
+      "description": "Token, rate limiting, cache, routing ve transformation",
+      "order": 2,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/009_api_gateway/interviews/002_api-gateway-interview-2.json"
+    },
+    {
+      "id": "api-gateway-interview-3",
+      "title": "API Gateway Interview - 3",
+      "description": "Versioning, protocol translation, observability ve timeout/retry",
+      "order": 3,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/009_api_gateway/interviews/003_api-gateway-interview-3.json"
+    },
+    {
+      "id": "api-gateway-interview-4",
+      "title": "API Gateway Interview - 4",
+      "description": "Circuit breaker, BFF, CORS, limitler ve saldiri korumalari",
+      "order": 4,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/009_api_gateway/interviews/004_api-gateway-interview-4.json"
+    },
+    {
+      "id": "api-gateway-interview-5",
+      "title": "API Gateway Interview - 5",
+      "description": "Service discovery, deployment stratejileri, multi-tenant ve urun secimi",
+      "order": 5,
+      "questionCount": 10,
+      "file": "/data/002_spring_boot/009_api_gateway/interviews/005_api-gateway-interview-5.json"
+    }
+  ]
+}

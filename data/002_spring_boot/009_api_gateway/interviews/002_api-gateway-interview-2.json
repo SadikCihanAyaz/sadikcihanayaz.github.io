@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "categoryId": "spring-boot",
+  "subcategoryId": "api-gateway",
+  "id": "api-gateway-interview-2",
+  "title": "API Gateway Interview - 2",
+  "description": "Token, rate limiting, cache, routing ve transformation",
+  "questions": [
+    {
+      "id": "i2-q1",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "JWT token dogrulamasini API Gateway'de yapmak mantikli mi? Neden?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q2",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway'de token validation yapmak ile downstream servislerde yapmak arasindaki trade-off nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q3",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway rate limiting nasil uygular?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q4",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Rate limiting algoritmalarindan hangilerini biliyorsunuz? Token bucket, leaky bucket gibi yontemleri ne zaman tercih edersiniz?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q5",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway'de throttling ile rate limiting arasindaki fark nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q6",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway caching nasil calisir ve hangi senaryolarda faydalidir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q7",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway'de response caching yaparken hangi riskleri goz onunde bulundurursunuz?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q8",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway request routing nasil yapar?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q9",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "Path-based routing ile host-based routing arasindaki fark nedir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    },
+    {
+      "id": "i2-q10",
+      "type": "direct",
+      "questionKind": "direct",
+      "question": "API Gateway request transformation ne demektir?",
+      "starterCode": "",
+      "answerBody": "",
+      "answerCode": ""
+    }
+  ]
+}
