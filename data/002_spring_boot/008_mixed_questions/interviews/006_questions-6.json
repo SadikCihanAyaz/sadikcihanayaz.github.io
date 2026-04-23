@@ -48,7 +48,7 @@
       "questionKind": "direct",
       "question": "Spring IoC ve Dependency Injection nedir?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: IoC, nesne yasam dongusu ve bagimlilik yonetiminin uygulama kodu yerine framework tarafindan yonetilmesidir. DI bunun pratik gorunen kismidir. Asil deger, sinifin bagimliligini kendisinin olusturmamasidir; bu test edilebilirligi artirir ve couplingi azaltir. Ozellikle constructor injection tercih ederim cunku bagimliliklari acik ve guvenli yapar.",
+      "answerBody": "Guclu cevap iskeleti: IoC, nesne yasam dongusu ve bagimlilik yonetiminin uygulama kodu yerine framework tarafindan yonetilmesidir. DI bunun pratik gorunen kismidir. Asil deger, sinifin bagimliligini kendisinin olusturmamasidir; bu test edilebilirligi artirir ve couplingi azaltir. Ozellikle constructor injection tercih ederim cunku bagimliliklari acik ve guvenli yapar.\n\nIlave not:\n\nIoC (Inversion of Control) nedir?\nObjeleri sen olusturmazsin, framework olusturur.\n- new yok\n- Spring senin yerine yonetir\n\nDependency Injection (DI) nedir?\nBir objenin bagimliliklarinin disaridan verilmesidir.\n- class kendi dependency'sini olusturmaz\n- disaridan enjekte edilir\n\nOrnek\nKotu (tight coupling):\nclass UserService {\n    private UserRepository repo = new UserRepository();\n}\n\nIyi (DI):\nclass UserService {\n    private final UserRepository repo;\n\n    public UserService(UserRepository repo) {\n        this.repo = repo;\n    }\n}\n\nRepo disaridan veriliyor.\n\nSpring ne yapiyor?\n@Service\nclass UserService {\n    private final UserRepository repo;\n\n    public UserService(UserRepository repo) {\n        this.repo = repo;\n    }\n}\n\nSpring:\n- bean olusturur\n- dependency'yi inject eder\n\nIliski\nIoC = kontrol Spring'de\nDI = Spring bu kontrolu injection ile yapar\n\nAvantajlar\n- loose coupling\n- test edilebilirlik\n- kolay degistirilebilir yapi\n\nTek cumle\nIoC, nesnelerin olusturulma kontrolunu Spring'e birakmaktir; DI ise bu nesnelerin bagimliliklarinin Spring tarafindan enjekte edilmesidir.\n\nKisa gercek:\nEskiden sen yonetirdin, simdi Spring yonetiyor; sen sadece isine bakiyorsun.",
       "answerCode": ""
     },
     {
@@ -66,7 +66,7 @@
       "questionKind": "direct",
       "question": "Microservice yazarken config ve profilelari nasil yonetirsin?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Configi koddan ayirir, environment bazli yonetirim. Dev test prod farklarini profile veya dis config ile tasirim ama asiri profile kullanip karmasa yaratmam. Ayrica config ve secreti ayiririm: timeout endpoint feature flag configtir; password ve API key secrettir. Amac uygulamayi yeniden build etmeden ortama tasiyabilmektir.",
+      "answerBody": "Kisa ve net:\n\nConfig'i koddan ayirir, ortam bazli yonetirim.\n\n1) Profile kullanirim (dev / stage / prod)\nspring:\n  profiles:\n    active: prod\n\nHer ortam icin:\n- application-dev.yml\n- application-stage.yml\n- application-prod.yml\n\nFarkli DB, URL ve config tutarim.\n\n2) Ortak + servis bazli config ayiririm\n- common config -> logging, timeout\n- service config -> order-service, user-service ozel ayarlar\n\n3) Config Server kullanirim\nMerkezi yonetim icin.\n- tum servisler config'i buradan alir\n- Git uzerinden yonetilir\n- degisiklik tek yerden yapilir\n\n4) Secret'lari ayiririm\nConfig icine gommem.\n- Kubernetes Secret\n- Vault\n\nOrnek: DB_PASSWORD, JWT_SECRET\n\n5) Environment variable kullanirim\nContainer / Kubernetes icin idealdir.\nSPRING_PROFILES_ACTIVE=prod\nDB_URL=...\n\n6) Kubernetes ile entegre ederim\n- ConfigMap -> normal config\n- Secret -> hassas veri\n\n7) Override mantigi\ndefault config\n-> profile config\n-> env var (en yuksek oncelik)\n\nTek cumle\nMicroservice'te config'i merkezi yonetir, profile bazli ayirir ve secret'lari ayri tutarak environment variable ve Config Server ile yonetirim.\n\nKisa gercek:\nConfig'i koda gomersen ileride aglarsin; ayirirsan rahat yasarsin.",
       "answerCode": ""
     },
     {
@@ -84,7 +84,7 @@
       "questionKind": "direct",
       "question": "@Transactional ile persistence context iliskisi nedir?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Transaction siniri ve persistence context cogu zaman birlikte calisir. Transaction acikken managed entityler izlenir ve dirty checking yapilir. Bu nedenle @Transactional sadece commit rollback degil; entity lifecycle, lazy loading ve update yonetimi icin de kritik sinirdir. Transactioni veri guvenligi kadar JPA davranisinin calisma alani olarak gorurum.",
+      "answerBody": "Guclu cevap iskeleti: Transaction siniri ve persistence context cogu zaman birlikte calisir. Transaction acikken managed entityler izlenir ve dirty checking yapilir. Bu nedenle @Transactional sadece commit rollback degil; entity lifecycle, lazy loading ve update yonetimi icin de kritik sinirdir. Transactioni veri guvenligi kadar JPA davranisinin calisma alani olarak gorurum.\n\nIlave not:\n\n@Transactional ile iliski\n- @Transactional acilinca bir persistence context baslar\n- kapaninca persistence context kapanir\n\nNe demek bu?\n@Transactional\npublic void updateUser() {\n    User user = em.find(User.class, 1);\n    user.setName(\"Ali\");\n}\n\nBu surecte:\n1. Transaction baslar\n2. Persistence context acilir\n3. user managed olur\n4. degisiklik yapilir\n5. commit -> dirty checking calisir\n6. DB update olur\n7. context kapanir\n\nNeden onemli?\n- persistence context = transaction scope\n- entity yonetimi burada olur\n- dirty checking burada calisir\n\n@Transactional olmazsa?\n- persistence context olmaz ya da cok kisa omurlu olur\n- entity detached olabilir\n- degisiklik DB'ye gitmez\n\nKisa mental model\n@Transactional = context ac\ncommit = degisiklikleri DB'ye yaz\n\nTek cumle\n@Transactional, persistence context'in lifecycle'ini belirler; transaction suresince entity'ler yonetilir ve commit sirasinda degisiklikler DB'ye yazilir.\n\nKisa gercek:\nTransaction yoksa Hibernate \"ben neyi takip edeyim?\" der.",
       "answerCode": ""
     },
     {
@@ -93,7 +93,7 @@
       "questionKind": "direct",
       "question": "Cucumber nedir, ne zaman kullanilir?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Cucumber davranis odakli testlerde kullanilan bir aractir ve business ile ortak dil kurmayi kolaylastirir. Ancak her testte kullanmam; asiri kullanimi bakim maliyeti yaratir. Ozellikle acceptance seviyesi akislarda business senaryosunu gorunur kilmak icin dusunurum, unit testin yerine koymam.",
+      "answerBody": "Kisa ve net:\n\nCucumber nedir?\nBDD (Behavior Driven Development) test aracidir.\n- testleri insan diliyle yazarsin\n- sonra Java koduna baglarsin\n\nNasil yazilir?\nFeature: User login\n\n  Scenario: Valid login\n    Given user exists\n    When user logs in\n    Then login is successful\n\nBu testtir.\n\nJava ile baglama\n@Given(\"user exists\")\npublic void userExists() { ... }\n\n@When(\"user logs in\")\npublic void login() { ... }\n\n@Then(\"login is successful\")\npublic void success() { ... }\n\nNe zaman kullanilir?\n- business logic anlasilir yazilacaksa\n- QA / product / developer birlikte calisiyorsa\n- acceptance test gerekiyorsa\n- end-to-end senaryo testleri\n\nNe zaman kullanmam?\n- unit test icin\n- basit servis testlerinde\n- kucuk projede\n\nAvantaj\n- herkes okuyabilir (dev + QA + business)\n- testler dokumantasyon olur\n\nDezavantaj\n- setup agir\n- bakim maliyeti yuksek\n- yanlis kullanilirsa karmasa\n\nTek cumle\nCucumber, testleri insan diliyle yazip otomasyona baglayan bir BDD aracidir ve ozellikle acceptance ve end-to-end testlerde kullanilir.\n\nKisa gercek:\nCucumber dogru yerde cok guclu; yanlis yerde test degil yuk olur.",
       "answerCode": ""
     },
     {
@@ -120,7 +120,7 @@
       "questionKind": "direct",
       "question": "Controller, service, repository testi nasil ayrilir?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Controller testinde HTTP katmani, request mapping, validation, status code ve response formatina bakarim. Service testinde business logici dependencyleri mocklayarak izole test ederim. Repository testinde custom query, pagination, filtering, join ve veri erisim davranisini dogrularim. Her katmani kendi sorumluluguna gore test ederim.",
+      "answerBody": "Kisa ve net:\n\nMantik\nHer katmani izole test ederim.\n\n1) Controller Test\nAmac: HTTP layer dogru mu?\n- endpoint calisiyor mu\n- request -> response mapping dogru mu\n- status code dogru mu\n\nTool:\n- @WebMvcTest\n- MockMvc\n\nDB yok\nGercek service yok (mock)\n\nOrnek mantik\nGET /users/1 -> 200 OK + JSON dogru mu?\n\n2) Service Test\nAmac: business logic dogru mu?\n- hesaplama\n- karar mekanizmasi\n- flow dogru mu\n\nTool:\n- Mockito (mock repository)\n\nSpring context gerekmez\nDB yok\n\nOrnek mantik\nStok yoksa -> exception firlatiyor mu?\n\n3) Repository Test\nAmac: DB query dogru mu?\n- JPA query dogru mu\n- join / mapping dogru mu\n\nTool:\n- @DataJpaTest\n\nGercek DB (genelde H2)\n\nOrnek mantik\nfindByEmail gercekten dogru kullaniciyi donduruyor mu?\n\nKisa ayrim\nLayer -> Test eder -> Kullanim\nController -> HTTP -> WebMvcTest\nService -> Logic -> Mockito\nRepository -> DB -> DataJpaTest\n\nEn onemli prensip\nHer katmani ayri test et.\n- hepsini @SpringBootTest ile test etme\n- yoksa yavas + karmasik olur\n\nTek cumle\nController HTTP davranisini, service business logic'i, repository ise DB erisimini test eder; her biri ayri ve izole test edilmelidir.\n\nKisa gercek:\nHer seyi tek testte denersen, hicbir seyi duzgun test edemezsin.",
       "answerCode": ""
     },
     {
@@ -129,7 +129,7 @@
       "questionKind": "direct",
       "question": "Yuksek trafikte bir servisi nasil scale edersin?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Once darbozazi olcerim: CPU, DB, thread pool, connection pool, network veya cache miss kaynakli mi anlarim. Rastgele scale etmem. Sonra duruma gore horizontal scaling, cache, query optimization, async processing, batching, read write ayrimi veya rate limiting uygularim. Olcekleme sadece instance arttirmak degil, tutan kati bulmaktir.",
+      "answerBody": "Kisa ve net:\n\nAmac\nDaha fazla istegi daha hizli karsilamak.\n\n1) Horizontal scaling (en temel)\nInstance sayisini artiririm.\n1 pod -> 5 pod -> 20 pod\n- Kubernetes HPA kullanirim\n- load balancer trafigi dagitir\n\n2) Stateless yaparim\nInstance'lar bagimsiz olmali.\n- session memory'de tutmam\n- Redis / external store kullanirim\n\n3) Cache kullanirim\nEn buyuk kazanc buradan gelir.\n- Redis\n- in-memory cache\nDB'ye gitmeden cevap veririm.\n\n4) DB bottleneck'ini cozerim\n- index eklerim\n- read replica kullanirim\n- connection pool ayarlarim\n\n5) Async / queue kullanirim\nAgir isleri ayiririm.\n- Kafka / RabbitMQ\n- background processing\n\n6) Rate limiting / backpressure\nSistemi korurum.\n- API Gateway rate limit\n- circuit breaker\n\n7) Resource tuning\n- CPU / memory ayari\n- thread pool tuning\n- GC tuning\n\n8) CDN / edge\nStatic icerik disariya alinir.\n\n9) Observability\nNeresi dar bogaz?\n- metrics\n- logs\n- tracing\n\nKisa mental model\nScale = daha fazla instance + daha az yuk + daha hizli DB\n\nTek cumle\nYuksek trafikte servisi stateless hale getirip yatay olceklendirir, cache ve async yapilarla yuku azaltir ve DB ile altyapi bottleneck'lerini optimize ederim.\n\nKisa gercek:\nScale sadece pod artirmak degil, dogru yerde yuk azaltmaktir.",
       "answerCode": ""
     },
     {
@@ -147,7 +147,7 @@
       "questionKind": "direct",
       "question": "Cachei nereye koyarsin?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Cache konumu optimize etmek istedigim katmana baglidir. Uygulama ici kisa omurlu cache baska, dagitik cache baska problemdir. Sik okunan ve nadir degisen veride cache mantikli olabilir. Ama stale data riski yuksekse veya invalidation zor ise cache yerine baska optimizasyon dusunurum. Cachei otomatik hizlandirma degil, trade off araci gorurum.",
+      "answerBody": "Kisa ve net:\n\n1) Uygulama ici cache (in-memory)\nEn hizli secenektir.\n- kucuk, sik okunan veri\n- config, lookup data\nHizli ama multi-instance'ta senkron degildir.\n\n2) Distributed cache (en yaygin)\nRedis kullanirim.\n- mikroservisler arasi ortak cache\n- DB yukunu azaltir\nShared ve scalable oldugu icin cogu projede ana cozumdur.\n\n3) API / Gateway seviyesinde\nResponse cache yaparim.\n- ayni request -> ayni response\n- ozellikle GET endpoint'lerde\n\n4) DB onunde\nQuery cache / read cache kullanirim.\n- agir query sonucu cache'lenir\n- DB'ye gitmezsin\n\n5) CDN (edge cache)\nStatic icerik icin.\n- image, js, css\n- kullaniciya en yakin noktadan servis edilir\n\nKisa karar\nDurum -> Cache\ntek instance -> in-memory\nmulti instance -> Redis\nAPI response -> gateway cache\nstatic content -> CDN\n\nEn dogru yaklasim\nCogu sistemde: App -> Redis -> DB\n\nTek cumle\nCache'i ihtiyaca gore katmanlara koyarim ama mikroservislerde genelde merkezi olarak Redis gibi distributed cache kullanirim.\n\nKisa gercek:\nCache yanlis yerdeyse ya ise yaramaz ya da bug uretir.",
       "answerCode": ""
     },
     {
@@ -156,7 +156,7 @@
       "questionKind": "direct",
       "question": "Logging ve monitoring nasil kurulur?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Gozlemlenebilirligi uc parca dusunurum: log, metric, trace. Log detay verir, metric trend gosterir, trace requestin servisler arasi yolunu gosterir. Productionda sadece log basmak yetmez; yapisal log, correlation id, latency metricleri, error rate ve kritik business metricleri takip etmek gerekir.",
+      "answerBody": "Kisa ve net:\n\nAmac\n- Sistemde ne oluyor? (log)\n- Sistem ne durumda? (metric)\n\n1) Logging nasil kurulur?\nUygulama tarafinda structured log (JSON) yazarim.\n- requestId / traceId eklerim\n\nToplama\nLog'lar merkezi toplanir.\nYaygin stack:\n- Elasticsearch\n- Logstash\n- Kibana\n(ELK stack)\n\nKubernetes'te\n- pod -> stdout log\n- agent (Fluentd / Fluent Bit) -> toplar -> gonderir\n\n2) Monitoring nasil kurulur?\nMetric toplama:\nPrometheus\n- CPU, memory\n- request count\n- error rate\n\nGorsellestirme:\nGrafana\n- dashboard\n- alert\n\nUygulama tarafi\nSpring Boot:\n/actuator/metrics\n/actuator/prometheus\n\n3) Alerting\nThreshold belirlerim.\n- error rate > %5\n- latency > 1s\nAlarm uretirim.\n\n4) Distributed tracing (bonus ama onemli)\nZipkin / Jaeger\n- request hangi servisten gecti\n- nerede yavasladi\n\nKisa mimari\nApp -> logs -> ELK\nApp -> metrics -> Prometheus -> Grafana\nApp -> trace -> Jaeger\n\nTek cumle\nLogging icin merkezi log toplama (ELK), monitoring icin Prometheus + Grafana kurar, trace icin ise dagitik izleme araclari eklerim.\n\nKisa gercek:\nLog yoksa korsun, metric yoksa hissizsin.",
       "answerCode": ""
     },
     {
@@ -165,7 +165,7 @@
       "questionKind": "direct",
       "question": "Connection pooling neden onemli?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Her istek icin DB baglantisi ac kapa yapmak pahali oldugu icin connection pool throughputu arttirir ve gecikmeyi azaltir. Ama sonsuz cozum degildir; yavas query veya uzun transaction varsa pool yine tukenebilir. Bunu performans ayari kadar uygulama ve DB arasinda kapasite kontrol mekanizmasi olarak gorurum.",
+      "answerBody": "Kisa ve net:\n\nConnection pooling, DB baglantilarini tekrar tekrar acmak yerine hazir havuzdan kullanmaktir.\n\nNeden onemli?\n\n1) Baglanti acmak pahali\n- TCP handshake\n- auth\n- setup\nHer request'te acarsan sistem yavaslar.\n\n2) Performans artar\nHazir connection kullanirsin.\nrequest -> pool -> connection -> DB\n\n3) DB'yi korur\nSinirsiz connection acilmaz.\n- DB limit asilmamis olur\n- overload olmaz\n\n4) Resource kontrolu saglar\n- max connection sayisi belli\n- queue olusur\n\nPool olmazsa ne olur?\n- her request yeni connection\n- latency artar\n- DB cokebilir\n\nSpring Boot'ta default\n- HikariCP\n- cok hizli\n\nTek cumle\nConnection pooling, pahali DB baglantilarini yeniden kullanarak performansi artirir ve veritabaniyi asiri yukten korur.\n\nKisa gercek:\nPool yoksa DB ile konusmak degil, kavga etmektir.",
       "answerCode": ""
     },
     {
@@ -174,7 +174,7 @@
       "questionKind": "direct",
       "question": "Neden long transaction kotu?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Uzun transaction daha uzun lock suresi, daha fazla contention, daha yuksek rollback maliyeti ve daha fazla kaynak tuketimi yaratir. Transaction icine gereksiz dis servis cagri veya kullanici bekleme suresi girdiginde olceklenme daha da bozulur. Bu nedenle transaction sinirlarini kisa ve is acisindan tutarli tutarim.",
+      "answerBody": "Kisa ve net:\n\n1) Lock tutar\nSatir / tablo kilitlenir.\n- diger transaction'lar bekler\n- sistem yavaslar\n\n2) Concurrency dusurur\nAyni anda az kisi calisabilir.\n- throughput duser\n- latency artar\n\n3) Deadlock riski artar\nUzun sure kilit -> cakisma ihtimali artar.\n\n4) Resource tuketir\n- connection tutulur\n- memory tutulur\n- connection pool dolabilir\n- sistem kitlenebilir\n\n5) Rollback maliyeti buyuktur\nUzun islem -> geri almak pahali.\n\n6) Kullanici deneyimi bozulur\nIslem gec bitince response gecikir.\n\nKisa mantik\nTransaction kisa = hizli + guvenli\nTransaction uzun = risk + yavaslik\n\nTek cumle\nLong transaction, lock surelerini uzatarak concurrency'yi dusurur, deadlock riskini artirir ve sistem performansini olumsuz etkiler.\n\nKisa gercek:\nTransaction uzadikca sistem sabri azalir.",
       "answerCode": ""
     },
     {
@@ -201,7 +201,7 @@
       "questionKind": "direct",
       "question": "Bir query performans sorununu nasil cozdun?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Guclu cevap index ekledim demekle bitmez. Once execution plana bakip maliyetli join veya scani tespit ederim. Sonra index, query rewrite, gereksiz kolonlari azaltma, pagination veya veri modeli duzeltmesi gibi kalici adimlari uygularim. Yaklasimim tahmine degil olcume dayanir.",
+      "answerBody": "Kisa ve net:\n\nProblem\nBir endpoint 3-4 saniye suruyordu.\n- DB CPU yuksek\n- latency kotuydu\n\n1) Once bakarim (tahmin degil)\nEXPLAIN ANALYZE kullanirim.\nGordugum seyler:\n- full scan\n- kotu join\n- index yok\n\n2) Root cause\nWHERE email = ? sorgusu vardi ama email index yoktu.\nMilyonlarca satir taraniyordu.\n\n3) Cozum\nIndex ekledim.\nCREATE INDEX idx_user_email ON users(email);\n\n4) Sonuc\nOnce: 3.2 saniye\nSonra: 20 ms\nDramatik dusus oldu.\n\nBonus yaptiklarim\n- SELECT * yerine gerekli alanlari cektim\n- gereksiz join'i kaldirdim\n- pagination ekledim\n\nKisa metodoloji\n1. olc (EXPLAIN)\n2. bottleneck bul\n3. index / query fix\n4. tekrar olc\n\nTek cumle\nQuery performans sorununda once execution plan'a bakar, ardindan index ve query optimizasyonu ile gereksiz veri taramasini azaltarak cozerim.\n\nKisa gercek:\n%80 problem index yok, kalani yanlis query.",
       "answerCode": ""
     },
     {
@@ -210,7 +210,7 @@
       "questionKind": "direct",
       "question": "Legacy kodda neyi iyilestirdin?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Legacyde buyuk bang rewrite yapmam. Once en cok aci veren veya riski yuksek bolumu secerim. Buyuk service classi sorumluluklara ayirmak, kritik akis icin test guvenlik agi eklemek, tekrar eden kodu ortaklastirmak ve gizli business rulelari netlestirmek gibi adimlarla ilerlerim. Hedef estetik degil degisiklik maliyetini dusurmektir.",
+      "answerBody": "Kisa ve net:\n\nProblem\nLegacy serviste:\n- 3-4 saniye response\n- okunmasi zor kod\n- test yok\n- DB'ye asiri yuk\n\nNe yaptim?\n\n1) Query optimize ettim\n- index ekledim\n- SELECT * kaldirdim\nLatency ciddi dustu.\n\n2) N+1 problemini cozdum\n- JOIN FETCH / batch fetch kullandim\nDB cagrisI azaldi.\n\n3) Cache ekledim\n- sik okunan veriyi Redis'e aldim\nDB load dustu.\n\n4) Kodu sadeleştirdim\n- buyuk methodlari bolderdim\n- sorumluluklari ayirdim (SRP)\n\n5) Test ekledim\n- unit test\n- kritik flow'lara coverage\n\n6) Logging ve error handling iyilestirdim\nDebug edilebilir hale geldi.\n\n7) Config ve secret ayirdim\nHardcoded degerleri kaldirdim.\n\nSonuc\nresponse time dustu\nDB load dustu\nmaintainability artti\nbug sayisi dustu\n\nTek cumle\nLegacy kodda performansi artirmak icin query ve cache optimizasyonu yaptim, kodu sadeleştirdim ve test ekleyerek surdurulebilir hale getirdim.\n\nKisa gercek:\nLegacy kod, calisan ama kimsenin dokunmak istemedigi seydir; sen onu dokunulabilir hale getirirsin.",
       "answerCode": ""
     },
     {
