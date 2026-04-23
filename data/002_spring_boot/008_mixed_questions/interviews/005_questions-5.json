@@ -57,7 +57,7 @@
       "questionKind": "direct",
       "question": "ArrayList ile LinkedList farki nedir, hangisini ne zaman secersin?",
       "starterCode": "",
-      "answerBody": "Guclu cevap iskeleti: Cogu gercek senaryoda varsayilan tercihim ArrayList olur cunku bellekte daha kompakt davranir ve random access hizlidir. LinkedList teoride bazi ekleme cikarma durumlarinda avantajli gorunse de pratikte cache locality ve traversal maliyeti nedeniyle cogu kez zayif kalir. Sirf ortadan silme var diye refleks olarak LinkedList secmem.",
+      "answerBody": "Kisa ve vurucu:\n\nTemel fark\n\nArrayList\n- array tabanli\n- index ile erisim cok hizli (O(1))\n- ortadan ekleme/silme pahali (shift olur)\n\nLinkedList\n- node (bagli liste)\n- index ile erisim yavas (O(n))\n- ortadan ekleme/silme daha ucuz (node degisir)\n\nNe zaman hangisi?\n\nArrayList secerim:\n- cogunlukla okuma / get(i) yapiyorsam\n- listeyi sik dolasiyorsam\n- append (sona ekleme) agirlikliysa\n\nEn yaygin dogru secim bu olur.\n\nLinkedList secerim:\n- basina/ortasina sik ekleme-silme varsa\n- queue / deque gibi kullaniyorsam\n\nAma gercek hayatta daha nadirdir.\n\nPratik gercek\n\n- Cogu durumda ArrayList kullanilir.\n- LinkedList teoride iyi gorunse de pratikte cache ve traversal maliyeti yuzunden genelde yavas kalir.\n\nTek cumle\n\nArrayList hizli erisim icin, LinkedList ise sik ekleme-silme icin uygundur; ama pratikte cogu senaryoda ArrayList tercih edilir.\n\nKisa gercek:\n\nLinkedList kitapta guzel,\nArrayList prod'da kazanir.\n",
       "answerCode": ""
     },
     {

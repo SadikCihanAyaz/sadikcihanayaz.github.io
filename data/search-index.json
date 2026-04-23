@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-04-23T06:51:34.038Z",
+  "generatedAt": "2026-04-23T06:57:26.555Z",
   "minChars": 4,
   "maxResults": 30,
   "totalItems": 825,
@@ -5515,7 +5515,7 @@
       "title": "ArrayList ile LinkedList farki nedir, hangisini ne zaman secersin?",
       "meta": "Questions / Karisik Sorular / Questions-5 / Soru 6",
       "url": "/interview.html?category=questions&subcategory=mixed-questions&interview=mixed-questions-5&question=i5-q6",
-      "search": "questions karisik sorular questions 5 soru 6 arraylist ile linkedlist farki nedir hangisini ne zaman secersin arraylist ile linkedlist farki nedir hangisini ne zaman secersin guclu cevap iskeleti cogu gercek senaryoda varsayilan tercihim arraylist olur cunku bellekte daha kompakt davranir ve random access hizlidir linkedlist teoride bazi ekleme cikarma durumlarinda avantajli gorunse de pratikte cache locality ve traversal maliyeti nedeniyle cogu kez zayif kalir sirf ortadan silme var diye refleks olarak linkedlist secmem"
+      "search": "questions karisik sorular questions 5 soru 6 arraylist ile linkedlist farki nedir hangisini ne zaman secersin arraylist ile linkedlist farki nedir hangisini ne zaman secersin kisa ve vurucu temel fark arraylist array tabanli index ile erisim cok hizli o 1 ortadan ekleme silme pahali shift olur linkedlist node bagli liste index ile erisim yavas o n ortadan ekleme silme daha ucuz node degisir ne zaman hangisi arraylist secerim cogunlukla okuma get i yapiyorsam listeyi sik dolasiyorsam append sona ekleme agirlikliysa en yaygin dogru secim bu olur linkedlist secerim basina ortasina sik ekleme silme varsa queue deque gibi kullaniyorsam ama gercek hayatta daha nadirdir pratik gercek cogu durumda arraylist kullanilir linkedlist teoride iyi gorunse de pratikte cache ve traversal maliyeti yuzunden genelde yavas kalir tek cumle arraylist hizli erisim icin linkedlist ise sik ekleme silme icin uygundur ama pratikte cogu senaryoda arraylist tercih edilir kisa gercek linkedlist kitapta guzel arraylist prod da kazanir"
     },
     {
       "id": "question:questions:mixed-questions:mixed-questions-5:i5-q7",
