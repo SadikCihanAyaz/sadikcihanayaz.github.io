@@ -165,7 +165,7 @@
       "questionKind": "direct",
       "question": "Parallel stream kullanir misin?",
       "starterCode": "",
-      "answerBody": "Beklenen cevap mantigi: Her yerde kullanilmaz, yanlis kullanim zarar verebilir. Guclu cevap: Parallel streami otomatik performans cozumlu olarak gormem. CPU bound ve bagimsiz islemlerde, yeterli veri hacminde fayda saglayabilir. Shared state, IO bound isler, thread pool kontrolu gereken alanlar veya request threadi icinde gelisiguzel kullanim risklidir. Once olcmeden parallel stream tercih etmem.",
+      "answerBody": "Kisa ve net:\n\nNe zaman kullanirim?\nCPU-bound + bagimsiz isler varsa.\n- buyuk liste\n- her eleman agir islem yapiyorsa\n- shared state yoksa\n\nlist.parallelStream()\n    .map(this::heavyCalculation)\n    .toList();\n\nParalel fayda saglayabilir.\n\nNe zaman kullanmam?\n- I/O varsa (DB, API cagrisI)\n- kucuk dataset\n- side-effect varsa\n- thread kontrolu onemliyse\n\nCogu gercek sistemde bu durumlar vardir.\n\nNeden dikkatli?\n- kontrol sende degil (ForkJoinPool)\n- debug zor\n- thread starvation olabilir\n- performans bazen daha kotu olur\n\nAlternatif\nDaha kontrollu cozum:\n- CompletableFuture\n- custom thread pool\n\nTek cumle\nParallel stream'i sadece CPU yogun ve bagimsiz islemlerde kullanirim; I/O ve kontrol gerektiren durumlarda tercih etmem.\n\nKisa gercek:\nParallel stream hizli olabilir ama yanlis yerde yavaslatir.",
       "answerCode": ""
     },
     {
