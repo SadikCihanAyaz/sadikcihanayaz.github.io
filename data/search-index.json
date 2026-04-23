@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-04-23T10:14:03.139Z",
+  "generatedAt": "2026-04-23T10:31:13.322Z",
   "minChars": 4,
   "maxResults": 30,
   "totalItems": 825,
@@ -5107,7 +5107,7 @@
       "title": "ExecutorService veya async processing ne zaman gerekir?",
       "meta": "Questions / Karisik Sorular / Questions-2 / Soru 19",
       "url": "/interview.html?category=questions&subcategory=mixed-questions&interview=mixed-questions-2&question=i2-q19",
-      "search": "questions karisik sorular questions 2 soru 19 executorservice veya async processing ne zaman gerekir executorservice veya async processing ne zaman gerekir beklenen cevap mantigi uzun suren veya bagimsiz isleri ana request akisindan ayirmak icin gerekir guclu cevap eposta gonderimi rapor hazirlama dis sistem cagrisi sonrasi yan etkiler gibi isleri response suresinden ayirmak icin async yaklasim uygundur ancak async tek basina cozum degildir thread pool boyutu backpressure retry hata yonetimi ve gozlemlenebilirlik birlikte tasarlanmalidir"
+      "search": "questions karisik sorular questions 2 soru 19 executorservice veya async processing ne zaman gerekir executorservice veya async processing ne zaman gerekir kisa ve net ne zaman gerekir isi bekletmeden devam etmek istiyorsam paralel is yapacaksam 1 async processing en yaygin kullaniciyi bekletmemek icin email gonder log yaz pdf olustur async sendemail response hizli doner is arkada calisir 2 parallel processing bagimsiz isleri ayni anda yapmak icin executor submit callservicea executor submit callserviceb toplam sure duser 3 io bound islerde db cagrisi api cagrisi bekleme suresi vardir paralel yapilabilir 4 queue background job agir isler icin video isleme rapor uretme ne zaman kullanmam basit islem kisa suren is kontrolsuz thread acmak riskler thread leak pool dolmasi exception kaybolmasi kisa fark executorservice kontrol yuksek async kolay ama daha az kontrol tek cumle executorservice veya async processing kullaniciyi bekletmemek ve bagimsiz isleri paralel calistirmak gerektiginde kullanilir kisa gercek async dogru yerde hiz yanlis yerde kaos"
     },
     {
       "id": "question:questions:mixed-questions:mixed-questions-2:i2-q20",
@@ -5115,7 +5115,7 @@
       "title": "@Async kullanirken nelere dikkat edersin?",
       "meta": "Questions / Karisik Sorular / Questions-2 / Soru 20",
       "url": "/interview.html?category=questions&subcategory=mixed-questions&interview=mixed-questions-2&question=i2-q20",
-      "search": "questions karisik sorular questions 2 soru 20 async kullanirken nelere dikkat edersin async kullanirken nelere dikkat edersin beklenen cevap mantigi proxy thread pool exception handling ve context propagation kritiktir guclu cevap async proxy tabanli oldugu icin self invocation problemi yasayabilir default executor yerine cogu zaman ozel thread pool tanimlamak daha dogrudur security context mdc ve tracing context bilgisinin yeni threade tasinmasi kontrol edilmelidir async hatalari sessiz kaybolmamali hata yonetimi ve gozlemlenebilirlik net kurulmalidir"
+      "search": "questions karisik sorular questions 2 soru 20 async kullanirken nelere dikkat edersin async kullanirken nelere dikkat edersin kisa ve net 1 method gercekten async mi ayni class icinde cagirdiginda calismaz this sendemail async olmaz baska bean uzerinden cagirmak gerekir 2 thread pool kontrolu default kullanmam async customexecutor thread sayisini kontrol ederim yoksa sistem sisebilir 3 exception kaybolur async public void send throw new runtimeexception bu durumda exception kolayca kaybolabilir cozum try catch completablefuture kullan 4 transaction problemi transactional async ile bekledigin gibi tasinmaz ayri transaction acmak gerekir 5 threadlocal security context tasinmaz user bilgisi kaybolur request context yok olur manuel tasimak gerekir 6 return tipi onerilen completablefuture t 7 uzun islerde dikkat cok async job thread pool dolar sistem kitlenebilir 8 logging tracing async is kaybolmasin diye traceid tasi log ekle tek cumle async kullanirken thread pool exception handling transaction ve context propagation konularina dikkat ederim kisa gercek async kolay baslar ama kontrol etmezsen production da seni uzmeye baslar"
     },
     {
       "id": "question:questions:mixed-questions:mixed-questions-3:i3-q1",
