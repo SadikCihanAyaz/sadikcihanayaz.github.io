@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-04-23T08:46:53.703Z",
+  "generatedAt": "2026-04-23T10:14:03.139Z",
   "minChars": 4,
   "maxResults": 30,
   "totalItems": 825,
@@ -4899,7 +4899,7 @@
       "title": "Deadlock nasil olusur?",
       "meta": "Questions / Karisik Sorular / Questions-1 / Soru 13",
       "url": "/interview.html?category=questions&subcategory=mixed-questions&interview=mixed-questions-1&question=i1-q13",
-      "search": "questions karisik sorular questions 1 soru 13 deadlock nasil olusur deadlock nasil olusur deadlock iki veya daha fazla transactionin birbirinin tuttugu locku beklemesiyle dongusel bir bekleme olustugunda ortaya cikar tipik ornekte t1 once a sonra b yi t2 once b sonra a yi kilitlerse karsilikli bekleme olusur riski azaltmak icin kaynaklara tutarli sirayla erismek transactionlari kisa tutmak ve gereksiz lock kapsamindan kacinmak gerekir lock stratejisi ve timeout ayarlari da onleyici etkidedir"
+      "search": "questions karisik sorular questions 1 soru 13 deadlock nasil olusur deadlock nasil olusur kisa ve net deadlock nasil olusur iki islem birbirinin tuttugu kilidi bekler klasik senaryo t1 a yi kilitledi b yi bekliyor t2 b yi kilitledi a yi bekliyor ikisi de bekler sistem kitlenir kod mantigi thread 1 lock a lock b thread 2 lock b lock a farkli sirayla lock almak deadlock uretir deadlock icin 4 sart 1 mutual exclusion kilit var 2 hold and wait elindekini birakmiyor 3 no preemption zorla alinamaz 4 circular wait dongu olusur nasil cozersin 1 lock sirasini sabitle her zaman a sonra b herkes ayni sirayla lock alir 2 timeout kullan trylock 5 timeunit seconds sonsuza kadar beklemez 3 daha kucuk lock kullan gereksiz genis lock tan kacin 4 lock suresini kisalt long transaction risklidir 5 deadlock detect retry db genelde birini oldurur sen retry edersin db tarafi ornek select for update farkli sirada kullanilirsa deadlock olusabilir tek cumle deadlock islemlerin birbirinin kilidini bekleyerek sonsuza kadar bloklanmasidir en iyi cozum lock alma sirasini standartlastirmaktir kisa gercek deadlock kimse ilerleyemez herkes birbirine bakar"
     },
     {
       "id": "question:questions:mixed-questions:mixed-questions-1:i1-q14",
@@ -4915,7 +4915,7 @@
       "title": "High-load serviste neye bakarsin?",
       "meta": "Questions / Karisik Sorular / Questions-1 / Soru 15",
       "url": "/interview.html?category=questions&subcategory=mixed-questions&interview=mixed-questions-1&question=i1-q15",
-      "search": "questions karisik sorular questions 1 soru 15 high load serviste neye bakarsin high load serviste neye bakarsin ilk adim darbogazi bulmaktir cpu memory gc db network thread pool veya connection pool kaynakli mi bakarim sonra latency throughput error rate ve saturation metrikleri ile resmi netlestiririm cozum tarafinda cache batching async processing query optimizasyonu horizontal scaling veya backpressure gibi yaklasimlari ihtiyaca gore degerlendiririm yani once olcer sonra optimize ederim"
+      "search": "questions karisik sorular questions 1 soru 15 high load serviste neye bakarsin high load serviste neye bakarsin kisa ve net amac sistem nerede boguluyor tek noktayi bulurum her seye bakip her sey kotu demek kolay ama ise yaramaz 1 once semptomu netlestiririm yavas mi latency cokuyor mu error rate calisiyor ama agir mi throughput ne cozmeye calistigimi bilirim 2 latency breakdown request nerede zaman harciyor controller service db external api bunu tracing jaeger ile izlerim 3 cpu vs io ayrimi cpu 100 ise compute problem algoritma kotu serialization agir loop parsing cpu dusuk ama yavas ise io problem db network external api 4 thread pool thread dolu mu queue buyuyor mu doluysa request bekler latency artar 5 db cogu zaman asil suclu burasi slow query var mi index var mi connection pool dolu mu lock deadlock var mi 6 external dependency baska servis yavas mi timeout var mi retry var mi circuit breaker var mi 7 cache hit rate dusuk mu db ye gereksiz yuk gidiyor olabilir 8 memory gc gc pause yuksek mi heap doluyor mu buradan latency spike gelir 9 error rate 5xx artmis mi timeout artmis mi sistem limite gelmis olabilir 10 load distribution bazi pod lar 90 cpu bazilari bos load balancer veya scaling sorunu olabilir gercek mental model 1 nerede yavas 2 neden yavas 3 o katmani duzelt en buyuk hata her seyi optimize etmeye calismak cache ekleyelim thread artir db degistir once problem nerede onu bulurum tek cumle high load serviste once latency nin nerede olustugunu tespit eder ardindan cpu thread pool db ve external call lar uzerinden gercek darbozagi hedefleyerek cozerim kisa gercek 90 vakada sorun db dir geri kalan 10 yanlis thread veya external call dur"
     },
     {
       "id": "question:questions:mixed-questions:mixed-questions-1:i1-q16",
@@ -4931,7 +4931,7 @@
       "title": "Agile ortamda rolun neydi?",
       "meta": "Questions / Karisik Sorular / Questions-1 / Soru 17",
       "url": "/interview.html?category=questions&subcategory=mixed-questions&interview=mixed-questions-1&question=i1-q17",
-      "search": "questions karisik sorular questions 1 soru 17 agile ortamda rolun neydi agile ortamda rolun neydi agile deneyimi sadece meeting isimleriyle degil uretilen katki ile anlatilir refinementlarda teknik riskleri gorunur kilmak tahmine katki vermek sprintte blockerlarin erken yonetimi ve code review test kalitesi production readiness tarafinda aktif rol almak vurgulanir yani agile bir seremoni listesi degil hizli geri bildirimle kaliteli teslimat seklidir rolunu net sorumluluklar ve orneklerle anlatmak gerekir"
+      "search": "questions karisik sorular questions 1 soru 17 agile ortamda rolun neydi agile ortamda rolun neydi kisa ve net rolum backend developer olarak aktif takim uyesiydim ama sadece kod yazan biri degildim ne yapiyordum 1 development feature gelistirme bug fix api tasarimi 2 sprint sureci aktif katilim sagliyordum planning task kirma estimation daily blocker paylasma review yaptigimiz isi demo etme retro neyi iyilestirelim 3 teknik sorumluluk code review refactoring performans iyilestirme test yazma 4 takim ici iletisim frontend ile api konusma qa ile test senaryosu product ile requirement netlestirme 5 ownership sadece task bitirdim degil prod issue takip log metric bakma sorunu cozene kadar sahiplenme guclu mulakat cumlesi agile ortamda sadece gelistirme degil sprint sureclerine aktif katildim teknik kararlar aldim ve gelistirdigim feature larin production daki davranisindan da sorumlu oldum tek cumle agile da rolum sadece kod yazmak degil sprint sureclerine aktif katilan ve gelistirdigi isin uctan uca sorumlulugunu alan backend developer olmakti kisa gercek agile da rol title degil ne kadar sorumluluk aldigin"
     },
     {
       "id": "question:questions:mixed-questions:mixed-questions-1:i1-q18",
@@ -4947,7 +4947,7 @@
       "title": "Prod hatasini nasil debug ettin?",
       "meta": "Questions / Karisik Sorular / Questions-1 / Soru 19",
       "url": "/interview.html?category=questions&subcategory=mixed-questions&interview=mixed-questions-1&question=i1-q19",
-      "search": "questions karisik sorular questions 1 soru 19 prod hatasini nasil debug ettin prod hatasini nasil debug ettin production issue debugunda once etki alanini daraltirim log metric trace deploy farki config degisikligi db durumu external dependency ve son release degisikliklerine bakarim hangi kosulda oldugu ne zamandir oldugu herkesi mi etkiledigi gibi sorularla sorunu sinirlarim gerekirse kontrollu hotfix uygular sonrasinda kalici cozum icin root cause analizi cikaririm"
+      "search": "questions karisik sorular questions 1 soru 19 prod hatasini nasil debug ettin prod hatasini nasil debug ettin kisa ve net problem prod da endpoint yavas timeout local de sorun yok klasik kabus 1 once panik yapmam veri bakarim logs metrics latency error rate tracing nerede yavasladigini bulurum 2 trace ile dar bogazi bulurum controller service db 2 5s burada db call yavas 3 db tarafina inerim slow query log explain gordugum seyler index yok full scan 4 fix index ekledim query sadelestirdim 5 sonuc once 2 5s sonra 40ms alternatif senaryolar thread pool dolu config fix external api yavas timeout fallback gc spike memory tuning n 1 join fetch debug yaklasimi 1 olc log metric trace 2 dar bogazi bul 3 sadece orayi duzelt 4 tekrar olc yapmadigim seyler kor log ekleme tahminle fix belki budur yaklasimi tek cumle prod hatasinda once log metric ve tracing ile darbozagi tespit edip problemi izole ederek hedefli sekilde cozdum kisa gercek prod debug dedektifliktir tahmin eden degil kanit bulan kazanir"
     },
     {
       "id": "question:questions:mixed-questions:mixed-questions-1:i1-q20",
@@ -5099,7 +5099,7 @@
       "title": "Parallel stream kullanir misin?",
       "meta": "Questions / Karisik Sorular / Questions-2 / Soru 18",
       "url": "/interview.html?category=questions&subcategory=mixed-questions&interview=mixed-questions-2&question=i2-q18",
-      "search": "questions karisik sorular questions 2 soru 18 parallel stream kullanir misin parallel stream kullanir misin beklenen cevap mantigi her yerde kullanilmaz yanlis kullanim zarar verebilir guclu cevap parallel streami otomatik performans cozumlu olarak gormem cpu bound ve bagimsiz islemlerde yeterli veri hacminde fayda saglayabilir shared state io bound isler thread pool kontrolu gereken alanlar veya request threadi icinde gelisiguzel kullanim risklidir once olcmeden parallel stream tercih etmem"
+      "search": "questions karisik sorular questions 2 soru 18 parallel stream kullanir misin parallel stream kullanir misin kisa ve net ne zaman kullanirim cpu bound bagimsiz isler varsa buyuk liste her eleman agir islem yapiyorsa shared state yoksa list parallelstream map this heavycalculation tolist paralel fayda saglayabilir ne zaman kullanmam i o varsa db api cagrisi kucuk dataset side effect varsa thread kontrolu onemliyse cogu gercek sistemde bu durumlar vardir neden dikkatli kontrol sende degil forkjoinpool debug zor thread starvation olabilir performans bazen daha kotu olur alternatif daha kontrollu cozum completablefuture custom thread pool tek cumle parallel stream i sadece cpu yogun ve bagimsiz islemlerde kullanirim i o ve kontrol gerektiren durumlarda tercih etmem kisa gercek parallel stream hizli olabilir ama yanlis yerde yavaslatir"
     },
     {
       "id": "question:questions:mixed-questions:mixed-questions-2:i2-q19",
