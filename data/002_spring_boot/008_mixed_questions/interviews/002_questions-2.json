@@ -174,7 +174,7 @@
       "questionKind": "direct",
       "question": "ExecutorService veya async processing ne zaman gerekir?",
       "starterCode": "",
-      "answerBody": "Beklenen cevap mantigi: Uzun suren veya bagimsiz isleri ana request akisindan ayirmak icin gerekir. Guclu cevap: Eposta gonderimi, rapor hazirlama, dis sistem cagrisi sonrasi yan etkiler gibi isleri response suresinden ayirmak icin async yaklasim uygundur. Ancak async tek basina cozum degildir; thread pool boyutu, backpressure, retry, hata yonetimi ve gozlemlenebilirlik birlikte tasarlanmalidir.",
+      "answerBody": "Kisa ve net:\n\nNe zaman gerekir?\n- isi bekletmeden devam etmek istiyorsam\n- paralel is yapacaksam\n\n1) Async processing (en yaygin)\nKullaniciyi bekletmemek icin.\n- email gonder\n- log yaz\n- pdf olustur\n\n@Async\nsendEmail();\n\nResponse hizli doner, is arkada calisir.\n\n2) Parallel processing\nBagimsiz isleri ayni anda yapmak icin.\n\nexecutor.submit(() -> callServiceA());\nexecutor.submit(() -> callServiceB());\n\nToplam sure duser.\n\n3) IO-bound islerde\n- DB cagrisI\n- API cagrisI\nBekleme suresi vardir, paralel yapilabilir.\n\n4) Queue / background job\nAgir isler icin.\n- video isleme\n- rapor uretme\n\nNe zaman kullanmam?\n- basit islem\n- kisa suren is\n- kontrolsuz thread acmak\n\nRiskler\n- thread leak\n- pool dolmasi\n- exception kaybolmasi\n\nKisa fark\nExecutorService -> kontrol yuksek\nAsync -> kolay ama daha az kontrol\n\nTek cumle\nExecutorService veya async processing, kullaniciyi bekletmemek ve bagimsiz isleri paralel calistirmak gerektiginde kullanilir.\n\nKisa gercek:\nAsync dogru yerde hiz, yanlis yerde kaos.",
       "answerCode": ""
     },
     {
@@ -183,7 +183,7 @@
       "questionKind": "direct",
       "question": "@Async kullanirken nelere dikkat edersin?",
       "starterCode": "",
-      "answerBody": "Beklenen cevap mantigi: Proxy, thread pool, exception handling ve context propagation kritiktir. Guclu cevap: @Async proxy tabanli oldugu icin self invocation problemi yasayabilir. Default executor yerine cogu zaman ozel thread pool tanimlamak daha dogrudur. Security context, MDC ve tracing context bilgisinin yeni threade tasinmasi kontrol edilmelidir. Async hatalari sessiz kaybolmamali, hata yonetimi ve gozlemlenebilirlik net kurulmalidir.",
+      "answerBody": "Kisa ve net:\n\n1) Method gercekten async mi?\nAyni class icinde cagirdiginda calismaz.\nthis.sendEmail(); // async olmaz\nBaska bean uzerinden cagirmak gerekir.\n\n2) Thread pool kontrolu\nDefault kullanmam.\n@Async(\"customExecutor\")\nThread sayisini kontrol ederim; yoksa sistem sisebilir.\n\n3) Exception kaybolur\n@Async\npublic void send() { throw new RuntimeException(); }\nBu durumda exception kolayca kaybolabilir.\nCozum:\n- try-catch\n- CompletableFuture kullan\n\n4) Transaction problemi\n@Transactional async ile bekledigin gibi tasinmaz.\nAyri transaction acmak gerekir.\n\n5) ThreadLocal / Security context\nTasinmaz.\n- user bilgisi kaybolur\n- request context yok olur\nManuel tasimak gerekir.\n\n6) Return tipi\nOnerilen: CompletableFuture<T>\n\n7) Uzun islerde dikkat\nCok async job -> thread pool dolar.\nSistem kitlenebilir.\n\n8) Logging / tracing\nAsync is kaybolmasin diye:\n- traceId tasi\n- log ekle\n\nTek cumle\n@Async kullanirken thread pool, exception handling, transaction ve context propagation konularina dikkat ederim.\n\nKisa gercek:\n@Async kolay baslar ama kontrol etmezsen production'da seni uzmeye baslar.",
       "answerCode": ""
     }
   ]
