@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategories": [
+    {
+      "id": "a1-genel-romence",
+      "title": "A1 - Baslangic",
+      "description": "Genel Romence - baslangic seviyesi",
+      "order": 1,
+      "folder": "001_a1_genel_romence",
+      "interviewCount": 0
+    },
+    {
+      "id": "a2-genel-romence",
+      "title": "A2 - Temel",
+      "description": "Genel Romence - temel seviye",
+      "order": 2,
+      "folder": "002_a2_genel_romence",
+      "interviewCount": 0
+    },
+    {
+      "id": "b1-genel-romence",
+      "title": "B1 - Orta",
+      "description": "Genel Romence - orta seviye",
+      "order": 3,
+      "folder": "003_b1_genel_romence",
+      "interviewCount": 0
+    },
+    {
+      "id": "b2-genel-romence",
+      "title": "B2 - Orta Ustu",
+      "description": "Genel Romence - orta ustu seviye",
+      "order": 4,
+      "folder": "004_b2_genel_romence",
+      "interviewCount": 0
+    },
+    {
+      "id": "c1-genel-romence",
+      "title": "C1 - Ileri",
+      "description": "Genel Romence - ileri seviye",
+      "order": 5,
+      "folder": "005_c1_genel_romence",
+      "interviewCount": 0
+    },
+    {
+      "id": "c2-genel-romence",
+      "title": "C2 - Ana Diline Yakin / Ustalik",
+      "description": "Genel Romence - ustalik seviyesi",
+      "order": 6,
+      "folder": "006_c2_genel_romence",
+      "interviewCount": 0
+    }
+  ]
+}

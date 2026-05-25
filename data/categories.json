@@ -27,6 +27,15 @@
       "folder": "003_questions",
       "subcategoryCount": 3,
       "subcategoriesFile": "/data/003_questions/subcategories.json"
+    },
+    {
+      "id": "romanian",
+      "title": "Romence",
+      "description": "A1'den C2'ye genel Romence ogrenme kategorileri",
+      "order": 4,
+      "folder": "004_romanian",
+      "subcategoryCount": 6,
+      "subcategoriesFile": "/data/004_romanian/subcategories.json"
     }
   ]
 }
