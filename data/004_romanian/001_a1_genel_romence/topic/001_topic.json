@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategoryId": "a1-genel-romence",
+  "id": "a1-genel-romence-topic",
+  "title": "A1 Genel Romence - Makale",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "A1 seviyesi Romenceye ilk adimdir. Bu seviyede amac uzun cumleler kurmak degil, gunluk hayatta en cok duyulan kaliplari tanimak ve basit cevaplar verebilmektir."
+    },
+    {
+      "type": "paragraph",
+      "text": "Selamlasma, kendini tanitma, sayilar, gunler, temel fiiller ve kisa diyaloglar bu seviyenin merkezindedir. Ogrenci once kaliplari duyar, tekrar eder ve sonra kendi bilgisiyle kucuk degisiklikler yapar."
+    }
+  ]
+}

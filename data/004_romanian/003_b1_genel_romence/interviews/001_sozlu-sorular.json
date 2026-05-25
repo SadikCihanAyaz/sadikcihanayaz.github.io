@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategoryId": "b1-genel-romence",
+  "id": "b1-genel-romence-sozlu-1",
+  "title": "B1 Genel Romence - Sozlu Sorular",
+  "description": "Orta seviye icin 5 acik-uclu sozlu soru",
+  "questions": [
+    {
+      "id": "b1-q1",
+      "type": "direct",
+      "question": "Romence ogrenme nedenini ve hedefini anlat."
+    },
+    {
+      "id": "b1-q2",
+      "type": "direct",
+      "question": "Yasadigin sehirde sevdigin ve sevmedigin seyleri acikla."
+    },
+    {
+      "id": "b1-q3",
+      "type": "direct",
+      "question": "Bir problem yasadiginda yardim istemek icin nasil konusursun?"
+    },
+    {
+      "id": "b1-q4",
+      "type": "direct",
+      "question": "Son izledigin film veya okudugun kitap hakkinda kisa yorum yap."
+    },
+    {
+      "id": "b1-q5",
+      "type": "direct",
+      "question": "Gelecek ay icin planlarini Romence anlat."
+    }
+  ]
+}

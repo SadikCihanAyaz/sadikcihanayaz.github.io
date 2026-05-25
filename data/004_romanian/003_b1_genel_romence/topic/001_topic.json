@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategoryId": "b1-genel-romence",
+  "id": "b1-genel-romence-topic",
+  "title": "B1 Genel Romence - Makale",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "B1 seviyesi bagimsiz kullanima gecis seviyesidir. Ogrenci artik tanidik konularda daha uzun konusabilir, fikir belirtebilir ve basit gerekceler sunabilir."
+    },
+    {
+      "type": "paragraph",
+      "text": "Bu seviyede anlatim akisi onem kazanir. Sadece dogru kelimeyi bilmek yetmez; olaylari siraya koymak, sebep-sonuc kurmak ve konusmayi devam ettirmek gerekir."
+    }
+  ]
+}

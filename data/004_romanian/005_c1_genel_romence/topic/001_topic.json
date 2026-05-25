@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategoryId": "c1-genel-romence",
+  "id": "c1-genel-romence-topic",
+  "title": "C1 Genel Romence - Makale",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "C1 seviyesi ileri ifade becerisi gerektirir. Ogrenci soyut konulari, profesyonel durumlari ve karmasik dusunceleri daha dogal bir akista anlatabilir."
+    },
+    {
+      "type": "paragraph",
+      "text": "Bu seviyede amac yalnizca anlasilmak degil, dogru uslubu secmektir. Resmi, akademik, gunluk ve ikna edici dil arasinda gecis yapabilmek onemli hale gelir."
+    }
+  ]
+}

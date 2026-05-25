@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategoryId": "b2-genel-romence",
+  "interviews": [
+    {
+      "id": "b2-genel-romence-sozlu-1",
+      "title": "B2 Genel Romence - Sozlu Sorular",
+      "description": "Orta ustu seviye icin 5 acik-uclu sozlu soru",
+      "order": 1,
+      "questionCount": 5,
+      "file": "/data/004_romanian/004_b2_genel_romence/interviews/001_sozlu-sorular.json"
+    }
+  ]
+}

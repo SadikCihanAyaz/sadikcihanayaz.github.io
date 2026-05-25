@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategoryId": "c1-genel-romence",
+  "interviews": [
+    {
+      "id": "c1-genel-romence-sozlu-1",
+      "title": "C1 Genel Romence - Sozlu Sorular",
+      "description": "Ileri seviye icin 5 acik-uclu sozlu soru",
+      "order": 1,
+      "questionCount": 5,
+      "file": "/data/004_romanian/005_c1_genel_romence/interviews/001_sozlu-sorular.json"
+    }
+  ]
+}

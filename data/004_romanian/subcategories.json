@@ -8,7 +8,9 @@
       "description": "Genel Romence - baslangic seviyesi",
       "order": 1,
       "folder": "001_a1_genel_romence",
-      "interviewCount": 0
+      "topicFile": "/data/004_romanian/001_a1_genel_romence/topic/001_topic.json",
+      "interviewsFile": "/data/004_romanian/001_a1_genel_romence/interviews/index.json",
+      "interviewCount": 1
     },
     {
       "id": "a2-genel-romence",
@@ -16,7 +18,9 @@
       "description": "Genel Romence - temel seviye",
       "order": 2,
       "folder": "002_a2_genel_romence",
-      "interviewCount": 0
+      "topicFile": "/data/004_romanian/002_a2_genel_romence/topic/001_topic.json",
+      "interviewsFile": "/data/004_romanian/002_a2_genel_romence/interviews/index.json",
+      "interviewCount": 1
     },
     {
       "id": "b1-genel-romence",
@@ -24,7 +28,9 @@
       "description": "Genel Romence - orta seviye",
       "order": 3,
       "folder": "003_b1_genel_romence",
-      "interviewCount": 0
+      "topicFile": "/data/004_romanian/003_b1_genel_romence/topic/001_topic.json",
+      "interviewsFile": "/data/004_romanian/003_b1_genel_romence/interviews/index.json",
+      "interviewCount": 1
     },
     {
       "id": "b2-genel-romence",
@@ -32,7 +38,9 @@
       "description": "Genel Romence - orta ustu seviye",
       "order": 4,
       "folder": "004_b2_genel_romence",
-      "interviewCount": 0
+      "topicFile": "/data/004_romanian/004_b2_genel_romence/topic/001_topic.json",
+      "interviewsFile": "/data/004_romanian/004_b2_genel_romence/interviews/index.json",
+      "interviewCount": 1
     },
     {
       "id": "c1-genel-romence",
@@ -40,7 +48,9 @@
       "description": "Genel Romence - ileri seviye",
       "order": 5,
       "folder": "005_c1_genel_romence",
-      "interviewCount": 0
+      "topicFile": "/data/004_romanian/005_c1_genel_romence/topic/001_topic.json",
+      "interviewsFile": "/data/004_romanian/005_c1_genel_romence/interviews/index.json",
+      "interviewCount": 1
     },
     {
       "id": "c2-genel-romence",
@@ -48,7 +58,9 @@
       "description": "Genel Romence - ustalik seviyesi",
       "order": 6,
       "folder": "006_c2_genel_romence",
-      "interviewCount": 0
+      "topicFile": "/data/004_romanian/006_c2_genel_romence/topic/001_topic.json",
+      "interviewsFile": "/data/004_romanian/006_c2_genel_romence/interviews/index.json",
+      "interviewCount": 1
     }
   ]
 }

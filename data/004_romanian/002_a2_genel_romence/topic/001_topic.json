@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategoryId": "a2-genel-romence",
+  "id": "a2-genel-romence-topic",
+  "title": "A2 Genel Romence - Makale",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "A2 seviyesinde ogrenci artik basit gunluk konularda daha rahat iletisim kurmaya baslar. Alisveris, yol tarifi, aile, is, okul ve rutinler gibi tanidik konular uzerinden cumleler kurulur."
+    },
+    {
+      "type": "paragraph",
+      "text": "Bu seviyede hedef, ezberlenen kaliplari kisisellestirmektir. Ogrenci sadece cevap vermekle kalmaz, kisa sorular sorabilir ve temel zaman ifadeleriyle gecmis ya da planlanan olaylari anlatabilir."
+    }
+  ]
+}

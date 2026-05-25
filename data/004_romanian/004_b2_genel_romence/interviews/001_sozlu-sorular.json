@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategoryId": "b2-genel-romence",
+  "id": "b2-genel-romence-sozlu-1",
+  "title": "B2 Genel Romence - Sozlu Sorular",
+  "description": "Orta ustu seviye icin 5 acik-uclu sozlu soru",
+  "questions": [
+    {
+      "id": "b2-q1",
+      "type": "direct",
+      "question": "Romence ogrenmenin kariyer ve sosyal hayat acisindan avantajlarini tartis."
+    },
+    {
+      "id": "b2-q2",
+      "type": "direct",
+      "question": "Uzaktan calisma ile ofisten calismayi karsilastir."
+    },
+    {
+      "id": "b2-q3",
+      "type": "direct",
+      "question": "Bir gorusu savunurken hangi ornekleri kullanirsin?"
+    },
+    {
+      "id": "b2-q4",
+      "type": "direct",
+      "question": "Romence konusurken yaptigin yaygin hatalari ve bunlari nasil duzelttigini anlat."
+    },
+    {
+      "id": "b2-q5",
+      "type": "direct",
+      "question": "Bir tartismada kibarca fikir ayriligini nasil ifade edersin?"
+    }
+  ]
+}
