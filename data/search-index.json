@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-14T07:29:16.838Z",
+  "generatedAt": "2026-05-25T11:25:22.344Z",
   "minChars": 4,
   "maxResults": 30,
-  "totalItems": 825,
+  "totalItems": 861,
   "items": [
     {
       "id": "topic:java:threads",
@@ -6604,6 +6604,294 @@
       "meta": "Questions / Temel Java / Temel Java - 6 / Soru 2",
       "url": "/interview.html?category=questions&subcategory=temel-java&interview=temel-java-6&question=q2",
       "search": "questions temel java temel java 6 soru 2 factory builder strategy observer decorator adapter template method ve proxy pattern lerinden birkacini karsilastirarak anlatir misin hangi problemde hangisi daha uygundur ve neden factory builder strategy observer decorator adapter template method ve proxy pattern lerinden birkacini karsilastirarak anlatir misin hangi problemde hangisi daha uygundur ve neden 1 factory ne ise yarar object olusturma isini merkezi hale getirir yani hangi class uretilecek kararini ben tek yerde vereyim ne zaman uygundur hangi nesnenin uretilecegi kosula bagliysa new islemini her yere yaymak istemiyorsan object creation mantigini saklamak istiyorsan ornek java interface payment void pay class creditcardpayment implements payment public void pay system out println paid by credit card class cashpayment implements payment public void pay system out println paid by cash class paymentfactory public static payment create string type if card equals type return new creditcardpayment if cash equals type return new cashpayment throw new illegalargumentexception unknown payment type public class main public static void main string args payment payment paymentfactory create card payment pay basit mantik factory der ki nesneyi sen newleme ben uretirim 2 builder ne ise yarar cok parametreli veya karmasik nesneleri adim adim olusturur ne zaman uygundur constructor cok uzunsa bazi alanlar optional ise okunabilir nesne olusturmak istiyorsan ornek java class user private string name private int age private string email private user builder builder this name builder name this age builder age this email builder email public static class builder private string name private int age private string email public builder name string name this name name return this public builder age int age this age age return this public builder email string email this email email return this public user build return new user this override public string tostring return name age email public class main public static void main string args user user new user builder name ali age 30 email ali example com build system out println user basit mantik builder der ki karmasik nesneyi tek constructor a bogma adim adim kur 3 strategy ne ise yarar bir isi yapmanin farkli yollarini ayri class lara koyar ne zaman uygundur ayni is icin birden fazla algoritma varsa if else zinciri buyuyorsa davranis runtime da degisebilecekse ornek java interface paymentstrategy void pay int amount class creditcardstrategy implements paymentstrategy public void pay int amount system out println paid amount by credit card class paypalstrategy implements paymentstrategy public void pay int amount system out println paid amount by paypal class paymentservice private paymentstrategy strategy public paymentservice paymentstrategy strategy this strategy strategy public void process int amount strategy pay amount public class main public static void main string args paymentservice service1 new paymentservice new creditcardstrategy service1 process 100 paymentservice service2 new paymentservice new paypalstrategy service2 process 200 basit mantik strategy der ki algoritmayi disari al gerektiginde degistir 4 observer ne ise yarar bir nesnede degisiklik olunca digerlerini haberdar eder ne zaman uygundur event sistemi kuruyorsan bir degisiklikten birden fazla parca etkilenecekse gevsek bagli bildirim sistemi istiyorsan ornek java import java util arraylist import java util list interface observer void update string message class mobileobserver implements observer public void update string message system out println mobile received message class emailobserver implements observer public void update string message system out println email received message class notificationservice private list observer observers new arraylist public void addobserver observer observer observers add observer public void notifyallobservers string message for ob"
+    },
+    {
+      "id": "topic:romanian:a1-genel-romence",
+      "kind": "topic",
+      "title": "A1 Genel Romence - Makale",
+      "meta": "Romence / A1 - Baslangic / Konu",
+      "url": "/learn.html?category=romanian&subcategory=a1-genel-romence&view=topic",
+      "search": "romence a1 baslangic genel romence baslangic seviyesi a1 genel romence makale a1 genel romence makale a1 seviyesi romenceye ilk adimdir bu seviyede amac uzun cumleler kurmak degil gunluk hayatta en cok duyulan kaliplari tanimak ve basit cevaplar verebilmektir selamlasma kendini tanitma sayilar gunler temel fiiller ve kisa diyaloglar bu seviyenin merkezindedir ogrenci once kaliplari duyar tekrar eder ve sonra kendi bilgisiyle kucuk degisiklikler yapar"
+    },
+    {
+      "id": "question:romanian:a1-genel-romence:a1-genel-romence-sozlu-1:a1-q1",
+      "kind": "question",
+      "title": "Romence kendini nasil tanitirsin?",
+      "meta": "Romence / A1 - Baslangic / A1 Genel Romence - Sozlu Sorular / Soru 1",
+      "url": "/interview.html?category=romanian&subcategory=a1-genel-romence&interview=a1-genel-romence-sozlu-1&question=a1-q1",
+      "search": "romence a1 baslangic a1 genel romence sozlu sorular soru 1 romence kendini nasil tanitirsin romence kendini nasil tanitirsin"
+    },
+    {
+      "id": "question:romanian:a1-genel-romence:a1-genel-romence-sozlu-1:a1-q2",
+      "kind": "question",
+      "title": "Birine Romence nasil selam verip halini sorarsin?",
+      "meta": "Romence / A1 - Baslangic / A1 Genel Romence - Sozlu Sorular / Soru 2",
+      "url": "/interview.html?category=romanian&subcategory=a1-genel-romence&interview=a1-genel-romence-sozlu-1&question=a1-q2",
+      "search": "romence a1 baslangic a1 genel romence sozlu sorular soru 2 birine romence nasil selam verip halini sorarsin birine romence nasil selam verip halini sorarsin"
+    },
+    {
+      "id": "question:romanian:a1-genel-romence:a1-genel-romence-sozlu-1:a1-q3",
+      "kind": "question",
+      "title": "Adini, yasini ve nereli oldugunu basit cumlelerle anlat.",
+      "meta": "Romence / A1 - Baslangic / A1 Genel Romence - Sozlu Sorular / Soru 3",
+      "url": "/interview.html?category=romanian&subcategory=a1-genel-romence&interview=a1-genel-romence-sozlu-1&question=a1-q3",
+      "search": "romence a1 baslangic a1 genel romence sozlu sorular soru 3 adini yasini ve nereli oldugunu basit cumlelerle anlat adini yasini ve nereli oldugunu basit cumlelerle anlat"
+    },
+    {
+      "id": "question:romanian:a1-genel-romence:a1-genel-romence-sozlu-1:a1-q4",
+      "kind": "question",
+      "title": "Gunluk hayatta en cok kullanacagin 5 Romence kelimeyi soyle.",
+      "meta": "Romence / A1 - Baslangic / A1 Genel Romence - Sozlu Sorular / Soru 4",
+      "url": "/interview.html?category=romanian&subcategory=a1-genel-romence&interview=a1-genel-romence-sozlu-1&question=a1-q4",
+      "search": "romence a1 baslangic a1 genel romence sozlu sorular soru 4 gunluk hayatta en cok kullanacagin 5 romence kelimeyi soyle gunluk hayatta en cok kullanacagin 5 romence kelimeyi soyle"
+    },
+    {
+      "id": "question:romanian:a1-genel-romence:a1-genel-romence-sozlu-1:a1-q5",
+      "kind": "question",
+      "title": "Bir kafede su veya kahve istemek icin nasil bir cumle kurarsin?",
+      "meta": "Romence / A1 - Baslangic / A1 Genel Romence - Sozlu Sorular / Soru 5",
+      "url": "/interview.html?category=romanian&subcategory=a1-genel-romence&interview=a1-genel-romence-sozlu-1&question=a1-q5",
+      "search": "romence a1 baslangic a1 genel romence sozlu sorular soru 5 bir kafede su veya kahve istemek icin nasil bir cumle kurarsin bir kafede su veya kahve istemek icin nasil bir cumle kurarsin"
+    },
+    {
+      "id": "topic:romanian:a2-genel-romence",
+      "kind": "topic",
+      "title": "A2 Genel Romence - Makale",
+      "meta": "Romence / A2 - Temel / Konu",
+      "url": "/learn.html?category=romanian&subcategory=a2-genel-romence&view=topic",
+      "search": "romence a2 temel genel romence temel seviye a2 genel romence makale a2 genel romence makale a2 seviyesinde ogrenci artik basit gunluk konularda daha rahat iletisim kurmaya baslar alisveris yol tarifi aile is okul ve rutinler gibi tanidik konular uzerinden cumleler kurulur bu seviyede hedef ezberlenen kaliplari kisisellestirmektir ogrenci sadece cevap vermekle kalmaz kisa sorular sorabilir ve temel zaman ifadeleriyle gecmis ya da planlanan olaylari anlatabilir"
+    },
+    {
+      "id": "question:romanian:a2-genel-romence:a2-genel-romence-sozlu-1:a2-q1",
+      "kind": "question",
+      "title": "Gunluk rutinini Romence basit cumlelerle anlat.",
+      "meta": "Romence / A2 - Temel / A2 Genel Romence - Sozlu Sorular / Soru 1",
+      "url": "/interview.html?category=romanian&subcategory=a2-genel-romence&interview=a2-genel-romence-sozlu-1&question=a2-q1",
+      "search": "romence a2 temel a2 genel romence sozlu sorular soru 1 gunluk rutinini romence basit cumlelerle anlat gunluk rutinini romence basit cumlelerle anlat"
+    },
+    {
+      "id": "question:romanian:a2-genel-romence:a2-genel-romence-sozlu-1:a2-q2",
+      "kind": "question",
+      "title": "Bir markette ne almak istedigini nasil soylersin?",
+      "meta": "Romence / A2 - Temel / A2 Genel Romence - Sozlu Sorular / Soru 2",
+      "url": "/interview.html?category=romanian&subcategory=a2-genel-romence&interview=a2-genel-romence-sozlu-1&question=a2-q2",
+      "search": "romence a2 temel a2 genel romence sozlu sorular soru 2 bir markette ne almak istedigini nasil soylersin bir markette ne almak istedigini nasil soylersin"
+    },
+    {
+      "id": "question:romanian:a2-genel-romence:a2-genel-romence-sozlu-1:a2-q3",
+      "kind": "question",
+      "title": "Birine yol tarifini Romence nasil sorarsin?",
+      "meta": "Romence / A2 - Temel / A2 Genel Romence - Sozlu Sorular / Soru 3",
+      "url": "/interview.html?category=romanian&subcategory=a2-genel-romence&interview=a2-genel-romence-sozlu-1&question=a2-q3",
+      "search": "romence a2 temel a2 genel romence sozlu sorular soru 3 birine yol tarifini romence nasil sorarsin birine yol tarifini romence nasil sorarsin"
+    },
+    {
+      "id": "question:romanian:a2-genel-romence:a2-genel-romence-sozlu-1:a2-q4",
+      "kind": "question",
+      "title": "Gecen hafta yaptigin basit bir aktiviteyi anlat.",
+      "meta": "Romence / A2 - Temel / A2 Genel Romence - Sozlu Sorular / Soru 4",
+      "url": "/interview.html?category=romanian&subcategory=a2-genel-romence&interview=a2-genel-romence-sozlu-1&question=a2-q4",
+      "search": "romence a2 temel a2 genel romence sozlu sorular soru 4 gecen hafta yaptigin basit bir aktiviteyi anlat gecen hafta yaptigin basit bir aktiviteyi anlat"
+    },
+    {
+      "id": "question:romanian:a2-genel-romence:a2-genel-romence-sozlu-1:a2-q5",
+      "kind": "question",
+      "title": "Aileni veya yakin bir arkadasini kisa cumlelerle tanit.",
+      "meta": "Romence / A2 - Temel / A2 Genel Romence - Sozlu Sorular / Soru 5",
+      "url": "/interview.html?category=romanian&subcategory=a2-genel-romence&interview=a2-genel-romence-sozlu-1&question=a2-q5",
+      "search": "romence a2 temel a2 genel romence sozlu sorular soru 5 aileni veya yakin bir arkadasini kisa cumlelerle tanit aileni veya yakin bir arkadasini kisa cumlelerle tanit"
+    },
+    {
+      "id": "topic:romanian:b1-genel-romence",
+      "kind": "topic",
+      "title": "B1 Genel Romence - Makale",
+      "meta": "Romence / B1 - Orta / Konu",
+      "url": "/learn.html?category=romanian&subcategory=b1-genel-romence&view=topic",
+      "search": "romence b1 orta genel romence orta seviye b1 genel romence makale b1 genel romence makale b1 seviyesi bagimsiz kullanima gecis seviyesidir ogrenci artik tanidik konularda daha uzun konusabilir fikir belirtebilir ve basit gerekceler sunabilir bu seviyede anlatim akisi onem kazanir sadece dogru kelimeyi bilmek yetmez olaylari siraya koymak sebep sonuc kurmak ve konusmayi devam ettirmek gerekir"
+    },
+    {
+      "id": "question:romanian:b1-genel-romence:b1-genel-romence-sozlu-1:b1-q1",
+      "kind": "question",
+      "title": "Romence ogrenme nedenini ve hedefini anlat.",
+      "meta": "Romence / B1 - Orta / B1 Genel Romence - Sozlu Sorular / Soru 1",
+      "url": "/interview.html?category=romanian&subcategory=b1-genel-romence&interview=b1-genel-romence-sozlu-1&question=b1-q1",
+      "search": "romence b1 orta b1 genel romence sozlu sorular soru 1 romence ogrenme nedenini ve hedefini anlat romence ogrenme nedenini ve hedefini anlat"
+    },
+    {
+      "id": "question:romanian:b1-genel-romence:b1-genel-romence-sozlu-1:b1-q2",
+      "kind": "question",
+      "title": "Yasadigin sehirde sevdigin ve sevmedigin seyleri acikla.",
+      "meta": "Romence / B1 - Orta / B1 Genel Romence - Sozlu Sorular / Soru 2",
+      "url": "/interview.html?category=romanian&subcategory=b1-genel-romence&interview=b1-genel-romence-sozlu-1&question=b1-q2",
+      "search": "romence b1 orta b1 genel romence sozlu sorular soru 2 yasadigin sehirde sevdigin ve sevmedigin seyleri acikla yasadigin sehirde sevdigin ve sevmedigin seyleri acikla"
+    },
+    {
+      "id": "question:romanian:b1-genel-romence:b1-genel-romence-sozlu-1:b1-q3",
+      "kind": "question",
+      "title": "Bir problem yasadiginda yardim istemek icin nasil konusursun?",
+      "meta": "Romence / B1 - Orta / B1 Genel Romence - Sozlu Sorular / Soru 3",
+      "url": "/interview.html?category=romanian&subcategory=b1-genel-romence&interview=b1-genel-romence-sozlu-1&question=b1-q3",
+      "search": "romence b1 orta b1 genel romence sozlu sorular soru 3 bir problem yasadiginda yardim istemek icin nasil konusursun bir problem yasadiginda yardim istemek icin nasil konusursun"
+    },
+    {
+      "id": "question:romanian:b1-genel-romence:b1-genel-romence-sozlu-1:b1-q4",
+      "kind": "question",
+      "title": "Son izledigin film veya okudugun kitap hakkinda kisa yorum yap.",
+      "meta": "Romence / B1 - Orta / B1 Genel Romence - Sozlu Sorular / Soru 4",
+      "url": "/interview.html?category=romanian&subcategory=b1-genel-romence&interview=b1-genel-romence-sozlu-1&question=b1-q4",
+      "search": "romence b1 orta b1 genel romence sozlu sorular soru 4 son izledigin film veya okudugun kitap hakkinda kisa yorum yap son izledigin film veya okudugun kitap hakkinda kisa yorum yap"
+    },
+    {
+      "id": "question:romanian:b1-genel-romence:b1-genel-romence-sozlu-1:b1-q5",
+      "kind": "question",
+      "title": "Gelecek ay icin planlarini Romence anlat.",
+      "meta": "Romence / B1 - Orta / B1 Genel Romence - Sozlu Sorular / Soru 5",
+      "url": "/interview.html?category=romanian&subcategory=b1-genel-romence&interview=b1-genel-romence-sozlu-1&question=b1-q5",
+      "search": "romence b1 orta b1 genel romence sozlu sorular soru 5 gelecek ay icin planlarini romence anlat gelecek ay icin planlarini romence anlat"
+    },
+    {
+      "id": "topic:romanian:b2-genel-romence",
+      "kind": "topic",
+      "title": "B2 Genel Romence - Makale",
+      "meta": "Romence / B2 - Orta Ustu / Konu",
+      "url": "/learn.html?category=romanian&subcategory=b2-genel-romence&view=topic",
+      "search": "romence b2 orta ustu genel romence orta ustu seviye b2 genel romence makale b2 genel romence makale b2 seviyesi daha dogal ve ayrintili ifade kurma seviyesidir ogrenci farkli konularda dusuncesini savunabilir avantaj dezavantaj anlatabilir ve daha akici konusabilir bu asamada kelime hazinesi genisletilir ve cumleler daha esnek hale gelir konusmada yalnizca bilgi vermek degil ton vurgu ve ikna edici aciklama da onem kazanir"
+    },
+    {
+      "id": "question:romanian:b2-genel-romence:b2-genel-romence-sozlu-1:b2-q1",
+      "kind": "question",
+      "title": "Romence ogrenmenin kariyer ve sosyal hayat acisindan avantajlarini tartis.",
+      "meta": "Romence / B2 - Orta Ustu / B2 Genel Romence - Sozlu Sorular / Soru 1",
+      "url": "/interview.html?category=romanian&subcategory=b2-genel-romence&interview=b2-genel-romence-sozlu-1&question=b2-q1",
+      "search": "romence b2 orta ustu b2 genel romence sozlu sorular soru 1 romence ogrenmenin kariyer ve sosyal hayat acisindan avantajlarini tartis romence ogrenmenin kariyer ve sosyal hayat acisindan avantajlarini tartis"
+    },
+    {
+      "id": "question:romanian:b2-genel-romence:b2-genel-romence-sozlu-1:b2-q2",
+      "kind": "question",
+      "title": "Uzaktan calisma ile ofisten calismayi karsilastir.",
+      "meta": "Romence / B2 - Orta Ustu / B2 Genel Romence - Sozlu Sorular / Soru 2",
+      "url": "/interview.html?category=romanian&subcategory=b2-genel-romence&interview=b2-genel-romence-sozlu-1&question=b2-q2",
+      "search": "romence b2 orta ustu b2 genel romence sozlu sorular soru 2 uzaktan calisma ile ofisten calismayi karsilastir uzaktan calisma ile ofisten calismayi karsilastir"
+    },
+    {
+      "id": "question:romanian:b2-genel-romence:b2-genel-romence-sozlu-1:b2-q3",
+      "kind": "question",
+      "title": "Bir gorusu savunurken hangi ornekleri kullanirsin?",
+      "meta": "Romence / B2 - Orta Ustu / B2 Genel Romence - Sozlu Sorular / Soru 3",
+      "url": "/interview.html?category=romanian&subcategory=b2-genel-romence&interview=b2-genel-romence-sozlu-1&question=b2-q3",
+      "search": "romence b2 orta ustu b2 genel romence sozlu sorular soru 3 bir gorusu savunurken hangi ornekleri kullanirsin bir gorusu savunurken hangi ornekleri kullanirsin"
+    },
+    {
+      "id": "question:romanian:b2-genel-romence:b2-genel-romence-sozlu-1:b2-q4",
+      "kind": "question",
+      "title": "Romence konusurken yaptigin yaygin hatalari ve bunlari nasil duzelttigini anlat.",
+      "meta": "Romence / B2 - Orta Ustu / B2 Genel Romence - Sozlu Sorular / Soru 4",
+      "url": "/interview.html?category=romanian&subcategory=b2-genel-romence&interview=b2-genel-romence-sozlu-1&question=b2-q4",
+      "search": "romence b2 orta ustu b2 genel romence sozlu sorular soru 4 romence konusurken yaptigin yaygin hatalari ve bunlari nasil duzelttigini anlat romence konusurken yaptigin yaygin hatalari ve bunlari nasil duzelttigini anlat"
+    },
+    {
+      "id": "question:romanian:b2-genel-romence:b2-genel-romence-sozlu-1:b2-q5",
+      "kind": "question",
+      "title": "Bir tartismada kibarca fikir ayriligini nasil ifade edersin?",
+      "meta": "Romence / B2 - Orta Ustu / B2 Genel Romence - Sozlu Sorular / Soru 5",
+      "url": "/interview.html?category=romanian&subcategory=b2-genel-romence&interview=b2-genel-romence-sozlu-1&question=b2-q5",
+      "search": "romence b2 orta ustu b2 genel romence sozlu sorular soru 5 bir tartismada kibarca fikir ayriligini nasil ifade edersin bir tartismada kibarca fikir ayriligini nasil ifade edersin"
+    },
+    {
+      "id": "topic:romanian:c1-genel-romence",
+      "kind": "topic",
+      "title": "C1 Genel Romence - Makale",
+      "meta": "Romence / C1 - Ileri / Konu",
+      "url": "/learn.html?category=romanian&subcategory=c1-genel-romence&view=topic",
+      "search": "romence c1 ileri genel romence ileri seviye c1 genel romence makale c1 genel romence makale c1 seviyesi ileri ifade becerisi gerektirir ogrenci soyut konulari profesyonel durumlari ve karmasik dusunceleri daha dogal bir akista anlatabilir bu seviyede amac yalnizca anlasilmak degil dogru uslubu secmektir resmi akademik gunluk ve ikna edici dil arasinda gecis yapabilmek onemli hale gelir"
+    },
+    {
+      "id": "question:romanian:c1-genel-romence:c1-genel-romence-sozlu-1:c1-q1",
+      "kind": "question",
+      "title": "Dil ogrenmenin dusunme bicimini nasil etkiledigini tartis.",
+      "meta": "Romence / C1 - Ileri / C1 Genel Romence - Sozlu Sorular / Soru 1",
+      "url": "/interview.html?category=romanian&subcategory=c1-genel-romence&interview=c1-genel-romence-sozlu-1&question=c1-q1",
+      "search": "romence c1 ileri c1 genel romence sozlu sorular soru 1 dil ogrenmenin dusunme bicimini nasil etkiledigini tartis dil ogrenmenin dusunme bicimini nasil etkiledigini tartis"
+    },
+    {
+      "id": "question:romanian:c1-genel-romence:c1-genel-romence-sozlu-1:c1-q2",
+      "kind": "question",
+      "title": "Resmi bir ortamda kibar ama net bir talebi nasil ifade edersin?",
+      "meta": "Romence / C1 - Ileri / C1 Genel Romence - Sozlu Sorular / Soru 2",
+      "url": "/interview.html?category=romanian&subcategory=c1-genel-romence&interview=c1-genel-romence-sozlu-1&question=c1-q2",
+      "search": "romence c1 ileri c1 genel romence sozlu sorular soru 2 resmi bir ortamda kibar ama net bir talebi nasil ifade edersin resmi bir ortamda kibar ama net bir talebi nasil ifade edersin"
+    },
+    {
+      "id": "question:romanian:c1-genel-romence:c1-genel-romence-sozlu-1:c1-q3",
+      "kind": "question",
+      "title": "Romence bir konuda ikna edici bir arguman kurarken nasil bir yapi izlersin?",
+      "meta": "Romence / C1 - Ileri / C1 Genel Romence - Sozlu Sorular / Soru 3",
+      "url": "/interview.html?category=romanian&subcategory=c1-genel-romence&interview=c1-genel-romence-sozlu-1&question=c1-q3",
+      "search": "romence c1 ileri c1 genel romence sozlu sorular soru 3 romence bir konuda ikna edici bir arguman kurarken nasil bir yapi izlersin romence bir konuda ikna edici bir arguman kurarken nasil bir yapi izlersin"
+    },
+    {
+      "id": "question:romanian:c1-genel-romence:c1-genel-romence-sozlu-1:c1-q4",
+      "kind": "question",
+      "title": "Kulturel farkliliklarin iletisime etkisini Romence anlat.",
+      "meta": "Romence / C1 - Ileri / C1 Genel Romence - Sozlu Sorular / Soru 4",
+      "url": "/interview.html?category=romanian&subcategory=c1-genel-romence&interview=c1-genel-romence-sozlu-1&question=c1-q4",
+      "search": "romence c1 ileri c1 genel romence sozlu sorular soru 4 kulturel farkliliklarin iletisime etkisini romence anlat kulturel farkliliklarin iletisime etkisini romence anlat"
+    },
+    {
+      "id": "question:romanian:c1-genel-romence:c1-genel-romence-sozlu-1:c1-q5",
+      "kind": "question",
+      "title": "Karmasik bir problemi adim adim aciklamak icin nasil konusursun?",
+      "meta": "Romence / C1 - Ileri / C1 Genel Romence - Sozlu Sorular / Soru 5",
+      "url": "/interview.html?category=romanian&subcategory=c1-genel-romence&interview=c1-genel-romence-sozlu-1&question=c1-q5",
+      "search": "romence c1 ileri c1 genel romence sozlu sorular soru 5 karmasik bir problemi adim adim aciklamak icin nasil konusursun karmasik bir problemi adim adim aciklamak icin nasil konusursun"
+    },
+    {
+      "id": "topic:romanian:c2-genel-romence",
+      "kind": "topic",
+      "title": "C2 Genel Romence - Makale",
+      "meta": "Romence / C2 - Ana Diline Yakin / Ustalik / Konu",
+      "url": "/learn.html?category=romanian&subcategory=c2-genel-romence&view=topic",
+      "search": "romence c2 ana diline yakin ustalik genel romence ustalik seviyesi c2 genel romence makale c2 genel romence makale c2 seviyesi dile cok yuksek hakimiyet seviyesidir ogrenci farkli kaynaklardan gelen bilgiyi anlayabilir ozetleyebilir ve neredeyse ana dili gibi esnek bicimde ifade edebilir bu seviyede incelikler on plana cikar ima mizah stil vurgu ve baglama uygun kelime secimi hedef sadece dogru konusmak degil dogal ve etkili konusmaktir"
+    },
+    {
+      "id": "question:romanian:c2-genel-romence:c2-genel-romence-sozlu-1:c2-q1",
+      "kind": "question",
+      "title": "Ayni fikri gunluk, resmi ve akademik uslupla ayri ayri nasil ifade edersin?",
+      "meta": "Romence / C2 - Ana Diline Yakin / Ustalik / C2 Genel Romence - Sozlu Sorular / Soru 1",
+      "url": "/interview.html?category=romanian&subcategory=c2-genel-romence&interview=c2-genel-romence-sozlu-1&question=c2-q1",
+      "search": "romence c2 ana diline yakin ustalik c2 genel romence sozlu sorular soru 1 ayni fikri gunluk resmi ve akademik uslupla ayri ayri nasil ifade edersin ayni fikri gunluk resmi ve akademik uslupla ayri ayri nasil ifade edersin"
+    },
+    {
+      "id": "question:romanian:c2-genel-romence:c2-genel-romence-sozlu-1:c2-q2",
+      "kind": "question",
+      "title": "Bir metindeki ima ve alt anlami Romence nasil aciklarsin?",
+      "meta": "Romence / C2 - Ana Diline Yakin / Ustalik / C2 Genel Romence - Sozlu Sorular / Soru 2",
+      "url": "/interview.html?category=romanian&subcategory=c2-genel-romence&interview=c2-genel-romence-sozlu-1&question=c2-q2",
+      "search": "romence c2 ana diline yakin ustalik c2 genel romence sozlu sorular soru 2 bir metindeki ima ve alt anlami romence nasil aciklarsin bir metindeki ima ve alt anlami romence nasil aciklarsin"
+    },
+    {
+      "id": "question:romanian:c2-genel-romence:c2-genel-romence-sozlu-1:c2-q3",
+      "kind": "question",
+      "title": "Karmasik bir toplumsal konuyu dengeli bir dille tartis.",
+      "meta": "Romence / C2 - Ana Diline Yakin / Ustalik / C2 Genel Romence - Sozlu Sorular / Soru 3",
+      "url": "/interview.html?category=romanian&subcategory=c2-genel-romence&interview=c2-genel-romence-sozlu-1&question=c2-q3",
+      "search": "romence c2 ana diline yakin ustalik c2 genel romence sozlu sorular soru 3 karmasik bir toplumsal konuyu dengeli bir dille tartis karmasik bir toplumsal konuyu dengeli bir dille tartis"
+    },
+    {
+      "id": "question:romanian:c2-genel-romence:c2-genel-romence-sozlu-1:c2-q4",
+      "kind": "question",
+      "title": "Romence konusurken stil ve ton secimini nasil belirlersin?",
+      "meta": "Romence / C2 - Ana Diline Yakin / Ustalik / C2 Genel Romence - Sozlu Sorular / Soru 4",
+      "url": "/interview.html?category=romanian&subcategory=c2-genel-romence&interview=c2-genel-romence-sozlu-1&question=c2-q4",
+      "search": "romence c2 ana diline yakin ustalik c2 genel romence sozlu sorular soru 4 romence konusurken stil ve ton secimini nasil belirlersin romence konusurken stil ve ton secimini nasil belirlersin"
+    },
+    {
+      "id": "question:romanian:c2-genel-romence:c2-genel-romence-sozlu-1:c2-q5",
+      "kind": "question",
+      "title": "Uzun bir tartismayi kisa, net ve etkili bir sonuc paragrafina nasil baglarsin?",
+      "meta": "Romence / C2 - Ana Diline Yakin / Ustalik / C2 Genel Romence - Sozlu Sorular / Soru 5",
+      "url": "/interview.html?category=romanian&subcategory=c2-genel-romence&interview=c2-genel-romence-sozlu-1&question=c2-q5",
+      "search": "romence c2 ana diline yakin ustalik c2 genel romence sozlu sorular soru 5 uzun bir tartismayi kisa net ve etkili bir sonuc paragrafina nasil baglarsin uzun bir tartismayi kisa net ve etkili bir sonuc paragrafina nasil baglarsin"
     }
   ]
 }
