@@ -158,6 +158,19 @@
     return String(category?.id || '') !== 'questions';
   }
 
+  function isRomanianCategory(category) {
+    return String(category?.id || '') === 'romanian';
+  }
+
+  async function loadRomanianArticles(subcategory) {
+    if (!subcategory.articlesFile) {
+      throw new Error(`Romence seviyesi icin articlesFile eksik: ${subcategory.id}`);
+    }
+
+    const data = await fetchJson(subcategory.articlesFile);
+    return sortByOrder(data.articles || []);
+  }
+
   function renderCategoryList(categories) {
     setBreadcrumb([link('Ana Sayfa', '/learn.html')]);
     setTitle('Kategoriler', 'Bir kategori secerek devam et.');
@@ -199,18 +212,22 @@
       path: `/learn.html?${makeQuery({ category: category.id })}`
     });
 
+    const isRomanian = isRomanianCategory(category);
     const hasTopic = categoryHasTopic(category);
     const cards = subcategories.map((sub) => {
       const href = `/learn.html?${makeQuery({ category: category.id, subcategory: sub.id })}`;
+      const articleCount = sub.articleCount ?? 0;
       const interviewCount = sub.interviewCount ?? 0;
-      const metaText = hasTopic
-        ? `1 Konu anlatimi + ${esc(interviewCount)} interview`
-        : `${esc(interviewCount)} interview`;
+      const metaText = isRomanian
+        ? `${esc(articleCount)} makale`
+        : hasTopic
+          ? `1 Konu anlatimi + ${esc(interviewCount)} interview`
+          : `${esc(interviewCount)} interview`;
 
       return `
         <article class="card">
           <h3>${esc(sub.title)}</h3>
-          <p>${esc(sub.description || '')}</p>
+          ${isRomanian ? '' : `<p>${esc(sub.description || '')}</p>`}
           <div class="meta">${metaText}</div>
           <div class="actions">
             <a class="btn btn-primary" href="${href}">Gir</a>
@@ -220,6 +237,79 @@
     }).join('');
 
     els.app.innerHTML = `<div class="grid">${cards || '<p>Alt kategori bulunamadi.</p>'}</div>`;
+  }
+
+  function renderRomanianArticleList(category, subcategory, articles) {
+    setBreadcrumb([
+      link('Ana Sayfa', '/learn.html'),
+      link(category.title, `/learn.html?${makeQuery({ category: category.id })}`),
+      esc(subcategory.title)
+    ]);
+
+    setTitle(subcategory.title, 'Makale oku ve sozlu sorularla pratik yap.');
+    setSeo({
+      title: `${subcategory.title} Romence Makaleleri | Learning Hub`,
+      description: `${subcategory.title} seviyesinde Romence okuma ve sozlu pratik makaleleri.`,
+      path: `/learn.html?${makeQuery({ category: category.id, subcategory: subcategory.id })}`
+    });
+
+    const cards = articles.map((article) => {
+      const href = `/learn.html?${makeQuery({
+        category: category.id,
+        subcategory: subcategory.id,
+        article: article.id
+      })}`;
+
+      return `
+        <article class="card">
+          <h3>${esc(article.title)}</h3>
+          <div class="meta">${esc((article.paragraphs || []).length)} paragraf / ${esc((article.questions || []).length)} soru</div>
+          <div class="actions">
+            <a class="btn btn-primary" href="${href}">Oku</a>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    els.app.innerHTML = `<div class="grid">${cards || '<p>Makale bulunamadi.</p>'}</div>`;
+  }
+
+  function renderRomanianArticle(category, subcategory, article) {
+    setBreadcrumb([
+      link('Ana Sayfa', '/learn.html'),
+      link(category.title, `/learn.html?${makeQuery({ category: category.id })}`),
+      link(subcategory.title, `/learn.html?${makeQuery({ category: category.id, subcategory: subcategory.id })}`),
+      esc(article.title)
+    ]);
+
+    setTitle(article.title, subcategory.title);
+    setSeo({
+      title: `${article.title} | ${subcategory.title} Romence`,
+      description: `${subcategory.title} seviyesinde Romence makale ve sozlu sorular.`,
+      path: `/learn.html?${makeQuery({ category: category.id, subcategory: subcategory.id, article: article.id })}`
+    });
+
+    const paragraphs = (article.paragraphs || [])
+      .map((paragraph) => `<p>${esc(paragraph)}</p>`)
+      .join('');
+    const questions = (article.questions || [])
+      .map((question) => `<li>${esc(question)}</li>`)
+      .join('');
+
+    els.app.innerHTML = `
+      <article class="card romanian-article">
+        <div class="romanian-paragraphs">
+          ${paragraphs || '<p>Bu makalede paragraf yok.</p>'}
+        </div>
+        <section class="romanian-questions">
+          <h2>Sozlu Sorular</h2>
+          <ol>${questions || '<li>Soru bulunamadi.</li>'}</ol>
+        </section>
+        <div class="actions">
+          <a class="btn" href="/learn.html?${makeQuery({ category: category.id, subcategory: subcategory.id })}">Makale Listesine Don</a>
+        </div>
+      </article>
+    `;
   }
 
   function renderSubcategoryHome(category, subcategory, topic, interviews) {
@@ -403,6 +493,7 @@
       const categoryId = q('category');
       const subcategoryId = q('subcategory');
       const view = q('view');
+      const articleId = q('article');
 
       const categories = await loadCategories();
 
@@ -427,6 +518,24 @@
       const subcategory = subcategories.find((item) => item.id === subcategoryId);
       if (!subcategory) {
         renderError('Alt kategori bulunamadi.');
+        return;
+      }
+
+      if (isRomanianCategory(category)) {
+        const articles = await loadRomanianArticles(subcategory);
+
+        if (!articleId) {
+          renderRomanianArticleList(category, subcategory, articles);
+          return;
+        }
+
+        const article = articles.find((item) => item.id === articleId);
+        if (!article) {
+          renderError('Makale bulunamadi.');
+          return;
+        }
+
+        renderRomanianArticle(category, subcategory, article);
         return;
       }
 

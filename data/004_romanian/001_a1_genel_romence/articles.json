@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "levelId": "a1-genel-romence",
+  "articles": [
+    {
+      "id": "a1-001",
+      "title": "Dimineata Anei",
+      "order": 1,
+      "paragraphs": [
+        "Ana se trezeste la ora sapte. Ea bea apa si mananca paine cu branza.",
+        "Dupa micul dejun, Ana merge la statia de autobuz. Ea merge la scoala."
+      ],
+      "questions": [
+        "La ce ora se trezeste Ana?",
+        "Ce mananca Ana dimineata?",
+        "Unde merge Ana dupa micul dejun?",
+        "Tu la ce ora te trezesti?",
+        "Ce mananci de obicei dimineata?"
+      ]
+    }
+  ]
+}

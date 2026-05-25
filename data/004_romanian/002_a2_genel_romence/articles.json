@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "levelId": "a2-genel-romence",
+  "articles": [
+    {
+      "id": "a2-001",
+      "title": "La piata",
+      "order": 1,
+      "paragraphs": [
+        "Mihai merge sambata la piata. El vrea sa cumpere rosii, mere si paine proaspata.",
+        "La prima taraba, vanzatoarea il intreaba ce doreste. Mihai cere doua kilograme de rosii si un kilogram de mere."
+      ],
+      "questions": [
+        "Unde merge Mihai sambata?",
+        "Ce vrea sa cumpere?",
+        "Ce il intreaba vanzatoarea?",
+        "Tu mergi des la piata?",
+        "Ce cumperi de obicei pentru acasa?"
+      ]
+    }
+  ]
+}

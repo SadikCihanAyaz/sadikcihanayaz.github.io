@@ -358,6 +358,43 @@ a:hover {
   margin: 7px 0;
 }
 
+.romanian-article {
+  max-width: 820px;
+}
+
+.romanian-paragraphs {
+  display: grid;
+  gap: 14px;
+}
+
+.romanian-paragraphs p {
+  margin: 0;
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.romanian-questions {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.romanian-questions h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.romanian-questions ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.romanian-questions li {
+  margin: 9px 0;
+  line-height: 1.55;
+}
+
 pre.code {
   margin: 0;
   background: var(--code);

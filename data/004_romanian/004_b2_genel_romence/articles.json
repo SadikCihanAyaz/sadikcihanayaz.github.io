@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "levelId": "b2-genel-romence",
+  "articles": [
+    {
+      "id": "b2-001",
+      "title": "Munca de acasa",
+      "order": 1,
+      "paragraphs": [
+        "In ultimii ani, munca de acasa a devenit o optiune obisnuita pentru multi angajati. Unii oameni spun ca sunt mai productivi acasa, deoarece economisesc timpul pierdut pe drum.",
+        "Pe de alta parte, altii simt ca le lipseste contactul direct cu echipa. Pentru ei, biroul ramane un loc important pentru colaborare, discutii rapide si separarea vietii personale de cea profesionala."
+      ],
+      "questions": [
+        "Care este un avantaj al muncii de acasa?",
+        "Ce dezavantaj este mentionat in text?",
+        "Tu ai prefera sa lucrezi de acasa sau de la birou?",
+        "Cum poate o echipa sa comunice bine la distanta?",
+        "Crezi ca munca hibrida este o solutie buna? De ce?"
+      ]
+    }
+  ]
+}
