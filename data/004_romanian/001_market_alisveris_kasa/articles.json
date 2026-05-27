@@ -2,5 +2,381 @@
   "version": 1,
   "categoryId": "romanian",
   "subcategoryId": "market-alisveris-kasa",
-  "articles": []
+  "articles": [
+    {
+      "id": "market-001",
+      "title": "Prețul de la casă este diferit de cel de la raft",
+      "order": 1,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Cred că prețul de la casă este diferit de cel de la raft." },
+        { "speaker": "Kasiyer", "text": "Îmi puteți arăta, vă rog, produsul și eticheta de preț?" },
+        { "speaker": "Sen", "text": "Sigur. Pe raft scria 12 lei, dar la casă apare 18 lei." },
+        { "speaker": "Kasiyer", "text": "Probabil reducerea nu a fost actualizată în sistem." },
+        { "speaker": "Sen", "text": "Se poate verifica prețul corect înainte să plătesc?" },
+        { "speaker": "Kasiyer", "text": "Da, chem un coleg să verifice la raft." },
+        { "speaker": "Sen", "text": "Dacă prețul de la raft este corect, aș dori să plătesc acel preț." },
+        { "speaker": "Kasiyer", "text": "Înțeleg. Dacă eticheta este greșită, vom corecta prețul." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Cred că prețul de la casă este diferit de cel de la raft.", "pronunciation": "Kred kı pretsul de la kası yeste diferit de çel de la raft.", "meaning": "Kasadaki fiyatın raftaki fiyattan farklı olduğunu düşünüyorum.", "grammar": ["Cred că = 'sanıyorum/düşünüyorum ki' kalıbıdır; emin olmadan kibarca itiraz etmek için çok uygundur.", "cel de la raft ifadesinde cel, önceki preț kelimesinin yerine geçer: 'raftaki olan'."], "vocabulary": [{ "word": "preț", "meaning": "fiyat" }, { "word": "raft", "meaning": "raf" }, { "word": "diferit", "meaning": "farklı" }] },
+        { "sentence": "Îmi puteți arăta produsul și eticheta de preț?", "pronunciation": "Îmi putets arıta produsul și etiketa de prets?", "meaning": "Bana ürünü ve fiyat etiketini gösterebilir misiniz?", "grammar": ["Îmi puteți + fiil resmi ve kibar 'bana ... yapabilir misiniz?' kalıbıdır.", "eticheta de preț isim tamlamasıdır: fiyat etiketi."], "vocabulary": [{ "word": "arăta", "meaning": "göstermek" }, { "word": "produs", "meaning": "ürün" }, { "word": "etichetă", "meaning": "etiket" }] },
+        { "sentence": "Pe raft scria 12 lei, dar la casă apare 18 lei.", "pronunciation": "Pe raft skria doisprezeçe ley, dar la kası apare optsprezeçe ley.", "meaning": "Rafta 12 lei yazıyordu ama kasada 18 lei görünüyor.", "grammar": ["scria geçmiş zaman gibi 'yazıyordu' anlamında kullanılır.", "dar iki zıt bilgiyi bağlar: ama/fakat."], "vocabulary": [{ "word": "scria", "meaning": "yazıyordu" }, { "word": "apare", "meaning": "görünüyor/çıkıyor" }] },
+        { "sentence": "Reducerea nu a fost actualizată în sistem.", "pronunciation": "Reduçerya nu a fost aktualizată în sistem.", "meaning": "İndirim sistemde güncellenmemiş.", "grammar": ["nu a fost actualizată edilgen geçmiş zaman yapısıdır: güncellenmedi/güncellenmemiş.", "reducerea dişil olduğu için actualizată da dişil formdadır."], "vocabulary": [{ "word": "reducere", "meaning": "indirim" }, { "word": "actualizată", "meaning": "güncellenmiş" }, { "word": "sistem", "meaning": "sistem" }] },
+        { "sentence": "Se poate verifica prețul corect înainte să plătesc?", "pronunciation": "Se poate verifika pretsul korekt înainte sı plıtesk?", "meaning": "Ödemeden önce doğru fiyat kontrol edilebilir mi?", "grammar": ["Se poate + fiil '... yapılabilir mi?' anlamında çok kullanışlı ve kibar bir kalıptır.", "înainte să + fiil '...meden önce' anlamı verir."], "vocabulary": [{ "word": "verifica", "meaning": "kontrol etmek" }, { "word": "plătesc", "meaning": "öderim" }] },
+        { "sentence": "Chem un coleg să verifice la raft.", "pronunciation": "Kem un koleg sı verifiçe la raft.", "meaning": "Rafta kontrol etmesi için bir çalışma arkadaşı çağırıyorum.", "grammar": ["să verifice burada amaç bildirir: kontrol etmesi için.", "coleg market çalışanı/iş arkadaşı anlamında kullanılır."], "vocabulary": [{ "word": "chem", "meaning": "çağırıyorum" }, { "word": "coleg", "meaning": "iş arkadaşı" }] },
+        { "sentence": "Aș dori să plătesc acel preț.", "pronunciation": "Aș dori sı plıtesk acel prets.", "meaning": "O fiyatı ödemek isterim.", "grammar": ["Aș dori resmi ve kibar 'isterim/istemek isterdim' kalıbıdır.", "acel preț 'o fiyat' demektir; uzaktaki/önceden bahsedilen fiyatı gösterir."], "vocabulary": [{ "word": "aș dori", "meaning": "isterim" }, { "word": "acel", "meaning": "o" }] },
+        { "sentence": "Dacă eticheta este greșită, vom corecta prețul.", "pronunciation": "Dakı etiketa yeste greșită, vom korekta pretsul.", "meaning": "Etiket yanlışsa fiyatı düzelteceğiz.", "grammar": ["Dacă şart bağlacıdır: eğer.", "vom corecta gelecek zaman: düzelteceğiz."], "vocabulary": [{ "word": "greșită", "meaning": "yanlış" }, { "word": "corecta", "meaning": "düzeltmek" }] }
+      ]
+    },
+    {
+      "id": "market-002",
+      "title": "Cardul nu funcționează la casă",
+      "order": 2,
+      "dialogue": [
+        { "speaker": "Kasiyer", "text": "Tranzacția a fost refuzată. Cardul nu a fost acceptat." },
+        { "speaker": "Sen", "text": "Îmi pare rău. Pot să încerc încă o dată?" },
+        { "speaker": "Kasiyer", "text": "Sigur. Vă rog să apropiați cardul de terminal." },
+        { "speaker": "Sen", "text": "Dacă nu merge contactless, pot introduce cardul?" },
+        { "speaker": "Kasiyer", "text": "Da, puteți introduce cardul și codul PIN." },
+        { "speaker": "Sen", "text": "Se pare că terminalul nu citește cardul." },
+        { "speaker": "Kasiyer", "text": "Aveți alt card sau doriți să plătiți numerar?" },
+        { "speaker": "Sen", "text": "Da, plătesc cu alt card. Vă rog să încercăm din nou." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Tranzacția a fost refuzată.", "pronunciation": "Tranzaktsia a fost refuzată.", "meaning": "İşlem reddedildi.", "grammar": ["a fost refuzată edilgen geçmiş zaman yapısıdır.", "tranzacția dişil olduğu için refuzată dişil formdadır."], "vocabulary": [{ "word": "tranzacție", "meaning": "işlem" }, { "word": "refuzată", "meaning": "reddedilmiş" }] },
+        { "sentence": "Pot să încerc încă o dată?", "pronunciation": "Pot sı înçerk înkı o dată?", "meaning": "Bir kez daha deneyebilir miyim?", "grammar": ["Pot să + fiil '... yapabilir miyim?' kalıbıdır.", "încă o dată 'bir kez daha' demektir."], "vocabulary": [{ "word": "încerc", "meaning": "denerim" }, { "word": "încă o dată", "meaning": "bir kez daha" }] },
+        { "sentence": "Vă rog să apropiați cardul de terminal.", "pronunciation": "Vı rog sı apropiați kardul de terminal.", "meaning": "Lütfen kartı terminale yaklaştırın.", "grammar": ["Vă rog să + fiil resmi rica kalıbıdır.", "apropiați ikinci çoğul/resmi emir gibi kullanılır."], "vocabulary": [{ "word": "apropiați", "meaning": "yaklaştırın" }, { "word": "terminal", "meaning": "pos cihazı/terminal" }] },
+        { "sentence": "Dacă nu merge contactless, pot introduce cardul?", "pronunciation": "Dakı nu merge kontaktles, pot introduçe kardul?", "meaning": "Temassız çalışmazsa kartı takabilir miyim?", "grammar": ["Dacă şart yapısıdır.", "nu merge günlük dilde 'çalışmıyor' anlamına gelir."], "vocabulary": [{ "word": "merge", "meaning": "çalışır/gider" }, { "word": "introduce", "meaning": "takmak/girmek" }] },
+        { "sentence": "Puteți introduce cardul și codul PIN.", "pronunciation": "Putets introduçe kardul și kodul pin.", "meaning": "Kartı takıp PIN kodunu girebilirsiniz.", "grammar": ["Puteți + fiil resmi 'yapabilirsiniz' anlamındadır.", "și burada iki işlemi bağlar."], "vocabulary": [{ "word": "cod PIN", "meaning": "PIN kodu" }] },
+        { "sentence": "Terminalul nu citește cardul.", "pronunciation": "Terminalul nu çitește kardul.", "meaning": "Terminal kartı okumuyor.", "grammar": ["nu citește şimdiki zamanda olumsuzdur: okumuyor.", "cardul belirli nesnedir: kartı."], "vocabulary": [{ "word": "citește", "meaning": "okuyor" }, { "word": "cardul", "meaning": "kartı" }] },
+        { "sentence": "Aveți alt card sau doriți să plătiți numerar?", "pronunciation": "Avets alt kard sau dorits sı plıtits numerar?", "meaning": "Başka kartınız var mı yoksa nakit ödemek ister misiniz?", "grammar": ["sau seçenek sunar: veya.", "doriți resmi 'istiyorsunuz' çekimidir."], "vocabulary": [{ "word": "alt card", "meaning": "başka kart" }, { "word": "numerar", "meaning": "nakit" }] },
+        { "sentence": "Plătesc cu alt card.", "pronunciation": "Plıtesk ku alt kard.", "meaning": "Başka kartla ödüyorum.", "grammar": ["cu + ödeme aracı: cu cardul, cu numerar, cu alt card.", "Plătesc birinci tekil şimdiki zaman: ödüyorum."], "vocabulary": [{ "word": "plătesc", "meaning": "ödüyorum" }, { "word": "cu", "meaning": "ile" }] }
+      ]
+    },
+    {
+      "id": "market-003",
+      "title": "Restul primit este greșit",
+      "order": 3,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Scuzați-mă, cred că restul nu este corect." },
+        { "speaker": "Kasiyer", "text": "Îmi puteți spune cât ați plătit?" },
+        { "speaker": "Sen", "text": "Am plătit cu o bancnotă de 100 de lei." },
+        { "speaker": "Kasiyer", "text": "Totalul a fost 63 de lei." },
+        { "speaker": "Sen", "text": "Atunci ar trebui să primesc 37 de lei rest." },
+        { "speaker": "Kasiyer", "text": "Aveți dreptate. V-am dat doar 27 de lei." },
+        { "speaker": "Sen", "text": "Nu este nicio problemă. Se poate corecta acum?" },
+        { "speaker": "Kasiyer", "text": "Da, îmi cer scuze. Vă dau diferența imediat." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Cred că restul nu este corect.", "pronunciation": "Kred kı restul nu yeste korekt.", "meaning": "Para üstünün doğru olmadığını düşünüyorum.", "grammar": ["Cred că tartışmayı yumuşatır; doğrudan suçlama yerine kibar itirazdır.", "restul burada para üstü anlamındadır."], "vocabulary": [{ "word": "rest", "meaning": "para üstü/kalan" }, { "word": "corect", "meaning": "doğru" }] },
+        { "sentence": "Cât ați plătit?", "pronunciation": "Kît ats plătit?", "meaning": "Ne kadar ödediniz?", "grammar": ["Cât miktar sorar.", "ați plătit resmi geçmiş zaman: ödediniz."], "vocabulary": [{ "word": "cât", "meaning": "ne kadar" }, { "word": "plătit", "meaning": "ödemiş" }] },
+        { "sentence": "Am plătit cu o bancnotă de 100 de lei.", "pronunciation": "Am plătit ku o banknotă de una sută de ley.", "meaning": "100 lei'lik banknotla ödedim.", "grammar": ["Am plătit geçmiş zaman: ödedim.", "cu o bancnotă de... ödeme aracını belirtir."], "vocabulary": [{ "word": "bancnotă", "meaning": "banknot" }, { "word": "lei", "meaning": "Romanya para birimi" }] },
+        { "sentence": "Totalul a fost 63 de lei.", "pronunciation": "Totalul a fost șaizeci și trei de ley.", "meaning": "Toplam 63 lei idi.", "grammar": ["a fost geçmiş zaman 'idi' anlamındadır.", "totalul belirli isimdir: toplam."], "vocabulary": [{ "word": "totalul", "meaning": "toplam" }] },
+        { "sentence": "Ar trebui să primesc 37 de lei rest.", "pronunciation": "Ar trebui sı primesk treizeci și șapte de ley rest.", "meaning": "37 lei para üstü almam gerekiyor.", "grammar": ["Ar trebui să 'gerekir/gerekiyor olmalı' anlamında kibar beklenti bildirir.", "să primesc 'almam' demektir."], "vocabulary": [{ "word": "primesc", "meaning": "alırım" }, { "word": "ar trebui", "meaning": "gerekir" }] },
+        { "sentence": "Aveți dreptate.", "pronunciation": "Avets dreptate.", "meaning": "Haklısınız.", "grammar": ["Aveți dreptate kalıp ifadedir; birebir 'haklılığa sahipsiniz' gibi düşünülür.", "Resmi konuşmada rahatça kullanılır."], "vocabulary": [{ "word": "dreptate", "meaning": "haklılık" }] },
+        { "sentence": "Se poate corecta acum?", "pronunciation": "Se poate korekta akum?", "meaning": "Şimdi düzeltilebilir mi?", "grammar": ["Se poate + fiil kibar edilgen soru kalıbıdır.", "acum 'şimdi' demektir."], "vocabulary": [{ "word": "corecta", "meaning": "düzeltmek" }, { "word": "acum", "meaning": "şimdi" }] },
+        { "sentence": "Vă dau diferența imediat.", "pronunciation": "Vı dau diferentsa imediat.", "meaning": "Farkı hemen size veriyorum.", "grammar": ["Vă dau 'size veriyorum' demektir.", "diferența burada eksik kalan para farkıdır."], "vocabulary": [{ "word": "diferența", "meaning": "fark" }, { "word": "imediat", "meaning": "hemen" }] }
+      ]
+    },
+    {
+      "id": "market-004",
+      "title": "Vreau să returnez un produs",
+      "order": 4,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Aș dori să returnez acest produs." },
+        { "speaker": "Çalışan", "text": "Aveți bonul fiscal?" },
+        { "speaker": "Sen", "text": "Da, îl am aici. Produsul nu a fost folosit." },
+        { "speaker": "Çalışan", "text": "Care este motivul returului?" },
+        { "speaker": "Sen", "text": "Nu este mărimea potrivită și vreau să îl returnez." },
+        { "speaker": "Çalışan", "text": "Doriți banii înapoi sau un voucher?" },
+        { "speaker": "Sen", "text": "Aș prefera banii înapoi pe card." },
+        { "speaker": "Çalışan", "text": "Sigur. Returul poate dura câteva zile lucrătoare." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Aș dori să returnez acest produs.", "pronunciation": "Aș dori sı returnez açest produs.", "meaning": "Bu ürünü iade etmek istiyorum.", "grammar": ["Aș dori resmi ve kibar istek yapısıdır.", "returnez fiili 'iade etmek' anlamında kullanılır."], "vocabulary": [{ "word": "returnez", "meaning": "iade ederim" }, { "word": "acest produs", "meaning": "bu ürün" }] },
+        { "sentence": "Aveți bonul fiscal?", "pronunciation": "Avets bonul fiskal?", "meaning": "Fişiniz var mı?", "grammar": ["Aveți resmi 'var mı' sorusudur.", "bonul fiscal resmi olarak kasa fişi demektir."], "vocabulary": [{ "word": "bon fiscal", "meaning": "fiş" }] },
+        { "sentence": "Produsul nu a fost folosit.", "pronunciation": "Produsul nu a fost folosit.", "meaning": "Ürün kullanılmadı.", "grammar": ["nu a fost folosit edilgen geçmiş zaman yapısıdır.", "produsul eril olduğu için folosit eril formdadır."], "vocabulary": [{ "word": "folosit", "meaning": "kullanılmış" }] },
+        { "sentence": "Care este motivul returului?", "pronunciation": "Kare yeste motivul returului?", "meaning": "İadenin sebebi nedir?", "grammar": ["Care este 'nedir/hangisidir' resmi soru kalıbıdır.", "returului genitif formudur: iadenin."], "vocabulary": [{ "word": "motiv", "meaning": "sebep" }, { "word": "retur", "meaning": "iade" }] },
+        { "sentence": "Nu este mărimea potrivită.", "pronunciation": "Nu yeste mırımea potrivită.", "meaning": "Uygun beden değil.", "grammar": ["Nu este olumsuz isim cümlesidir.", "potrivită dişil formdur; mărimea kelimesine uyar."], "vocabulary": [{ "word": "mărime", "meaning": "beden/ölçü" }, { "word": "potrivită", "meaning": "uygun" }] },
+        { "sentence": "Doriți banii înapoi sau un voucher?", "pronunciation": "Dorits banii înapoy sau un voucher?", "meaning": "Parayı geri mi istersiniz yoksa kupon mu?", "grammar": ["Doriți resmi 'istiyor musunuz' çekimidir.", "sau seçenek sunar."], "vocabulary": [{ "word": "banii înapoi", "meaning": "para iadesi" }, { "word": "voucher", "meaning": "kupon" }] },
+        { "sentence": "Aș prefera banii înapoi pe card.", "pronunciation": "Aș prefera banii înapoy pe kard.", "meaning": "Para iadesini karta tercih ederim.", "grammar": ["Aș prefera kibar tercih bildirir.", "pe card karta/ kart üzerine anlamında ödeme bağlamında kullanılır."], "vocabulary": [{ "word": "aș prefera", "meaning": "tercih ederim" }] },
+        { "sentence": "Returul poate dura câteva zile lucrătoare.", "pronunciation": "Returul poate dura kîteva zile lukrătoare.", "meaning": "İade birkaç iş günü sürebilir.", "grammar": ["poate dura 'sürebilir' demektir.", "zile lucrătoare iş günleri anlamındadır."], "vocabulary": [{ "word": "dura", "meaning": "sürmek" }, { "word": "zile lucrătoare", "meaning": "iş günleri" }] }
+      ]
+    },
+    {
+      "id": "market-005",
+      "title": "Produsul este stricat sau deteriorat",
+      "order": 5,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Am cumpărat acest produs, dar este deteriorat." },
+        { "speaker": "Çalışan", "text": "Îmi pare rău. Îmi puteți arăta problema?" },
+        { "speaker": "Sen", "text": "Ambalajul este rupt și produsul pare stricat." },
+        { "speaker": "Çalışan", "text": "Aveți bonul și produsul complet?" },
+        { "speaker": "Sen", "text": "Da, am bonul și toate piesele în cutie." },
+        { "speaker": "Çalışan", "text": "Putem să îl schimbăm sau să facem retur." },
+        { "speaker": "Sen", "text": "Aș dori să îl schimb cu unul nou." },
+        { "speaker": "Çalışan", "text": "Sigur. Verific dacă avem același produs pe stoc." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Am cumpărat acest produs, dar este deteriorat.", "pronunciation": "Am kumpırat açest produs, dar yeste deteriorat.", "meaning": "Bu ürünü aldım ama hasarlı.", "grammar": ["Am cumpărat geçmiş zaman: satın aldım.", "dar zıtlık bağlacıdır."], "vocabulary": [{ "word": "cumpărat", "meaning": "satın almış" }, { "word": "deteriorat", "meaning": "hasarlı" }] },
+        { "sentence": "Îmi puteți arăta problema?", "pronunciation": "Îmi putets arıta problema?", "meaning": "Bana problemi gösterebilir misiniz?", "grammar": ["Îmi puteți arăta kibar rica kalıbıdır.", "problema belirli isimdir: problem."], "vocabulary": [{ "word": "problemă", "meaning": "problem" }] },
+        { "sentence": "Ambalajul este rupt.", "pronunciation": "Ambalajul yeste rupt.", "meaning": "Ambalaj yırtık.", "grammar": ["este rupt durum bildirir.", "rupt eril formdur; ambalajul eril kabul edilir."], "vocabulary": [{ "word": "ambalaj", "meaning": "ambalaj" }, { "word": "rupt", "meaning": "yırtık" }] },
+        { "sentence": "Produsul pare stricat.", "pronunciation": "Produsul pare strikat.", "meaning": "Ürün bozuk görünüyor.", "grammar": ["pare + sıfat '... gibi görünüyor' yapısıdır.", "stricat bozuk/arıza görmüş anlamındadır."], "vocabulary": [{ "word": "pare", "meaning": "görünüyor" }, { "word": "stricat", "meaning": "bozuk" }] },
+        { "sentence": "Aveți bonul și produsul complet?", "pronunciation": "Avets bonul și produsul komplet?", "meaning": "Fiş ve ürünün tamamı var mı?", "grammar": ["complet burada 'eksiksiz/tam' anlamında kullanılır.", "și iki nesneyi bağlar."], "vocabulary": [{ "word": "complet", "meaning": "tam/eksiksiz" }] },
+        { "sentence": "Am toate piesele în cutie.", "pronunciation": "Am toate piesele în kutiye.", "meaning": "Kutuda tüm parçalar var.", "grammar": ["toate piesele 'tüm parçalar' demektir.", "în cutie yer belirtir: kutuda."], "vocabulary": [{ "word": "piese", "meaning": "parçalar" }, { "word": "cutie", "meaning": "kutu" }] },
+        { "sentence": "Putem să îl schimbăm sau să facem retur.", "pronunciation": "Putem sı îl skimbăm sau sı façem retur.", "meaning": "Onu değiştirebiliriz veya iade yapabiliriz.", "grammar": ["Putem să 'yapabiliriz' demektir.", "îl eril nesne zamiri: onu."], "vocabulary": [{ "word": "schimbăm", "meaning": "değiştiririz" }, { "word": "retur", "meaning": "iade" }] },
+        { "sentence": "Verific dacă avem același produs pe stoc.", "pronunciation": "Verifik dakı avem açelași produs pe stok.", "meaning": "Stokta aynı ürün var mı kontrol ediyorum.", "grammar": ["dacă burada 'olup olmadığını' anlamındadır.", "pe stoc stokta demektir."], "vocabulary": [{ "word": "același", "meaning": "aynı" }, { "word": "pe stoc", "meaning": "stokta" }] }
+      ]
+    },
+    {
+      "id": "market-006",
+      "title": "Am cumpărat produsul greșit",
+      "order": 6,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Am cumpărat din greșeală acest produs." },
+        { "speaker": "Çalışan", "text": "Doriți să îl schimbați cu produsul corect?" },
+        { "speaker": "Sen", "text": "Da, am nevoie de aceeași marcă, dar alt model." },
+        { "speaker": "Çalışan", "text": "Produsul este deschis sau sigilat?" },
+        { "speaker": "Sen", "text": "Este sigilat. Nu l-am folosit deloc." },
+        { "speaker": "Çalışan", "text": "Atunci îl putem schimba fără probleme." },
+        { "speaker": "Sen", "text": "Trebuie să merg la același raion pentru produsul corect?" },
+        { "speaker": "Çalışan", "text": "Da, iar după aceea reveniți la casă pentru schimb." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Am cumpărat din greșeală acest produs.", "pronunciation": "Am kumpırat din greșeală açest produs.", "meaning": "Bu ürünü yanlışlıkla satın aldım.", "grammar": ["din greșeală 'yanlışlıkla' kalıbıdır; hata yaptığını yumuşak anlatır.", "Am cumpărat geçmiş zaman: satın aldım."], "vocabulary": [{ "word": "din greșeală", "meaning": "yanlışlıkla" }, { "word": "produs", "meaning": "ürün" }] },
+        { "sentence": "Doriți să îl schimbați cu produsul corect?", "pronunciation": "Dorits sı îl skimbats ku produsul korekt?", "meaning": "Onu doğru ürünle değiştirmek ister misiniz?", "grammar": ["Doriți să + fiil resmi teklif/soru kalıbıdır.", "îl eril nesne zamiridir: onu."], "vocabulary": [{ "word": "schimbați", "meaning": "değiştiriyorsunuz/değiştirin" }, { "word": "corect", "meaning": "doğru" }] },
+        { "sentence": "Am nevoie de aceeași marcă, dar alt model.", "pronunciation": "Am nevoye de açeyași markı, dar alt model.", "meaning": "Aynı markaya ama başka modele ihtiyacım var.", "grammar": ["Am nevoie de '...e ihtiyacım var' kalıbıdır.", "aceeași dişil 'aynı' demektir; marcă ile uyumludur."], "vocabulary": [{ "word": "marcă", "meaning": "marka" }, { "word": "model", "meaning": "model" }] },
+        { "sentence": "Produsul este deschis sau sigilat?", "pronunciation": "Produsul yeste deskis sau sigilat?", "meaning": "Ürün açılmış mı yoksa kapalı mı?", "grammar": ["sau iki seçenek sunar: veya/yoksa.", "deschis ve sigilat ürün durumunu anlatan sıfatlardır."], "vocabulary": [{ "word": "deschis", "meaning": "açılmış" }, { "word": "sigilat", "meaning": "mühürlü/kapalı" }] },
+        { "sentence": "Nu l-am folosit deloc.", "pronunciation": "Nu l-am folosit delok.", "meaning": "Onu hiç kullanmadım.", "grammar": ["l-am folosit 'onu kullandım' demektir; nu ile olumsuz olur.", "deloc olumsuzluğu güçlendirir: hiç."], "vocabulary": [{ "word": "folosit", "meaning": "kullanılmış" }, { "word": "deloc", "meaning": "hiç" }] },
+        { "sentence": "Îl putem schimba fără probleme.", "pronunciation": "Îl putem skimba fırı probleme.", "meaning": "Onu sorunsuz değiştirebiliriz.", "grammar": ["putem schimba 'değiştirebiliriz' demektir.", "fără probleme çok pratik bir kalıptır: sorun olmadan."], "vocabulary": [{ "word": "fără", "meaning": "olmadan" }, { "word": "probleme", "meaning": "problemler" }] },
+        { "sentence": "Trebuie să merg la același raion?", "pronunciation": "Trebuye sı merg la açelași rayon?", "meaning": "Aynı reyona gitmem gerekiyor mu?", "grammar": ["Trebuie să merg 'gitmem gerekiyor' demektir.", "același eril 'aynı' formudur."], "vocabulary": [{ "word": "raion", "meaning": "reyon/bölüm" }, { "word": "merg", "meaning": "giderim" }] },
+        { "sentence": "Reveniți la casă pentru schimb.", "pronunciation": "Revenits la kası pentru skimb.", "meaning": "Değişim için kasaya geri gelin.", "grammar": ["Reveniți resmi emir/rica formudur.", "pentru schimb 'değişim için' anlamındadır."], "vocabulary": [{ "word": "reveniți", "meaning": "geri gelin" }, { "word": "schimb", "meaning": "değişim" }] }
+      ]
+    },
+    {
+      "id": "market-007",
+      "title": "Am pierdut bonul, dar vreau retur",
+      "order": 7,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Am pierdut bonul, dar aș dori să returnez produsul." },
+        { "speaker": "Çalışan", "text": "Fără bon, returul poate fi mai dificil." },
+        { "speaker": "Sen", "text": "Am plătit cu cardul și pot arăta tranzacția în aplicație." },
+        { "speaker": "Çalışan", "text": "Acest lucru ne poate ajuta să găsim cumpărătura." },
+        { "speaker": "Sen", "text": "Produsul este sigilat și cumpărat ieri." },
+        { "speaker": "Çalışan", "text": "Voi verifica în sistem după ultimele patru cifre ale cardului." },
+        { "speaker": "Sen", "text": "Sigur. Vă pot da și ora aproximativă a cumpărării." },
+        { "speaker": "Çalışan", "text": "Perfect. Dacă găsim tranzacția, putem continua returul." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Am pierdut bonul.", "pronunciation": "Am pierdut bonul.", "meaning": "Fişi kaybettim.", "grammar": ["Am pierdut geçmiş zaman: kaybettim.", "bonul belirli isimdir: fişi."], "vocabulary": [{ "word": "pierdut", "meaning": "kaybetmiş" }, { "word": "bon", "meaning": "fiş" }] },
+        { "sentence": "Fără bon, returul poate fi mai dificil.", "pronunciation": "Fırı bon, returul poate fi mai difiçil.", "meaning": "Fiş olmadan iade daha zor olabilir.", "grammar": ["Fără + isim '... olmadan' demektir.", "poate fi 'olabilir' anlamındadır."], "vocabulary": [{ "word": "fără", "meaning": "olmadan" }, { "word": "dificil", "meaning": "zor" }] },
+        { "sentence": "Am plătit cu cardul.", "pronunciation": "Am plătit ku kardul.", "meaning": "Kartla ödedim.", "grammar": ["cu cardul ödeme aracını belirtir.", "Am plătit geçmiş zaman kullanımıdır."], "vocabulary": [{ "word": "card", "meaning": "kart" }, { "word": "plătit", "meaning": "ödemiş" }] },
+        { "sentence": "Pot arăta tranzacția în aplicație.", "pronunciation": "Pot arıta tranzaktsia în aplikatsie.", "meaning": "İşlemi uygulamada gösterebilirim.", "grammar": ["Pot arăta 'gösterebilirim' demektir.", "în aplicație yer belirtir: uygulamada."], "vocabulary": [{ "word": "tranzacție", "meaning": "işlem" }, { "word": "aplicație", "meaning": "uygulama" }] },
+        { "sentence": "Acest lucru ne poate ajuta.", "pronunciation": "Açest lukru ne poate ajuta.", "meaning": "Bu şey bize yardımcı olabilir.", "grammar": ["ne poate ajuta 'bize yardım edebilir' demektir.", "Acest lucru resmi konuşmada 'bu durum' anlamına gelir."], "vocabulary": [{ "word": "acest lucru", "meaning": "bu durum" }, { "word": "ajuta", "meaning": "yardım etmek" }] },
+        { "sentence": "Voi verifica în sistem.", "pronunciation": "Voy verifika în sistem.", "meaning": "Sistemde kontrol edeceğim.", "grammar": ["Voi verifica gelecek zaman: kontrol edeceğim.", "în sistem 'sistemde' demektir."], "vocabulary": [{ "word": "voi verifica", "meaning": "kontrol edeceğim" }] },
+        { "sentence": "Vă pot da ora aproximativă a cumpărării.", "pronunciation": "Vı pot da ora aproximativı a kumpırării.", "meaning": "Satın alma saatinin yaklaşık bilgisini verebilirim.", "grammar": ["Vă pot da 'size verebilirim' demektir.", "a cumpărării genitif yapıdır: satın almanın."], "vocabulary": [{ "word": "aproximativă", "meaning": "yaklaşık" }, { "word": "cumpărare", "meaning": "satın alma" }] },
+        { "sentence": "Dacă găsim tranzacția, putem continua returul.", "pronunciation": "Dakı găsim tranzaktsia, putem kontinua returul.", "meaning": "İşlemi bulursak iadeye devam edebiliriz.", "grammar": ["Dacă şart cümlesi kurar.", "putem continua 'devam edebiliriz' demektir."], "vocabulary": [{ "word": "găsim", "meaning": "buluruz" }, { "word": "continua", "meaning": "devam etmek" }] }
+      ]
+    },
+    {
+      "id": "market-008",
+      "title": "Produsul a fost scanat de două ori",
+      "order": 8,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Scuzați-mă, cred că produsul a fost scanat de două ori." },
+        { "speaker": "Kasiyer", "text": "Haideți să verificăm bonul înainte să plătiți." },
+        { "speaker": "Sen", "text": "Aici apare același iaurt de două ori." },
+        { "speaker": "Kasiyer", "text": "Aveți dreptate. A fost o greșeală la scanare." },
+        { "speaker": "Sen", "text": "Se poate șterge una dintre linii?" },
+        { "speaker": "Kasiyer", "text": "Da, anulez produsul scanat în plus." },
+        { "speaker": "Sen", "text": "Vă rog să-mi spuneți noul total." },
+        { "speaker": "Kasiyer", "text": "Noul total este 54 de lei." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Produsul a fost scanat de două ori.", "pronunciation": "Produsul a fost skanat de două ori.", "meaning": "Ürün iki kez okutuldu.", "grammar": ["a fost scanat edilgen geçmiş zaman yapısıdır.", "de două ori 'iki kez' demektir."], "vocabulary": [{ "word": "scanat", "meaning": "okutulmuş/taranmış" }, { "word": "de două ori", "meaning": "iki kez" }] },
+        { "sentence": "Haideți să verificăm bonul.", "pronunciation": "Haydets sı verifikăm bonul.", "meaning": "Haydi fişi kontrol edelim.", "grammar": ["Haideți să + fiil 'hadi ... yapalım' resmi/çoğul kalıbıdır.", "bonul belirli nesnedir: fişi."], "vocabulary": [{ "word": "verificăm", "meaning": "kontrol edelim" }] },
+        { "sentence": "Aici apare același iaurt de două ori.", "pronunciation": "Aici apare açelași iaurt de două ori.", "meaning": "Burada aynı yoğurt iki kez görünüyor.", "grammar": ["apare 'görünüyor/çıkıyor' anlamındadır.", "același 'aynı' demektir."], "vocabulary": [{ "word": "iaurt", "meaning": "yoğurt" }, { "word": "apare", "meaning": "görünüyor" }] },
+        { "sentence": "A fost o greșeală la scanare.", "pronunciation": "A fost o greșeală la skanare.", "meaning": "Okutmada bir hata olmuş.", "grammar": ["A fost 'oldu/olmuş' geçmiş zaman yapısıdır.", "la scanare 'okutma sırasında' anlamı verir."], "vocabulary": [{ "word": "greșeală", "meaning": "hata" }, { "word": "scanare", "meaning": "okutma/tarama" }] },
+        { "sentence": "Se poate șterge una dintre linii?", "pronunciation": "Se poate șterje una dintre linii?", "meaning": "Satırlardan biri silinebilir mi?", "grammar": ["Se poate șterge 'silinebilir mi?' kibar edilgen sorudur.", "una dintre '...den biri' demektir."], "vocabulary": [{ "word": "șterge", "meaning": "silmek" }, { "word": "linii", "meaning": "satırlar" }] },
+        { "sentence": "Anulez produsul scanat în plus.", "pronunciation": "Anulez produsul skanat în plus.", "meaning": "Fazladan okutulan ürünü iptal ediyorum.", "grammar": ["Anulez birinci tekil: iptal ediyorum.", "în plus 'fazladan' demektir."], "vocabulary": [{ "word": "anulez", "meaning": "iptal ediyorum" }, { "word": "în plus", "meaning": "fazladan" }] },
+        { "sentence": "Vă rog să-mi spuneți noul total.", "pronunciation": "Vı rog sı-mi spunets noul total.", "meaning": "Lütfen yeni toplamı söyleyin.", "grammar": ["să-mi spuneți 'bana söyleyin' resmi rica kalıbıdır.", "noul total 'yeni toplam' demektir."], "vocabulary": [{ "word": "noul", "meaning": "yeni olan" }, { "word": "total", "meaning": "toplam" }] },
+        { "sentence": "Noul total este 54 de lei.", "pronunciation": "Noul total yeste cincizeci și patru de ley.", "meaning": "Yeni toplam 54 lei.", "grammar": ["este bağlaç fiildir: ...dır.", "Para miktarlarında de lei kullanılır."], "vocabulary": [{ "word": "lei", "meaning": "lei" }] }
+      ]
+    },
+    {
+      "id": "market-009",
+      "title": "Folosirea cardului de fidelitate",
+      "order": 9,
+      "dialogue": [
+        { "speaker": "Kasiyer", "text": "Aveți card de fidelitate?" },
+        { "speaker": "Sen", "text": "Da, îl am în aplicație." },
+        { "speaker": "Kasiyer", "text": "Vă rog să scanați codul de bare." },
+        { "speaker": "Sen", "text": "Reducerea se aplică automat?" },
+        { "speaker": "Kasiyer", "text": "Da, dacă produsul face parte din promoție." },
+        { "speaker": "Sen", "text": "Pot verifica pe bon dacă reducerea a fost aplicată?" },
+        { "speaker": "Kasiyer", "text": "Sigur. Reducerea apare sub fiecare produs eligibil." },
+        { "speaker": "Sen", "text": "Perfect. Vă rog să folosim cardul înainte de plată." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Aveți card de fidelitate?", "pronunciation": "Avets kard de fidelitate?", "meaning": "Sadakat kartınız var mı?", "grammar": ["Aveți resmi 'var mı' sorusudur.", "card de fidelitate market indirim/sadakat kartıdır."], "vocabulary": [{ "word": "fidelitate", "meaning": "sadakat" }] },
+        { "sentence": "Îl am în aplicație.", "pronunciation": "Îl am în aplikatsie.", "meaning": "Onu uygulamada taşıyorum/var.", "grammar": ["Îl eril nesne zamiri: onu.", "în aplicație 'uygulamada' demektir."], "vocabulary": [{ "word": "aplicație", "meaning": "uygulama" }] },
+        { "sentence": "Scanați codul de bare.", "pronunciation": "Skanats kodul de bare.", "meaning": "Barkodu okutun.", "grammar": ["Scanați resmi emir/rica formudur.", "cod de bare barkod demektir."], "vocabulary": [{ "word": "cod de bare", "meaning": "barkod" }] },
+        { "sentence": "Reducerea se aplică automat?", "pronunciation": "Reduçerya se aplikı automat?", "meaning": "İndirim otomatik uygulanıyor mu?", "grammar": ["se aplică dönüşlü/edilgen kullanım: uygulanır.", "automat 'otomatik olarak' demektir."], "vocabulary": [{ "word": "aplică", "meaning": "uygular/uygulanır" }, { "word": "automat", "meaning": "otomatik" }] },
+        { "sentence": "Produsul face parte din promoție.", "pronunciation": "Produsul faça parte din promotie.", "meaning": "Ürün kampanyaya dahil.", "grammar": ["face parte din '...e dahildir' kalıbıdır.", "promoție kampanya/indirim dönemi anlamındadır."], "vocabulary": [{ "word": "promoție", "meaning": "kampanya" }] },
+        { "sentence": "Pot verifica pe bon?", "pronunciation": "Pot verifika pe bon?", "meaning": "Fişte kontrol edebilir miyim?", "grammar": ["pe bon 'fişte/fiş üzerinde' anlamındadır.", "Pot verifica 'kontrol edebilir miyim'."], "vocabulary": [{ "word": "bon", "meaning": "fiş" }] },
+        { "sentence": "Reducerea apare sub fiecare produs eligibil.", "pronunciation": "Reduçerya apare sub fiekaře produs eligibil.", "meaning": "İndirim her uygun ürünün altında görünür.", "grammar": ["fiecare 'her' demektir.", "eligibil kampanyaya uygun anlamındadır."], "vocabulary": [{ "word": "eligibil", "meaning": "uygun" }, { "word": "sub", "meaning": "altında" }] },
+        { "sentence": "Să folosim cardul înainte de plată.", "pronunciation": "Sı folosim kardul înainte de plată.", "meaning": "Kartı ödemeden önce kullanalım.", "grammar": ["Să folosim 'kullanalım' anlamında öneri/istek bildirir.", "înainte de plată 'ödemeden önce' demektir."], "vocabulary": [{ "word": "folosim", "meaning": "kullanalım" }, { "word": "plată", "meaning": "ödeme" }] }
+      ]
+    },
+    {
+      "id": "market-010",
+      "title": "Vreau sau nu vreau pungă",
+      "order": 10,
+      "dialogue": [
+        { "speaker": "Kasiyer", "text": "Doriți pungă?" },
+        { "speaker": "Sen", "text": "Da, vă rog, o pungă mare." },
+        { "speaker": "Kasiyer", "text": "Avem pungă de plastic și sacoșă reutilizabilă." },
+        { "speaker": "Sen", "text": "Cât costă sacoșa reutilizabilă?" },
+        { "speaker": "Kasiyer", "text": "Costă 3 lei și este mai rezistentă." },
+        { "speaker": "Sen", "text": "Atunci iau o sacoșă reutilizabilă." },
+        { "speaker": "Kasiyer", "text": "Doriți să pun produsele în sacoșă?" },
+        { "speaker": "Sen", "text": "Nu, mulțumesc. Le pun eu." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Doriți pungă?", "pronunciation": "Dorits pungı?", "meaning": "Poşet ister misiniz?", "grammar": ["Doriți resmi 'ister misiniz' demektir.", "Nesne belirsiz olduğu için o pungă yerine kısa konuşmada pungă denebilir."], "vocabulary": [{ "word": "pungă", "meaning": "poşet" }] },
+        { "sentence": "O pungă mare.", "pronunciation": "O pungı mare.", "meaning": "Büyük bir poşet.", "grammar": ["o dişil belirsiz artikeldir.", "mare sıfatı isimden sonra gelir."], "vocabulary": [{ "word": "mare", "meaning": "büyük" }] },
+        { "sentence": "Avem pungă de plastic și sacoșă reutilizabilă.", "pronunciation": "Avem pungı de plastik și sakoșı reutilizabilı.", "meaning": "Plastik poşet ve tekrar kullanılabilir çanta var.", "grammar": ["Avem 'bizde var' anlamında kullanılır.", "și iki seçeneği bağlar."], "vocabulary": [{ "word": "plastic", "meaning": "plastik" }, { "word": "reutilizabilă", "meaning": "tekrar kullanılabilir" }] },
+        { "sentence": "Cât costă sacoșa reutilizabilă?", "pronunciation": "Kît kostı sakoșa reutilizabilı?", "meaning": "Tekrar kullanılabilir çanta ne kadar?", "grammar": ["Cât costă 'ne kadar tutuyor/kaç para' kalıbıdır."], "vocabulary": [{ "word": "costă", "meaning": "tutar/fiyatı" }, { "word": "sacoșă", "meaning": "alışveriş çantası" }] },
+        { "sentence": "Este mai rezistentă.", "pronunciation": "Yeste mai rezistentı.", "meaning": "Daha dayanıklı.", "grammar": ["mai + sıfat karşılaştırma yapar: daha.", "rezistentă dişil formdur; sacoșă ile uyumludur."], "vocabulary": [{ "word": "rezistentă", "meaning": "dayanıklı" }] },
+        { "sentence": "Iau o sacoșă reutilizabilă.", "pronunciation": "Yau o sakoșı reutilizabilı.", "meaning": "Tekrar kullanılabilir bir çanta alıyorum.", "grammar": ["Iau 'alıyorum' demektir.", "Alışverişte karar bildirirken çok doğal kullanılır."], "vocabulary": [{ "word": "iau", "meaning": "alıyorum" }] },
+        { "sentence": "Doriți să pun produsele în sacoșă?", "pronunciation": "Dorits sı pun produsele în sakoșı?", "meaning": "Ürünleri çantaya koymamı ister misiniz?", "grammar": ["să pun 'koyayım' anlamı verir.", "în sacoșă 'çantanın içine' demektir."], "vocabulary": [{ "word": "pun", "meaning": "koyarım" }, { "word": "produsele", "meaning": "ürünler" }] },
+        { "sentence": "Le pun eu.", "pronunciation": "Le pun yeu.", "meaning": "Onları ben koyarım.", "grammar": ["Le çoğul nesne zamiridir: onları.", "eu vurgulu 'ben' anlamı katar."], "vocabulary": [{ "word": "le", "meaning": "onları" }, { "word": "eu", "meaning": "ben" }] }
+      ]
+    },
+    {
+      "id": "market-011",
+      "title": "Întreb unde se află un produs",
+      "order": 11,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Mă puteți ajuta, vă rog?" },
+        { "speaker": "Çalışan", "text": "Sigur. Ce produs căutați?" },
+        { "speaker": "Sen", "text": "Caut lapte fără lactoză." },
+        { "speaker": "Çalışan", "text": "Îl găsiți la raionul de lactate, pe partea dreaptă." },
+        { "speaker": "Sen", "text": "Este aproape de iaurturi?" },
+        { "speaker": "Çalışan", "text": "Da, este pe raftul de sus, lângă iaurturi." },
+        { "speaker": "Sen", "text": "Mulțumesc. Dacă nu îl găsesc, pot să revin?" },
+        { "speaker": "Çalışan", "text": "Desigur, vă ajut cu plăcere." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Mă puteți ajuta, vă rog?", "pronunciation": "Mı putets ajuta, vı rog?", "meaning": "Bana yardımcı olabilir misiniz lütfen?", "grammar": ["Mă puteți ajuta çok kullanışlı kibar yardım isteme kalıbıdır.", "vă rog cümleyi daha nazik yapar."], "vocabulary": [{ "word": "ajuta", "meaning": "yardım etmek" }] },
+        { "sentence": "Ce produs căutați?", "pronunciation": "Çe produs kıutats?", "meaning": "Hangi ürünü arıyorsunuz?", "grammar": ["Ce + isim soru kalıbıdır: hangi/ne.", "căutați resmi 'arıyorsunuz' çekimidir."], "vocabulary": [{ "word": "căutați", "meaning": "arıyorsunuz" }] },
+        { "sentence": "Caut lapte fără lactoză.", "pronunciation": "Kaut lapte fırı laktoză.", "meaning": "Laktozsuz süt arıyorum.", "grammar": ["Caut birinci tekil 'arıyorum' demektir.", "fără + isim '...siz' anlamı verir."], "vocabulary": [{ "word": "lapte", "meaning": "süt" }, { "word": "fără lactoză", "meaning": "laktozsuz" }] },
+        { "sentence": "Îl găsiți la raionul de lactate.", "pronunciation": "Îl gısits la rayonul de laktate.", "meaning": "Onu süt ürünleri reyonunda bulursunuz.", "grammar": ["Îl eril nesne zamiridir: onu.", "la raionul de... yer belirtir."], "vocabulary": [{ "word": "găsiți", "meaning": "bulursunuz" }, { "word": "lactate", "meaning": "süt ürünleri" }] },
+        { "sentence": "Pe partea dreaptă.", "pronunciation": "Pe partea dreaptı.", "meaning": "Sağ tarafta.", "grammar": ["pe partea + yön kalıbı yer tariflerinde çok kullanılır.", "dreaptă dişil formdur."], "vocabulary": [{ "word": "partea dreaptă", "meaning": "sağ taraf" }] },
+        { "sentence": "Este aproape de iaurturi?", "pronunciation": "Yeste aproape de iaurturi?", "meaning": "Yoğurtların yakınında mı?", "grammar": ["aproape de '...e yakın' anlamındadır.", "iaurturi çoğuldur."], "vocabulary": [{ "word": "aproape de", "meaning": "yakınında" }, { "word": "iaurturi", "meaning": "yoğurtlar" }] },
+        { "sentence": "Este pe raftul de sus.", "pronunciation": "Yeste pe raftul de sus.", "meaning": "Üst rafta.", "grammar": ["pe raftul 'raftta/rafın üzerinde' demektir.", "de sus 'üstteki' anlamı verir."], "vocabulary": [{ "word": "raftul de sus", "meaning": "üst raf" }] },
+        { "sentence": "Dacă nu îl găsesc, pot să revin?", "pronunciation": "Dakı nu îl gısesk, pot sı revin?", "meaning": "Onu bulamazsam geri gelebilir miyim?", "grammar": ["Dacă şart cümlesi kurar.", "pot să revin 'geri gelebilir miyim' demektir."], "vocabulary": [{ "word": "revin", "meaning": "geri gelirim" }] }
+      ]
+    },
+    {
+      "id": "market-012",
+      "title": "Întreb dacă produsul este pe stoc",
+      "order": 12,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Mai aveți acest produs pe stoc?" },
+        { "speaker": "Çalışan", "text": "Moment, verific în sistem." },
+        { "speaker": "Sen", "text": "Pe raft nu am găsit niciunul." },
+        { "speaker": "Çalışan", "text": "În sistem apar trei bucăți." },
+        { "speaker": "Sen", "text": "Este posibil să fie în depozit?" },
+        { "speaker": "Çalışan", "text": "Da, chem un coleg să verifice în spate." },
+        { "speaker": "Sen", "text": "Dacă nu este disponibil, când revine pe stoc?" },
+        { "speaker": "Çalışan", "text": "De obicei primim marfă joi dimineața." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Mai aveți acest produs pe stoc?", "pronunciation": "Mai avets açest produs pe stok?", "meaning": "Bu ürün hâlâ stokta var mı?", "grammar": ["Mai aveți 'hâlâ var mı / kaldı mı' anlamı katar.", "pe stoc stokta demektir."], "vocabulary": [{ "word": "mai", "meaning": "hâlâ/daha" }, { "word": "stoc", "meaning": "stok" }] },
+        { "sentence": "Verific în sistem.", "pronunciation": "Verifik în sistem.", "meaning": "Sistemde kontrol ediyorum.", "grammar": ["Verific şimdiki zaman: kontrol ediyorum.", "în sistem yer belirtir."], "vocabulary": [{ "word": "verific", "meaning": "kontrol ediyorum" }] },
+        { "sentence": "Pe raft nu am găsit niciunul.", "pronunciation": "Pe raft nu am gısit niçunul.", "meaning": "Rafta hiç bulamadım.", "grammar": ["nu am găsit geçmiş zaman olumsuzdur.", "niciunul 'hiçbiri/hiç tane' demektir."], "vocabulary": [{ "word": "găsit", "meaning": "bulmuş" }, { "word": "niciunul", "meaning": "hiçbiri" }] },
+        { "sentence": "În sistem apar trei bucăți.", "pronunciation": "În sistem apar trei bukıts.", "meaning": "Sistemde üç adet görünüyor.", "grammar": ["apar çoğul özneyle kullanılır: görünüyorlar.", "bucăți adet/parça sayarken kullanılır."], "vocabulary": [{ "word": "apar", "meaning": "görünüyor" }, { "word": "bucăți", "meaning": "adet/parça" }] },
+        { "sentence": "Este posibil să fie în depozit?", "pronunciation": "Yeste posibil sı fie în depozit?", "meaning": "Depoda olması mümkün mü?", "grammar": ["Este posibil să fie 'olması mümkün' yapısıdır.", "depozit depo anlamındadır."], "vocabulary": [{ "word": "posibil", "meaning": "mümkün" }, { "word": "depozit", "meaning": "depo" }] },
+        { "sentence": "Chem un coleg să verifice în spate.", "pronunciation": "Kem un koleg sı verifiçe în spate.", "meaning": "Arkada kontrol etmesi için bir çalışan çağırıyorum.", "grammar": ["să verifice amaç bildirir.", "în spate markette arka depo/arka taraf anlamına gelebilir."], "vocabulary": [{ "word": "în spate", "meaning": "arkada" }] },
+        { "sentence": "Când revine pe stoc?", "pronunciation": "Kınd revine pe stok?", "meaning": "Ne zaman tekrar stoğa gelir?", "grammar": ["revine pe stoc kalıp olarak 'stoğa geri gelir' demektir.", "Când zaman sorar."], "vocabulary": [{ "word": "revine", "meaning": "geri gelir" }] },
+        { "sentence": "Primim marfă joi dimineața.", "pronunciation": "Primim marfı joi diminyatsa.", "meaning": "Perşembe sabahı mal geliyor/alıyoruz.", "grammar": ["Primim 'alıyoruz/teslim alıyoruz' demektir.", "joi dimineața zaman ifadesidir."], "vocabulary": [{ "word": "marfă", "meaning": "mal/ürün sevkiyatı" }, { "word": "joi", "meaning": "perşembe" }] }
+      ]
+    },
+    {
+      "id": "market-013",
+      "title": "Lipsește un produs din comanda online",
+      "order": 13,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Din comanda mea online lipsește un produs." },
+        { "speaker": "Müşteri Hizmetleri", "text": "Îmi pare rău. Îmi puteți da numărul comenzii?" },
+        { "speaker": "Sen", "text": "Da, numărul comenzii este 45821." },
+        { "speaker": "Müşteri Hizmetleri", "text": "Ce produs lipsește din comandă?" },
+        { "speaker": "Sen", "text": "Lipsește detergentul de rufe." },
+        { "speaker": "Müşteri Hizmetleri", "text": "Verific imediat lista produselor livrate." },
+        { "speaker": "Sen", "text": "Aș prefera să primesc produsul, nu rambursarea." },
+        { "speaker": "Müşteri Hizmetleri", "text": "În regulă. Vom programa o livrare separată." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Din comanda mea online lipsește un produs.", "pronunciation": "Din komanda mea online lipsește un produs.", "meaning": "Online siparişimden bir ürün eksik.", "grammar": ["Din comanda mea 'siparişimden' demektir.", "lipsește 'eksik' anlamında kullanılır."], "vocabulary": [{ "word": "comandă", "meaning": "sipariş" }, { "word": "lipsește", "meaning": "eksik" }] },
+        { "sentence": "Îmi puteți da numărul comenzii?", "pronunciation": "Îmi putets da numırul komenzii?", "meaning": "Bana sipariş numarasını verebilir misiniz?", "grammar": ["Îmi puteți da 'bana verebilir misiniz' kalıbıdır.", "comenzii genitif formudur: siparişin."], "vocabulary": [{ "word": "numărul comenzii", "meaning": "sipariş numarası" }] },
+        { "sentence": "Numărul comenzii este 45821.", "pronunciation": "Numırul komenzii yeste...", "meaning": "Sipariş numarası 45821.", "grammar": ["este burada '...dır' anlamındadır.", "Resmi bilgi verirken net ve kısa cümle uygundur."], "vocabulary": [{ "word": "număr", "meaning": "numara" }] },
+        { "sentence": "Ce produs lipsește din comandă?", "pronunciation": "Çe produs lipsește din komandă?", "meaning": "Siparişte hangi ürün eksik?", "grammar": ["Ce produs 'hangi ürün' demektir.", "din comandă siparişten/sipariş içinde anlamı verir."], "vocabulary": [{ "word": "ce produs", "meaning": "hangi ürün" }] },
+        { "sentence": "Lipsește detergentul de rufe.", "pronunciation": "Lipsește detergentul de rufe.", "meaning": "Çamaşır deterjanı eksik.", "grammar": ["detergentul belirli isimdir: deterjan.", "de rufe 'çamaşır için' anlamı katar."], "vocabulary": [{ "word": "detergent", "meaning": "deterjan" }, { "word": "rufe", "meaning": "çamaşırlar" }] },
+        { "sentence": "Verific imediat lista produselor livrate.", "pronunciation": "Verifik imediat lista produselor livrate.", "meaning": "Teslim edilen ürün listesini hemen kontrol ediyorum.", "grammar": ["produselor livrate 'teslim edilen ürünlerin' demektir.", "imediat hemen anlamında kullanılır."], "vocabulary": [{ "word": "livrate", "meaning": "teslim edilmiş" }] },
+        { "sentence": "Aș prefera să primesc produsul, nu rambursarea.", "pronunciation": "Aș prefera sı primesk produsul, nu rambursarea.", "meaning": "Para iadesi değil, ürünü almayı tercih ederim.", "grammar": ["Aș prefera kibar tercih bildirir.", "nu rambursarea karşıtlık kurar: iade değil."], "vocabulary": [{ "word": "rambursare", "meaning": "para iadesi" }] },
+        { "sentence": "Vom programa o livrare separată.", "pronunciation": "Vom programa o livrare separată.", "meaning": "Ayrı bir teslimat planlayacağız.", "grammar": ["Vom programa gelecek zaman: planlayacağız.", "livrare separată ayrı teslimat demektir."], "vocabulary": [{ "word": "livrare", "meaning": "teslimat" }, { "word": "separată", "meaning": "ayrı" }] }
+      ]
+    },
+    {
+      "id": "market-014",
+      "title": "A venit produsul greșit în comanda online",
+      "order": 14,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Am primit un produs greșit în comanda online." },
+        { "speaker": "Müşteri Hizmetleri", "text": "Ne pare rău. Ce produs ați comandat?" },
+        { "speaker": "Sen", "text": "Am comandat cafea măcinată, dar am primit cafea boabe." },
+        { "speaker": "Müşteri Hizmetleri", "text": "Puteți trimite o fotografie cu produsul primit?" },
+        { "speaker": "Sen", "text": "Da, pot trimite fotografia pe e-mail." },
+        { "speaker": "Müşteri Hizmetleri", "text": "După verificare, putem trimite produsul corect." },
+        { "speaker": "Sen", "text": "Trebuie să returnez produsul greșit?" },
+        { "speaker": "Müşteri Hizmetleri", "text": "Da, curierul îl va ridica la următoarea livrare." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Am primit un produs greșit.", "pronunciation": "Am primit un produs greșit.", "meaning": "Yanlış bir ürün aldım.", "grammar": ["Am primit geçmiş zaman: aldım/teslim aldım.", "greșit ürünün yanlış olduğunu belirtir."], "vocabulary": [{ "word": "primit", "meaning": "almış" }, { "word": "greșit", "meaning": "yanlış" }] },
+        { "sentence": "Ce produs ați comandat?", "pronunciation": "Çe produs ats komandat?", "meaning": "Hangi ürünü sipariş ettiniz?", "grammar": ["ați comandat resmi geçmiş zaman: sipariş ettiniz.", "Ce produs nesne sorusudur."], "vocabulary": [{ "word": "comandat", "meaning": "sipariş etmiş" }] },
+        { "sentence": "Am comandat cafea măcinată, dar am primit cafea boabe.", "pronunciation": "Am komandat kafeya mıçinată, dar am primit kafeya boabe.", "meaning": "Öğütülmüş kahve sipariş ettim ama çekirdek kahve geldi.", "grammar": ["dar iki zıt durumu bağlar.", "măcinată dişil sıfat olarak cafea ile uyumludur."], "vocabulary": [{ "word": "cafea măcinată", "meaning": "öğütülmüş kahve" }, { "word": "cafea boabe", "meaning": "çekirdek kahve" }] },
+        { "sentence": "Puteți trimite o fotografie?", "pronunciation": "Putets trimite o fotografie?", "meaning": "Bir fotoğraf gönderebilir misiniz?", "grammar": ["Puteți trimite resmi rica sorusudur.", "o fotografie belirsiz tekil isimdir."], "vocabulary": [{ "word": "trimite", "meaning": "göndermek" }, { "word": "fotografie", "meaning": "fotoğraf" }] },
+        { "sentence": "Pot trimite fotografia pe e-mail.", "pronunciation": "Pot trimite fotografia pe imeyl.", "meaning": "Fotoğrafı e-posta ile gönderebilirim.", "grammar": ["pe e-mail günlük kullanımda e-posta üzerinden anlamındadır.", "Pot trimite 'gönderebilirim' demektir."], "vocabulary": [{ "word": "e-mail", "meaning": "e-posta" }] },
+        { "sentence": "După verificare, putem trimite produsul corect.", "pronunciation": "După verifikare, putem trimite produsul korekt.", "meaning": "Kontrolden sonra doğru ürünü gönderebiliriz.", "grammar": ["După + isim '...den sonra' demektir.", "produsul corect doğru ürün anlamındadır."], "vocabulary": [{ "word": "verificare", "meaning": "kontrol" }] },
+        { "sentence": "Trebuie să returnez produsul greșit?", "pronunciation": "Trebuye sı returnez produsul greșit?", "meaning": "Yanlış ürünü iade etmem gerekiyor mu?", "grammar": ["Trebuie să returnez 'iade etmem gerekiyor' demektir."], "vocabulary": [{ "word": "returnez", "meaning": "iade ederim" }] },
+        { "sentence": "Curierul îl va ridica la următoarea livrare.", "pronunciation": "Kurierul îl va ridika la următoarya livrare.", "meaning": "Kurye onu sonraki teslimatta alacak.", "grammar": ["va ridica gelecek zaman: alacak.", "îl nesne zamiri ürüne gönderme yapar."], "vocabulary": [{ "word": "curier", "meaning": "kurye" }, { "word": "următoarea", "meaning": "sonraki" }] }
+      ]
+    },
+    {
+      "id": "market-015",
+      "title": "Livrarea comenzii întârzie",
+      "order": 15,
+      "dialogue": [
+        { "speaker": "Sen", "text": "Bună ziua. Livrarea comenzii mele întârzie." },
+        { "speaker": "Müşteri Hizmetleri", "text": "Îmi pare rău. Îmi puteți da numărul comenzii?" },
+        { "speaker": "Sen", "text": "Da, comanda trebuia să ajungă între orele 10 și 12." },
+        { "speaker": "Müşteri Hizmetleri", "text": "Verific acum statusul curierului." },
+        { "speaker": "Sen", "text": "Am produse congelate în comandă și sunt îngrijorat." },
+        { "speaker": "Müşteri Hizmetleri", "text": "Înțeleg. Curierul este pe drum, dar are întârziere." },
+        { "speaker": "Sen", "text": "Dacă produsele ajung deteriorate, ce pot face?" },
+        { "speaker": "Müşteri Hizmetleri", "text": "Puteți solicita rambursare sau înlocuire." }
+      ],
+      "sentenceNotes": [
+        { "sentence": "Livrarea comenzii mele întârzie.", "pronunciation": "Livrarea komenzii mele întârzie.", "meaning": "Siparişimin teslimatı gecikiyor.", "grammar": ["Livrarea comenzii mele 'siparişimin teslimatı' tamlamasıdır.", "întârzie şimdiki zamanda 'gecikiyor' demektir."], "vocabulary": [{ "word": "livrare", "meaning": "teslimat" }, { "word": "întârzie", "meaning": "gecikiyor" }] },
+        { "sentence": "Îmi puteți da numărul comenzii?", "pronunciation": "Îmi putets da numırul komenzii?", "meaning": "Bana sipariş numarasını verebilir misiniz?", "grammar": ["Îmi puteți da kibar bilgi isteme kalıbıdır.", "numărul comenzii sipariş numarasıdır."], "vocabulary": [{ "word": "număr", "meaning": "numara" }] },
+        { "sentence": "Comanda trebuia să ajungă între orele 10 și 12.", "pronunciation": "Komanda trebuya sı ajungă între orele zeçe și doisprezeçe.", "meaning": "Sipariş 10 ile 12 arasında gelmeliydi.", "grammar": ["trebuia să geçmiş gereklilik/beklenti bildirir.", "între orele... saat aralığı verir."], "vocabulary": [{ "word": "ajungă", "meaning": "ulaşsın/gelsin" }, { "word": "între", "meaning": "arasında" }] },
+        { "sentence": "Verific acum statusul curierului.", "pronunciation": "Verifik akum statusul kurierului.", "meaning": "Şimdi kuryenin durumunu kontrol ediyorum.", "grammar": ["statusul curierului 'kuryenin durumu' demektir.", "acum şimdi anlamındadır."], "vocabulary": [{ "word": "status", "meaning": "durum" }, { "word": "curier", "meaning": "kurye" }] },
+        { "sentence": "Am produse congelate în comandă.", "pronunciation": "Am produse konjelate în komandă.", "meaning": "Siparişte donmuş ürünler var.", "grammar": ["produse congelate çoğul isim tamlamasıdır.", "în comandă sipariş içinde demektir."], "vocabulary": [{ "word": "congelate", "meaning": "donmuş" }] },
+        { "sentence": "Sunt îngrijorat.", "pronunciation": "Sunt îngrijorat.", "meaning": "Endişeliyim.", "grammar": ["Sunt + sıfat durum bildirir.", "Erkek konuşmacı îngrijorat, kadın konuşmacı îngrijorată der."], "vocabulary": [{ "word": "îngrijorat", "meaning": "endişeli" }] },
+        { "sentence": "Curierul este pe drum, dar are întârziere.", "pronunciation": "Kurierul yeste pe drum, dar are întârziere.", "meaning": "Kurye yolda ama gecikmesi var.", "grammar": ["este pe drum 'yolda' kalıbıdır.", "are întârziere 'gecikmesi var' demektir."], "vocabulary": [{ "word": "pe drum", "meaning": "yolda" }, { "word": "întârziere", "meaning": "gecikme" }] },
+        { "sentence": "Puteți solicita rambursare sau înlocuire.", "pronunciation": "Putets soliçita rambursare sau înlokuire.", "meaning": "Para iadesi veya değişim talep edebilirsiniz.", "grammar": ["Puteți solicita resmi 'talep edebilirsiniz' yapısıdır.", "sau iki seçenek sunar."], "vocabulary": [{ "word": "rambursare", "meaning": "para iadesi" }, { "word": "înlocuire", "meaning": "değişim/yerine koyma" }] }
+      ]
+    }
+  ]
 }
