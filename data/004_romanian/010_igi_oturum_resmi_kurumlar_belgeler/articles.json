@@ -382,6 +382,118 @@
       "id": "igi-002",
       "title": "A întreba despre documentele necesare pentru permisul de ședere",
       "order": 2,
+      "dialogue": [
+        {
+          "speaker": "Sen",
+          "text": "Aș dori să depun dosarul pentru permisul de ședere."
+        },
+        {
+          "speaker": "Memur",
+          "text": "Aveți lista documentelor necesare?"
+        },
+        {
+          "speaker": "Sen",
+          "text": "Am pașaportul, contractul de muncă și dovada adresei."
+        },
+        {
+          "speaker": "Sen",
+          "text": "Îmi puteți spune dacă mai este nevoie de alte documente?"
+        }
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Aș dori să depun dosarul pentru permisul de ședere.",
+          "pronunciation": "Aș dori sı depun dosarul pentru permisul de ședere.",
+          "meaning": "Oturum izni için dosyayı teslim etmek istiyorum.",
+          "grammar": [
+            "Aș dori resmi ve kibar istek bildirir.",
+            "să depun ikinci fiili bağlar: teslim etmek."
+          ],
+          "vocabulary": [
+            {
+              "word": "depun",
+              "meaning": "teslim ederim, başvururum"
+            },
+            {
+              "word": "dosarul",
+              "meaning": "dosya"
+            },
+            {
+              "word": "permis de ședere",
+              "meaning": "oturum izni"
+            }
+          ]
+        },
+        {
+          "sentence": "Aveți lista documentelor necesare?",
+          "pronunciation": "Avets lista dokumentelor necesare?",
+          "meaning": "Gerekli belgelerin listesi sizde var mı?",
+          "grammar": [
+            "Aveți resmi 'var mı / sahip misiniz' kalıbıdır.",
+            "documentelor necesare 'gerekli belgelerin' anlamındadır."
+          ],
+          "vocabulary": [
+            {
+              "word": "lista",
+              "meaning": "liste"
+            },
+            {
+              "word": "documentelor",
+              "meaning": "belgelerin"
+            },
+            {
+              "word": "necesare",
+              "meaning": "gerekli"
+            }
+          ]
+        },
+        {
+          "sentence": "Am pașaportul, contractul de muncă și dovada adresei.",
+          "pronunciation": "Am pașaportul, kontraktul de munkı și dovada adresei.",
+          "meaning": "Pasaportum, iş sözleşmem ve adres kanıtım var.",
+          "grammar": [
+            "Am 'var / sahibim' anlamında kullanılır.",
+            "și bağlacı listedeki son öğeyi bağlar."
+          ],
+          "vocabulary": [
+            {
+              "word": "pașaportul",
+              "meaning": "pasaport"
+            },
+            {
+              "word": "contractul de muncă",
+              "meaning": "iş sözleşmesi"
+            },
+            {
+              "word": "dovada adresei",
+              "meaning": "adres kanıtı"
+            }
+          ]
+        },
+        {
+          "sentence": "Îmi puteți spune dacă mai este nevoie de alte documente?",
+          "pronunciation": "İmi putets spune dakı mai yeste nevoye de alte dokumente?",
+          "meaning": "Başka belgelere gerek olup olmadığını bana söyleyebilir misiniz?",
+          "grammar": [
+            "Îmi puteți spune kibar 'bana söyleyebilir misiniz' kalıbıdır.",
+            "este nevoie de '...e ihtiyaç var' anlamına gelir."
+          ],
+          "vocabulary": [
+            {
+              "word": "îmi",
+              "meaning": "bana"
+            },
+            {
+              "word": "dacă",
+              "meaning": "eğer / olup olmadığını"
+            },
+            {
+              "word": "alte documente",
+              "meaning": "başka belgeler"
+            }
+          ]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Aș dori să depun dosarul pentru permisul de ședere și vreau să mă asigur că am toate documentele necesare. Îmi puteți spune, vă rog, ce acte trebuie să aduc?",
         "Am pașaportul, contractul de muncă și dovada adresei, dar nu sunt sigur dacă mai este nevoie de alte documente. Aș aprecia dacă mi-ați putea explica lista completă."
@@ -392,6 +504,82 @@
       "id": "igi-003",
       "title": "A explica un document lipsă",
       "order": 3,
+      "dialogue": [
+        {
+          "speaker": "Sen",
+          "text": "Am observat că îmi lipsește un document."
+        },
+        {
+          "speaker": "Memur",
+          "text": "Ce document lipsește din dosar?"
+        },
+        {
+          "speaker": "Sen",
+          "text": "Nu am reușit să îl obțin la timp."
+        },
+        {
+          "speaker": "Sen",
+          "text": "Pot să aduc documentul lipsă mai târziu?"
+        }
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Am observat că îmi lipsește un document.",
+          "pronunciation": "Am observat kı imi lipsește un dokument.",
+          "meaning": "Bir belgemin eksik olduğunu fark ettim.",
+          "grammar": [
+            "Am observat geçmiş zamanda 'fark ettim' demektir."
+          ],
+          "vocabulary": [
+            {
+              "word": "lipsește",
+              "meaning": "eksik"
+            }
+          ]
+        },
+        {
+          "sentence": "Ce document lipsește din dosar?",
+          "pronunciation": "Çe dokument lipsește din dosar?",
+          "meaning": "Dosyadan hangi belge eksik?",
+          "grammar": [
+            "Ce document 'hangi belge' soru kalıbıdır."
+          ],
+          "vocabulary": [
+            {
+              "word": "din dosar",
+              "meaning": "dosyadan / dosyada"
+            }
+          ]
+        },
+        {
+          "sentence": "Nu am reușit să îl obțin la timp.",
+          "pronunciation": "Nu am reuşit sı îl obtsin la timp.",
+          "meaning": "Onu zamanında alamadım.",
+          "grammar": [
+            "Nu am reușit 'başaramadım' anlamındadır."
+          ],
+          "vocabulary": [
+            {
+              "word": "la timp",
+              "meaning": "zamanında"
+            }
+          ]
+        },
+        {
+          "sentence": "Pot să aduc documentul lipsă mai târziu?",
+          "pronunciation": "Pot sı aduk dokumentul lipsı mai tırziu?",
+          "meaning": "Eksik belgeyi daha sonra getirebilir miyim?",
+          "grammar": [
+            "Pot să izin veya yeterlilik sorar: yapabilir miyim?"
+          ],
+          "vocabulary": [
+            {
+              "word": "mai târziu",
+              "meaning": "daha sonra"
+            }
+          ]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Am venit astăzi pentru dosarul meu, dar am observat că îmi lipsește un document. Din păcate, nu am reușit să îl obțin la timp.",
         "Vă rog să-mi spuneți dacă pot depune dosarul acum și să aduc documentul lipsă mai târziu. Dacă nu este posibil, aș dori să știu ce trebuie să fac în continuare."
@@ -402,6 +590,82 @@
       "id": "igi-004",
       "title": "A întreba despre stadiul dosarului",
       "order": 4,
+      "dialogue": [
+        {
+          "speaker": "Sen",
+          "text": "Aș dori să verific stadiul dosarului meu."
+        },
+        {
+          "speaker": "Memur",
+          "text": "Aveți numărul de înregistrare?"
+        },
+        {
+          "speaker": "Sen",
+          "text": "Da, vă pot oferi numărul de înregistrare."
+        },
+        {
+          "speaker": "Sen",
+          "text": "Trebuie să mai aduc ceva?"
+        }
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Aș dori să verific stadiul dosarului meu.",
+          "pronunciation": "Aș dori sı verifik stadiul dosarului meu.",
+          "meaning": "Dosyamın durumunu kontrol etmek istiyorum.",
+          "grammar": [
+            "stadiul dosarului 'dosyanın aşaması/durumu' demektir."
+          ],
+          "vocabulary": [
+            {
+              "word": "stadiul",
+              "meaning": "durum, aşama"
+            }
+          ]
+        },
+        {
+          "sentence": "Aveți numărul de înregistrare?",
+          "pronunciation": "Avets numırul de înrejistrare?",
+          "meaning": "Kayıt numaranız var mı?",
+          "grammar": [
+            "Aveți resmi soru kalıbıdır."
+          ],
+          "vocabulary": [
+            {
+              "word": "numărul de înregistrare",
+              "meaning": "kayıt numarası"
+            }
+          ]
+        },
+        {
+          "sentence": "Da, vă pot oferi numărul de înregistrare.",
+          "pronunciation": "Da, vı pot oferi numırul de înrejistrare.",
+          "meaning": "Evet, size kayıt numarasını verebilirim.",
+          "grammar": [
+            "vă pot oferi 'size sunabilirim' resmi kalıbıdır."
+          ],
+          "vocabulary": [
+            {
+              "word": "oferi",
+              "meaning": "vermek, sunmak"
+            }
+          ]
+        },
+        {
+          "sentence": "Trebuie să mai aduc ceva?",
+          "pronunciation": "Trebuye sı mai aduk çeva?",
+          "meaning": "Başka bir şey getirmem gerekiyor mu?",
+          "grammar": [
+            "Trebuie să 'gerekiyor' yapısıdır."
+          ],
+          "vocabulary": [
+            {
+              "word": "ceva",
+              "meaning": "bir şey"
+            }
+          ]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Aș dori să verific stadiul dosarului meu pentru permisul de ședere. Am depus documentele la IGI și vreau să știu dacă dosarul este în procesare.",
         "Vă pot oferi numele meu, numărul pașaportului sau numărul de înregistrare, dacă este necesar. Vă rog să-mi spuneți dacă mai trebuie să aduc ceva."
@@ -412,6 +676,82 @@
       "id": "igi-005",
       "title": "A întreba dacă permisul de ședere este gata",
       "order": 5,
+      "dialogue": [
+        {
+          "speaker": "Sen",
+          "text": "Aș dori să știu dacă permisul meu de ședere este gata."
+        },
+        {
+          "speaker": "Memur",
+          "text": "Când ați depus dosarul?"
+        },
+        {
+          "speaker": "Sen",
+          "text": "Am depus dosarul acum ceva timp."
+        },
+        {
+          "speaker": "Sen",
+          "text": "Pot veni să ridic cardul?"
+        }
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Aș dori să știu dacă permisul meu de ședere este gata.",
+          "pronunciation": "Aș dori sı știu dakı permisul meu de ședere yeste gata.",
+          "meaning": "Oturum iznimin hazır olup olmadığını bilmek istiyorum.",
+          "grammar": [
+            "dacă burada 'olup olmadığını' anlamı verir."
+          ],
+          "vocabulary": [
+            {
+              "word": "gata",
+              "meaning": "hazır"
+            }
+          ]
+        },
+        {
+          "sentence": "Când ați depus dosarul?",
+          "pronunciation": "Kınd ats depus dosarul?",
+          "meaning": "Dosyayı ne zaman teslim ettiniz?",
+          "grammar": [
+            "Când 'ne zaman' soru kelimesidir."
+          ],
+          "vocabulary": [
+            {
+              "word": "ați depus",
+              "meaning": "teslim ettiniz"
+            }
+          ]
+        },
+        {
+          "sentence": "Am depus dosarul acum ceva timp.",
+          "pronunciation": "Am depus dosarul akum çeva timp.",
+          "meaning": "Dosyayı bir süre önce teslim ettim.",
+          "grammar": [
+            "Am depus geçmiş zaman 'teslim ettim' demektir."
+          ],
+          "vocabulary": [
+            {
+              "word": "acum ceva timp",
+              "meaning": "bir süre önce"
+            }
+          ]
+        },
+        {
+          "sentence": "Pot veni să ridic cardul?",
+          "pronunciation": "Pot veni sı ridik kardul?",
+          "meaning": "Kartı almaya gelebilir miyim?",
+          "grammar": [
+            "să ridic resmi kurumlarda 'teslim almak' anlamında kullanılır."
+          ],
+          "vocabulary": [
+            {
+              "word": "ridic",
+              "meaning": "teslim alırım"
+            }
+          ]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Aș dori să știu dacă permisul meu de ședere este gata. Am depus dosarul acum ceva timp și aș vrea să verific dacă pot veni să ridic cardul.",
         "Vă rog să-mi spuneți ce document trebuie să aduc atunci când vin să îl ridic. De asemenea, aș vrea să știu programul de lucru pentru ridicarea permisului."
@@ -422,6 +762,42 @@
       "id": "igi-006",
       "title": "A anunța schimbarea adresei",
       "order": 6,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Aș dori să anunț schimbarea adresei mele."},
+        {"speaker": "Memur", "text": "Când v-ați mutat la noua adresă?"},
+        {"speaker": "Sen", "text": "M-am mutat recent la o altă adresă."},
+        {"speaker": "Sen", "text": "Trebuie să completez un formular separat?"}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Aș dori să anunț schimbarea adresei mele.",
+          "pronunciation": "Aș dori sı anunts skimbarya adresei mele.",
+          "meaning": "Adres değişikliğimi bildirmek istiyorum.",
+          "grammar": ["schimbarea adresei mele 'adresimin değişikliği' anlamındadır."],
+          "vocabulary": [{"word": "anunț", "meaning": "bildiririm"}, {"word": "adresei mele", "meaning": "adresimin"}]
+        },
+        {
+          "sentence": "Când v-ați mutat la noua adresă?",
+          "pronunciation": "Kınd v-ats mutat la noua adresı?",
+          "meaning": "Yeni adrese ne zaman taşındınız?",
+          "grammar": ["v-ați mutat resmi geçmiş zaman dönüşlü fiildir."],
+          "vocabulary": [{"word": "mutat", "meaning": "taşınmış"}, {"word": "noua adresă", "meaning": "yeni adres"}]
+        },
+        {
+          "sentence": "M-am mutat recent la o altă adresă.",
+          "pronunciation": "M-am mutat reçent la o altı adresı.",
+          "meaning": "Yakın zamanda başka bir adrese taşındım.",
+          "grammar": ["M-am mutat 'taşındım' demektir; dönüşlü yapı kullanılır."],
+          "vocabulary": [{"word": "recent", "meaning": "yakın zamanda"}, {"word": "altă", "meaning": "başka"}]
+        },
+        {
+          "sentence": "Trebuie să completez un formular separat?",
+          "pronunciation": "Trebuye sı komplektez un formular separat?",
+          "meaning": "Ayrı bir form doldurmam gerekiyor mu?",
+          "grammar": ["Trebuie să completez 'doldurmam gerekiyor' yapısıdır."],
+          "vocabulary": [{"word": "completez", "meaning": "doldururum"}, {"word": "formular separat", "meaning": "ayrı form"}]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Aș dori să anunț schimbarea adresei mele. M-am mutat recent la o altă adresă și vreau să actualizez informațiile în dosarul meu.",
         "Am pregătit documentele necesare pentru noua adresă. Vă rog să-mi spuneți dacă trebuie să completez un formular sau să fac o programare separată."
@@ -432,6 +808,42 @@
       "id": "igi-007",
       "title": "A explica schimbarea locului de muncă sau a contractului",
       "order": 7,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Mi s-a schimbat situația profesională."},
+        {"speaker": "Memur", "text": "Aveți un nou contract de muncă?"},
+        {"speaker": "Sen", "text": "Da, pot aduce noul contract."},
+        {"speaker": "Sen", "text": "Care este procedura corectă în această situație?"}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Mi s-a schimbat situația profesională.",
+          "pronunciation": "Mi s-a skimbat situația profesionalı.",
+          "meaning": "Mesleki durumum değişti.",
+          "grammar": ["Mi s-a schimbat 'benim için değişti' anlamı veren dönüşlü yapıdır."],
+          "vocabulary": [{"word": "situația profesională", "meaning": "mesleki durum"}]
+        },
+        {
+          "sentence": "Aveți un nou contract de muncă?",
+          "pronunciation": "Avets un nou kontrakt de munkı?",
+          "meaning": "Yeni bir iş sözleşmeniz var mı?",
+          "grammar": ["un nou contract 'yeni bir sözleşme' demektir."],
+          "vocabulary": [{"word": "nou", "meaning": "yeni"}, {"word": "contract de muncă", "meaning": "iş sözleşmesi"}]
+        },
+        {
+          "sentence": "Da, pot aduce noul contract.",
+          "pronunciation": "Da, pot aduçe noul kontrakt.",
+          "meaning": "Evet, yeni sözleşmeyi getirebilirim.",
+          "grammar": ["pot aduce 'getirebilirim' anlamında kullanılır."],
+          "vocabulary": [{"word": "aduce", "meaning": "getirmek"}, {"word": "noul contract", "meaning": "yeni sözleşme"}]
+        },
+        {
+          "sentence": "Care este procedura corectă în această situație?",
+          "pronunciation": "Kare yeste prosedura korektı în açeastă situație?",
+          "meaning": "Bu durumda doğru prosedür nedir?",
+          "grammar": ["Care este 'nedir / hangisidir' resmi soru kalıbıdır."],
+          "vocabulary": [{"word": "procedura corectă", "meaning": "doğru prosedür"}, {"word": "situație", "meaning": "durum"}]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Aș dori să vă informez că mi s-a schimbat situația profesională. Am un nou contract de muncă / s-a modificat contractul meu actual și vreau să știu dacă trebuie să actualizez dosarul.",
         "Pot aduce noul contract și orice alt document necesar. Vă rog să-mi spuneți care este procedura corectă în această situație."
@@ -442,6 +854,42 @@
       "id": "igi-008",
       "title": "A explica situația reînnoirii pașaportului",
       "order": 8,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Pașaportul meu este în proces de reînnoire."},
+        {"speaker": "Memur", "text": "Aveți o dovadă oficială?"},
+        {"speaker": "Sen", "text": "Da, pot aduce documentul care confirmă acest lucru."},
+        {"speaker": "Sen", "text": "Pot continua procedura cu această dovadă?"}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Pașaportul meu este în proces de reînnoire.",
+          "pronunciation": "Pașaportul meu yeste în proçes de reînnoire.",
+          "meaning": "Pasaportum yenileme sürecinde.",
+          "grammar": ["este în proces de '... sürecinde' kalıbıdır."],
+          "vocabulary": [{"word": "pașaportul meu", "meaning": "pasaportum"}, {"word": "reînnoire", "meaning": "yenileme"}]
+        },
+        {
+          "sentence": "Aveți o dovadă oficială?",
+          "pronunciation": "Avets o dovadı ofiçialı?",
+          "meaning": "Resmi bir kanıtınız var mı?",
+          "grammar": ["o dovadă oficială tekil dişil isim tamlamasıdır."],
+          "vocabulary": [{"word": "dovadă", "meaning": "kanıt"}, {"word": "oficială", "meaning": "resmi"}]
+        },
+        {
+          "sentence": "Da, pot aduce documentul care confirmă acest lucru.",
+          "pronunciation": "Da, pot aduçe dokumentul kare konfirmı açest lukru.",
+          "meaning": "Evet, bunu doğrulayan belgeyi getirebilirim.",
+          "grammar": ["care confirmă 'doğrulayan' anlamında relative clause yapısıdır."],
+          "vocabulary": [{"word": "confirmă", "meaning": "doğrular"}, {"word": "acest lucru", "meaning": "bu şey / bu durum"}]
+        },
+        {
+          "sentence": "Pot continua procedura cu această dovadă?",
+          "pronunciation": "Pot kontinua prosedura ku açeastă dovadı?",
+          "meaning": "Bu kanıtla prosedüre devam edebilir miyim?",
+          "grammar": ["cu această dovadă 'bu kanıtla' anlamındadır."],
+          "vocabulary": [{"word": "continua", "meaning": "devam etmek"}, {"word": "procedura", "meaning": "prosedür"}]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Pașaportul meu este în proces de reînnoire și de aceea nu am încă noul document. Am depus cererea la autoritățile competente și aștept să primesc pașaportul nou.",
         "Vă rog să-mi spuneți dacă pot continua procedura cu dovada că pașaportul este în curs de reînnoire. Dacă este nevoie, pot aduce documentul oficial care confirmă acest lucru."
@@ -452,6 +900,42 @@
       "id": "igi-009",
       "title": "A cere ajutor pentru completarea unui formular",
       "order": 9,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Am acest formular de completat."},
+        {"speaker": "Sen", "text": "Nu sunt sigur cum trebuie să scriu aceste informații."},
+        {"speaker": "Memur", "text": "Vă pot explica fiecare câmp."},
+        {"speaker": "Sen", "text": "Puteți verifica dacă informațiile sunt corecte?"}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Am acest formular de completat.",
+          "pronunciation": "Am açest formular de komplektat.",
+          "meaning": "Doldurmam gereken bu form var.",
+          "grammar": ["de completat 'doldurulacak / doldurmak için' anlamındadır."],
+          "vocabulary": [{"word": "formular", "meaning": "form"}, {"word": "completat", "meaning": "doldurulmuş / doldurmak"}]
+        },
+        {
+          "sentence": "Nu sunt sigur cum trebuie să scriu aceste informații.",
+          "pronunciation": "Nu sunt sigur kum trebuye sı skriu açeste informatsii.",
+          "meaning": "Bu bilgileri nasıl yazmam gerektiğinden emin değilim.",
+          "grammar": ["cum trebuie să 'nasıl ... gerekiyor' anlamı verir."],
+          "vocabulary": [{"word": "scriu", "meaning": "yazarım"}, {"word": "informații", "meaning": "bilgiler"}]
+        },
+        {
+          "sentence": "Vă pot explica fiecare câmp.",
+          "pronunciation": "Vı pot explika fiekaře kîmp.",
+          "meaning": "Size her alanı açıklayabilirim.",
+          "grammar": ["fiecare câmp 'her alan' demektir."],
+          "vocabulary": [{"word": "explica", "meaning": "açıklamak"}, {"word": "câmp", "meaning": "alan"}]
+        },
+        {
+          "sentence": "Puteți verifica dacă informațiile sunt corecte?",
+          "pronunciation": "Putets verifika dakı informatsiile sunt korekte?",
+          "meaning": "Bilgilerin doğru olup olmadığını kontrol edebilir misiniz?",
+          "grammar": ["dacă burada 'olup olmadığını' anlamında kullanılır."],
+          "vocabulary": [{"word": "verifica", "meaning": "kontrol etmek"}, {"word": "corecte", "meaning": "doğru"}]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Am acest formular de completat, dar nu sunt sigur cum trebuie să scriu anumite informații. Îmi puteți explica, vă rog, ce trebuie să completez aici?",
         "Nu vreau să fac o greșeală în formular. Dacă este posibil, aș dori să verificați dacă informațiile sunt scrise corect înainte să îl depun."
@@ -462,6 +946,42 @@
       "id": "igi-010",
       "title": "A obține un document de la notar",
       "order": 10,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Am nevoie de un document notarial pentru dosarul meu."},
+        {"speaker": "Noter", "text": "Ce tip de document vă trebuie?"},
+        {"speaker": "Sen", "text": "Aș dori să știu cât durează procedura."},
+        {"speaker": "Sen", "text": "Documentul poate fi eliberat astăzi?"}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Am nevoie de un document notarial pentru dosarul meu.",
+          "pronunciation": "Am nevoye de un dokument notarial pentru dosarul meu.",
+          "meaning": "Dosyam için noter belgesine ihtiyacım var.",
+          "grammar": ["Am nevoie de '...e ihtiyacım var' kalıbıdır."],
+          "vocabulary": [{"word": "document notarial", "meaning": "noter belgesi"}, {"word": "dosarul meu", "meaning": "dosyam"}]
+        },
+        {
+          "sentence": "Ce tip de document vă trebuie?",
+          "pronunciation": "Çe tip de dokument vı trebuye?",
+          "meaning": "Size hangi tür belge gerekiyor?",
+          "grammar": ["vă trebuie 'size gerekiyor' anlamına gelir."],
+          "vocabulary": [{"word": "tip", "meaning": "tür"}, {"word": "trebuie", "meaning": "gerekiyor"}]
+        },
+        {
+          "sentence": "Aș dori să știu cât durează procedura.",
+          "pronunciation": "Aș dori sı știu kît dureazı prosedura.",
+          "meaning": "Prosedürün ne kadar sürdüğünü bilmek istiyorum.",
+          "grammar": ["cât durează 'ne kadar sürer' demektir."],
+          "vocabulary": [{"word": "durează", "meaning": "sürer"}, {"word": "procedura", "meaning": "prosedür"}]
+        },
+        {
+          "sentence": "Documentul poate fi eliberat astăzi?",
+          "pronunciation": "Dokumentul poate fi eliberat astızi?",
+          "meaning": "Belge bugün verilebilir mi?",
+          "grammar": ["poate fi eliberat edilgen yapıdır: verilebilir/düzenlenebilir."],
+          "vocabulary": [{"word": "eliberat", "meaning": "verilmiş, çıkarılmış"}, {"word": "astăzi", "meaning": "bugün"}]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Am nevoie de un document notarial pentru dosarul meu. Aș dori să știu ce acte trebuie să prezint și cât durează procedura.",
         "De asemenea, vă rog să-mi spuneți care este costul și dacă documentul poate fi eliberat în aceeași zi. Am nevoie de el pentru o instituție publică."
@@ -472,6 +992,42 @@
       "id": "igi-011",
       "title": "A cere informații despre apostilă și traducere",
       "order": 11,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Am un document străin."},
+        {"speaker": "Memur", "text": "Documentul trebuie tradus și legalizat."},
+        {"speaker": "Sen", "text": "Are nevoie și de apostilă?"},
+        {"speaker": "Sen", "text": "Vreau să îl pregătesc în forma acceptată de instituție."}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Am un document străin.",
+          "pronunciation": "Am un dokument strıin.",
+          "meaning": "Yabancı bir belgem var.",
+          "grammar": ["străin sıfatı 'yabancı' anlamında document kelimesini niteler."],
+          "vocabulary": [{"word": "document", "meaning": "belge"}, {"word": "străin", "meaning": "yabancı"}]
+        },
+        {
+          "sentence": "Documentul trebuie tradus și legalizat.",
+          "pronunciation": "Dokumentul trebuye tradus și legalizat.",
+          "meaning": "Belgenin çevrilmesi ve onaylatılması gerekiyor.",
+          "grammar": ["trebuie tradus pasif gereklilik anlamı verir."],
+          "vocabulary": [{"word": "tradus", "meaning": "çevrilmiş"}, {"word": "legalizat", "meaning": "onaylatılmış"}]
+        },
+        {
+          "sentence": "Are nevoie și de apostilă?",
+          "pronunciation": "Are nevoye și de apostilı?",
+          "meaning": "Apostile de ihtiyacı var mı?",
+          "grammar": ["Are nevoie de '...e ihtiyacı var' kalıbıdır."],
+          "vocabulary": [{"word": "apostilă", "meaning": "apostil"}, {"word": "și", "meaning": "de, ve"}]
+        },
+        {
+          "sentence": "Vreau să îl pregătesc în forma acceptată de instituție.",
+          "pronunciation": "Vreau sı îl pregıtesk în forma açeptată de institutsie.",
+          "meaning": "Onu kurumun kabul ettiği biçimde hazırlamak istiyorum.",
+          "grammar": ["forma acceptată de instituție 'kurum tarafından kabul edilen form' demektir."],
+          "vocabulary": [{"word": "pregătesc", "meaning": "hazırlarım"}, {"word": "instituție", "meaning": "kurum"}]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Am un document străin și vreau să știu dacă trebuie tradus și legalizat în România. De asemenea, nu sunt sigur dacă documentul are nevoie de apostilă.",
         "Îmi puteți spune, vă rog, care este procedura corectă? Aș vrea să pregătesc documentul în forma acceptată de instituție."
@@ -482,6 +1038,42 @@
       "id": "igi-012",
       "title": "A cere un document de la primărie sau administrația fiscală",
       "order": 12,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Aș dori să solicit un document oficial."},
+        {"speaker": "Memur", "text": "Pentru ce instituție aveți nevoie de document?"},
+        {"speaker": "Sen", "text": "Am nevoie de el pentru dosarul meu administrativ."},
+        {"speaker": "Sen", "text": "În cât timp se eliberează documentul?"}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Aș dori să solicit un document oficial.",
+          "pronunciation": "Aș dori sı soliçit un dokument ofiçial.",
+          "meaning": "Resmi bir belge talep etmek istiyorum.",
+          "grammar": ["să solicit resmi 'talep etmek' fiilidir."],
+          "vocabulary": [{"word": "solicit", "meaning": "talep ederim"}, {"word": "oficial", "meaning": "resmi"}]
+        },
+        {
+          "sentence": "Pentru ce instituție aveți nevoie de document?",
+          "pronunciation": "Pentru çe institutsie avets nevoye de dokument?",
+          "meaning": "Belgeye hangi kurum için ihtiyacınız var?",
+          "grammar": ["Pentru ce instituție 'hangi kurum için' demektir."],
+          "vocabulary": [{"word": "instituție", "meaning": "kurum"}, {"word": "aveți nevoie", "meaning": "ihtiyacınız var"}]
+        },
+        {
+          "sentence": "Am nevoie de el pentru dosarul meu administrativ.",
+          "pronunciation": "Am nevoye de yel pentru dosarul meu administrativ.",
+          "meaning": "Ona idari dosyam için ihtiyacım var.",
+          "grammar": ["de el 'ona / o belgeye' anlamındadır."],
+          "vocabulary": [{"word": "dosar administrativ", "meaning": "idari dosya"}]
+        },
+        {
+          "sentence": "În cât timp se eliberează documentul?",
+          "pronunciation": "În kît timp se elibereazı dokumentul?",
+          "meaning": "Belge ne kadar sürede veriliyor?",
+          "grammar": ["se eliberează edilgen/resmi kullanımda 'verilir' demektir."],
+          "vocabulary": [{"word": "în cât timp", "meaning": "ne kadar sürede"}, {"word": "eliberează", "meaning": "verir, çıkarır"}]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Aș dori să solicit un document oficial de la primărie / administrația fiscală. Am nevoie de acest document pentru dosarul meu administrativ.",
         "Vă rog să-mi spuneți ce formular trebuie să completez și ce acte trebuie să prezint. De asemenea, aș vrea să știu în cât timp se eliberează documentul."
@@ -492,6 +1084,42 @@
       "id": "igi-013",
       "title": "A cere informații în timp ce aștepți la rând",
       "order": 13,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Îmi cer scuze, aș dori să întreb ceva rapid."},
+        {"speaker": "Sen", "text": "Aici este rândul pentru depunerea documentelor?"},
+        {"speaker": "Memur", "text": "Nu, pentru ridicarea permisului trebuie să mergeți la alt ghișeu."},
+        {"speaker": "Sen", "text": "Vă rog să-mi spuneți unde trebuie să aștept."}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Îmi cer scuze, aș dori să întreb ceva rapid.",
+          "pronunciation": "İmi çer skuze, aș dori sı întreb çeva rapid.",
+          "meaning": "Afedersiniz, hızlıca bir şey sormak istiyorum.",
+          "grammar": ["Îmi cer scuze resmi 'özür dilerim / afedersiniz' kalıbıdır."],
+          "vocabulary": [{"word": "scuze", "meaning": "özür"}, {"word": "rapid", "meaning": "hızlı"}]
+        },
+        {
+          "sentence": "Aici este rândul pentru depunerea documentelor?",
+          "pronunciation": "Aici yeste rîndul pentru depunerya dokumentelor?",
+          "meaning": "Belgeleri teslim etmek için sıra burada mı?",
+          "grammar": ["Aici este 'burada mı' anlamında yer sorusudur."],
+          "vocabulary": [{"word": "aici", "meaning": "burada"}, {"word": "rândul", "meaning": "sıra"}]
+        },
+        {
+          "sentence": "Nu, pentru ridicarea permisului trebuie să mergeți la alt ghișeu.",
+          "pronunciation": "Nu, pentru ridikarya permisului trebuye sı merjets la alt ghişeu.",
+          "meaning": "Hayır, izni teslim almak için başka gişeye gitmeniz gerekiyor.",
+          "grammar": ["trebuie să mergeți 'gitmeniz gerekiyor' resmi yapıdır."],
+          "vocabulary": [{"word": "ridicarea", "meaning": "teslim alma"}, {"word": "ghișeu", "meaning": "gişe"}]
+        },
+        {
+          "sentence": "Vă rog să-mi spuneți unde trebuie să aștept.",
+          "pronunciation": "Vı rog sı-mi spunets unde trebuye sı aştept.",
+          "meaning": "Lütfen nerede beklemem gerektiğini söyleyin.",
+          "grammar": ["unde trebuie să 'nerede ... gerekiyor' yapısıdır."],
+          "vocabulary": [{"word": "unde", "meaning": "nerede"}, {"word": "aștept", "meaning": "beklerim"}]
+        }
+      ],
       "paragraphs": [
         "Bună ziua. Îmi cer scuze, aș dori să întreb ceva rapid. Aici este rândul pentru depunerea documentelor sau pentru ridicarea permisului?",
         "Nu sunt sigur unde trebuie să aștept. Vă rog să-mi spuneți dacă sunt la ghișeul corect sau dacă trebuie să merg în altă parte."
@@ -502,6 +1130,42 @@
       "id": "igi-014",
       "title": "A cere repetarea informației când nu ai înțeles funcționarul",
       "order": 14,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Îmi cer scuze, nu am înțeles foarte bine."},
+        {"speaker": "Sen", "text": "Puteți repeta, vă rog, mai rar?"},
+        {"speaker": "Memur", "text": "Trebuie să aduceți copia pașaportului."},
+        {"speaker": "Sen", "text": "Învăț limba română și am nevoie de puțin timp."}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Îmi cer scuze, nu am înțeles foarte bine.",
+          "pronunciation": "İmi çer skuze, nu am întseles foarte bine.",
+          "meaning": "Afedersiniz, çok iyi anlamadım.",
+          "grammar": ["nu am înțeles geçmiş zamanda olumsuz 'anlamadım' demektir."],
+          "vocabulary": [{"word": "înțeles", "meaning": "anladım"}, {"word": "foarte bine", "meaning": "çok iyi"}]
+        },
+        {
+          "sentence": "Puteți repeta, vă rog, mai rar?",
+          "pronunciation": "Putets repeta, vı rog, mai rar?",
+          "meaning": "Lütfen daha yavaş tekrar edebilir misiniz?",
+          "grammar": ["Puteți + fiil resmi rica sorusudur."],
+          "vocabulary": [{"word": "repeta", "meaning": "tekrar etmek"}, {"word": "mai rar", "meaning": "daha yavaş"}]
+        },
+        {
+          "sentence": "Trebuie să aduceți copia pașaportului.",
+          "pronunciation": "Trebuye sı aduçeți kopia pașaportului.",
+          "meaning": "Pasaport kopyasını getirmeniz gerekiyor.",
+          "grammar": ["să aduceți resmi 'getirmeniz' çekimidir."],
+          "vocabulary": [{"word": "copia", "meaning": "kopya"}, {"word": "pașaportului", "meaning": "pasaportun"}]
+        },
+        {
+          "sentence": "Învăț limba română și am nevoie de puțin timp.",
+          "pronunciation": "Învats limba romını și am nevoye de putsin timp.",
+          "meaning": "Romence öğreniyorum ve biraz zamana ihtiyacım var.",
+          "grammar": ["Învăț birinci tekil şahıs 'öğreniyorum' demektir."],
+          "vocabulary": [{"word": "învăț", "meaning": "öğreniyorum"}, {"word": "puțin timp", "meaning": "biraz zaman"}]
+        }
+      ],
       "paragraphs": [
         "Îmi cer scuze, nu am înțeles foarte bine ce ați spus. Puteți repeta, vă rog, mai rar?",
         "Învăț limba română și uneori am nevoie de puțin timp ca să înțeleg corect. Dacă este posibil, puteți să-mi spuneți încă o dată ce document trebuie să aduc?"
@@ -512,6 +1176,42 @@
       "id": "igi-015",
       "title": "A scrie un e-mail oficial",
       "order": 15,
+      "dialogue": [
+        {"speaker": "Sen", "text": "Mă numesc [Numele tău] și vă scriu în legătură cu dosarul meu."},
+        {"speaker": "Sen", "text": "Aș dori să verific stadiul dosarului pentru permisul de ședere."},
+        {"speaker": "Sen", "text": "Numărul meu de înregistrare este [număr]."},
+        {"speaker": "Sen", "text": "Vă mulțumesc pentru ajutor."}
+      ],
+      "sentenceNotes": [
+        {
+          "sentence": "Mă numesc [Numele tău] și vă scriu în legătură cu dosarul meu.",
+          "pronunciation": "Mı numesk [numele tıu] și vı skriu în legıturı ku dosarul meu.",
+          "meaning": "Benim adım [adın] ve size dosyamla ilgili yazıyorum.",
+          "grammar": ["Mă numesc 'adım...' resmi tanıtma kalıbıdır."],
+          "vocabulary": [{"word": "vă scriu", "meaning": "size yazıyorum"}, {"word": "în legătură cu", "meaning": "ile ilgili"}]
+        },
+        {
+          "sentence": "Aș dori să verific stadiul dosarului pentru permisul de ședere.",
+          "pronunciation": "Aș dori sı verifik stadiul dosarului pentru permisul de ședere.",
+          "meaning": "Oturum izni dosyasının durumunu kontrol etmek istiyorum.",
+          "grammar": ["Aș dori să verific resmi e-postalarda kibar istektir."],
+          "vocabulary": [{"word": "stadiul dosarului", "meaning": "dosyanın durumu"}, {"word": "permis de ședere", "meaning": "oturum izni"}]
+        },
+        {
+          "sentence": "Numărul meu de înregistrare este [număr].",
+          "pronunciation": "Numırul meu de înrejistrare yeste [numır].",
+          "meaning": "Kayıt numaram [numara].",
+          "grammar": ["este burada '...dır' anlamında bağlaç fiildir."],
+          "vocabulary": [{"word": "numărul meu", "meaning": "benim numaram"}, {"word": "înregistrare", "meaning": "kayıt"}]
+        },
+        {
+          "sentence": "Vă mulțumesc pentru ajutor.",
+          "pronunciation": "Vı multsumesk pentru ajutor.",
+          "meaning": "Yardımınız için teşekkür ederim.",
+          "grammar": ["Vă mulțumesc resmi teşekkür kalıbıdır."],
+          "vocabulary": [{"word": "mulțumesc", "meaning": "teşekkür ederim"}, {"word": "ajutor", "meaning": "yardım"}]
+        }
+      ],
       "paragraphs": [
         "Bună ziua,",
         "Mă numesc [Numele tău] și vă scriu în legătură cu dosarul meu pentru permisul de ședere. Aș dori să verific stadiul dosarului și să știu dacă mai sunt necesare documente suplimentare.",
