@@ -319,6 +319,9 @@
             </li>
           `)
           .join('');
+        const extraNotes = (note.extraNotes || note.extra || [])
+          .map((item) => `<li>${esc(item)}</li>`)
+          .join('');
 
         return `
           <section class="romanian-note">
@@ -337,6 +340,7 @@
               </dl>
               ${grammar ? `<div class="romanian-note-block"><h4>Gramer</h4><ul>${grammar}</ul></div>` : ''}
               ${vocabulary ? `<div class="romanian-note-block"><h4>Kelimeler</h4><ul>${vocabulary}</ul></div>` : ''}
+              ${extraNotes ? `<div class="romanian-note-block"><h4>Ek Aciklama</h4><ul>${extraNotes}</ul></div>` : ''}
             </div>
           </section>
         `;
