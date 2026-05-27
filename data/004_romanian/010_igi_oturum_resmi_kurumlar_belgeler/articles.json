@@ -7,11 +7,376 @@
       "id": "igi-001",
       "title": "A lua o programare la IGI",
       "order": 1,
-      "paragraphs": [
-        "Bună ziua. Aș dori să fac o programare la IGI pentru permisul meu de ședere. Vreau să știu care sunt datele disponibile și ce documente trebuie să pregătesc înainte de programare.",
-        "Dacă este posibil, aș prefera o programare dimineața. Vă rog să-mi confirmați data, ora și adresa unde trebuie să mă prezint."
+      "dialogue": [
+        {
+          "speaker": "Memur",
+          "text": "Bună ziua. Cu ce vă pot ajuta?"
+        },
+        {
+          "speaker": "Sen",
+          "text": "Bună ziua. Aș dori să fac o programare la IGI pentru permisul meu de ședere."
+        },
+        {
+          "speaker": "Memur",
+          "text": "Pentru ce tip de permis doriți programarea?"
+        },
+        {
+          "speaker": "Sen",
+          "text": "Pentru prelungirea permisului de ședere. Vreau să știu care sunt datele disponibile."
+        },
+        {
+          "speaker": "Memur",
+          "text": "Aveți toate documentele pregătite?"
+        },
+        {
+          "speaker": "Sen",
+          "text": "Încă nu sunt sigur. Vă rog să-mi spuneți ce documente trebuie să pregătesc înainte de programare."
+        },
+        {
+          "speaker": "Memur",
+          "text": "Puteți veni marți dimineața, la ora nouă."
+        },
+        {
+          "speaker": "Sen",
+          "text": "Dacă este posibil, aș prefera o programare dimineața. Vă rog să-mi confirmați data, ora și adresa unde trebuie să mă prezint."
+        }
       ],
-      "questions": []
+      "sentenceNotes": [
+        {
+          "sentence": "Bună ziua.",
+          "pronunciation": "Bunı ziva.",
+          "meaning": "İyi günler / Merhaba.",
+          "grammar": [
+            "Resmi ve kibar bir selamlaşma kalıbıdır.",
+            "Kurumlarda, bankada, doktorda ve telefonda güvenle kullanılabilir."
+          ],
+          "vocabulary": [
+            {
+              "word": "bună",
+              "meaning": "iyi"
+            },
+            {
+              "word": "ziua",
+              "meaning": "gün"
+            }
+          ]
+        },
+        {
+          "sentence": "Cu ce vă pot ajuta?",
+          "pronunciation": "Ku çe vı pot ajuta?",
+          "meaning": "Size nasıl yardımcı olabilirim?",
+          "grammar": [
+            "Cu ce soru kalıbı 'ne ile / hangi konuda' anlamı verir.",
+            "vă resmi 'size' zamiridir.",
+            "pot ajuta 'yardım edebilirim' demektir; pot fiili yapabilmek anlamı katar."
+          ],
+          "vocabulary": [
+            {
+              "word": "cu ce",
+              "meaning": "ne ile, hangi konuda"
+            },
+            {
+              "word": "vă",
+              "meaning": "size, sizi",
+              "note": "Resmi konuşmada kullanılır."
+            },
+            {
+              "word": "pot",
+              "meaning": "yapabilirim"
+            },
+            {
+              "word": "ajuta",
+              "meaning": "yardım etmek"
+            }
+          ]
+        },
+        {
+          "sentence": "Aș dori să fac o programare la IGI pentru permisul meu de ședere.",
+          "pronunciation": "Aş dori sı fak o programare la İJİ pentru permisul meu de şedere.",
+          "meaning": "Oturum iznim için IGI'den randevu almak istiyorum.",
+          "grammar": [
+            "Aș dori çok kibar bir 'isterdim / istiyorum' kalıbıdır.",
+            "să fac yapayım / yapmak anlamında ikinci fiili bağlar.",
+            "pentru amacı belirtir: '... için'.",
+            "permisul meu de ședere 'benim oturum iznim' demektir."
+          ],
+          "vocabulary": [
+            {
+              "word": "aș dori",
+              "meaning": "isterdim, istiyorum",
+              "note": "Resmi kurumlarda çok kullanışlıdır."
+            },
+            {
+              "word": "să fac",
+              "meaning": "yapmak, yapayım"
+            },
+            {
+              "word": "o programare",
+              "meaning": "bir randevu"
+            },
+            {
+              "word": "permis de ședere",
+              "meaning": "oturum izni"
+            }
+          ]
+        },
+        {
+          "sentence": "Pentru ce tip de permis doriți programarea?",
+          "pronunciation": "Pentru çe tip de permis dorits programarya?",
+          "meaning": "Hangi tür izin için randevu istiyorsunuz?",
+          "grammar": [
+            "Pentru ce 'ne için / hangi amaçla' anlamına gelir.",
+            "doriți resmi 'istiyorsunuz' çekimidir.",
+            "programarea kelimesindeki -a eki belirli randevuyu ifade eder."
+          ],
+          "vocabulary": [
+            {
+              "word": "pentru ce",
+              "meaning": "ne için"
+            },
+            {
+              "word": "tip",
+              "meaning": "tür, tip"
+            },
+            {
+              "word": "permis",
+              "meaning": "izin, kart"
+            },
+            {
+              "word": "doriți",
+              "meaning": "istiyorsunuz"
+            }
+          ]
+        },
+        {
+          "sentence": "Pentru prelungirea permisului de ședere.",
+          "pronunciation": "Pentru prelungirya permisului de şedere.",
+          "meaning": "Oturum izninin uzatılması için.",
+          "grammar": [
+            "prelungirea 'uzatma / uzatılması' anlamında isimleşmiş yapıdır.",
+            "permisului formu 'iznin' anlamına gelir; burada sahiplik/genitif ilişki vardır."
+          ],
+          "vocabulary": [
+            {
+              "word": "prelungirea",
+              "meaning": "uzatma, uzatılması"
+            },
+            {
+              "word": "permisului",
+              "meaning": "iznin"
+            },
+            {
+              "word": "ședere",
+              "meaning": "ikamet, oturum"
+            }
+          ]
+        },
+        {
+          "sentence": "Vreau să știu care sunt datele disponibile.",
+          "pronunciation": "Vreau sı ştiu kare sunt datele disponibile.",
+          "meaning": "Hangi tarihlerin uygun olduğunu bilmek istiyorum.",
+          "grammar": [
+            "Vreau să știu 'bilmek istiyorum' kalıbıdır.",
+            "care sunt 'hangileri' anlamı verir.",
+            "datele disponibile 'uygun / müsait tarihler' demektir."
+          ],
+          "vocabulary": [
+            {
+              "word": "vreau",
+              "meaning": "istiyorum"
+            },
+            {
+              "word": "să știu",
+              "meaning": "bilmek"
+            },
+            {
+              "word": "datele",
+              "meaning": "tarihler"
+            },
+            {
+              "word": "disponibile",
+              "meaning": "uygun, müsait"
+            }
+          ]
+        },
+        {
+          "sentence": "Aveți toate documentele pregătite?",
+          "pronunciation": "Avets toate dokumentele pregıtite?",
+          "meaning": "Tüm belgeleriniz hazır mı?",
+          "grammar": [
+            "Aveți resmi 'sahip misiniz / var mı' anlamında kullanılır.",
+            "toate documentele 'tüm belgeler' demektir.",
+            "pregătite sıfatı çoğul dişil forma uyar; documentele ile uyumludur."
+          ],
+          "vocabulary": [
+            {
+              "word": "aveți",
+              "meaning": "sahipsiniz, var mı"
+            },
+            {
+              "word": "toate",
+              "meaning": "tüm, hepsi"
+            },
+            {
+              "word": "documentele",
+              "meaning": "belgeler"
+            },
+            {
+              "word": "pregătite",
+              "meaning": "hazırlanmış, hazır"
+            }
+          ]
+        },
+        {
+          "sentence": "Încă nu sunt sigur.",
+          "pronunciation": "Inka nu sunt sigur.",
+          "meaning": "Henüz emin değilim.",
+          "grammar": [
+            "Încă nu 'henüz değil' anlamına gelir.",
+            "sunt sigur erkek konuşmacı için 'eminim' demektir. Kadın konuşmacı sigură kullanır."
+          ],
+          "vocabulary": [
+            {
+              "word": "încă",
+              "meaning": "henüz, hâlâ"
+            },
+            {
+              "word": "nu",
+              "meaning": "değil, hayır"
+            },
+            {
+              "word": "sunt sigur",
+              "meaning": "eminim"
+            }
+          ]
+        },
+        {
+          "sentence": "Vă rog să-mi spuneți ce documente trebuie să pregătesc înainte de programare.",
+          "pronunciation": "Vı rog sı-mi spunets çe dokumente trebuie sı pregıtesk ınainte de programare.",
+          "meaning": "Lütfen randevudan önce hangi belgeleri hazırlamam gerektiğini söyleyin.",
+          "grammar": [
+            "Vă rog kibar 'lütfen / rica ederim' kalıbıdır.",
+            "să-mi spuneți 'bana söyleyin' demektir; -mi bana anlamı katar.",
+            "trebuie să pregătesc 'hazırlamam gerekiyor' yapısıdır.",
+            "înainte de '...den önce' anlamına gelir."
+          ],
+          "vocabulary": [
+            {
+              "word": "vă rog",
+              "meaning": "lütfen, rica ederim"
+            },
+            {
+              "word": "să-mi spuneți",
+              "meaning": "bana söyleyin"
+            },
+            {
+              "word": "trebuie",
+              "meaning": "gerekiyor"
+            },
+            {
+              "word": "să pregătesc",
+              "meaning": "hazırlamam"
+            },
+            {
+              "word": "înainte de",
+              "meaning": "önce"
+            }
+          ]
+        },
+        {
+          "sentence": "Puteți veni marți dimineața, la ora nouă.",
+          "pronunciation": "Putets veni marts diminyatsa, la ora nouı.",
+          "meaning": "Salı sabahı saat dokuzda gelebilirsiniz.",
+          "grammar": [
+            "Puteți veni 'gelebilirsiniz' anlamındadır.",
+            "marți dimineața zaman ifadesidir: salı sabahı.",
+            "la ora nouă 'saat dokuzda' demektir."
+          ],
+          "vocabulary": [
+            {
+              "word": "puteți",
+              "meaning": "yapabilirsiniz"
+            },
+            {
+              "word": "veni",
+              "meaning": "gelmek"
+            },
+            {
+              "word": "marți",
+              "meaning": "salı"
+            },
+            {
+              "word": "dimineața",
+              "meaning": "sabah"
+            },
+            {
+              "word": "la ora nouă",
+              "meaning": "saat dokuzda"
+            }
+          ]
+        },
+        {
+          "sentence": "Dacă este posibil, aș prefera o programare dimineața.",
+          "pronunciation": "Dakı yeste posibil, aş prefera o programare diminyatsa.",
+          "meaning": "Mümkünse sabah bir randevu tercih ederim.",
+          "grammar": [
+            "Dacă este posibil resmi ve kibar 'mümkünse' kalıbıdır.",
+            "aș prefera 'tercih ederim / tercih ederdim' anlamında nazik bir ifadedir.",
+            "dimineața burada 'sabahleyin / sabah' zaman zarfı gibi kullanılır."
+          ],
+          "vocabulary": [
+            {
+              "word": "dacă",
+              "meaning": "eğer"
+            },
+            {
+              "word": "este posibil",
+              "meaning": "mümkün"
+            },
+            {
+              "word": "aș prefera",
+              "meaning": "tercih ederim"
+            },
+            {
+              "word": "dimineața",
+              "meaning": "sabah"
+            }
+          ]
+        },
+        {
+          "sentence": "Vă rog să-mi confirmați data, ora și adresa unde trebuie să mă prezint.",
+          "pronunciation": "Vı rog sı-mi konfirmats data, ora şi adresa unde trebuie sı mı prezint.",
+          "meaning": "Lütfen gitmem gereken tarih, saat ve adresi bana teyit edin.",
+          "grammar": [
+            "să-mi confirmați 'bana teyit edin' anlamında resmi bir kalıptır.",
+            "data, ora și adresa üç nesneyi listeler: tarih, saat ve adres.",
+            "unde trebuie să mă prezint 'nerede hazır bulunmam gerekiyor' anlamına gelir.",
+            "mă prezint resmi bağlamda 'kendimi sunarım / orada bulunurum' gibi kullanılır."
+          ],
+          "vocabulary": [
+            {
+              "word": "confirmați",
+              "meaning": "teyit edin, onaylayın"
+            },
+            {
+              "word": "data",
+              "meaning": "tarih"
+            },
+            {
+              "word": "ora",
+              "meaning": "saat"
+            },
+            {
+              "word": "adresa",
+              "meaning": "adres"
+            },
+            {
+              "word": "mă prezint",
+              "meaning": "hazır bulunurum, giderim"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "igi-002",

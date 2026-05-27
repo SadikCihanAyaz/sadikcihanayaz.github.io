@@ -374,15 +374,143 @@ a:hover {
   line-height: 1.75;
 }
 
+.romanian-dialogue,
+.romanian-analysis,
 .romanian-questions {
   margin-top: 28px;
   padding-top: 18px;
   border-top: 1px solid var(--line);
 }
 
+.romanian-dialogue {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.romanian-dialogue h2,
+.romanian-analysis h2,
 .romanian-questions h2 {
   margin: 0 0 12px;
   font-size: 22px;
+}
+
+.romanian-dialogue-line {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fbfdff;
+}
+
+.romanian-speaker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  border-radius: 999px;
+  background: #eaf2ff;
+  color: #0b5ed7;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.romanian-dialogue-line p {
+  margin: 0;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.romanian-analysis {
+  display: grid;
+  gap: 12px;
+}
+
+.romanian-note {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.romanian-note-index {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: var(--text);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.romanian-note-body h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.romanian-note-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0 0 12px;
+}
+
+.romanian-note-fields div {
+  padding: 10px;
+  border-radius: 8px;
+  background: #f5f8fc;
+}
+
+.romanian-note-fields dt {
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.romanian-note-fields dd {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.romanian-note-block {
+  margin-top: 10px;
+}
+
+.romanian-note-block h4 {
+  margin: 0 0 7px;
+  font-size: 15px;
+}
+
+.romanian-note-block ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.romanian-note-block li {
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.romanian-note-block li span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .romanian-questions ol {
@@ -813,6 +941,12 @@ body.no-scroll {
 
   .question-title {
     font-size: 20px;
+  }
+
+  .romanian-dialogue-line,
+  .romanian-note,
+  .romanian-note-fields {
+    grid-template-columns: 1fr;
   }
 
   .question-row {

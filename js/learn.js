@@ -246,7 +246,7 @@
       esc(subcategory.title)
     ]);
 
-    setTitle(subcategory.title, 'Makale oku ve sozlu sorularla pratik yap.');
+    setTitle(subcategory.title, 'Diyalog oku ve cumle analizleriyle pratik yap.');
     setSeo({
       title: `${subcategory.title} Romence Makaleleri | Learning Hub`,
       description: `${subcategory.title} seviyesinde Romence okuma ve sozlu pratik makaleleri.`,
@@ -259,11 +259,17 @@
         subcategory: subcategory.id,
         article: article.id
       })}`;
+      const dialogueCount = (article.dialogue || []).length;
+      const sentenceNoteCount = (article.sentenceNotes || []).length;
+      const paragraphCount = (article.paragraphs || []).length;
+      const metaText = dialogueCount > 0 || sentenceNoteCount > 0
+        ? `${esc(dialogueCount)} diyalog satırı / ${esc(sentenceNoteCount)} cümle analizi`
+        : `${esc(paragraphCount)} paragraf`;
 
       return `
         <article class="card">
           <h3>${esc(article.title)}</h3>
-          <div class="meta">${esc((article.paragraphs || []).length)} paragraf / ${esc((article.questions || []).length)} soru</div>
+          <div class="meta">${metaText}</div>
           <div class="actions">
             <a class="btn btn-primary" href="${href}">Oku</a>
           </div>
@@ -285,26 +291,68 @@
     setTitle(article.title, subcategory.title);
     setSeo({
       title: `${article.title} | ${subcategory.title} Romence`,
-      description: `${subcategory.title} seviyesinde Romence makale ve sozlu sorular.`,
+      description: `${subcategory.title} icin Romence diyalog, okuma ve cumle analizi.`,
       path: `/learn.html?${makeQuery({ category: category.id, subcategory: subcategory.id, article: article.id })}`
     });
 
+    const dialogue = (article.dialogue || [])
+      .map((line) => `
+        <div class="romanian-dialogue-line">
+          <div class="romanian-speaker">${esc(line.speaker || '')}</div>
+          <p>${esc(line.text || '')}</p>
+        </div>
+      `)
+      .join('');
     const paragraphs = (article.paragraphs || [])
       .map((paragraph) => `<p>${esc(paragraph)}</p>`)
       .join('');
-    const questions = (article.questions || [])
-      .map((question) => `<li>${esc(question)}</li>`)
+    const sentenceNotes = (article.sentenceNotes || [])
+      .map((note, index) => {
+        const grammar = (note.grammar || [])
+          .map((item) => `<li>${esc(item)}</li>`)
+          .join('');
+        const vocabulary = (note.vocabulary || [])
+          .map((item) => `
+            <li>
+              <strong>${esc(item.word || '')}</strong>: ${esc(item.meaning || '')}
+              ${item.note ? `<span>${esc(item.note)}</span>` : ''}
+            </li>
+          `)
+          .join('');
+
+        return `
+          <section class="romanian-note">
+            <div class="romanian-note-index">${esc(index + 1)}</div>
+            <div class="romanian-note-body">
+              <h3>${esc(note.sentence || '')}</h3>
+              <dl class="romanian-note-fields">
+                <div>
+                  <dt>Okunuş</dt>
+                  <dd>${esc(note.pronunciation || '')}</dd>
+                </div>
+                <div>
+                  <dt>Anlam</dt>
+                  <dd>${esc(note.meaning || '')}</dd>
+                </div>
+              </dl>
+              ${grammar ? `<div class="romanian-note-block"><h4>Gramer</h4><ul>${grammar}</ul></div>` : ''}
+              ${vocabulary ? `<div class="romanian-note-block"><h4>Kelimeler</h4><ul>${vocabulary}</ul></div>` : ''}
+            </div>
+          </section>
+        `;
+      })
       .join('');
+    const content = dialogue
+      ? `<section class="romanian-dialogue"><h2>Diyalog</h2>${dialogue}</section>`
+      : `<div class="romanian-paragraphs">${paragraphs || '<p>Bu makalede paragraf yok.</p>'}</div>`;
+    const analysisSection = sentenceNotes
+      ? `<section class="romanian-analysis"><h2>Cümle Analizi</h2>${sentenceNotes}</section>`
+      : '';
 
     els.app.innerHTML = `
       <article class="card romanian-article">
-        <div class="romanian-paragraphs">
-          ${paragraphs || '<p>Bu makalede paragraf yok.</p>'}
-        </div>
-        <section class="romanian-questions">
-          <h2>Sozlu Sorular</h2>
-          <ol>${questions || '<li>Soru bulunamadi.</li>'}</ol>
-        </section>
+        ${content}
+        ${analysisSection}
         <div class="actions">
           <a class="btn" href="/learn.html?${makeQuery({ category: category.id, subcategory: subcategory.id })}">Makale Listesine Don</a>
         </div>
