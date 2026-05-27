@@ -161,6 +161,14 @@
                               "folder":  "020_romanyada_kucuk_onemli_durumlar",
                               "articlesFile":  "/data/004_romanian/020_romanyada_kucuk_onemli_durumlar/articles.json",
                               "articleCount":  0
+                          },
+                          {
+                              "id":  "noter-procura-resmi-belge-islemleri",
+                              "title":  "Noter, Procură ve Resmi Belge İşlemleri",
+                              "order":  21,
+                              "folder":  "021_noter_procura_resmi_belge_islemleri",
+                              "articlesFile":  "/data/004_romanian/021_noter_procura_resmi_belge_islemleri/articles.json",
+                              "articleCount":  15
                           }
                       ]
 }

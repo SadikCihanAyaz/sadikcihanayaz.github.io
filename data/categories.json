@@ -1,41 +1,41 @@
 {
-  "version": 4,
-  "categories": [
-    {
-      "id": "java",
-      "title": "Java",
-      "description": "Core Java, concurrency ve backend temelleri",
-      "order": 1,
-      "folder": "001_java",
-      "subcategoryCount": 4,
-      "subcategoriesFile": "/data/001_java/subcategories.json"
-    },
-    {
-      "id": "spring-boot",
-      "title": "Spring Boot",
-      "description": "Spring Boot guvenlik ve veri katmani: Spring Security, JWT, OAuth2, RBAC, Hibernate, JPA",
-      "order": 2,
-      "folder": "002_spring_boot",
-      "subcategoryCount": 6,
-      "subcategoriesFile": "/data/002_spring_boot/subcategories.json"
-    },
-    {
-      "id": "questions",
-      "title": "Questions",
-      "description": "Coding ve karisik soru setleri",
-      "order": 3,
-      "folder": "003_questions",
-      "subcategoryCount": 3,
-      "subcategoriesFile": "/data/003_questions/subcategories.json"
-    },
-    {
-      "id": "romanian",
-      "title": "Romence",
-      "description": "Romanya'da gunluk hayat ve is durumlari icin tematik Romence pratikleri",
-      "order": 4,
-      "folder": "004_romanian",
-      "subcategoryCount": 20,
-      "subcategoriesFile": "/data/004_romanian/subcategories.json"
-    }
-  ]
+    "version":  4,
+    "categories":  [
+                       {
+                           "id":  "java",
+                           "title":  "Java",
+                           "description":  "Core Java, concurrency ve backend temelleri",
+                           "order":  1,
+                           "folder":  "001_java",
+                           "subcategoryCount":  4,
+                           "subcategoriesFile":  "/data/001_java/subcategories.json"
+                       },
+                       {
+                           "id":  "spring-boot",
+                           "title":  "Spring Boot",
+                           "description":  "Spring Boot guvenlik ve veri katmani: Spring Security, JWT, OAuth2, RBAC, Hibernate, JPA",
+                           "order":  2,
+                           "folder":  "002_spring_boot",
+                           "subcategoryCount":  6,
+                           "subcategoriesFile":  "/data/002_spring_boot/subcategories.json"
+                       },
+                       {
+                           "id":  "questions",
+                           "title":  "Questions",
+                           "description":  "Coding ve karisik soru setleri",
+                           "order":  3,
+                           "folder":  "003_questions",
+                           "subcategoryCount":  3,
+                           "subcategoriesFile":  "/data/003_questions/subcategories.json"
+                       },
+                       {
+                           "id":  "romanian",
+                           "title":  "Romence",
+                           "description":  "Romanya\u0027da gunluk hayat ve is durumlari icin tematik Romence pratikleri",
+                           "order":  4,
+                           "folder":  "004_romanian",
+                           "subcategoryCount":  21,
+                           "subcategoriesFile":  "/data/004_romanian/subcategories.json"
+                       }
+                   ]
 }
