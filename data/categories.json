@@ -31,10 +31,10 @@
     {
       "id": "romanian",
       "title": "Romence",
-      "description": "A1'den C2'ye genel Romence ogrenme kategorileri",
+      "description": "Romanya'da gunluk hayat ve is durumlari icin tematik Romence pratikleri",
       "order": 4,
       "folder": "004_romanian",
-      "subcategoryCount": 6,
+      "subcategoryCount": 20,
       "subcategoriesFile": "/data/004_romanian/subcategories.json"
     }
   ]

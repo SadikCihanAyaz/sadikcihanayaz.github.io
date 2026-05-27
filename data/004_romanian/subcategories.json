@@ -3,58 +3,164 @@
   "categoryId": "romanian",
   "subcategories": [
     {
-      "id": "a1-genel-romence",
-      "title": "A1 - Baslangic",
-      "description": "Genel Romence - baslangic seviyesi",
+      "id": "market-alisveris-kasa",
+      "title": "Market, alışveriş ve kasa durumları",
       "order": 1,
-      "folder": "001_a1_genel_romence",
-      "articlesFile": "/data/004_romanian/001_a1_genel_romence/articles.json",
-      "articleCount": 1
+      "folder": "001_market_alisveris_kasa",
+      "articlesFile": "/data/004_romanian/001_market_alisveris_kasa/articles.json",
+      "articleCount": 0
     },
     {
-      "id": "a2-genel-romence",
-      "title": "A2 - Temel",
-      "description": "Genel Romence - temel seviye",
+      "id": "banka-atm-para-islemleri",
+      "title": "Banka, ATM ve para işlemleri",
       "order": 2,
-      "folder": "002_a2_genel_romence",
-      "articlesFile": "/data/004_romanian/002_a2_genel_romence/articles.json",
-      "articleCount": 1
+      "folder": "002_banka_atm_para_islemleri",
+      "articlesFile": "/data/004_romanian/002_banka_atm_para_islemleri/articles.json",
+      "articleCount": 0
     },
     {
-      "id": "b1-genel-romence",
-      "title": "B1 - Orta",
-      "description": "Genel Romence - orta seviye",
+      "id": "ev-kira-ev-sahibi",
+      "title": "Ev, kira ve ev sahibiyle iletişim",
       "order": 3,
-      "folder": "003_b1_genel_romence",
-      "articlesFile": "/data/004_romanian/003_b1_genel_romence/articles.json",
-      "articleCount": 1
+      "folder": "003_ev_kira_ev_sahibi",
+      "articlesFile": "/data/004_romanian/003_ev_kira_ev_sahibi/articles.json",
+      "articleCount": 0
     },
     {
-      "id": "b2-genel-romence",
-      "title": "B2 - Orta Ustu",
-      "description": "Genel Romence - orta ustu seviye",
+      "id": "faturalar-internet-ev-arizalari",
+      "title": "Elektrik, su, gaz, internet ve ev arızaları",
       "order": 4,
-      "folder": "004_b2_genel_romence",
-      "articlesFile": "/data/004_romanian/004_b2_genel_romence/articles.json",
-      "articleCount": 1
+      "folder": "004_faturalar_internet_ev_arizalari",
+      "articlesFile": "/data/004_romanian/004_faturalar_internet_ev_arizalari/articles.json",
+      "articleCount": 0
     },
     {
-      "id": "c1-genel-romence",
-      "title": "C1 - Ileri",
-      "description": "Genel Romence - ileri seviye",
+      "id": "usta-elektrikci-tesisatci-tamirci",
+      "title": "Usta, elektrikçi, tesisatçı, tamirci çağırma",
       "order": 5,
-      "folder": "005_c1_genel_romence",
-      "articlesFile": "/data/004_romanian/005_c1_genel_romence/articles.json",
-      "articleCount": 1
+      "folder": "005_usta_elektrikci_tesisatci_tamirci",
+      "articlesFile": "/data/004_romanian/005_usta_elektrikci_tesisatci_tamirci/articles.json",
+      "articleCount": 0
     },
     {
-      "id": "c2-genel-romence",
-      "title": "C2 - Ana Diline Yakin / Ustalik",
-      "description": "Genel Romence - ustalik seviyesi",
+      "id": "araba-trafik-servis-arac-islemleri",
+      "title": "Araba, trafik, servis ve araç işlemleri",
       "order": 6,
-      "folder": "006_c2_genel_romence",
-      "articlesFile": "/data/004_romanian/006_c2_genel_romence/articles.json",
-      "articleCount": 1
+      "folder": "006_araba_trafik_servis_arac_islemleri",
+      "articlesFile": "/data/004_romanian/006_araba_trafik_servis_arac_islemleri/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "araba-alim-satim-ikinci-el",
+      "title": "Araba alım-satım ve ikinci el işlemler",
+      "order": 7,
+      "folder": "007_araba_alim_satim_ikinci_el",
+      "articlesFile": "/data/004_romanian/007_araba_alim_satim_ikinci_el/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "saglik-doktor-eczane-acil",
+      "title": "Sağlık, doktor, eczane ve acil durumlar",
+      "order": 8,
+      "folder": "008_saglik_doktor_eczane_acil",
+      "articlesFile": "/data/004_romanian/008_saglik_doktor_eczane_acil/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "cocuk-kres-okul-aile",
+      "title": "Çocuk, kreş, okul ve aile hayatı",
+      "order": 9,
+      "folder": "009_cocuk_kres_okul_aile",
+      "articlesFile": "/data/004_romanian/009_cocuk_kres_okul_aile/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "igi-oturum-resmi-kurumlar-belgeler",
+      "title": "IGI, oturum, resmi kurumlar ve belgeler",
+      "order": 10,
+      "folder": "010_igi_oturum_resmi_kurumlar_belgeler",
+      "articlesFile": "/data/004_romanian/010_igi_oturum_resmi_kurumlar_belgeler/articles.json",
+      "articleCount": 15
+    },
+    {
+      "id": "is-yeri-gunluk-ofis-romencesi",
+      "title": "İş yeri: günlük ofis Romencesi",
+      "order": 11,
+      "folder": "011_is_yeri_gunluk_ofis_romencesi",
+      "articlesFile": "/data/004_romanian/011_is_yeri_gunluk_ofis_romencesi/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "yazilim-gelistirici-is-romencesi",
+      "title": "Yazılım geliştirici olarak iş Romencesi",
+      "order": 12,
+      "folder": "012_yazilim_gelistirici_is_romencesi",
+      "articlesFile": "/data/004_romanian/012_yazilim_gelistirici_is_romencesi/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "telefon-gorusmeleri-musteri-hizmetleri",
+      "title": "Telefon görüşmeleri ve müşteri hizmetleri",
+      "order": 13,
+      "folder": "013_telefon_gorusmeleri_musteri_hizmetleri",
+      "articlesFile": "/data/004_romanian/013_telefon_gorusmeleri_musteri_hizmetleri/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "restoran-kafe-siparis-sosyal-hayat",
+      "title": "Restoran, kafe, sipariş ve sosyal hayat",
+      "order": 14,
+      "folder": "014_restoran_kafe_siparis_sosyal_hayat",
+      "articlesFile": "/data/004_romanian/014_restoran_kafe_siparis_sosyal_hayat/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "kargo-teslimat-online-siparisler",
+      "title": "Kargo, teslimat ve online siparişler",
+      "order": 15,
+      "folder": "015_kargo_teslimat_online_siparisler",
+      "articlesFile": "/data/004_romanian/015_kargo_teslimat_online_siparisler/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "komsular-apartman-gunluk-problemler",
+      "title": "Komşular, apartman ve günlük sosyal problemler",
+      "order": 16,
+      "folder": "016_komsular_apartman_gunluk_problemler",
+      "articlesFile": "/data/004_romanian/016_komsular_apartman_gunluk_problemler/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "giyim-berber-kuafor-kisisel-hizmetler",
+      "title": "Giyim, berber, kuaför ve kişisel hizmetler",
+      "order": 17,
+      "folder": "017_giyim_berber_kuafor_kisisel_hizmetler",
+      "articlesFile": "/data/004_romanian/017_giyim_berber_kuafor_kisisel_hizmetler/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "acil-stresli-durumlar",
+      "title": "Acil ve stresli durumlar",
+      "order": 18,
+      "folder": "018_acil_stresli_durumlar",
+      "articlesFile": "/data/004_romanian/018_acil_stresli_durumlar/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "burokratik-yazismalar-resmi-epostalar",
+      "title": "Bürokratik yazışmalar ve resmi e-postalar",
+      "order": 19,
+      "folder": "019_burokratik_yazismalar_resmi_epostalar",
+      "articlesFile": "/data/004_romanian/019_burokratik_yazismalar_resmi_epostalar/articles.json",
+      "articleCount": 0
+    },
+    {
+      "id": "romanyada-kucuk-onemli-durumlar",
+      "title": "Romanya’da günlük küçük ama önemli durumlar",
+      "order": 20,
+      "folder": "020_romanyada_kucuk_onemli_durumlar",
+      "articlesFile": "/data/004_romanian/020_romanyada_kucuk_onemli_durumlar/articles.json",
+      "articleCount": 0
     }
   ]
 }

@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "categoryId": "romanian",
+  "subcategoryId": "igi-oturum-resmi-kurumlar-belgeler",
+  "articles": [
+    {
+      "id": "igi-001",
+      "title": "A lua o programare la IGI",
+      "order": 1,
+      "paragraphs": [
+        "Bună ziua. Aș dori să fac o programare la IGI pentru permisul meu de ședere. Vreau să știu care sunt datele disponibile și ce documente trebuie să pregătesc înainte de programare.",
+        "Dacă este posibil, aș prefera o programare dimineața. Vă rog să-mi confirmați data, ora și adresa unde trebuie să mă prezint."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-002",
+      "title": "A întreba despre documentele necesare pentru permisul de ședere",
+      "order": 2,
+      "paragraphs": [
+        "Bună ziua. Aș dori să depun dosarul pentru permisul de ședere și vreau să mă asigur că am toate documentele necesare. Îmi puteți spune, vă rog, ce acte trebuie să aduc?",
+        "Am pașaportul, contractul de muncă și dovada adresei, dar nu sunt sigur dacă mai este nevoie de alte documente. Aș aprecia dacă mi-ați putea explica lista completă."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-003",
+      "title": "A explica un document lipsă",
+      "order": 3,
+      "paragraphs": [
+        "Bună ziua. Am venit astăzi pentru dosarul meu, dar am observat că îmi lipsește un document. Din păcate, nu am reușit să îl obțin la timp.",
+        "Vă rog să-mi spuneți dacă pot depune dosarul acum și să aduc documentul lipsă mai târziu. Dacă nu este posibil, aș dori să știu ce trebuie să fac în continuare."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-004",
+      "title": "A întreba despre stadiul dosarului",
+      "order": 4,
+      "paragraphs": [
+        "Bună ziua. Aș dori să verific stadiul dosarului meu pentru permisul de ședere. Am depus documentele la IGI și vreau să știu dacă dosarul este în procesare.",
+        "Vă pot oferi numele meu, numărul pașaportului sau numărul de înregistrare, dacă este necesar. Vă rog să-mi spuneți dacă mai trebuie să aduc ceva."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-005",
+      "title": "A întreba dacă permisul de ședere este gata",
+      "order": 5,
+      "paragraphs": [
+        "Bună ziua. Aș dori să știu dacă permisul meu de ședere este gata. Am depus dosarul acum ceva timp și aș vrea să verific dacă pot veni să ridic cardul.",
+        "Vă rog să-mi spuneți ce document trebuie să aduc atunci când vin să îl ridic. De asemenea, aș vrea să știu programul de lucru pentru ridicarea permisului."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-006",
+      "title": "A anunța schimbarea adresei",
+      "order": 6,
+      "paragraphs": [
+        "Bună ziua. Aș dori să anunț schimbarea adresei mele. M-am mutat recent la o altă adresă și vreau să actualizez informațiile în dosarul meu.",
+        "Am pregătit documentele necesare pentru noua adresă. Vă rog să-mi spuneți dacă trebuie să completez un formular sau să fac o programare separată."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-007",
+      "title": "A explica schimbarea locului de muncă sau a contractului",
+      "order": 7,
+      "paragraphs": [
+        "Bună ziua. Aș dori să vă informez că mi s-a schimbat situația profesională. Am un nou contract de muncă / s-a modificat contractul meu actual și vreau să știu dacă trebuie să actualizez dosarul.",
+        "Pot aduce noul contract și orice alt document necesar. Vă rog să-mi spuneți care este procedura corectă în această situație."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-008",
+      "title": "A explica situația reînnoirii pașaportului",
+      "order": 8,
+      "paragraphs": [
+        "Bună ziua. Pașaportul meu este în proces de reînnoire și de aceea nu am încă noul document. Am depus cererea la autoritățile competente și aștept să primesc pașaportul nou.",
+        "Vă rog să-mi spuneți dacă pot continua procedura cu dovada că pașaportul este în curs de reînnoire. Dacă este nevoie, pot aduce documentul oficial care confirmă acest lucru."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-009",
+      "title": "A cere ajutor pentru completarea unui formular",
+      "order": 9,
+      "paragraphs": [
+        "Bună ziua. Am acest formular de completat, dar nu sunt sigur cum trebuie să scriu anumite informații. Îmi puteți explica, vă rog, ce trebuie să completez aici?",
+        "Nu vreau să fac o greșeală în formular. Dacă este posibil, aș dori să verificați dacă informațiile sunt scrise corect înainte să îl depun."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-010",
+      "title": "A obține un document de la notar",
+      "order": 10,
+      "paragraphs": [
+        "Bună ziua. Am nevoie de un document notarial pentru dosarul meu. Aș dori să știu ce acte trebuie să prezint și cât durează procedura.",
+        "De asemenea, vă rog să-mi spuneți care este costul și dacă documentul poate fi eliberat în aceeași zi. Am nevoie de el pentru o instituție publică."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-011",
+      "title": "A cere informații despre apostilă și traducere",
+      "order": 11,
+      "paragraphs": [
+        "Bună ziua. Am un document străin și vreau să știu dacă trebuie tradus și legalizat în România. De asemenea, nu sunt sigur dacă documentul are nevoie de apostilă.",
+        "Îmi puteți spune, vă rog, care este procedura corectă? Aș vrea să pregătesc documentul în forma acceptată de instituție."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-012",
+      "title": "A cere un document de la primărie sau administrația fiscală",
+      "order": 12,
+      "paragraphs": [
+        "Bună ziua. Aș dori să solicit un document oficial de la primărie / administrația fiscală. Am nevoie de acest document pentru dosarul meu administrativ.",
+        "Vă rog să-mi spuneți ce formular trebuie să completez și ce acte trebuie să prezint. De asemenea, aș vrea să știu în cât timp se eliberează documentul."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-013",
+      "title": "A cere informații în timp ce aștepți la rând",
+      "order": 13,
+      "paragraphs": [
+        "Bună ziua. Îmi cer scuze, aș dori să întreb ceva rapid. Aici este rândul pentru depunerea documentelor sau pentru ridicarea permisului?",
+        "Nu sunt sigur unde trebuie să aștept. Vă rog să-mi spuneți dacă sunt la ghișeul corect sau dacă trebuie să merg în altă parte."
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-014",
+      "title": "A cere repetarea informației când nu ai înțeles funcționarul",
+      "order": 14,
+      "paragraphs": [
+        "Îmi cer scuze, nu am înțeles foarte bine ce ați spus. Puteți repeta, vă rog, mai rar?",
+        "Învăț limba română și uneori am nevoie de puțin timp ca să înțeleg corect. Dacă este posibil, puteți să-mi spuneți încă o dată ce document trebuie să aduc?"
+      ],
+      "questions": []
+    },
+    {
+      "id": "igi-015",
+      "title": "A scrie un e-mail oficial",
+      "order": 15,
+      "paragraphs": [
+        "Bună ziua,",
+        "Mă numesc [Numele tău] și vă scriu în legătură cu dosarul meu pentru permisul de ședere. Aș dori să verific stadiul dosarului și să știu dacă mai sunt necesare documente suplimentare.",
+        "Am depus documentele la data de [data] și numărul meu de înregistrare este [număr], dacă este necesar. Vă rog să-mi transmiteți informațiile disponibile.",
+        "Vă mulțumesc pentru ajutor.",
+        "Cu stimă,\n[Numele tău]"
+      ],
+      "questions": []
+    }
+  ]
+}
